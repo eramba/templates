@@ -1,7 +1,0 @@
-{
-    "name": "eramba/aws-ebs-encryption-audit",
-    "description": "Automation script to audit AWS EBS volumes for encryption enablement in eu-west-1",
-    "require": {
-        "aws/aws-sdk-php": "^3.300"
-    }
-}

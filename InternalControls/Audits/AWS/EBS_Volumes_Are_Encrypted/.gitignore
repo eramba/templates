@@ -1,6 +1,0 @@
-# Ignore Composer vendor directory
-/vendor/
-/vendor/*
-
-# Composer lock file (optional, include if you don't want it in Git)
-/composer.lock
