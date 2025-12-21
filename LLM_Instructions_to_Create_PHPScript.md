@@ -14,6 +14,7 @@ Create a **single-run automation script** in the **latest stable version of PHP*
 - Any input variable required by the script (credentials, tokens, hosts, file paths, etc.) **must**:
   - Be provided as an input parameter
   - Use the exact format: `{$VARIABLE_NAME}`
+  - Also accept Bash, etc Environmental variables for testing purposes
 - This format is mandatory because all variables will be stored as **Eramba secrets**.
 
 ## Execution Model
