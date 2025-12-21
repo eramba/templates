@@ -96,13 +96,13 @@ This mirrors how the script will behave when executed inside Eramba.
 All scripts in this repository were created using **ChatGPT**, following a strict two-step approach:
 
 1. **Account & permission instructions**  
-   An LLM prompt is used to generate clear, actionable instructions explaining how to:
+   An [LLM prompt](https://github.com/eramba/automation/blob/master/LLM_Instructions_to_Create_README.md) is used to generate clear, actionable instructions explaining how to:
    - Create service accounts
    - Assign roles and permissions
    - Prepare the target system securely
 
 2. **Script generation**  
-   A second LLM prompt is used to generate:
+   A [second LLM prompt](https://github.com/eramba/automation/blob/master/LLM_Instructions_to_Create_PHPScript.md) is used to generate:
    - A single-run PHP script
    - A Composer configuration
    - A ZIP-ready structure suitable for Eramba automations

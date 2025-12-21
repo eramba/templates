@@ -38,6 +38,7 @@ This document defines **all required inputs, variables, and external system setu
   - A JSON string stored as an environment variable.
   - Contains **only active employees**.
   - The script will not read from a file.
+  - We use a [Google Drive Spreadsheet](https://github.com/eramba/automation/tree/master/Google%20Workspace/Read%20Google%20Sheet) to store employees and some attributes, this automation script reads that file and stores it in eramba so all other account reviews scripts can compare users.
 
 ### Required JSON format
 The environment variable must contain a JSON **array** of employee objects in the following format:
@@ -45,11 +46,11 @@ The environment variable must contain a JSON **array** of employee objects in th
 ```json
 [
   {
-    "name": "Adriana",
-    "surname": "Ribicic",
-    "login": "adriana.ribicic@eramba.org",
-    "roles": ["accounting"],
-    "worker_type": "employee",
-    "os": "mac"
+    "name": "Name",
+    "surname": "Surname",
+    "login": "email@domain.com",
+    "roles": ["role"],
+    "worker_type": "employee|contractor",
+    "os": "mac|windows|linux"
   }
 ]
