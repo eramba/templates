@@ -1,0 +1,13 @@
+# Composer (all directories, all depths)
+vendor/
+**/vendor/
+composer.lock
+**/composer.lock
+
+# Composer cache / artifacts (defensive)
+**/.composer/
+**/composer.phar
+
+# macOS
+.DS_Store
+**/.DS_Store
