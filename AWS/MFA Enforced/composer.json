@@ -1,0 +1,11 @@
+{
+  "name": "eramba/aws-mfa-audit",
+  "description": "Single-run AWS IAM MFA audit for eramba automations (prints count of enabled IAM users without MFA).",
+  "type": "project",
+  "require": {
+    "php": ">=8.2",
+    "aws/aws-sdk-php": "^3.0"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
