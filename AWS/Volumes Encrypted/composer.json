@@ -1,0 +1,12 @@
+{
+  "name": "eramba/automation-aws-ebs-encryption-audit",
+  "description": "Single-run script to audit EBS volume encryption status across regions with tag-based regex filtering.",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "aws/aws-sdk-php": "^3.300"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
