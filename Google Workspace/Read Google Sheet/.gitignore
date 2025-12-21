@@ -1,0 +1,24 @@
+# Composer dependencies
+/vendor/
+
+# Composer lock (ignore ONLY if this is a library, not an app)
+# composer.lock
+
+# Composer cache
+/.composer/
+
+# Environment files
+.env
+.env.*.local
+
+# IDE / OS junk
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# PHPUnit
+.phpunit.result.cache
