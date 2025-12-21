@@ -63,6 +63,10 @@ No frameworks. No background jobs. One run, one output.
 
 The fastest way to test any automation is to clone the repository and run the script locally.
 
+Make sure you first download all necesary libraries by running:
+
+```composer install```
+
 You will need to define **environment variables** so the script can authenticate and run properly.
 
 Examples:
