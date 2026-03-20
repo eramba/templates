@@ -84,10 +84,10 @@ function userHasMfaDevice(IamClient $iam, string $userName): bool {
     return count($devices) > 0;
 }
 
-$accessKeyId     = env('AWS_ACCESS_KEY_ID');
-$secretAccessKey = env('AWS_SECRET_ACCESS_KEY');
-$sessionToken    = env('AWS_SESSION_TOKEN');
-$region          = env('AWS_REGION');
+$accessKeyId     = "%SECRET_aws_key%";
+$secretAccessKey = "%SECRET_aws_secret%";
+$sessionToken    = null;
+$region          = "%SECRET_aws_region%";
 
 if (!$accessKeyId || !$secretAccessKey || !$region) {
     stderr("Missing required environment variables. Required: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION.");
