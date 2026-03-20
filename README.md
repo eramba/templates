@@ -41,21 +41,23 @@ Every automation directory must include:
 1. **Composer configuration**  
    A `composer.json` file defining any required dependencies.
 
-2. **Single execution script**  
+2. **Single execution script (Example of Audits)**  
    One PHP script that:
    - Connects to the target system
-   - Collects data
-   - Performs validation or comparison
-   - Outputs evidence (usually JSON)
+   - Collects data (audit evidence)
+   - Performs validation or comparison (analyses the evidence)
+   - Updates audit (conclusion, result, etc) record and includs the analysis from the previous step as comments & attachments
    - Ends execution
+  
+NOTE: The example above is related purely to Control Catalogue / Internal Controls / Audits, but maintenances can perform many different actions in almost any module in Eramba. For that reason, you might find automations that do other things; for example, they may analyse the results of an Online Assessment and update a third party.
 
 3. **Local README.md**  
    A README that clearly explains:
    - Required environment variables
-   - How to create accounts, roles, or permissions on the target system
-   - Any assumptions or limitations of the script
+   - Optional: How to create accounts, roles, or permissions on the target system (vendor)
+   - Any assumptions or limitations of the script (For example, evidence that collects, criteria to pass or fail an audit, etc)
 
-No frameworks. No background jobs. One run, one output.
+NOTE: The example above is related purely to Control Catalogue / Internal Controls / Audits, but maintenances can perform many different actions in almost any module in Eramba. For that reason, you might find automations that do other things; for example, they may analyse the results of an Online Assessment and update a third party.
 
 ---
 
@@ -93,7 +95,7 @@ This mirrors how the script will behave when executed inside Eramba.
 
 ## LLM-Generated Automations
 
-All scripts in this repository were created using **ChatGPT**, following a strict two-step approach:
+All scripts in this repository were created using **Codex**, following a strict two-step approach:
 
 1. **Account & permission instructions**  
    An [LLM prompt](https://github.com/eramba/automation/blob/master/LLM_Instructions_to_Create_README.md) is used to generate clear, actionable instructions explaining how to:
