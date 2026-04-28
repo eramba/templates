@@ -12,7 +12,7 @@ This questionnaire is used to understand which basic software development securi
 
 It is useful for:
 
-- Adjusting our **Software Development Security** (https://github.com/eramba/templates/blob/master/GRC%20Templates/Policies/Software%20Development%20Policy.md) policy template.
+- Adjusting our [**Software Development Security**](https://github.com/eramba/templates/blob/master/GRC%20Templates/Policies/Software%20Development%20Policy.md) policy template.
 - Performing general maturity assessments.
 
 The more often a customer responds **“inconsistent”** to the questions, the less standardized their practices are and, therefore, the less mature they are in this area.
