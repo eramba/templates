@@ -1,0 +1,548 @@
+﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
+2,Scope,"<i>This document applies to all employees, contractors, temporary staff, and other personnel with access to organizational assets, systems, or information.</i>",2.1,Is this scope accurate and complete for your organization?,"This document applies to all employees, contractors, temporary staff, and other personnel with access to organizational assets, systems, or information.",2,Yes|No|Somewhat,,0,,,||2.2,1
+2,Scope,"<i>This document applies to all employees, contractors, temporary staff, and other personnel with access to organizational assets, systems, or information.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.1,Is someone responsible for Human Resources is responsible for managing personnel processes in accordance with this policy.?,,2,Yes|No,,0,,,3.2|,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.2,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.3,"Is someone responsible for Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.?",,2,Yes|No,,0,,,3.4|,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.4,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.5,"Is someone responsible for The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.?",,2,Yes|No,,0,,,3.6|,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.6,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.7,Is someone responsible for Employees and Contractors are responsible for complying with security policies and assigned responsibilities.?,,2,Yes|No,,0,,,3.8|,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.8,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Human Resources is responsible for managing personnel processes in accordance with this policy.
+- Department Managers are responsible for defining roles, supervising personnel, and ensuring security responsibilities are understood.
+- The Information Security function is responsible for defining human resources security requirements and supporting their implementation, with the assistance of Department Managers.
+- Employees and Contractors are responsible for complying with security policies and assigned responsibilities.</i>",3.9,Are we missing any responsibility here that is performed in your company?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.1,Does this policy statement apply to your company: Security responsibilities must be defined and applied throughout the personnel lifecycle.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.2|4.2|4.2,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.2,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.3,Does this policy statement apply to your company: Personnel must be suitable for the roles they are assigned.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.4|4.4|4.4,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.4,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.5,Does this policy statement apply to your company: Personnel must understand and comply with organizational security requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.6|4.6|4.6,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.6,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.7,Does this policy statement apply to your company: Access to assets and information must be aligned with employment or contractual status.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.8|4.8|4.8,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.8,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.9,Does this policy statement apply to your company: Security obligations may continue after termination where applicable.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.10|4.10|4.10,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.10,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.11,Does this policy statement apply to your company: Violations of security requirements may result in disciplinary action.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.12|4.12|4.12,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.12,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Security responsibilities must be defined and applied throughout the personnel lifecycle.
+- Personnel must be suitable for the roles they are assigned.
+- Personnel must understand and comply with organizational security requirements.
+- Access to assets and information must be aligned with employment or contractual status.
+- Security obligations may continue after termination where applicable.
+- Violations of security requirements may result in disciplinary action.</i>",4.13,Are we missing any policy statement here that reflects something done in your company?,,1,,,0,,,,1
+5,Standard - Screening,"<i>- Background checks must be performed where legally permitted and appropriate to the role.
+- Screening requirements must align with legal, regulatory, and contractual obligations.</i>",5.1,Does this requirement reflect your company current practice: Background checks must be performed where legally permitted and appropriate to the role.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+5,Standard - Screening,"<i>- Background checks must be performed where legally permitted and appropriate to the role.
+- Screening requirements must align with legal, regulatory, and contractual obligations.</i>",5.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Screening,"<i>- Background checks must be performed where legally permitted and appropriate to the role.
+- Screening requirements must align with legal, regulatory, and contractual obligations.</i>",5.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Screening,"<i>- Background checks must be performed where legally permitted and appropriate to the role.
+- Screening requirements must align with legal, regulatory, and contractual obligations.</i>",5.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Screening,"<i>- Background checks must be performed where legally permitted and appropriate to the role.
+- Screening requirements must align with legal, regulatory, and contractual obligations.</i>",5.5,"Does this requirement reflect your company current practice: Screening requirements must align with legal, regulatory, and contractual obligations.",,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+5,Standard - Screening,"<i>- Background checks must be performed where legally permitted and appropriate to the role.
+- Screening requirements must align with legal, regulatory, and contractual obligations.</i>",5.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Supplier register|Due diligence questionnaire|Contract clauses|Supplier review records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Screening,"<i>- Background checks must be performed where legally permitted and appropriate to the role.
+- Screening requirements must align with legal, regulatory, and contractual obligations.</i>",5.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Screening,"<i>- Background checks must be performed where legally permitted and appropriate to the role.
+- Screening requirements must align with legal, regulatory, and contractual obligations.</i>",5.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.1,Does this requirement reflect your company current practice: Employment and contractor agreements must define security responsibilities.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Supplier register|Due diligence questionnaire|Contract clauses|Supplier review records|Screenshots|System exports|Other,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.5,Does this requirement reflect your company current practice: Confidentiality obligations must be included in contracts.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Supplier register|Due diligence questionnaire|Contract clauses|Supplier review records|Screenshots|System exports|Other,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.9,Does this requirement reflect your company current practice: Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.13,Does this requirement reflect your company current practice: Confidentiality obligations must remain in effect after termination where applicable.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,"Standard - Contracts, Confidentiality, and NDAs","<i>- Employment and contractor agreements must define security responsibilities.
+- Confidentiality obligations must be included in contracts.
+- Non-disclosure agreements (NDAs) must be in place where access to sensitive or restricted information is required.
+- Confidentiality obligations must remain in effect after termination where applicable.</i>",6.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Onboarding,"<i>- Roles and responsibilities must be clearly defined prior to granting access.
+- Access must be provisioned in accordance with approved organizational roles.</i>",7.1,Does this requirement reflect your company current practice: Roles and responsibilities must be clearly defined prior to granting access.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.2 7.3|7.4|7.4|7.4,1
+7,Standard - Onboarding,"<i>- Roles and responsibilities must be clearly defined prior to granting access.
+- Access must be provisioned in accordance with approved organizational roles.</i>",7.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Onboarding,"<i>- Roles and responsibilities must be clearly defined prior to granting access.
+- Access must be provisioned in accordance with approved organizational roles.</i>",7.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Onboarding,"<i>- Roles and responsibilities must be clearly defined prior to granting access.
+- Access must be provisioned in accordance with approved organizational roles.</i>",7.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Onboarding,"<i>- Roles and responsibilities must be clearly defined prior to granting access.
+- Access must be provisioned in accordance with approved organizational roles.</i>",7.5,Does this requirement reflect your company current practice: Access must be provisioned in accordance with approved organizational roles.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+7,Standard - Onboarding,"<i>- Roles and responsibilities must be clearly defined prior to granting access.
+- Access must be provisioned in accordance with approved organizational roles.</i>",7.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Onboarding,"<i>- Roles and responsibilities must be clearly defined prior to granting access.
+- Access must be provisioned in accordance with approved organizational roles.</i>",7.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Onboarding,"<i>- Roles and responsibilities must be clearly defined prior to granting access.
+- Access must be provisioned in accordance with approved organizational roles.</i>",7.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.1,Does this requirement reflect your company current practice: Security responsibilities must be communicated and acknowledged.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.2 8.3|8.4|8.4|8.4,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Training completion report|Acknowledgement records|Awareness material|Attendance records|Screenshots|System exports|Other,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.5,Does this requirement reflect your company current practice: Changes to roles or responsibilities must be reflected in access rights.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.9,Does this requirement reflect your company current practice: Personnel must comply with all organizational security policies and standards.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - During Employment,"<i>- Security responsibilities must be communicated and acknowledged.
+- Changes to roles or responsibilities must be reflected in access rights.
+- Personnel must comply with all organizational security policies and standards.</i>",8.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.1,Does this requirement reflect your company current practice: Remote working arrangements must be approved by management.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.2 9.3|9.4|9.4|9.4,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.5,Does this requirement reflect your company current practice: Personnel working remotely must comply with organizational security requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.9,Does this requirement reflect your company current practice: Organizational data and systems accessed remotely must be protected in accordance with applicable policies.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Remote Working,"<i>- Remote working arrangements must be approved by management.
+- Personnel working remotely must comply with organizational security requirements.
+- Organizational data and systems accessed remotely must be protected in accordance with applicable policies.</i>",9.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.1,Does this requirement reflect your company current practice: Standard Exit,,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.5,Does this requirement reflect your company current practice: Access to systems and assets must be revoked upon termination or contract end.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Asset inventory|MDM/endpoint management export|Software inventory|Other,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.9,Does this requirement reflect your company current practice: Organizational assets must be returned.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Asset inventory|MDM/endpoint management export|Software inventory|Return checklist|Service desk tickets|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.13,Does this requirement reflect your company current practice: Emergency Exit,,2,Yes|No|Somewhat|Not applicable,,0,,,10.14 10.15|10.16|10.16|10.16,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.17,"Does this requirement reflect your company current practice: In cases of immediate risk, access may be revoked without prior notice.",,2,Yes|No|Somewhat|Not applicable,,0,,,10.18 10.19|10.20|10.20|10.20,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Risk register|Risk assessment report|Treatment plan|Other,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.21,Does this requirement reflect your company current practice: Emergency access removal must be documented and reviewed after the fact.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.22 10.23|10.24|10.24|10.24,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.25,Does this requirement reflect your company current practice: Confidentiality and security obligations must be reinforced upon exit.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.26 10.27|10.28|10.28|10.28,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.26,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.27,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Termination and Exit,"<i>- Standard Exit
+  - Access to systems and assets must be revoked upon termination or contract end.
+  - Organizational assets must be returned.
+- Emergency Exit
+  - In cases of immediate risk, access may be revoked without prior notice.
+  - Emergency access removal must be documented and reviewed after the fact.
+- Confidentiality and security obligations must be reinforced upon exit.</i>",10.28,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.1,Does this requirement reflect your company current practice: Violations of security policies may result in disciplinary action.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.2 11.3|11.4|11.4|11.4,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.5,Does this requirement reflect your company current practice: Disciplinary measures must follow standard organizational procedures and applicable laws.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.6 11.7|11.8|11.8|11.8,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.9,Does this requirement reflect your company current practice: Security incidents involving personnel may trigger disciplinary review.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.10 11.11|11.12|11.12|11.12,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Disciplinary Process,"<i>- Violations of security policies may result in disciplinary action.
+- Disciplinary measures must follow standard organizational procedures and applicable laws.
+- Security incidents involving personnel may trigger disciplinary review.</i>",11.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+12,Procedure - Onboarding Procedure,"<i>1. Employment or contract terms are established.
+2. Screening requirements are completed where applicable.
+3. Security responsibilities and confidentiality obligations are communicated.
+4. Access is provisioned based on approved roles.</i>",12.1,Does this procedure reflect your actual process?,"1. Employment or contract terms are established.
+2. Screening requirements are completed where applicable.
+3. Security responsibilities and confidentiality obligations are communicated.
+4. Access is provisioned based on approved roles.",2,Yes|No|Somewhat|Not applicable,,0,,,|12.2|12.2|12.2,1
+12,Procedure - Onboarding Procedure,"<i>1. Employment or contract terms are established.
+2. Screening requirements are completed where applicable.
+3. Security responsibilities and confidentiality obligations are communicated.
+4. Access is provisioned based on approved roles.</i>",12.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
+13,Procedure - Role Change Procedure,"<i>1. Role changes are approved and documented.
+2. Access rights are reviewed and adjusted accordingly.
+3. Changes are logged where required.</i>",13.1,Does this procedure reflect your actual process?,"1. Role changes are approved and documented.
+2. Access rights are reviewed and adjusted accordingly.
+3. Changes are logged where required.",2,Yes|No|Somewhat|Not applicable,,0,,,|13.2|13.2|13.2,1
+13,Procedure - Role Change Procedure,"<i>1. Role changes are approved and documented.
+2. Access rights are reviewed and adjusted accordingly.
+3. Changes are logged where required.</i>",13.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
+14,Procedure - Offboarding Procedure,"<i>1. Termination or contract end is confirmed.
+2. Standard or emergency access revocation is performed as required.
+3. Assets are returned.
+4. Ongoing confidentiality obligations are communicated.</i>",14.1,Does this procedure reflect your actual process?,"1. Termination or contract end is confirmed.
+2. Standard or emergency access revocation is performed as required.
+3. Assets are returned.
+4. Ongoing confidentiality obligations are communicated.",2,Yes|No|Somewhat|Not applicable,,0,,,|14.2|14.2|14.2,1
+14,Procedure - Offboarding Procedure,"<i>1. Termination or contract end is confirmed.
+2. Standard or emergency access revocation is performed as required.
+3. Assets are returned.
+4. Ongoing confidentiality obligations are communicated.</i>",14.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1

@@ -1,0 +1,1378 @@
+﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
+2,Scope,"<i>This policy applies to:
+- All production and non-production systems, applications, infrastructure, and services.
+- All changes that may impact availability, performance, security, or integrity of systems.
+- All capacity-related activities affecting systems, networks, and services.
+- All personnel involved in operational management, system administration, and service delivery.</i>",2.1,Is this scope accurate and complete for your organization?,"This policy applies to:
+- All production and non-production systems, applications, infrastructure, and services.
+- All changes that may impact availability, performance, security, or integrity of systems.
+- All capacity-related activities affecting systems, networks, and services.
+- All personnel involved in operational management, system administration, and service delivery.",2,Yes|No|Somewhat,,0,,,||2.2,1
+2,Scope,"<i>This policy applies to:
+- All production and non-production systems, applications, infrastructure, and services.
+- All changes that may impact availability, performance, security, or integrity of systems.
+- All capacity-related activities affecting systems, networks, and services.
+- All personnel involved in operational management, system administration, and service delivery.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.1,"Is someone responsible for Management: Ensures operational management activities are governed, resourced, and aligned with business needs.?",,2,Yes|No,,0,,,3.2|,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.2,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.3,"Is someone responsible for The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.?",,2,Yes|No,,0,,,3.4|,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.4,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.5,"Is someone responsible for IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.?",,2,Yes|No,,0,,,3.6|,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.6,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.7,Is someone responsible for System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.?,,2,Yes|No,,0,,,3.8|,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.8,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.9,Is someone responsible for Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements. ---?,,2,Yes|No,,0,,,3.10|,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.10,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
+- The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
+- IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
+- System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
+- Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
+
+---</i>",3.11,Are we missing any responsibility here that is performed in your company?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.1,"Does this policy statement apply to your company: Operational changes must be planned, assessed, approved, and documented.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.2|4.2|4.2,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.2,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.3,"Does this policy statement apply to your company: Changes must not introduce unmanaged security, availability, or performance risks.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.4|4.4|4.4,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.4,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.5,Does this policy statement apply to your company: System and service capacity must be monitored and managed proactively.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.6|4.6|4.6,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.6,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.7,Does this policy statement apply to your company: Capacity limitations must be identified and addressed before they impact operations.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.8|4.8|4.8,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.8,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.9,"Does this policy statement apply to your company: Operational management activities must be repeatable, controlled, and auditable. ---",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.10|4.10|4.10,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.10,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Operational changes must be planned, assessed, approved, and documented.
+- Changes must not introduce unmanaged security, availability, or performance risks.
+- System and service capacity must be monitored and managed proactively.
+- Capacity limitations must be identified and addressed before they impact operations.
+- Operational management activities must be repeatable, controlled, and auditable.
+
+---</i>",4.11,Are we missing any policy statement here that reflects something done in your company?,,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.1,"Does this requirement reflect your company current practice: All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.",,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.5,Does this requirement reflect your company current practice: Changes must be:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.9,"Does this requirement reflect your company current practice: Classified (e.g. standard, normal, emergency).",,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.13,"Does this requirement reflect your company current practice: Assessed for impact on availability, performance, and security.",,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Risk register|Risk assessment report|Treatment plan|Management approval records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.17,Does this requirement reflect your company current practice: Approved before implementation.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.21,Does this requirement reflect your company current practice: Change implementation must:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.25,Does this requirement reflect your company current practice: Be planned and scheduled.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.26,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.27,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.28,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.29,Does this requirement reflect your company current practice: Include rollback or recovery considerations.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.30 5.31|5.32|5.32|5.32,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.30,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Backup job reports|Restore test records|Retention configuration|Recovery runbooks|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.31,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.32,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.33,Does this requirement reflect your company current practice: Avoid unnecessary disruption to business operations.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.34 5.35|5.36|5.36|5.36,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.34,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.35,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.36,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.37,Does this requirement reflect your company current practice: Emergency changes must:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.38 5.39|5.40|5.40|5.40,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.38,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.39,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.40,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.41,Does this requirement reflect your company current practice: Be justified and documented.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.42 5.43|5.44|5.44|5.44,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.42,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.43,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.44,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.45,Does this requirement reflect your company current practice: Be reviewed retrospectively.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.46 5.47|5.48|5.48|5.48,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.46,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.47,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.48,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.49,Does this requirement reflect your company current practice: Changes must be tested where feasible prior to deployment.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.50 5.51|5.52|5.52|5.52,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.50,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SDLC procedure|Code review records|Security test reports|Release approvals|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.51,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.52,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.53,Does this requirement reflect your company current practice: Change records must be maintained.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.54 5.55|5.56|5.56|5.56,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.54,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.55,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
+- Changes must be:
+  - Classified (e.g. standard, normal, emergency).
+  - Assessed for impact on availability, performance, and security.
+  - Approved before implementation.
+- Change implementation must:
+  - Be planned and scheduled.
+  - Include rollback or recovery considerations.
+  - Avoid unnecessary disruption to business operations.
+- Emergency changes must:
+  - Be justified and documented.
+  - Be reviewed retrospectively.
+- Changes must be tested where feasible prior to deployment.
+- Change records must be maintained.</i>",5.56,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.1,Does this requirement reflect your company current practice: Capacity requirements must be identified for systems and services.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.5,Does this requirement reflect your company current practice: Capacity management must consider:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.9,Does this requirement reflect your company current practice: Current utilization.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.13,Does this requirement reflect your company current practice: Expected growth.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.17,Does this requirement reflect your company current practice: Business and operational requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.21,Does this requirement reflect your company current practice: Capacity must be monitored to identify trends and potential constraints.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.25,Does this requirement reflect your company current practice: Capacity thresholds and alerts should be defined where technically feasible.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.26,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.27,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.28,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.29,Does this requirement reflect your company current practice: Capacity-related risks must be addressed before service levels are impacted.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.30,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Risk register|Risk assessment report|Treatment plan|Management approval records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.31,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.32,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.33,Does this requirement reflect your company current practice: Capacity planning must be reviewed periodically and when significant changes occur. ---,,2,Yes|No|Somewhat|Not applicable,,0,,,6.34 6.35|6.36|6.36|6.36,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.34,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.35,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
+- Capacity management must consider:
+  - Current utilization.
+  - Expected growth.
+  - Business and operational requirements.
+- Capacity must be monitored to identify trends and potential constraints.
+- Capacity thresholds and alerts should be defined where technically feasible.
+- Capacity-related risks must be addressed before service levels are impacted.
+- Capacity planning must be reviewed periodically and when significant changes occur.
+
+---</i>",6.36,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Procedure - Change Management Procedure,"<i>1. Change request is raised and documented.
+2. Change is assessed for impact and risk.
+3. Required approvals are obtained.
+4. Change is implemented according to plan.
+5. Change outcome is reviewed and documented.</i>",7.1,Does this procedure reflect your actual process?,"1. Change request is raised and documented.
+2. Change is assessed for impact and risk.
+3. Required approvals are obtained.
+4. Change is implemented according to plan.
+5. Change outcome is reviewed and documented.",2,Yes|No|Somewhat|Not applicable,,0,,,|7.2|7.2|7.2,1
+7,Procedure - Change Management Procedure,"<i>1. Change request is raised and documented.
+2. Change is assessed for impact and risk.
+3. Required approvals are obtained.
+4. Change is implemented according to plan.
+5. Change outcome is reviewed and documented.</i>",7.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
+8,Procedure - Capacity Management Procedure,"<i>1. Identify capacity requirements for systems and services.
+2. Monitor utilization and performance.
+3. Analyse trends and forecast future needs.
+4. Plan and implement capacity adjustments.
+5. Review effectiveness and update plans as required.</i>",8.1,Does this procedure reflect your actual process?,"1. Identify capacity requirements for systems and services.
+2. Monitor utilization and performance.
+3. Analyse trends and forecast future needs.
+4. Plan and implement capacity adjustments.
+5. Review effectiveness and update plans as required.",2,Yes|No|Somewhat|Not applicable,,0,,,|8.2|8.2|8.2,1
+8,Procedure - Capacity Management Procedure,"<i>1. Identify capacity requirements for systems and services.
+2. Monitor utilization and performance.
+3. Analyse trends and forecast future needs.
+4. Plan and implement capacity adjustments.
+5. Review effectiveness and update plans as required.</i>",8.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1

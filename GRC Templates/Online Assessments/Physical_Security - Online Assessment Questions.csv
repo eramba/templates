@@ -1,0 +1,647 @@
+﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
+2,Scope,"<i>This document applies to all physical locations operated or used by the organization, including offices, data centers, server rooms, storage areas, and any location where organizational assets or information are stored or processed.</i>",2.1,Is this scope accurate and complete for your organization?,"This document applies to all physical locations operated or used by the organization, including offices, data centers, server rooms, storage areas, and any location where organizational assets or information are stored or processed.",2,Yes|No|Somewhat,,0,,,||2.2,1
+2,Scope,"<i>This document applies to all physical locations operated or used by the organization, including offices, data centers, server rooms, storage areas, and any location where organizational assets or information are stored or processed.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.1,Is someone responsible for Department Managers are responsible for ensuring physical security requirements are followed within their areas.?,,2,Yes|No,,0,,,3.2|,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.2,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.3,Is someone responsible for Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.?,,2,Yes|No,,0,,,3.4|,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.4,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.5,"Is someone responsible for The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.?",,2,Yes|No,,0,,,3.6|,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.6,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.7,Is someone responsible for Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.?,,2,Yes|No,,0,,,3.8|,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.8,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for ensuring physical security requirements are followed within their areas.
+- Facilities or Office Management (where applicable) is responsible for implementing and maintaining physical security controls.
+- The Information Security function is responsible for defining physical security requirements and supporting their implementation, with the assistance of Department Managers.
+- Users (employees and contractors) are responsible for complying with physical security controls and reporting issues or incidents.</i>",3.9,Are we missing any responsibility here that is performed in your company?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.1,Does this policy statement apply to your company: Physical access to organizational facilities must be controlled and restricted based on business need.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.2|4.2|4.2,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.2,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.3,"Does this policy statement apply to your company: Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.4|4.4|4.4,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.4,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.5,Does this policy statement apply to your company: Sensitive areas must be clearly identified and protected with additional controls.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.6|4.6|4.6,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.6,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.7,"Does this policy statement apply to your company: Physical security practices must support legal, regulatory, and contractual obligations.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.8|4.8|4.8,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.8,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Physical access to organizational facilities must be controlled and restricted based on business need.
+- Physical security controls must protect assets from unauthorized access, theft, damage, or disruption.
+- Sensitive areas must be clearly identified and protected with additional controls.
+- Physical security practices must support legal, regulatory, and contractual obligations.</i>",4.9,Are we missing any policy statement here that reflects something done in your company?,,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.1,Does this requirement reflect your company current practice: Access to organizational facilities must be restricted to authorized individuals.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.5,"Does this requirement reflect your company current practice: Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.",,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Encryption configuration|Key management records|Certificate inventory|Other,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.9,Does this requirement reflect your company current practice: Security guards may be deployed at entrances where appropriate.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.13,Does this requirement reflect your company current practice: Access rights must be granted based on business need and reviewed periodically.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.17,"Does this requirement reflect your company current practice: Visitors must be identified, authorized, and escorted where required.",,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Access badge records|Visitor logs|CCTV or alarm reports|Physical access reviews|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Physical Access Control,"<i>- Access to organizational facilities must be restricted to authorized individuals.
+- Physical access controls may include keys, badges, access cards, biometric controls, or equivalent mechanisms.
+- Security guards may be deployed at entrances where appropriate.
+- Access rights must be granted based on business need and reviewed periodically.
+- Visitors must be identified, authorized, and escorted where required.</i>",5.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.1,Does this requirement reflect your company current practice: Physical security monitoring controls must be implemented where appropriate.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Access badge records|Visitor logs|CCTV or alarm reports|Physical access reviews|Screenshots|Other,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.5,Does this requirement reflect your company current practice: Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.9,"Does this requirement reflect your company current practice: Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.",,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.13,Does this requirement reflect your company current practice: Guards may monitor entrances and exits to deter unauthorized removal of assets.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Asset inventory|MDM/endpoint management export|Software inventory|Return checklist|Service desk tickets|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Other,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.17,"Does this requirement reflect your company current practice: When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.",,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Supplier register|Due diligence questionnaire|Contract clauses|Supplier review records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.21,"Does this requirement reflect your company current practice: Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.",,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Asset inventory|MDM/endpoint management export|Software inventory|Return checklist|Service desk tickets|Risk register|Risk assessment report|Treatment plan|Management approval records|Supplier register|Other,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Monitoring and Guarding,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Security guards may perform regular patrols or rounds to monitor facilities and detect suspicious activity.
+- Guards may check offices and common areas to ensure doors, windows, and secure areas are properly closed.
+- Guards may monitor entrances and exits to deter unauthorized removal of assets.
+- When third parties or suppliers perform on-site work, their activities must be supervised as appropriate.
+- Suppliers and contractors may be checked upon exit to reduce the risk of unauthorized removal of organizational assets, in accordance with applicable laws and regulations.</i>",6.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.1,"Does this requirement reflect your company current practice: Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.2 7.3|7.4|7.4|7.4,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.5,"Does this requirement reflect your company current practice: Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Access badge records|Visitor logs|CCTV or alarm reports|Physical access reviews|Screenshots|Other,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.9,Does this requirement reflect your company current practice: Access to secure areas must be limited to authorized personnel only.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Secure Areas,"<i>- Areas containing sensitive systems, data, or infrastructure must be designated as secure areas.
+- Secure areas must be protected by appropriate physical controls, such as controlled entry points and monitoring.
+- Access to secure areas must be limited to authorized personnel only.</i>",7.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.1,Does this requirement reflect your company current practice: Physical security monitoring controls must be implemented where appropriate.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.2 8.3|8.4|8.4|8.4,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Access badge records|Visitor logs|CCTV or alarm reports|Physical access reviews|Screenshots|Other,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.5,"Does this requirement reflect your company current practice: Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.",,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.9,"Does this requirement reflect your company current practice: Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.",,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.13,"Does this requirement reflect your company current practice: CCTV recordings must be protected from unauthorized access, modification, or deletion.",,2,Yes|No|Somewhat|Not applicable,,0,,,8.14 8.15|8.16|8.16|8.16,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.17,"Does this requirement reflect your company current practice: Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.",,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Monitoring and Surveillance,"<i>- Physical security monitoring controls must be implemented where appropriate.
+- Monitoring controls may include motion sensors, alarms, and intrusion detection mechanisms.
+- Closed-circuit television (CCTV) systems may be used to monitor entrances, exits, and sensitive areas.
+- CCTV recordings must be protected from unauthorized access, modification, or deletion.
+- Retention of CCTV recordings must comply with legal, regulatory, and privacy requirements.</i>",8.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.1,Does this requirement reflect your company current practice: Facilities and physical security controls must be maintained to ensure continued effectiveness.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.2 9.3|9.4|9.4|9.4,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Access badge records|Visitor logs|CCTV or alarm reports|Physical access reviews|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.5,Does this requirement reflect your company current practice: Maintenance activities must be planned and performed in a controlled manner.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.9,"Does this requirement reflect your company current practice: Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.",,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.13,Does this requirement reflect your company current practice: Maintenance activities that could impact security controls must be reviewed and coordinated in advance.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Risk register|Risk assessment report|Treatment plan|Management approval records|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.17,Does this requirement reflect your company current practice: Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Access badge records|Visitor logs|CCTV or alarm reports|Physical access reviews|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Facility and Equipment Maintenance,"<i>- Facilities and physical security controls must be maintained to ensure continued effectiveness.
+- Maintenance activities must be planned and performed in a controlled manner.
+- Only authorized and qualified personnel or approved third parties may perform maintenance on facilities, security controls, or critical equipment.
+- Maintenance activities that could impact security controls must be reviewed and coordinated in advance.
+- Physical security controls and facilities must be reviewed periodically to identify weaknesses or required improvements.</i>",9.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.1,"Does this requirement reflect your company current practice: Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.",,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Access badge records|Visitor logs|CCTV or alarm reports|Physical access reviews|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.5,Does this requirement reflect your company current practice: Critical equipment must be located in areas with appropriate environmental controls where required.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.9,Does this requirement reflect your company current practice: Cabling and network infrastructure must be protected against unauthorized access or tampering.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Network diagrams|Firewall rule export|VPN configuration|Other,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Protection of Equipment,"<i>- Equipment must be protected against physical threats such as theft, fire, water damage, and environmental hazards.
+- Critical equipment must be located in areas with appropriate environmental controls where required.
+- Cabling and network infrastructure must be protected against unauthorized access or tampering.</i>",10.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.1,Does this requirement reflect your company current practice: Sensitive information must not be left unattended in unsecured areas.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.2 11.3|11.4|11.4|11.4,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.5,Does this requirement reflect your company current practice: Workstations must be locked when unattended.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.6 11.7|11.8|11.8|11.8,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.9,Does this requirement reflect your company current practice: Printed sensitive information must be secured or disposed of properly when not in use.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.10 11.11|11.12|11.12|11.12,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Clear Desk and Clear Screen,"<i>- Sensitive information must not be left unattended in unsecured areas.
+- Workstations must be locked when unattended.
+- Printed sensitive information must be secured or disposed of properly when not in use.</i>",11.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+12,Procedure - Visitor Management Procedure,"<i>1. Visitors are identified and registered upon arrival.
+2. Visitor access is approved and limited to required areas.
+3. Visitors are escorted where necessary.
+4. Visitor access is revoked upon departure.</i>",12.1,Does this procedure reflect your actual process?,"1. Visitors are identified and registered upon arrival.
+2. Visitor access is approved and limited to required areas.
+3. Visitors are escorted where necessary.
+4. Visitor access is revoked upon departure.",2,Yes|No|Somewhat|Not applicable,,0,,,|12.2|12.2|12.2,1
+12,Procedure - Visitor Management Procedure,"<i>1. Visitors are identified and registered upon arrival.
+2. Visitor access is approved and limited to required areas.
+3. Visitors are escorted where necessary.
+4. Visitor access is revoked upon departure.</i>",12.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
+13,Procedure - Physical Access Review Procedure,"<i>1. Physical access rights are reviewed periodically.
+2. Access for individuals no longer requiring entry is removed promptly.
+3. Reviews are documented where required.</i>",13.1,Does this procedure reflect your actual process?,"1. Physical access rights are reviewed periodically.
+2. Access for individuals no longer requiring entry is removed promptly.
+3. Reviews are documented where required.",2,Yes|No|Somewhat|Not applicable,,0,,,|13.2|13.2|13.2,1
+13,Procedure - Physical Access Review Procedure,"<i>1. Physical access rights are reviewed periodically.
+2. Access for individuals no longer requiring entry is removed promptly.
+3. Reviews are documented where required.</i>",13.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1

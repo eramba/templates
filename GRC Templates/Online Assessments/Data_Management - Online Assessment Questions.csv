@@ -1,0 +1,910 @@
+﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
+2,Scope,"<i>This document applies to all data created, processed, stored, transmitted, or managed by the organization, regardless of format, system, or location.</i>",2.1,Is this scope accurate and complete for your organization?,"This document applies to all data created, processed, stored, transmitted, or managed by the organization, regardless of format, system, or location.",2,Yes|No|Somewhat,,0,,,||2.2,1
+2,Scope,"<i>This document applies to all data created, processed, stored, transmitted, or managed by the organization, regardless of format, system, or location.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.1,Is someone responsible for Department Managers are responsible for identifying and classifying data used within their areas.?,,2,Yes|No,,0,,,3.2|,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.2,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.3,Is someone responsible for System Owners are responsible for ensuring data within their systems is managed in accordance with this document.?,,2,Yes|No,,0,,,3.4|,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.4,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.5,"Is someone responsible for The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.?",,2,Yes|No,,0,,,3.6|,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.6,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.7,Is someone responsible for Users are responsible for handling data in accordance with its classification and organizational policies.?,,2,Yes|No,,0,,,3.8|,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.8,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Department Managers are responsible for identifying and classifying data used within their areas.
+- System Owners are responsible for ensuring data within their systems is managed in accordance with this document.
+- The Information Security function is responsible for defining data management requirements and supporting departments in their application, in collaboration with Legal, Compliance, Department Owners, and System Administrators.
+- Users are responsible for handling data in accordance with its classification and organizational policies.</i>",3.9,Are we missing any responsibility here that is performed in your company?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.1,Does this policy statement apply to your company: All organizational data must be classified according to its sensitivity and business impact.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.2|4.2|4.2,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.2,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.3,"Does this policy statement apply to your company: Data must be handled, stored, transmitted, and disposed of based on its classification.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.4|4.4|4.4,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.4,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.5,Does this policy statement apply to your company: Data ownership must be clearly defined.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.6|4.6|4.6,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.6,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.7,"Does this policy statement apply to your company: Data must be protected against unauthorized access, disclosure, modification, or loss.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.8|4.8|4.8,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.8,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.9,"Does this policy statement apply to your company: Data management practices must support legal, regulatory, and contractual obligations.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.10|4.10|4.10,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.10,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.11,Does this policy statement apply to your company: Personal data must be handled in accordance with applicable privacy and data protection laws.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.12|4.12|4.12,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.12,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.13,Does this policy statement apply to your company: All organizational data must be backed up to ensure availability and recoverability.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.14|4.14|4.14,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.14,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All organizational data must be classified according to its sensitivity and business impact.
+- Data must be handled, stored, transmitted, and disposed of based on its classification.
+- Data ownership must be clearly defined.
+- Data must be protected against unauthorized access, disclosure, modification, or loss.
+- Data management practices must support legal, regulatory, and contractual obligations.
+- Personal data must be handled in accordance with applicable privacy and data protection laws.
+- All organizational data must be backed up to ensure availability and recoverability.</i>",4.15,Are we missing any policy statement here that reflects something done in your company?,,1,,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.1,Does this requirement reflect your company current practice: Data must be classified using the classification table defined below.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.5,Does this requirement reflect your company current practice: Data classification must be determined by the data owner or responsible department.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.9,Does this requirement reflect your company current practice: Classification must be reviewed and updated when data usage or sensitivity changes.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.13,"Does this requirement reflect your company current practice: Where technically feasible, data classification must be reflected using labels or metadata. | Classification | Classification Criteria | Examples | |---------------|-------------------------|----------| | Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases | | Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation | | Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts | | Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |",,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Risk register|Risk assessment report|Treatment plan|Other,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Data Classification,"<i>- Data must be classified using the classification table defined below.
+- Data classification must be determined by the data owner or responsible department.
+- Classification must be reviewed and updated when data usage or sensitivity changes.
+- Where technically feasible, data classification must be reflected using labels or metadata.
+
+| Classification | Classification Criteria | Examples |
+|---------------|-------------------------|----------|
+| Public | Information intended to be accessible by anyone. Disclosure causes no harm to the organization or individuals. | Public website content, marketing materials, press releases |
+| Internal | Information whose disclosure could cause limited operational or reputational impact but does not involve regulated or sensitive data. | Internal policies, procedures, internal communications, project documentation |
+| Confidential | Information whose disclosure, modification, or loss could cause significant harm. Includes personally identifiable information (PII), regulated data, or sensitive business information. | Employee PII, customer PII, financial records, contracts |
+| Restricted | Information whose disclosure, modification, or loss could cause severe or critical harm to the organization or individuals. Includes highly sensitive PII and security-critical data. | Authentication secrets, cryptographic keys, government identifiers, security configurations, M&A data |</i>",5.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.1,Does this requirement reflect your company current practice: An organization-wide data inventory must exist.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.5,Does this requirement reflect your company current practice: The data inventory must be maintained and kept up to date.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.9,"Does this requirement reflect your company current practice: The data inventory must identify, at a minimum:",,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.13,Does this requirement reflect your company current practice: Name or description of the data set,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.17,Does this requirement reflect your company current practice: Data owner,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.21,Does this requirement reflect your company current practice: Data classification,,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.25,"Does this requirement reflect your company current practice: Type of data (e.g. business data, personal data, PII)",,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.26,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.27,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.28,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.29,"Does this requirement reflect your company current practice: Applicable legal, regulatory, or contractual obligations",,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.30,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Supplier register|Due diligence questionnaire|Contract clauses|Supplier review records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.31,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.32,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.33,Does this requirement reflect your company current practice: The data inventory must be reviewed periodically and updated when significant changes occur.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.34 6.35|6.36|6.36|6.36,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.34,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.35,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
+- The data inventory must be maintained and kept up to date.
+- The data inventory must identify, at a minimum:
+  - Name or description of the data set
+  - Data owner
+  - Data classification
+  - Type of data (e.g. business data, personal data, PII)
+  - Applicable legal, regulatory, or contractual obligations
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.36,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.1,Does this requirement reflect your company current practice: Data must be stored only in locations appropriate to its classification.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.2 7.3|7.4|7.4|7.4,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.5,Does this requirement reflect your company current practice: Encryption at rest is required for all data classifications except Public.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Encryption configuration|Key management records|Certificate inventory|Secret management export|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.9,"Does this requirement reflect your company current practice: Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Supplier register|Due diligence questionnaire|Contract clauses|Supplier review records|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.13,Does this requirement reflect your company current practice: Restricted data must only be stored in systems with enhanced security controls.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Data Storage,"<i>- Data must be stored only in locations appropriate to its classification.
+- Encryption at rest is required for all data classifications except Public.
+- Internal, Confidential, and Restricted data must only be stored in company-controlled systems or approved and controlled third-party systems.
+- Restricted data must only be stored in systems with enhanced security controls.</i>",7.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Data Transmission,"<i>- Data transmitted over networks must be protected based on its classification.
+- PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.</i>",8.1,Does this requirement reflect your company current practice: Data transmitted over networks must be protected based on its classification.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.2 8.3|8.4|8.4|8.4,1
+8,Standard - Data Transmission,"<i>- Data transmitted over networks must be protected based on its classification.
+- PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.</i>",8.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Network diagrams|Firewall rule export|VPN configuration|Change tickets|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Data Transmission,"<i>- Data transmitted over networks must be protected based on its classification.
+- PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.</i>",8.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Data Transmission,"<i>- Data transmitted over networks must be protected based on its classification.
+- PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.</i>",8.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Data Transmission,"<i>- Data transmitted over networks must be protected based on its classification.
+- PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.</i>",8.5,Does this requirement reflect your company current practice: PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
+8,Standard - Data Transmission,"<i>- Data transmitted over networks must be protected based on its classification.
+- PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.</i>",8.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Encryption configuration|Key management records|Certificate inventory|Secret management export|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Data Transmission,"<i>- Data transmitted over networks must be protected based on its classification.
+- PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.</i>",8.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Data Transmission,"<i>- Data transmitted over networks must be protected based on its classification.
+- PII and other sensitive data must be encrypted during transmission in accordance with the Cryptography policy.</i>",8.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.1,"Does this requirement reflect your company current practice: Data retention periods must be defined based on legal, regulatory, and business requirements.",,2,Yes|No|Somewhat|Not applicable,,0,,,9.2 9.3|9.4|9.4|9.4,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.5,Does this requirement reflect your company current practice: PII must not be retained longer than necessary.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.9,Does this requirement reflect your company current practice: Data must be disposed of securely when no longer required.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Data Retention and Disposal,"<i>- Data retention periods must be defined based on legal, regulatory, and business requirements.
+- PII must not be retained longer than necessary.
+- Data must be disposed of securely when no longer required.</i>",9.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Data Access,"<i>- Access to data must be granted based on business need and least privilege.
+- Access to PII must be restricted and reviewed when roles or responsibilities change.</i>",10.1,Does this requirement reflect your company current practice: Access to data must be granted based on business need and least privilege.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
+10,Standard - Data Access,"<i>- Access to data must be granted based on business need and least privilege.
+- Access to PII must be restricted and reviewed when roles or responsibilities change.</i>",10.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Data Access,"<i>- Access to data must be granted based on business need and least privilege.
+- Access to PII must be restricted and reviewed when roles or responsibilities change.</i>",10.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Data Access,"<i>- Access to data must be granted based on business need and least privilege.
+- Access to PII must be restricted and reviewed when roles or responsibilities change.</i>",10.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Data Access,"<i>- Access to data must be granted based on business need and least privilege.
+- Access to PII must be restricted and reviewed when roles or responsibilities change.</i>",10.5,Does this requirement reflect your company current practice: Access to PII must be restricted and reviewed when roles or responsibilities change.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
+10,Standard - Data Access,"<i>- Access to data must be granted based on business need and least privilege.
+- Access to PII must be restricted and reviewed when roles or responsibilities change.</i>",10.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Data Access,"<i>- Access to data must be granted based on business need and least privilege.
+- Access to PII must be restricted and reviewed when roles or responsibilities change.</i>",10.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Data Access,"<i>- Access to data must be granted based on business need and least privilege.
+- Access to PII must be restricted and reviewed when roles or responsibilities change.</i>",10.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.1,Does this requirement reflect your company current practice: All organizational data must be backed up at least daily.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.2 11.3|11.4|11.4|11.4,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.5,"Does this requirement reflect your company current practice: Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.",,2,Yes|No|Somewhat|Not applicable,,0,,,11.6 11.7|11.8|11.8|11.8,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Backup job reports|Restore test records|Retention configuration|Recovery runbooks|Supplier register|Due diligence questionnaire|Contract clauses|Supplier review records|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.9,"Does this requirement reflect your company current practice: Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.",,2,Yes|No|Somewhat|Not applicable,,0,,,11.10 11.11|11.12|11.12|11.12,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Backup job reports|Restore test records|Retention configuration|Recovery runbooks|Encryption configuration|Key management records|Certificate inventory|Secret management export|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.13,Does this requirement reflect your company current practice: Backup data containing PII must be protected in accordance with its classification.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.14 11.15|11.16|11.16|11.16,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Backup job reports|Restore test records|Retention configuration|Recovery runbooks|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.17,Does this requirement reflect your company current practice: Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.18 11.19|11.20|11.20|11.20,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Backup job reports|Restore test records|Retention configuration|Recovery runbooks|SDLC procedure|Code review records|Security test reports|Release approvals|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Data Backup and Recovery,"<i>- All organizational data must be backed up at least daily.
+- Backups must be retained for up to one (1) year, unless shorter or longer retention is required by legal, regulatory, or contractual obligations.
+- Backup scope, storage, encryption, and protection must follow the Backup & Recovery Policy and Cryptography Policy.
+- Backup data containing PII must be protected in accordance with its classification.
+- Backup restore capabilities must be tested in accordance with the Backup & Recovery Policy.</i>",11.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+12,Procedure - Data Inventory Procedure,"<i>1. Systems and repositories that store or process organizational data are identified.
+2. Data sets within each system are identified and documented.
+3. For each data set, the required inventory attributes are recorded.
+4. The data inventory is reviewed and updated periodically or when significant changes occur.</i>",12.1,Does this procedure reflect your actual process?,"1. Systems and repositories that store or process organizational data are identified.
+2. Data sets within each system are identified and documented.
+3. For each data set, the required inventory attributes are recorded.
+4. The data inventory is reviewed and updated periodically or when significant changes occur.",2,Yes|No|Somewhat|Not applicable,,0,,,|12.2|12.2|12.2,1
+12,Procedure - Data Inventory Procedure,"<i>1. Systems and repositories that store or process organizational data are identified.
+2. Data sets within each system are identified and documented.
+3. For each data set, the required inventory attributes are recorded.
+4. The data inventory is reviewed and updated periodically or when significant changes occur.</i>",12.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
+13,Procedure - Data Classification Procedure,"<i>1. Data owners identify the data they are responsible for.
+2. Data is classified using the classification table.
+3. Classification decisions are documented.
+4. Classifications are reviewed periodically or when data usage changes.</i>",13.1,Does this procedure reflect your actual process?,"1. Data owners identify the data they are responsible for.
+2. Data is classified using the classification table.
+3. Classification decisions are documented.
+4. Classifications are reviewed periodically or when data usage changes.",2,Yes|No|Somewhat|Not applicable,,0,,,|13.2|13.2|13.2,1
+13,Procedure - Data Classification Procedure,"<i>1. Data owners identify the data they are responsible for.
+2. Data is classified using the classification table.
+3. Classification decisions are documented.
+4. Classifications are reviewed periodically or when data usage changes.</i>",13.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
+14,Procedure - Data Retention and Disposal Procedure,"<i>1. Retention requirements are identified for each data type.
+2. Data is retained for the defined period.
+3. Data is securely disposed of when retention periods expire.
+4. Disposal actions are documented where required.</i>",14.1,Does this procedure reflect your actual process?,"1. Retention requirements are identified for each data type.
+2. Data is retained for the defined period.
+3. Data is securely disposed of when retention periods expire.
+4. Disposal actions are documented where required.",2,Yes|No|Somewhat|Not applicable,,0,,,|14.2|14.2|14.2,1
+14,Procedure - Data Retention and Disposal Procedure,"<i>1. Retention requirements are identified for each data type.
+2. Data is retained for the defined period.
+3. Data is securely disposed of when retention periods expire.
+4. Disposal actions are documented where required.</i>",14.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1

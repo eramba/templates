@@ -1,0 +1,1383 @@
+﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
+2,Scope,"<i>This document applies to all information security incidents affecting organizational systems, data, services, or assets, including incidents involving employees, contractors, third parties, or external parties.</i>",2.1,Is this scope accurate and complete for your organization?,"This document applies to all information security incidents affecting organizational systems, data, services, or assets, including incidents involving employees, contractors, third parties, or external parties.",2,Yes|No|Somewhat,,0,,,||2.2,1
+2,Scope,"<i>This document applies to all information security incidents affecting organizational systems, data, services, or assets, including incidents involving employees, contractors, third parties, or external parties.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.1,Is someone responsible for All Users are responsible for promptly reporting suspected or actual information security incidents.?,,2,Yes|No,,0,,,3.2|,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.2,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.3,Is someone responsible for Department Managers are responsible for supporting incident response activities within their areas.?,,2,Yes|No,,0,,,3.4|,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.4,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.5,"Is someone responsible for The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.?",,2,Yes|No,,0,,,3.6|,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.6,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.7,"Is someone responsible for IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.?",,2,Yes|No,,0,,,3.8|,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.8,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.9,"Is someone responsible for Legal, Compliance, and Management are involved where required based on incident severity.?",,2,Yes|No,,0,,,3.10|,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.10,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- All Users are responsible for promptly reporting suspected or actual information security incidents.
+- Department Managers are responsible for supporting incident response activities within their areas.
+- The Information Security function is responsible for defining incident management requirements and coordinating incident response, with the assistance of Department Managers.
+- IT / Technical Teams are responsible for technical investigation, containment, and remediation activities where applicable.
+- Legal, Compliance, and Management are involved where required based on incident severity.</i>",3.11,Are we missing any responsibility here that is performed in your company?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.1,Does this policy statement apply to your company: Information security incidents must be reported and managed in a timely and structured manner.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.2|4.2|4.2,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.2,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.3,"Does this policy statement apply to your company: Incident response activities must prioritize safety, containment, and impact reduction.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.4|4.4|4.4,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.4,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.5,Does this policy statement apply to your company: Evidence related to incidents must be preserved where required.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.6|4.6|4.6,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.6,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.7,Does this policy statement apply to your company: Lessons learned from incidents must be used to improve security controls.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.8|4.8|4.8,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.8,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.9,"Does this policy statement apply to your company: Incident management practices must support legal, regulatory, and contractual obligations.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.10|4.10|4.10,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.10,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.11,Does this policy statement apply to your company: Personnel must be able to report security concerns without fear of retaliation.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.12|4.12|4.12,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.12,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- Information security incidents must be reported and managed in a timely and structured manner.
+- Incident response activities must prioritize safety, containment, and impact reduction.
+- Evidence related to incidents must be preserved where required.
+- Lessons learned from incidents must be used to improve security controls.
+- Incident management practices must support legal, regulatory, and contractual obligations.
+- Personnel must be able to report security concerns without fear of retaliation.</i>",4.13,Are we missing any policy statement here that reflects something done in your company?,,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.1,Does this requirement reflect your company current practice: Information security events and incidents must be identified and reported as soon as they are detected or suspected.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.5,Does this requirement reflect your company current practice: Reporting channels must be clearly defined and communicated.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.9,"Does this requirement reflect your company current practice: Incidents and concerns may include, but are not limited to:",,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.13,Does this requirement reflect your company current practice: Malware alerts,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.17,Does this requirement reflect your company current practice: Suspicious or failed authentication activity,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.21,Does this requirement reflect your company current practice: Unauthorized access or data disclosure,,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.25,Does this requirement reflect your company current practice: Loss or theft of devices,,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.26,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Asset inventory|MDM/endpoint management export|Software inventory|Return checklist|Service desk tickets|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.27,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.28,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.29,Does this requirement reflect your company current practice: System compromise or abnormal behavior,,2,Yes|No|Somewhat|Not applicable,,0,,,5.30 5.31|5.32|5.32|5.32,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.30,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.31,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.32,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.33,Does this requirement reflect your company current practice: Policy violations with security impact,,2,Yes|No|Somewhat|Not applicable,,0,,,5.34 5.35|5.36|5.36|5.36,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.34,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Risk register|Risk assessment report|Treatment plan|Management approval records|Screenshots|System exports|Other,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.35,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,Standard - Incident Identification and Reporting,"<i>- Information security events and incidents must be identified and reported as soon as they are detected or suspected.
+- Reporting channels must be clearly defined and communicated.
+- Incidents and concerns may include, but are not limited to:
+  - Malware alerts
+  - Suspicious or failed authentication activity
+  - Unauthorized access or data disclosure
+  - Loss or theft of devices
+  - System compromise or abnormal behavior
+  - Policy violations with security impact</i>",5.36,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.1,Does this requirement reflect your company current practice: The organization must provide a mechanism for confidential or anonymous reporting of security concerns.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.5,"Does this requirement reflect your company current practice: Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.",,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.9,Does this requirement reflect your company current practice: An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.13,Does this requirement reflect your company current practice: Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.17,Does this requirement reflect your company current practice: Retaliation against individuals who report concerns in good faith is prohibited.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Whistleblowing and Anonymous Reporting,"<i>- The organization must provide a mechanism for confidential or anonymous reporting of security concerns.
+- Personnel may report suspected incidents, policy violations, or unethical behavior without identifying themselves.
+- An anonymous reporting channel must be maintained (e.g. anonymous_incident@company.com).
+- Reports submitted through anonymous channels must be reviewed and handled with the same level of seriousness as identified reports.
+- Retaliation against individuals who report concerns in good faith is prohibited.</i>",6.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.1,"Does this requirement reflect your company current practice: An information security event is any observable occurrence in a system, network, or service that may be relevant to security.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.2 7.3|7.4|7.4|7.4,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Network diagrams|Firewall rule export|VPN configuration|Change tickets|Screenshots|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.5,"Does this requirement reflect your company current practice: An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Asset inventory|MDM/endpoint management export|Software inventory|Return checklist|Service desk tickets|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.9,Does this requirement reflect your company current practice: All reported events must be reviewed to determine whether they constitute an incident.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.13,Does this requirement reflect your company current practice: Events that do not pose a security risk must be recorded and closed.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Risk register|Risk assessment report|Treatment plan|Management approval records|Screenshots|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.17,"Does this requirement reflect your company current practice: Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Risk register|Risk assessment report|Treatment plan|Management approval records|Incident tickets|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.21,"Does this requirement reflect your company current practice: Incidents must be classified and prioritized based on potential and actual impact, including:",,2,Yes|No|Somewhat|Not applicable,,0,,,7.22 7.23|7.24|7.24|7.24,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Risk register|Risk assessment report|Treatment plan|Management approval records|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.25,"Does this requirement reflect your company current practice: Impact on confidentiality, integrity, and availability",,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.26,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Risk register|Risk assessment report|Treatment plan|Management approval records|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.27,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.28,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.29,"Does this requirement reflect your company current practice: Scope of affected systems, data, or users",,2,Yes|No|Somewhat|Not applicable,,0,,,7.30 7.31|7.32|7.32|7.32,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.30,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.31,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.32,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.33,"Does this requirement reflect your company current practice: Legal, regulatory, or contractual implications",,2,Yes|No|Somewhat|Not applicable,,0,,,7.34 7.35|7.36|7.36|7.36,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.34,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Supplier register|Due diligence questionnaire|Contract clauses|Supplier review records|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.35,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.36,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.37,"Does this requirement reflect your company current practice: Potential financial, operational, and reputational cost to the organization",,2,Yes|No|Somewhat|Not applicable,,0,,,7.38 7.39|7.40|7.40|7.40,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.38,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.39,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.40,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.41,Does this requirement reflect your company current practice: Urgency and likelihood of further impact,,2,Yes|No|Somewhat|Not applicable,,0,,,7.42 7.43|7.44|7.44|7.44,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.42,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Risk register|Risk assessment report|Treatment plan|Management approval records|Screenshots|System exports|Other,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.43,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
+- An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
+- All reported events must be reviewed to determine whether they constitute an incident.
+- Events that do not pose a security risk must be recorded and closed.
+- Events that indicate compromise, policy violation, or material risk must be escalated and classified as incidents.
+- Incidents must be classified and prioritized based on potential and actual impact, including:
+  - Impact on confidentiality, integrity, and availability
+  - Scope of affected systems, data, or users
+  - Legal, regulatory, or contractual implications
+  - Potential financial, operational, and reputational cost to the organization
+  - Urgency and likelihood of further impact</i>",7.44,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.1,Does this requirement reflect your company current practice: Incident response must follow a defined and repeatable process.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.2 8.3|8.4|8.4|8.4,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.5,Does this requirement reflect your company current practice: Response activities may include:,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.9,Does this requirement reflect your company current practice: Containment and mitigation,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.13,Does this requirement reflect your company current practice: Investigation and analysis,,2,Yes|No|Somewhat|Not applicable,,0,,,8.14 8.15|8.16|8.16|8.16,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.17,Does this requirement reflect your company current practice: Eradication of root causes,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.21,Does this requirement reflect your company current practice: Recovery of systems and services,,2,Yes|No|Somewhat|Not applicable,,0,,,8.22 8.23|8.24|8.24|8.24,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Backup job reports|Restore test records|Retention configuration|Recovery runbooks|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.25,Does this requirement reflect your company current practice: Actions taken must be documented.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.26 8.27|8.28|8.28|8.28,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.26,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.27,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+8,Standard - Incident Response and Handling,"<i>- Incident response must follow a defined and repeatable process.
+- Response activities may include:
+  - Containment and mitigation
+  - Investigation and analysis
+  - Eradication of root causes
+  - Recovery of systems and services
+- Actions taken must be documented.</i>",8.28,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.1,Does this requirement reflect your company current practice: Incidents must be escalated to management based on severity.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.2 9.3|9.4|9.4|9.4,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.5,Does this requirement reflect your company current practice: Internal and external communications must be controlled and coordinated.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.9,"Does this requirement reflect your company current practice: Notifications to customers, partners, or authorities must be approved and managed where required.",,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+9,Standard - Communication and Escalation,"<i>- Incidents must be escalated to management based on severity.
+- Internal and external communications must be controlled and coordinated.
+- Notifications to customers, partners, or authorities must be approved and managed where required.</i>",9.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.1,Does this requirement reflect your company current practice: Evidence related to incidents must be preserved to support investigation or legal action.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.5,Does this requirement reflect your company current practice: Access to evidence must be restricted.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|IAM export|Access review records|User account listing|Approval tickets|Authentication logs|MFA configuration screenshots|Password manager records|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.9,Does this requirement reflect your company current practice: Chain-of-custody must be maintained where applicable.,,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+10,Standard - Evidence Handling,"<i>- Evidence related to incidents must be preserved to support investigation or legal action.
+- Access to evidence must be restricted.
+- Chain-of-custody must be maintained where applicable.</i>",10.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.1,Does this requirement reflect your company current practice: Significant incidents must be reviewed after resolution.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.2 11.3|11.4|11.4|11.4,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.5,Does this requirement reflect your company current practice: Root causes and contributing factors must be identified.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.6 11.7|11.8|11.8|11.8,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.9,Does this requirement reflect your company current practice: Corrective actions must be defined and tracked.,,2,Yes|No|Somewhat|Not applicable,,0,,,11.10 11.11|11.12|11.12|11.12,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+11,Standard - Post-Incident Review,"<i>- Significant incidents must be reviewed after resolution.
+- Root causes and contributing factors must be identified.
+- Corrective actions must be defined and tracked.</i>",11.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+12,Procedure - Incident Response Procedure,"<i>1. Event or incident is detected or reported (including anonymous reports).
+2. Event is logged and reviewed.
+3. Determination is made whether the event constitutes an incident.
+4. Incidents are classified and prioritized.
+5. Containment and mitigation actions are performed.
+6. Investigation and remediation are completed.
+7. Systems and services are recovered.
+8. Incident is closed and documented.</i>",12.1,Does this procedure reflect your actual process?,"1. Event or incident is detected or reported (including anonymous reports).
+2. Event is logged and reviewed.
+3. Determination is made whether the event constitutes an incident.
+4. Incidents are classified and prioritized.
+5. Containment and mitigation actions are performed.
+6. Investigation and remediation are completed.
+7. Systems and services are recovered.
+8. Incident is closed and documented.",2,Yes|No|Somewhat|Not applicable,,0,,,|12.2|12.2|12.2,1
+12,Procedure - Incident Response Procedure,"<i>1. Event or incident is detected or reported (including anonymous reports).
+2. Event is logged and reviewed.
+3. Determination is made whether the event constitutes an incident.
+4. Incidents are classified and prioritized.
+5. Containment and mitigation actions are performed.
+6. Investigation and remediation are completed.
+7. Systems and services are recovered.
+8. Incident is closed and documented.</i>",12.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
+13,Procedure - Incident Review Procedure,"<i>1. Incident details are reviewed.
+2. Lessons learned are identified.
+3. Improvements to controls or processes are defined.
+4. Actions are tracked to completion.</i>",13.1,Does this procedure reflect your actual process?,"1. Incident details are reviewed.
+2. Lessons learned are identified.
+3. Improvements to controls or processes are defined.
+4. Actions are tracked to completion.",2,Yes|No|Somewhat|Not applicable,,0,,,|13.2|13.2|13.2,1
+13,Procedure - Incident Review Procedure,"<i>1. Incident details are reviewed.
+2. Lessons learned are identified.
+3. Improvements to controls or processes are defined.
+4. Actions are tracked to completion.</i>",13.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1

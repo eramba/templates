@@ -1,0 +1,2027 @@
+﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
+2,Scope,"<i>This policy applies to:
+- All information assets owned, processed, or managed by the organization.
+- All systems, services, and processes within the ISMS scope.
+- All personnel, including employees, contractors, and third parties with access to organizational information or systems.</i>",2.1,Is this scope accurate and complete for your organization?,"This policy applies to:
+- All information assets owned, processed, or managed by the organization.
+- All systems, services, and processes within the ISMS scope.
+- All personnel, including employees, contractors, and third parties with access to organizational information or systems.",2,Yes|No|Somewhat,,0,,,||2.2,1
+2,Scope,"<i>This policy applies to:
+- All information assets owned, processed, or managed by the organization.
+- All systems, services, and processes within the ISMS scope.
+- All personnel, including employees, contractors, and third parties with access to organizational information or systems.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.1,Is someone responsible for Top Management: Approves this policy and demonstrates commitment to information security.?,,2,Yes|No,,0,,,3.2|,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.2,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.3,"Is someone responsible for The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.?",,2,Yes|No,,0,,,3.4|,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.4,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.5,Is someone responsible for Department Managers: Ensure this policy is implemented within their areas.?,,2,Yes|No,,0,,,3.6|,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.6,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.7,"Is someone responsible for All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies. ---?",,2,Yes|No,,0,,,3.8|,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.8,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Top Management: Approves this policy and demonstrates commitment to information security.
+- The Information Security function: Maintains this policy and supports its implementation, with the support of other department managers.
+- Department Managers: Ensure this policy is implemented within their areas.
+- All Personnel: Understand, acknowledge, and comply with this policy and supporting information security policies.
+
+---</i>",3.9,Are we missing any responsibility here that is performed in your company?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.1,"Does this policy statement apply to your company: Protect information assets against unauthorized access, disclosure, alteration, or loss.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.2|4.2|4.2,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.2,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.3,Does this policy statement apply to your company: Maintain availability of systems and services supporting critical business processes.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.4|4.4|4.4,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.4,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.5,Does this policy statement apply to your company: Manage information security risks in line with the Risk Management Policy.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.6|4.6|4.6,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.6,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.7,"Does this policy statement apply to your company: Maintain customer, regulatory, and stakeholder trust. All information security activities shall be guided by the following principles:",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.8|4.8|4.8,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.8,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.9,Does this policy statement apply to your company: Information security supports business objectives.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.10|4.10|4.10,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.10,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.11,Does this policy statement apply to your company: Risk-based decision making is applied.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.12|4.12|4.12,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.12,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.13,Does this policy statement apply to your company: Least privilege and need-to-know access is enforced.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.14|4.14|4.14,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.14,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.15,Does this policy statement apply to your company: Security controls are proportionate to risk.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.16|4.16|4.16,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.16,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.17,Does this policy statement apply to your company: Information security is a shared responsibility. The organization commits to satisfying applicable:,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.18|4.18|4.18,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.18,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.19,Does this policy statement apply to your company: Legal and regulatory requirements,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.20|4.20|4.20,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.20,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.21,Does this policy statement apply to your company: Contractual obligations,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.22|4.22|4.22,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.22,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.23,Does this policy statement apply to your company: Information security requirements agreed with customers and suppliers The organization commits to the continual improvement of the Information Security Management System (ISMS) through:,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.24|4.24|4.24,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.24,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.25,Does this policy statement apply to your company: Risk assessment and treatment,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.26|4.26|4.26,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.26,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.27,Does this policy statement apply to your company: Monitoring and measurement,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.28|4.28|4.28,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.28,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.29,Does this policy statement apply to your company: Audits and reviews,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.30|4.30|4.30,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.30,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.31,Does this policy statement apply to your company: Management oversight Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.32|4.32|4.32,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.32,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.33,Does this policy statement apply to your company: Exceptions to this policy or supporting information security policies must be formally requested.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.34|4.34|4.34,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.34,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.35,"Does this policy statement apply to your company: Exceptions must be risk-assessed, approved, documented, and time-bound.",,2,Yes|No|Somewhat|Not applicable,,0,,,|4.36|4.36|4.36,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.36,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.37,Does this policy statement apply to your company: Approved exceptions must be reviewed periodically. ---,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.38|4.38|4.38,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.38,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>### Definition of Information Security
+Information security is the preservation of the confidentiality, integrity, and availability of information, regardless of its form.
+
+### Information Security Objectives
+The organization establishes information security objectives to:
+- Protect information assets against unauthorized access, disclosure, alteration, or loss.
+- Maintain availability of systems and services supporting critical business processes.
+- Manage information security risks in line with the Risk Management Policy.
+- Maintain customer, regulatory, and stakeholder trust.
+
+### Information Security Principles
+All information security activities shall be guided by the following principles:
+- Information security supports business objectives.
+- Risk-based decision making is applied.
+- Least privilege and need-to-know access is enforced.
+- Security controls are proportionate to risk.
+- Information security is a shared responsibility.
+
+### Compliance and Applicable Requirements
+The organization commits to satisfying applicable:
+- Legal and regulatory requirements
+- Contractual obligations
+- Information security requirements agreed with customers and suppliers
+
+### Continual Improvement
+The organization commits to the continual improvement of the Information Security Management System (ISMS) through:
+- Risk assessment and treatment
+- Monitoring and measurement
+- Audits and reviews
+- Management oversight
+
+### Roles and Responsibilities
+Information security roles and responsibilities are defined and governed through the Information Security Roles and Responsibilities Policy.
+
+### Exceptions and Exemptions
+- Exceptions to this policy or supporting information security policies must be formally requested.
+- Exceptions must be risk-assessed, approved, documented, and time-bound.
+- Approved exceptions must be reviewed periodically.
+
+---</i>",4.39,Are we missing any policy statement here that reflects something done in your company?,,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.1,Does this requirement reflect your company current practice: This policy shall be approved by Top Management.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.5,Does this requirement reflect your company current practice: The policy shall be:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.9,Does this requirement reflect your company current practice: Documented,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.13,Does this requirement reflect your company current practice: Communicated to relevant personnel,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.17,Does this requirement reflect your company current practice: Made available to interested parties where appropriate,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.21,Does this requirement reflect your company current practice: Personnel shall be required to acknowledge understanding and compliance where applicable.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Training completion report|Acknowledgement records|Awareness material|Attendance records|Screenshots|System exports|Other,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+5,"Standard - Approval, Communication, and Awareness","<i>- This policy shall be approved by Top Management.
+- The policy shall be:
+  - Documented
+  - Communicated to relevant personnel
+  - Made available to interested parties where appropriate
+- Personnel shall be required to acknowledge understanding and compliance where applicable.</i>",5.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.1,Does this requirement reflect your company current practice: This policy shall be reviewed:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.2,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.3,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.4,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.5,Does this requirement reflect your company current practice: At planned intervals,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.6,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.7,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.8,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.9,"Does this requirement reflect your company current practice: When significant changes occur to business strategy, technology, regulations, risks, or the threat environment",,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.10,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Risk register|Risk assessment report|Treatment plan|Management approval records|Screenshots|Other,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.11,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.12,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.13,Does this requirement reflect your company current practice: Reviews shall consider:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.14,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.15,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.16,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.17,Does this requirement reflect your company current practice: Audit results,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.18,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|SIEM reports|Log exports|Monitoring alerts|Audit reports|Review meeting records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.19,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.20,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.21,Does this requirement reflect your company current practice: Management review outputs,,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.22,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.23,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.24,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.25,Does this requirement reflect your company current practice: Lessons learned from information security incidents,,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.26,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Incident tickets|Incident register|Post-incident review|Notification records|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.27,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.28,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.29,Does this requirement reflect your company current practice: Changes to this policy require Top Management approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.30,"Which technologies, tools, methods, or evidence sources are used?",,5,Policy document|Procedure document|Assigned owner or role record|Screenshots|System exports|Other,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.31,"What evidence can you provide to demonstrate this requirement is implemented? Examples may include screenshots, reports, logs, tickets, approvals, procedures, meeting records, or system exports.",,1,,,0,,,,1
+6,Standard - Review and Update,"<i>- This policy shall be reviewed:
+  - At planned intervals
+  - When significant changes occur to business strategy, technology, regulations, risks, or the threat environment
+- Reviews shall consider:
+  - Audit results
+  - Management review outputs
+  - Lessons learned from information security incidents
+- Changes to this policy require Top Management approval.</i>",6.32,"Please explain why this requirement is not implemented, only partially implemented, or not applicable.",,1,,,0,,,,1

@@ -1,0 +1,86 @@
+﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
+2,Scope,"<i>This document applies to all employees, contractors, temporary staff, and third parties who have access to the organization’s information, systems, or facilities.</i>",2.1,Is this scope accurate and complete for your organization?,"This document applies to all employees, contractors, temporary staff, and third parties who have access to the organization’s information, systems, or facilities.",2,Yes|No|Somewhat,,0,,,||2.2,1
+2,Scope,"<i>This document applies to all employees, contractors, temporary staff, and third parties who have access to the organization’s information, systems, or facilities.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
+3,Responsibilities,"<i>- Management is responsible for supporting and enforcing security awareness activities.
+- The Information Security function is responsible for defining and maintaining security awareness content, with support from relevant departments where required.
+- All personnel are responsible for complying with security awareness requirements and applying them in their daily activities.</i>",3.1,Is someone responsible for Management is responsible for supporting and enforcing security awareness activities.?,,2,Yes|No,,0,,,3.2|,1
+3,Responsibilities,"<i>- Management is responsible for supporting and enforcing security awareness activities.
+- The Information Security function is responsible for defining and maintaining security awareness content, with support from relevant departments where required.
+- All personnel are responsible for complying with security awareness requirements and applying them in their daily activities.</i>",3.2,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Management is responsible for supporting and enforcing security awareness activities.
+- The Information Security function is responsible for defining and maintaining security awareness content, with support from relevant departments where required.
+- All personnel are responsible for complying with security awareness requirements and applying them in their daily activities.</i>",3.3,"Is someone responsible for The Information Security function is responsible for defining and maintaining security awareness content, with support from relevant departments where required.?",,2,Yes|No,,0,,,3.4|,1
+3,Responsibilities,"<i>- Management is responsible for supporting and enforcing security awareness activities.
+- The Information Security function is responsible for defining and maintaining security awareness content, with support from relevant departments where required.
+- All personnel are responsible for complying with security awareness requirements and applying them in their daily activities.</i>",3.4,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Management is responsible for supporting and enforcing security awareness activities.
+- The Information Security function is responsible for defining and maintaining security awareness content, with support from relevant departments where required.
+- All personnel are responsible for complying with security awareness requirements and applying them in their daily activities.</i>",3.5,Is someone responsible for All personnel are responsible for complying with security awareness requirements and applying them in their daily activities.?,,2,Yes|No,,0,,,3.6|,1
+3,Responsibilities,"<i>- Management is responsible for supporting and enforcing security awareness activities.
+- The Information Security function is responsible for defining and maintaining security awareness content, with support from relevant departments where required.
+- All personnel are responsible for complying with security awareness requirements and applying them in their daily activities.</i>",3.6,"Who performs this responsibility? Please provide the role, team, or job title.",,1,,,0,,,,1
+3,Responsibilities,"<i>- Management is responsible for supporting and enforcing security awareness activities.
+- The Information Security function is responsible for defining and maintaining security awareness content, with support from relevant departments where required.
+- All personnel are responsible for complying with security awareness requirements and applying them in their daily activities.</i>",3.7,Are we missing any responsibility here that is performed in your company?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.1,Does this policy statement apply to your company: All personnel must participate in regular security awareness training.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.2|4.2|4.2,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.2,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.3,Does this policy statement apply to your company: Security awareness training must be appropriate to the individual’s role and responsibilities.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.4|4.4|4.4,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.4,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.5,Does this policy statement apply to your company: Personnel must understand and comply with the organization’s information security policies and standards.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.6|4.6|4.6,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.6,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.7,Does this policy statement apply to your company: Failure to follow security awareness requirements may result in disciplinary action.,,2,Yes|No|Somewhat|Not applicable,,0,,,|4.8|4.8|4.8,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.8,How would you describe this policy statement to better reflect the reality?,,1,,,0,,,,1
+4,Policy Statements,"<i>- All personnel must participate in regular security awareness training.
+- Security awareness training must be appropriate to the individual’s role and responsibilities.
+- Personnel must understand and comply with the organization’s information security policies and standards.
+- Failure to follow security awareness requirements may result in disciplinary action.</i>",4.9,Are we missing any policy statement here that reflects something done in your company?,,1,,,0,,,,1
+5,Procedure - Security Awareness Training Procedure,"<i>1. Security awareness training content is defined and maintained by the Information Security function.
+2. Training is delivered to all personnel through organization-approved methods.
+3. New personnel complete security awareness training as part of onboarding.
+4. Existing personnel complete security awareness training at least annually.
+5. Completion records are collected and retained as evidence.</i>",5.1,Does this procedure reflect your actual process?,"1. Security awareness training content is defined and maintained by the Information Security function.
+2. Training is delivered to all personnel through organization-approved methods.
+3. New personnel complete security awareness training as part of onboarding.
+4. Existing personnel complete security awareness training at least annually.
+5. Completion records are collected and retained as evidence.",2,Yes|No|Somewhat|Not applicable,,0,,,|5.2|5.2|5.2,1
+5,Procedure - Security Awareness Training Procedure,"<i>1. Security awareness training content is defined and maintained by the Information Security function.
+2. Training is delivered to all personnel through organization-approved methods.
+3. New personnel complete security awareness training as part of onboarding.
+4. Existing personnel complete security awareness training at least annually.
+5. Completion records are collected and retained as evidence.</i>",5.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
+6,Procedure - Ongoing Awareness Activities Procedure,"<i>1. Periodic security awareness communications are distributed to personnel.
+2. Awareness activities may include newsletters, alerts, campaigns, or simulations.
+3. Topics are selected based on current threats, incidents, or risk assessments.
+4. Participation and effectiveness may be monitored where applicable.</i>",6.1,Does this procedure reflect your actual process?,"1. Periodic security awareness communications are distributed to personnel.
+2. Awareness activities may include newsletters, alerts, campaigns, or simulations.
+3. Topics are selected based on current threats, incidents, or risk assessments.
+4. Participation and effectiveness may be monitored where applicable.",2,Yes|No|Somewhat|Not applicable,,0,,,|6.2|6.2|6.2,1
+6,Procedure - Ongoing Awareness Activities Procedure,"<i>1. Periodic security awareness communications are distributed to personnel.
+2. Awareness activities may include newsletters, alerts, campaigns, or simulations.
+3. Topics are selected based on current threats, incidents, or risk assessments.
+4. Participation and effectiveness may be monitored where applicable.</i>",6.2,Please provide corrections in step-by-step format.,,1,,,0,,,,1
