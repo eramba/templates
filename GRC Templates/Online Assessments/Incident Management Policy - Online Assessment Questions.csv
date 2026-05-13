@@ -613,7 +613,7 @@
   - Scope of affected systems, data, or users
   - Legal, regulatory, or contractual implications
   - Potential financial, operational, and reputational cost to the organization
-  - Urgency and likelihood of further impact</i>",7.5,"Does this requirement reflect your company current practice: An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+  - Urgency and likelihood of further impact</i>",7.5,"Does this reflect current practice: an information security incident is one or more information security events assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
 7,Standard - Incident Classification and Prioritization,"<i>- An information security event is any observable occurrence in a system, network, or service that may be relevant to security.
 - An information security incident is one or more events that have been assessed and determined to pose a real or potential threat to the confidentiality, integrity, or availability of organizational assets.
 - All reported events must be reviewed to determine whether they constitute an incident.

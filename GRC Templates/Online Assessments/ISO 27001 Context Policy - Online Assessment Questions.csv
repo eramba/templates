@@ -571,7 +571,7 @@ The ISMS does not include customer-managed environments or systems not operated 
 
 The ISMS scope is reviewed periodically and whenever significant organizational, technical, or regulatory changes occur.
 
----</i>",7.25,"Does this requirement reflect your company current practice: Interfaces and dependencies with third-party service providers supporting the delivery and operation of the Eramba SaaS platform. The ISMS does not include customer-managed environments or systems not operated or controlled by Eramba Limited, except where explicitly defined through contractual or operational interfaces. The ISMS scope is reviewed periodically and whenever significant organizational, technical, or regulatory changes occur. ---",,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
+---</i>",7.25,"Does this reflect current practice: ISMS interfaces and dependencies with third-party providers supporting Eramba SaaS, excluding customer-managed or non-Eramba-controlled systems unless contractually or operationally defined, and periodically reviewed?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
 7,Standard - ISMS Scope,"<i>The Information Security Management System (ISMS) applies to Eramba Limited and covers the design, development, operation, hosting, and support of the Eramba software platform provided to customers as a Software-as-a-Service (SaaS) solution.
 
 The scope includes:
@@ -1141,7 +1141,7 @@ Information security objectives are documented, communicated, monitored, and rev
 
 Information security objectives are documented, communicated, monitored, and reviewed as appropriate.
 
----</i>",9.13,"Does this requirement reflect your company current practice: Maintain customer and regulatory trust by complying with applicable information security requirements and maintaining alignment with ISO 27001. Information security objectives are documented, communicated, monitored, and reviewed as appropriate. ---",,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
+---</i>",9.13,"Does this reflect current practice: maintaining customer and regulatory trust by complying with applicable information security requirements, aligning with ISO 27001, and documenting, communicating, monitoring, and reviewing security objectives?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
 9,Standard - Information Security Objectives,"<i>The organization establishes the following information security objectives:
 
 - Protect customer data by preventing unauthorized access, disclosure, or loss of information processed by the Eramba SaaS platform.
