@@ -399,7 +399,7 @@
   - Data classification
   - Type of data (e.g. business data, personal data, PII)
   - Applicable legal, regulatory, or contractual obligations
-- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.9,"Does this requirement reflect your company current practice: The data inventory must identify, at a minimum:",,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.9,"Does this requirement reflect your company current practice: The data inventory must identify, at a minimum, the data set name or description, data owner, data classification, data type, and applicable legal, regulatory, or contractual obligations?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
 6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
 - The data inventory must be maintained and kept up to date.
 - The data inventory must identify, at a minimum:
@@ -435,7 +435,7 @@
   - Data classification
   - Type of data (e.g. business data, personal data, PII)
   - Applicable legal, regulatory, or contractual obligations
-- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.13,Does this requirement reflect your company current practice: Name or description of the data set,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.13,"Does this requirement reflect your company current practice: The data inventory must identify, at a minimum, the name or description of the data set?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
 6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
 - The data inventory must be maintained and kept up to date.
 - The data inventory must identify, at a minimum:
@@ -471,7 +471,7 @@
   - Data classification
   - Type of data (e.g. business data, personal data, PII)
   - Applicable legal, regulatory, or contractual obligations
-- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.17,Does this requirement reflect your company current practice: Data owner,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.17,"Does this requirement reflect your company current practice: The data inventory must identify, at a minimum, the data owner?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
 6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
 - The data inventory must be maintained and kept up to date.
 - The data inventory must identify, at a minimum:
@@ -507,7 +507,7 @@
   - Data classification
   - Type of data (e.g. business data, personal data, PII)
   - Applicable legal, regulatory, or contractual obligations
-- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.21,Does this requirement reflect your company current practice: Data classification,,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.21,"Does this requirement reflect your company current practice: The data inventory must identify, at a minimum, the data classification?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
 6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
 - The data inventory must be maintained and kept up to date.
 - The data inventory must identify, at a minimum:
@@ -543,7 +543,7 @@
   - Data classification
   - Type of data (e.g. business data, personal data, PII)
   - Applicable legal, regulatory, or contractual obligations
-- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.25,"Does this requirement reflect your company current practice: Type of data (e.g. business data, personal data, PII)",,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.25,"Does this requirement reflect your company current practice: The data inventory must identify, at a minimum, the type of data, such as business data, personal data, or PII?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
 6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
 - The data inventory must be maintained and kept up to date.
 - The data inventory must identify, at a minimum:
@@ -579,7 +579,7 @@
   - Data classification
   - Type of data (e.g. business data, personal data, PII)
   - Applicable legal, regulatory, or contractual obligations
-- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.29,"Does this requirement reflect your company current practice: Applicable legal, regulatory, or contractual obligations",,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
+- The data inventory must be reviewed periodically and updated when significant changes occur.</i>",6.29,"Does this requirement reflect your company current practice: The data inventory must identify, at a minimum, applicable legal, regulatory, or contractual obligations?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
 6,Standard - Data Inventory,"<i>- An organization-wide data inventory must exist.
 - The data inventory must be maintained and kept up to date.
 - The data inventory must identify, at a minimum:

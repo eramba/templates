@@ -689,7 +689,7 @@ The Information Security Policy is:
 
 Topic-specific policies support and align with the Information Security Policy.
 
----</i>",8.5,Does this requirement reflect your company current practice: Provides the framework for setting information security objectives.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
+---</i>",8.5,Does this requirement reflect your company current practice: The Information Security Policy provides the framework for setting information security objectives?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
 8,Standard - Information Security Policy Framework,"<i>The organization maintains an Information Security Policy that:
 - Is appropriate to the organization’s purpose and context.
 - Provides the framework for setting information security objectives.
@@ -745,7 +745,7 @@ The Information Security Policy is:
 
 Topic-specific policies support and align with the Information Security Policy.
 
----</i>",8.9,Does this requirement reflect your company current practice: Commits to satisfying applicable information security requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
+---</i>",8.9,Does this requirement reflect your company current practice: The Information Security Policy commits to satisfying applicable information security requirements?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
 8,Standard - Information Security Policy Framework,"<i>The organization maintains an Information Security Policy that:
 - Is appropriate to the organization’s purpose and context.
 - Provides the framework for setting information security objectives.
@@ -857,7 +857,7 @@ The Information Security Policy is:
 
 Topic-specific policies support and align with the Information Security Policy.
 
----</i>",8.17,Does this requirement reflect your company current practice: Documented,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
+---</i>",8.17,Does this requirement reflect your company current practice: The Information Security Policy is documented?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
 8,Standard - Information Security Policy Framework,"<i>The organization maintains an Information Security Policy that:
 - Is appropriate to the organization’s purpose and context.
 - Provides the framework for setting information security objectives.
@@ -913,7 +913,7 @@ The Information Security Policy is:
 
 Topic-specific policies support and align with the Information Security Policy.
 
----</i>",8.21,Does this requirement reflect your company current practice: Communicated internally,,2,Yes|No|Somewhat|Not applicable,,0,,,8.22 8.23|8.24|8.24|8.24,1
+---</i>",8.21,Does this requirement reflect your company current practice: The Information Security Policy is communicated internally?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.22 8.23|8.24|8.24|8.24,1
 8,Standard - Information Security Policy Framework,"<i>The organization maintains an Information Security Policy that:
 - Is appropriate to the organization’s purpose and context.
 - Provides the framework for setting information security objectives.
@@ -1181,7 +1181,7 @@ Information security objectives are documented, communicated, monitored, and rev
 
 Progress against objectives is reviewed periodically and feeds into management review and continual improvement activities.
 
----</i>",10.1,Does this requirement reflect your company current practice: What actions will be taken,,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
+---</i>",10.1,"Does this requirement reflect your company current practice: For each information security objective, the organization determines what actions will be taken?",,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
 10,Standard - Planning to Achieve Information Security Objectives,"<i>For each information security objective, the organization determines:
 - What actions will be taken
 - What resources are required
@@ -1221,7 +1221,7 @@ Progress against objectives is reviewed periodically and feeds into management r
 
 Progress against objectives is reviewed periodically and feeds into management review and continual improvement activities.
 
----</i>",10.5,Does this requirement reflect your company current practice: What resources are required,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
+---</i>",10.5,"Does this requirement reflect your company current practice: For each information security objective, the organization determines what resources are required?",,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
 10,Standard - Planning to Achieve Information Security Objectives,"<i>For each information security objective, the organization determines:
 - What actions will be taken
 - What resources are required
@@ -1261,7 +1261,7 @@ Progress against objectives is reviewed periodically and feeds into management r
 
 Progress against objectives is reviewed periodically and feeds into management review and continual improvement activities.
 
----</i>",10.9,Does this requirement reflect your company current practice: Who is responsible,,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
+---</i>",10.9,"Does this requirement reflect your company current practice: For each information security objective, the organization determines who is responsible?",,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
 10,Standard - Planning to Achieve Information Security Objectives,"<i>For each information security objective, the organization determines:
 - What actions will be taken
 - What resources are required
@@ -1301,7 +1301,7 @@ Progress against objectives is reviewed periodically and feeds into management r
 
 Progress against objectives is reviewed periodically and feeds into management review and continual improvement activities.
 
----</i>",10.13,Does this requirement reflect your company current practice: Target completion timelines,,2,Yes|No|Somewhat|Not applicable,,0,,,10.14 10.15|10.16|10.16|10.16,1
+---</i>",10.13,"Does this requirement reflect your company current practice: For each information security objective, the organization determines target completion timelines?",,2,Yes|No|Somewhat|Not applicable,,0,,,10.14 10.15|10.16|10.16|10.16,1
 10,Standard - Planning to Achieve Information Security Objectives,"<i>For each information security objective, the organization determines:
 - What actions will be taken
 - What resources are required

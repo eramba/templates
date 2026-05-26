@@ -349,7 +349,7 @@
 - Deprecated or weak algorithms and protocols must be disabled, including but not limited to:
   - SSL and early TLS versions
   - DES, 3DES, RC4
-  - MD5 and SHA-1</i>",9.5,"Does this requirement reflect your company current practice: Deprecated or weak algorithms and protocols must be disabled, including but not limited to:",,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
+  - MD5 and SHA-1</i>",9.5,Does this requirement reflect your company current practice: Deprecated or weak algorithms and protocols must be disabled?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
 9,Standard - Approved and Disallowed Cryptography,"<i>- Only strong, industry-accepted cryptographic algorithms and protocols may be used.
 - Deprecated or weak algorithms and protocols must be disabled, including but not limited to:
   - SSL and early TLS versions
@@ -369,7 +369,7 @@
 - Deprecated or weak algorithms and protocols must be disabled, including but not limited to:
   - SSL and early TLS versions
   - DES, 3DES, RC4
-  - MD5 and SHA-1</i>",9.9,Does this requirement reflect your company current practice: SSL and early TLS versions,,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+  - MD5 and SHA-1</i>",9.9,Does this requirement reflect your company current practice: SSL and early TLS versions must be disabled?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
 9,Standard - Approved and Disallowed Cryptography,"<i>- Only strong, industry-accepted cryptographic algorithms and protocols may be used.
 - Deprecated or weak algorithms and protocols must be disabled, including but not limited to:
   - SSL and early TLS versions
@@ -389,7 +389,7 @@
 - Deprecated or weak algorithms and protocols must be disabled, including but not limited to:
   - SSL and early TLS versions
   - DES, 3DES, RC4
-  - MD5 and SHA-1</i>",9.13,"Does this requirement reflect your company current practice: DES, 3DES, RC4",,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
+  - MD5 and SHA-1</i>",9.13,"Does this requirement reflect your company current practice: DES, 3DES, and RC4 must be disabled?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
 9,Standard - Approved and Disallowed Cryptography,"<i>- Only strong, industry-accepted cryptographic algorithms and protocols may be used.
 - Deprecated or weak algorithms and protocols must be disabled, including but not limited to:
   - SSL and early TLS versions
@@ -409,7 +409,7 @@
 - Deprecated or weak algorithms and protocols must be disabled, including but not limited to:
   - SSL and early TLS versions
   - DES, 3DES, RC4
-  - MD5 and SHA-1</i>",9.17,Does this requirement reflect your company current practice: MD5 and SHA-1,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
+  - MD5 and SHA-1</i>",9.17,Does this requirement reflect your company current practice: MD5 and SHA-1 must not be used for approved cryptographic protection?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
 9,Standard - Approved and Disallowed Cryptography,"<i>- Only strong, industry-accepted cryptographic algorithms and protocols may be used.
 - Deprecated or weak algorithms and protocols must be disabled, including but not limited to:
   - SSL and early TLS versions

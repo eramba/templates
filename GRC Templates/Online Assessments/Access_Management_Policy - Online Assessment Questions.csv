@@ -865,7 +865,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.25,"Does this requirement reflect your company current practice: Where password-based authentication is used, systems must enforce the following password policy where technically feasible:",,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.25,"Does this requirement reflect your company current practice: Where password-based authentication is used, systems must enforce the password policy where technically feasible?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -941,7 +941,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.29,Does this requirement reflect your company current practice: Minimum length of 12 characters,,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.29,"Does this requirement reflect your company current practice: Where password-based authentication is used, passwords must have a minimum length of 12 characters where technically feasible?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -1245,7 +1245,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.45,"Does this requirement reflect your company current practice: Systems must implement brute-force protection where technically feasible, including one or more of the following:",,2,Yes|No|Somewhat|Not applicable,,0,,,6.46 6.47|6.48|6.48|6.48,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.45,Does this requirement reflect your company current practice: Systems must implement brute-force protection where technically feasible?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.46 6.47|6.48|6.48|6.48,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -1321,7 +1321,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.49,Does this requirement reflect your company current practice: Account lockout after repeated failed attempts,,2,Yes|No|Somewhat|Not applicable,,0,,,6.50 6.51|6.52|6.52|6.52,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.49,Does this requirement reflect your company current practice: Brute-force protection may include account lockout after repeated failed attempts?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.50 6.51|6.52|6.52|6.52,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -1397,7 +1397,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.53,Does this requirement reflect your company current practice: Progressive authentication delays,,2,Yes|No|Somewhat|Not applicable,,0,,,6.54 6.55|6.56|6.56|6.56,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.53,Does this requirement reflect your company current practice: Brute-force protection may include progressive authentication delays?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.54 6.55|6.56|6.56|6.56,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -1473,7 +1473,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.57,Does this requirement reflect your company current practice: Rate limiting,,2,Yes|No|Somewhat|Not applicable,,0,,,6.58 6.59|6.60|6.60|6.60,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.57,Does this requirement reflect your company current practice: Brute-force protection may include rate limiting?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.58 6.59|6.60|6.60|6.60,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.

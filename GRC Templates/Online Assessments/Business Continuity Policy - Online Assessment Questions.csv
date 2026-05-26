@@ -197,7 +197,7 @@
   - Maintain existing information security controls during disruption where possible.
   - Define compensating controls when normal controls cannot be maintained.
 - Security of information must be restored to the required level within defined timeframes following disruption.
-- Continuity plans must be developed, implemented, tested, reviewed, and updated.</i>",5.5,Does this requirement reflect your company current practice: Business continuity plans must:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+- Continuity plans must be developed, implemented, tested, reviewed, and updated.</i>",5.5,Does this requirement reflect your company current practice: Business continuity plans must maintain existing information security controls during disruption where possible and define compensating controls when normal controls cannot be maintained?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
 5,Standard - Information Security During Disruption,"<i>- Information security requirements must be integrated into business continuity planning.
 - Business continuity plans must:
   - Maintain existing information security controls during disruption where possible.
@@ -221,7 +221,7 @@
   - Maintain existing information security controls during disruption where possible.
   - Define compensating controls when normal controls cannot be maintained.
 - Security of information must be restored to the required level within defined timeframes following disruption.
-- Continuity plans must be developed, implemented, tested, reviewed, and updated.</i>",5.9,Does this requirement reflect your company current practice: Maintain existing information security controls during disruption where possible.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+- Continuity plans must be developed, implemented, tested, reviewed, and updated.</i>",5.9,Does this requirement reflect your company current practice: Business continuity plans must maintain existing information security controls during disruption where possible?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
 5,Standard - Information Security During Disruption,"<i>- Information security requirements must be integrated into business continuity planning.
 - Business continuity plans must:
   - Maintain existing information security controls during disruption where possible.
@@ -245,7 +245,7 @@
   - Maintain existing information security controls during disruption where possible.
   - Define compensating controls when normal controls cannot be maintained.
 - Security of information must be restored to the required level within defined timeframes following disruption.
-- Continuity plans must be developed, implemented, tested, reviewed, and updated.</i>",5.13,Does this requirement reflect your company current practice: Define compensating controls when normal controls cannot be maintained.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+- Continuity plans must be developed, implemented, tested, reviewed, and updated.</i>",5.13,Does this requirement reflect your company current practice: Business continuity plans must define compensating controls when normal controls cannot be maintained?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
 5,Standard - Information Security During Disruption,"<i>- Information security requirements must be integrated into business continuity planning.
 - Business continuity plans must:
   - Maintain existing information security controls during disruption where possible.
@@ -318,7 +318,7 @@
   - Determine acceptable disruption periods.
 - Each prioritized activity must be assigned a Recovery Time Objective (RTO).
 - Resources required to support prioritized activities must be identified.
-- For information supporting critical activities, a Recovery Point Objective (RPO) must be defined where applicable.</i>",6.1,Does this requirement reflect your company current practice: A Business Impact Analysis must be performed to:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+- For information supporting critical activities, a Recovery Point Objective (RPO) must be defined where applicable.</i>",6.1,"Does this requirement reflect your company current practice: A Business Impact Analysis must be performed to identify critical business activities, assess impact types and severity over time, and determine acceptable disruption periods?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
 6,Standard - Business Impact Analysis (BIA),"<i>- A Business Impact Analysis must be performed to:
   - Identify critical business activities.
   - Assess impact types and severity over time.
@@ -346,7 +346,7 @@
   - Determine acceptable disruption periods.
 - Each prioritized activity must be assigned a Recovery Time Objective (RTO).
 - Resources required to support prioritized activities must be identified.
-- For information supporting critical activities, a Recovery Point Objective (RPO) must be defined where applicable.</i>",6.5,Does this requirement reflect your company current practice: Identify critical business activities.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+- For information supporting critical activities, a Recovery Point Objective (RPO) must be defined where applicable.</i>",6.5,Does this requirement reflect your company current practice: A Business Impact Analysis must be performed to identify critical business activities?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
 6,Standard - Business Impact Analysis (BIA),"<i>- A Business Impact Analysis must be performed to:
   - Identify critical business activities.
   - Assess impact types and severity over time.
@@ -374,7 +374,7 @@
   - Determine acceptable disruption periods.
 - Each prioritized activity must be assigned a Recovery Time Objective (RTO).
 - Resources required to support prioritized activities must be identified.
-- For information supporting critical activities, a Recovery Point Objective (RPO) must be defined where applicable.</i>",6.9,Does this requirement reflect your company current practice: Assess impact types and severity over time.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+- For information supporting critical activities, a Recovery Point Objective (RPO) must be defined where applicable.</i>",6.9,Does this requirement reflect your company current practice: A Business Impact Analysis must be performed to assess impact types and severity over time?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
 6,Standard - Business Impact Analysis (BIA),"<i>- A Business Impact Analysis must be performed to:
   - Identify critical business activities.
   - Assess impact types and severity over time.
@@ -402,7 +402,7 @@
   - Determine acceptable disruption periods.
 - Each prioritized activity must be assigned a Recovery Time Objective (RTO).
 - Resources required to support prioritized activities must be identified.
-- For information supporting critical activities, a Recovery Point Objective (RPO) must be defined where applicable.</i>",6.13,Does this requirement reflect your company current practice: Determine acceptable disruption periods.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+- For information supporting critical activities, a Recovery Point Objective (RPO) must be defined where applicable.</i>",6.13,Does this requirement reflect your company current practice: A Business Impact Analysis must be performed to determine acceptable disruption periods?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
 6,Standard - Business Impact Analysis (BIA),"<i>- A Business Impact Analysis must be performed to:
   - Identify critical business activities.
   - Assess impact types and severity over time.
@@ -624,7 +624,7 @@
 - Redundant systems must be monitored for failures.
 - Redundant systems should be tested to verify failover operates as intended.
 
----</i>",7.9,"Does this requirement reflect your company current practice: Redundancy may include, where applicable:",,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
+---</i>",7.9,"Does this requirement reflect your company current practice: Redundancy may include network, hosting, power, and application resilience measures where applicable?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
 7,Standard - Redundancy of Information Processing Facilities,"<i>- Redundancy must be implemented where required to meet availability objectives.
 - Redundant components and facilities must provide equivalent security to primary systems.
 - Redundancy may include, where applicable:
@@ -676,7 +676,7 @@
 - Redundant systems must be monitored for failures.
 - Redundant systems should be tested to verify failover operates as intended.
 
----</i>",7.13,Does this requirement reflect your company current practice: Multiple network or connectivity providers.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
+---</i>",7.13,"Does this requirement reflect your company current practice: Redundancy may include, where applicable, multiple network or connectivity providers?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
 7,Standard - Redundancy of Information Processing Facilities,"<i>- Redundancy must be implemented where required to meet availability objectives.
 - Redundant components and facilities must provide equivalent security to primary systems.
 - Redundancy may include, where applicable:
@@ -728,7 +728,7 @@
 - Redundant systems must be monitored for failures.
 - Redundant systems should be tested to verify failover operates as intended.
 
----</i>",7.17,Does this requirement reflect your company current practice: Redundant networks or routing paths.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
+---</i>",7.17,"Does this requirement reflect your company current practice: Redundancy may include, where applicable, redundant networks or routing paths?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
 7,Standard - Redundancy of Information Processing Facilities,"<i>- Redundancy must be implemented where required to meet availability objectives.
 - Redundant components and facilities must provide equivalent security to primary systems.
 - Redundancy may include, where applicable:
@@ -780,7 +780,7 @@
 - Redundant systems must be monitored for failures.
 - Redundant systems should be tested to verify failover operates as intended.
 
----</i>",7.21,Does this requirement reflect your company current practice: Geographically separated hosting locations.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.22 7.23|7.24|7.24|7.24,1
+---</i>",7.21,"Does this requirement reflect your company current practice: Redundancy may include, where applicable, geographically separated hosting locations?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.22 7.23|7.24|7.24|7.24,1
 7,Standard - Redundancy of Information Processing Facilities,"<i>- Redundancy must be implemented where required to meet availability objectives.
 - Redundant components and facilities must provide equivalent security to primary systems.
 - Redundancy may include, where applicable:
@@ -832,7 +832,7 @@
 - Redundant systems must be monitored for failures.
 - Redundant systems should be tested to verify failover operates as intended.
 
----</i>",7.25,Does this requirement reflect your company current practice: Redundant power supplies or sources.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
+---</i>",7.25,"Does this requirement reflect your company current practice: Redundancy may include, where applicable, redundant power supplies or sources?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
 7,Standard - Redundancy of Information Processing Facilities,"<i>- Redundancy must be implemented where required to meet availability objectives.
 - Redundant components and facilities must provide equivalent security to primary systems.
 - Redundancy may include, where applicable:
@@ -884,7 +884,7 @@
 - Redundant systems must be monitored for failures.
 - Redundant systems should be tested to verify failover operates as intended.
 
----</i>",7.29,Does this requirement reflect your company current practice: Multiple parallel software instances with load balancing.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.30 7.31|7.32|7.32|7.32,1
+---</i>",7.29,"Does this requirement reflect your company current practice: Redundancy may include, where applicable, multiple parallel software instances with load balancing?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.30 7.31|7.32|7.32|7.32,1
 7,Standard - Redundancy of Information Processing Facilities,"<i>- Redundancy must be implemented where required to meet availability objectives.
 - Redundant components and facilities must provide equivalent security to primary systems.
 - Redundancy may include, where applicable:

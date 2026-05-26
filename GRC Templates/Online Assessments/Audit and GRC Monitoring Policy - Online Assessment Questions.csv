@@ -1,4 +1,4 @@
-﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+"﻿""Chapter ID (Mandatory", for example 1, 2," Etc)""",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
 1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
 2,Scope,,2.1,Is this scope accurate and complete for your organization?,,2,Yes|No|Somewhat,,0,,,||2.2,1
 2,Scope,,2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
@@ -13,7 +13,7 @@
 - Monitoring results must be documented and retained as evidence.
 - Monitoring outcomes must be reviewed by the Information Security function, with the support of other department managers.
 
----</i>",5.1,Does this requirement reflect your company current practice: Information security performance must be monitored using defined metrics mapped to:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+---</i>",5.1,"Does this requirement reflect your company current practice: Information security performance must be monitored using defined metrics mapped to controls, risks, policies, and key ISMS processes?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
 5,Standard - Monitoring and Measurement,"<i>- Information security performance must be monitored using defined metrics mapped to:
   - Controls
   - Risks
@@ -53,7 +53,7 @@
 - Monitoring results must be documented and retained as evidence.
 - Monitoring outcomes must be reviewed by the Information Security function, with the support of other department managers.
 
----</i>",5.5,Does this requirement reflect your company current practice: Controls,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+---</i>",5.5,Does this requirement reflect your company current practice: Information security performance must be monitored using defined metrics mapped to controls?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
 5,Standard - Monitoring and Measurement,"<i>- Information security performance must be monitored using defined metrics mapped to:
   - Controls
   - Risks
@@ -93,7 +93,7 @@
 - Monitoring results must be documented and retained as evidence.
 - Monitoring outcomes must be reviewed by the Information Security function, with the support of other department managers.
 
----</i>",5.9,Does this requirement reflect your company current practice: Risks,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+---</i>",5.9,Does this requirement reflect your company current practice: Information security performance must be monitored using defined metrics mapped to risks?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
 5,Standard - Monitoring and Measurement,"<i>- Information security performance must be monitored using defined metrics mapped to:
   - Controls
   - Risks
@@ -133,7 +133,7 @@
 - Monitoring results must be documented and retained as evidence.
 - Monitoring outcomes must be reviewed by the Information Security function, with the support of other department managers.
 
----</i>",5.13,Does this requirement reflect your company current practice: Policies,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+---</i>",5.13,Does this requirement reflect your company current practice: Information security performance must be monitored using defined metrics mapped to policies?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
 5,Standard - Monitoring and Measurement,"<i>- Information security performance must be monitored using defined metrics mapped to:
   - Controls
   - Risks
@@ -173,7 +173,7 @@
 - Monitoring results must be documented and retained as evidence.
 - Monitoring outcomes must be reviewed by the Information Security function, with the support of other department managers.
 
----</i>",5.17,Does this requirement reflect your company current practice: Key ISMS processes,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+---</i>",5.17,Does this requirement reflect your company current practice: Information security performance must be monitored using defined metrics mapped to key ISMS processes?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
 5,Standard - Monitoring and Measurement,"<i>- Information security performance must be monitored using defined metrics mapped to:
   - Controls
   - Risks
@@ -467,7 +467,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.9,Does this requirement reflect your company current practice: Internal audits shall ensure that:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+---</i>",6.9,"Does this requirement reflect your company current practice: Internal audits shall ensure that controls are audited over time, implemented and operating as intended, and aligned with approved policies, standards, and procedures?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -531,7 +531,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.13,Does this requirement reflect your company current practice: All internal controls are audited over time.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+---</i>",6.13,Does this requirement reflect your company current practice: Internal audits shall ensure that all internal controls are audited over time?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -595,7 +595,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.17,Does this requirement reflect your company current practice: Controls are implemented and operating as intended.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+---</i>",6.17,Does this requirement reflect your company current practice: Internal audits shall ensure that controls are implemented and operating as intended?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -659,7 +659,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.21,"Does this requirement reflect your company current practice: Controls adhere to approved policies, standards, and procedures.",,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
+---</i>",6.21,"Does this requirement reflect your company current practice: Internal audits shall ensure that controls adhere to approved policies, standards, and procedures?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -723,7 +723,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.25,Does this requirement reflect your company current practice: Control owners shall:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
+---</i>",6.25,"Does this requirement reflect your company current practice: Control owners shall be informed of audit results, receive feedback on deficiencies and improvements, and implement corrective actions?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -787,7 +787,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.29,Does this requirement reflect your company current practice: Be informed of audit results.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
+---</i>",6.29,Does this requirement reflect your company current practice: Control owners shall be informed of audit results?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -851,7 +851,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.33,Does this requirement reflect your company current practice: Receive clear feedback on deficiencies and required improvements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.34 6.35|6.36|6.36|6.36,1
+---</i>",6.33,Does this requirement reflect your company current practice: Control owners shall receive clear feedback on deficiencies and required improvements?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.34 6.35|6.36|6.36|6.36,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -915,7 +915,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.37,Does this requirement reflect your company current practice: Be responsible for implementing corrective actions.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.38 6.39|6.40|6.40|6.40,1
+---</i>",6.37,Does this requirement reflect your company current practice: Control owners shall be responsible for implementing corrective actions?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.38 6.39|6.40|6.40|6.40,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -979,7 +979,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.41,Does this requirement reflect your company current practice: Audit results and control testing performance shall be:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.42 6.43|6.44|6.44|6.44,1
+---</i>",6.41,Does this requirement reflect your company current practice: Audit results and control testing performance shall be tracked until closure and reported at least annually to management?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.42 6.43|6.44|6.44|6.44,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -1043,7 +1043,7 @@
   - Reported at least annually to management during the management committee review.
 - Audit scope, results, and evidence must be documented and retained.
 
----</i>",6.45,Does this requirement reflect your company current practice: Tracked until closure.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.46 6.47|6.48|6.48|6.48,1
+---</i>",6.45,Does this requirement reflect your company current practice: Audit results and control testing performance shall be tracked until closure?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.46 6.47|6.48|6.48|6.48,1
 6,Standard - Internal Audit Programme,"<i>- An internal audit programme must be established and maintained.
 - Internal audits shall be performed at planned and risk-based intervals.
 - Internal audits shall ensure that:
@@ -1284,7 +1284,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.5,Does this requirement reflect your company current practice: Independent reviews must:,,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+---</i>",7.5,"Does this requirement reflect your company current practice: Independent reviews must be performed by a qualified third party and cover the entire ISMS, including policies, risks, controls, and processes?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1336,7 +1336,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.9,Does this requirement reflect your company current practice: Be performed by a qualified third party.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
+---</i>",7.9,Does this requirement reflect your company current practice: Independent reviews must be performed by a qualified third party?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1388,7 +1388,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.13,"Does this requirement reflect your company current practice: Cover the entire ISMS, including policies, risks, controls, and processes.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
+---</i>",7.13,"Does this requirement reflect your company current practice: Independent reviews must cover the entire ISMS, including policies, risks, controls, and processes?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1440,7 +1440,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.17,Does this requirement reflect your company current practice: The objectives of the review are to:,,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
+---</i>",7.17,"Does this requirement reflect your company current practice: The objectives of the review are to assess the suitability, adequacy, and effectiveness of the ISMS and identify gaps, weaknesses, and improvement opportunities?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1492,7 +1492,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.21,"Does this requirement reflect your company current practice: Assess the suitability, adequacy, and effectiveness of the ISMS.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.22 7.23|7.24|7.24|7.24,1
+---</i>",7.21,"Does this requirement reflect your company current practice: The objectives of the review are to assess the suitability, adequacy, and effectiveness of the ISMS?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.22 7.23|7.24|7.24|7.24,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1544,7 +1544,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.25,"Does this requirement reflect your company current practice: Identify gaps, weaknesses, and improvement opportunities.",,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
+---</i>",7.25,"Does this requirement reflect your company current practice: The objectives of the review are to identify gaps, weaknesses, and improvement opportunities?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1596,7 +1596,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.29,Does this requirement reflect your company current practice: Results of independent reviews must be:,,2,Yes|No|Somewhat|Not applicable,,0,,,7.30 7.31|7.32|7.32|7.32,1
+---</i>",7.29,Does this requirement reflect your company current practice: Results of independent reviews must be documented and reported to management?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.30 7.31|7.32|7.32|7.32,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1648,7 +1648,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.33,Does this requirement reflect your company current practice: Documented.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.34 7.35|7.36|7.36|7.36,1
+---</i>",7.33,Does this requirement reflect your company current practice: Results of independent reviews must be documented?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.34 7.35|7.36|7.36|7.36,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1700,7 +1700,7 @@
   - Reported to management.
 - Identified findings must result in corrective actions that are tracked to completion.
 
----</i>",7.37,Does this requirement reflect your company current practice: Reported to management.,,2,Yes|No|Somewhat|Not applicable,,0,,,7.38 7.39|7.40|7.40|7.40,1
+---</i>",7.37,Does this requirement reflect your company current practice: Results of independent reviews must be reported to management?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.38 7.39|7.40|7.40|7.40,1
 7,Standard - Independent Review of Information Security,"<i>- An independent review of information security shall be conducted at least every two years.
 - Independent reviews must:
   - Be performed by a qualified third party.
@@ -1836,7 +1836,7 @@
 - Information security policies must be reviewed at least annually to ensure they remain appropriate, effective, and aligned with business and regulatory requirements.
 - Reviews and approvals must be documented.
 
----</i>",8.5,Does this requirement reflect your company current practice: Risk reviews shall:,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
+---</i>",8.5,"Does this requirement reflect your company current practice: Risk reviews shall confirm continued relevance, reassess likelihood and impact, and validate risk treatment effectiveness?",,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
 8,Standard - Risk and Policy Review,"<i>- Information security risks must be reviewed at least annually.
 - Risk reviews shall:
   - Confirm continued relevance.
@@ -1872,7 +1872,7 @@
 - Information security policies must be reviewed at least annually to ensure they remain appropriate, effective, and aligned with business and regulatory requirements.
 - Reviews and approvals must be documented.
 
----</i>",8.9,Does this requirement reflect your company current practice: Confirm continued relevance.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
+---</i>",8.9,Does this requirement reflect your company current practice: Risk reviews shall confirm continued relevance?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
 8,Standard - Risk and Policy Review,"<i>- Information security risks must be reviewed at least annually.
 - Risk reviews shall:
   - Confirm continued relevance.
@@ -1908,7 +1908,7 @@
 - Information security policies must be reviewed at least annually to ensure they remain appropriate, effective, and aligned with business and regulatory requirements.
 - Reviews and approvals must be documented.
 
----</i>",8.13,Does this requirement reflect your company current practice: Reassess likelihood and impact.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.14 8.15|8.16|8.16|8.16,1
+---</i>",8.13,Does this requirement reflect your company current practice: Risk reviews shall reassess likelihood and impact?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.14 8.15|8.16|8.16|8.16,1
 8,Standard - Risk and Policy Review,"<i>- Information security risks must be reviewed at least annually.
 - Risk reviews shall:
   - Confirm continued relevance.
@@ -1944,7 +1944,7 @@
 - Information security policies must be reviewed at least annually to ensure they remain appropriate, effective, and aligned with business and regulatory requirements.
 - Reviews and approvals must be documented.
 
----</i>",8.17,Does this requirement reflect your company current practice: Validate risk treatment effectiveness.,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
+---</i>",8.17,Does this requirement reflect your company current practice: Risk reviews shall validate risk treatment effectiveness?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
 8,Standard - Risk and Policy Review,"<i>- Information security risks must be reviewed at least annually.
 - Risk reviews shall:
   - Confirm continued relevance.
@@ -2083,7 +2083,7 @@
   - Risk status and treatment effectiveness.
   - Policy review status.
   - Opportunities for continual improvement.
-- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.5,Does this requirement reflect your company current practice: The annual management committee review must include:,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
+- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.5,"Does this requirement reflect your company current practice: The annual management committee review must include audit performance, review results, risk status, policy review status, and improvement opportunities?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
 9,Standard - Management Review,"<i>- Management shall review the ISMS at planned intervals.
 - The annual management committee review must include:
   - Overall control testing and audit performance.
@@ -2115,7 +2115,7 @@
   - Risk status and treatment effectiveness.
   - Policy review status.
   - Opportunities for continual improvement.
-- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.9,Does this requirement reflect your company current practice: Overall control testing and audit performance.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.9,Does this requirement reflect your company current practice: The annual management committee review must include overall control testing and audit performance?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
 9,Standard - Management Review,"<i>- Management shall review the ISMS at planned intervals.
 - The annual management committee review must include:
   - Overall control testing and audit performance.
@@ -2147,7 +2147,7 @@
   - Risk status and treatment effectiveness.
   - Policy review status.
   - Opportunities for continual improvement.
-- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.13,Does this requirement reflect your company current practice: Results of internal audits and independent reviews.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
+- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.13,Does this requirement reflect your company current practice: The annual management committee review must include results of internal audits and independent reviews?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
 9,Standard - Management Review,"<i>- Management shall review the ISMS at planned intervals.
 - The annual management committee review must include:
   - Overall control testing and audit performance.
@@ -2179,7 +2179,7 @@
   - Risk status and treatment effectiveness.
   - Policy review status.
   - Opportunities for continual improvement.
-- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.17,Does this requirement reflect your company current practice: Risk status and treatment effectiveness.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
+- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.17,Does this requirement reflect your company current practice: The annual management committee review must include risk status and treatment effectiveness?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
 9,Standard - Management Review,"<i>- Management shall review the ISMS at planned intervals.
 - The annual management committee review must include:
   - Overall control testing and audit performance.
@@ -2211,7 +2211,7 @@
   - Risk status and treatment effectiveness.
   - Policy review status.
   - Opportunities for continual improvement.
-- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.21,Does this requirement reflect your company current practice: Policy review status.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.22 9.23|9.24|9.24|9.24,1
+- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.21,Does this requirement reflect your company current practice: The annual management committee review must include policy review status?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.22 9.23|9.24|9.24|9.24,1
 9,Standard - Management Review,"<i>- Management shall review the ISMS at planned intervals.
 - The annual management committee review must include:
   - Overall control testing and audit performance.
@@ -2243,7 +2243,7 @@
   - Risk status and treatment effectiveness.
   - Policy review status.
   - Opportunities for continual improvement.
-- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.25,Does this requirement reflect your company current practice: Opportunities for continual improvement.,,2,Yes|No|Somewhat|Not applicable,,0,,,9.26 9.27|9.28|9.28|9.28,1
+- Decisions and actions resulting from management reviews must be documented and tracked.</i>",9.25,Does this requirement reflect your company current practice: The annual management committee review must include opportunities for continual improvement?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.26 9.27|9.28|9.28|9.28,1
 9,Standard - Management Review,"<i>- Management shall review the ISMS at planned intervals.
 - The annual management committee review must include:
   - Overall control testing and audit performance.

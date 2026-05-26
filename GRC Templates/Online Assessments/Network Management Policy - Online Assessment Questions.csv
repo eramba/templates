@@ -120,7 +120,7 @@
   - Production environments
   - Development and testing environments
   - Office and employee networks
-- Network segmentation must be enforced using appropriate network controls (e.g. VLANs, firewalls).</i>",5.1,Does this requirement reflect your company current practice: Networks must be segregated to differentiate at a minimum:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+- Network segmentation must be enforced using appropriate network controls (e.g. VLANs, firewalls).</i>",5.1,"Does this requirement reflect your company current practice: Networks must be segregated to differentiate, at a minimum, between production environments, development and testing environments, and office and employee networks?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
 5,Standard - Network Segmentation,"<i>- Networks must be segregated to differentiate at a minimum:
   - Production environments
   - Development and testing environments
@@ -140,7 +140,7 @@
   - Production environments
   - Development and testing environments
   - Office and employee networks
-- Network segmentation must be enforced using appropriate network controls (e.g. VLANs, firewalls).</i>",5.5,Does this requirement reflect your company current practice: Production environments,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+- Network segmentation must be enforced using appropriate network controls (e.g. VLANs, firewalls).</i>",5.5,Does this requirement reflect your company current practice: Production environments must be segregated from other network environments?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
 5,Standard - Network Segmentation,"<i>- Networks must be segregated to differentiate at a minimum:
   - Production environments
   - Development and testing environments
@@ -160,7 +160,7 @@
   - Production environments
   - Development and testing environments
   - Office and employee networks
-- Network segmentation must be enforced using appropriate network controls (e.g. VLANs, firewalls).</i>",5.9,Does this requirement reflect your company current practice: Development and testing environments,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+- Network segmentation must be enforced using appropriate network controls (e.g. VLANs, firewalls).</i>",5.9,Does this requirement reflect your company current practice: Development and testing environments must be segregated from other network environments?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
 5,Standard - Network Segmentation,"<i>- Networks must be segregated to differentiate at a minimum:
   - Production environments
   - Development and testing environments
@@ -180,7 +180,7 @@
   - Production environments
   - Development and testing environments
   - Office and employee networks
-- Network segmentation must be enforced using appropriate network controls (e.g. VLANs, firewalls).</i>",5.13,Does this requirement reflect your company current practice: Office and employee networks,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+- Network segmentation must be enforced using appropriate network controls (e.g. VLANs, firewalls).</i>",5.13,Does this requirement reflect your company current practice: Office and employee networks must be segregated from other network environments?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
 5,Standard - Network Segmentation,"<i>- Networks must be segregated to differentiate at a minimum:
   - Production environments
   - Development and testing environments

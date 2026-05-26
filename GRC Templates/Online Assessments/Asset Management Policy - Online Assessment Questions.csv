@@ -262,7 +262,7 @@
   - Asset name or identifier
   - Asset type (e.g. hardware, software, cloud service, data system)
   - Asset owner
-- Asset inventories must be reviewed periodically.</i>",5.13,"Does this requirement reflect your company current practice: Asset inventories must identify, at a minimum:",,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+- Asset inventories must be reviewed periodically.</i>",5.13,"Does this requirement reflect your company current practice: Asset inventories must identify, at a minimum, the asset name or identifier, asset type, and asset owner?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
 5,Standard - Asset Inventory,"<i>- An asset inventory must exist for all key assets.
 - Asset inventories must be accurate and kept up to date.
 - Asset inventories may be maintained at the department level.
@@ -294,7 +294,7 @@
   - Asset name or identifier
   - Asset type (e.g. hardware, software, cloud service, data system)
   - Asset owner
-- Asset inventories must be reviewed periodically.</i>",5.17,Does this requirement reflect your company current practice: Asset name or identifier,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+- Asset inventories must be reviewed periodically.</i>",5.17,"Does this requirement reflect your company current practice: Asset inventories must identify, at a minimum, the asset name or identifier?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
 5,Standard - Asset Inventory,"<i>- An asset inventory must exist for all key assets.
 - Asset inventories must be accurate and kept up to date.
 - Asset inventories may be maintained at the department level.
@@ -326,7 +326,7 @@
   - Asset name or identifier
   - Asset type (e.g. hardware, software, cloud service, data system)
   - Asset owner
-- Asset inventories must be reviewed periodically.</i>",5.21,"Does this requirement reflect your company current practice: Asset type (e.g. hardware, software, cloud service, data system)",,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
+- Asset inventories must be reviewed periodically.</i>",5.21,"Does this requirement reflect your company current practice: Asset inventories must identify, at a minimum, the asset type, such as hardware, software, cloud service, or data system?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
 5,Standard - Asset Inventory,"<i>- An asset inventory must exist for all key assets.
 - Asset inventories must be accurate and kept up to date.
 - Asset inventories may be maintained at the department level.
@@ -358,7 +358,7 @@
   - Asset name or identifier
   - Asset type (e.g. hardware, software, cloud service, data system)
   - Asset owner
-- Asset inventories must be reviewed periodically.</i>",5.25,Does this requirement reflect your company current practice: Asset owner,,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
+- Asset inventories must be reviewed periodically.</i>",5.25,"Does this requirement reflect your company current practice: Asset inventories must identify, at a minimum, the asset owner?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
 5,Standard - Asset Inventory,"<i>- An asset inventory must exist for all key assets.
 - Asset inventories must be accurate and kept up to date.
 - Asset inventories may be maintained at the department level.

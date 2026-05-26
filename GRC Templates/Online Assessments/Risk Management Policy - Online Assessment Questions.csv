@@ -4563,7 +4563,7 @@
   - Be classified using the risk matrix
 - Risks must be prioritised based on their risk level.
 
----</i>",7.5,Does this requirement reflect your company current practice: Each risk must:,,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+---</i>",7.5,"Does this requirement reflect your company current practice: Each risk must have an assigned risk owner, be analysed for likelihood and impact, and be classified using the risk matrix?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
 7,Standard - Information Security Risk Assessment,"<i>- Risks must be identified for loss of confidentiality, integrity, and availability.
 - Each risk must:
   - Have an assigned risk owner
@@ -4595,7 +4595,7 @@
   - Be classified using the risk matrix
 - Risks must be prioritised based on their risk level.
 
----</i>",7.9,Does this requirement reflect your company current practice: Have an assigned risk owner,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
+---</i>",7.9,Does this requirement reflect your company current practice: Each risk must have an assigned risk owner?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
 7,Standard - Information Security Risk Assessment,"<i>- Risks must be identified for loss of confidentiality, integrity, and availability.
 - Each risk must:
   - Have an assigned risk owner
@@ -4627,7 +4627,7 @@
   - Be classified using the risk matrix
 - Risks must be prioritised based on their risk level.
 
----</i>",7.13,Does this requirement reflect your company current practice: Be analysed for likelihood and impact,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
+---</i>",7.13,Does this requirement reflect your company current practice: Each risk must be analysed for likelihood and impact?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
 7,Standard - Information Security Risk Assessment,"<i>- Risks must be identified for loss of confidentiality, integrity, and availability.
 - Each risk must:
   - Have an assigned risk owner
@@ -4659,7 +4659,7 @@
   - Be classified using the risk matrix
 - Risks must be prioritised based on their risk level.
 
----</i>",7.17,Does this requirement reflect your company current practice: Be classified using the risk matrix,,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
+---</i>",7.17,Does this requirement reflect your company current practice: Each risk must be classified using the risk matrix?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
 7,Standard - Information Security Risk Assessment,"<i>- Risks must be identified for loss of confidentiality, integrity, and availability.
 - Each risk must:
   - Have an assigned risk owner
@@ -4724,7 +4724,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.1,Does this requirement reflect your company current practice: Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:,,2,Yes|No|Somewhat|Not applicable,,0,,,8.2 8.3|8.4|8.4|8.4,1
+---</i>",8.1,Does this requirement reflect your company current practice: Risks exceeding acceptance thresholds must be treated using one or more Eramba-aligned mechanisms?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.2 8.3|8.4|8.4|8.4,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4760,7 +4760,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.5,Does this requirement reflect your company current practice: Internal Controls,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
+---</i>",8.5,Does this requirement reflect your company current practice: Risk treatment mechanisms may include internal controls?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4796,7 +4796,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.9,Does this requirement reflect your company current practice: Policies,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
+---</i>",8.9,Does this requirement reflect your company current practice: Risk treatment mechanisms may include policies?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4832,7 +4832,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.13,Does this requirement reflect your company current practice: Exceptions,,2,Yes|No|Somewhat|Not applicable,,0,,,8.14 8.15|8.16|8.16|8.16,1
+---</i>",8.13,Does this requirement reflect your company current practice: Risk treatment mechanisms may include exceptions?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.14 8.15|8.16|8.16|8.16,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4868,7 +4868,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.17,Does this requirement reflect your company current practice: Projects,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
+---</i>",8.17,Does this requirement reflect your company current practice: Risk treatment mechanisms may include projects?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4976,7 +4976,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.1,Does this requirement reflect your company current practice: Risk assessments must be performed:,,2,Yes|No|Somewhat|Not applicable,,0,,,9.2 9.3|9.4|9.4|9.4,1
+---</i>",9.1,Does this requirement reflect your company current practice: Risk assessments must be performed at planned intervals and when significant changes occur?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.2 9.3|9.4|9.4|9.4,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5012,7 +5012,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.5,Does this requirement reflect your company current practice: At planned intervals,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
+---</i>",9.5,Does this requirement reflect your company current practice: Risk assessments must be performed at planned intervals?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5048,7 +5048,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.9,"Does this requirement reflect your company current practice: When significant changes occur, including:",,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+---</i>",9.9,"Does this requirement reflect your company current practice: Risk assessments must be performed when significant changes occur, including new services, major system changes, security incidents, and supplier or regulatory changes?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5084,7 +5084,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.13,Does this requirement reflect your company current practice: New systems or services,,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
+---</i>",9.13,"Does this requirement reflect your company current practice: Risk assessments must be performed when significant changes occur, including new systems or services?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5120,7 +5120,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.17,Does this requirement reflect your company current practice: Material changes to existing systems,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
+---</i>",9.17,"Does this requirement reflect your company current practice: Risk assessments must be performed when significant changes occur, including material changes to existing systems?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5156,7 +5156,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.21,Does this requirement reflect your company current practice: Security incidents,,2,Yes|No|Somewhat|Not applicable,,0,,,9.22 9.23|9.24|9.24|9.24,1
+---</i>",9.21,"Does this requirement reflect your company current practice: Risk assessments must be performed when significant changes occur, including security incidents?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.22 9.23|9.24|9.24|9.24,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5226,7 +5226,7 @@
   - Risk approvals and residual risk acceptance
 - Records must be complete, current, and auditable.
 
----</i>",10.1,Does this requirement reflect your company current practice: The organization shall retain documented information for:,,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
+---</i>",10.1,"Does this requirement reflect your company current practice: The organization shall retain documented information for risk assessment results, risk classification and treatment decisions, and risk approvals and residual risk acceptance?",,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
 10,Standard - Documentation and Records,"<i>- The organization shall retain documented information for:
   - Risk assessment results
   - Risk classification and treatment decisions
@@ -5254,7 +5254,7 @@
   - Risk approvals and residual risk acceptance
 - Records must be complete, current, and auditable.
 
----</i>",10.5,Does this requirement reflect your company current practice: Risk assessment results,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
+---</i>",10.5,Does this requirement reflect your company current practice: The organization shall retain documented information for risk assessment results?,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
 10,Standard - Documentation and Records,"<i>- The organization shall retain documented information for:
   - Risk assessment results
   - Risk classification and treatment decisions
@@ -5282,7 +5282,7 @@
   - Risk approvals and residual risk acceptance
 - Records must be complete, current, and auditable.
 
----</i>",10.9,Does this requirement reflect your company current practice: Risk classification and treatment decisions,,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
+---</i>",10.9,Does this requirement reflect your company current practice: The organization shall retain documented information for risk classification and treatment decisions?,,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
 10,Standard - Documentation and Records,"<i>- The organization shall retain documented information for:
   - Risk assessment results
   - Risk classification and treatment decisions
@@ -5310,7 +5310,7 @@
   - Risk approvals and residual risk acceptance
 - Records must be complete, current, and auditable.
 
----</i>",10.13,Does this requirement reflect your company current practice: Risk approvals and residual risk acceptance,,2,Yes|No|Somewhat|Not applicable,,0,,,10.14 10.15|10.16|10.16|10.16,1
+---</i>",10.13,Does this requirement reflect your company current practice: The organization shall retain documented information for risk approvals and residual risk acceptance?,,2,Yes|No|Somewhat|Not applicable,,0,,,10.14 10.15|10.16|10.16|10.16,1
 10,Standard - Documentation and Records,"<i>- The organization shall retain documented information for:
   - Risk assessment results
   - Risk classification and treatment decisions
