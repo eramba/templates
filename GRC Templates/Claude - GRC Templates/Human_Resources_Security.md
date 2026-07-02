@@ -196,3 +196,22 @@ All employees, contractors, and third-party personnel with access to organizatio
 
 **ISO 37001:2025 (37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.3)**
 13. Ensure compliance with applicable ISO 37001:2025 requirements (37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.3).
+### Security Policy Violation Management
+
+**Applies to all frameworks**
+- A formal disciplinary process must exist for information security policy violations.
+- Violations must be investigated and outcomes applied consistently.
+- The process must be communicated to all personnel.
+
+**ISO 27002:2022 (6.4)**
+- Comply with ISO 27002:2022 requirements applicable to this area (6.4).
+
+### Security Policy Violation Management Procedure
+
+**Applies to all frameworks**
+1. Log reported violation including description, date, and reporter.
+2. Assign an investigator independent of the subject.
+3. Gather evidence and assess severity of the violation.
+4. Apply disciplinary outcome consistent with the policy and proportionate to severity.
+5. Document outcome and retain record confidentially.
+6. Identify whether the violation indicates a control gap requiring remediation.
