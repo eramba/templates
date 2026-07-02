@@ -35,13 +35,10 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (12.1, 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 12.1, 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8 for specific safeguard requirements.
 
 **SCF 2025 (NET-01, NET-02, NET-03, NET-04, NET-05)**
-- Implement SCF 2025 controls applicable to this area; refer to controls NET-01, NET-02, NET-03, NET-04, NET-05 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (e))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (e)); measures must be proportionate to the organisation's risk exposure and size.
 
 ### Network Segmentation
 
@@ -64,13 +61,10 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (12.2, 13.4, 13.5)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 12.2, 13.4, 13.5 for specific safeguard requirements.
 
 **SCF 2025 (NET-06, NET-07, NET-08, NET-09)**
-- Implement SCF 2025 controls applicable to this area; refer to controls NET-06, NET-07, NET-08, NET-09 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (e))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (e)); measures must be proportionate to the organisation's risk exposure and size.
 
 ### Remote Access
 
@@ -86,13 +80,10 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (9.5, 9.6, 9.7)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 9.5, 9.6, 9.7 for specific safeguard requirements.
 
 **SCF 2025 (NET-10, NET-11, NET-12)**
-- Implement SCF 2025 controls applicable to this area; refer to controls NET-10, NET-11, NET-12 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (j))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (j)); measures must be proportionate to the organisation's risk exposure and size.
 
 ## Standards
 
@@ -106,22 +97,16 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 1. Export current ruleset and compare against the approved baseline.
 2. Remove or justify any rules without a documented business requirement.
 3. Document review results and obtain sign-off.
-
-**PCI DSS v4.0.1 (1.2.5, 1.2.6, 1.2.7)**
 4. Schedule review at least every six months.
 5. Confirm all rules restricting CDE traffic are present and correctly configured.
 
-**NIST 800-53 Rev5 (SC-7)**
-6. Document compliance with applicable NIST 800-53 Rev5 controls (SC-7) in the system security plan.
+**PCI DSS v4.0.1 (1.2.5, 1.2.7, 1.3.1, 1.3.2)**
+6. Confirm review occurs at least every six months per 1.2.7.
+7. Confirm all rules restricting CDE traffic are present and correctly configured per 1.3.1 and 1.3.2.
+8. Confirm only approved services, protocols, and ports are permitted per 1.2.5.
 
-**CIS Controls v8.1 (12.1, 12.3)**
-7. Document compliance with applicable CIS Controls v8.1 controls (12.1, 12.3) per organisational policy.
-
-**SCF 2025 (NET-02, NET-03, NET-04)**
-8. Document compliance with applicable SCF 2025 controls (NET-02, NET-03, NET-04) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (e))**
-9. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (e)) as applicable to the organisation's classification under NIS2.
+**SOC 2 (TSP 2017) (CC6.6, CC6.7)**
+9. Confirm logical access security measures protect against external threats per CC6.6 and CC6.7.
 
 ### Network Change
 
@@ -130,40 +115,27 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 2. Assess security impact of the proposed network change.
 3. Test in a lab or non-production environment where feasible.
 4. Deploy and verify; update network diagrams and documentation.
-
-**PCI DSS v4.0.1 (1.2.1, 1.2.8)**
 5. Confirm CDE network diagrams are updated to reflect the change.
 6. Verify segmentation controls remain intact post-change.
 
-**NIST 800-53 Rev5 (CM-3, SC-7)**
-7. Document compliance with applicable NIST 800-53 Rev5 controls (CM-3, SC-7) in the system security plan.
+**PCI DSS v4.0.1 (1.2.2, 1.2.8)**
+7. Confirm network diagrams are updated to reflect the change per 1.2.3 and 1.2.4.
+8. Confirm all changes follow the defined change control process per 1.2.2.
+9. Confirm configuration files are consistent with security standards after change per 1.2.8.
 
-**CIS Controls v8.1 (12.1, 12.4)**
-8. Document compliance with applicable CIS Controls v8.1 controls (12.1, 12.4) per organisational policy.
-
-**SCF 2025 (NET-01, NET-05)**
-9. Document compliance with applicable SCF 2025 controls (NET-01, NET-05) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (e))**
-10. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (e)) as applicable to the organisation's classification under NIS2.
+**SOC 2 (TSP 2017) (CC6.6, CC8.1)**
+10. Confirm changes are authorised, configured, documented, and tested per CC6.6 and CC8.1.
 
 ### Wireless Network Authorisation
 
-**PCI DSS v4.0.1 (1.2.3, 1.3.3)**
+**Applies to all frameworks**
 1. Maintain an inventory of all authorised wireless networks including SSID, location, and business purpose.
 2. Scan for unauthorised wireless access points at defined intervals.
 3. Investigate and disable any detected unauthorised wireless access points immediately.
 4. Confirm all wireless networks are isolated from the CDE unless explicitly approved.
 5. Document authorisation status and scan results; retain as evidence.
 
-**NIST 800-53 Rev5 (SC-7)**
-6. Document compliance with applicable NIST 800-53 Rev5 controls (SC-7) in the system security plan.
-
-**CIS Controls v8.1 (12.6, 12.7, 12.8)**
-7. Document compliance with applicable CIS Controls v8.1 controls (12.6, 12.7, 12.8) per organisational policy.
-
-**SCF 2025 (NET-13, NET-14, NET-15)**
-8. Document compliance with applicable SCF 2025 controls (NET-13, NET-14, NET-15) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (e))**
-9. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (e)) as applicable to the organisation's classification under NIS2.
+**PCI DSS v4.0.1 (1.2.3, 1.3.3, 11.2.1, 11.2.2)**
+6. Confirm wireless access point inventory is maintained with business justification per 11.2.2.
+7. Confirm scanning for unauthorised access points occurs at least every three months per 11.2.1.
+8. Confirm all wireless networks are isolated from the CDE per 1.3.3.
