@@ -114,6 +114,21 @@ All systems, applications, and data stores that process, store, or transmit sens
 **SOC 2 (TSP 2017) (CC6.7)**
 11. Confirm encryption keys are managed to protect data transmission and storage per CC6.7.
 
+**ISO 27002:2022 (8.24)**
+12. Implement rules for effective use of cryptography and key management per 8.24.
+
+**NIST 800-53 Rev5 (SC-12)**
+13. Establish and manage cryptographic keys in accordance with key management requirements per SC-12.
+
+**SCF 2025 (CRY-09)**
+14. Manage cryptographic keys to protect confidentiality, integrity, and availability per CRY-09.
+
+**NIS2 Article 21 (Article 21(2) (h))**
+15. Confirm cryptographic key management supports the encryption policy per Article 21(2)(h).
+
+**ISO 27701:2025 (A.3.26)**
+16. Apply rules for effective use of cryptography related to PII processing per A.3.26.
+
 ### Key Rotation and Retirement
 
 **Applies to all frameworks**
@@ -131,6 +146,21 @@ All systems, applications, and data stores that process, store, or transmit sens
 
 **SOC 2 (TSP 2017) (CC6.7)**
 10. Confirm key retirement prevents access to encrypted data per CC6.7.
+
+**ISO 27002:2022 (8.24)**
+11. Implement key management per the cryptography policy including rotation at cryptoperiod end per 8.24.
+
+**NIST 800-53 Rev5 (SC-12)**
+12. Manage key lifecycle in accordance with defined key management requirements per SC-12.
+
+**SCF 2025 (CRY-09)**
+13. Manage cryptographic key rotation and retirement per CRY-09.
+
+**NIS2 Article 21 (Article 21(2) (h))**
+14. Confirm key rotation supports the cryptography and encryption policy per Article 21(2)(h).
+
+**ISO 27701:2025 (A.3.26)**
+15. Apply cryptographic key management controls for PII processing per A.3.26.
 
 ### Certificate Management
 
@@ -151,3 +181,20 @@ All systems, applications, and data stores that process, store, or transmit sens
 
 **SOC 2 (TSP 2017) (CC6.7)**
 12. Confirm certificates protect data transmission per CC6.7.
+
+**ISO 27002:2022 (8.24)**
+13. Define and implement rules for cryptographic key management including certificate lifecycle per 8.24.
+
+**NIST 800-53 Rev5 (SC-17)**
+14. Issue public key certificates under an approved certificate policy per SC-17.
+
+**SCF 2025 (CRY-08, CRY-11, CRY-12)**
+15. Securely implement PKI or obtain from a reputable provider per CRY-08.
+16. Enable organisation-defined certificate authorities per CRY-11.
+17. Monitor for new certificates issued for organisation-controlled domains per CRY-12.
+
+**NIS2 Article 21 (Article 21(2) (h))**
+18. Confirm certificate management supports the use of cryptography per Article 21(2)(h).
+
+**ISO 27701:2025 (A.3.26)**
+19. Apply cryptographic controls including certificate management for PII processing per A.3.26.
