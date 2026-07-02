@@ -1,4 +1,4 @@
-﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+"﻿""Chapter ID (Mandatory", for example 1, 2," Etc)""",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
 1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
 2,Scope,"<i>This document applies to all users, accounts, systems, applications, infrastructure, and data managed or used by the organization.</i>",2.1,Is this scope accurate and complete for your organization?,"This document applies to all users, accounts, systems, applications, infrastructure, and data managed or used by the organization.",2,Yes|No|Somewhat,,0,,,||2.2,1
 2,Scope,"<i>This document applies to all users, accounts, systems, applications, infrastructure, and data managed or used by the organization.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
@@ -6,7 +6,7 @@
 - System Owners are responsible for defining and maintaining system roles for the systems they own, ensuring system roles align with organizational roles and that segregation of duties is enforced.
 - Human Resources supports the validation of organizational roles and employment or contractual status where applicable.
 - The Information Security function is responsible for supporting and monitoring role and access decisions to ensure security principles and segregation of duties are maintained.
-- Users are responsible for using their access appropriately and protecting their credentials.</i>",3.1,"Is someone responsible for Department Managers are responsible for defining organizational (departmental) roles and their required functions, with support from Human Resources where applicable.?",,2,Yes|No,,0,,,3.2|,1
+- Users are responsible for using their access appropriately and protecting their credentials.</i>",3.1,"Is someone responsible for defining organizational (departmental) roles and their required functions, with support from Human Resources where applicable in your organization?",,2,Yes|No,,0,,,3.2|,1
 3,Responsibilities,"<i>- Department Managers are responsible for defining organizational (departmental) roles and their required functions, with support from Human Resources where applicable.
 - System Owners are responsible for defining and maintaining system roles for the systems they own, ensuring system roles align with organizational roles and that segregation of duties is enforced.
 - Human Resources supports the validation of organizational roles and employment or contractual status where applicable.
@@ -26,7 +26,7 @@
 - System Owners are responsible for defining and maintaining system roles for the systems they own, ensuring system roles align with organizational roles and that segregation of duties is enforced.
 - Human Resources supports the validation of organizational roles and employment or contractual status where applicable.
 - The Information Security function is responsible for supporting and monitoring role and access decisions to ensure security principles and segregation of duties are maintained.
-- Users are responsible for using their access appropriately and protecting their credentials.</i>",3.5,Is someone responsible for Human Resources supports the validation of organizational roles and employment or contractual status where applicable.?,,2,Yes|No,,0,,,3.6|,1
+- Users are responsible for using their access appropriately and protecting their credentials.</i>",3.5,Is someone responsible for supporting the validation of organizational roles and employment or contractual status where applicable in your organization?,,2,Yes|No,,0,,,3.6|,1
 3,Responsibilities,"<i>- Department Managers are responsible for defining organizational (departmental) roles and their required functions, with support from Human Resources where applicable.
 - System Owners are responsible for defining and maintaining system roles for the systems they own, ensuring system roles align with organizational roles and that segregation of duties is enforced.
 - Human Resources supports the validation of organizational roles and employment or contractual status where applicable.
@@ -36,7 +36,7 @@
 - System Owners are responsible for defining and maintaining system roles for the systems they own, ensuring system roles align with organizational roles and that segregation of duties is enforced.
 - Human Resources supports the validation of organizational roles and employment or contractual status where applicable.
 - The Information Security function is responsible for supporting and monitoring role and access decisions to ensure security principles and segregation of duties are maintained.
-- Users are responsible for using their access appropriately and protecting their credentials.</i>",3.7,Is someone responsible for The Information Security function is responsible for supporting and monitoring role and access decisions to ensure security principles and segregation of duties are maintained.?,,2,Yes|No,,0,,,3.8|,1
+- Users are responsible for using their access appropriately and protecting their credentials.</i>",3.7,Is someone responsible for supporting and monitoring role and access decisions to ensure security principles and segregation of duties are maintained in your organization?,,2,Yes|No,,0,,,3.8|,1
 3,Responsibilities,"<i>- Department Managers are responsible for defining organizational (departmental) roles and their required functions, with support from Human Resources where applicable.
 - System Owners are responsible for defining and maintaining system roles for the systems they own, ensuring system roles align with organizational roles and that segregation of duties is enforced.
 - Human Resources supports the validation of organizational roles and employment or contractual status where applicable.
@@ -46,7 +46,7 @@
 - System Owners are responsible for defining and maintaining system roles for the systems they own, ensuring system roles align with organizational roles and that segregation of duties is enforced.
 - Human Resources supports the validation of organizational roles and employment or contractual status where applicable.
 - The Information Security function is responsible for supporting and monitoring role and access decisions to ensure security principles and segregation of duties are maintained.
-- Users are responsible for using their access appropriately and protecting their credentials.</i>",3.9,Is someone responsible for Users are responsible for using their access appropriately and protecting their credentials.?,,2,Yes|No,,0,,,3.10|,1
+- Users are responsible for using their access appropriately and protecting their credentials.</i>",3.9,Is someone responsible for using their access appropriately and protecting their credentials in your organization?,,2,Yes|No,,0,,,3.10|,1
 3,Responsibilities,"<i>- Department Managers are responsible for defining organizational (departmental) roles and their required functions, with support from Human Resources where applicable.
 - System Owners are responsible for defining and maintaining system roles for the systems they own, ensuring system roles align with organizational roles and that segregation of duties is enforced.
 - Human Resources supports the validation of organizational roles and employment or contractual status where applicable.
@@ -865,7 +865,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.25,"Does this requirement reflect your company current practice: Where password-based authentication is used, systems must enforce the following password policy where technically feasible:",,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.25,"Does this requirement reflect your company current practice: Where password-based authentication is used, systems must enforce the password policy where technically feasible?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -941,7 +941,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.29,Does this requirement reflect your company current practice: Minimum length of 12 characters,,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.29,"Does this requirement reflect your company current practice: Where password-based authentication is used, passwords must have a minimum length of 12 characters where technically feasible?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -1245,7 +1245,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.45,"Does this requirement reflect your company current practice: Systems must implement brute-force protection where technically feasible, including one or more of the following:",,2,Yes|No|Somewhat|Not applicable,,0,,,6.46 6.47|6.48|6.48|6.48,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.45,Does this requirement reflect your company current practice: Systems must implement brute-force protection where technically feasible?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.46 6.47|6.48|6.48|6.48,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -1321,7 +1321,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.49,Does this requirement reflect your company current practice: Account lockout after repeated failed attempts,,2,Yes|No|Somewhat|Not applicable,,0,,,6.50 6.51|6.52|6.52|6.52,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.49,Does this requirement reflect your company current practice: Brute-force protection may include account lockout after repeated failed attempts?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.50 6.51|6.52|6.52|6.52,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -1397,7 +1397,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.53,Does this requirement reflect your company current practice: Progressive authentication delays,,2,Yes|No|Somewhat|Not applicable,,0,,,6.54 6.55|6.56|6.56|6.56,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.53,Does this requirement reflect your company current practice: Brute-force protection may include progressive authentication delays?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.54 6.55|6.56|6.56|6.56,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.
@@ -1473,7 +1473,7 @@
 - Multi-factor authentication must be enforced where technically feasible.
 - Initial credentials must be temporary and changed at first use where applicable.
 - Interactive login using highly privileged or technical accounts must be disabled where supported.
-- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.57,Does this requirement reflect your company current practice: Rate limiting,,2,Yes|No|Somewhat|Not applicable,,0,,,6.58 6.59|6.60|6.60|6.60,1
+- Authentication events must be logged in accordance with the Logging & Monitoring requirements.</i>",6.57,Does this requirement reflect your company current practice: Brute-force protection may include rate limiting?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.58 6.59|6.60|6.60|6.60,1
 6,Standard - Authentication,"<i>- Authentication must be performed using organization-approved mechanisms.
 - Authentication must be integrated with a central identity source where technically feasible.
 - All authentication secrets, including passwords, keys, tokens, and credentials, must be generated using approved computerized methods where technically feasible.

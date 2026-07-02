@@ -1,4 +1,4 @@
-﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+"﻿""Chapter ID (Mandatory", for example 1, 2," Etc)""",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
 1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
 2,Scope,"<i>This policy applies to:
 - All production and non-production systems, applications, infrastructure, and services.
@@ -20,7 +20,7 @@
 - System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
 - Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
 
----</i>",3.1,"Is someone responsible for Management: Ensures operational management activities are governed, resourced, and aligned with business needs.?",,2,Yes|No,,0,,,3.2|,1
+---</i>",3.1,"Is someone responsible for ensuring operational management activities are governed, resourced, and aligned with business needs in your organization?",,2,Yes|No,,0,,,3.2|,1
 3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
 - The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
 - IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
@@ -34,7 +34,7 @@
 - System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
 - Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
 
----</i>",3.3,"Is someone responsible for The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.?",,2,Yes|No,,0,,,3.4|,1
+---</i>",3.3,"Is someone responsible for defining security requirements related to operational changes and capacity planning, with the support of other department managers in your organization?",,2,Yes|No,,0,,,3.4|,1
 3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
 - The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
 - IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
@@ -48,7 +48,7 @@
 - System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
 - Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
 
----</i>",3.5,"Is someone responsible for IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.?",,2,Yes|No,,0,,,3.6|,1
+---</i>",3.5,"Is someone responsible for planning, implementing, and managing changes and capacity in accordance with this policy in your organization?",,2,Yes|No,,0,,,3.6|,1
 3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
 - The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
 - IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
@@ -62,7 +62,7 @@
 - System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
 - Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
 
----</i>",3.7,Is someone responsible for System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.?,,2,Yes|No,,0,,,3.8|,1
+---</i>",3.7,Is someone responsible for approving changes affecting their systems and ensuring capacity meets business requirements in your organization?,,2,Yes|No,,0,,,3.8|,1
 3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
 - The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
 - IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
@@ -76,7 +76,7 @@
 - System and Service Owners: Approve changes affecting their systems and ensure capacity meets business requirements.
 - Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements.
 
----</i>",3.9,Is someone responsible for Suppliers and Service Providers: Comply with operational management requirements defined in contracts and agreements. ---?,,2,Yes|No,,0,,,3.10|,1
+---</i>",3.9,Is someone responsible for complying with operational management requirements defined in contracts and agreements in your organization?,,2,Yes|No,,0,,,3.10|,1
 3,Responsibilities,"<i>- Management: Ensures operational management activities are governed, resourced, and aligned with business needs.
 - The Information Security function: Defines security requirements related to operational changes and capacity planning, with the support of other department managers.
 - IT / Operations Teams: Plan, implement, and manage changes and capacity in accordance with this policy.
@@ -237,7 +237,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.5,Does this requirement reflect your company current practice: Changes must be:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+- Change records must be maintained.</i>",5.5,"Does this requirement reflect your company current practice: Changes must be classified, assessed for impact on availability, performance, and security, and approved before implementation?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -293,7 +293,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.9,"Does this requirement reflect your company current practice: Classified (e.g. standard, normal, emergency).",,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+- Change records must be maintained.</i>",5.9,"Does this requirement reflect your company current practice: Changes must be classified, for example as standard, normal, or emergency?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -349,7 +349,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.13,"Does this requirement reflect your company current practice: Assessed for impact on availability, performance, and security.",,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+- Change records must be maintained.</i>",5.13,"Does this requirement reflect your company current practice: Changes must be assessed for impact on availability, performance, and security?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -405,7 +405,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.17,Does this requirement reflect your company current practice: Approved before implementation.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+- Change records must be maintained.</i>",5.17,Does this requirement reflect your company current practice: Changes must be approved before implementation?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -461,7 +461,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.21,Does this requirement reflect your company current practice: Change implementation must:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
+- Change records must be maintained.</i>",5.21,"Does this requirement reflect your company current practice: Change implementation must be planned and scheduled, include rollback or recovery considerations, and avoid unnecessary disruption to business operations?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -517,7 +517,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.25,Does this requirement reflect your company current practice: Be planned and scheduled.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
+- Change records must be maintained.</i>",5.25,Does this requirement reflect your company current practice: Change implementation must be planned and scheduled?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -573,7 +573,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.29,Does this requirement reflect your company current practice: Include rollback or recovery considerations.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.30 5.31|5.32|5.32|5.32,1
+- Change records must be maintained.</i>",5.29,Does this requirement reflect your company current practice: Change implementation must include rollback or recovery considerations?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.30 5.31|5.32|5.32|5.32,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -629,7 +629,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.33,Does this requirement reflect your company current practice: Avoid unnecessary disruption to business operations.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.34 5.35|5.36|5.36|5.36,1
+- Change records must be maintained.</i>",5.33,Does this requirement reflect your company current practice: Change implementation must avoid unnecessary disruption to business operations?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.34 5.35|5.36|5.36|5.36,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -685,7 +685,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.37,Does this requirement reflect your company current practice: Emergency changes must:,,2,Yes|No|Somewhat|Not applicable,,0,,,5.38 5.39|5.40|5.40|5.40,1
+- Change records must be maintained.</i>",5.37,"Does this requirement reflect your company current practice: Emergency changes must be justified and documented, and reviewed retrospectively?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.38 5.39|5.40|5.40|5.40,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -741,7 +741,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.41,Does this requirement reflect your company current practice: Be justified and documented.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.42 5.43|5.44|5.44|5.44,1
+- Change records must be maintained.</i>",5.41,Does this requirement reflect your company current practice: Emergency changes must be justified and documented?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.42 5.43|5.44|5.44|5.44,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -797,7 +797,7 @@
   - Be justified and documented.
   - Be reviewed retrospectively.
 - Changes must be tested where feasible prior to deployment.
-- Change records must be maintained.</i>",5.45,Does this requirement reflect your company current practice: Be reviewed retrospectively.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.46 5.47|5.48|5.48|5.48,1
+- Change records must be maintained.</i>",5.45,Does this requirement reflect your company current practice: Emergency changes must be reviewed retrospectively?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.46 5.47|5.48|5.48|5.48,1
 5,Standard - Change Management,"<i>- All changes to systems, applications, infrastructure, and configurations must follow a defined change management process.
 - Changes must be:
   - Classified (e.g. standard, normal, emergency).
@@ -1006,7 +1006,7 @@
 - Capacity-related risks must be addressed before service levels are impacted.
 - Capacity planning must be reviewed periodically and when significant changes occur.
 
----</i>",6.5,Does this requirement reflect your company current practice: Capacity management must consider:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+---</i>",6.5,"Does this requirement reflect your company current practice: Capacity management must consider current utilization, expected growth, and business and operational requirements?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
 6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
 - Capacity management must consider:
   - Current utilization.
@@ -1050,7 +1050,7 @@
 - Capacity-related risks must be addressed before service levels are impacted.
 - Capacity planning must be reviewed periodically and when significant changes occur.
 
----</i>",6.9,Does this requirement reflect your company current practice: Current utilization.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+---</i>",6.9,Does this requirement reflect your company current practice: Capacity management must consider current utilization?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
 6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
 - Capacity management must consider:
   - Current utilization.
@@ -1094,7 +1094,7 @@
 - Capacity-related risks must be addressed before service levels are impacted.
 - Capacity planning must be reviewed periodically and when significant changes occur.
 
----</i>",6.13,Does this requirement reflect your company current practice: Expected growth.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+---</i>",6.13,Does this requirement reflect your company current practice: Capacity management must consider expected growth?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
 6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
 - Capacity management must consider:
   - Current utilization.
@@ -1138,7 +1138,7 @@
 - Capacity-related risks must be addressed before service levels are impacted.
 - Capacity planning must be reviewed periodically and when significant changes occur.
 
----</i>",6.17,Does this requirement reflect your company current practice: Business and operational requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+---</i>",6.17,Does this requirement reflect your company current practice: Capacity management must consider business and operational requirements?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
 6,Standard - Capacity Management,"<i>- Capacity requirements must be identified for systems and services.
 - Capacity management must consider:
   - Current utilization.

@@ -1,4 +1,4 @@
-﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+"﻿""Chapter ID (Mandatory", for example 1, 2," Etc)""",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
 1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
 2,Scope,"<i>This policy applies to all information within the scope of the ISMS, including business processes, systems, assets, services, and third-party relationships.</i>",2.1,Is this scope accurate and complete for your organization?,"This policy applies to all information within the scope of the ISMS, including business processes, systems, assets, services, and third-party relationships.",2,Yes|No|Somewhat,,0,,,||2.2,1
 2,Scope,"<i>This policy applies to all information within the scope of the ISMS, including business processes, systems, assets, services, and third-party relationships.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
@@ -8,7 +8,7 @@
 - Department Managers: Support risk assessment and treatment activities.
 - All Personnel: Contribute to identifying and reporting risks.
 
----</i>",3.1,"Is someone responsible for Management: Ensures the risk management process is established, resourced, and aligned with business objectives.?",,2,Yes|No,,0,,,3.2|,1
+---</i>",3.1,"Is someone responsible for ensuring the risk management process is established, resourced, and aligned with business objectives in your organization?",,2,Yes|No,,0,,,3.2|,1
 3,Responsibilities,"<i>- Management: Ensures the risk management process is established, resourced, and aligned with business objectives.
 - The Information Security function: Defines and maintains the risk assessment and treatment methodology and ensures consistency of application, with the support of other department managers.
 - Risk Owners: Are accountable for risks, approve treatment actions within their authority, and accept residual risks.
@@ -22,7 +22,7 @@
 - Department Managers: Support risk assessment and treatment activities.
 - All Personnel: Contribute to identifying and reporting risks.
 
----</i>",3.3,"Is someone responsible for The Information Security function: Defines and maintains the risk assessment and treatment methodology and ensures consistency of application, with the support of other department managers.?",,2,Yes|No,,0,,,3.4|,1
+---</i>",3.3,"Is someone responsible for defining and maintaining the risk assessment and treatment methodology and ensuring consistency of application, with the support of other department managers in your organization?",,2,Yes|No,,0,,,3.4|,1
 3,Responsibilities,"<i>- Management: Ensures the risk management process is established, resourced, and aligned with business objectives.
 - The Information Security function: Defines and maintains the risk assessment and treatment methodology and ensures consistency of application, with the support of other department managers.
 - Risk Owners: Are accountable for risks, approve treatment actions within their authority, and accept residual risks.
@@ -36,7 +36,7 @@
 - Department Managers: Support risk assessment and treatment activities.
 - All Personnel: Contribute to identifying and reporting risks.
 
----</i>",3.5,"Is someone responsible for Risk Owners: Are accountable for risks, approve treatment actions within their authority, and accept residual risks.?",,2,Yes|No,,0,,,3.6|,1
+---</i>",3.5,"Is someone responsible for being accountable for risks, approving treatment actions within their authority, and accepting residual risks in your organization?",,2,Yes|No,,0,,,3.6|,1
 3,Responsibilities,"<i>- Management: Ensures the risk management process is established, resourced, and aligned with business objectives.
 - The Information Security function: Defines and maintains the risk assessment and treatment methodology and ensures consistency of application, with the support of other department managers.
 - Risk Owners: Are accountable for risks, approve treatment actions within their authority, and accept residual risks.
@@ -50,7 +50,7 @@
 - Department Managers: Support risk assessment and treatment activities.
 - All Personnel: Contribute to identifying and reporting risks.
 
----</i>",3.7,Is someone responsible for Department Managers: Support risk assessment and treatment activities.?,,2,Yes|No,,0,,,3.8|,1
+---</i>",3.7,Is someone responsible for supporting risk assessment and treatment activities in your organization?,,2,Yes|No,,0,,,3.8|,1
 3,Responsibilities,"<i>- Management: Ensures the risk management process is established, resourced, and aligned with business objectives.
 - The Information Security function: Defines and maintains the risk assessment and treatment methodology and ensures consistency of application, with the support of other department managers.
 - Risk Owners: Are accountable for risks, approve treatment actions within their authority, and accept residual risks.
@@ -64,7 +64,7 @@
 - Department Managers: Support risk assessment and treatment activities.
 - All Personnel: Contribute to identifying and reporting risks.
 
----</i>",3.9,Is someone responsible for All Personnel: Contribute to identifying and reporting risks. ---?,,2,Yes|No,,0,,,3.10|,1
+---</i>",3.9,Is someone responsible for contributing to identifying and reporting risks in your organization?,,2,Yes|No,,0,,,3.10|,1
 3,Responsibilities,"<i>- Management: Ensures the risk management process is established, resourced, and aligned with business objectives.
 - The Information Security function: Defines and maintains the risk assessment and treatment methodology and ensures consistency of application, with the support of other department managers.
 - Risk Owners: Are accountable for risks, approve treatment actions within their authority, and accept residual risks.
@@ -170,7 +170,7 @@
 - Risk level is calculated as Likelihood × Impact.
 - The resulting risk score is mapped to a risk level using the approved risk matrix.
 
----</i>",5.1,Does this requirement reflect your company current practice: High (3): Happened before and could happen again.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+---</i>",5.1,Does this requirement reflect your company current practice: High (3) likelihood means the event happened before and could happen again.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
 5,Standard - Risk Classification Criteria,"<i>#### Likelihood
 - High (3): Happened before and could happen again.
 - Medium (2): Never happened before but could happen.
@@ -230,7 +230,7 @@
 - Risk level is calculated as Likelihood × Impact.
 - The resulting risk score is mapped to a risk level using the approved risk matrix.
 
----</i>",5.5,Does this requirement reflect your company current practice: Medium (2): Never happened before but could happen.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+---</i>",5.5,Does this requirement reflect your company current practice: Medium (2) likelihood means the event never happened before but could happen.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
 5,Standard - Risk Classification Criteria,"<i>#### Likelihood
 - High (3): Happened before and could happen again.
 - Medium (2): Never happened before but could happen.
@@ -290,7 +290,7 @@
 - Risk level is calculated as Likelihood × Impact.
 - The resulting risk score is mapped to a risk level using the approved risk matrix.
 
----</i>",5.9,Does this requirement reflect your company current practice: Low (1): Never happened before and is unlikely to happen.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+---</i>",5.9,Does this requirement reflect your company current practice: Low (1) likelihood means the event never happened before and is unlikely to happen.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
 5,Standard - Risk Classification Criteria,"<i>#### Likelihood
 - High (3): Happened before and could happen again.
 - Medium (2): Never happened before but could happen.
@@ -350,7 +350,7 @@
 - Risk level is calculated as Likelihood × Impact.
 - The resulting risk score is mapped to a risk level using the approved risk matrix.
 
----</i>",5.13,Does this requirement reflect your company current practice: High (3): Contractual or legal repercussions.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+---</i>",5.13,Does this requirement reflect your company current practice: High (3) impact means contractual or legal repercussions.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
 5,Standard - Risk Classification Criteria,"<i>#### Likelihood
 - High (3): Happened before and could happen again.
 - Medium (2): Never happened before but could happen.
@@ -410,7 +410,7 @@
 - Risk level is calculated as Likelihood × Impact.
 - The resulting risk score is mapped to a risk level using the approved risk matrix.
 
----</i>",5.17,Does this requirement reflect your company current practice: Medium (2): Reputational repercussions.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+---</i>",5.17,Does this requirement reflect your company current practice: Medium (2) impact means reputational repercussions.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
 5,Standard - Risk Classification Criteria,"<i>#### Likelihood
 - High (3): Happened before and could happen again.
 - Medium (2): Never happened before but could happen.
@@ -470,7 +470,7 @@
 - Risk level is calculated as Likelihood × Impact.
 - The resulting risk score is mapped to a risk level using the approved risk matrix.
 
----</i>",5.21,Does this requirement reflect your company current practice: Low (1): Negligible impact to customers or the organization.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
+---</i>",5.21,Does this requirement reflect your company current practice: Low (1) impact means negligible impact to customers or the organization.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
 5,Standard - Risk Classification Criteria,"<i>#### Likelihood
 - High (3): Happened before and could happen again.
 - Medium (2): Never happened before but could happen.
@@ -530,7 +530,7 @@
 - Risk level is calculated as Likelihood × Impact.
 - The resulting risk score is mapped to a risk level using the approved risk matrix.
 
----</i>",5.25,Does this requirement reflect your company current practice: Risk level is calculated as Likelihood × Impact.,,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
+---</i>",5.25,Does this requirement reflect your company current practice: Risk level is calculated as Likelihood × Impact?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
 5,Standard - Risk Classification Criteria,"<i>#### Likelihood
 - High (3): Happened before and could happen again.
 - Medium (2): Never happened before but could happen.
@@ -590,7 +590,7 @@
 - Risk level is calculated as Likelihood × Impact.
 - The resulting risk score is mapped to a risk level using the approved risk matrix.
 
----</i>",5.29,Does this requirement reflect your company current practice: The resulting risk score is mapped to a risk level using the approved risk matrix. ---,,2,Yes|No|Somewhat|Not applicable,,0,,,5.30 5.31|5.32|5.32|5.32,1
+---</i>",5.29,Does this requirement reflect your company current practice: The resulting risk score is mapped to a risk level using the approved risk matrix?,,2,Yes|No|Somewhat|Not applicable,,0,,,5.30 5.31|5.32|5.32|5.32,1
 5,Standard - Risk Classification Criteria,"<i>#### Likelihood
 - High (3): Happened before and could happen again.
 - Medium (2): Never happened before but could happen.
@@ -671,7 +671,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.1,Does this requirement reflect your company current practice: Characteristics:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+---</i>",6.1,Does this requirement reflect your company current practice: Low risks have the following characteristics.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -815,7 +815,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.5,Does this requirement reflect your company current practice: Low overall impact to the organization.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+---</i>",6.5,Does this requirement reflect your company current practice: Low risks may have low overall impact to the organization?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -959,7 +959,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.9,Does this requirement reflect your company current practice: Risk is considered acceptable.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+---</i>",6.9,Does this requirement reflect your company current practice: Low risks may be considered acceptable?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -1103,7 +1103,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.13,Does this requirement reflect your company current practice: Treatment:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+---</i>",6.13,Does this requirement reflect your company current practice: Low risks have the following treatment requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -1247,7 +1247,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.17,Does this requirement reflect your company current practice: Risk may be accepted or treated at the discretion of the risk owner.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+---</i>",6.17,Does this requirement reflect your company current practice: Low risks may be accepted or treated at the discretion of the risk owner?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -1391,7 +1391,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.21,Does this requirement reflect your company current practice: Approval:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
+---</i>",6.21,Does this requirement reflect your company current practice: Low risks have the following approval requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.22 6.23|6.24|6.24|6.24,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -1535,7 +1535,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.25,Does this requirement reflect your company current practice: Risk Owner approval only.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
+---</i>",6.25,Does this requirement reflect your company current practice: Low risks require Risk Owner approval only.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.26 6.27|6.28|6.28|6.28,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -1679,7 +1679,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.29,Does this requirement reflect your company current practice: No additional management approval is required.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
+---</i>",6.29,Does this requirement reflect your company current practice: Low risks do not require additional management approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.30 6.31|6.32|6.32|6.32,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -1823,7 +1823,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.33,Does this requirement reflect your company current practice: Characteristics:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.34 6.35|6.36|6.36|6.36,1
+---</i>",6.33,Does this requirement reflect your company current practice: Medium risks have the following characteristics.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.34 6.35|6.36|6.36|6.36,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -1967,7 +1967,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.37,Does this requirement reflect your company current practice: Noticeable business or reputational impact.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.38 6.39|6.40|6.40|6.40,1
+---</i>",6.37,Does this requirement reflect your company current practice: Medium risks may have noticeable business or reputational impact?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.38 6.39|6.40|6.40|6.40,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -2111,7 +2111,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.41,Does this requirement reflect your company current practice: Risk requires active management.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.42 6.43|6.44|6.44|6.44,1
+---</i>",6.41,Does this requirement reflect your company current practice: Medium risks require active management?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.42 6.43|6.44|6.44|6.44,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -2255,7 +2255,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.45,Does this requirement reflect your company current practice: Treatment:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.46 6.47|6.48|6.48|6.48,1
+---</i>",6.45,Does this requirement reflect your company current practice: Medium risks have the following treatment requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.46 6.47|6.48|6.48|6.48,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -2399,7 +2399,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.49,"Does this requirement reflect your company current practice: Risk must be treated using internal controls, policies, exceptions, or projects.",,2,Yes|No|Somewhat|Not applicable,,0,,,6.50 6.51|6.52|6.52|6.52,1
+---</i>",6.49,"Does this requirement reflect your company current practice: Medium risks must be treated using internal controls, policies, exceptions, or projects?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.50 6.51|6.52|6.52|6.52,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -2543,7 +2543,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.53,Does this requirement reflect your company current practice: Approval:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.54 6.55|6.56|6.56|6.56,1
+---</i>",6.53,Does this requirement reflect your company current practice: Medium risks have the following approval requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.54 6.55|6.56|6.56|6.56,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -2687,7 +2687,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.57,Does this requirement reflect your company current practice: Risk Owner,,2,Yes|No|Somewhat|Not applicable,,0,,,6.58 6.59|6.60|6.60|6.60,1
+---</i>",6.57,Does this requirement reflect your company current practice: Medium risks require Risk Owner approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.58 6.59|6.60|6.60|6.60,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -2831,7 +2831,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.61,Does this requirement reflect your company current practice: Risk Owner’s Manager,,2,Yes|No|Somewhat|Not applicable,,0,,,6.62 6.63|6.64|6.64|6.64,1
+---</i>",6.61,Does this requirement reflect your company current practice: Medium risks require Risk Owner’s Manager approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.62 6.63|6.64|6.64|6.64,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -2975,7 +2975,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.65,Does this requirement reflect your company current practice: GRC Manager,,2,Yes|No|Somewhat|Not applicable,,0,,,6.66 6.67|6.68|6.68|6.68,1
+---</i>",6.65,Does this requirement reflect your company current practice: Medium risks require GRC Manager approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.66 6.67|6.68|6.68|6.68,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -3119,7 +3119,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.69,Does this requirement reflect your company current practice: Characteristics:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.70 6.71|6.72|6.72|6.72,1
+---</i>",6.69,Does this requirement reflect your company current practice: High (Serious) risks have the following characteristics.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.70 6.71|6.72|6.72|6.72,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -3263,7 +3263,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.73,"Does this requirement reflect your company current practice: Significant contractual, legal, or business impact.",,2,Yes|No|Somewhat|Not applicable,,0,,,6.74 6.75|6.76|6.76|6.76,1
+---</i>",6.73,"Does this requirement reflect your company current practice: High (Serious) risks may have significant contractual, legal, or business impact?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.74 6.75|6.76|6.76|6.76,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -3407,7 +3407,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.77,Does this requirement reflect your company current practice: Risk is not acceptable without executive awareness.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.78 6.79|6.80|6.80|6.80,1
+---</i>",6.77,Does this requirement reflect your company current practice: High (Serious) risks are not acceptable without executive awareness?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.78 6.79|6.80|6.80|6.80,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -3551,7 +3551,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.81,Does this requirement reflect your company current practice: Treatment:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.82 6.83|6.84|6.84|6.84,1
+---</i>",6.81,Does this requirement reflect your company current practice: High (Serious) risks have the following treatment requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.82 6.83|6.84|6.84|6.84,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -3695,7 +3695,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.85,Does this requirement reflect your company current practice: Risk must be treated and tracked until reduced to an acceptable level or formally accepted.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.86 6.87|6.88|6.88|6.88,1
+---</i>",6.85,Does this requirement reflect your company current practice: High (Serious) risks must be treated and tracked until reduced to an acceptable level or formally accepted?,,2,Yes|No|Somewhat|Not applicable,,0,,,6.86 6.87|6.88|6.88|6.88,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -3839,7 +3839,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.89,Does this requirement reflect your company current practice: Approval:,,2,Yes|No|Somewhat|Not applicable,,0,,,6.90 6.91|6.92|6.92|6.92,1
+---</i>",6.89,Does this requirement reflect your company current practice: High (Serious) risks have the following approval requirements.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.90 6.91|6.92|6.92|6.92,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -3983,7 +3983,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.93,Does this requirement reflect your company current practice: Risk Owner,,2,Yes|No|Somewhat|Not applicable,,0,,,6.94 6.95|6.96|6.96|6.96,1
+---</i>",6.93,Does this requirement reflect your company current practice: High (Serious) risks require Risk Owner approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.94 6.95|6.96|6.96|6.96,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -4127,7 +4127,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.97,Does this requirement reflect your company current practice: Risk Owner’s Manager,,2,Yes|No|Somewhat|Not applicable,,0,,,6.98 6.99|6.100|6.100|6.100,1
+---</i>",6.97,Does this requirement reflect your company current practice: High (Serious) risks require Risk Owner’s Manager approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.98 6.99|6.100|6.100|6.100,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -4271,7 +4271,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.101,Does this requirement reflect your company current practice: GRC Manager,,2,Yes|No|Somewhat|Not applicable,,0,,,6.102 6.103|6.104|6.104|6.104,1
+---</i>",6.101,Does this requirement reflect your company current practice: High (Serious) risks require GRC Manager approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.102 6.103|6.104|6.104|6.104,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -4415,7 +4415,7 @@
   - GRC Manager
   - Director-level approval
 
----</i>",6.105,Does this requirement reflect your company current practice: Director-level approval ---,,2,Yes|No|Somewhat|Not applicable,,0,,,6.106 6.107|6.108|6.108|6.108,1
+---</i>",6.105,Does this requirement reflect your company current practice: High (Serious) risks require Director-level approval.,,2,Yes|No|Somewhat|Not applicable,,0,,,6.106 6.107|6.108|6.108|6.108,1
 6,Standard - Risk Treatment Matrix and Approval Requirements,"<i>Risk treatment decisions must follow the risk matrix defined by likelihood and impact, with associated approval requirements:
 
 #### Low Risk
@@ -4563,7 +4563,7 @@
   - Be classified using the risk matrix
 - Risks must be prioritised based on their risk level.
 
----</i>",7.5,Does this requirement reflect your company current practice: Each risk must:,,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+---</i>",7.5,"Does this requirement reflect your company current practice: Each risk must have an assigned risk owner, be analysed for likelihood and impact, and be classified using the risk matrix?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
 7,Standard - Information Security Risk Assessment,"<i>- Risks must be identified for loss of confidentiality, integrity, and availability.
 - Each risk must:
   - Have an assigned risk owner
@@ -4595,7 +4595,7 @@
   - Be classified using the risk matrix
 - Risks must be prioritised based on their risk level.
 
----</i>",7.9,Does this requirement reflect your company current practice: Have an assigned risk owner,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
+---</i>",7.9,Does this requirement reflect your company current practice: Each risk must have an assigned risk owner?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
 7,Standard - Information Security Risk Assessment,"<i>- Risks must be identified for loss of confidentiality, integrity, and availability.
 - Each risk must:
   - Have an assigned risk owner
@@ -4627,7 +4627,7 @@
   - Be classified using the risk matrix
 - Risks must be prioritised based on their risk level.
 
----</i>",7.13,Does this requirement reflect your company current practice: Be analysed for likelihood and impact,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
+---</i>",7.13,Does this requirement reflect your company current practice: Each risk must be analysed for likelihood and impact?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
 7,Standard - Information Security Risk Assessment,"<i>- Risks must be identified for loss of confidentiality, integrity, and availability.
 - Each risk must:
   - Have an assigned risk owner
@@ -4659,7 +4659,7 @@
   - Be classified using the risk matrix
 - Risks must be prioritised based on their risk level.
 
----</i>",7.17,Does this requirement reflect your company current practice: Be classified using the risk matrix,,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
+---</i>",7.17,Does this requirement reflect your company current practice: Each risk must be classified using the risk matrix?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
 7,Standard - Information Security Risk Assessment,"<i>- Risks must be identified for loss of confidentiality, integrity, and availability.
 - Each risk must:
   - Have an assigned risk owner
@@ -4724,7 +4724,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.1,Does this requirement reflect your company current practice: Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:,,2,Yes|No|Somewhat|Not applicable,,0,,,8.2 8.3|8.4|8.4|8.4,1
+---</i>",8.1,Does this requirement reflect your company current practice: Risks exceeding acceptance thresholds must be treated using one or more Eramba-aligned mechanisms?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.2 8.3|8.4|8.4|8.4,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4760,7 +4760,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.5,Does this requirement reflect your company current practice: Internal Controls,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
+---</i>",8.5,Does this requirement reflect your company current practice: Risk treatment mechanisms may include internal controls?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.6 8.7|8.8|8.8|8.8,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4796,7 +4796,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.9,Does this requirement reflect your company current practice: Policies,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
+---</i>",8.9,Does this requirement reflect your company current practice: Risk treatment mechanisms may include policies?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.10 8.11|8.12|8.12|8.12,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4832,7 +4832,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.13,Does this requirement reflect your company current practice: Exceptions,,2,Yes|No|Somewhat|Not applicable,,0,,,8.14 8.15|8.16|8.16|8.16,1
+---</i>",8.13,Does this requirement reflect your company current practice: Risk treatment mechanisms may include exceptions?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.14 8.15|8.16|8.16|8.16,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4868,7 +4868,7 @@
 - Residual risk must be reassessed after treatment.
 - Risk acceptance must follow the approval requirements defined in the risk matrix.
 
----</i>",8.17,Does this requirement reflect your company current practice: Projects,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
+---</i>",8.17,Does this requirement reflect your company current practice: Risk treatment mechanisms may include projects?,,2,Yes|No|Somewhat|Not applicable,,0,,,8.18 8.19|8.20|8.20|8.20,1
 8,Standard - Information Security Risk Treatment,"<i>- Risks exceeding acceptance thresholds must be treated using one or more of the following Eramba-aligned mechanisms:
   - Internal Controls
   - Policies
@@ -4976,7 +4976,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.1,Does this requirement reflect your company current practice: Risk assessments must be performed:,,2,Yes|No|Somewhat|Not applicable,,0,,,9.2 9.3|9.4|9.4|9.4,1
+---</i>",9.1,Does this requirement reflect your company current practice: Risk assessments must be performed at planned intervals and when significant changes occur?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.2 9.3|9.4|9.4|9.4,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5012,7 +5012,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.5,Does this requirement reflect your company current practice: At planned intervals,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
+---</i>",9.5,Does this requirement reflect your company current practice: Risk assessments must be performed at planned intervals?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.6 9.7|9.8|9.8|9.8,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5048,7 +5048,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.9,"Does this requirement reflect your company current practice: When significant changes occur, including:",,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+---</i>",9.9,"Does this requirement reflect your company current practice: Risk assessments must be performed when significant changes occur, including new services, major system changes, security incidents, and supplier or regulatory changes?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5084,7 +5084,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.13,Does this requirement reflect your company current practice: New systems or services,,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
+---</i>",9.13,"Does this requirement reflect your company current practice: Risk assessments must be performed when significant changes occur, including new systems or services?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5120,7 +5120,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.17,Does this requirement reflect your company current practice: Material changes to existing systems,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
+---</i>",9.17,"Does this requirement reflect your company current practice: Risk assessments must be performed when significant changes occur, including material changes to existing systems?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5156,7 +5156,7 @@
     - Security incidents
     - Supplier or regulatory changes
 
----</i>",9.21,Does this requirement reflect your company current practice: Security incidents,,2,Yes|No|Somewhat|Not applicable,,0,,,9.22 9.23|9.24|9.24|9.24,1
+---</i>",9.21,"Does this requirement reflect your company current practice: Risk assessments must be performed when significant changes occur, including security incidents?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.22 9.23|9.24|9.24|9.24,1
 9,Standard - Risk Assessment Frequency and Triggers,"<i>- Risk assessments must be performed:
   - At planned intervals
   - When significant changes occur, including:
@@ -5226,7 +5226,7 @@
   - Risk approvals and residual risk acceptance
 - Records must be complete, current, and auditable.
 
----</i>",10.1,Does this requirement reflect your company current practice: The organization shall retain documented information for:,,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
+---</i>",10.1,"Does this requirement reflect your company current practice: The organization shall retain documented information for risk assessment results, risk classification and treatment decisions, and risk approvals and residual risk acceptance?",,2,Yes|No|Somewhat|Not applicable,,0,,,10.2 10.3|10.4|10.4|10.4,1
 10,Standard - Documentation and Records,"<i>- The organization shall retain documented information for:
   - Risk assessment results
   - Risk classification and treatment decisions
@@ -5254,7 +5254,7 @@
   - Risk approvals and residual risk acceptance
 - Records must be complete, current, and auditable.
 
----</i>",10.5,Does this requirement reflect your company current practice: Risk assessment results,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
+---</i>",10.5,Does this requirement reflect your company current practice: The organization shall retain documented information for risk assessment results?,,2,Yes|No|Somewhat|Not applicable,,0,,,10.6 10.7|10.8|10.8|10.8,1
 10,Standard - Documentation and Records,"<i>- The organization shall retain documented information for:
   - Risk assessment results
   - Risk classification and treatment decisions
@@ -5282,7 +5282,7 @@
   - Risk approvals and residual risk acceptance
 - Records must be complete, current, and auditable.
 
----</i>",10.9,Does this requirement reflect your company current practice: Risk classification and treatment decisions,,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
+---</i>",10.9,Does this requirement reflect your company current practice: The organization shall retain documented information for risk classification and treatment decisions?,,2,Yes|No|Somewhat|Not applicable,,0,,,10.10 10.11|10.12|10.12|10.12,1
 10,Standard - Documentation and Records,"<i>- The organization shall retain documented information for:
   - Risk assessment results
   - Risk classification and treatment decisions
@@ -5310,7 +5310,7 @@
   - Risk approvals and residual risk acceptance
 - Records must be complete, current, and auditable.
 
----</i>",10.13,Does this requirement reflect your company current practice: Risk approvals and residual risk acceptance,,2,Yes|No|Somewhat|Not applicable,,0,,,10.14 10.15|10.16|10.16|10.16,1
+---</i>",10.13,Does this requirement reflect your company current practice: The organization shall retain documented information for risk approvals and residual risk acceptance?,,2,Yes|No|Somewhat|Not applicable,,0,,,10.14 10.15|10.16|10.16|10.16,1
 10,Standard - Documentation and Records,"<i>- The organization shall retain documented information for:
   - Risk assessment results
   - Risk classification and treatment decisions

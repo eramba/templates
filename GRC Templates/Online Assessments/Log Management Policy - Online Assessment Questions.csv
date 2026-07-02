@@ -1,11 +1,11 @@
-﻿"Chapter ID (Mandatory, for example 1, 2, Etc)",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
+"﻿""Chapter ID (Mandatory", for example 1, 2," Etc)""",Chapter Title (Mandatory),Chapter Description (Optional),"Question ID (Mandatory and Unique, for example: 1.1, 1.2, Etc)",Question Title (Mandatory),Question Description (Optional),"Answer Type (Mandatory, one of the following options: 1 for Open Answer, 2 for Dropdown - Single Select, 3 for Dropdown - Single Select - Open answer, 4 for Date, 5 for Dropdown - Multiple Select, 6 for Dropdown - Multiple Select - Open answer)","Dropdown Options (Mandatory if column G is Dropdown. List options for the dropdown separated by a pipe character, for example: Yes|No|Undefined)","DropDown Warnings (Optional, for every option on column H you can define a message, for example: Great|Oh|Think twice)","Dropdown Scoring (Mandatory, set this to 1 if you want to enable scoring for this question. Otherwise set to 0)","Dropdown Option Score (Mandatory if J is set to 1, set the score of the question as an integer positive number, for example 10)","Dropdown Option Score Multiplier (Mandatory if J is set to 1. For every option of the dropdown in column H define an integer positive number that will be multiplied by the value on column K, for example: 1|2|10)","Dropdown Option Show another Question (Optional and only possible if column G is dropdown.For every option in column H you can define one or more question IDs from column D to be shown when the option is selected. For example: 1.2 1.6||6.7 would display questions 1.2 and 1.6 if the first option is selected, none if the second is selected and 6.7 if the third option is selected)","Question Comments & Attachments (Mandatory, select 0 if you do not want to show this option or 1 if you want to let users provide comments and attachments for each question)"
 1,Respondent Information,,1.1,"Who is responding to this questionnaire? Please provide your name, team, and role within that team.",,1,,,0,,,,1
 2,Scope,"<i>This document applies to all systems, applications, infrastructure, network devices, security controls, and services (on-premise or cloud-based) that process, store, or transmit organizational data.</i>",2.1,Is this scope accurate and complete for your organization?,"This document applies to all systems, applications, infrastructure, network devices, security controls, and services (on-premise or cloud-based) that process, store, or transmit organizational data.",2,Yes|No|Somewhat,,0,,,||2.2,1
 2,Scope,"<i>This document applies to all systems, applications, infrastructure, network devices, security controls, and services (on-premise or cloud-based) that process, store, or transmit organizational data.</i>",2.2,Please provide the correct or updated scope.,,1,,,0,,,,1
 3,Responsibilities,"<i>- System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.
 - Department Managers support implementation and ensure operational compliance within their areas.
 - The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.
-- IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.</i>",3.1,Is someone responsible for System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.?,,2,Yes|No,,0,,,3.2|,1
+- IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.</i>",3.1,Is someone responsible for ensuring logging is enabled and aligned with this policy for systems they own in your organization?,,2,Yes|No,,0,,,3.2|,1
 3,Responsibilities,"<i>- System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.
 - Department Managers support implementation and ensure operational compliance within their areas.
 - The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.
@@ -13,7 +13,7 @@
 3,Responsibilities,"<i>- System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.
 - Department Managers support implementation and ensure operational compliance within their areas.
 - The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.
-- IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.</i>",3.3,Is someone responsible for Department Managers support implementation and ensure operational compliance within their areas.?,,2,Yes|No,,0,,,3.4|,1
+- IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.</i>",3.3,Is someone responsible for supporting implementation and ensuring operational compliance within their areas in your organization?,,2,Yes|No,,0,,,3.4|,1
 3,Responsibilities,"<i>- System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.
 - Department Managers support implementation and ensure operational compliance within their areas.
 - The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.
@@ -21,7 +21,7 @@
 3,Responsibilities,"<i>- System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.
 - Department Managers support implementation and ensure operational compliance within their areas.
 - The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.
-- IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.</i>",3.5,"Is someone responsible for The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.?",,2,Yes|No,,0,,,3.6|,1
+- IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.</i>",3.5,"Is someone responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers in your organization?",,2,Yes|No,,0,,,3.6|,1
 3,Responsibilities,"<i>- System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.
 - Department Managers support implementation and ensure operational compliance within their areas.
 - The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.
@@ -29,7 +29,7 @@
 3,Responsibilities,"<i>- System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.
 - Department Managers support implementation and ensure operational compliance within their areas.
 - The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.
-- IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.</i>",3.7,"Is someone responsible for IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.?",,2,Yes|No,,0,,,3.8|,1
+- IT / Technical Teams are responsible for implementing, maintaining, and supporting logging and monitoring controls.</i>",3.7,"Is someone responsible for implementing, maintaining, and supporting logging and monitoring controls in your organization?",,2,Yes|No,,0,,,3.8|,1
 3,Responsibilities,"<i>- System Owners are responsible for ensuring logging is enabled and aligned with this policy for systems they own.
 - Department Managers support implementation and ensure operational compliance within their areas.
 - The Information Security function is responsible for defining logging requirements and monitoring expectations, with the assistance of Department Managers.
@@ -123,7 +123,7 @@
   - Network devices (e.g. firewalls, routers, switches)
   - Security controls (e.g. authentication systems, endpoint protection)
   - Cloud platforms and managed services
-- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.1,"Does this requirement reflect your company current practice: Logs must be generated, where technically feasible, by:",,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
+- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.1,"Does this requirement reflect your company current practice: Logs must be generated, where technically feasible, by systems, applications, infrastructure, security controls, and cloud services?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.2 5.3|5.4|5.4|5.4,1
 5,Standard - Log Sources,"<i>- Logs must be generated, where technically feasible, by:
   - Operating systems
   - Applications
@@ -155,7 +155,7 @@
   - Network devices (e.g. firewalls, routers, switches)
   - Security controls (e.g. authentication systems, endpoint protection)
   - Cloud platforms and managed services
-- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.5,Does this requirement reflect your company current practice: Operating systems,,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
+- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.5,"Does this requirement reflect your company current practice: Logs must be generated, where technically feasible, by operating systems?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.6 5.7|5.8|5.8|5.8,1
 5,Standard - Log Sources,"<i>- Logs must be generated, where technically feasible, by:
   - Operating systems
   - Applications
@@ -187,7 +187,7 @@
   - Network devices (e.g. firewalls, routers, switches)
   - Security controls (e.g. authentication systems, endpoint protection)
   - Cloud platforms and managed services
-- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.9,Does this requirement reflect your company current practice: Applications,,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
+- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.9,"Does this requirement reflect your company current practice: Logs must be generated, where technically feasible, by applications?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.10 5.11|5.12|5.12|5.12,1
 5,Standard - Log Sources,"<i>- Logs must be generated, where technically feasible, by:
   - Operating systems
   - Applications
@@ -219,7 +219,7 @@
   - Network devices (e.g. firewalls, routers, switches)
   - Security controls (e.g. authentication systems, endpoint protection)
   - Cloud platforms and managed services
-- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.13,Does this requirement reflect your company current practice: Databases,,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
+- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.13,"Does this requirement reflect your company current practice: Logs must be generated, where technically feasible, by databases?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.14 5.15|5.16|5.16|5.16,1
 5,Standard - Log Sources,"<i>- Logs must be generated, where technically feasible, by:
   - Operating systems
   - Applications
@@ -251,7 +251,7 @@
   - Network devices (e.g. firewalls, routers, switches)
   - Security controls (e.g. authentication systems, endpoint protection)
   - Cloud platforms and managed services
-- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.17,"Does this requirement reflect your company current practice: Network devices (e.g. firewalls, routers, switches)",,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
+- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.17,"Does this requirement reflect your company current practice: Logs must be generated, where technically feasible, by network devices such as firewalls, routers, and switches?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.18 5.19|5.20|5.20|5.20,1
 5,Standard - Log Sources,"<i>- Logs must be generated, where technically feasible, by:
   - Operating systems
   - Applications
@@ -283,7 +283,7 @@
   - Network devices (e.g. firewalls, routers, switches)
   - Security controls (e.g. authentication systems, endpoint protection)
   - Cloud platforms and managed services
-- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.21,"Does this requirement reflect your company current practice: Security controls (e.g. authentication systems, endpoint protection)",,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
+- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.21,"Does this requirement reflect your company current practice: Logs must be generated, where technically feasible, by security controls such as authentication systems and endpoint protection?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.22 5.23|5.24|5.24|5.24,1
 5,Standard - Log Sources,"<i>- Logs must be generated, where technically feasible, by:
   - Operating systems
   - Applications
@@ -315,7 +315,7 @@
   - Network devices (e.g. firewalls, routers, switches)
   - Security controls (e.g. authentication systems, endpoint protection)
   - Cloud platforms and managed services
-- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.25,Does this requirement reflect your company current practice: Cloud platforms and managed services,,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
+- Security-relevant events must be logged, including authentication, authorization, configuration changes, and system activity.</i>",5.25,"Does this requirement reflect your company current practice: Logs must be generated, where technically feasible, by cloud platforms and managed services?",,2,Yes|No|Somewhat|Not applicable,,0,,,5.26 5.27|5.28|5.28|5.28,1
 5,Standard - Log Sources,"<i>- Logs must be generated, where technically feasible, by:
   - Operating systems
   - Applications
@@ -378,7 +378,7 @@
   - User, service, or account identity
   - Action performed and outcome
 - Systems must use synchronized time sources to ensure log correlation.
-- Log formats must support centralized collection and analysis where possible.</i>",6.1,"Does this requirement reflect your company current practice: Logs must include, where technically feasible:",,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
+- Log formats must support centralized collection and analysis where possible.</i>",6.1,"Does this requirement reflect your company current practice: Logs must include, where technically feasible, the event date and time, source system or device, identity, and action performed with outcome?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.2 6.3|6.4|6.4|6.4,1
 6,Standard - Log Format and Time Synchronization,"<i>- Logs must include, where technically feasible:
   - Date and time of the event
   - Source system or device
@@ -406,7 +406,7 @@
   - User, service, or account identity
   - Action performed and outcome
 - Systems must use synchronized time sources to ensure log correlation.
-- Log formats must support centralized collection and analysis where possible.</i>",6.5,Does this requirement reflect your company current practice: Date and time of the event,,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
+- Log formats must support centralized collection and analysis where possible.</i>",6.5,"Does this requirement reflect your company current practice: Logs must include, where technically feasible, the date and time of the event?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.6 6.7|6.8|6.8|6.8,1
 6,Standard - Log Format and Time Synchronization,"<i>- Logs must include, where technically feasible:
   - Date and time of the event
   - Source system or device
@@ -434,7 +434,7 @@
   - User, service, or account identity
   - Action performed and outcome
 - Systems must use synchronized time sources to ensure log correlation.
-- Log formats must support centralized collection and analysis where possible.</i>",6.9,Does this requirement reflect your company current practice: Source system or device,,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
+- Log formats must support centralized collection and analysis where possible.</i>",6.9,"Does this requirement reflect your company current practice: Logs must include, where technically feasible, the source system or device?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.10 6.11|6.12|6.12|6.12,1
 6,Standard - Log Format and Time Synchronization,"<i>- Logs must include, where technically feasible:
   - Date and time of the event
   - Source system or device
@@ -462,7 +462,7 @@
   - User, service, or account identity
   - Action performed and outcome
 - Systems must use synchronized time sources to ensure log correlation.
-- Log formats must support centralized collection and analysis where possible.</i>",6.13,"Does this requirement reflect your company current practice: User, service, or account identity",,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
+- Log formats must support centralized collection and analysis where possible.</i>",6.13,"Does this requirement reflect your company current practice: Logs must include, where technically feasible, the user, service, or account identity?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.14 6.15|6.16|6.16|6.16,1
 6,Standard - Log Format and Time Synchronization,"<i>- Logs must include, where technically feasible:
   - Date and time of the event
   - Source system or device
@@ -490,7 +490,7 @@
   - User, service, or account identity
   - Action performed and outcome
 - Systems must use synchronized time sources to ensure log correlation.
-- Log formats must support centralized collection and analysis where possible.</i>",6.17,Does this requirement reflect your company current practice: Action performed and outcome,,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
+- Log formats must support centralized collection and analysis where possible.</i>",6.17,"Does this requirement reflect your company current practice: Logs must include, where technically feasible, the action performed and outcome?",,2,Yes|No|Somewhat|Not applicable,,0,,,6.18 6.19|6.20|6.20|6.20,1
 6,Standard - Log Format and Time Synchronization,"<i>- Logs must include, where technically feasible:
   - Date and time of the event
   - Source system or device
@@ -607,7 +607,7 @@
   - Unauthorized access attempts
   - Changes to security configurations
   - Malware or intrusion alerts
-- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.5,"Does this requirement reflect your company current practice: Monitoring must include predefined scenarios, such as:",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
+- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.5,"Does this requirement reflect your company current practice: Monitoring must include predefined scenarios such as suspicious authentication, privileged account use, unauthorized access, security configuration changes, and malware or intrusion alerts?",,2,Yes|No|Somewhat|Not applicable,,0,,,7.6 7.7|7.8|7.8|7.8,1
 7,Standard - Monitoring and Detection Scenarios,"<i>- Logs must be monitored manually or automatically to detect security-relevant activity.
 - Monitoring must include predefined scenarios, such as:
   - Failed or suspicious authentication attempts
@@ -639,7 +639,7 @@
   - Unauthorized access attempts
   - Changes to security configurations
   - Malware or intrusion alerts
-- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.9,Does this requirement reflect your company current practice: Failed or suspicious authentication attempts,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
+- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.9,Does this requirement reflect your company current practice: Monitoring must include predefined scenarios such as failed or suspicious authentication attempts?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.10 7.11|7.12|7.12|7.12,1
 7,Standard - Monitoring and Detection Scenarios,"<i>- Logs must be monitored manually or automatically to detect security-relevant activity.
 - Monitoring must include predefined scenarios, such as:
   - Failed or suspicious authentication attempts
@@ -671,7 +671,7 @@
   - Unauthorized access attempts
   - Changes to security configurations
   - Malware or intrusion alerts
-- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.13,Does this requirement reflect your company current practice: Use of privileged accounts,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
+- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.13,Does this requirement reflect your company current practice: Monitoring must include predefined scenarios such as use of privileged accounts?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.14 7.15|7.16|7.16|7.16,1
 7,Standard - Monitoring and Detection Scenarios,"<i>- Logs must be monitored manually or automatically to detect security-relevant activity.
 - Monitoring must include predefined scenarios, such as:
   - Failed or suspicious authentication attempts
@@ -703,7 +703,7 @@
   - Unauthorized access attempts
   - Changes to security configurations
   - Malware or intrusion alerts
-- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.17,Does this requirement reflect your company current practice: Unauthorized access attempts,,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
+- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.17,Does this requirement reflect your company current practice: Monitoring must include predefined scenarios such as unauthorized access attempts?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.18 7.19|7.20|7.20|7.20,1
 7,Standard - Monitoring and Detection Scenarios,"<i>- Logs must be monitored manually or automatically to detect security-relevant activity.
 - Monitoring must include predefined scenarios, such as:
   - Failed or suspicious authentication attempts
@@ -735,7 +735,7 @@
   - Unauthorized access attempts
   - Changes to security configurations
   - Malware or intrusion alerts
-- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.21,Does this requirement reflect your company current practice: Changes to security configurations,,2,Yes|No|Somewhat|Not applicable,,0,,,7.22 7.23|7.24|7.24|7.24,1
+- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.21,Does this requirement reflect your company current practice: Monitoring must include predefined scenarios such as changes to security configurations?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.22 7.23|7.24|7.24|7.24,1
 7,Standard - Monitoring and Detection Scenarios,"<i>- Logs must be monitored manually or automatically to detect security-relevant activity.
 - Monitoring must include predefined scenarios, such as:
   - Failed or suspicious authentication attempts
@@ -767,7 +767,7 @@
   - Unauthorized access attempts
   - Changes to security configurations
   - Malware or intrusion alerts
-- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.25,Does this requirement reflect your company current practice: Malware or intrusion alerts,,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
+- Alerts must be generated and routed to appropriate teams based on defined scenarios.</i>",7.25,Does this requirement reflect your company current practice: Monitoring must include predefined scenarios such as malware or intrusion alerts?,,2,Yes|No|Somewhat|Not applicable,,0,,,7.26 7.27|7.28|7.28|7.28,1
 7,Standard - Monitoring and Detection Scenarios,"<i>- Logs must be monitored manually or automatically to detect security-relevant activity.
 - Monitoring must include predefined scenarios, such as:
   - Failed or suspicious authentication attempts
@@ -958,7 +958,7 @@
   - Stored centrally
   - Append-only or write-once
   - Protected using integrity controls (e.g. hashing)
-- Access to logs must follow least privilege principles.</i>",9.9,Does this requirement reflect your company current practice: Access to logs must be limited to:,,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
+- Access to logs must follow least privilege principles.</i>",9.9,Does this requirement reflect your company current practice: Access to logs must be limited to the Information Security function and relevant System Owners?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.10 9.11|9.12|9.12|9.12,1
 9,Standard - Log Integrity and Access Control,"<i>- Logs must be protected against unauthorized modification, deletion, or overwriting.
 - Users, including privileged users, must not be able to delete or alter logs of their own activities.
 - Access to logs must be limited to:
@@ -1002,7 +1002,7 @@
   - Stored centrally
   - Append-only or write-once
   - Protected using integrity controls (e.g. hashing)
-- Access to logs must follow least privilege principles.</i>",9.13,Does this requirement reflect your company current practice: The Information Security function,,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
+- Access to logs must follow least privilege principles.</i>",9.13,Does this requirement reflect your company current practice: Access to logs must be limited to the Information Security function?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.14 9.15|9.16|9.16|9.16,1
 9,Standard - Log Integrity and Access Control,"<i>- Logs must be protected against unauthorized modification, deletion, or overwriting.
 - Users, including privileged users, must not be able to delete or alter logs of their own activities.
 - Access to logs must be limited to:
@@ -1046,7 +1046,7 @@
   - Stored centrally
   - Append-only or write-once
   - Protected using integrity controls (e.g. hashing)
-- Access to logs must follow least privilege principles.</i>",9.17,Does this requirement reflect your company current practice: Relevant System Owners,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
+- Access to logs must follow least privilege principles.</i>",9.17,Does this requirement reflect your company current practice: Access to logs must be limited to relevant System Owners?,,2,Yes|No|Somewhat|Not applicable,,0,,,9.18 9.19|9.20|9.20|9.20,1
 9,Standard - Log Integrity and Access Control,"<i>- Logs must be protected against unauthorized modification, deletion, or overwriting.
 - Users, including privileged users, must not be able to delete or alter logs of their own activities.
 - Access to logs must be limited to:
@@ -1134,7 +1134,7 @@
   - Stored centrally
   - Append-only or write-once
   - Protected using integrity controls (e.g. hashing)
-- Access to logs must follow least privilege principles.</i>",9.25,"Does this requirement reflect your company current practice: Where technically feasible, logs must be:",,2,Yes|No|Somewhat|Not applicable,,0,,,9.26 9.27|9.28|9.28|9.28,1
+- Access to logs must follow least privilege principles.</i>",9.25,"Does this requirement reflect your company current practice: Where technically feasible, logs must be stored centrally and be append-only or write-once?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.26 9.27|9.28|9.28|9.28,1
 9,Standard - Log Integrity and Access Control,"<i>- Logs must be protected against unauthorized modification, deletion, or overwriting.
 - Users, including privileged users, must not be able to delete or alter logs of their own activities.
 - Access to logs must be limited to:
@@ -1178,7 +1178,7 @@
   - Stored centrally
   - Append-only or write-once
   - Protected using integrity controls (e.g. hashing)
-- Access to logs must follow least privilege principles.</i>",9.29,Does this requirement reflect your company current practice: Stored centrally,,2,Yes|No|Somewhat|Not applicable,,0,,,9.30 9.31|9.32|9.32|9.32,1
+- Access to logs must follow least privilege principles.</i>",9.29,"Does this requirement reflect your company current practice: Where technically feasible, logs must be stored centrally?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.30 9.31|9.32|9.32|9.32,1
 9,Standard - Log Integrity and Access Control,"<i>- Logs must be protected against unauthorized modification, deletion, or overwriting.
 - Users, including privileged users, must not be able to delete or alter logs of their own activities.
 - Access to logs must be limited to:
@@ -1222,7 +1222,7 @@
   - Stored centrally
   - Append-only or write-once
   - Protected using integrity controls (e.g. hashing)
-- Access to logs must follow least privilege principles.</i>",9.33,Does this requirement reflect your company current practice: Append-only or write-once,,2,Yes|No|Somewhat|Not applicable,,0,,,9.34 9.35|9.36|9.36|9.36,1
+- Access to logs must follow least privilege principles.</i>",9.33,"Does this requirement reflect your company current practice: Where technically feasible, logs must be append-only or write-once?",,2,Yes|No|Somewhat|Not applicable,,0,,,9.34 9.35|9.36|9.36|9.36,1
 9,Standard - Log Integrity and Access Control,"<i>- Logs must be protected against unauthorized modification, deletion, or overwriting.
 - Users, including privileged users, must not be able to delete or alter logs of their own activities.
 - Access to logs must be limited to:
