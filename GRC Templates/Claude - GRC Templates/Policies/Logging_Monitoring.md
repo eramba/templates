@@ -108,6 +108,35 @@ All systems, applications, network devices, and infrastructure processing, stori
 **SOC 2 (TSP 2017) (CC7.1, CC7.2)**
 11. Confirm logging covers changes to configurations and security-relevant events per CC7.1 and CC7.2.
 
+**ISO 27002:2022 (8.15, 8.17)**
+12. Produce, store, protect, and analyse logs recording activities, exceptions, and events per 8.15.
+13. Synchronise system clocks to approved time sources per 8.17.
+
+**NIST 800-53 Rev5 (AU-2, AU-3, AU-8, AU-12)**
+14. Identify event types to log per AU-2.
+15. Ensure records contain event type, time, location, source, outcome, and identity per AU-3.
+16. Synchronise clocks per AU-8.
+17. Provide audit record generation capability per AU-12.
+
+**CIS Controls v8.1 (8.2, 8.4, 8.5)**
+18. Ensure logging is enabled across all enterprise assets per 8.2.
+19. Configure at least two synchronised time sources per 8.4.
+20. Configure detailed audit logging for assets containing sensitive data per 8.5.
+
+**SCF 2025 (MON-02, MON-03, MON-07)**
+21. Utilise a SIEM for centralised log collection per MON-02.
+22. Configure event logs with sufficient content per MON-03.
+23. Configure systems to use an authoritative time source per MON-07.
+
+**NIS2 Article 21 (Article 21(2) (a))**
+24. Confirm logging supports risk analysis and information system security policies per Article 21(2)(a).
+
+**ISO 27701:2025 (A.3.25)**
+25. Produce, store, protect, and analyse logs related to PII processing per A.3.25.
+
+**ISO 42001:2023 (A.6.2.8)**
+26. Record AI system event logs at minimum when the system is in use per A.6.2.8.
+
 ### Log Review
 
 **Applies to all frameworks**
@@ -128,6 +157,24 @@ All systems, applications, network devices, and infrastructure processing, stori
 11. Confirm anomalous behaviour is detected and investigated per CC7.2.
 12. Confirm evaluation process is in place for security event analysis per CC4.1.
 
+**ISO 27002:2022 (8.16)**
+13. Monitor for anomalous behaviour and evaluate potential incidents per 8.16.
+
+**NIST 800-53 Rev5 (AU-6, SI-4)**
+14. Review and analyse audit records at defined frequencies per AU-6.
+15. Monitor the system for attacks and indicators of compromise per SI-4.
+
+**CIS Controls v8.1 (8.11, 13.1)**
+16. Conduct audit log reviews to detect anomalies at least weekly per 8.11.
+17. Centralise security event alerting for correlation and analysis per 13.1.
+
+**SCF 2025 (MON-16, MON-17)**
+18. Detect and respond to anomalous behaviour per MON-16.
+19. Ensure log reviews include analysis and triage integrated with incident response per MON-17.
+
+**NIS2 Article 21 (Article 21(2) (f))**
+20. Confirm log review supports assessment of cybersecurity risk-management measure effectiveness per Article 21(2)(f).
+
 ### Security Control Failure Response
 
 **Applies to all frameworks**
@@ -144,3 +191,16 @@ All systems, applications, network devices, and infrastructure processing, stori
 
 **SOC 2 (TSP 2017) (CC7.1)**
 9. Confirm control failure triggers detection and monitoring procedures per CC7.1.
+
+**ISO 27002:2022 (8.16)**
+10. Take appropriate actions to evaluate potential incidents upon detecting anomalous behaviour per 8.16.
+
+**NIST 800-53 Rev5 (SI-4, AU-5)**
+11. Monitor for security control failures per SI-4.
+12. Alert personnel and take action upon audit logging process failures per AU-5.
+
+**CIS Controls v8.1 (13.1)**
+13. Centralise alerting to detect and respond to control failures per 13.1.
+
+**SCF 2025 (MON-05)**
+14. Alert appropriate personnel in the event of a log processing failure and remedy per MON-05.
