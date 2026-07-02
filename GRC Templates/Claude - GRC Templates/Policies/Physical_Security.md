@@ -35,7 +35,6 @@ All physical locations where organizational information systems or sensitive inf
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **SCF 2025 (PES-01, PES-02, PES-03, PES-04, PES-05)**
-- Implement SCF 2025 controls applicable to this area; refer to controls PES-01, PES-02, PES-03, PES-04, PES-05 for specific requirements.
 
 ### Equipment and Asset Protection
 
@@ -55,7 +54,6 @@ All physical locations where organizational information systems or sensitive inf
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **SCF 2025 (PES-06, PES-07, PES-08, PES-09, PES-10)**
-- Implement SCF 2025 controls applicable to this area; refer to controls PES-06, PES-07, PES-08, PES-09, PES-10 for specific requirements.
 
 ### Physical Security of Devices
 
@@ -73,7 +71,6 @@ All physical locations where organizational information systems or sensitive inf
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **SCF 2025 (PES-11, PES-12, PES-13)**
-- Implement SCF 2025 controls applicable to this area; refer to controls PES-11, PES-12, PES-13 for specific requirements.
 
 ## Standards
 
@@ -88,15 +85,14 @@ All physical locations where organizational information systems or sensitive inf
 2. Issue a temporary access badge and assign an escort.
 3. Escort the visitor throughout their time in restricted areas.
 4. Collect badge and log departure time.
-
-**PCI DSS v4.0.1 (9.2.3, 9.2.4)**
 5. Retain visitor logs for at least three months.
 
-**NIST 800-53 Rev5 (PE-3, PE-8)**
-6. Document compliance with applicable NIST 800-53 Rev5 controls (PE-3, PE-8) in the system security plan.
+**PCI DSS v4.0.1 (9.3.2, 9.3.3, 9.3.4)**
+6. Confirm visitor logs are maintained with name, organisation, date/time, and authorising personnel per 9.3.4.
+7. Confirm visitor badges expire and are surrendered before visitors leave per 9.3.3.
 
-**SCF 2025 (PES-03, PES-04, PES-05)**
-7. Document compliance with applicable SCF 2025 controls (PES-03, PES-04, PES-05) per organisational policy.
+**SOC 2 (TSP 2017) (CC6.4)**
+8. Confirm physical access to facilities is restricted and managed per CC6.4.
 
 ### Physical Access Review
 
@@ -105,15 +101,14 @@ All physical locations where organizational information systems or sensitive inf
 2. Remove access for personnel no longer requiring it.
 3. Verify no terminated employee access remains active.
 4. Document and retain review results.
-
-**PCI DSS v4.0.1 (9.2.1, 9.2.2)**
 5. Confirm review frequency is at least quarterly for CDE areas.
 
-**NIST 800-53 Rev5 (PE-2, PE-3)**
-6. Document compliance with applicable NIST 800-53 Rev5 controls (PE-2, PE-3) in the system security plan.
+**PCI DSS v4.0.1 (9.2.1, 9.3.1)**
+6. Confirm physical access to CDE is reviewed at least every three months per 9.3.1.
+7. Confirm all physical access mechanisms are returned or disabled upon termination per 9.3.1.1.
 
-**SCF 2025 (PES-01, PES-02, PES-03)**
-7. Document compliance with applicable SCF 2025 controls (PES-01, PES-02, PES-03) per organisational policy.
+**SOC 2 (TSP 2017) (CC6.4, CC6.5)**
+8. Confirm physical access controls are reviewed and updated per CC6.4 and CC6.5.
 
 ### Media Disposal
 
@@ -121,28 +116,19 @@ All physical locations where organizational information systems or sensitive inf
 1. Identify media containing sensitive data for disposal.
 2. Apply approved destruction method.
 3. Obtain and retain a certificate of destruction where applicable.
-
-**PCI DSS v4.0.1 (9.4.5, 9.4.6, 9.4.7)**
 4. Confirm destruction method renders cardholder data unrecoverable.
 5. Log disposal in the media destruction register.
+6. Select destruction method based on the classification level of data the media contained.
 
-**ISO 27002:2022**
-4. Select destruction method based on the classification level of data the media contained.
+**PCI DSS v4.0.1 (9.4.6, 9.4.7)**
+7. Confirm hard-copy materials are cross-cut shredded, incinerated, or pulped per 9.4.6.
+8. Confirm electronic media is destroyed or rendered unrecoverable per 9.4.7.
+9. Log disposal in media destruction register.
 
-**NIST 800-53 Rev5 (MP-6, MP-7)**
-7. Document compliance with applicable NIST 800-53 Rev5 controls (MP-6, MP-7) in the system security plan.
+**SOC 2 (TSP 2017) (CC6.5)**
+10. Confirm ability to read or recover data is eliminated before disposal per CC6.5.
 
-**SCF 2025 (PES-14, PES-15)**
-8. Document compliance with applicable SCF 2025 controls (PES-14, PES-15) per organisational policy.
 ### Clear Desk and Clear Screen Controls
-
-**Applies to all frameworks**
-- Sensitive documents and removable media must not be left unattended at workstations or in shared areas.
-- Screen lock must activate automatically after a defined inactivity period.
-- Clear desk and screen rules must be communicated to all personnel.
-
-**ISO 27002:2022 (7.7)**
-- Comply with ISO 27002:2022 requirements applicable to this area (7.7).
 
 ### Clear Desk and Screen Spot Check Procedure
 
