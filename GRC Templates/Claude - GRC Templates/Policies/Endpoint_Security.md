@@ -87,6 +87,13 @@ All endpoint devices owned or managed by the organisation including laptops, des
 5. Verify remediation and document results.
 6. Update the baseline if changes are approved; retain evidence of review.
 
+**PCI DSS v4.0.1 (6.3.2, 6.3.3)**
+7. Confirm hardened configuration baseline covers CDE systems per 6.3.2.
+8. Confirm baseline is reviewed and updated annually per 6.3.2.
+
+**SOC 2 (TSP 2017) (CC7.1)**
+9. Confirm detection and monitoring procedures identify configuration non-compliance per CC7.1.
+
 ### Malware Protection Review
 
 **Applies to all frameworks**
@@ -95,6 +102,15 @@ All endpoint devices owned or managed by the organisation including laptops, des
 3. Investigate and remediate within defined SLA.
 4. Review malware detection events for the period; escalate significant incidents.
 5. Document results and retain as audit evidence.
+
+**PCI DSS v4.0.1 (5.2.1, 5.2.2, 5.3.1, 5.3.2, 5.3.3, 5.3.4, 5.3.5)**
+6. Confirm anti-malware is deployed on all applicable CDE system components per 5.2.1.
+7. Confirm signatures are updated automatically per 5.3.1.
+8. Confirm anti-malware cannot be disabled by users without documented management approval per 5.3.5.
+9. Confirm anti-malware logs are enabled and retained per 5.3.4.
+
+**SOC 2 (TSP 2017) (CC6.8)**
+10. Confirm controls prevent introduction of unauthorized or malicious software per CC6.8.
 
 ### Web and Email Filtering Review
 
@@ -105,6 +121,14 @@ All endpoint devices owned or managed by the organisation including laptops, des
 4. Review filtering event logs; confirm blocked events are being logged and significant incidents investigated.
 5. Document configuration status and any gaps identified.
 
+**PCI DSS v4.0.1 (1.2.5, 5.4.1)**
+6. Confirm anti-phishing mechanisms are in place and active per 5.4.1.
+7. Confirm only approved services and protocols are permitted through network controls per 1.2.5.
+
+**SOC 2 (TSP 2017) (CC6.6, CC6.8)**
+8. Confirm logical access security measures protect against external threats per CC6.6.
+9. Confirm controls prevent introduction of malicious software per CC6.8.
+
 ### Software Installation Control
 
 **Applies to all frameworks**
@@ -113,3 +137,9 @@ All endpoint devices owned or managed by the organisation including laptops, des
 3. Confirm all authorised installations were approved and logged.
 4. Review the authorised software list for currency; remove end-of-life titles.
 5. Document compliance rate and any unauthorised software found.
+
+**PCI DSS v4.0.1 (6.3.2)**
+6. Confirm only authorised software is installed on CDE systems per 6.3.2.
+
+**SOC 2 (TSP 2017) (CC6.8)**
+7. Confirm installation and modification of software is restricted to authorised individuals per CC6.8.
