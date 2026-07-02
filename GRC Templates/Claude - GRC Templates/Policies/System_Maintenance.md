@@ -27,13 +27,10 @@ All information systems, system components, and supporting infrastructure owned 
 - Spare parts and maintenance support for critical system components must be obtained within organisation-defined timeframes following failure.
 
 **CIS Controls v8.1 (4.1, 4.2, 4.3)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 4.1, 4.2, 4.3 for specific safeguard requirements.
 
 **SCF 2025 (MNT-01, MNT-02, MNT-03)**
-- Implement SCF 2025 controls applicable to this area; refer to controls MNT-01, MNT-02, MNT-03 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (e))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (e)); measures must be proportionate to the organisation's risk exposure and size.
 
 ### Maintenance Tools
 
@@ -43,10 +40,8 @@ All information systems, system components, and supporting infrastructure owned 
 - Unauthorised tools must not be used for system maintenance.
 
 **CIS Controls v8.1 (4.4, 4.5, 4.6)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 4.4, 4.5, 4.6 for specific safeguard requirements.
 
 **SCF 2025 (MNT-04, MNT-05)**
-- Implement SCF 2025 controls applicable to this area; refer to controls MNT-04, MNT-05 for specific requirements.
 
 ### Remote Maintenance
 
@@ -60,13 +55,10 @@ All information systems, system components, and supporting infrastructure owned 
 - Remote maintenance tools must be consistent with organisational policy and documented in the system security plan.
 
 **CIS Controls v8.1 (4.2)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 4.2 for specific safeguard requirements.
 
 **SCF 2025 (MNT-06, MNT-07)**
-- Implement SCF 2025 controls applicable to this area; refer to controls MNT-06, MNT-07 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (e))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (e)); measures must be proportionate to the organisation's risk exposure and size.
 
 ### Maintenance Personnel
 
@@ -76,7 +68,6 @@ All information systems, system components, and supporting infrastructure owned 
 - Maintenance personnel without required access authorisations must be supervised by authorised organisational personnel.
 
 **SCF 2025 (MNT-08, MNT-09)**
-- Implement SCF 2025 controls applicable to this area; refer to controls MNT-08, MNT-09 for specific requirements.
 
 ## Standards
 
@@ -92,18 +83,7 @@ All information systems, system components, and supporting infrastructure owned 
 3. Execute maintenance during an approved window.
 4. Verify system integrity and functionality post-maintenance.
 5. Document the maintenance activity including date, personnel, components affected, and outcome.
-
-**NIST 800-53 Rev5 (MA-2, MA-6)**
 6. Confirm spare parts availability meets defined timely maintenance requirements for critical components.
-
-**CIS Controls v8.1 (4.1, 4.2, 4.3)**
-7. Document compliance with applicable CIS Controls v8.1 controls (4.1, 4.2, 4.3) per organisational policy.
-
-**SCF 2025 (MNT-01, MNT-02, MNT-03)**
-8. Document compliance with applicable SCF 2025 controls (MNT-01, MNT-02, MNT-03) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (e))**
-9. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (e)) as applicable to the organisation's classification under NIS2.
 
 ### Remote Maintenance Session
 
@@ -114,15 +94,6 @@ All information systems, system components, and supporting infrastructure owned 
 4. Terminate session and close network connection upon completion.
 5. Document session details: date, duration, personnel, actions taken.
 
-**CIS Controls v8.1 (4.2)**
-6. Document compliance with applicable CIS Controls v8.1 controls (4.2) per organisational policy.
-
-**SCF 2025 (MNT-06, MNT-07)**
-7. Document compliance with applicable SCF 2025 controls (MNT-06, MNT-07) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (e))**
-8. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (e)) as applicable to the organisation's classification under NIS2.
-
 ### Component Removal for Off-site Maintenance
 
 **Applies to all frameworks**
@@ -131,9 +102,3 @@ All information systems, system components, and supporting infrastructure owned 
 3. Log component removal including serial number, destination, and responsible party.
 4. Upon return, inspect component for tampering before reinstallation.
 5. Verify system integrity after reinstallation and document.
-
-**CIS Controls v8.1 (4.1, 4.3)**
-6. Document compliance with applicable CIS Controls v8.1 controls (4.1, 4.3) per organisational policy.
-
-**SCF 2025 (MNT-03, MNT-04)**
-7. Document compliance with applicable SCF 2025 controls (MNT-03, MNT-04) per organisational policy.
