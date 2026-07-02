@@ -134,3 +134,21 @@ All physical locations where organizational information systems or sensitive inf
 
 **SCF 2025 (PES-14, PES-15)**
 8. Document compliance with applicable SCF 2025 controls (PES-14, PES-15) per organisational policy.
+### Clear Desk and Clear Screen Controls
+
+**Applies to all frameworks**
+- Sensitive documents and removable media must not be left unattended at workstations or in shared areas.
+- Screen lock must activate automatically after a defined inactivity period.
+- Clear desk and screen rules must be communicated to all personnel.
+
+**ISO 27002:2022 (7.7)**
+- Comply with ISO 27002:2022 requirements applicable to this area (7.7).
+
+### Clear Desk and Screen Spot Check Procedure
+
+**Applies to all frameworks**
+1. Conduct unannounced walkthrough of work areas, checking for unattended sensitive documents, unlocked screens, and exposed credentials.
+2. Record findings by area and workstation.
+3. Report findings to line managers of affected areas.
+4. Confirm corrective actions are communicated to affected personnel.
+5. Document walkthrough date, areas covered, and findings.
