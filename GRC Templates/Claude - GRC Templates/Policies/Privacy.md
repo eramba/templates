@@ -27,16 +27,12 @@ All systems, processes, and personnel involved in the collection, storage, proce
 - Processing of PII must be monitored for changes and corrective actions implemented where processing deviates from authorised purposes.
 
 **CIS Controls v8.1 (3.1, 3.2)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 3.1, 3.2 for specific safeguard requirements.
 
 **SCF 2025 (PRI-01, PRI-02, PRI-03)**
-- Implement SCF 2025 controls applicable to this area; refer to controls PRI-01, PRI-02, PRI-03 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (a))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (a)); measures must be proportionate to the organisation's risk exposure and size.
 
 **ISO 27701:2025 (A.3.3, A.3.4, A.3.5, A.2.2.2, A.2.2.3)**
-- Comply with ISO 27701:2025 requirements applicable to this area (A.3.3, A.3.4, A.3.5, A.2.2.2, A.2.2.3).
 
 ### Consent
 
@@ -47,10 +43,8 @@ All systems, processes, and personnel involved in the collection, storage, proce
 - Records of consent must be maintained.
 
 **SCF 2025 (PRI-04, PRI-05)**
-- Implement SCF 2025 controls applicable to this area; refer to controls PRI-04, PRI-05 for specific requirements.
 
 **ISO 27701:2025 (A.3.6, A.3.7, A.3.8, A.2.2.4, A.2.2.5)**
-- Comply with ISO 27701:2025 requirements applicable to this area (A.3.6, A.3.7, A.3.8, A.2.2.4, A.2.2.5).
 
 ### Privacy Notice
 
@@ -61,10 +55,8 @@ All systems, processes, and personnel involved in the collection, storage, proce
 - Additional safeguards must be applied to specific categories of sensitive PII (e.g. health data, biometrics, financial data).
 
 **SCF 2025 (PRI-06, PRI-07, PRI-08)**
-- Implement SCF 2025 controls applicable to this area; refer to controls PRI-06, PRI-07, PRI-08 for specific requirements.
 
 **ISO 27701:2025 (A.3.9, A.3.10, A.2.2.6, A.2.2.7)**
-- Comply with ISO 27701:2025 requirements applicable to this area (A.3.9, A.3.10, A.2.2.6, A.2.2.7).
 
 ### Data Minimisation and Retention
 
@@ -75,13 +67,10 @@ All systems, processes, and personnel involved in the collection, storage, proce
 - PII must be securely disposed of at the end of its retention period.
 
 **CIS Controls v8.1 (3.3)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 3.3 for specific safeguard requirements.
 
 **SCF 2025 (PRI-09, PRI-10, PRI-11)**
-- Implement SCF 2025 controls applicable to this area; refer to controls PRI-09, PRI-10, PRI-11 for specific requirements.
 
 **ISO 27701:2025 (A.3.11, A.3.12, A.3.13, A.3.14, A.2.2.7)**
-- Comply with ISO 27701:2025 requirements applicable to this area (A.3.11, A.3.12, A.3.13, A.3.14, A.2.2.7).
 
 ## Standards
 
@@ -98,17 +87,10 @@ All systems, processes, and personnel involved in the collection, storage, proce
 4. Assess whether the processing is proportionate and limited to what is necessary.
 5. Record the assessment and obtain sign-off from the Privacy Officer.
 
-**CIS Controls v8.1 (3.1, 3.2)**
-6. Document compliance with applicable CIS Controls v8.1 controls (3.1, 3.2) per organisational policy.
-
-**SCF 2025 (PRI-01, PRI-02, PRI-03)**
-7. Document compliance with applicable SCF 2025 controls (PRI-01, PRI-02, PRI-03) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (a))**
-8. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (a)) as applicable to the organisation's classification under NIS2.
-
-**ISO 27701:2025 (A.3.3, A.3.4, A.3.5, A.2.2.2)**
-9. Ensure compliance with applicable ISO 27701:2025 requirements (A.3.3, A.3.4, A.3.5, A.2.2.2).
+**SOC 2 (TSP 2017) (P3.1, P4.1, P4.2)**
+6. Confirm personal information is collected consistent with stated objectives per P3.1.
+7. Confirm use is limited to identified purposes per P4.1.
+8. Confirm retention is consistent with objectives per P4.2.
 
 ### Privacy Notice Publication and Maintenance
 
@@ -119,14 +101,9 @@ All systems, processes, and personnel involved in the collection, storage, proce
 4. Review the notice at least annually and upon any change to processing activities.
 5. Document review date and approver.
 
-**CIS Controls v8.1 (3.1)**
-6. Document compliance with applicable CIS Controls v8.1 controls (3.1) per organisational policy.
-
-**SCF 2025 (PRI-06, PRI-07)**
-7. Document compliance with applicable SCF 2025 controls (PRI-06, PRI-07) per organisational policy.
-
-**ISO 27701:2025 (A.3.9, A.3.10, A.2.2.6)**
-8. Ensure compliance with applicable ISO 27701:2025 requirements (A.3.9, A.3.10, A.2.2.6).
+**SOC 2 (TSP 2017) (P1.1, P2.1)**
+6. Confirm notice communicates purpose, choices, types of data, and rights per P1.1.
+7. Confirm data subjects are informed of available choices per P2.1.
 
 ### Individual Rights Request Handling
 
@@ -138,14 +115,11 @@ All systems, processes, and personnel involved in the collection, storage, proce
 5. Document the request, actions taken, and outcome.
 6. Notify the individual of the outcome.
 
-**CIS Controls v8.1 (3.2, 3.3)**
-7. Document compliance with applicable CIS Controls v8.1 controls (3.2, 3.3) per organisational policy.
+**SOC 2 (TSP 2017) (P5.1, P5.2, P8.1)**
+7. Confirm data subjects can access their personal information per P5.1.
+8. Confirm corrections and amendments are processed per P5.2.
+9. Confirm a process exists for receiving and resolving inquiries and complaints per P8.1.
 
-**SCF 2025 (PRI-08, PRI-09, PRI-10)**
-8. Document compliance with applicable SCF 2025 controls (PRI-08, PRI-09, PRI-10) per organisational policy.
-
-**ISO 27701:2025 (A.3.21, A.3.22, A.3.23, A.3.24, A.3.25)**
-9. Ensure compliance with applicable ISO 27701:2025 requirements (A.3.21, A.3.22, A.3.23, A.3.24, A.3.25).
 ### Data Subject Rights Request Fulfilment Review Procedure
 
 **Applies to all frameworks**
@@ -157,7 +131,7 @@ All systems, processes, and personnel involved in the collection, storage, proce
 
 ### PII Cross-Border Transfer Review Procedure
 
-**ISO 27701:2025 (A.1.5.2, A.1.5.3, A.1.5.4)**
+**Applies to all frameworks**
 1. Review the data transfer register for completeness.
 2. Confirm legal mechanism for each transfer is current and valid.
 3. Confirm data subjects are informed of transfers as required.
