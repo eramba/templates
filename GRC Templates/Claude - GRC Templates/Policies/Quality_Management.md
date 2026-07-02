@@ -69,6 +69,10 @@ All processes, products, services, and functions that affect the quality of outp
 5. Communicate requirements to relevant internal functions.
 6. Document the review outcome and retain records.
 
+**ISO 9001:2015 (8.2.1, 8.2.2, 8.2.3.1)**
+7. Confirm customer and statutory requirements are determined, understood, and met per 8.2.1 and 8.2.2.
+8. Confirm ability to meet requirements is reviewed before committing to supply per 8.2.3.1.
+
 ### Nonconformity Management
 
 **Applies to all frameworks**
@@ -78,6 +82,11 @@ All processes, products, services, and functions that affect the quality of outp
 4. Conduct root cause analysis and define corrective actions.
 5. Implement corrective actions and verify effectiveness.
 6. Document and retain records of the nonconformity and actions taken.
+
+**ISO 9001:2015 (8.7.1, 8.7.2, 10.2.1, 10.2.2)**
+7. Control nonconforming outputs by identifying and taking action per 8.7.1.
+8. Retain documented information of nonconforming output nature and actions taken per 8.7.2.
+9. Implement corrective actions proportionate to the effects of nonconformities per 10.2.1 and 10.2.2.
 
 ### Customer Satisfaction Monitoring Procedure
 
