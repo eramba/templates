@@ -121,6 +121,32 @@ All information assets, processes, systems, and third-party relationships within
 **SOC 2 (TSP 2017) (CC3.1, CC3.2, CC3.3)**
 14. Include fraud risk and third-party risks in the assessment scope per CC3.3.
 
+**NIST 800-53 Rev5 (RA-3, RA-2)**
+15. Categorise the system and document the security categorisation per RA-2.
+16. Identify threats, vulnerabilities, likelihood, and magnitude of harm per RA-3.
+
+**SCF 2025 (RSK-03, RSK-04, RSK-05)**
+17. Assign a risk ranking to identified risks per RSK-05.
+18. Document risks per defined identification and assessment processes per RSK-03 and RSK-04.
+
+**NIS2 Article 21 (Article 21(2) (a))**
+19. Confirm risk analysis includes information system security policies proportionate to entity classification per Article 21(2)(a).
+
+**ISO 27701:2025 (6.1.2, 8.2)**
+20. Conduct privacy risk assessment covering risks to PII principals per 6.1.2 and 8.2.
+
+**ISO 45001:2018 (6.1.2.1, 6.1.2.2)**
+21. Identify hazards and assess OH&S risks and opportunities per 6.1.2.1, 6.1.2.2, and 6.1.2.3.
+
+**ISO 42001:2023 (6.1.2, 8.2)**
+22. Conduct AI risk assessment per 6.1.2 and 8.2.
+
+**ISO 37001:2025 (37001:2025 - 4.5.1, 37001:2025 - 4.5.2)**
+23. Identify and document bribery risks at planned intervals per 4.5.1 and 4.5.2.
+
+**ISO 9001:2015 (6.1.1, 6.1.2)**
+24. Determine risks and opportunities relevant to the QMS per 6.1.1 and 6.1.2.
+
 ### Risk Treatment
 
 **Applies to all frameworks**
@@ -139,6 +165,30 @@ All information assets, processes, systems, and third-party relationships within
 **SOC 2 (TSP 2017) (CC3.4, CC9.1)**
 10. Confirm treatment decisions are consistent with service commitments per CC3.4 and CC9.1.
 
+**NIST 800-53 Rev5 (RA-7)**
+11. Respond to findings with actions consistent with organisational risk tolerance per RA-7.
+
+**SCF 2025 (RSK-06)**
+12. Implement risk remediation to bring risks to an acceptable level per RSK-06.
+
+**NIS2 Article 21 (Article 21(2) (a))**
+13. Confirm treatment measures are proportionate and all-hazards based per Article 21(2)(a).
+
+**ISO 27701:2025 (6.1.3, 8.3)**
+14. Implement the privacy risk treatment plan per 6.1.3 and 8.3.
+
+**ISO 45001:2018 (6.1.4)**
+15. Plan actions to address OH&S risks and opportunities per 6.1.4.
+
+**ISO 42001:2023 (6.1.3, 8.3)**
+16. Implement the AI risk treatment plan per 6.1.3 and 8.3.
+
+**ISO 37001:2025 (37001:2025 - 6.1)**
+17. Define and implement actions to manage bribery risks per 6.1.
+
+**ISO 9001:2015 (6.1.2)**
+18. Integrate risk treatment actions into QMS processes per 6.1.2.
+
 ### Risk Register Review
 
 **Applies to all frameworks**
@@ -155,10 +205,44 @@ All information assets, processes, systems, and third-party relationships within
 
 **SOC 2 (TSP 2017) (CC9.1)**
 
+**NIST 800-53 Rev5 (CA-7, PM-6)**
+9. Monitor risk continuously and update per CA-7 and PM-6.
+
+**SCF 2025 (RSK-07, RSK-11)**
+10. Routinely update risk assessments upon new vulnerabilities or changes per RSK-07 and RSK-11.
+
+**NIS2 Article 21 (Article 21(2) (f))**
+11. Confirm the effectiveness of risk management measures is assessed per Article 21(2)(f).
+
+**ISO 27701:2025 (9.1)**
+12. Monitor and evaluate privacy management system performance per 9.1.
+
+**ISO 45001:2018 (9.1.1)**
+13. Monitor and measure OH&S performance per 9.1.1.
+
+**ISO 42001:2023 (9.1)**
+14. Monitor and evaluate AI management system performance per 9.1.
+
+**ISO 37001:2025 (37001:2025 - 9.1)**
+15. Monitor, measure, analyse, and evaluate the ABMS per 9.1.
+
+**ISO 9001:2015 (9.1.1, 9.1.3)**
+16. Analyse and evaluate QMS data and performance per 9.1.1 and 9.1.3.
+
 ### Threat Intelligence Review
 
 **PCI DSS v4.0.1 (12.3.1)**
 1. Document intelligence review as part of the targeted risk analysis per 12.3.1.
+
+**ISO 27002:2022 (5.7)**
+2. Collect and analyse threat intelligence to produce actionable output per 5.7.
+
+**NIST 800-53 Rev5 (SI-5, PM-16)**
+3. Receive security alerts and advisories on an ongoing basis per SI-5.
+4. Implement a threat awareness programme for cross-organisation sharing per PM-16.
+
+**SCF 2025 (THR-01, THR-03)**
+5. Maintain situational awareness via threat intelligence feeds per THR-01 and THR-03.
 
 ### Threat Intelligence Review Procedure
 
@@ -173,6 +257,23 @@ All information assets, processes, systems, and third-party relationships within
 
 **ISO 27001:2022 (9.1)**
 1. Retain documented information of compliance review results per 9.1.
+
+**ISO 27002:2022 (5.31)**
+2. Identify, document, and keep up to date applicable legal and regulatory requirements per 5.31.
+
+**SCF 2025 (CPL-01, CPL-02)**
+3. Facilitate identification and implementation of relevant requirements per CPL-01.
+4. Provide controls oversight function reporting to leadership per CPL-02.
+
+**ISO 27701:2025 (A.3.13)**
+5. Document legal, statutory, regulatory, and contractual requirements related to PII processing per A.3.13.
+
+**ISO 45001:2018 (6.1.3, 9.1.2)**
+6. Determine and maintain access to current OH&S legal requirements per 6.1.3.
+7. Evaluate compliance with legal requirements at defined intervals per 9.1.2.
+
+**ISO 37001:2025 (37001:2025 - 6.2)**
+8. Establish and maintain anti-bribery objectives per 6.2.
 
 ### Legal and Regulatory Compliance Review Procedure
 
@@ -192,6 +293,30 @@ All information assets, processes, systems, and third-party relationships within
 **SOC 2 (TSP 2017) (CC4.1)**
 3. Confirm evaluation results are communicated to responsible parties per CC4.1.
 
+**ISO 27002:2022 (5.35)**
+4. Ensure the review covers people, processes, and technologies at planned intervals per 5.35.
+
+**NIST 800-53 Rev5 (CA-2)**
+5. Select appropriate assessor; develop and execute a control assessment plan per CA-2.
+
+**SCF 2025 (IAO-02, CPL-03)**
+6. Formally assess controls through Information Assurance Programme activities per IAO-02 and CPL-03.
+
+**ISO 27701:2025 (A.3.15)**
+7. Review the approach to managing information security related to PII processing independently per A.3.15.
+
+**ISO 45001:2018 (9.2.1)**
+8. Conduct independent OH&S internal audits per 9.2.1.
+
+**ISO 42001:2023 (9.2.1)**
+9. Conduct independent AI management system internal audits per 9.2.1.
+
+**ISO 37001:2025 (37001:2025 - 9.2.1, 37001:2025 - 9.2.4)**
+10. Ensure audit objectivity and impartiality through independent review per 9.2.4.
+
+**ISO 9001:2015 (9.2.1)**
+11. Conduct independent QMS internal audits per 9.2.1.
+
 ### Independent Information Security Review Procedure
 
 **Applies to all frameworks**
@@ -208,6 +333,30 @@ All information assets, processes, systems, and third-party relationships within
 
 **SOC 2 (TSP 2017) (CC4.1, CC4.2)**
 2. Confirm deficiencies are communicated and tracked per CC4.1 and CC4.2.
+
+**ISO 27002:2022 (5.36)**
+3. Regularly review compliance with the information security policy and standards per 5.36.
+
+**NIST 800-53 Rev5 (CA-7)**
+4. Implement continuous monitoring and report results per CA-7.
+
+**SCF 2025 (CPL-02, CPL-03)**
+5. Provide cybersecurity controls oversight and review processes for conformity per CPL-02 and CPL-03.
+
+**ISO 27701:2025 (A.3.16)**
+6. Review compliance with PIMS policies and standards per A.3.16.
+
+**ISO 45001:2018 (9.1.1)**
+7. Monitor, measure, analyse, and evaluate OH&S performance per 9.1.1.
+
+**ISO 42001:2023 (9.1)**
+8. Monitor and evaluate AI management system performance per 9.1.
+
+**ISO 37001:2025 (37001:2025 - 9.1)**
+9. Monitor, measure, analyse, and evaluate the ABMS per 9.1.
+
+**ISO 9001:2015 (9.1.1, 9.1.3)**
+10. Analyse and evaluate QMS performance per 9.1.1 and 9.1.3.
 
 ### Internal Information Security Compliance Review Procedure
 
@@ -228,6 +377,30 @@ All information assets, processes, systems, and third-party relationships within
 **SOC 2 (TSP 2017) (CC4.1)**
 4. Confirm audit results are evaluated and communicated to responsible parties per CC4.1.
 
+**ISO 27002:2022 (5.35)**
+5. Confirm the review covers people, processes, and technologies per 5.35.
+
+**NIST 800-53 Rev5 (CA-2)**
+6. Conduct control assessments to determine whether controls are implemented correctly per CA-2.
+
+**SCF 2025 (CPL-04, IAO-02)**
+7. Conduct assessments to determine conformity and effectiveness per CPL-04 and IAO-02.
+
+**ISO 27701:2025 (9.2.1, 9.2.2)**
+8. Conduct PIMS internal audits at planned intervals per 9.2.1 and 9.2.2.
+
+**ISO 45001:2018 (9.2.1, 9.2.2)**
+9. Conduct OH&S management system internal audits per 9.2.1 and 9.2.2.
+
+**ISO 42001:2023 (9.2.1, 9.2.2)**
+10. Conduct AI management system internal audits per 9.2.1 and 9.2.2.
+
+**ISO 37001:2025 (37001:2025 - 9.2.1, 37001:2025 - 9.2.2, 37001:2025 - 9.2.3, 37001:2025 - 9.2.4)**
+11. Conduct ABMS audits using risk-based procedures per 9.2.1, 9.2.2, 9.2.3, and 9.2.4.
+
+**ISO 9001:2015 (9.2.1, 9.2.2)**
+12. Conduct QMS internal audits at planned intervals per 9.2.1 and 9.2.2.
+
 ### Internal Audit Execution Procedure
 
 **Applies to all frameworks**
@@ -246,6 +419,29 @@ All information assets, processes, systems, and third-party relationships within
 
 **SOC 2 (TSP 2017) (CC4.2, CC5.3)**
 3. Confirm control deficiencies are identified and communicated per CC4.2 and CC5.3.
+
+**NIST 800-53 Rev5 (PM-6)**
+4. Monitor, report, and document management system performance per PM-6.
+
+**SCF 2025 (GOV-03, GOV-17)**
+5. Submit status reporting to applicable authorities as required per GOV-17.
+6. Review and update programme documentation per GOV-03.
+
+**ISO 27701:2025 (9.3.1, 9.3.2, 9.3.3)**
+7. Conduct PIMS management review covering all required inputs per 9.3.1, 9.3.2, and 9.3.3.
+
+**ISO 45001:2018 (9.3)**
+8. Conduct OH&S management review at planned intervals per 9.3.
+
+**ISO 42001:2023 (9.3.1, 9.3.2, 9.3.3)**
+9. Conduct AI management system review per 9.3.1, 9.3.2, and 9.3.3.
+
+**ISO 37001:2025 (37001:2025 - 9.3.1, 37001:2025 - 9.3.2, 37001:2025 - 9.3.3, 37001:2025 - 9.4)**
+10. Conduct ABMS review per 9.3.1, 9.3.2, and 9.3.3.
+11. Anti-bribery function assesses system adequacy continually per 9.4.
+
+**ISO 9001:2015 (9.3.1, 9.3.2, 9.3.3)**
+12. Conduct QMS management review per 9.3.1, 9.3.2, and 9.3.3.
 
 ### Management Review Execution Procedure
 
