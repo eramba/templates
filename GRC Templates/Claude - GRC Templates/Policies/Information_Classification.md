@@ -111,6 +111,29 @@ All information created, received, processed, stored, or transmitted by the orga
 **SOC 2 (TSP 2017) (C1.1)**
 8. Confirm confidential information is identified and designated per C1.1.
 
+**ISO 27002:2022 (5.12, 5.13)**
+9. Classify information according to security needs per 5.12.
+10. Apply labelling procedures in accordance with the classification scheme per 5.13.
+
+**NIST 800-53 Rev5 (MP-3)**
+11. Mark system media indicating distribution limitations and security markings per MP-3.
+
+**CIS Controls v8.1 (3.1, 3.7)**
+12. Establish and maintain a documented data management process per 3.1.
+13. Establish and maintain an overall data classification scheme per 3.7.
+
+**SCF 2025 (DCH-02, DCH-04, DCH-05)**
+14. Ensure data and assets are categorised per applicable requirements per DCH-02.
+15. Mark media in accordance with data protection requirements per DCH-04.
+16. Bind cybersecurity and data protection attributes to information per DCH-05.
+
+**NIS2 Article 21 (Article 21(2) (a))**
+17. Confirm classification supports risk analysis and information system security per Article 21(2)(a).
+
+**ISO 27701:2025 (A.3.5, A.3.6)**
+18. Classify information taking PII into account per A.3.5.
+19. Apply labelling procedures for PII per A.3.6.
+
 ### Reclassification
 
 **Applies to all frameworks**
@@ -123,6 +146,12 @@ All information created, received, processed, stored, or transmitted by the orga
 
 **SOC 2 (TSP 2017) (C1.1)**
 7. Confirm confidential information is retained no longer than necessary per C1.1.
+
+**ISO 27002:2022 (5.12)**
+8. Review and update classification as information needs change per 5.12.
+
+**SCF 2025 (DCH-11)**
+9. Reclassify data commensurate with security category or classification level per DCH-11.
 
 ### Secure Disposal
 
@@ -139,6 +168,25 @@ All information created, received, processed, stored, or transmitted by the orga
 
 **SOC 2 (TSP 2017) (C1.2)**
 8. Confirm confidential information is destroyed per disposal procedures per C1.2.
+
+**ISO 27002:2022 (8.1)**
+9. Delete information stored in systems or devices when no longer required per 8.1.
+
+**NIST 800-53 Rev5 (MP-6, SI-12)**
+10. Sanitise system media prior to disposal per MP-6.
+11. Manage and retain information in accordance with applicable requirements per SI-12.
+
+**CIS Controls v8.1 (3.5)**
+12. Securely dispose of data per the data management process commensurate with sensitivity per 3.5.
+
+**SCF 2025 (DCH-21, DCH-08, DCH-09)**
+13. Securely dispose of information per DCH-21.
+14. Securely dispose of media per DCH-08.
+15. Sanitise system media per DCH-09.
+
+**ISO 27701:2025 (A.1.4.6, A.1.4.9)**
+16. Delete PII or render it non-identifiable at end of processing per A.1.4.6.
+17. Dispose of PII per documented disposal policies per A.1.4.9.
 
 ### Intellectual Property Rights Management
 
