@@ -116,6 +116,43 @@ All employees, contractors, and third-party personnel with access to organizatio
 **SOC 2 (TSP 2017) (CC1.4)**
 13. Confirm onboarding demonstrates commitment to attract and retain competent individuals per CC1.4.
 
+**ISO 27002:2022 (6.1, 6.2, 6.6)**
+14. Carry out background verification checks prior to joining per 6.1.
+15. Ensure employment contracts state information security responsibilities per 6.2.
+16. Require NDAs to be signed prior to access per 6.6.
+
+**NIST 800-53 Rev5 (PS-3, PS-6)**
+17. Screen individuals prior to authorising access per PS-3.
+18. Require access agreements to be signed per PS-6.
+
+**CIS Controls v8.1 (14.1)**
+19. Ensure security awareness programme is communicated to new hires per 14.1.
+
+**SCF 2025 (HRS-04, HRS-05, HRS-06)**
+20. Screen personnel prior to authorising access per HRS-04.
+21. Require compliance with security terms of employment per HRS-05.
+22. Require access agreements prior to access per HRS-06.
+
+**NIS2 Article 21 (Article 21(2) (i))**
+23. Confirm onboarding supports human resources security per Article 21(2)(i).
+
+**ISO 27701:2025 (A.3.17)**
+24. Ensure personnel are aware of privacy policy and PII protection responsibilities per A.3.17.
+
+**ISO 45001:2018 (7.2, 7.3)**
+25. Confirm personnel are competent for their OH&S role per 7.2.
+26. Confirm workers are aware of OH&S policy and objectives per 7.3.
+
+**ISO 42001:2023 (7.2, 7.3)**
+27. Confirm personnel are competent for their AI-related role per 7.2 and 7.3.
+
+**ISO 37001:2025 (37001:2025 - 7.2.1, 37001:2025 - 7.2.2.1, 37001:2025 - 7.3.1)**
+28. Implement employment procedures requiring anti-bribery policy compliance per 7.2.2.1.
+29. Conduct enhanced assessments for positions with more than low bribery risk per 7.2.2.2.
+
+**ISO 9001:2015 (7.2, 7.3)**
+30. Confirm personnel competence and awareness for QMS roles per 7.2 and 7.3.
+
 ### Offboarding
 
 **Applies to all frameworks**
@@ -132,6 +169,24 @@ All employees, contractors, and third-party personnel with access to organizatio
 
 **SOC 2 (TSP 2017) (CC6.2, CC6.3)**
 9. Confirm logical and physical access protections are discontinued per CC6.2 and CC6.3.
+
+**ISO 27002:2022 (5.11, 6.5)**
+10. Ensure all assets are returned upon termination per 5.11.
+11. Enforce post-termination security responsibilities per 6.5.
+
+**NIST 800-53 Rev5 (PS-4, PS-5)**
+12. Disable system access within the defined time period upon termination per PS-4.
+13. Review and adjust access authorisations upon personnel transfer per PS-5.
+
+**CIS Controls v8.1 (6.2)**
+14. Confirm access revoking process is followed immediately upon termination per 6.2.
+
+**SCF 2025 (HRS-09, HRS-08)**
+15. Govern termination of individual employment per HRS-09.
+16. Adjust access authorisations upon transfer in a timely manner per HRS-08.
+
+**NIS2 Article 21 (Article 21(2) (i))**
+17. Confirm offboarding maintains human resources security and access control per Article 21(2)(i).
 
 ### Security Training Delivery and Tracking
 
@@ -157,10 +212,54 @@ All employees, contractors, and third-party personnel with access to organizatio
 **SOC 2 (TSP 2017) (CC1.4)**
 14. Confirm management participation is recorded to demonstrate commitment per CC1.4.
 
+**ISO 27002:2022 (6.3)**
+15. Provide appropriate security awareness, education, and training with regular updates per 6.3.
+
+**NIST 800-53 Rev5 (AT-2, AT-3)**
+16. Provide security and privacy literacy training to system users per AT-2.
+17. Provide role-based security training to personnel with assigned roles per AT-3.
+
+**CIS Controls v8.1 (14.1, 14.2, 14.6, 14.9)**
+18. Train workforce to recognise social engineering attacks per 14.2.
+19. Train workforce on recognising and reporting security incidents per 14.6.
+20. Conduct role-specific security awareness and skills training per 14.9.
+
+**SCF 2025 (SAT-02, SAT-03, SAT-04)**
+21. Provide awareness training appropriate to all employees per SAT-02.
+22. Provide role-based training before authorising access per SAT-03.
+23. Document, retain, and monitor training activities per SAT-04.
+
+**NIS2 Article 21 (Article 21(2) (g))**
+24. Confirm training covers basic cyber hygiene practices per Article 21(2)(g).
+
+**ISO 27701:2025 (A.3.17)**
+25. Provide security awareness training to personnel relevant to PII processing per A.3.17.
+
+**ISO 45001:2018 (7.2, 7.3)**
+26. Confirm workers are competent and aware per 7.2 and 7.3.
+
+**ISO 42001:2023 (7.2, 7.3)**
+27. Confirm personnel are aware of the AI policy and their contribution per 7.2 and 7.3.
+
+**ISO 37001:2025 (37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.4)**
+28. Provide adequate anti-bribery training per 7.3.1, 7.3.2, and 7.3.4.
+
+**ISO 9001:2015 (7.2, 7.3)**
+29. Confirm personnel competence and awareness per 7.2 and 7.3.
+
 ### Security Policy Violation Management
 
 **SOC 2 (TSP 2017) (CC1.5)**
 1. Confirm individuals are held accountable for internal control responsibilities per CC1.5.
+
+**ISO 27002:2022 (6.4)**
+2. Apply a formalised disciplinary process for information security policy violations per 6.4.
+
+**NIST 800-53 Rev5 (PS-8)**
+3. Employ a formal sanctions process for individuals failing to comply per PS-8.
+
+**SCF 2025 (HRS-07)**
+4. Sanction personnel failing to comply with security policies per HRS-07.
 
 ### Security Policy Violation Management Procedure
 
