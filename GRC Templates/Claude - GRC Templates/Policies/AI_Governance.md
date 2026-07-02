@@ -77,6 +77,16 @@ All AI systems developed, procured, or used by the organisation, including machi
 5. Document the assessment and retain as evidence.
 6. Schedule reassessment upon material changes to the system or its use.
 
+**SCF 2025 (AAT-09, AAT-10)**
+7. Document AI risks and potential impacts per AAT-09.
+8. Implement AI Test, Evaluation, Validation and Verification practices per AAT-10.
+
+**ISO 42001:2023 (6.1.4, 8.4, A.5.2, A.5.3, A.5.4, A.5.5)**
+9. Perform AI system impact assessments at planned intervals or when significant changes occur per 6.1.4 and 8.4.
+10. Document results of AI impact assessments per A.5.3.
+11. Assess and document potential impacts on individuals and groups per A.5.4.
+12. Assess and document potential societal impacts per A.5.5.
+
 ### AI System Monitoring
 
 **Applies to all frameworks**
@@ -86,6 +96,16 @@ All AI systems developed, procured, or used by the organisation, including machi
 4. Implement corrective actions where issues are identified.
 5. Report significant issues to the AI system owner and governance committee.
 6. Document monitoring results and retain records.
+
+**SCF 2025 (AAT-16)**
+7. Monitor functionality and behaviour of deployed AI systems per AAT-16.
+
+**ISO 42001:2023 (9.1, A.6.2.6, A.8.4, A.8.5)**
+8. Monitor and evaluate AI management system performance per 9.1.
+9. Define and document necessary elements for ongoing AI system operation including monitoring per A.6.2.6.
+10. Provide capabilities for interested parties to report adverse impacts per A.8.3.
+11. Document plan for communicating AI incidents to users per A.8.4.
+12. Document obligations to report information about the AI system per A.8.5.
 
 ### AI System Impact Assessment Review Procedure
 
