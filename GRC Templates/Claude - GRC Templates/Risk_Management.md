@@ -192,3 +192,72 @@ All information assets, processes, systems, and third-party relationships within
 
 **ISO 9001:2015 (9.1.1, 9.3.1)**
 11. Ensure compliance with applicable ISO 9001:2015 requirements (9.1.1, 9.3.1).
+### Threat Intelligence Review
+
+**Applies to all frameworks**
+- Information relating to emerging threats must be collected from approved sources and reviewed at defined intervals.
+- Material new threats must be assessed for relevance and reflected in the risk register.
+- Threat intelligence findings must be shared with relevant stakeholders.
+
+**ISO 27002:2022 (5.7)**
+- Comply with ISO 27002:2022 requirements applicable to this area (5.7).
+
+### Threat Intelligence Review Procedure
+
+**Applies to all frameworks**
+1. Identify and access approved threat intelligence sources (e.g. government CERT, ISAC, commercial feed).
+2. Review intelligence published since last review; identify threats relevant to the organisation's assets and sector.
+3. Assess whether any new threats require a risk register update or immediate action.
+4. Document findings and share with Information Security leadership.
+5. Record review completion date and sources consulted.
+### Legal and Regulatory Compliance Review
+
+**Applies to all frameworks**
+- Applicable legal, regulatory, and contractual information security requirements must be maintained in a register and reviewed at least annually.
+- Compliance activities must be documented per requirement.
+
+**ISO 27002:2022 (5.31)**
+- Comply with ISO 27002:2022 requirements applicable to this area (5.31).
+
+### Legal and Regulatory Compliance Review Procedure
+
+**Applies to all frameworks**
+1. Review and update the register of applicable legal and regulatory requirements.
+2. Identify any new or changed requirements since last review.
+3. Assess impact of changes on existing controls and policies.
+4. Confirm compliance evidence is documented per requirement.
+5. Retain review record with date and approver.
+### Independent Information Security Review
+
+**Applies to all frameworks**
+- An independent review of the information security programme must be conducted at planned intervals or upon significant changes.
+- Review findings must receive management responses and remediation plans.
+
+**ISO 27002:2022 (5.35)**
+- Comply with ISO 27002:2022 requirements applicable to this area (5.35).
+
+### Independent Information Security Review Procedure
+
+**Applies to all frameworks**
+1. Define scope and appoint an independent reviewer (internal audit, external auditor, or qualified third party).
+2. Conduct review covering key controls, policies, and management processes.
+3. Document findings with risk rating and management responses.
+4. Track remediation of findings to closure.
+5. Present results to senior management.
+### Internal Information Security Compliance Review
+
+**Applies to all frameworks**
+- Compliance with internal information security policies and standards must be reviewed at least annually.
+- Non-compliances must be tracked and remediated.
+
+**ISO 27002:2022 (5.36)**
+- Comply with ISO 27002:2022 requirements applicable to this area (5.36).
+
+### Internal Information Security Compliance Review Procedure
+
+**Applies to all frameworks**
+1. Execute compliance review checklist across major policy areas.
+2. Document non-compliances with policy reference, description, and owner.
+3. Assign remediation deadlines.
+4. Track resolution of findings from prior reviews.
+5. Report overall compliance status to management.
