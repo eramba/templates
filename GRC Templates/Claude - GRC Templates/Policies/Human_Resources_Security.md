@@ -30,19 +30,14 @@ All employees, contractors, and third-party personnel with access to organizatio
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (14.1, 14.2)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 14.1, 14.2 for specific safeguard requirements.
 
 **SCF 2025 (HRS-01, HRS-02, HRS-03)**
-- Implement SCF 2025 controls applicable to this area; refer to controls HRS-01, HRS-02, HRS-03 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (i))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (i)); measures must be proportionate to the organisation's risk exposure and size.
 
 **ISO 27701:2025 (A.3.20)**
-- Comply with ISO 27701:2025 requirements applicable to this area (A.3.20).
 
 **ISO 37001:2025 (37001:2025 - 7.2.1, 37001:2025 - 7.2.2)**
-- Comply with ISO 37001:2025 requirements applicable to this area (37001:2025 - 7.2.1, 37001:2025 - 7.2.2).
 
 ### Security Awareness and Training
 
@@ -64,16 +59,12 @@ All employees, contractors, and third-party personnel with access to organizatio
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9 for specific safeguard requirements.
 
 **SCF 2025 (HRS-06, HRS-07, HRS-08)**
-- Implement SCF 2025 controls applicable to this area; refer to controls HRS-06, HRS-07, HRS-08 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (g))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (g)); measures must be proportionate to the organisation's risk exposure and size.
 
 **ISO 37001:2025 (37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.3)**
-- Comply with ISO 37001:2025 requirements applicable to this area (37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.3).
 
 ### Termination and Role Change
 
@@ -89,16 +80,12 @@ All employees, contractors, and third-party personnel with access to organizatio
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (5.3, 6.2)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 5.3, 6.2 for specific safeguard requirements.
 
 **SCF 2025 (HRS-09, HRS-10, HRS-11)**
-- Implement SCF 2025 controls applicable to this area; refer to controls HRS-09, HRS-10, HRS-11 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (i))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (i)); measures must be proportionate to the organisation's risk exposure and size.
 
 **ISO 27701:2025 (A.3.20)**
-- Comply with ISO 27701:2025 requirements applicable to this area (A.3.20).
 
 ## Standards
 
@@ -112,31 +99,22 @@ All employees, contractors, and third-party personnel with access to organizatio
 1. Issue and sign confidentiality agreement and acceptable use policy.
 2. Provision access based on assigned role.
 3. Complete mandatory security awareness training before system access.
-
-**PCI DSS v4.0.1 (12.6.1, 12.6.2)**
 4. Confirm training covers cardholder data environment threats including phishing and social engineering.
 5. Record training completion and retain as evidence.
+6. Complete background screening per policy prior to access provisioning.
+7. Confirm the onboarding process reflects the organisation's commitment to integrity and ethical values.
 
-**ISO 27002:2022 (6.1, 6.2)**
-4. Complete background screening per policy prior to access provisioning.
+**PCI DSS v4.0.1 (12.6.1, 12.6.2, 12.6.3, 12.7.1)**
+8. Confirm background screening was completed before CDE access was granted per 12.7.1.
+9. Confirm security awareness training covering phishing and social engineering was completed before access per 12.6.1.
+10. Obtain signed policy acknowledgement per 12.6.3.
+
+**ISO 27001:2022 (7.2, 7.3)**
+11. Confirm competence requirements for the role are defined and met per 7.2.
+12. Confirm personnel are aware of the security policy and their role per 7.3.
 
 **SOC 2 (TSP 2017) (CC1.4)**
-4. Confirm the onboarding process reflects the organisation's commitment to integrity and ethical values.
-
-**NIST 800-53 Rev5 (PS-2, PS-3)**
-8. Document compliance with applicable NIST 800-53 Rev5 controls (PS-2, PS-3) in the system security plan.
-
-**CIS Controls v8.1 (14.1, 14.2)**
-9. Document compliance with applicable CIS Controls v8.1 controls (14.1, 14.2) per organisational policy.
-
-**SCF 2025 (HRS-01, HRS-02, HRS-03)**
-10. Document compliance with applicable SCF 2025 controls (HRS-01, HRS-02, HRS-03) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (g), Article 21(2) (i))**
-11. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (g), Article 21(2) (i)) as applicable to the organisation's classification under NIS2.
-
-**ISO 37001:2025 (37001:2025 - 7.2.1, 37001:2025 - 7.2.2)**
-12. Ensure compliance with applicable ISO 37001:2025 requirements (37001:2025 - 7.2.1, 37001:2025 - 7.2.2).
+13. Confirm onboarding demonstrates commitment to attract and retain competent individuals per CC1.4.
 
 ### Offboarding
 
@@ -145,24 +123,15 @@ All employees, contractors, and third-party personnel with access to organizatio
 2. Revoke all logical and physical access.
 3. Collect all organisational assets.
 4. Document completion in offboarding checklist.
+5. Confirm removal of all CDE access on the last day.
+6. Communicate any surviving confidentiality obligations to the departing individual.
 
 **PCI DSS v4.0.1 (8.2.5, 8.2.6)**
-5. Confirm removal of all CDE access on the last day.
+7. Confirm all CDE access is revoked on or before the last working day per 8.2.5.
+8. Confirm account deactivation is completed rather than deletion where audit trails must be preserved per 8.2.6.
 
-**ISO 27002:2022 (6.5)**
-5. Communicate any surviving confidentiality obligations to the departing individual.
-
-**NIST 800-53 Rev5 (PS-4, PS-5)**
-7. Document compliance with applicable NIST 800-53 Rev5 controls (PS-4, PS-5) in the system security plan.
-
-**CIS Controls v8.1 (5.3, 6.2)**
-8. Document compliance with applicable CIS Controls v8.1 controls (5.3, 6.2) per organisational policy.
-
-**SCF 2025 (HRS-09, HRS-10, HRS-11)**
-9. Document compliance with applicable SCF 2025 controls (HRS-09, HRS-10, HRS-11) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (i))**
-10. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (i)) as applicable to the organisation's classification under NIS2.
+**SOC 2 (TSP 2017) (CC6.2, CC6.3)**
+9. Confirm logical and physical access protections are discontinued per CC6.2 and CC6.3.
 
 ### Security Training Delivery and Tracking
 
@@ -171,40 +140,27 @@ All employees, contractors, and third-party personnel with access to organizatio
 2. Deliver training via approved channels.
 3. Record completion per individual and retain as evidence.
 4. Follow up with personnel who have not completed training by the deadline.
-
-**PCI DSS v4.0.1 (12.6.1, 12.6.2, 12.6.3)**
 5. Confirm training content is reviewed and updated at least annually to reflect current threats.
 6. Obtain signed acknowledgement from each individual confirming understanding of security policies.
+7. Tailor training content to the individual's role where applicable.
+8. Confirm management participation is visible and recorded.
 
-**ISO 27002:2022 (6.3)**
-5. Tailor training content to the individual's role where applicable.
+**PCI DSS v4.0.1 (12.6.1, 12.6.2, 12.6.3)**
+9. Confirm training content is reviewed and updated at least once every 12 months per 12.6.2.
+10. Confirm training covers phishing, social engineering, and acceptable use of end-user technologies per 12.6.3.1 and 12.6.3.2.
+11. Obtain signed acknowledgement from each individual per 12.6.3.
 
-**SOC 2 (TSP 2017) (CC1.2, CC1.3)**
-5. Confirm management participation is visible and recorded.
+**ISO 27001:2022 (7.2, 7.3)**
+12. Confirm training addresses competence gaps identified per 7.2.
+13. Confirm personnel are aware of policy implications and their contribution per 7.3.
 
-**NIST 800-53 Rev5 (AT-2, AT-3)**
-9. Document compliance with applicable NIST 800-53 Rev5 controls (AT-2, AT-3) in the system security plan.
+**SOC 2 (TSP 2017) (CC1.4)**
+14. Confirm management participation is recorded to demonstrate commitment per CC1.4.
 
-**CIS Controls v8.1 (14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9)**
-10. Document compliance with applicable CIS Controls v8.1 controls (14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9) per organisational policy.
-
-**SCF 2025 (HRS-06, HRS-07, HRS-08)**
-11. Document compliance with applicable SCF 2025 controls (HRS-06, HRS-07, HRS-08) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (g))**
-12. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (g)) as applicable to the organisation's classification under NIS2.
-
-**ISO 37001:2025 (37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.3)**
-13. Ensure compliance with applicable ISO 37001:2025 requirements (37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.3).
 ### Security Policy Violation Management
 
-**Applies to all frameworks**
-- A formal disciplinary process must exist for information security policy violations.
-- Violations must be investigated and outcomes applied consistently.
-- The process must be communicated to all personnel.
-
-**ISO 27002:2022 (6.4)**
-- Comply with ISO 27002:2022 requirements applicable to this area (6.4).
+**SOC 2 (TSP 2017) (CC1.5)**
+1. Confirm individuals are held accountable for internal control responsibilities per CC1.5.
 
 ### Security Policy Violation Management Procedure
 
@@ -215,9 +171,10 @@ All employees, contractors, and third-party personnel with access to organizatio
 4. Apply disciplinary outcome consistent with the policy and proportionate to severity.
 5. Document outcome and retain record confidentially.
 6. Identify whether the violation indicates a control gap requiring remediation.
+
 ### Security Training Records Review Procedure
 
-**NIST 800-53 Rev5 (AT-4)**
+**Applies to all frameworks**
 1. Export training records from the training platform showing completion by individual, role, and date.
 2. Identify personnel missing required training or with records over 12 months old.
 3. Confirm role-specific training records exist for security-sensitive roles.
