@@ -103,6 +103,23 @@ All information assets including hardware, software, data, and services owned or
 **SOC 2 (TSP 2017) (CC6.1)**
 9. Confirm asset is included in the information asset inventory per CC6.1.
 
+**ISO 27002:2022 (5.9)**
+10. Develop and maintain an inventory of information and other associated assets including owners per 5.9.
+
+**NIST 800-53 Rev5 (CM-8)**
+11. Develop and document an inventory of system components that accurately reflects the system per CM-8.
+
+**CIS Controls v8.1 (1.2, 1.3)**
+12. Address unauthorised assets discovered during registration per 1.2.
+13. Utilise active discovery tools to identify connected assets per 1.3.
+
+**SCF 2025 (AST-02, AST-03)**
+14. Maintain inventories accurately reflecting current technology assets per AST-02.
+15. Assign asset ownership responsibilities per AST-03.
+
+**NIS2 Article 21 (Article 21(2) (i))**
+16. Confirm asset registration supports asset management requirements per Article 21(2)(i).
+
 ### Asset Inventory Review
 
 **Applies to all frameworks**
@@ -124,6 +141,25 @@ All information assets including hardware, software, data, and services owned or
 **SOC 2 (TSP 2017) (CC6.1)**
 11. Confirm information assets are identified, inventoried, and managed per CC6.1.
 
+**ISO 27002:2022 (5.9)**
+12. Review and maintain the asset inventory to ensure accuracy and completeness per 5.9.
+
+**NIST 800-53 Rev5 (CM-8, PM-5)**
+13. Review and update asset inventory at defined frequencies per CM-8 and PM-5.
+
+**CIS Controls v8.1 (1.2, 1.3, 2.1, 2.2, 2.3)**
+14. Ensure process exists to address unauthorised assets weekly per 1.2.
+15. Utilise active and DHCP-based discovery to keep inventory current per 1.3 and 1.4.
+16. Confirm only currently supported software is in the authorised list per 2.2.
+17. Address unauthorised software monthly per 2.3.
+
+**SCF 2025 (AST-02, AST-32)**
+18. Maintain inventories accurately reflecting current technology assets per AST-02.
+19. Automate network asset discovery per AST-32.
+
+**NIS2 Article 21 (Article 21(2) (i))**
+20. Confirm asset inventory supports asset management per Article 21(2)(i).
+
 ### Asset Disposal
 
 **Applies to all frameworks**
@@ -135,3 +171,13 @@ All information assets including hardware, software, data, and services owned or
 
 **SOC 2 (TSP 2017) (CC6.5)**
 6. Confirm logical and physical protections over the asset are discontinued appropriately per CC6.5.
+
+**ISO 27002:2022 (5.11)**
+7. Ensure personnel return all organisational assets upon termination per 5.11.
+
+**NIST 800-53 Rev5 (MP-6)**
+8. Sanitise system media prior to disposal per MP-6.
+
+**SCF 2025 (AST-09, AST-30)**
+9. Securely dispose of or repurpose system components per AST-09.
+10. Ensure technology assets are properly decommissioned per AST-30.
