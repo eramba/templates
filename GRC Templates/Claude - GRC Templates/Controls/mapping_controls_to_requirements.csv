@@ -1,0 +1,59 @@
+Control Title,ISO 27002:2022,CIS Controls v8.1
+User Account Inventory Review,"5.15, 5.16, 5.18, 8.2","5.1, 5.3, 5.5, 6.8"
+Privileged Access Rights Review,"5.18, 8.2","5.4, 6.5"
+Account Provisioning and Deprovisioning Process Review,"5.16, 5.18","6.1, 6.2"
+Multi-Factor Authentication Coverage Review,8.5,"6.3, 6.4, 6.5"
+Role-Based Access Control Review,"5.15, 8.3","6.8, 3.3"
+Segregation of Duties Verification,5.3,—
+Default Account and Password Management Review,5.16,4.7
+Hardware Asset Inventory Review,5.9,"1.2, 1.3, 1.4"
+Software Inventory and Authorisation Review,5.9,"2.1, 2.2, 2.3"
+Data Inventory and Flow Review,5.9,"3.2, 3.8"
+Internal Vulnerability Scan,8.8,7.5
+External Vulnerability Scan,8.8,7.6
+Patch Deployment Review,8.8,"7.3, 7.4, 7.7"
+Penetration Test Execution and Finding Remediation,—,"18.2, 18.3, 18.5"
+Vulnerability Remediation Tracking,8.8,"7.2, 7.7, 16.3"
+Log Collection and Configuration Review,"8.15, 8.17","8.2, 8.3, 8.4, 8.5, 8.9"
+Log Review and Anomaly Investigation,8.16,"8.11, 13.1, 13.11"
+Log Retention Compliance Review,8.15,"8.1, 8.3"
+Service Provider Log Collection Review,—,8.12
+Incident Response Plan Review and Test,5.24,"17.4, 17.7"
+Post-Incident Review Execution,5.27,17.8
+Security Incident Reporting Channel Review,6.8,17.3
+Change Request Approval and Documentation Review,8.32,—
+Security Awareness Training Completion Review,6.3,"14.1, 14.2, 14.6"
+Pre-Employment Background Screening Review,6.1,—
+Offboarding Access Revocation Review,6.5,6.2
+Cryptographic Key and Certificate Lifecycle Review,8.24,3.11
+Firewall Ruleset Review,"8.20, 8.21","12.2, 12.6, 13.4"
+Network Segmentation Verification,8.22,"12.2, 13.4"
+Remote Access Security Review,6.7,"12.7, 6.4"
+Network Architecture and Diagram Review,—,12.4
+Physical Access Rights Review,"7.2, 7.3, 7.4",—
+Clear Desk and Clear Screen Compliance Check,7.7,—
+Media Disposal Verification,"7.10, 7.14",—
+Supplier Security Assessment Review,"5.19, 5.21, 5.22","15.3, 15.5"
+Supplier Contract Security Requirements Review,5.20,15.4
+Supplier Offboarding and Data Return Verification,5.22,15.7
+Backup Execution and Restore Test,8.13,"11.2, 11.3, 11.5"
+BCP and DR Plan Test,"5.29, 5.30","11.4, 11.5"
+Data Classification and Labelling Compliance Review,"5.12, 5.13, 5.14","3.1, 3.7"
+Data Retention and Disposal Compliance Review,5.33,"3.4, 3.5"
+Threat Intelligence Review,5.7,—
+Legal and Regulatory Compliance Review,5.31,—
+Independent Information Security Review,5.35,—
+Internal Information Security Compliance Review,5.36,—
+Security Policy Violation Management Review,6.4,—
+Endpoint Configuration Baseline Review,"8.1, 8.9","4.1, 4.3, 4.6"
+Malware Protection Review,8.7,"10.1, 10.2, 10.7, 9.7, 13.2"
+Web and Email Filtering Review,8.23,"9.2, 9.3, 9.5, 9.7"
+Software Installation Control Review,8.19,"2.5, 2.6, 2.7"
+Endpoint Encryption Compliance Review,8.1,"3.6, 3.9"
+Data Loss Prevention Review,—,3.13
+Secure Development Lifecycle Compliance Review,"8.25, 8.27","16.1, 16.9"
+Static and Dynamic Application Security Testing Review,8.29,"16.12, 16.13"
+Secure Coding Standards Compliance Review,8.28,16.9
+Application Security Requirements Review,8.26,16.2
+Third-Party Software Component Review,8.25,"16.4, 16.5"
+"Development, Test, and Production Environment Separation Review",8.31,16.8
