@@ -135,6 +135,25 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 **SOC 2 (TSP 2017) (CC6.1, CC6.2)**
 11. Confirm the provisioned credentials are registered in the identity inventory per CC6.1.
 
+**ISO 27002:2022 (5.16, 5.18)**
+12. Record the access grant in the access rights register covering the full identity lifecycle per 5.16 and 5.18.
+
+**NIST 800-53 Rev5 (AC-2, IA-4)**
+13. Define account type and apply least privilege at point of provisioning per AC-2 and IA-4.
+
+**CIS Controls v8.1 (5.1, 6.1)**
+14. Add account to the account inventory immediately upon creation per 5.1.
+15. Confirm access granting follows the documented process per 6.1.
+
+**SCF 2025 (IAC-07, IAC-15)**
+16. Confirm provisioning follows the formal user registration process per IAC-07 and IAC-15.
+
+**NIS2 Article 21 (Article 21(2) (i))**
+17. Confirm provisioning supports human resources security and access control proportionate to NIS2 classification per Article 21(2)(i).
+
+**ISO 27701:2025 (A.3.8, A.3.9)**
+18. Confirm identities for PII-processing systems are provisioned per the identity lifecycle process per A.3.8 and A.3.9.
+
 ### Exception-Based Access
 
 **Applies to all frameworks**
@@ -151,6 +170,24 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 **SOC 2 (TSP 2017) (CC6.3)**
 8. Confirm the exception is recorded in the access management system per CC6.3.
 
+**ISO 27002:2022 (5.15, 5.18)**
+9. Confirm exception access is time-bounded and subject to the access control policy per 5.15 and 5.18.
+
+**NIST 800-53 Rev5 (AC-2, AC-6)**
+10. Confirm exception is consistent with least privilege and documented per AC-2 and AC-6.
+
+**CIS Controls v8.1 (6.8)**
+11. Confirm exception is reflected in the RBAC documentation per 6.8.
+
+**SCF 2025 (IAC-20, IAC-21)**
+12. Confirm exception is authorised under the access enforcement framework per IAC-20 and IAC-21.
+
+**NIS2 Article 21 (Article 21(2) (i))**
+13. Confirm exception access controls remain proportionate per Article 21(2)(i).
+
+**ISO 27701:2025 (A.3.9)**
+14. Confirm access exception related to PII processing is approved and time-limited per A.3.9.
+
 ### Account Deprovisioning
 
 **Applies to all frameworks**
@@ -166,6 +203,24 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 
 **SOC 2 (TSP 2017) (CC6.2, CC6.3)**
 8. Confirm deprovisioning is logged in the access management system per CC6.2 and CC6.3.
+
+**ISO 27002:2022 (5.16, 5.18)**
+9. Confirm identity is deprovisioned across all systems per the identity lifecycle policy per 5.16 and 5.18.
+
+**NIST 800-53 Rev5 (AC-2, PS-4)**
+10. Disable account within the defined time period upon termination per AC-2 and PS-4.
+
+**CIS Controls v8.1 (5.3, 6.2)**
+11. Confirm dormant account is disabled within 45 days and access revoking process is followed per 5.3 and 6.2.
+
+**SCF 2025 (IAC-07, HRS-09)**
+12. Confirm deprovisioning follows the formal user de-registration process per IAC-07 and HRS-09.
+
+**NIS2 Article 21 (Article 21(2) (i))**
+13. Confirm deprovisioning supports access control requirements per Article 21(2)(i).
+
+**ISO 27701:2025 (A.3.8, A.3.9)**
+14. Confirm expired user IDs are not reissued for PII-processing systems per A.3.8.
 
 ### Access Review
 
@@ -184,3 +239,23 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 **SOC 2 (TSP 2017) (CC6.1, CC6.2, CC6.3)**
 9. Confirm access rights reviewed align with current job function per CC6.3.
 10. Document management acknowledgement of review results per CC6.1.
+
+**ISO 27002:2022 (5.15, 5.18, 8.2, 8.3)**
+11. Confirm access rights are reviewed and removed per the access control policy per 5.18.
+12. Confirm privileged access rights are restricted and reviewed per 8.2.
+
+**NIST 800-53 Rev5 (AC-2, AC-6)**
+13. Confirm review covers all account types including service accounts per AC-2 and AC-6.
+
+**CIS Controls v8.1 (5.1, 5.3, 6.8)**
+14. Confirm dormant accounts have been identified and disabled per 5.3.
+15. Confirm RBAC definitions reflect reviewed access rights per 6.8.
+
+**SCF 2025 (IAC-17, IAC-16)**
+16. Confirm periodic review of privileges is completed per IAC-17 and IAC-16.
+
+**NIS2 Article 21 (Article 21(2) (i))**
+17. Confirm access review supports human resources security and access control per Article 21(2)(i).
+
+**ISO 27701:2025 (A.3.9)**
+18. Confirm access rights to PII and associated assets are reviewed per A.3.9.
