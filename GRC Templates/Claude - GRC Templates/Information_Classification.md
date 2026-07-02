@@ -174,3 +174,21 @@ All information created, received, processed, stored, or transmitted by the orga
 
 **NIS2 Article 21 (Article 21(2) (a))**
 9. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (a)) as applicable to the organisation's classification under NIS2.
+### Intellectual Property Rights Management
+
+**Applies to all frameworks**
+- Procedures must be in place to protect the organisation's intellectual property and to comply with third-party IP obligations.
+- Use of licensed software must comply with licence terms.
+- Copying or use of copyrighted material must be authorised.
+
+**ISO 27002:2022 (5.32)**
+- Comply with ISO 27002:2022 requirements applicable to this area (5.32).
+
+### Intellectual Property Rights Compliance Review Procedure
+
+**Applies to all frameworks**
+1. Review software asset inventory against licence entitlements.
+2. Identify any unlicensed or over-deployed software.
+3. Confirm procedures are in place to prevent use of unlicensed content.
+4. Document compliance status and remediation actions.
+5. Retain review record with date and approver.
