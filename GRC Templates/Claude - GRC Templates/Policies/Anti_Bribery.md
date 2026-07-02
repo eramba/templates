@@ -70,6 +70,9 @@ All employees, officers, directors, contractors, agents, and business associates
 3. Record the item in the gifts and hospitality register including description, value, recipient, and business justification.
 4. Decline or return gifts that cannot be approved.
 
+**ISO 37001:2025 (37001:2025 - 8.7)**
+5. Apply procedures to prevent offering, provision, or acceptance of gifts where this would be bribery per 8.7.
+
 ### Business Associate Due Diligence
 
 **Applies to all frameworks**
@@ -78,6 +81,10 @@ All employees, officers, directors, contractors, agents, and business associates
 3. Include anti-bribery contractual obligations in the engagement agreement.
 4. Record due diligence findings and approvals.
 5. Review at defined intervals or upon material changes to the relationship.
+
+**ISO 37001:2025 (37001:2025 - 8.2, 37001:2025 - 8.6)**
+6. Conduct due diligence on business associates where risk assessment identifies more than low bribery risk per 8.2.
+7. Require business associates to commit to anti-bribery compliance where risk warrants per 8.6.
 
 ### Bribery Concern Investigation
 
@@ -88,6 +95,10 @@ All employees, officers, directors, contractors, agents, and business associates
 4. Conclude the investigation with documented findings.
 5. Implement corrective actions and notify relevant parties as appropriate.
 6. Report material findings to senior management and, where required, to authorities.
+
+**ISO 37001:2025 (37001:2025 - 8.9, 37001:2025 - 8.10)**
+7. Implement procedures to encourage and enable reporting of bribery without fear of reprisal per 8.9.
+8. Implement procedures to assess and investigate reported bribery or policy violations per 8.10.
 
 ### Anti-Bribery Risk Assessment Review Procedure
 
