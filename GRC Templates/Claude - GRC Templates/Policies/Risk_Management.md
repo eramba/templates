@@ -39,16 +39,12 @@ All information assets, processes, systems, and third-party relationships within
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **SCF 2025 (RSK-01, RSK-02, RSK-03, RSK-04)**
-- Implement SCF 2025 controls applicable to this area; refer to controls RSK-01, RSK-02, RSK-03, RSK-04 for specific requirements.
 
 **NIS2 Article 21 (Article 21(1), Article 21(2) (a))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(1), Article 21(2) (a)); measures must be proportionate to the organisation's risk exposure and size.
 
 **ISO 37001:2025 (37001:2025 - 6.1, 37001:2025 - 6.2)**
-- Comply with ISO 37001:2025 requirements applicable to this area (37001:2025 - 6.1, 37001:2025 - 6.2).
 
 **ISO 9001:2015 (6.1.1, 6.1.2)**
-- Comply with ISO 9001:2015 requirements applicable to this area (6.1.1, 6.1.2).
 
 ### Risk Treatment
 
@@ -67,16 +63,12 @@ All information assets, processes, systems, and third-party relationships within
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **SCF 2025 (RSK-05, RSK-06, RSK-07)**
-- Implement SCF 2025 controls applicable to this area; refer to controls RSK-05, RSK-06, RSK-07 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (a), Article 21(2) (f))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (a), Article 21(2) (f)); measures must be proportionate to the organisation's risk exposure and size.
 
 **ISO 37001:2025 (37001:2025 - 6.3)**
-- Comply with ISO 37001:2025 requirements applicable to this area (37001:2025 - 6.3).
 
 **ISO 9001:2015 (6.2.1, 6.2.2)**
-- Comply with ISO 9001:2015 requirements applicable to this area (6.2.1, 6.2.2).
 
 ### Continuous Risk Monitoring
 
@@ -94,13 +86,10 @@ All information assets, processes, systems, and third-party relationships within
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **SCF 2025 (RSK-08, RSK-09, RSK-10)**
-- Implement SCF 2025 controls applicable to this area; refer to controls RSK-08, RSK-09, RSK-10 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (f))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (f)); measures must be proportionate to the organisation's risk exposure and size.
 
 **ISO 9001:2015 (9.1.1, 9.3.1, 9.3.2, 9.3.3)**
-- Comply with ISO 9001:2015 requirements applicable to this area (9.1.1, 9.3.1, 9.3.2, 9.3.3).
 
 ## Standards
 
@@ -116,31 +105,21 @@ All information assets, processes, systems, and third-party relationships within
 3. Identify applicable threats and vulnerabilities per asset.
 4. Evaluate likelihood and impact; calculate risk level.
 5. Document findings in the risk register.
+6. Ensure CDE assets and processes are explicitly included in scope.
+7. Apply the organisation's defined risk criteria consistently to produce comparable results.
+8. Obtain management review and sign-off on assessment results.
+9. Incorporate relevant threat intelligence into the assessment.
+10. Include fraud risk and third-party risks in the assessment scope.
 
 **PCI DSS v4.0.1 (12.3.1, 12.3.2)**
-6. Ensure CDE assets and processes are explicitly included in scope.
+11. Confirm CDE assets and processes are explicitly included in scope and documented per 12.3.1.
 
-**ISO 27001:2022 (6.1.2)**
-6. Apply the organisation's defined risk criteria consistently to produce comparable results.
-7. Obtain management review and sign-off on assessment results.
+**ISO 27001:2022 (6.1.1, 6.1.2, 8.2)**
+12. Apply the organisation's defined risk criteria to produce consistent, comparable results per 6.1.2.
+13. Retain documented evidence of assessment results per 8.2.
 
-**ISO 27002:2022 (5.7, 5.8)**
-6. Incorporate relevant threat intelligence into the assessment.
-
-**SOC 2 (TSP 2017) (CC3.1, CC3.2)**
-6. Include fraud risk and third-party risks in the assessment scope.
-
-**NIST 800-53 Rev5 (RA-2, RA-3)**
-11. Document compliance with applicable NIST 800-53 Rev5 controls (RA-2, RA-3) in the system security plan.
-
-**SCF 2025 (RSK-01, RSK-02, RSK-03, RSK-04)**
-12. Document compliance with applicable SCF 2025 controls (RSK-01, RSK-02, RSK-03, RSK-04) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (a))**
-13. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (a)) as applicable to the organisation's classification under NIS2.
-
-**ISO 9001:2015 (6.1.1, 6.1.2)**
-14. Ensure compliance with applicable ISO 9001:2015 requirements (6.1.1, 6.1.2).
+**SOC 2 (TSP 2017) (CC3.1, CC3.2, CC3.3)**
+14. Include fraud risk and third-party risks in the assessment scope per CC3.3.
 
 ### Risk Treatment
 
@@ -150,21 +129,15 @@ All information assets, processes, systems, and third-party relationships within
 3. Assign ownership and target completion dates.
 4. Obtain formal acceptance of residual risk from the risk owner.
 5. Update the risk register with treatment decisions.
+6. Update the Statement of Applicability to reflect treatment decisions.
+7. Confirm treatment decisions are consistent with service commitments and system requirements.
 
 **ISO 27001:2022 (6.1.3, 8.3)**
-6. Update the Statement of Applicability to reflect treatment decisions.
+8. Update the Statement of Applicability to reflect treatment decisions per 6.1.3.
+9. Retain documented results of the risk treatment process per 8.3.
 
 **SOC 2 (TSP 2017) (CC3.4, CC9.1)**
-6. Confirm treatment decisions are consistent with service commitments and system requirements.
-
-**NIST 800-53 Rev5 (CA-5)**
-8. Document compliance with applicable NIST 800-53 Rev5 controls (CA-5) in the system security plan.
-
-**SCF 2025 (RSK-05, RSK-06, RSK-07)**
-9. Document compliance with applicable SCF 2025 controls (RSK-05, RSK-06, RSK-07) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (a), Article 21(2) (f))**
-10. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (a), Article 21(2) (f)) as applicable to the organisation's classification under NIS2.
+10. Confirm treatment decisions are consistent with service commitments per CC3.4 and CC9.1.
 
 ### Risk Register Review
 
@@ -174,33 +147,18 @@ All information assets, processes, systems, and third-party relationships within
 3. Identify new or changed risks arising from operational or environmental changes.
 4. Update risk ratings where circumstances have changed.
 5. Present review outcomes to senior management.
-
-**ISO 27001:2022 (8.2, 9.1)**
 6. Record the review as part of management review inputs per clause 9.3.
+7. Assess whether changes to the organisation's objectives or technology affect existing risk ratings.
 
-**SOC 2 (TSP 2017) (CC9.1, CC9.2)**
-6. Assess whether changes to the organisation's objectives or technology affect existing risk ratings.
+**ISO 27001:2022 (9.1, 9.3.1, 9.3.2, 9.3.3)**
+8. Present review results to top management; record as input to management review per 9.3.2.
 
-**NIST 800-53 Rev5 (CA-7)**
-8. Document compliance with applicable NIST 800-53 Rev5 controls (CA-7) in the system security plan.
+**SOC 2 (TSP 2017) (CC9.1)**
 
-**SCF 2025 (RSK-08, RSK-09)**
-9. Document compliance with applicable SCF 2025 controls (RSK-08, RSK-09) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (f))**
-10. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (f)) as applicable to the organisation's classification under NIS2.
-
-**ISO 9001:2015 (9.1.1, 9.3.1)**
-11. Ensure compliance with applicable ISO 9001:2015 requirements (9.1.1, 9.3.1).
 ### Threat Intelligence Review
 
-**Applies to all frameworks**
-- Information relating to emerging threats must be collected from approved sources and reviewed at defined intervals.
-- Material new threats must be assessed for relevance and reflected in the risk register.
-- Threat intelligence findings must be shared with relevant stakeholders.
-
-**ISO 27002:2022 (5.7)**
-- Comply with ISO 27002:2022 requirements applicable to this area (5.7).
+**PCI DSS v4.0.1 (12.3.1)**
+1. Document intelligence review as part of the targeted risk analysis per 12.3.1.
 
 ### Threat Intelligence Review Procedure
 
@@ -210,14 +168,11 @@ All information assets, processes, systems, and third-party relationships within
 3. Assess whether any new threats require a risk register update or immediate action.
 4. Document findings and share with Information Security leadership.
 5. Record review completion date and sources consulted.
+
 ### Legal and Regulatory Compliance Review
 
-**Applies to all frameworks**
-- Applicable legal, regulatory, and contractual information security requirements must be maintained in a register and reviewed at least annually.
-- Compliance activities must be documented per requirement.
-
-**ISO 27002:2022 (5.31)**
-- Comply with ISO 27002:2022 requirements applicable to this area (5.31).
+**ISO 27001:2022 (9.1)**
+1. Retain documented information of compliance review results per 9.1.
 
 ### Legal and Regulatory Compliance Review Procedure
 
@@ -227,14 +182,15 @@ All information assets, processes, systems, and third-party relationships within
 3. Assess impact of changes on existing controls and policies.
 4. Confirm compliance evidence is documented per requirement.
 5. Retain review record with date and approver.
+
 ### Independent Information Security Review
 
-**Applies to all frameworks**
-- An independent review of the information security programme must be conducted at planned intervals or upon significant changes.
-- Review findings must receive management responses and remediation plans.
+**ISO 27001:2022 (9.2, 9.2.1, 9.2.2)**
+1. Confirm reviewer is independent of the area being reviewed per 9.2.1.
+2. Retain documented audit results per 9.2.1.
 
-**ISO 27002:2022 (5.35)**
-- Comply with ISO 27002:2022 requirements applicable to this area (5.35).
+**SOC 2 (TSP 2017) (CC4.1)**
+3. Confirm evaluation results are communicated to responsible parties per CC4.1.
 
 ### Independent Information Security Review Procedure
 
@@ -244,14 +200,14 @@ All information assets, processes, systems, and third-party relationships within
 3. Document findings with risk rating and management responses.
 4. Track remediation of findings to closure.
 5. Present results to senior management.
+
 ### Internal Information Security Compliance Review
 
-**Applies to all frameworks**
-- Compliance with internal information security policies and standards must be reviewed at least annually.
-- Non-compliances must be tracked and remediated.
+**ISO 27001:2022 (9.1)**
+1. Document monitoring and measurement results per 9.1.
 
-**ISO 27002:2022 (5.36)**
-- Comply with ISO 27002:2022 requirements applicable to this area (5.36).
+**SOC 2 (TSP 2017) (CC4.1, CC4.2)**
+2. Confirm deficiencies are communicated and tracked per CC4.1 and CC4.2.
 
 ### Internal Information Security Compliance Review Procedure
 
@@ -261,15 +217,16 @@ All information assets, processes, systems, and third-party relationships within
 3. Assign remediation deadlines.
 4. Track resolution of findings from prior reviews.
 5. Report overall compliance status to management.
+
 ### Internal Audit Execution
 
-**Applies to all frameworks**
-- A programme of internal audits must be planned, executed, and documented at defined intervals.
-- Audit findings must be graded and communicated to relevant management.
-- Non-conformities must receive corrective action records.
+**ISO 27001:2022 (9.2, 9.2.1, 9.2.2)**
+1. Confirm auditors are independent of the area being audited per 9.2.2.
+2. Document the audit programme with frequency, methods, and responsibilities per 9.2.2.
+3. Retain documented information of audit results as evidence per 9.2.1.
 
-**ISO 27001:2022 (9.2, 9.2.1, 9.2.2) | ISO 27701:2025 (9.2.1, 9.2.2) | ISO 42001:2023 (9.2.1, 9.2.2) | ISO 37001:2025 (9.2.1, 9.2.2) | ISO 45001:2018 (9.2.1, 9.2.2) | ISO 9001:2015 (9.2.1, 9.2.2)**
-- Comply with applicable management system requirements for internal audit.
+**SOC 2 (TSP 2017) (CC4.1)**
+4. Confirm audit results are evaluated and communicated to responsible parties per CC4.1.
 
 ### Internal Audit Execution Procedure
 
@@ -283,12 +240,12 @@ All information assets, processes, systems, and third-party relationships within
 
 ### Management Review Execution
 
-**Applies to all frameworks**
-- Management must formally review the management system at planned intervals to evaluate performance and drive improvement.
-- Review outputs must include decisions on continual improvement and resources.
+**ISO 27001:2022 (9.3.1, 9.3.2, 9.3.3)**
+1. Ensure all required inputs are addressed per 9.3.2: status of prior actions, changes, performance, audit results, risk status, objectives.
+2. Retain documented information of review results as evidence per 9.3.3.
 
-**ISO 27001:2022 (9.3, 9.3.1, 9.3.2, 9.3.3)**
-- Comply with ISO 27001 management review requirements.
+**SOC 2 (TSP 2017) (CC4.2, CC5.3)**
+3. Confirm control deficiencies are identified and communicated per CC4.2 and CC5.3.
 
 ### Management Review Execution Procedure
 
@@ -329,7 +286,7 @@ All information assets, processes, systems, and third-party relationships within
 
 ### Cardholder Data Environment Scoping Review Procedure
 
-**PCI DSS v4.0.1 (3.1.1, 12.5.1, 12.5.2)**
+**Applies to all frameworks**
 1. Review network diagram, data flow diagram, and CDE asset inventory for currency.
 2. Run cardholder data discovery scan across all in-scope systems.
 3. Investigate any PANs found outside the defined CDE.
@@ -338,7 +295,7 @@ All information assets, processes, systems, and third-party relationships within
 
 ### PCI DSS Compliance Assessment Procedure
 
-**PCI DSS v4.0.1 (12.3.1, 12.3.2)**
+**Applies to all frameworks**
 1. Determine applicable SAQ type or arrange QSA engagement.
 2. Complete assessment against all applicable requirements.
 3. Document compensating controls where required.
@@ -348,7 +305,7 @@ All information assets, processes, systems, and third-party relationships within
 
 ### Cyber Governance Programme Review Procedure
 
-**SCF 2025 (GOV-02, GOV-03, GOV-04, GOV-05)**
+**Applies to all frameworks**
 1. Review cybersecurity programme documentation for currency and completeness.
 2. Confirm senior management approval of programme objectives and resources.
 3. Review performance metrics against defined targets.
