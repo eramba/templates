@@ -88,6 +88,7 @@ All employees, officers, directors, contractors, agents, and business associates
 4. Conclude the investigation with documented findings.
 5. Implement corrective actions and notify relevant parties as appropriate.
 6. Report material findings to senior management and, where required, to authorities.
+
 ### Anti-Bribery Risk Assessment Review Procedure
 
 **Applies to all frameworks**
