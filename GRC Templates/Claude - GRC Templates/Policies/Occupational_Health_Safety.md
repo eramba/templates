@@ -80,9 +80,10 @@ All workers including employees, contractors, and visitors at all organisational
 4. Conduct root cause analysis within defined timeframe.
 5. Implement corrective actions and verify effectiveness.
 6. Document the investigation and share learnings with relevant workers.
+
 ### OH&S Legal Compliance Evaluation Procedure
 
-**ISO 45001:2018 (6.1.3, 9.1.2)**
+**Applies to all frameworks**
 1. Review the register of applicable OH&S legal requirements for currency.
 2. Evaluate compliance status for each requirement.
 3. Document any gaps and assign corrective actions.
@@ -91,7 +92,7 @@ All workers including employees, contractors, and visitors at all organisational
 
 ### OH&S Performance Monitoring Review Procedure
 
-**ISO 45001:2018 (9.1.1, 9.1.2)**
+**Applies to all frameworks**
 1. Compile OH&S performance data for the period: incidents, near-misses, hazard actions, objective status.
 2. Analyse trends and compare against targets.
 3. Identify adverse trends requiring intervention.
