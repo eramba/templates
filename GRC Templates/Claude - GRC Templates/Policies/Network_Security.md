@@ -108,6 +108,26 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 **SOC 2 (TSP 2017) (CC6.6, CC6.7)**
 9. Confirm logical access security measures protect against external threats per CC6.6 and CC6.7.
 
+**ISO 27002:2022 (8.2, 8.21)**
+10. Secure, manage, and control network devices to protect information per 8.2.
+11. Identify, implement, and monitor security mechanisms for network services per 8.21.
+
+**NIST 800-53 Rev5 (SC-7, CM-6)**
+12. Monitor and control communications at external and key internal managed interfaces per SC-7.
+13. Establish configuration settings reflecting the most restrictive mode per CM-6.
+
+**CIS Controls v8.1 (12.2, 12.6, 13.4)**
+14. Design and maintain a secure network architecture per 12.2.
+15. Use secure network management and communication protocols per 12.6.
+16. Perform traffic filtering between network segments per 13.4.
+
+**SCF 2025 (NET-03, NET-04)**
+17. Monitor and control communications at the external network boundary per NET-03.
+18. Implement and govern ACLs for data flow enforcement per NET-04.
+
+**NIS2 Article 21 (Article 21(2) (e))**
+19. Confirm firewall rules support security in network and information systems per Article 21(2)(e).
+
 ### Network Change
 
 **Applies to all frameworks**
@@ -126,6 +146,22 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 **SOC 2 (TSP 2017) (CC6.6, CC8.1)**
 10. Confirm changes are authorised, configured, documented, and tested per CC6.6 and CC8.1.
 
+**ISO 27002:2022 (8.2)**
+11. Secure, manage, and control networks and network devices per 8.2.
+
+**NIST 800-53 Rev5 (CM-2, CM-3)**
+12. Maintain under configuration control a current baseline configuration per CM-2.
+13. Review and approve configuration-controlled changes per CM-3.
+
+**CIS Controls v8.1 (12.1, 12.3, 12.4)**
+14. Ensure network infrastructure is kept up to date per 12.1.
+15. Securely manage network infrastructure per 12.3.
+16. Maintain architecture diagrams per 12.4.
+
+**SCF 2025 (CHG-02, NET-01)**
+17. Govern technical configuration change control per CHG-02.
+18. Maintain network architecture diagrams reflecting current state per NET-01.
+
 ### Wireless Network Authorisation
 
 **Applies to all frameworks**
@@ -139,3 +175,12 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 6. Confirm wireless access point inventory is maintained with business justification per 11.2.2.
 7. Confirm scanning for unauthorised access points occurs at least every three months per 11.2.1.
 8. Confirm all wireless networks are isolated from the CDE per 1.3.3.
+
+**ISO 27002:2022 (8.2)**
+9. Secure, manage, and control network devices including wireless per 8.2.
+
+**NIST 800-53 Rev5 (AC-18)**
+10. Establish configuration requirements and authorise each type of wireless access per AC-18.
+
+**SCF 2025 (NET-15)**
+11. Control authorised wireless usage and monitor for unauthorised wireless access per NET-15.
