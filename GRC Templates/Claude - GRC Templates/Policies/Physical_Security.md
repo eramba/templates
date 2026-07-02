@@ -94,6 +94,15 @@ All physical locations where organizational information systems or sensitive inf
 **SOC 2 (TSP 2017) (CC6.4)**
 8. Confirm physical access to facilities is restricted and managed per CC6.4.
 
+**ISO 27002:2022 (7.2)**
+9. Protect secure areas with appropriate entry controls per 7.2.
+
+**NIST 800-53 Rev5 (PE-8)**
+10. Maintain visitor access records for the defined time period per PE-8.
+
+**SCF 2025 (PES-06)**
+11. Identify, authorise, and monitor visitors before allowing access per PES-06.
+
 ### Physical Access Review
 
 **Applies to all frameworks**
@@ -109,6 +118,24 @@ All physical locations where organizational information systems or sensitive inf
 
 **SOC 2 (TSP 2017) (CC6.4, CC6.5)**
 8. Confirm physical access controls are reviewed and updated per CC6.4 and CC6.5.
+
+**ISO 27002:2022 (7.2, 7.3, 7.4)**
+9. Define and use security perimeters to protect areas containing information assets per 7.1.
+10. Protect secure areas with appropriate entry controls per 7.2.
+11. Monitor premises for unauthorised physical access per 7.4.
+
+**NIST 800-53 Rev5 (PE-2, PE-3, PE-6)**
+12. Maintain authorised access list; review at defined intervals per PE-2.
+13. Enforce physical access authorisations at entry and exit points per PE-3.
+14. Monitor physical access and review logs at defined frequencies per PE-6.
+
+**SCF 2025 (PES-02, PES-03, PES-05)**
+15. Maintain current list of personnel with authorised physical access per PES-02.
+16. Enforce physical access authorisations at all physical access points per PES-03.
+17. Monitor for, detect, and respond to physical security incidents per PES-05.
+
+**ISO 45001:2018 (8.1.1, 8.1.2)**
+18. Manage physical environment controls to eliminate or reduce OH&S hazards per 8.1.1 and 8.1.2.
 
 ### Media Disposal
 
@@ -127,6 +154,22 @@ All physical locations where organizational information systems or sensitive inf
 
 **SOC 2 (TSP 2017) (CC6.5)**
 10. Confirm ability to read or recover data is eliminated before disposal per CC6.5.
+
+**ISO 27002:2022 (7.1, 7.14)**
+11. Manage storage media through its lifecycle including secure disposal per 7.1.
+12. Verify equipment is securely overwritten or destroyed prior to disposal per 7.14.
+
+**NIST 800-53 Rev5 (MP-6)**
+13. Sanitise system media using techniques commensurate with information sensitivity per MP-6.
+
+**SCF 2025 (AST-09, DCH-08, DCH-09)**
+14. Securely dispose of or repurpose system components per AST-09.
+15. Securely dispose of media using formal procedures per DCH-08.
+16. Sanitise system media per DCH-09.
+
+**ISO 27701:2025 (A.3.20, A.3.21)**
+17. Manage storage media with PII through its lifecycle per A.3.20.
+18. Verify equipment containing PII is securely overwritten prior to disposal per A.3.21.
 
 ### Clear Desk and Clear Screen Controls
 
