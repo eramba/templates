@@ -78,9 +78,10 @@ All processes, products, services, and functions that affect the quality of outp
 4. Conduct root cause analysis and define corrective actions.
 5. Implement corrective actions and verify effectiveness.
 6. Document and retain records of the nonconformity and actions taken.
+
 ### Customer Satisfaction Monitoring Procedure
 
-**ISO 9001:2015 (5.1.2, 9.1.2)**
+**Applies to all frameworks**
 1. Collect customer satisfaction data via surveys, feedback mechanisms, or complaints.
 2. Analyse results against defined targets.
 3. Identify areas below target and define improvement actions.
@@ -89,7 +90,7 @@ All processes, products, services, and functions that affect the quality of outp
 
 ### Quality Nonconformity Review Procedure
 
-**ISO 9001:2015 (8.7.1, 8.7.2, 10.2.1, 10.2.2)**
+**Applies to all frameworks**
 1. Review the nonconformity log for new and open items.
 2. Confirm each nonconforming output was identified and controlled.
 3. Confirm root cause analysis was completed for significant items.
