@@ -92,6 +92,32 @@ All systems, processes, and personnel involved in the collection, storage, proce
 7. Confirm use is limited to identified purposes per P4.1.
 8. Confirm retention is consistent with objectives per P4.2.
 
+**ISO 27002:2022 (5.34)**
+9. Identify and meet requirements for privacy and protection of PII per 5.34.
+
+**NIST 800-53 Rev5 (PT-2, PT-3, RA-8)**
+10. Determine and document authority to process PII per PT-2.
+11. Identify and document purposes for processing PII per PT-3.
+12. Conduct privacy impact assessments before developing or procuring IT that processes PII per RA-8.
+
+**CIS Controls v8.1 (3.1, 3.2)**
+13. Establish and maintain a documented data management process per 3.1.
+14. Establish and maintain a data inventory per 3.2.
+
+**SCF 2025 (PRI-01, PRI-04, RSK-10)**
+15. Implement data protection controls throughout the data lifecycle per PRI-01.
+16. Restrict PII collection to minimum adequate and limited to purposes per PRI-04.
+17. Conduct a Data Protection Impact Assessment per RSK-10.
+
+**NIS2 Article 21 (Article 21(2) (a))**
+18. Confirm PII processing assessment supports risk analysis per Article 21(2)(a).
+
+**ISO 27701:2025 (A.1.2.2, A.1.2.3, A.1.2.6, A.1.2.9)**
+19. Identify and document specific purposes for PII processing per A.1.2.2.
+20. Determine and document the lawful basis for processing per A.1.2.3.
+21. Document process for demonstrating consent per A.1.2.4.
+22. Maintain records in support of PII processing obligations per A.1.2.9.
+
 ### Privacy Notice Publication and Maintenance
 
 **Applies to all frameworks**
@@ -104,6 +130,19 @@ All systems, processes, and personnel involved in the collection, storage, proce
 **SOC 2 (TSP 2017) (P1.1, P2.1)**
 6. Confirm notice communicates purpose, choices, types of data, and rights per P1.1.
 7. Confirm data subjects are informed of available choices per P2.1.
+
+**ISO 27002:2022 (5.34)**
+8. Identify and meet PII protection requirements per 5.34.
+
+**NIST 800-53 Rev5 (PT-5)**
+9. Provide notice to individuals about PII processing at first interaction per PT-5.
+
+**SCF 2025 (PRI-02, PRI-17)**
+10. Make privacy notice available upon first interaction ensuring it is clear and understandable per PRI-02.
+11. Craft communications to data subjects concisely and unambiguously per PRI-17.
+
+**ISO 27701:2025 (A.1.3.3, A.1.3.4)**
+12. Provide PII principals with clear, accessible information identifying the controller and describing processing per A.1.3.3 and A.1.3.4.
 
 ### Individual Rights Request Handling
 
@@ -119,6 +158,20 @@ All systems, processes, and personnel involved in the collection, storage, proce
 7. Confirm data subjects can access their personal information per P5.1.
 8. Confirm corrections and amendments are processed per P5.2.
 9. Confirm a process exists for receiving and resolving inquiries and complaints per P8.1.
+
+**ISO 27002:2022 (5.34)**
+10. Identify and meet PII protection requirements including individual rights per 5.34.
+
+**NIST 800-53 Rev5 (PT-4)**
+11. Implement mechanisms for individuals to consent to PII processing per PT-4.
+
+**SCF 2025 (PRI-06)**
+12. Provide authenticated data subjects the ability to access, correct, and delete their PII per PRI-06.
+
+**ISO 27701:2025 (A.1.3.7, A.1.3.9, A.1.3.10)**
+13. Implement policies and mechanisms to access, correct, or erase PII without undue delay per A.1.3.7.
+14. Provide a copy of PII processed upon request per A.1.3.9.
+15. Define and document response times for handling requests per A.1.3.10.
 
 ### Data Subject Rights Request Fulfilment Review Procedure
 
