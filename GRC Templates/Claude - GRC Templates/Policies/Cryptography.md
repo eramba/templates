@@ -35,13 +35,10 @@ All systems, applications, and data stores that process, store, or transmit sens
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (3.1)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 3.1 for specific safeguard requirements.
 
 **SCF 2025 (CRY-01, CRY-02, CRY-03)**
-- Implement SCF 2025 controls applicable to this area; refer to controls CRY-01, CRY-02, CRY-03 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (h))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (h)); measures must be proportionate to the organisation's risk exposure and size.
 
 ### Key Management
 
@@ -63,13 +60,10 @@ All systems, applications, and data stores that process, store, or transmit sens
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (3.1)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 3.1 for specific safeguard requirements.
 
 **SCF 2025 (CRY-04, CRY-05, CRY-06, CRY-07)**
-- Implement SCF 2025 controls applicable to this area; refer to controls CRY-04, CRY-05, CRY-06, CRY-07 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (h))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (h)); measures must be proportionate to the organisation's risk exposure and size.
 
 ### Data Encryption at Rest
 
@@ -90,13 +84,10 @@ All systems, applications, and data stores that process, store, or transmit sens
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (3.11)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 3.11 for specific safeguard requirements.
 
 **SCF 2025 (CRY-08, CRY-09)**
-- Implement SCF 2025 controls applicable to this area; refer to controls CRY-08, CRY-09 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (h))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (h)); measures must be proportionate to the organisation's risk exposure and size.
 
 ## Standards
 
@@ -111,25 +102,17 @@ All systems, applications, and data stores that process, store, or transmit sens
 2. Distribute keys via secure, encrypted channels only.
 3. Record key metadata in the key register.
 4. Never transmit keys in plaintext.
-
-**PCI DSS v4.0.1 (3.7.1, 3.7.2, 3.6.1)**
 5. Apply split knowledge and dual control for manual key management operations.
 6. Formally designate key custodians and document their responsibilities.
+7. Confirm key generation method is consistent with the classification of the data being protected.
 
-**ISO 27002:2022 (8.24)**
-5. Confirm key generation method is consistent with the classification of the data being protected.
+**PCI DSS v4.0.1 (3.7.1, 3.7.2, 3.7.6, 3.7.8)**
+8. Apply split knowledge and dual control for manual cleartext key operations per 3.7.6.
+9. Obtain written acknowledgement from key custodians of their responsibilities per 3.7.8.
+10. Confirm key generation method produces strong cryptographic keys per 3.7.1.
 
-**NIST 800-53 Rev5 (SC-12, SC-17)**
-8. Document compliance with applicable NIST 800-53 Rev5 controls (SC-12, SC-17) in the system security plan.
-
-**CIS Controls v8.1 (3.1)**
-9. Document compliance with applicable CIS Controls v8.1 controls (3.1) per organisational policy.
-
-**SCF 2025 (CRY-04, CRY-05, CRY-06)**
-10. Document compliance with applicable SCF 2025 controls (CRY-04, CRY-05, CRY-06) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (h))**
-11. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (h)) as applicable to the organisation's classification under NIS2.
+**SOC 2 (TSP 2017) (CC6.7)**
+11. Confirm encryption keys are managed to protect data transmission and storage per CC6.7.
 
 ### Key Rotation and Retirement
 
@@ -138,22 +121,16 @@ All systems, applications, and data stores that process, store, or transmit sens
 2. Generate replacement key and re-encrypt affected data.
 3. Revoke old key and update the key register.
 4. Securely destroy retired key material.
-
-**PCI DSS v4.0.1 (3.7.4, 3.7.5, 3.7.6, 3.7.7, 3.7.8)**
 5. Document the rotation event including date, custodians involved, and systems affected.
 6. Confirm retired keys cannot be used to decrypt current data.
 
-**NIST 800-53 Rev5 (SC-12)**
-7. Document compliance with applicable NIST 800-53 Rev5 controls (SC-12) in the system security plan.
+**PCI DSS v4.0.1 (3.7.4, 3.7.5, 3.7.7)**
+7. Confirm key rotation occurs at cryptoperiod end or upon compromise per 3.7.4.
+8. Confirm retired keys are prevented from use and securely destroyed per 3.7.5.
+9. Confirm unauthorised key substitution is prevented per 3.7.7.
 
-**CIS Controls v8.1 (3.1)**
-8. Document compliance with applicable CIS Controls v8.1 controls (3.1) per organisational policy.
-
-**SCF 2025 (CRY-06, CRY-07)**
-9. Document compliance with applicable SCF 2025 controls (CRY-06, CRY-07) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (h))**
-10. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (h)) as applicable to the organisation's classification under NIS2.
+**SOC 2 (TSP 2017) (CC6.7)**
+10. Confirm key retirement prevents access to encrypted data per CC6.7.
 
 ### Certificate Management
 
@@ -163,22 +140,14 @@ All systems, applications, and data stores that process, store, or transmit sens
 3. Generate a CSR and submit to the approved Certificate Authority.
 4. Deploy the renewed certificate and verify correct installation.
 5. Revoke and remove any expired or compromised certificates immediately.
-
-**PCI DSS v4.0.1 (4.2.1)**
 6. Confirm only approved algorithms and key lengths are used in new or renewed certificates.
 7. Verify that no TLS versions earlier than 1.2 are enabled on renewed endpoints.
+8. Record certificate lifecycle events in the key management register.
 
-**ISO 27002:2022 (8.24)**
-6. Record certificate lifecycle events in the key management register.
+**PCI DSS v4.0.1 (4.2.1)**
+9. Confirm only trusted keys and certificates are accepted per 4.2.1.
+10. Confirm TLS 1.2 or higher is enforced; earlier versions are disabled per 4.2.1.
+11. Maintain inventory of trusted keys and certificates per 4.2.1.1.
 
-**NIST 800-53 Rev5 (SC-17, SC-8)**
-9. Document compliance with applicable NIST 800-53 Rev5 controls (SC-17, SC-8) in the system security plan.
-
-**CIS Controls v8.1 (3.1)**
-10. Document compliance with applicable CIS Controls v8.1 controls (3.1) per organisational policy.
-
-**SCF 2025 (CRY-05, CRY-06)**
-11. Document compliance with applicable SCF 2025 controls (CRY-05, CRY-06) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (h))**
-12. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (h)) as applicable to the organisation's classification under NIS2.
+**SOC 2 (TSP 2017) (CC6.7)**
+12. Confirm certificates protect data transmission per CC6.7.
