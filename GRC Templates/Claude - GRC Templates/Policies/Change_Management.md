@@ -112,6 +112,38 @@ All changes to production systems, applications, infrastructure, and configurati
 **SOC 2 (TSP 2017) (CC8.1)**
 15. Confirm change is authorised, documented, tested, and approved before deployment per CC8.1.
 
+**ISO 27002:2022 (8.32)**
+16. Subject all changes to information processing facilities to change management procedures per 8.32.
+
+**NIST 800-53 Rev5 (CM-3, CM-4, CM-5)**
+17. Review and approve configuration-controlled changes per CM-3.
+18. Analyse changes for security impacts before implementation per CM-4.
+19. Enforce access restrictions associated with changes per CM-5.
+
+**CIS Controls v8.1 (4.1, 4.2)**
+20. Maintain a documented secure configuration process per 4.1.
+21. Maintain a documented secure configuration process for network infrastructure per 4.2.
+
+**SCF 2025 (CHG-01, CHG-02, CHG-03)**
+22. Govern technical configuration change control per CHG-02.
+23. Analyse proposed changes for security impacts per CHG-03.
+24. Verify control functionality following changes per CHG-06.
+
+**NIS2 Article 21 (Article 21(2) (e))**
+25. Confirm change management supports security in network and information system maintenance per Article 21(2)(e).
+
+**ISO 45001:2018 (8.1.3)**
+26. Control planned changes that impact OH&S performance per 8.1.3.
+
+**ISO 42001:2023 (6.3)**
+27. Carry out changes to the AI management system in a planned manner per 6.3.
+
+**ISO 37001:2025 (37001:2025 - 6.3)**
+28. Carry out changes to the ABMS in a planned manner per 6.3.
+
+**ISO 9001:2015 (6.3, 8.5.6)**
+29. Plan and control changes to the QMS and production processes per 6.3 and 8.5.6.
+
 ### Emergency Change
 
 **Applies to all frameworks**
@@ -129,3 +161,12 @@ All changes to production systems, applications, infrastructure, and configurati
 
 **SOC 2 (TSP 2017) (CC8.1)**
 8. Confirm emergency change is authorised and documented per CC8.1.
+
+**ISO 27002:2022 (8.32)**
+9. Ensure emergency changes are subject to change management procedures per 8.32.
+
+**NIST 800-53 Rev5 (CM-3)**
+10. Apply change control procedures including emergency change protocols per CM-3.
+
+**SCF 2025 (CHG-07)**
+11. Govern emergency change procedures per CHG-07.
