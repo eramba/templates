@@ -36,13 +36,10 @@ All information systems, users, and processes. Includes third parties who must r
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (17.2, 17.3, 17.6)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 17.2, 17.3, 17.6 for specific safeguard requirements.
 
 **SCF 2025 (IRO-01, IRO-02, IRO-03, IRO-04)**
-- Implement SCF 2025 controls applicable to this area; refer to controls IRO-01, IRO-02, IRO-03, IRO-04 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (b))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (b)); measures must be proportionate to the organisation's risk exposure and size.
 
 ### Incident Response and Containment
 
@@ -64,13 +61,10 @@ All information systems, users, and processes. Includes third parties who must r
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (17.4, 17.5, 17.7)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 17.4, 17.5, 17.7 for specific safeguard requirements.
 
 **SCF 2025 (IRO-05, IRO-06, IRO-07, IRO-08, IRO-09)**
-- Implement SCF 2025 controls applicable to this area; refer to controls IRO-05, IRO-06, IRO-07, IRO-08, IRO-09 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (b))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (b)); measures must be proportionate to the organisation's risk exposure and size.
 
 ### Post-Incident Review and Notification
 
@@ -88,13 +82,10 @@ All information systems, users, and processes. Includes third parties who must r
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (17.8, 17.9)**
-- Implement CIS Controls v8.1 controls applicable to this area; refer to controls 17.8, 17.9 for specific safeguard requirements.
 
 **SCF 2025 (IRO-10, IRO-11, IRO-12)**
-- Implement SCF 2025 controls applicable to this area; refer to controls IRO-10, IRO-11, IRO-12 for specific requirements.
 
 **NIS2 Article 21 (Article 21(2) (b))**
-- This area falls within the scope of NIS2 Article 21 obligations (Article 21(2) (b)); measures must be proportionate to the organisation's risk exposure and size.
 
 ## Standards
 
@@ -109,21 +100,14 @@ All information systems, users, and processes. Includes third parties who must r
 2. Report via the designated channel.
 3. Information Security logs the report and assigns a severity classification.
 4. Open an incident record and begin tracking.
-
-**PCI DSS v4.0.1 (12.10.1, 12.10.3)**
 5. Confirm whether cardholder data may be involved; if so, escalate immediately per the CDE incident response plan.
 
-**NIST 800-53 Rev5 (IR-6)**
-6. Document compliance with applicable NIST 800-53 Rev5 controls (IR-6) in the system security plan.
+**PCI DSS v4.0.1 (12.10.1, 12.10.3)**
+6. Confirm 24/7 response capability is in place and designated personnel are available per 12.10.3.
+7. Confirm whether CDE or cardholder data is involved; if so, initiate CDE incident response plan per 12.10.1.
 
-**CIS Controls v8.1 (17.3, 17.6)**
-7. Document compliance with applicable CIS Controls v8.1 controls (17.3, 17.6) per organisational policy.
-
-**SCF 2025 (IRO-02, IRO-03)**
-8. Document compliance with applicable SCF 2025 controls (IRO-02, IRO-03) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (b))**
-9. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (b)) as applicable to the organisation's classification under NIS2.
+**SOC 2 (TSP 2017) (CC7.3)**
+8. Confirm security events are evaluated and communicated to determine incident classification per CC7.3.
 
 ### Incident Response
 
@@ -132,28 +116,18 @@ All information systems, users, and processes. Includes third parties who must r
 2. Contain the incident to prevent further damage.
 3. Eradicate the threat and restore affected systems.
 4. Close incident record with full documentation.
-
-**PCI DSS v4.0.1 (12.10.2, 12.10.4, 12.10.5)**
 5. Collect and preserve evidence in a forensically sound manner.
 6. Notify payment brand and acquirer if cardholder data is confirmed compromised.
+7. Document all actions taken throughout the response lifecycle.
+8. Confirm recovery actions restore service in line with availability and processing integrity commitments.
 
-**ISO 27002:2022 (5.26, 5.27)**
-5. Document all actions taken throughout the response lifecycle.
+**PCI DSS v4.0.1 (12.10.2, 12.10.4, 12.10.5)**
+9. Collect and preserve evidence in a forensically sound manner per 12.10.4.
+10. Notify payment brand or acquirer if cardholder data is confirmed compromised per 12.10.5.
 
-**SOC 2 (TSP 2017) (CC7.4, CC7.5)**
-5. Confirm recovery actions restore service in line with availability and processing integrity commitments.
-
-**NIST 800-53 Rev5 (IR-4, IR-5)**
-9. Document compliance with applicable NIST 800-53 Rev5 controls (IR-4, IR-5) in the system security plan.
-
-**CIS Controls v8.1 (17.4, 17.5, 17.7)**
-10. Document compliance with applicable CIS Controls v8.1 controls (17.4, 17.5, 17.7) per organisational policy.
-
-**SCF 2025 (IRO-05, IRO-06, IRO-07, IRO-08)**
-11. Document compliance with applicable SCF 2025 controls (IRO-05, IRO-06, IRO-07, IRO-08) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (b))**
-12. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (b)) as applicable to the organisation's classification under NIS2.
+**SOC 2 (TSP 2017) (CC7.4)**
+11. Confirm response procedures address containment and recovery per CC7.4.
+12. Document roles and responsibilities applied during response per CC7.4.
 
 ### Post-Incident Review
 
@@ -162,27 +136,19 @@ All information systems, users, and processes. Includes third parties who must r
 2. Identify root cause, timeline, and control gaps.
 3. Document lessons learned.
 4. Update incident response plan and controls as needed.
-
-**PCI DSS v4.0.1 (12.10.6)**
 5. Incorporate lessons learned into the next annual incident response plan test.
+6. Retain collected evidence consistent with legal and regulatory requirements.
 
-**ISO 27002:2022 (5.28, 5.29)**
-5. Retain collected evidence consistent with legal and regulatory requirements.
+**PCI DSS v4.0.1 (12.10.6, 12.10.7)**
+7. Incorporate lessons learned into the incident response plan per 12.10.6.
+8. If stored PAN was found outside CDE, confirm retrieval or deletion actions were taken per 12.10.7.
 
-**NIST 800-53 Rev5 (IR-4)**
-7. Document compliance with applicable NIST 800-53 Rev5 controls (IR-4) in the system security plan.
+**SOC 2 (TSP 2017) (CC7.5)**
+9. Confirm recovery activities restored the affected environment per CC7.5.
 
-**CIS Controls v8.1 (17.8, 17.9)**
-8. Document compliance with applicable CIS Controls v8.1 controls (17.8, 17.9) per organisational policy.
-
-**SCF 2025 (IRO-10, IRO-11)**
-9. Document compliance with applicable SCF 2025 controls (IRO-10, IRO-11) per organisational policy.
-
-**NIS2 Article 21 (Article 21(2) (b))**
-10. Ensure compliance with NIS2 Article 21 obligations (Article 21(2) (b)) as applicable to the organisation's classification under NIS2.
 ### NIS2 Incident Notification Review Procedure
 
-**NIS2 Article 21 (Article 21(2) (b), Article 21(4), Article 21(5))**
+**Applies to all frameworks**
 1. For each significant incident in the review period, confirm whether NIS2 reporting obligation was triggered.
 2. Verify initial notification to the competent authority was made within 24 hours.
 3. Verify detailed report was submitted within 72 hours.
