@@ -109,6 +109,33 @@ All information systems, users, and processes. Includes third parties who must r
 **SOC 2 (TSP 2017) (CC7.3)**
 8. Confirm security events are evaluated and communicated to determine incident classification per CC7.3.
 
+**ISO 27002:2022 (5.24, 5.25, 6.8)**
+9. Confirm incident management processes, roles, and responsibilities are defined per 5.24.
+10. Confirm security events are assessed and categorised per 5.25.
+11. Confirm reporting mechanism is accessible per 6.8.
+
+**NIST 800-53 Rev5 (IR-6, IR-8)**
+12. Require personnel to report suspected incidents within the defined time period per IR-6.
+13. Confirm the incident response plan includes roles and communication per IR-8.
+
+**CIS Controls v8.1 (17.3, 17.4)**
+14. Confirm incident reporting process is documented and accessible per 17.3.
+15. Confirm incident response process addresses roles and responsibilities per 17.4.
+
+**SCF 2025 (IRO-01, IRO-04, IRO-09)**
+16. Confirm incident response operations capability is in place per IRO-01.
+17. Confirm incident response plan is maintained and accessible per IRO-04.
+18. Document and monitor incident status through to resolution per IRO-09.
+
+**NIS2 Article 21 (Article 21(2) (b))**
+19. Confirm incident handling procedures are in place proportionate to entity classification per Article 21(2)(b).
+
+**ISO 27701:2025 (A.3.11)**
+20. Confirm incident management processes cover PII processing incidents per A.3.11.
+
+**ISO 42001:2023 (A.8.4)**
+21. Confirm a plan for communicating AI incidents to users is in place per A.8.4.
+
 ### Incident Response
 
 **Applies to all frameworks**
@@ -129,6 +156,28 @@ All information systems, users, and processes. Includes third parties who must r
 11. Confirm response procedures address containment and recovery per CC7.4.
 12. Document roles and responsibilities applied during response per CC7.4.
 
+**ISO 27002:2022 (5.26, 5.28)**
+13. Respond to incidents in accordance with documented procedures per 5.26.
+14. Identify, collect, and preserve evidence in a forensically sound manner per 5.28.
+
+**NIST 800-53 Rev5 (IR-4, IR-5)**
+15. Execute incident handling covering preparation, detection, containment, eradication, and recovery per IR-4.
+16. Track and document all incidents per IR-5.
+
+**CIS Controls v8.1 (17.5, 17.6)**
+17. Confirm roles and responsibilities were assigned and followed per 17.5.
+18. Confirm communication mechanisms were used as planned per 17.6.
+
+**SCF 2025 (IRO-02, IRO-08, IRO-12)**
+19. Execute incident handling covering detection, analysis, containment, eradication, and recovery per IRO-02.
+20. Maintain chain of custody and digital forensics procedures per IRO-08.
+
+**NIS2 Article 21 (Article 21(2) (b))**
+21. Execute incident response measures proportionate to entity classification per Article 21(2)(b).
+
+**ISO 27701:2025 (A.3.12)**
+22. Respond to PII-related incidents per documented procedures; include breach notification actions where required per A.3.12.
+
 ### Post-Incident Review
 
 **Applies to all frameworks**
@@ -145,6 +194,24 @@ All information systems, users, and processes. Includes third parties who must r
 
 **SOC 2 (TSP 2017) (CC7.5)**
 9. Confirm recovery activities restored the affected environment per CC7.5.
+
+**ISO 27002:2022 (5.27)**
+10. Use knowledge gained from incidents to strengthen controls per 5.27.
+
+**NIST 800-53 Rev5 (IR-4)**
+11. Incorporate lessons learned into incident response capabilities per IR-4.
+
+**CIS Controls v8.1 (17.8)**
+12. Conduct post-incident review to identify lessons learned and follow-up actions per 17.8.
+
+**SCF 2025 (IRO-13)**
+13. Conduct root cause analysis and incorporate lessons learned per IRO-13.
+
+**NIS2 Article 21 (Article 21(2) (b))**
+14. Confirm response and recovery activities were proportionate per Article 21(2)(b).
+
+**ISO 45001:2018 (10.2)**
+15. Investigate incidents and implement corrective actions per 10.2.
 
 ### NIS2 Incident Notification Review Procedure
 
