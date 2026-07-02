@@ -120,6 +120,45 @@ All third-party suppliers, vendors, and service providers that access, process, 
 **SOC 2 (TSP 2017) (CC9.2)**
 11. Confirm specific security requirements are established for the engagement per CC9.2.
 
+**ISO 27002:2022 (5.19, 5.2, 5.23)**
+12. Define and implement processes to manage information security risks from supplier products per 5.19.
+13. Establish and agree information security requirements with each supplier per 5.2.
+14. Establish processes for cloud services acquisition, use, and exit per 5.23.
+
+**NIST 800-53 Rev5 (SR-5, SA-9)**
+15. Employ acquisition strategies and contract tools to protect against supply chain risks per SR-5.
+16. Require external service providers to comply with security requirements per SA-9.
+
+**CIS Controls v8.1 (15.1, 15.2, 15.4)**
+17. Maintain an inventory of service providers per 15.1.
+18. Establish a service provider management policy per 15.2.
+19. Ensure service provider contracts include security requirements per 15.4.
+
+**SCF 2025 (TPM-01, TPM-04, TPM-05)**
+20. Facilitate implementation of third-party management controls per TPM-01.
+21. Mitigate risks associated with third-party access per TPM-04.
+22. Require contractual security requirements from third parties per TPM-05.
+
+**NIS2 Article 21 (Article 21(2) (d))**
+23. Confirm supplier security requirements address supply chain security per Article 21(2)(d).
+
+**ISO 27701:2025 (A.3.10)**
+24. Ensure supplier agreements address PII processing security requirements per A.3.10.
+
+**ISO 45001:2018 (8.1.4.1, 8.1.4.2)**
+25. Control procurement for OH&S conformity per 8.1.4.1.
+26. Coordinate with contractors to identify and control OH&S risks per 8.1.4.2.
+
+**ISO 42001:2023 (A.10.3)**
+27. Establish a process for supplier usage to align with responsible AI approach per A.10.3.
+
+**ISO 37001:2025 (37001:2025 - 8.6)**
+28. Require business associates to commit to anti-bribery compliance per 8.6.
+
+**ISO 9001:2015 (8.4.1, 8.4.2)**
+29. Control externally provided processes, products, and services per 8.4.1.
+30. Communicate requirements to external providers per 8.4.3.
+
 ### Supplier Review
 
 **Applies to all frameworks**
@@ -137,6 +176,28 @@ All third-party suppliers, vendors, and service providers that access, process, 
 **SOC 2 (TSP 2017) (CC9.2)**
 9. Confirm supplier compliance with commitments is assessed and documented per CC9.2.
 
+**ISO 27002:2022 (5.21, 5.22)**
+10. Manage information security in the ICT supply chain per 5.21.
+11. Monitor, review, and manage change in supplier security practices per 5.22.
+
+**NIST 800-53 Rev5 (SR-6)**
+12. Assess and review supply chain-related risks at defined frequencies per SR-6.
+
+**CIS Controls v8.1 (15.3, 15.5, 15.6)**
+13. Classify service providers per defined criteria per 15.3.
+14. Assess service providers consistent with the management policy per 15.5.
+15. Monitor service providers per the management policy per 15.6.
+
+**SCF 2025 (TPM-08, TPM-09)**
+16. Regularly review and assess external service providers for compliance per TPM-08.
+17. Address weaknesses identified in supplier assessments per TPM-09.
+
+**NIS2 Article 21 (Article 21(2) (d), Article 21(3))**
+18. Confirm supplier review addresses supply chain security and supplier-specific vulnerabilities per Article 21(2)(d) and Article 21(3).
+
+**ISO 9001:2015 (8.4.1)**
+19. Evaluate and monitor external providers against requirements per 8.4.1.
+
 ### Supplier Offboarding
 
 **Applies to all frameworks**
@@ -153,3 +214,18 @@ All third-party suppliers, vendors, and service providers that access, process, 
 
 **SOC 2 (TSP 2017) (CC9.2)**
 9. Confirm vendor access and data are terminated per CC9.2.
+
+**ISO 27002:2022 (5.22)**
+10. Manage change in supplier services and exit processes per 5.22.
+
+**NIST 800-53 Rev5 (SR-3)**
+11. Establish supply chain controls and processes for disposal and transition per SR-3.
+
+**CIS Controls v8.1 (15.7)**
+12. Securely decommission service providers including account deactivation, data flows termination, and data disposal per 15.7.
+
+**SCF 2025 (TPM-10)**
+13. Control changes to third-party services including termination per TPM-10.
+
+**ISO 27701:2025 (A.2.4.3)**
+14. Ensure PII is returned, transferred, or disposed of securely at contract end per A.2.4.3.
