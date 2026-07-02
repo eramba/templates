@@ -94,6 +94,29 @@ All endpoint devices owned or managed by the organisation including laptops, des
 **SOC 2 (TSP 2017) (CC7.1)**
 9. Confirm detection and monitoring procedures identify configuration non-compliance per CC7.1.
 
+**ISO 27002:2022 (8.1, 8.9)**
+10. Protect information stored on or accessible via user endpoint devices per 8.1.
+11. Establish, document, implement, monitor, and review configurations per 8.9.
+
+**NIST 800-53 Rev5 (CM-2, CM-6)**
+12. Develop, document, and maintain under configuration control a current baseline configuration per CM-2.
+13. Establish configuration settings reflecting the most restrictive mode per CM-6.
+
+**CIS Controls v8.1 (4.1, 4.3)**
+14. Establish and maintain a documented secure configuration process for enterprise assets per 4.1.
+15. Configure automatic session locking after defined inactivity period per 4.3.
+
+**SCF 2025 (CFG-02, END-01, END-02)**
+16. Develop, document, and maintain secure baseline configurations per CFG-02.
+17. Facilitate endpoint device management controls per END-01.
+18. Protect confidentiality, integrity, availability, and safety of endpoint devices per END-02.
+
+**NIS2 Article 21 (Article 21(2) (e))**
+19. Confirm endpoint configuration controls support security in network and information systems per Article 21(2)(e).
+
+**ISO 27701:2025 (A.3.22)**
+20. Protect PII stored on or accessible via user endpoint devices per A.3.22.
+
 ### Malware Protection Review
 
 **Applies to all frameworks**
@@ -112,6 +135,24 @@ All endpoint devices owned or managed by the organisation including laptops, des
 **SOC 2 (TSP 2017) (CC6.8)**
 10. Confirm controls prevent introduction of unauthorized or malicious software per CC6.8.
 
+**ISO 27002:2022 (8.7)**
+11. Implement malware protection supported by appropriate user awareness per 8.7.
+
+**NIST 800-53 Rev5 (SI-3)**
+12. Implement malicious code protection mechanisms at system entry and exit points per SI-3.
+
+**CIS Controls v8.1 (10.1, 10.2, 10.7)**
+13. Deploy and maintain anti-malware software on all enterprise assets per 10.1.
+14. Configure automatic anti-malware signature updates per 10.2.
+15. Use behaviour-based anti-malware software per 10.7.
+
+**SCF 2025 (END-04, END-07)**
+16. Utilise anti-malware technologies to detect and eradicate malicious code per END-04.
+17. Utilise host-based intrusion detection and prevention per END-07.
+
+**NIS2 Article 21 (Article 21(2) (e))**
+18. Confirm malware protection controls support security in network and information systems per Article 21(2)(e).
+
 ### Web and Email Filtering Review
 
 **Applies to all frameworks**
@@ -129,6 +170,27 @@ All endpoint devices owned or managed by the organisation including laptops, des
 8. Confirm logical access security measures protect against external threats per CC6.6.
 9. Confirm controls prevent introduction of malicious software per CC6.8.
 
+**ISO 27002:2022 (8.23)**
+10. Manage access to external websites to reduce exposure to malicious content per 8.23.
+
+**NIST 800-53 Rev5 (SC-7, SI-8)**
+11. Monitor and control communications at external and internal managed interfaces per SC-7.
+12. Employ spam protection mechanisms at system entry and exit points per SI-8.
+
+**CIS Controls v8.1 (9.2, 9.3, 9.5, 9.7)**
+13. Use DNS filtering services on all endpoint devices per 9.2.
+14. Enforce and update network-based URL filters per 9.3.
+15. Implement DMARC, SPF, and DKIM per 9.5.
+16. Deploy and maintain email server anti-malware protections per 9.7.
+
+**SCF 2025 (NET-18, NET-20, END-08)**
+17. Force internet-bound traffic through a proxy for URL and DNS filtering per NET-18.
+18. Implement email filtering to detect malicious attachments per NET-20.
+19. Utilise anti-phishing and spam protection technologies per END-08.
+
+**NIS2 Article 21 (Article 21(2) (e))**
+20. Confirm web and email filtering controls support security in network and information systems per Article 21(2)(e).
+
 ### Software Installation Control
 
 **Applies to all frameworks**
@@ -143,3 +205,21 @@ All endpoint devices owned or managed by the organisation including laptops, des
 
 **SOC 2 (TSP 2017) (CC6.8)**
 7. Confirm installation and modification of software is restricted to authorised individuals per CC6.8.
+
+**ISO 27002:2022 (8.19)**
+8. Securely manage software installation on operational systems per 8.19.
+
+**NIST 800-53 Rev5 (CM-7, CM-11)**
+9. Configure the system to provide only essential capabilities per CM-7.
+10. Establish policies governing user-installed software per CM-11.
+
+**CIS Controls v8.1 (2.5, 2.6, 2.7)**
+11. Allowlist authorised software using technical controls per 2.5.
+12. Allowlist authorised libraries per 2.6.
+13. Allowlist authorised scripts using digital signatures and version control per 2.7.
+
+**SCF 2025 (CFG-03, CFG-04, CFG-05, END-03)**
+14. Configure systems to provide only essential capabilities per CFG-03.
+15. Enforce software usage restrictions per CFG-04.
+16. Restrict ability of non-privileged users to install unauthorised software per CFG-05.
+17. Prohibit software installations without explicitly assigned privileged status per END-03.
