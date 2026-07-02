@@ -86,6 +86,7 @@ All AI systems developed, procured, or used by the organisation, including machi
 4. Implement corrective actions where issues are identified.
 5. Report significant issues to the AI system owner and governance committee.
 6. Document monitoring results and retain records.
+
 ### AI System Impact Assessment Review Procedure
 
 **Applies to all frameworks**
