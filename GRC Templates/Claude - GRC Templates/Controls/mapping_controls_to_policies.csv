@@ -57,3 +57,27 @@ Secure Coding Standards Compliance Review,Secure Development,Secure Coding Revie
 Application Security Requirements Review,Secure Development,Application Security Requirements Review
 Third-Party Software Component Review,Secure Development,Security Testing in Development
 "Development, Test, and Production Environment Separation Review",Secure Development,Secure Development Lifecycle Review
+Internal Audit Execution,Risk Management,Independent Information Security Review
+Management Review Execution,Risk Management,Risk Register Review
+Nonconformity and Corrective Action Tracking,Risk Management,Risk Register Review
+Cardholder Data Environment Scoping Review,Information Classification,Classification at Creation
+PCI DSS Compliance Self-Assessment or Audit,Risk Management,Legal and Regulatory Compliance Review
+Cardholder Data Discovery Scan,Information Classification,Classification at Creation
+SOC 2 Control Effectiveness Monitoring,Risk Management,Internal Information Security Compliance Review
+Availability and Processing Integrity Monitoring,Business Continuity,BCP and DR Plan Review
+System Security Plan Review,Risk Management,Risk Register Review
+Plan of Action and Milestones (POA&M) Review,Risk Management,Risk Register Review
+Security Training Records Review,Human Resources Security,Security Training Delivery and Tracking
+OH&S Legal Compliance Evaluation,Occupational Health Safety,Hazard Identification and Risk Assessment
+OH&S Performance Monitoring Review,Occupational Health Safety,Hazard Identification and Risk Assessment
+AI System Impact Assessment Review,AI Governance,AI Impact Assessment
+AI System Performance and Monitoring Review,AI Governance,AI System Monitoring
+Anti-Bribery Risk Assessment Review,Anti Bribery,Bribery Risk Assessment
+Gifts and Hospitality Register Review,Anti Bribery,Gifts and Hospitality Approval
+Anti-Bribery Due Diligence Review,Anti Bribery,Business Associate Due Diligence
+Customer Satisfaction Monitoring,Quality Management,Customer Requirements Review
+Quality Nonconformity Review,Quality Management,Nonconformity Management
+PII Cross-Border Transfer Review,Privacy,PII Processing Assessment
+Data Subject Rights Request Fulfilment Review,Privacy,Individual Rights Request Handling
+Cyber Governance Programme Review,Risk Management,Independent Information Security Review
+NIS2 Incident Notification Review,Incident Management,Post-Incident Review
