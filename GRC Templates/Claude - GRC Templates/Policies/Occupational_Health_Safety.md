@@ -71,6 +71,11 @@ All workers including employees, contractors, and visitors at all organisational
 5. Document results and assign owners for control implementation.
 6. Review and update the risk register at defined intervals.
 
+**ISO 45001:2018 (6.1.2.1, 6.1.2.2, 6.1.2.3)**
+7. Establish and maintain a proactive and ongoing hazard identification process per 6.1.2.1.
+8. Assess OH&S risks from identified hazards per 6.1.2.2.
+9. Assess OH&S opportunities per 6.1.2.3.
+
 ### OH&S Incident Reporting and Investigation
 
 **Applies to all frameworks**
@@ -80,6 +85,10 @@ All workers including employees, contractors, and visitors at all organisational
 4. Conduct root cause analysis within defined timeframe.
 5. Implement corrective actions and verify effectiveness.
 6. Document the investigation and share learnings with relevant workers.
+
+**ISO 45001:2018 (10.2)**
+7. Report, investigate, and take action to manage incidents and nonconformities per 10.2.
+8. Implement corrective actions and evaluate their effectiveness per 10.2.
 
 ### OH&S Legal Compliance Evaluation Procedure
 
