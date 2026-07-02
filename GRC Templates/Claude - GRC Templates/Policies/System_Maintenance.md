@@ -85,6 +85,14 @@ All information systems, system components, and supporting infrastructure owned 
 5. Document the maintenance activity including date, personnel, components affected, and outcome.
 6. Confirm spare parts availability meets defined timely maintenance requirements for critical components.
 
+**NIST 800-53 Rev5 (MA-2, MA-6)**
+7. Schedule, document, and review maintenance records per manufacturer specifications per MA-2.
+8. Obtain maintenance support within the defined time period of failure per MA-6.
+
+**SCF 2025 (MNT-02, MNT-03)**
+9. Conduct controlled maintenance activities throughout the asset lifecycle per MNT-02.
+10. Obtain maintenance support within the defined RTO per MNT-03.
+
 ### Remote Maintenance Session
 
 **Applies to all frameworks**
@@ -94,6 +102,12 @@ All information systems, system components, and supporting infrastructure owned 
 4. Terminate session and close network connection upon completion.
 5. Document session details: date, duration, personnel, actions taken.
 
+**NIST 800-53 Rev5 (MA-4)**
+6. Approve, monitor, and control nonlocal maintenance and diagnostic activities per MA-4.
+
+**SCF 2025 (MNT-05)**
+7. Authorise, monitor, and control remote maintenance and diagnostic activities per MNT-05.
+
 ### Component Removal for Off-site Maintenance
 
 **Applies to all frameworks**
@@ -102,3 +116,9 @@ All information systems, system components, and supporting infrastructure owned 
 3. Log component removal including serial number, destination, and responsible party.
 4. Upon return, inspect component for tampering before reinstallation.
 5. Verify system integrity after reinstallation and document.
+
+**NIST 800-53 Rev5 (MA-5)**
+6. Establish a process for maintenance personnel authorisation per MA-5.
+
+**SCF 2025 (MNT-09)**
+7. Ensure off-site maintenance activities are conducted securely and assets are secured during transfer per MNT-09.
