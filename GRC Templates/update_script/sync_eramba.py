@@ -586,7 +586,7 @@ def load_policy_mapping_from_github():
     return result
 
 
-def sync_compliance(dry_run=False):
+def sync_compliance(dry_run=False, max_pages=0):
     """
     Link policies to compliance analysis requirements using 00_mapping_table.md.
 
@@ -613,6 +613,9 @@ def sync_compliance(dry_run=False):
     limit = 100
     consecutive_errors = 0
     while True:
+        if max_pages and page > max_pages:
+            log(f"Reached --max-pages limit ({max_pages}), stopping pagination")
+            break
         result, err = eramba_request('GET', f"/api/compliance-managements/index?page={page}&limit={limit}")
         if err:
             consecutive_errors += 1
@@ -765,6 +768,8 @@ def main():
     parser.add_argument('--dry-run', action='store_true', help='Print what would happen without making changes')
     parser.add_argument('--only', choices=['policies', 'controls', 'compliance'],
                         help='Run only one sync step')
+    parser.add_argument('--max-pages', type=int, default=0,
+                        help='Limit compliance pagination to N pages (for testing, 0 = all pages)')
     args = parser.parse_args()
 
     dry_run = args.dry_run or DRY_RUN
@@ -793,7 +798,7 @@ def main():
         success &= sync_controls(dry_run=dry_run)
 
     if args.only in (None, 'compliance'):
-        success &= sync_compliance(dry_run=dry_run)
+        success &= sync_compliance(dry_run=dry_run, max_pages=args.max_pages)
 
     print()
     if success:
