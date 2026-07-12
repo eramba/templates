@@ -405,6 +405,16 @@ def sync_controls(dry_run=False):
 
     created = updated = errors = 0
 
+    # Load policy mapping so we can link controls to their policy
+    pol_csv_path = f"{GITHUB_BASE}/Controls/mapping_controls_to_policies.csv"
+    pol_csv, err = github_get_file_content(pol_csv_path)
+    ctrl_to_policy = {}
+    if not err:
+        for row in csv.DictReader(StringIO(pol_csv)):
+            ctrl_to_policy[row['Control Title'].strip()] = row.get('Policy', '').strip()
+    else:
+        log(f"Could not load policy mapping: {err}", 'WARN')
+
     for ctrl in gh_controls:
         title = ctrl.get('Title', '').strip()
         if not title:
@@ -412,11 +422,17 @@ def sync_controls(dry_run=False):
         key = title.lower()
         existing = eramba_controls.get(key)
 
+        # Resolve linked policy eramba ID
+        pol_name = ctrl_to_policy.get(title, '').lower()
+        pol_rec  = eramba_policies.get(pol_name)
+        pol_ids  = [{'id': pol_rec['id']}] if pol_rec else []
+
         # Map CSV columns to eramba fields
         payload_fields = {
             'name': title,
             'objective': ctrl.get('Description', ''),
             'audit_metric_description': ctrl.get('Audit Methodology', ''),
+            'security_policies': pol_ids,
         }
 
         if existing:
