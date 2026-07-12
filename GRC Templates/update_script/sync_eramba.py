@@ -526,24 +526,79 @@ def sync_controls(dry_run=False):
 # Sync: Compliance Analysis links
 # ---------------------------------------------------------------------------
 
+def load_policy_mapping_from_github():
+    """
+    Parse 00_mapping_table.md and return:
+    {policy_name: {eramba_regulator_name: [req_id, ...]}}
+    """
+    path = f"{GITHUB_BASE}/Policies/00_mapping_table.md"
+    content, err = github_get_file_content(path)
+    if err:
+        log(f"Cannot read 00_mapping_table.md: {err}", 'ERR')
+        return {}
+
+    # Column header → eramba regulator name
+    FW_RENAME = {
+        'PCI DSS v4.0.1':         'PCI-DSS',
+        'ISO 27001:2022':          'ISO 27001',
+        'ISO 27002:2022':          'ISO 27002',
+        'SOC 2 (TSP 2017)':       'SOC2',
+        'NIST 800-53 Rev5':       'NIST SP 800-53 Rev. 5',
+        'CIS Controls v8.1':      'CIS Controls',
+        'SCF 2025':                'Secure Control Framework',
+        'NIS2 Article 21':        'NIS2 - Article 21',
+        'ISO 27701:2025':          'ISO 27701',
+        'ISO 45001:2018':          'ISO 45001',
+        'ISO 42001:2023':          'ISO 42001',
+        'ISO 37001:2025':          'ISO 37001',
+        'ISO 9001:2015':           'ISO 9001',
+        'OWASP LLM Top 10 2025':  'OWASP Top 10 for LLM Applications',
+        'NIST AI 600-1 2024':     'NIST AI 600-1 Generative AI Profile',
+        'EU AI Act 2024/1689':    'EU AI Act',
+    }
+
+    lines = [l.strip() for l in content.split('\n') if l.strip().startswith('|')]
+    if len(lines) < 3:
+        log("Could not parse 00_mapping_table.md", 'ERR')
+        return {}
+
+    headers = [h.strip() for h in lines[0].split('|')[1:-1]]
+    fw_headers = headers[1:]  # skip 'Policy' column
+
+    result = {}
+    for line in lines[2:]:  # skip header and separator
+        cells = [c.strip() for c in line.split('|')[1:-1]]
+        if not cells:
+            continue
+        policy_name = cells[0].strip()
+        result[policy_name] = {}
+        for fw_label, req_str in zip(fw_headers, cells[1:]):
+            if not req_str or req_str == '—':
+                continue
+            eramba_name = FW_RENAME.get(fw_label)
+            if not eramba_name:
+                continue
+            req_ids = [r.strip() for r in req_str.split(',') if r.strip()]
+            if req_ids:
+                result[policy_name][eramba_name] = req_ids
+
+    log(f"Loaded policy mapping: {len(result)} policies")
+    return result
+
+
 def sync_compliance(dry_run=False):
     """
-    Link policies and controls to compliance analysis requirements.
+    Link policies to compliance analysis requirements using 00_mapping_table.md.
 
-    Logic:
-    1. Paginate GET /api/compliance-managements/index into memory
-       Each record has compliance_package_item.compliance_package.compliance_package_regulator.name
-       and compliance_package_item.item_id — these identify the framework + requirement
-    2. Load controls and policies from eramba (by name)
-    3. Load mappings from GitHub CSV
-    4. For each control → framework → req_id mapping:
-       - Find the compliance analysis record in memory
-       - PUT it with the control ID and linked policy ID added
+    For each policy → framework → req_id in the mapping table:
+    1. Find the compliance analysis record (already in memory)
+    2. Add the policy ID to its security_policies list
+    3. PUT the updated record
     """
     log("\n=== COMPLIANCE ANALYSIS LINKS ===")
 
     # Step 1: paginate all compliance analysis records into memory
-    log("Loading all compliance analysis records (paginating slowly)...")
+    log("Loading all compliance analysis records (paginating)...")
     ca_records = []
     page = 1
     limit = 100
@@ -551,7 +606,7 @@ def sync_compliance(dry_run=False):
         result, err = eramba_request('GET', f"/api/compliance-managements/index?page={page}&limit={limit}")
         if err:
             if ca_records:
-                log(f"Stopped at page {page}: {err} — continuing with {len(ca_records)} records", 'WARN')
+                log(f"Stopped at page {page}: {err} — using {len(ca_records)} records", 'WARN')
             else:
                 log(f"Cannot load compliance analysis: {err}", 'ERR')
                 return False
@@ -572,60 +627,39 @@ def sync_compliance(dry_run=False):
     # Step 2: build lookup {(regulator_name_lower, item_id_lower): ca_record}
     ca_lookup = {}
     for rec in ca_records:
-        item = rec.get('compliance_package_item') or {}
-        pkg  = item.get('compliance_package') or {}
-        reg  = pkg.get('compliance_package_regulator') or {}
+        item    = rec.get('compliance_package_item') or {}
+        pkg     = item.get('compliance_package') or {}
+        reg     = pkg.get('compliance_package_regulator') or {}
         reg_name = reg.get('name', '').lower().strip()
         item_id  = item.get('item_id', '').lower().strip()
         if reg_name and item_id:
             ca_lookup[(reg_name, item_id)] = rec
 
-    log(f"Built lookup with {len(ca_lookup)} (regulator, item_id) entries")
+    log(f"Built lookup with {len(ca_lookup)} entries")
 
-    # Show sample regulator names from the lookup so we can verify matching
-    sample_regs = sorted(set(k[0] for k in ca_lookup.keys()))[:20]
+    # Show sample regulator names for debugging
+    sample_regs = sorted(set(k[0] for k in ca_lookup.keys()))[:10]
     log(f"Sample regulator names in lookup: {sample_regs}")
 
-    if not ca_lookup:
-        log("Lookup is empty — check compliance_package_item nesting in the response", 'ERR')
-        if ca_records:
-            sample = ca_records[0]
-            log(f"Sample keys: {list(sample.keys())}", 'WARN')
-            log(f"compliance_package_item: {sample.get('compliance_package_item')}", 'WARN')
-        return False
+    # Step 3: load policies from eramba and policy→requirement mapping from GitHub
+    eramba_pols   = load_eramba_policies()
+    policy_map    = load_policy_mapping_from_github()
 
-    # Step 3: load controls, policies, and mappings
-    eramba_ctrls = load_eramba_controls()
-    eramba_pols  = load_eramba_policies()
-    gh_mappings  = load_mappings_from_github()
-
-    pol_csv_path = f"{GITHUB_BASE}/Controls/mapping_controls_to_policies.csv"
-    pol_csv, err = github_get_file_content(pol_csv_path)
-    ctrl_to_policy = {}
-    if not err:
-        for row in csv.DictReader(StringIO(pol_csv)):
-            ctrl_to_policy[row['Control Title'].strip()] = row.get('Policy', '').strip()
-
-    # Show what framework labels are in the CSV mappings
-    fw_labels_in_csv = sorted(set(fw for fw_map in gh_mappings.values() for fw in fw_map.keys()))
-    log(f"Framework labels in CSV: {fw_labels_in_csv}")
+    log(f"Framework labels in mapping table: {sorted(set(fw for v in policy_map.values() for fw in v.keys()))[:8]}...")
 
     updated = skipped = not_found = errors = 0
 
-    # Step 4: iterate mappings and update compliance analysis records
-    for ctrl_title, fw_map in gh_mappings.items():
-        ctrl_rec = eramba_ctrls.get(ctrl_title.lower())
-        if not ctrl_rec:
-            continue  # control not yet in eramba
+    # Step 4: iterate policy → framework → req_id and update compliance analysis
+    for policy_name, fw_map in policy_map.items():
+        pol_rec = eramba_pols.get(policy_name.lower().strip())
+        if not pol_rec:
+            log(f"Policy not in eramba: '{policy_name}'", 'WARN')
+            continue
+        pol_id = pol_rec['id']
 
-        ctrl_id  = ctrl_rec['id']
-        pol_name = ctrl_to_policy.get(ctrl_title, '').lower()
-        pol_rec  = eramba_pols.get(pol_name)
-        pol_id   = pol_rec['id'] if pol_rec else None
-
-        for fw_label, req_ids in fw_map.items():
+        for reg_name, req_ids in fw_map.items():
             for req_id in req_ids:
-                key = (fw_label.lower().strip(), req_id.lower().strip())
+                key = (reg_name.lower().strip(), req_id.lower().strip())
                 ca_rec = ca_lookup.get(key)
                 if not ca_rec:
                     not_found += 1
@@ -633,28 +667,26 @@ def sync_compliance(dry_run=False):
 
                 ca_id = ca_rec['id']
 
-                # Build existing ID lists from the cached record
-                existing_svcs = ca_rec.get('security_services') or []
+                # Check if policy already linked
                 existing_pols = ca_rec.get('security_policies') or []
-                svc_ids = [s['id'] if isinstance(s, dict) else s for s in existing_svcs]
                 pol_ids = [p['id'] if isinstance(p, dict) else p for p in existing_pols]
 
-                changed = False
-                if ctrl_id not in svc_ids:
-                    svc_ids.append(ctrl_id)
-                    changed = True
-                if pol_id and pol_id not in pol_ids:
-                    pol_ids.append(pol_id)
-                    changed = True
-
-                if not changed:
+                if pol_id in pol_ids:
                     skipped += 1
                     continue
 
+                pol_ids.append(pol_id)
+
                 if dry_run:
-                    log(f"[DRY] {fw_label} {req_id} → policy={pol_id} control={ctrl_id}", 'DRY')
+                    log(f"[DRY] {reg_name} {req_id} → policy {pol_id} ({policy_name})", 'DRY')
                     updated += 1
+                    # Update in-memory so we don't double-count
+                    ca_rec['security_policies'] = [{'id': i} for i in pol_ids]
                     continue
+
+                # Keep existing security_services
+                existing_svcs = ca_rec.get('security_services') or []
+                svc_ids = [s['id'] if isinstance(s, dict) else s for s in existing_svcs]
 
                 payload = {
                     "compliance_treatment_strategy_id": 1,
@@ -675,7 +707,7 @@ def sync_compliance(dry_run=False):
 
                 res, err = eramba_request('PUT', f"/api/compliance-managements/{ca_id}", payload)
                 if err:
-                    log(f"PUT ca {ca_id} ({fw_label} {req_id}): {err}", 'ERR')
+                    log(f"PUT ca {ca_id} ({reg_name} {req_id}): {err}", 'ERR')
                     errors += 1
                     continue
                 if isinstance(res, dict) and not res.get('success', True):
@@ -683,10 +715,8 @@ def sync_compliance(dry_run=False):
                     errors += 1
                     continue
 
-                # Update in-memory record so subsequent iterations see the new IDs
-                ca_rec['security_services'] = [{'id': i} for i in svc_ids]
-                ca_rec['security_policies']  = [{'id': i} for i in pol_ids]
-
+                # Update in-memory
+                ca_rec['security_policies'] = [{'id': i} for i in pol_ids]
                 time.sleep(API_DELAY)
                 updated += 1
 
