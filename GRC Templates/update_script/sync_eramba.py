@@ -582,6 +582,10 @@ def sync_compliance(dry_run=False):
 
     log(f"Built lookup with {len(ca_lookup)} (regulator, item_id) entries")
 
+    # Show sample regulator names from the lookup so we can verify matching
+    sample_regs = sorted(set(k[0] for k in ca_lookup.keys()))[:20]
+    log(f"Sample regulator names in lookup: {sample_regs}")
+
     if not ca_lookup:
         log("Lookup is empty — check compliance_package_item nesting in the response", 'ERR')
         if ca_records:
@@ -602,8 +606,10 @@ def sync_compliance(dry_run=False):
         for row in csv.DictReader(StringIO(pol_csv)):
             ctrl_to_policy[row['Control Title'].strip()] = row.get('Policy', '').strip()
 
-    # The framework column headers in the CSV match eramba regulator names exactly
-    # (after the rename we did earlier)
+    # Show what framework labels are in the CSV mappings
+    fw_labels_in_csv = sorted(set(fw for fw_map in gh_mappings.values() for fw in fw_map.keys()))
+    log(f"Framework labels in CSV: {fw_labels_in_csv}")
+
     updated = skipped = not_found = errors = 0
 
     # Step 4: iterate mappings and update compliance analysis records
