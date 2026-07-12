@@ -62,6 +62,28 @@ The compliance analysis sync only updates existing records — it cannot create 
 ### Matching strategy
 Records are matched by **name** (case-insensitive). If a policy or control with the same name already exists in eramba, it is updated. If not, it is created.
 
+### Framework name mapping
+The CSV column headers in `mapping_controls_to_requirements.csv` exactly match the compliance package regulator names in eramba. Do not rename either side without updating both.
+
+| CSV column header | eramba package name |
+|---|---|
+| PCI-DSS | PCI-DSS |
+| ISO 27001 | ISO 27001 |
+| ISO 27002 | ISO 27002 |
+| SOC2 | SOC2 |
+| NIST SP 800-53 Rev. 5 | NIST SP 800-53 Rev. 5 |
+| CIS Controls | CIS Controls |
+| Secure Control Framework | Secure Control Framework |
+| NIS2 - Article 21 | NIS2 - Article 21 |
+| ISO 27701 | ISO 27701 |
+| ISO 45001 | ISO 45001 |
+| ISO 42001 | ISO 42001 |
+| ISO 37001 | ISO 37001 |
+| ISO 9001 | ISO 9001 |
+| OWASP Top 10 for LLM Applications | OWASP Top 10 for LLM Applications |
+| NIST AI 600-1 Generative AI Profile | NIST AI 600-1 Generative AI Profile |
+| EU AI Act | EU AI Act |
+
 ### First run
 On first run, all 22 policies and 99 controls will be created. Subsequent runs will update them.
 
