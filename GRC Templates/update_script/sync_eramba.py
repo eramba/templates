@@ -392,11 +392,17 @@ def sync_policies(dry_run=False):
                 'next_review_date': str(date.today().replace(year=date.today().year + 10)),
             }
             if not dry_run:
-                _, err = eramba_request('POST', '/api/security-policies/add', payload)
+                res, err = eramba_request('POST', '/api/security-policies/add', payload)
                 if err:
                     log(f"POST policy {pol['name']}: {err}", 'ERR')
                     errors += 1
                     continue
+                # Check eramba success envelope
+                if isinstance(res, dict) and not res.get('success', True):
+                    log(f"POST policy {pol['name']} failed: {res}", 'ERR')
+                    errors += 1
+                    continue
+                log(f"POST policy {pol['name']} response: {json.dumps(res)[:200]}")
                 time.sleep(API_DELAY)
             log(f"{'[DRY] ' if dry_run else ''}Created policy: {pol['name']}", 'OK' if not dry_run else 'DRY')
             created += 1
@@ -471,11 +477,16 @@ def sync_controls(dry_run=False):
                 **payload_fields,
             }
             if not dry_run:
-                _, err = eramba_request('POST', '/api/security-services/add', payload)
+                res, err = eramba_request('POST', '/api/security-services/add', payload)
                 if err:
                     log(f"POST control {title}: {err}", 'ERR')
                     errors += 1
                     continue
+                if isinstance(res, dict) and not res.get('success', True):
+                    log(f"POST control {title} failed: {res}", 'ERR')
+                    errors += 1
+                    continue
+                log(f"POST control {title} response: {json.dumps(res)[:200]}")
                 time.sleep(API_DELAY)
             log(f"{'[DRY] ' if dry_run else ''}Created control: {title}", 'OK' if not dry_run else 'DRY')
             created += 1
