@@ -659,12 +659,12 @@ def sync_compliance(dry_run=False):
                     "compliance_exceptions": None,
                     "security_policies": pol_ids,
                     "security_services": svc_ids,
-                    "risks": None,
-                    "third_party_risks": None,
-                    "business_continuities": None,
-                    "compliance_analysis_findings": None,
-                    "assets": None,
-                    "legal_id": None,
+                    "risks": [""],
+                    "third_party_risks": [""],
+                    "business_continuities": [""],
+                    "compliance_analysis_findings": [""],
+                    "assets": [""],
+                    "legal_id": [""],
                 }
 
                 res, err = eramba_request('PUT', f"/api/compliance-managements/{ca_id}", payload)
