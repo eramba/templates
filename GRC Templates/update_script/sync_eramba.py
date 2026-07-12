@@ -370,12 +370,21 @@ def sync_policies(dry_run=False):
                     log(f"GET policy {pol['name']}: {err}", 'ERR')
                     errors += 1
                     continue
-                # Merge: keep all existing fields, update only content fields
-                full['description'] = pol['html']
+                # Unwrap {success, data} envelope if present
+                if isinstance(full, dict) and 'data' in full:
+                    full = full['data']
+                # Update only content fields — keep everything else as-is
+                full['index'] = pol['name']
                 full['short_description'] = pol['short_description']
-                _, err = eramba_request('PUT', f"/api/security-policies/{rec_id}", full)
+                full['description'] = pol['html']
+                full['version'] = os.environ.get('PR_NUMBER', full.get('version', '1.0'))
+                res, err = eramba_request('PUT', f"/api/security-policies/{rec_id}", full)
                 if err:
                     log(f"PUT policy {pol['name']}: {err}", 'ERR')
+                    errors += 1
+                    continue
+                if isinstance(res, dict) and not res.get('success', True):
+                    log(f"PUT policy {pol['name']} failed: {res}", 'ERR')
                     errors += 1
                     continue
                 time.sleep(API_DELAY)
