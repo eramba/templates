@@ -716,6 +716,7 @@ def sync_compliance(dry_run=False, max_pages=0):
                     "legal_id": [""],
                 }
 
+                log(f"Linking {policy_name} → {reg_name} {req_id} (ca_id={ca_id})")
                 res, err = eramba_request('PUT', f"/api/compliance-managements/{ca_id}", payload)
                 if err:
                     log(f"PUT ca {ca_id} ({reg_name} {req_id}): {err}", 'ERR')
@@ -730,6 +731,7 @@ def sync_compliance(dry_run=False, max_pages=0):
                 ca_rec['security_policies'] = [{'id': i} for i in pol_ids]
                 time.sleep(API_DELAY)
                 updated += 1
+                log(f"✓ {updated} linked so far")
 
     log(f"\nCompliance links: {updated} updated, {skipped} already linked, {not_found} req IDs not found in eramba, {errors} errors")
     return errors == 0
