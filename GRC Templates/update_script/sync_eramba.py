@@ -469,38 +469,37 @@ def sync_compliance(dry_run=False):
     reg_by_name = {r.get('name', '').lower().strip(): r for r in regulators}
     log(f"Found {len(regulators)} regulators in eramba")
 
-    # Map our framework labels → regulator name patterns to search for
-    # Keys = column headers in mapping_controls_to_requirements.csv
-    # Values = substrings to match against eramba regulator names (case-insensitive)
-    FW_NAME_PATTERNS = {
-        'PCI DSS v4.0.1':            ['pci dss'],
-        'ISO 27001:2022':             ['27001'],
-        'ISO 27002:2022':             ['27002'],
-        'SOC 2 (TSP 2017)':          ['soc 2', 'soc2'],
-        'NIST 800-53 Rev5':          ['nist 800-53', 'nist800-53'],
-        'CIS Controls v8.1':         ['cis controls', 'cis v8'],
-        'SCF 2025':                   ['scf'],
-        'NIS2 Article 21':           ['nis2', 'nis 2'],
-        'ISO 27701:2025':             ['27701'],
-        'ISO 45001:2018':             ['45001'],
-        'ISO 42001:2023':             ['42001'],
-        'ISO 37001:2025':             ['37001'],
-        'ISO 9001:2015':              ['9001'],
-        'OWASP LLM Top 10 2025':     ['owasp llm', 'owasp top 10 llm'],
-        'NIST AI 600-1 2024':        ['nist ai 600', 'ai 600-1'],
-        'EU AI Act 2024/1689':       ['eu ai act', '2024/1689'],
-    }
+    # The CSV column headers exactly match the eramba compliance package regulator names.
+    # This is the complete mapping — no fuzzy matching needed.
+    # If you add a new framework, add it here too.
+    FW_EXACT_NAMES = [
+        'PCI-DSS',
+        'ISO 27001',
+        'ISO 27002',
+        'SOC2',
+        'NIST SP 800-53 Rev. 5',
+        'CIS Controls',
+        'Secure Control Framework',
+        'NIS2 - Article 21',
+        'ISO 27701',
+        'ISO 45001',
+        'ISO 42001',
+        'ISO 37001',
+        'ISO 9001',
+        'OWASP Top 10 for LLM Applications',
+        'NIST AI 600-1 Generative AI Profile',
+        'EU AI Act',
+    ]
 
-    # Find regulator IDs for our frameworks
+    # Find regulator IDs using exact name match
     fw_regulator_ids = {}
-    for fw_label, patterns in FW_NAME_PATTERNS.items():
-        for reg_name_lower, reg in reg_by_name.items():
-            if any(p in reg_name_lower for p in patterns):
-                fw_regulator_ids[fw_label] = reg['id']
-                log(f"  Matched '{fw_label}' → eramba '{reg.get('name')}' (id={reg['id']})")
-                break
-        if fw_label not in fw_regulator_ids:
-            log(f"  No match for '{fw_label}' in eramba regulators", 'WARN')
+    for fw_name in FW_EXACT_NAMES:
+        reg = reg_by_name.get(fw_name.lower().strip())
+        if reg:
+            fw_regulator_ids[fw_name] = reg['id']
+            log(f"  Matched '{fw_name}' (id={reg['id']})")
+        else:
+            log(f"  Not found in eramba: '{fw_name}'", 'WARN')
 
     if not fw_regulator_ids:
         log("No framework regulators matched — check regulator names in eramba", 'ERR')
