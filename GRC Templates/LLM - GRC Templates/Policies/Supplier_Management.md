@@ -229,3 +229,39 @@ All third-party suppliers, vendors, and service providers that access, process, 
 
 **ISO 27701:2025 (A.2.4.3)**
 14. Ensure PII is returned, transferred, or disposed of securely at contract end per A.2.4.3.
+### Third-Party GAI System Governance
+
+**NIST AI 600-1 2024 (GV-6.1-001, GV-6.1-004, GV-6.1-005, GV-6.1-006, GV-6.1-007, GV-6.2-001, GV-6.2-003, GV-6.2-004, GV-6.2-006, GV-6.2-007)**
+- All third-party entities with access to organisational AI content must be inventoried and an approved GAI technology and service provider list maintained.
+- Contracts with third-party GAI providers must specify content ownership, usage rights, security requirements, and content provenance standards.
+- A use-case-based supplier risk assessment framework must evaluate and monitor third-party GAI performance and adherence to standards.
+- Continuous monitoring processes for third-party GAI systems in deployment must be established.
+- Incident response plans for third-party GAI failures must be aligned with the organisation's incident response process.
+- Vendor contracts must avoid arbitrary termination of critical GAI services and non-standard terms that amplify liability.
+
+**EU AI Act 2024/1689 (Art.25.4, Art.53.1)**
+- Contracts with third-party AI system and component providers must allocate responsibilities for compliance with applicable requirements.
+- Organisations using GPAI models must ensure appropriate obligations are placed on model providers through contractual arrangements.
+
+**OWASP Top 10 for LLM Applications 2025 (LLM03)**
+- Third-party LLM supply chain components including base models, fine-tuning datasets, and plugins must be assessed for integrity and provenance before use.
+
+### Third-Party GAI Governance Procedure
+
+**Applies to all frameworks**
+1. Inventory all third-party GAI systems, models, and services in use.
+2. Conduct security assessment including review of model cards, SOC 2 reports, or equivalent.
+3. Execute contract with required security, data, and content provenance clauses.
+4. Establish continuous monitoring of third-party GAI system performance and safety.
+5. Maintain incident response plan for third-party GAI failures.
+6. Document review outcomes and retain records.
+
+**NIST AI 600-1 2024 (GV-6.1-004, GV-6.1-005, GV-6.2-004)**
+7. Confirm SLAs specify content ownership, usage rights, and content provenance standards.
+8. Confirm monitoring processes detect deviations from agreed standards.
+
+**EU AI Act 2024/1689 (Art.25.4)**
+7. Confirm contractual responsibilities for compliance with AI Act requirements are allocated between parties.
+
+**OWASP Top 10 for LLM Applications 2025 (LLM03)**
+7. Confirm provenance and integrity verification is performed for all LLM supply chain components.

@@ -125,3 +125,124 @@ All AI systems developed, procured, or used by the organisation, including machi
 3. Investigate anomalies or unexpected outputs.
 4. Escalate significant issues to the AI governance committee.
 5. Document findings and actions taken.
+### Prohibited AI Practices
+
+**Applies to all frameworks**
+- The organisation must not develop, deploy, or use AI systems that perform practices prohibited under applicable AI regulations.
+- Personnel must be trained to recognise prohibited AI use cases and report concerns without reprisal.
+
+**EU AI Act 2024/1689 (Art.5.1, Art.5.2, Art.5.3, Art.5.4)**
+- AI systems that deploy subliminal techniques beyond a person's consciousness to distort behaviour are prohibited.
+- AI systems that exploit vulnerabilities of specific groups due to age, disability, or social or economic circumstances are prohibited.
+- AI systems used for social scoring by public authorities leading to detrimental treatment are prohibited.
+- Real-time remote biometric identification systems in publicly accessible spaces for law enforcement are prohibited except under specific legal authorisations.
+
+**OWASP Top 10 for LLM Applications 2025 (LLM06)**
+- LLM-based systems must not be granted autonomous agency beyond their defined, least-privilege function.
+
+### AI Literacy
+
+**EU AI Act 2024/1689 (Art.4)**
+- Providers and deployers must ensure sufficient AI literacy among staff and other persons dealing with AI system operation and use.
+- AI literacy measures must be proportionate to the context of use, the technical complexity, and the impact of the AI system.
+
+**NIST AI 600-1 2024 (GV-3.2-002, GV-3.2-003)**
+- Acceptable use policies for AI interfaces and human-AI configurations must be defined and communicated.
+- Roles and responsibilities must be adjusted to account for the oversight of AI systems across their lifecycle.
+
+### LLM-Specific Security Risks
+
+**Applies to all frameworks**
+- Organisations deploying large language model applications must identify and manage LLM-specific security risks including prompt injection, sensitive data disclosure, supply chain integrity, output handling failures, and excessive agency.
+
+**OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM03, LLM04, LLM05, LLM06, LLM07, LLM08, LLM09, LLM10)**
+- Prompt injection vulnerabilities must be mitigated through input validation, privilege separation, and adversarial testing.
+- Sensitive information disclosure through LLM outputs must be prevented through output scanning, data minimisation, and access controls.
+- LLM supply chain risks including compromised models, datasets, and plugins must be managed through vendor assessment and provenance verification.
+- Data and model poisoning risks must be mitigated through training data governance and integrity controls.
+- Improper output handling that could lead to downstream system exploitation must be addressed through output sanitisation.
+- Excessive agency granted to LLM agents must be controlled through least-privilege configuration, human approval checkpoints, and resource limits.
+- System prompt leakage must be prevented through secure prompt design and access controls.
+- Vector and embedding weaknesses in RAG systems must be addressed through access controls and data validation.
+- Misinformation from LLM outputs must be mitigated through content verification, fact-checking, and clear AI disclosure.
+- Unbounded resource consumption must be prevented through rate limiting, quotas, and usage monitoring.
+
+### AI Quality Management System
+
+**EU AI Act 2024/1689 (Art.17.1, Art.17.2)**
+- Providers of high-risk AI systems must put a quality management system in place documented in a systematic and orderly manner covering all aspects of compliance with the Regulation.
+- Implementation of the quality management system must be proportionate to the size of the provider's organisation.
+
+**NIST AI 600-1 2024 (GV-4.1-001, GV-4.1-002, GV-4.1-003)**
+- Policies, procedures, and processes must address continual improvement for AI risk measurement.
+- Policies must address risks associated with lack of explainability and transparency in AI systems.
+- Oversight functions must be established across the AI lifecycle including procurement, design, and deployment.
+
+### AI Corrective Actions and Duty of Information
+
+**EU AI Act 2024/1689 (Art.20.1, Art.20.2, Art.82.2)**
+- Providers who consider or have reason to consider that a high-risk AI system is not in conformity with requirements must take corrective action, withdraw, recall, or disable the system as appropriate.
+- Where a high-risk AI system presents a risk, the provider shall immediately investigate the causes and take corrective measures.
+- Corrective action shall be applied to all AI systems of the same type that present the same risk.
+
+**NIST AI 600-1 2024 (MG-2.4-001, MG-2.4-002, MG-2.4-003, MG-2.4-004)**
+- Specific criteria for deactivation of GAI systems must be established and regularly reviewed in accordance with risk tolerances.
+- Procedures for escalating GAI system incidents to the organisational risk management authority must be maintained.
+- Communication plans must be in place to inform AI stakeholders as part of the deactivation process.
+
+### Procedures
+
+### AI Prohibited Practices Compliance Review Procedure
+
+**Applies to all frameworks**
+1. Review the inventory of AI systems in use or development against the prohibited practices list.
+2. Confirm no system performs subliminal manipulation, exploits vulnerability of specific groups, or performs prohibited biometric identification.
+3. Obtain legal/compliance sign-off on the review.
+4. Document the review outcome and retain as evidence.
+
+**EU AI Act 2024/1689 (Art.5.1, Art.5.2, Art.5.3, Art.5.4)**
+5. Confirm review specifically addresses all sub-provisions of Article 5 including real-time remote biometric identification.
+6. Document any borderline cases with legal counsel assessment.
+
+### AI Literacy Programme Procedure
+
+**Applies to all frameworks**
+1. Identify all personnel who develop, operate, deploy, or use AI systems.
+2. Assess current AI literacy levels against role requirements.
+3. Deliver training appropriate to role, context, and AI system risk level.
+4. Document completion and retain records.
+
+**EU AI Act 2024/1689 (Art.4)**
+5. Ensure AI literacy measures are proportionate to the technical complexity and impact of AI systems in scope.
+
+**NIST AI 600-1 2024 (GV-3.2-002, GV-3.2-003)**
+5. Include training on acceptable use policies and human-AI configuration responsibilities.
+
+### LLM Security Controls Review Procedure
+
+**Applies to all frameworks**
+1. Identify all LLM-based applications and agentic systems in production.
+2. Assess each system against the OWASP LLM Top 10 risk categories.
+3. Confirm controls are in place for prompt injection, sensitive data disclosure, output handling, supply chain, and resource limits.
+4. Document findings and assign remediation owners.
+5. Retest after remediation.
+
+**OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM05, LLM06, LLM07, LLM10)**
+6. Include adversarial prompt testing in scope.
+7. Confirm agent permission boundaries are enforced technically, not only by policy.
+
+**NIST AI 600-1 2024 (MS-2.7-007, MS-2.6-006)**
+6. Include red-team scenarios covering misuse, manipulation, and abuse facilitation.
+
+### AI Corrective Action Procedure
+
+**Applies to all frameworks**
+1. Identify the non-conformity or risk presented by the AI system.
+2. Investigate the root cause.
+3. Take corrective action: update the system, withdraw from service, or apply a temporary mitigation.
+4. Communicate to affected deployers or downstream parties as required.
+5. Document the corrective action and outcome.
+
+**EU AI Act 2024/1689 (Art.20.1, Art.20.2, Art.82.2)**
+6. Confirm corrective action is applied to all AI systems of the same type presenting the same risk.
+7. Notify the market surveillance authority where required.

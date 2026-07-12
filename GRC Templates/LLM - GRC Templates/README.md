@@ -38,6 +38,9 @@ LLM - GRC Templates/
 | 11 | ISO 42001 | 2023 |
 | 12 | ISO 37001 | 2025 |
 | 13 | ISO 9001 | 2015 |
+| 14 | OWASP Top 10 for LLM Applications | 2025 |
+| 15 | NIST AI 600-1 Generative AI Profile | 2024 |
+| 16 | EU AI Act | Regulation 2024/1689 |
 
 ---
 
@@ -92,7 +95,7 @@ The tagging is at the step level (Option B), not the procedure level, so custome
 | Policy | Primary Frameworks |
 |--------|--------------------|
 | Access Management | All 13 |
-| AI Governance | ISO 42001, SCF |
+| AI Governance | ISO 42001, SCF, EU AI Act, NIST AI 600-1, OWASP LLM |
 | Anti-Bribery | ISO 37001 |
 | Asset Management | All 13 |
 | Business Continuity | All 13 |
@@ -125,7 +128,7 @@ Internal controls operationalise the procedures defined in policies. Each contro
 1. Reading all requirements for ISO 27002 and CIS Controls v8.1 in full and mapping them to existing policy procedures.
 2. Where multiple requirements described the same operational activity, they were collapsed into a single control mapped to all applicable req IDs.
 3. Where requirements had no existing procedure home, new procedures were added to existing policies or new policies were created.
-4. All remaining 11 frameworks were then mapped to the same 82 controls (reuse where the control already satisfied the requirement) or new controls were added.
+4. All remaining 11 frameworks were then mapped to the same 99 controls (reuse where the control already satisfied the requirement) or new controls were added.
 
 ### Control Format (CSV columns)
 
@@ -201,7 +204,7 @@ Summary (✓ = framework has requirements mapped to this policy):
 
 ## Controls-to-Framework Mapping
 
-See `Controls/mapping_controls_to_requirements.csv` for the full cross-reference (82 controls × 13 frameworks with matched requirement IDs).
+See `Controls/mapping_controls_to_requirements.csv` for the full cross-reference (99 controls × 13 frameworks with matched requirement IDs).
 
 ---
 
@@ -217,5 +220,6 @@ The relationship is: **Policy Procedure** defines how something should be done �
 
 | Date | Change | Author |
 |------|--------|--------|
-| 2026-07-02 | Initial library: 22 policies, 82 controls, 13 frameworks (PCI DSS v4.0.1, ISO 27001:2022, ISO 27002:2022, SOC 2, NIST 800-53 Rev5, CIS v8.1, SCF 2025, NIS2, ISO 27701, ISO 45001, ISO 42001, ISO 37001, ISO 9001). Procedure tags added for all 13 frameworks. | LLM |
+| 2026-07-02 | Initial library: 22 policies, 99 controls, 13 frameworks (PCI DSS v4.0.1, ISO 27001:2022, ISO 27002:2022, SOC 2, NIST 800-53 Rev5, CIS v8.1, SCF 2025, NIS2, ISO 27701, ISO 45001, ISO 42001, ISO 37001, ISO 9001). Procedure tags added for all 13 frameworks. | LLM |
+| 2026-07-12 | Added 3 new AI frameworks: OWASP LLM Top 10 2025, NIST AI 600-1 2024, EU AI Act 2024/1689. Added 17 new controls. Updated AI_Governance, Secure_Development, Risk_Management, Supplier_Management, Logging_Monitoring policies. | LLM |
 | 2026-07-02 | Renamed directory from `Claude - GRC Templates` to `LLM - GRC Templates`. Moved `00_mapping_table.md` into `Policies/` subdirectory. Added this README. | LLM |
