@@ -27,7 +27,7 @@ eramba is an open-source GRC (Governance, Risk, and Compliance) platform. This p
 GRC Templates/LLM - GRC Templates/
 ├── README.md                          ← Summary of everything, keep updated
 ├── Policies/
-│   ├── 00_mapping_table.md            ← 22 policies × 13 frameworks with req IDs
+│   ├── 00_mapping_table.md            ← 22 policies × 16 frameworks with req IDs
 │   ├── Access_Management.md
 │   ├── AI_Governance.md
 │   ├── Anti_Bribery.md
@@ -75,6 +75,9 @@ GRC Templates/LLM - GRC Templates/
 | iso42001 | ISO 42001:2023 | ISO42001.csv |
 | iso37001 | ISO 37001:2025 | ISO37001.csv |
 | iso9001 | ISO 9001:2015 | ISO9001.csv |
+| owasp_llm | OWASP Top 10 for LLM Applications 2025 | export_2026-07-12.csv |
+| nist_ai | NIST AI 600-1 Generative AI Profile 2024 | export_2026-07-12__1_.csv |
+| eu_ai | EU AI Act (Regulation EU 2024/1689) | export_2026-07-12__2_.csv |
 
 The CSV files have columns: section_id, section_title, req_id, req_title, description (exact columns vary slightly per framework).
 
@@ -133,14 +136,25 @@ N. framework-specific step
 
 ## What Has Been Done
 
-1. Built 22 policy documents in Markdown covering all 13 frameworks
+1. Built 22 policy documents in Markdown covering all 16 frameworks
 2. Tagged all policy statements by framework (done)
-3. Tagged all procedure steps by framework for all 13 frameworks (done)
+3. Tagged all procedure steps by framework for all 16 frameworks (done)
 4. Built 82 internal controls with full audit methodologies
 5. Built 3 mapping CSVs (controls × requirements, controls × policies)
-6. Built policy mapping table (22 policies × 13 frameworks)
+6. Built policy mapping table (22 policies × 16 frameworks)
 7. Pushed everything to GitHub under `GRC Templates/LLM - GRC Templates/`
 8. Set up branch + PR workflow
+
+---
+
+## What Was Added in July 2026
+
+- 3 new AI frameworks: OWASP LLM Top 10 2025, NIST AI 600-1 2024, EU AI Act 2024/1689
+- 17 new controls (LLM security, EU AI Act compliance, NIST AI governance)
+- 5 existing policies expanded: AI_Governance, Secure_Development, Risk_Management, Supplier_Management, Logging_Monitoring
+- EU AI Act filtered to ~128 operational requirements (excluding notified body, member state, and procedural-only articles)
+- NIST AI 600-1 filtered to ~175 operational actions (excluding pure academic measurement)
+- Framework data in: /home/claude/data_ai_frameworks.json
 
 ---
 
