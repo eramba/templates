@@ -81,3 +81,20 @@ PII Cross-Border Transfer Review,Privacy,PII Processing Assessment
 Data Subject Rights Request Fulfilment Review,Privacy,Individual Rights Request Handling
 Cyber Governance Programme Review,Risk Management,Independent Information Security Review
 NIS2 Incident Notification Review,Incident Management,Post-Incident Review
+AI Prohibited Practices Compliance Review,AI Governance,AI Impact Assessment
+AI System Risk Management Review,AI Governance,AI Impact Assessment
+AI Training Data Governance Review,AI Governance,AI System Lifecycle Management
+AI Technical Documentation Review,AI Governance,AI System Lifecycle Management
+AI System Logging and Record-Keeping Review,Logging Monitoring,Log Configuration
+AI Human Oversight Controls Review,AI Governance,AI System Lifecycle Management
+AI Transparency and Disclosure Review,AI Governance,AI System Lifecycle Management
+AI Serious Incident Reporting Review,Incident Management,Post-Incident Review
+AI Post-Market Monitoring Review,AI Governance,AI System Monitoring
+Fundamental Rights Impact Assessment,AI Governance,AI Impact Assessment
+LLM Prompt Injection Controls Review,Secure Development,Security Testing in Development
+LLM Sensitive Data Disclosure Controls Review,Secure Development,Security Testing in Development
+LLM Supply Chain Security Review,Supplier Management,Supplier Onboarding
+LLM Output Validation and Handling Review,Secure Development,Security Testing in Development
+LLM Resource and Agency Controls Review,Secure Development,Application Security Requirements Review
+GAI Red-Teaming and Adversarial Testing,AI Governance,AI System Lifecycle Management
+Third-Party GAI System Governance Review,Supplier Management,Supplier Review
