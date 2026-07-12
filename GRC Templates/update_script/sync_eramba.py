@@ -34,8 +34,17 @@ import argparse
 import urllib.request
 import urllib.parse
 import urllib.error
+import ssl
 from datetime import date
 from io import StringIO
+
+# SSL context — disable verification if the server uses a self-signed or
+# internally-issued certificate that Python cannot verify locally.
+# For production use with a valid public certificate, remove this and use
+# the default ssl context instead.
+SSL_CONTEXT = ssl.create_default_context()
+SSL_CONTEXT.check_hostname = False
+SSL_CONTEXT.verify_mode = ssl.CERT_NONE
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -94,7 +103,7 @@ def eramba_request(method, path, data=None):
     body = json.dumps(data).encode() if data is not None else None
     req = urllib.request.Request(url, data=body, headers=headers, method=method)
     try:
-        with urllib.request.urlopen(req, timeout=30) as r:
+        with urllib.request.urlopen(req, timeout=30, context=SSL_CONTEXT) as r:
             raw = r.read().decode()
             return json.loads(raw) if raw.strip() else {}, None
     except urllib.error.HTTPError as e:
@@ -141,7 +150,7 @@ def github_request(path):
         headers['Authorization'] = f'token {GITHUB_TOKEN}'
     req = urllib.request.Request(url, headers=headers)
     try:
-        with urllib.request.urlopen(req, timeout=30) as r:
+        with urllib.request.urlopen(req, timeout=30, context=SSL_CONTEXT) as r:
             return json.loads(r.read()), None
     except urllib.error.HTTPError as e:
         return None, f"HTTP {e.code}: {e.read().decode()[:200]}"
