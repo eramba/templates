@@ -451,127 +451,133 @@ def sync_controls(dry_run=False):
 
 def sync_compliance(dry_run=False):
     """
-    For each compliance analysis record in eramba, check if the repo's
-    mapping CSV has controls and/or policies mapped to that requirement.
+    For each compliance analysis record in eramba, check if the repo
+    mapping CSV has controls/policies for that requirement.
     If yes, update the record to add those links.
 
-    Note: eramba compliance analysis records must already exist (created manually
-    when importing the compliance package). This step only UPDATES them.
+    Strategy:
+    1. Load all compliance package regulators → find our 16 frameworks by name
+    2. For each matched framework, fetch its package items → build {item_id_str: item_pk}
+    3. Load compliance analysis records → build {item_pk: ca_record}
+    4. For each control→requirement mapping, find the ca record and update it
     """
     log("\n=== COMPLIANCE ANALYSIS LINKS ===")
 
-    # Load all data we need
-    ca_records   = load_eramba_compliance_analysis()
-    eramba_ctrls = load_eramba_controls()
-    eramba_pols  = load_eramba_policies()
-    gh_mappings  = load_mappings_from_github()
+    # Step 1: load all compliance package regulators
+    log("Loading compliance package regulators...")
+    regulators = eramba_get_all('/api/compliance-package-regulators/index')
+    reg_by_name = {r.get('name', '').lower().strip(): r for r in regulators}
+    log(f"Found {len(regulators)} regulators in eramba")
 
-    if not ca_records:
-        log("No compliance analysis records found in eramba — nothing to update", 'WARN')
-        log("Import your compliance packages in eramba first, then run this script", 'WARN')
-        return True
-
-    # Build a lookup by fetching each record's full detail to get package+requirement info
-    # The index endpoint returns compliance_package_item_id — we need to map that to
-    # package name + requirement index by fetching individual records (sampled first
-    # to understand structure, then built from the index data we have).
-    #
-    # Strategy: fetch a sample record to understand field structure, then build
-    # lookup from {compliance_package_item_id: ca_record} and separately fetch
-    # the compliance package items to map item_id → (package_name, req_id).
-
-    if not ca_records:
-        log("No compliance analysis records found", 'WARN')
-        return True
-
-    # Log the structure so we can debug
-    sample = ca_records[0]
-    log(f"Compliance analysis record fields: {list(sample.keys())}")
-
-    # Fetch one full record to see nested structure
-    sample_full, err = eramba_request('GET', f"/api/compliance-managements/{sample['id']}")
-    if not err and sample_full:
-        log(f"Full record fields: {list(sample_full.keys())}")
-        # Log nested objects
-        for k, v in sample_full.items():
-            if isinstance(v, dict):
-                log(f"  {k} keys: {list(v.keys())}")
-
-    # Build lookup: {compliance_package_item_id: ca_record}
-    ca_by_item_id = {}
-    for rec in ca_records:
-        item_id = rec.get('compliance_package_item_id')
-        if item_id:
-            ca_by_item_id[item_id] = rec
-
-    log(f"Built item_id lookup with {len(ca_by_item_id)} entries")
-
-    if not ca_by_item_id:
-        log("Could not build compliance analysis lookup — compliance_package_item_id missing", 'WARN')
-        log(f"Sample record: {sample}", 'WARN')
-        return False
-
-    # We'll use a different matching approach:
-    # For each control→framework→req_id mapping, find the ca record via the
-    # compliance package items API (if available) or log what we need.
-    # For now, log what we have so we can refine.
-    log(f"NOTE: Compliance link sync requires mapping req IDs to compliance_package_item_ids")
-    log(f"Fetching sample compliance package item to understand structure...")
-
-    # Try to fetch compliance package items
-    sample_item_id = list(ca_by_item_id.keys())[0]
-    log(f"Sample compliance_package_item_id: {sample_item_id}")
-
-    # Try fetching the compliance package item directly
-    item_rec, err = eramba_request('GET', f"/api/compliance-package-regulators/{sample_item_id}")
-    if not err and item_rec:
-        log(f"Compliance package item fields: {list(item_rec.keys())}")
-        for k, v in item_rec.items():
-            if v and not isinstance(v, (list, dict)):
-                log(f"  {k}: {v}")
-    else:
-        log(f"Could not fetch compliance package item {sample_item_id}: {err}", 'WARN')
-
-    # Build the full lookup by fetching compliance package items
-    # This tells us: item_id → (package_name, req_id)
-    log("Building compliance package item lookup (this may take a while for large datasets)...")
-    log("Fetching compliance package items index...")
-
-    # Try the compliance package items endpoint
-    pkg_items, err2 = eramba_request('GET', '/api/compliance-package-items/index?page=1&limit=1')
-    if not err2:
-        log(f"Found compliance package items endpoint. Fields: {list(pkg_items[0].keys()) if isinstance(pkg_items, list) and pkg_items else pkg_items}")
-    else:
-        log(f"No /api/compliance-package-items/index: {err2}", 'WARN')
-
-    # Cannot proceed further without understanding the item structure
-    # Return True so other syncs still complete
-    log("Compliance link sync: run with --only compliance after reviewing the debug output above", 'WARN')
-    log(f"Built lookup with {len(ca_by_item_id)} compliance analysis records", 'OK')
-    return True
-
-    # Framework label → lookup key mapping
-    # These must match the column headers in mapping_controls_to_requirements.csv
-    FW_PACKAGE_NAMES = {
-        'PCI DSS v4.0.1':                  'pci dss v4.0.1',
-        'ISO 27001:2022':                  'iso 27001:2022',
-        'ISO 27002:2022':                  'iso 27002:2022',
-        'SOC 2 (TSP 2017)':               'soc 2',
-        'NIST 800-53 Rev5':               'nist 800-53',
-        'CIS Controls v8.1':              'cis controls',
-        'SCF 2025':                        'scf 2025',
-        'NIS2 Article 21':                'nis2',
-        'ISO 27701:2025':                  'iso 27701',
-        'ISO 45001:2018':                  'iso 45001',
-        'ISO 42001:2023':                  'iso 42001',
-        'ISO 37001:2025':                  'iso 37001',
-        'ISO 9001:2015':                   'iso 9001',
-        'OWASP LLM Top 10 2025':          'owasp llm',
-        'NIST AI 600-1 2024':             'nist ai 600-1',
-        'EU AI Act 2024/1689':            'eu ai act',
+    # Map our framework labels → regulator name patterns to search for
+    # Keys = column headers in mapping_controls_to_requirements.csv
+    # Values = substrings to match against eramba regulator names (case-insensitive)
+    FW_NAME_PATTERNS = {
+        'PCI DSS v4.0.1':            ['pci dss'],
+        'ISO 27001:2022':             ['27001'],
+        'ISO 27002:2022':             ['27002'],
+        'SOC 2 (TSP 2017)':          ['soc 2', 'soc2'],
+        'NIST 800-53 Rev5':          ['nist 800-53', 'nist800-53'],
+        'CIS Controls v8.1':         ['cis controls', 'cis v8'],
+        'SCF 2025':                   ['scf'],
+        'NIS2 Article 21':           ['nis2', 'nis 2'],
+        'ISO 27701:2025':             ['27701'],
+        'ISO 45001:2018':             ['45001'],
+        'ISO 42001:2023':             ['42001'],
+        'ISO 37001:2025':             ['37001'],
+        'ISO 9001:2015':              ['9001'],
+        'OWASP LLM Top 10 2025':     ['owasp llm', 'owasp top 10 llm'],
+        'NIST AI 600-1 2024':        ['nist ai 600', 'ai 600-1'],
+        'EU AI Act 2024/1689':       ['eu ai act', '2024/1689'],
     }
 
-    # Also load policy mappings from mapping_controls_to_policies.csv
+    # Find regulator IDs for our frameworks
+    fw_regulator_ids = {}
+    for fw_label, patterns in FW_NAME_PATTERNS.items():
+        for reg_name_lower, reg in reg_by_name.items():
+            if any(p in reg_name_lower for p in patterns):
+                fw_regulator_ids[fw_label] = reg['id']
+                log(f"  Matched '{fw_label}' → eramba '{reg.get('name')}' (id={reg['id']})")
+                break
+        if fw_label not in fw_regulator_ids:
+            log(f"  No match for '{fw_label}' in eramba regulators", 'WARN')
+
+    if not fw_regulator_ids:
+        log("No framework regulators matched — check regulator names in eramba", 'ERR')
+        return False
+
+    # Step 2: for each matched framework, fetch its package items
+    # compliance-package-items has compliance_package_id (not regulator_id directly)
+    # So we first need the package IDs for each regulator, then fetch items
+    log("\nLoading compliance packages per framework...")
+    all_packages = eramba_get_all('/api/compliance-packages/index')
+    if not all_packages:
+        # Try alternative endpoint name
+        all_packages = eramba_get_all('/api/compliance-package-regulators/index')
+
+    # Build {regulator_id: [package_id, ...]}
+    reg_to_pkg_ids = {}
+    for pkg in all_packages:
+        reg_id = pkg.get('compliance_package_regulator_id') or (
+            (pkg.get('compliance_package_regulator') or {}).get('id'))
+        pkg_id = pkg.get('id')
+        if reg_id and pkg_id:
+            reg_to_pkg_ids.setdefault(reg_id, []).append(pkg_id)
+
+    log(f"Found packages for {len(reg_to_pkg_ids)} regulators")
+
+    # Step 3: build {item_id_str: compliance_package_item_pk} for our frameworks
+    log("\nBuilding requirement item lookup per framework...")
+    item_str_to_pk = {}   # (fw_label, item_id_str_lower) → item_pk
+    item_pk_to_fw  = {}   # item_pk → (fw_label, item_id_str)
+
+    for fw_label, reg_id in fw_regulator_ids.items():
+        pkg_ids = reg_to_pkg_ids.get(reg_id, [])
+        if not pkg_ids:
+            log(f"  No packages found for {fw_label} (regulator id={reg_id})", 'WARN')
+            continue
+
+        fw_item_count = 0
+        for pkg_id in pkg_ids:
+            items = eramba_get_all(f'/api/compliance-package-items/index?compliance_package_id={pkg_id}')
+            if not items:
+                # Try without filter — fetch all and filter locally
+                items = eramba_get_all('/api/compliance-package-items/index')
+                items = [i for i in items if i.get('compliance_package_id') == pkg_id]
+
+            for item in items:
+                item_pk  = item.get('id')
+                item_str = item.get('item_id', item.get('index', '')).strip()
+                if item_pk and item_str:
+                    key = (fw_label, item_str.lower())
+                    item_str_to_pk[key] = item_pk
+                    item_pk_to_fw[item_pk] = (fw_label, item_str)
+                    fw_item_count += 1
+            time.sleep(API_DELAY)
+
+        log(f"  {fw_label}: {fw_item_count} items loaded")
+
+    log(f"\nTotal items in lookup: {len(item_str_to_pk)}")
+
+    # Step 4: load compliance analysis records → {item_pk: ca_record}
+    log("\nLoading compliance analysis records...")
+    ca_records = eramba_get_all('/api/compliance-managements/index')
+    log(f"Found {len(ca_records)} compliance analysis records")
+
+    ca_by_item_pk = {}
+    for rec in ca_records:
+        item_pk = rec.get('compliance_package_item_id')
+        if item_pk:
+            ca_by_item_pk[item_pk] = rec
+
+    # Step 5: load controls and policies from eramba
+    eramba_ctrls = load_eramba_controls()
+    eramba_pols  = load_eramba_policies()
+
+    # Step 6: load mappings from GitHub
+    gh_mappings = load_mappings_from_github()
+
+    # Load policy mappings
     pol_csv_path = f"{GITHUB_BASE}/Controls/mapping_controls_to_policies.csv"
     pol_csv, err = github_get_file_content(pol_csv_path)
     ctrl_to_policy = {}
@@ -579,90 +585,85 @@ def sync_compliance(dry_run=False):
         for row in csv.DictReader(StringIO(pol_csv)):
             ctrl_to_policy[row['Control Title'].strip()] = row.get('Policy', '').strip()
 
-    updated = skipped = errors = 0
+    # Step 7: iterate mappings and update compliance analysis records
+    updated = skipped = not_found = errors = 0
 
     for ctrl_title, fw_map in gh_mappings.items():
         ctrl_rec = eramba_ctrls.get(ctrl_title.lower())
         if not ctrl_rec:
-            log(f"Control not in eramba (not yet created?): {ctrl_title}", 'WARN')
-            continue
+            continue  # control not yet in eramba
 
         ctrl_id = ctrl_rec['id']
-
-        # Find the linked policy eramba ID
         pol_name = ctrl_to_policy.get(ctrl_title, '').lower()
         pol_rec  = eramba_pols.get(pol_name)
         pol_id   = pol_rec['id'] if pol_rec else None
 
         for fw_label, req_ids in fw_map.items():
-            pkg_key = FW_PACKAGE_NAMES.get(fw_label, '').lower()
-            if not pkg_key:
-                continue
+            if fw_label not in fw_regulator_ids:
+                continue  # framework not in eramba
 
             for req_id in req_ids:
-                ca_key = (pkg_key, req_id.lower())
-                ca_rec = ca_lookup.get(ca_key)
-                if not ca_rec:
-                    # Try partial match on package name
-                    for (pname, rid), rec in ca_lookup.items():
-                        if pkg_key in pname and rid == req_id.lower():
-                            ca_rec = rec
-                            break
+                key = (fw_label, req_id.lower())
+                item_pk = item_str_to_pk.get(key)
+                if not item_pk:
+                    not_found += 1
+                    continue
 
+                ca_rec = ca_by_item_pk.get(item_pk)
                 if not ca_rec:
-                    continue  # Requirement not in eramba — skip silently
+                    not_found += 1
+                    continue
 
                 ca_id = ca_rec['id']
 
-                # GET full compliance analysis record
-                if not dry_run:
-                    full, err = eramba_request('GET', f"/api/compliance-managements/{ca_id}")
-                    if err:
-                        log(f"GET compliance analysis {ca_id}: {err}", 'ERR')
-                        errors += 1
-                        continue
-
-                    # Merge in our control and policy IDs
-                    existing_services = full.get('security_services', []) or []
-                    existing_policies = full.get('security_policies', []) or []
-
-                    # Add if not already present
-                    svc_ids = [s if isinstance(s, int) else s.get('id') for s in existing_services]
-                    pol_ids = [p if isinstance(p, int) else p.get('id') for p in existing_policies]
-
-                    changed = False
-                    if ctrl_id not in svc_ids:
-                        svc_ids.append(ctrl_id)
-                        changed = True
-                    if pol_id and pol_id not in pol_ids:
-                        pol_ids.append(pol_id)
-                        changed = True
-
-                    if not changed:
-                        skipped += 1
-                        continue
-
-                    full['security_services'] = [{'id': i} for i in svc_ids]
-                    full['security_policies']  = [{'id': i} for i in pol_ids]
-
-                    _, err = eramba_request('PUT', f"/api/compliance-managements/{ca_id}", full)
-                    if err:
-                        log(f"PUT compliance analysis {ca_id} ({fw_label} {req_id}): {err}", 'ERR')
-                        errors += 1
-                        continue
-                    time.sleep(API_DELAY)
+                if dry_run:
+                    log(f"[DRY] Would link '{ctrl_title}' + policy '{pol_name}' → {fw_label} {req_id}", 'DRY')
                     updated += 1
-                else:
-                    log(f"[DRY] Would link {ctrl_title} → {fw_label} {req_id}", 'DRY')
-                    updated += 1
+                    continue
 
-    log(f"\nCompliance links: {updated} updated, {skipped} already linked, {errors} errors")
+                # GET full record (PUT requires all fields)
+                full, err = eramba_request('GET', f"/api/compliance-managements/{ca_id}")
+                if err:
+                    log(f"GET ca {ca_id}: {err}", 'ERR')
+                    errors += 1
+                    continue
+
+                # Unwrap {success, data} wrapper if present
+                if isinstance(full, dict) and 'data' in full:
+                    full = full['data']
+
+                # Merge control and policy IDs
+                existing_svcs = full.get('security_services') or []
+                existing_pols = full.get('security_policies') or []
+                svc_ids = [s['id'] if isinstance(s, dict) else s for s in existing_svcs]
+                pol_ids = [p['id'] if isinstance(p, dict) else p for p in existing_pols]
+
+                changed = False
+                if ctrl_id not in svc_ids:
+                    svc_ids.append(ctrl_id)
+                    changed = True
+                if pol_id and pol_id not in pol_ids:
+                    pol_ids.append(pol_id)
+                    changed = True
+
+                if not changed:
+                    skipped += 1
+                    continue
+
+                full['security_services'] = [{'id': i} for i in svc_ids]
+                full['security_policies']  = [{'id': i} for i in pol_ids]
+
+                _, err = eramba_request('PUT', f"/api/compliance-managements/{ca_id}", full)
+                if err:
+                    log(f"PUT ca {ca_id} ({fw_label} {req_id}): {err}", 'ERR')
+                    errors += 1
+                    continue
+                time.sleep(API_DELAY)
+                updated += 1
+
+    log(f"\nCompliance links: {updated} updated, {skipped} already linked, {not_found} req IDs not found in eramba, {errors} errors")
     return errors == 0
 
-
-# ---------------------------------------------------------------------------
-# Validation
-# ---------------------------------------------------------------------------
 
 def validate_env():
     missing = []
