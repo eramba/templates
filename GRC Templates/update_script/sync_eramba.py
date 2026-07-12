@@ -702,10 +702,10 @@ def sync_compliance(dry_run=False, max_pages=0):
                 payload = {
                     "compliance_treatment_strategy_id": 1,
                     "efficacy": 0,
-                    "description": None,
+                    "description": "",
                     "owners": ["User-1"],
-                    "projects": None,
-                    "compliance_exceptions": None,
+                    "projects": [],
+                    "compliance_exceptions": [],
                     "security_policies": pol_ids,
                     "security_services": svc_ids,
                     "risks": [""],
