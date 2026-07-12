@@ -48,6 +48,29 @@ SSL_CONTEXT.check_hostname = False
 SSL_CONTEXT.verify_mode = ssl.CERT_NONE
 
 # ---------------------------------------------------------------------------
+# Logging setup — writes to logs/ directory next to the script
+# ---------------------------------------------------------------------------
+
+import logging
+from pathlib import Path
+
+def setup_file_logger():
+    log_dir = Path(__file__).parent / 'logs'
+    log_dir.mkdir(exist_ok=True)
+    timestamp = __import__('datetime').datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    log_file = log_dir / f'sync_{timestamp}.log'
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(message)s',
+        handlers=[
+            logging.FileHandler(log_file, encoding='utf-8'),
+        ]
+    )
+    return log_file
+
+LOG_FILE = setup_file_logger()
+
+# ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
 
@@ -110,7 +133,9 @@ API_DELAY = 0.5
 
 def log(msg, level='INFO'):
     prefix = {'INFO': '  ', 'OK': '✓ ', 'SKIP': '– ', 'WARN': '! ', 'ERR': '✗ ', 'DRY': '~ '}
-    print(f"{prefix.get(level, '  ')}{msg}")
+    line = f"{prefix.get(level, '  ')}{msg}"
+    print(line)
+    logging.info(line)
 
 
 def eramba_auth_header():
@@ -804,6 +829,7 @@ def main():
     validate_env()
 
     print(f"\neramba GRC Template Sync")
+    print(f"Log file : {LOG_FILE}")
     print(f"========================")
     print(f"Instance : {ERAMBA_URL}")
     print(f"User     : {ERAMBA_USER}")
