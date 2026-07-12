@@ -601,7 +601,7 @@ def sync_compliance(dry_run=False):
     log("Loading all compliance analysis records (paginating)...")
     ca_records = []
     page = 1
-    limit = 100
+    limit = 200
     consecutive_errors = 0
     while True:
         result, err = eramba_request('GET', f"/api/compliance-managements/index?page={page}&limit={limit}")
