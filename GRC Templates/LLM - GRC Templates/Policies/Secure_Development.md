@@ -250,3 +250,43 @@ All software developed, customised, or procured by the organisation, including i
 
 **SCF 2025 (TDA-20)**
 9. Limit privileges to change software resident within software libraries per TDA-20.
+### LLM Application Security
+
+**Applies to all frameworks**
+- LLM-based applications must be assessed for LLM-specific vulnerabilities as part of the secure development lifecycle.
+- Security testing must include adversarial prompt testing, output validation, and supply chain integrity checks.
+
+**OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM03, LLM04, LLM05, LLM06, LLM07, LLM08, LLM09, LLM10)**
+- Prompt injection mitigations must be designed into LLM application architecture before deployment.
+- Sensitive information disclosure through model outputs must be addressed in the threat model.
+- LLM supply chain components (base models, datasets, plugins) must be vetted as part of the SDL.
+- Output handling must include sanitisation before passing LLM output to downstream systems or execution environments.
+- Agentic LLM systems must implement least-privilege, resource limits, and human approval checkpoints in the design phase.
+
+**NIST AI 600-1 2024 (MS-2.7-007, MS-2.7-008, MS-2.7-009)**
+- AI red-teaming must assess resilience against abuse, prompt injection, extraction attacks, and misuse facilitation.
+- Fine-tuning must be verified not to compromise safety and security controls.
+- Security measures must be regularly assessed and verified to remain effective.
+
+**EU AI Act 2024/1689 (Art.15.1, Art.15.5)**
+- High-risk AI systems must be designed to achieve appropriate accuracy, robustness, and cybersecurity.
+- AI systems must be resilient against attempts by unauthorised third parties to alter their use, outputs, or performance by exploiting vulnerabilities.
+
+### LLM Application Security Testing Procedure
+
+**Applies to all frameworks**
+1. Include LLM-specific test cases in the security testing plan for all LLM applications.
+2. Test for prompt injection (direct and indirect), sensitive data leakage via outputs, and excessive agency.
+3. Conduct adversarial red-team testing against jailbreaking and manipulation scenarios.
+4. Test output handling: confirm LLM-generated code or commands are not executed without sanitisation.
+5. Review supply chain components for provenance and known vulnerabilities.
+6. Document findings and track to remediation.
+
+**OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM05, LLM06, LLM10)**
+7. Include resource exhaustion and denial-of-service via unbounded inference in the test scope.
+
+**NIST AI 600-1 2024 (MS-2.7-007)**
+7. Include scenarios covering abuse to facilitate attacks on other systems via malicious code generation.
+
+**EU AI Act 2024/1689 (Art.15.5)**
+7. Include testing of resilience against adversarial inputs designed to alter AI system outputs.
