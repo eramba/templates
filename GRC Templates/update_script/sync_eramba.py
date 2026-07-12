@@ -598,6 +598,15 @@ def sync_compliance(dry_run=False):
     log("\n=== COMPLIANCE ANALYSIS LINKS ===")
 
     # Step 1: paginate all compliance analysis records into memory
+    # Load policies and mapping FIRST before the heavy pagination
+    # (eramba may be too tired to respond after 14k+ records)
+    eramba_pols  = load_eramba_policies()
+    policy_map   = load_policy_mapping_from_github()
+
+    if not eramba_pols:
+        log("No policies found in eramba — run --only policies first", 'ERR')
+        return False
+
     log("Loading all compliance analysis records (paginating)...")
     ca_records = []
     page = 1
@@ -643,10 +652,6 @@ def sync_compliance(dry_run=False):
     # Show sample regulator names for debugging
     sample_regs = sorted(set(k[0] for k in ca_lookup.keys()))[:10]
     log(f"Sample regulator names in lookup: {sample_regs}")
-
-    # Step 3: load policies from eramba and policy→requirement mapping from GitHub
-    eramba_pols   = load_eramba_policies()
-    policy_map    = load_policy_mapping_from_github()
 
     log(f"Framework labels in mapping table: {sorted(set(fw for v in policy_map.values() for fw in v.keys()))[:8]}...")
 
