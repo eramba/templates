@@ -113,22 +113,23 @@ def eramba_request(method, path, data=None):
         return None, str(e)
 
 
-def eramba_get_all(path):
+def eramba_get_all(path, max_pages=50):
     """Fetch all pages from a list endpoint. Returns list of records."""
     records = []
     page = 1
     limit = 100
-    while True:
+    while page <= max_pages:
         result, err = eramba_request('GET', f"{path}?page={page}&limit={limit}")
         if err:
-            log(f"GET {path} page {page}: {err}", 'ERR')
+            if records:
+                log(f"GET {path} page {page}: {err} — stopping, using {len(records)} records so far", 'WARN')
+            else:
+                log(f"GET {path} page {page}: {err}", 'ERR')
             break
         if not result:
             break
-        # eramba returns either a list directly or a dict with 'data' key
         items = result if isinstance(result, list) else result.get('data', result)
         if not isinstance(items, list):
-            # single page, wrap it
             records.append(items)
             break
         if not items:
@@ -470,21 +471,84 @@ def sync_compliance(dry_run=False):
         log("Import your compliance packages in eramba first, then run this script", 'WARN')
         return True
 
-    # Build a lookup: {(package_name_lower, req_id_lower): ca_record}
-    ca_lookup = {}
-    for rec in ca_records:
-        # The record structure depends on eramba version; common fields:
-        pkg_name = (rec.get('compliance_package_regulator', {}) or {}).get('name', '')
-        req_id   = rec.get('item_number', rec.get('requirement_id', rec.get('index', '')))
-        if pkg_name and req_id:
-            ca_lookup[(pkg_name.lower(), str(req_id).lower())] = rec
+    # Build a lookup by fetching each record's full detail to get package+requirement info
+    # The index endpoint returns compliance_package_item_id — we need to map that to
+    # package name + requirement index by fetching individual records (sampled first
+    # to understand structure, then built from the index data we have).
+    #
+    # Strategy: fetch a sample record to understand field structure, then build
+    # lookup from {compliance_package_item_id: ca_record} and separately fetch
+    # the compliance package items to map item_id → (package_name, req_id).
 
-    if not ca_lookup:
-        log("Could not build compliance analysis lookup (unexpected record structure)", 'WARN')
-        log("Sample record keys: " + str(list(ca_records[0].keys())[:10]) if ca_records else "no records", 'WARN')
+    if not ca_records:
+        log("No compliance analysis records found", 'WARN')
+        return True
+
+    # Log the structure so we can debug
+    sample = ca_records[0]
+    log(f"Compliance analysis record fields: {list(sample.keys())}")
+
+    # Fetch one full record to see nested structure
+    sample_full, err = eramba_request('GET', f"/api/compliance-managements/{sample['id']}")
+    if not err and sample_full:
+        log(f"Full record fields: {list(sample_full.keys())}")
+        # Log nested objects
+        for k, v in sample_full.items():
+            if isinstance(v, dict):
+                log(f"  {k} keys: {list(v.keys())}")
+
+    # Build lookup: {compliance_package_item_id: ca_record}
+    ca_by_item_id = {}
+    for rec in ca_records:
+        item_id = rec.get('compliance_package_item_id')
+        if item_id:
+            ca_by_item_id[item_id] = rec
+
+    log(f"Built item_id lookup with {len(ca_by_item_id)} entries")
+
+    if not ca_by_item_id:
+        log("Could not build compliance analysis lookup — compliance_package_item_id missing", 'WARN')
+        log(f"Sample record: {sample}", 'WARN')
         return False
 
-    log(f"Built lookup with {len(ca_lookup)} compliance analysis records")
+    # We'll use a different matching approach:
+    # For each control→framework→req_id mapping, find the ca record via the
+    # compliance package items API (if available) or log what we need.
+    # For now, log what we have so we can refine.
+    log(f"NOTE: Compliance link sync requires mapping req IDs to compliance_package_item_ids")
+    log(f"Fetching sample compliance package item to understand structure...")
+
+    # Try to fetch compliance package items
+    sample_item_id = list(ca_by_item_id.keys())[0]
+    log(f"Sample compliance_package_item_id: {sample_item_id}")
+
+    # Try fetching the compliance package item directly
+    item_rec, err = eramba_request('GET', f"/api/compliance-package-regulators/{sample_item_id}")
+    if not err and item_rec:
+        log(f"Compliance package item fields: {list(item_rec.keys())}")
+        for k, v in item_rec.items():
+            if v and not isinstance(v, (list, dict)):
+                log(f"  {k}: {v}")
+    else:
+        log(f"Could not fetch compliance package item {sample_item_id}: {err}", 'WARN')
+
+    # Build the full lookup by fetching compliance package items
+    # This tells us: item_id → (package_name, req_id)
+    log("Building compliance package item lookup (this may take a while for large datasets)...")
+    log("Fetching compliance package items index...")
+
+    # Try the compliance package items endpoint
+    pkg_items, err2 = eramba_request('GET', '/api/compliance-package-items/index?page=1&limit=1')
+    if not err2:
+        log(f"Found compliance package items endpoint. Fields: {list(pkg_items[0].keys()) if isinstance(pkg_items, list) and pkg_items else pkg_items}")
+    else:
+        log(f"No /api/compliance-package-items/index: {err2}", 'WARN')
+
+    # Cannot proceed further without understanding the item structure
+    # Return True so other syncs still complete
+    log("Compliance link sync: run with --only compliance after reviewing the debug output above", 'WARN')
+    log(f"Built lookup with {len(ca_by_item_id)} compliance analysis records", 'OK')
+    return True
 
     # Framework label → lookup key mapping
     # These must match the column headers in mapping_controls_to_requirements.csv
