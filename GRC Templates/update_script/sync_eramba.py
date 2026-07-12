@@ -62,19 +62,20 @@ GITHUB_BRANCH   = 'master'
 GITHUB_BASE     = 'GRC Templates/LLM - GRC Templates'
 
 # How we set new policies in eramba
+# How we set new policies in eramba
 POLICY_DEFAULTS = {
-    'security_policy_document_type_id': 2,   # 2 = Standard
-    'use_attachments': '2',                   # 2 = Use URL (description holds HTML)
-    'status': '1',                            # 1 = Published
+    'security_policy_document_type_id': 1,   # 1 = Procedure
+    'use_attachments': 0,                     # 0 = Use Content (HTML in description)
+    'status': 1,                              # 1 = Published
     'permission': 'public',
-    'version': '1.0',
-    'asset_label_id': 2,                      # 2 = Public
+    'version': os.environ.get('PR_NUMBER', '1.0'),
+    'asset_label_id': 1,
     'url': '',
     'tags': [],
-    'projects': [],
+    'projects': [1],
     'owners': ['User-1'],
     'collaborators': ['User-1'],
-    'related_documents': [],
+    'related_documents': [1],
 }
 
 # How we set new controls in eramba
