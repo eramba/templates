@@ -546,7 +546,7 @@ def sync_compliance(dry_run=False):
     log("Loading all compliance analysis records (paginating slowly)...")
     ca_records = []
     page = 1
-    limit = 25  # small page size to avoid 502s
+    limit = 100
     while True:
         result, err = eramba_request('GET', f"/api/compliance-managements/index?page={page}&limit={limit}")
         if err:
@@ -565,7 +565,7 @@ def sync_compliance(dry_run=False):
         if len(result) < limit:
             break
         page += 1
-        time.sleep(API_DELAY)
+        time.sleep(1)
 
     log(f"Loaded {len(ca_records)} compliance analysis records")
 
