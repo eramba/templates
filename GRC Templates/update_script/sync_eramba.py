@@ -568,7 +568,7 @@ def load_policy_mapping_from_github():
         'ISO 27001:2022':          'ISO 27001',
         'ISO 27002:2022':          'ISO 27002',
         'SOC 2 (TSP 2017)':       'SOC2',
-        'NIST 800-53 Rev5':       'NIST SP 800-53 Rev. 5',
+        'NIST 800-53 Rev5':       'NIST 800-53 v5',
         'CIS Controls v8.1':      'CIS Controls',
         'SCF 2025':                'Secure Control Framework',
         'NIS2 Article 21':        'NIS2 - Article 21',
