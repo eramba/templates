@@ -697,11 +697,15 @@ def sync_compliance(dry_run=False, max_pages=0):
 
         for reg_name, req_ids in fw_map.items():
             for req_id in req_ids:
-                key = (reg_name.lower().strip(), req_id.lower().strip())
+                # Strip known prefixes that don't match eramba's item_id format
+                clean_req_id = req_id
+                if clean_req_id.startswith('37001:2025 - '):
+                    clean_req_id = clean_req_id[len('37001:2025 - '):]
+                key = (reg_name.lower().strip(), clean_req_id.lower().strip())
                 ca_rec = ca_lookup.get(key)
                 if not ca_rec:
                     not_found += 1
-                    not_found_list.append(f"{policy_name} | {reg_name} | {req_id}")
+                    not_found_list.append(f"{policy_name} | {reg_name} | {req_id} (looked up as: {clean_req_id})")
                     continue
 
                 ca_id = ca_rec['id']
