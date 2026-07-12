@@ -27,6 +27,7 @@ GitHub repo:
 import os
 import sys
 import json
+import markdown as md_converter
 import csv
 import time
 import base64
@@ -62,17 +63,17 @@ GITHUB_BASE     = 'GRC Templates/LLM - GRC Templates'
 
 # How we set new policies in eramba
 POLICY_DEFAULTS = {
-    'security_policy_document_type_id': 3,   # 3 = Policy
-    'use_attachments': '0',                   # 0 = Use Content (inline markdown)
-    'status': '0',                            # 0 = Draft
+    'security_policy_document_type_id': 2,   # 2 = Standard
+    'use_attachments': '2',                   # 2 = Use URL (description holds HTML)
+    'status': '1',                            # 1 = Published
     'permission': 'public',
     'version': '1.0',
-    'asset_label_id': 2,
+    'asset_label_id': 2,                      # 2 = Public
     'url': '',
     'tags': [],
     'projects': [],
-    'owners': [],
-    'collaborators': [],
+    'owners': ['User-1'],
+    'collaborators': ['User-1'],
     'related_documents': [],
 }
 
@@ -242,10 +243,13 @@ def load_policies_from_github():
                 short_desc = line.strip()[:255]
                 break
 
+        html = md_converter.markdown(content, extensions=['tables', 'fenced_code', 'nl2br'])
+
         policies.append({
             'name': name,
             'short_description': short_desc,
             'description': content,
+            'html': html,
             'filename': f['name'],
         })
         time.sleep(0.1)
@@ -366,7 +370,7 @@ def sync_policies(dry_run=False):
                     errors += 1
                     continue
                 # Merge: keep all existing fields, update only content fields
-                full['description'] = pol['description']
+                full['description'] = pol['html']
                 full['short_description'] = pol['short_description']
                 _, err = eramba_request('PUT', f"/api/security-policies/{rec_id}", full)
                 if err:
@@ -383,9 +387,9 @@ def sync_policies(dry_run=False):
                 **POLICY_DEFAULTS,
                 'index': pol['name'],
                 'short_description': pol['short_description'],
-                'description': pol['description'],
-                'published_date': str(date.today()),
-                'next_review_date': str(date.today().replace(year=date.today().year + 1)),
+                'description': pol['html'],
+                'published_date': str(date.today() - __import__('datetime').timedelta(days=1)),
+                'next_review_date': str(date.today().replace(year=date.today().year + 10)),
             }
             if not dry_run:
                 _, err = eramba_request('POST', '/api/security-policies/add', payload)
