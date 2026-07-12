@@ -80,7 +80,24 @@ POLICY_DEFAULTS = {
 
 # How we set new controls in eramba
 CONTROL_DEFAULTS = {
-    'security_service_type_id': 4,            # 4 = Production
+    'security_service_type_id': 4,
+    'documentation_url': None,
+    'service_owners': ['User-1'],
+    'collaborators': ['User-1'],
+    'opex': 1,
+    'capex': 1,
+    'resource_utilization': 1,
+    'classifications': [],
+    'audit_calendar_type': 0,
+    'security_service_audit_dates': [],
+    'audit_success_criteria': 'User Defined',
+    'audit_owners': [],
+    'audit_evidence_owners': [],
+    'security_service_maintenance_dates': [],
+    'maintenance_metric_description': '',
+    'maintenance_owners': ['User-1'],
+    'service_contracts': [1],
+    'projects': None,
 }
 
 # Delay between API calls to avoid hammering the server
@@ -453,7 +470,7 @@ def sync_controls(dry_run=False):
         # Resolve linked policy eramba ID
         pol_name = ctrl_to_policy.get(title, '').lower()
         pol_rec  = eramba_policies.get(pol_name)
-        pol_ids  = [{'id': pol_rec['id']}] if pol_rec else []
+        pol_ids  = [pol_rec['id']] if pol_rec else []
 
         # Map CSV columns to eramba fields
         payload_fields = {
