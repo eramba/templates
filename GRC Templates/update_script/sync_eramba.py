@@ -67,6 +67,13 @@ POLICY_DEFAULTS = {
     'status': '0',                            # 0 = Draft
     'permission': 'public',
     'version': '1.0',
+    'asset_label_id': 2,
+    'url': '',
+    'tags': [],
+    'projects': [],
+    'owners': [],
+    'collaborators': [],
+    'related_documents': [],
 }
 
 # How we set new controls in eramba
@@ -402,6 +409,7 @@ def sync_controls(dry_run=False):
     log("\n=== CONTROLS ===")
     gh_controls = load_controls_from_github()
     eramba_controls = load_eramba_controls()
+    eramba_policies = load_eramba_policies()
 
     created = updated = errors = 0
 
