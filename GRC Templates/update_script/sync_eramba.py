@@ -75,7 +75,7 @@ CONTROL_DEFAULTS = {
 }
 
 # Delay between API calls to avoid hammering the server
-API_DELAY = 0.3
+API_DELAY = 0.5
 
 
 # ---------------------------------------------------------------------------
@@ -102,22 +102,30 @@ def eramba_request(method, path, data=None):
     }
     body = json.dumps(data).encode() if data is not None else None
     req = urllib.request.Request(url, data=body, headers=headers, method=method)
-    try:
-        with urllib.request.urlopen(req, timeout=30, context=SSL_CONTEXT) as r:
-            raw = r.read().decode()
-            return json.loads(raw) if raw.strip() else {}, None
-    except urllib.error.HTTPError as e:
-        body = e.read().decode()
-        return None, f"HTTP {e.code}: {body[:300]}"
-    except Exception as e:
-        return None, str(e)
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=30, context=SSL_CONTEXT) as r:
+                raw = r.read().decode()
+                return json.loads(raw) if raw.strip() else {}, None
+        except urllib.error.HTTPError as e:
+            body = e.read().decode()
+            if e.code == 502 and attempt < 2:
+                time.sleep(2 ** attempt)  # backoff: 1s, 2s
+                continue
+            return None, f"HTTP {e.code}: {body[:300]}"
+        except Exception as e:
+            if attempt < 2:
+                time.sleep(1)
+                continue
+            return None, str(e)
+    return None, "Max retries exceeded"
 
 
 def eramba_get_all(path, max_pages=50):
     """Fetch all pages from a list endpoint. Returns list of records."""
     records = []
     page = 1
-    limit = 100
+    limit = 50
     while page <= max_pages:
         result, err = eramba_request('GET', f"{path}?page={page}&limit={limit}")
         if err:
@@ -128,7 +136,10 @@ def eramba_get_all(path, max_pages=50):
             break
         if not result:
             break
-        items = result if isinstance(result, list) else result.get('data', result)
+        # Unwrap {success: true, data: [...]} envelope if present
+        if isinstance(result, dict) and 'data' in result:
+            result = result['data']
+        items = result if isinstance(result, list) else []
         if not isinstance(items, list):
             records.append(items)
             break
@@ -505,51 +516,52 @@ def sync_compliance(dry_run=False):
         log("No framework regulators matched — check regulator names in eramba", 'ERR')
         return False
 
-    # Step 2: for each matched framework, fetch its package items
-    # compliance-package-items has compliance_package_id (not regulator_id directly)
-    # So we first need the package IDs for each regulator, then fetch items
-    log("\nLoading compliance packages per framework...")
-    all_packages = eramba_get_all('/api/compliance-packages/index')
-    if not all_packages:
-        # Try alternative endpoint name
-        all_packages = eramba_get_all('/api/compliance-package-regulators/index')
-
-    # Build {regulator_id: [package_id, ...]}
-    reg_to_pkg_ids = {}
-    for pkg in all_packages:
-        reg_id = pkg.get('compliance_package_regulator_id') or (
-            (pkg.get('compliance_package_regulator') or {}).get('id'))
-        pkg_id = pkg.get('id')
-        if reg_id and pkg_id:
-            reg_to_pkg_ids.setdefault(reg_id, []).append(pkg_id)
-
-    log(f"Found packages for {len(reg_to_pkg_ids)} regulators")
-
-    # Step 3: build {item_id_str: compliance_package_item_pk} for our frameworks
+    # Step 2: fetch compliance package items per regulator directly
+    # Each regulator has a nested list of packages, each package has items.
+    # We fetch the regulator detail to get its packages, then fetch items per package.
     log("\nBuilding requirement item lookup per framework...")
     item_str_to_pk = {}   # (fw_label, item_id_str_lower) → item_pk
     item_pk_to_fw  = {}   # item_pk → (fw_label, item_id_str)
 
     for fw_label, reg_id in fw_regulator_ids.items():
-        pkg_ids = reg_to_pkg_ids.get(reg_id, [])
+        # Fetch the regulator detail to get its package IDs
+        reg_detail, err = eramba_request('GET', f"/api/compliance-package-regulators/{reg_id}")
+        if err:
+            log(f"  Cannot fetch regulator {reg_id} ({fw_label}): {err}", 'WARN')
+            continue
+
+        # Unwrap {success, data} if needed
+        if isinstance(reg_detail, dict) and 'data' in reg_detail:
+            reg_detail = reg_detail['data']
+
+        # Get package IDs from the regulator — they may be nested
+        pkg_ids = []
+        packages = reg_detail.get('compliance_packages', []) or []
+        for pkg in packages:
+            pid = pkg.get('id') if isinstance(pkg, dict) else pkg
+            if pid:
+                pkg_ids.append(pid)
+
         if not pkg_ids:
-            log(f"  No packages found for {fw_label} (regulator id={reg_id})", 'WARN')
+            log(f"  No packages in regulator {reg_id} ({fw_label}) — trying item fetch directly", 'WARN')
+            # Fallback: fetch items filtered by regulator via query param
+            items = eramba_get_all(f'/api/compliance-package-items/index?compliance_package_regulator_id={reg_id}')
+            for item in items:
+                item_pk  = item.get('id')
+                item_str = item.get('item_id', item.get('index', '')).strip()
+                if item_pk and item_str:
+                    item_str_to_pk[(fw_label, item_str.lower())] = item_pk
+            log(f"  {fw_label}: {len(items)} items loaded (direct fetch)")
             continue
 
         fw_item_count = 0
         for pkg_id in pkg_ids:
             items = eramba_get_all(f'/api/compliance-package-items/index?compliance_package_id={pkg_id}')
-            if not items:
-                # Try without filter — fetch all and filter locally
-                items = eramba_get_all('/api/compliance-package-items/index')
-                items = [i for i in items if i.get('compliance_package_id') == pkg_id]
-
             for item in items:
                 item_pk  = item.get('id')
                 item_str = item.get('item_id', item.get('index', '')).strip()
                 if item_pk and item_str:
-                    key = (fw_label, item_str.lower())
-                    item_str_to_pk[key] = item_pk
+                    item_str_to_pk[(fw_label, item_str.lower())] = item_pk
                     item_pk_to_fw[item_pk] = (fw_label, item_str)
                     fw_item_count += 1
             time.sleep(API_DELAY)
