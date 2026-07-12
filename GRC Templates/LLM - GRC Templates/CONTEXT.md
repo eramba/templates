@@ -66,7 +66,7 @@ GRC Templates/LLM - GRC Templates/
 | iso27001 | ISO 27001:2022 | ISO27001_2022.csv |
 | iso27002 | ISO 27002:2022 | ISO27002_2022__1_.csv |
 | soc2 | SOC 2 (TSP 2017) | SOC2.csv |
-| nist | NIST 800-53 Rev5 | NIST_800-53_Rev5.csv |
+| nist | NIST 800-53 v5 | NIST_800-53_Rev5.csv |
 | cis | CIS Controls v8.1 | CIS_v8_1.csv |
 | scf | SCF 2025 | SCF_2025.csv |
 | nis2 | NIS2 Article 21 | NIS2.csv |
