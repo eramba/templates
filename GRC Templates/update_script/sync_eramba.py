@@ -659,6 +659,8 @@ def sync_compliance(dry_run=False, max_pages=0):
     log(f"Framework labels in mapping table: {sorted(set(fw for v in policy_map.values() for fw in v.keys()))[:8]}...")
 
     updated = skipped = not_found = errors = 0
+    not_found_list = []
+    error_list = []
 
     # Step 4: iterate policy → framework → req_id and update compliance analysis
     for policy_name, fw_map in policy_map.items():
@@ -674,6 +676,7 @@ def sync_compliance(dry_run=False, max_pages=0):
                 ca_rec = ca_lookup.get(key)
                 if not ca_rec:
                     not_found += 1
+                    not_found_list.append(f"{policy_name} | {reg_name} | {req_id}")
                     continue
 
                 ca_id = ca_rec['id']
@@ -719,11 +722,15 @@ def sync_compliance(dry_run=False, max_pages=0):
                 log(f"Linking {policy_name} → {reg_name} {req_id} (ca_id={ca_id})")
                 res, err = eramba_request('PUT', f"/api/compliance-managements/{ca_id}", payload)
                 if err:
-                    log(f"PUT ca {ca_id} ({reg_name} {req_id}): {err}", 'ERR')
+                    msg = f"{policy_name} | {reg_name} | {req_id} | ca_id={ca_id} | {err}"
+                    log(f"PUT failed: {msg}", 'ERR')
+                    error_list.append(msg)
                     errors += 1
                     continue
                 if isinstance(res, dict) and not res.get('success', True):
-                    log(f"PUT ca {ca_id} failed: {res}", 'ERR')
+                    msg = f"{policy_name} | {reg_name} | {req_id} | ca_id={ca_id} | {res}"
+                    log(f"PUT failed: {msg}", 'ERR')
+                    error_list.append(msg)
                     errors += 1
                     continue
 
@@ -733,7 +740,25 @@ def sync_compliance(dry_run=False, max_pages=0):
                 updated += 1
                 log(f"✓ {updated} linked so far")
 
-    log(f"\nCompliance links: {updated} updated, {skipped} already linked, {not_found} req IDs not found in eramba, {errors} errors")
+    log(f"\n{'='*50}")
+    log(f"COMPLIANCE SYNC SUMMARY")
+    log(f"{'='*50}")
+    log(f"  Updated:        {updated}")
+    log(f"  Already linked: {skipped}")
+    log(f"  Not found:      {not_found}")
+    log(f"  Errors:         {errors}")
+
+    if not_found_list:
+        log(f"\nNOT FOUND ({len(not_found_list)}) — req ID exists in mapping table but not in eramba:")
+        for item in sorted(not_found_list):
+            log(f"  - {item}")
+
+    if error_list:
+        log(f"\nERRORS ({len(error_list)}) — PUT request failed:")
+        for item in error_list:
+            log(f"  - {item}", 'ERR')
+
+    log(f"\n{'='*50}")
     return errors == 0
 
 
