@@ -507,3 +507,54 @@ All information assets, processes, systems, and third-party relationships within
 3. Review performance metrics against defined targets.
 4. Identify and document gaps; assign owners.
 5. Present programme status to leadership.
+### AI-Specific Risk Management System
+
+**EU AI Act 2024/1689 (Art.9.1, Art.9.2, Art.9.8, Art.9.9, Art.9.10)**
+- A risk management system for high-risk AI systems must be established, implemented, documented, and maintained as a continuous iterative process throughout the entire AI system lifecycle.
+- The risk management system must identify and analyse known and reasonably foreseeable risks to health, safety, and fundamental rights, estimate and evaluate those risks, and adopt appropriate risk management measures.
+- High-risk AI systems must be tested before deployment and the testing must demonstrate that they perform consistently for their intended purpose and do not present risks beyond accepted thresholds.
+- Providers must consider whether the AI system is accessible to children or other vulnerable persons.
+
+**NIST AI 600-1 2024 (MP-1.1-001, MP-1.1-002, MP-1.1-004, GV-1.3-001, GV-1.3-002)**
+- The intended purpose, context of use, and assumptions and limitations of the GAI system must be documented and evaluated in collaboration with domain experts.
+- Foreseeable illegal uses or applications of the GAI system that surpass organisational risk tolerances must be identified and documented.
+- Risk tiers for GAI systems must consider information integrity impacts, system dependencies, harm potential, and CBRN information risks.
+- Minimum performance thresholds for deployment approval must be established and reviewed.
+
+### Fundamental Rights Impact Assessment
+
+**EU AI Act 2024/1689 (Art.27.1, Art.27.2, Art.27.3, Art.27.4)**
+- Deployers of high-risk AI systems must conduct a fundamental rights impact assessment prior to first use.
+- The assessment must cover the categories of persons likely to be affected, the foreseeable impacts on fundamental rights, the measures taken to mitigate risks, and an indication of the expected duration.
+- Assessment results must be notified to the market surveillance authority and the filled-in form submitted.
+- Where a data protection impact assessment has been conducted, it may be combined with the fundamental rights impact assessment.
+
+### AI-Specific Risk Management Procedure
+
+**Applies to all frameworks**
+1. Identify the AI system scope and confirm classification (high-risk or not under applicable regulation).
+2. Identify and document known and foreseeable risks to health, safety, and fundamental rights.
+3. Estimate likelihood and severity of harm.
+4. Define and implement risk management measures.
+5. Test the system to confirm performance and risk thresholds are met.
+6. Document the risk management system and retain records.
+7. Review and update continuously throughout the AI system lifecycle.
+
+**EU AI Act 2024/1689 (Art.9.1, Art.9.2, Art.9.6, Art.9.8)**
+8. Confirm testing was performed at an appropriate stage of development and prior to market placement.
+9. Document that residual risks are acceptable per organisational risk tolerance.
+
+**NIST AI 600-1 2024 (MP-1.1-001, MP-1.1-002, GV-1.3-001)**
+8. Document the expected and acceptable context of use in collaboration with domain experts.
+9. Update the risk hierarchy as new risks emerge.
+
+### Fundamental Rights Impact Assessment Procedure
+
+**EU AI Act 2024/1689 (Art.27.1, Art.27.2, Art.27.3)**
+1. Confirm the AI system is subject to the fundamental rights impact assessment obligation.
+2. Identify categories of persons who may be affected.
+3. Assess foreseeable impacts on the right to human dignity, privacy, non-discrimination, consumer protection, and other applicable rights.
+4. Define and document measures to mitigate identified risks.
+5. Document expected duration of use.
+6. Notify the market surveillance authority and submit the completed assessment.
+7. Update the assessment if the system is substantially modified.
