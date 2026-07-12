@@ -69,7 +69,7 @@ POLICY_DEFAULTS = {
     'status': 1,                              # 1 = Published
     'permission': 'public',
     'version': os.environ.get('PR_NUMBER', '1.0'),
-    'asset_label_id': 1,
+    'asset_label_id': None,
     'url': '',
     'tags': [],
     'projects': [1],
