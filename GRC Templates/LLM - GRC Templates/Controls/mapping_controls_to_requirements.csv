@@ -1,4 +1,4 @@
-Control Title,PCI DSS v4.0.1,ISO 27001:2022,ISO 27002:2022,SOC 2 (TSP 2017),NIST 800-53 Rev5,CIS Controls v8.1,SCF 2025,NIS2 Article 21,ISO 27701:2025,ISO 45001:2018,ISO 42001:2023,ISO 37001:2025,ISO 9001:2015,OWASP LLM Top 10 2025,NIST AI 600-1 2024,EU AI Act 2024/1689
+Control Title,PCI-DSS,ISO 27001,ISO 27002,SOC2,NIST SP 800-53 Rev. 5,CIS Controls,Secure Control Framework,NIS2 - Article 21,ISO 27701,ISO 45001,ISO 42001,ISO 37001,ISO 9001,OWASP Top 10 for LLM Applications,NIST AI 600-1 Generative AI Profile,EU AI Act
 User Account Inventory Review,"7.2.1, 7.2.5, 8.2.1",—,"5.15, 5.16, 5.18, 8.2","CC6.1, CC6.2, CC6.3","AC-2, IA-4","5.1, 5.3, 5.5, 6.8","IAC-01, IAC-02, IAC-15, IAC-17",Article 21(2) (i),"A.3.8, A.3.9",—,—,—,—,—,—,—
 Privileged Access Rights Review,"7.2.6, 8.2.2, 8.3.1",—,"5.18, 8.2","CC6.1, CC6.3","AC-2, AC-6","5.4, 6.5","IAC-16, IAC-21",Article 21(2) (i),—,—,—,—,—,—,—,—
 Account Provisioning and Deprovisioning Process Review,"7.2.5, 8.2.5, 8.2.6",—,"5.16, 5.18","CC6.2, CC6.3","AC-2, IA-4, PS-4","6.1, 6.2","IAC-07, HRS-09",Article 21(2) (i),"A.3.8, A.3.9",—,—,—,—,—,—,—
