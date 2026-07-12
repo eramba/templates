@@ -602,15 +602,18 @@ def sync_compliance(dry_run=False):
     ca_records = []
     page = 1
     limit = 100
+    consecutive_errors = 0
     while True:
         result, err = eramba_request('GET', f"/api/compliance-managements/index?page={page}&limit={limit}")
         if err:
-            if ca_records:
-                log(f"Stopped at page {page}: {err} — using {len(ca_records)} records", 'WARN')
-            else:
-                log(f"Cannot load compliance analysis: {err}", 'ERR')
-                return False
-            break
+            consecutive_errors += 1
+            log(f"Page {page} error ({consecutive_errors}): {err} — waiting 5s before retry", 'WARN')
+            time.sleep(5)
+            if consecutive_errors >= 3:
+                log(f"3 consecutive errors — stopping at {len(ca_records)} records", 'WARN')
+                break
+            continue  # retry same page
+        consecutive_errors = 0
         if isinstance(result, dict) and 'data' in result:
             result = result['data']
         if not isinstance(result, list) or not result:
