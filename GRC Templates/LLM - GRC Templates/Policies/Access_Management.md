@@ -83,6 +83,19 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 - Ensure passwords for application and system accounts are not hard-coded in scripts or configuration files per 8.6.2.
 - Protect passwords for application and system accounts against misuse with periodic changes and access controls per 8.6.3.
 
+**NIST 800-53 Rev5 (AC-7, AC-8, AC-9, AC-10, AC-11, AC-12, IA-6, IA-7, IA-10, IA-11, IA-12)**
+- Enforce configurable limit of consecutive invalid logon attempts per AC-7.
+- Display system use notification before granting system access per AC-8.
+- Notify user of previous logon date and time upon successful logon per AC-9.
+- Limit concurrent sessions per user, role, or account per AC-10.
+- Initiate device lock after defined period of inactivity per AC-11.
+- Automatically terminate sessions after defined period per AC-12.
+- Obscure authentication feedback to protect authentication information per IA-6.
+- Implement mechanisms to authenticate cryptographic modules per IA-7.
+- Implement adaptive authentication techniques per IA-10.
+- Require re-authentication when defined circumstances or situations require per IA-11.
+- Implement identity proofing and enrollment processes for user accounts per IA-12.
+
 ### Authorization and Access Rights
 
 **Applies to all frameworks**
@@ -108,6 +121,29 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 **SCF 2025 (IAC-03, IAC-05, IAC-06, IAC-16, IAC-17, IAC-18)**
 
 **NIS2 Article 21 (Article 21(2) (i))**
+
+**NIST 800-53 Rev5 (AC-4, AC-14, AC-17, AC-19, AC-20, AC-21, AC-22, IA-1, IA-3, IA-9)**
+- Enforce approved authorizations for information flow within and between systems per AC-4.
+- Identify actions that can be performed without identification or authentication per AC-14.
+- Establish and document usage restrictions and configuration requirements for remote access per AC-17.
+- Establish usage restrictions and configuration requirements for mobile device access per AC-19.
+- Establish terms and conditions for external system connections per AC-20.
+- Facilitate information sharing based on access authorizations per AC-21.
+- Manage publicly accessible content on organisational systems per AC-22.
+- Develop, document, and disseminate access control policy per IA-1.
+- Identify and authenticate devices before establishing connections per IA-3.
+- Identify and authenticate services before establishing connections per IA-9.
+
+**SCF 2025 (IAC-19, IAC-22, IAC-23, IAC-24, IAC-25, IAC-26, IAC-27, IAC-28, IAC-29)**
+- Restrict credential sharing per IAC-19.
+- Implement account lockout mechanisms per IAC-22.
+- Limit concurrent sessions per user per IAC-23.
+- Enforce session lock after inactivity per IAC-24.
+- Automatically terminate sessions per IAC-25.
+- Identify and document permitted actions without identification or authentication per IAC-26.
+- Implement reference monitor concept for access enforcement per IAC-27.
+- Implement identity proofing and verification per IAC-28.
+- Implement attribute-based access control per IAC-29.
 
 ### Periodic Access Review
 
