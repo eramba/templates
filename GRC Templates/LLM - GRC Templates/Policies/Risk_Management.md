@@ -150,6 +150,16 @@ All information assets, processes, systems, and third-party relationships within
 **ISO 27001:2022 (6.1)**
 - Determine actions to address risks and opportunities that could affect the achievement of intended ISMS outcomes per 6.1.
 
+**NIST 800-53 Rev5 (CA-1, CA-3, CA-4, CA-6, RA-1, RA-4, RA-9, RA-10)**
+- Develop and disseminate assessment, authorisation, and monitoring policy per CA-1.
+- Approve and manage information exchange between systems using agreements per CA-3.
+- Conduct security certification of organisational systems per CA-4.
+- Authorise systems before operation and periodically thereafter per CA-6.
+- Develop and disseminate risk assessment policy per RA-1.
+- Update risk assessments in accordance with organisational risk tolerance per RA-4.
+- Identify critical system components and functions by performing criticality analysis per RA-9.
+- Establish and implement threat hunting capability per RA-10.
+
 ### Risk Treatment
 
 **Applies to all frameworks**
@@ -234,6 +244,75 @@ All information assets, processes, systems, and third-party relationships within
 
 **ISO 27001:2022 (6.2)**
 - Confirm information security objectives are established, measurable, monitored, communicated, and updated as appropriate per 6.2.
+
+**NIST 800-53 Rev5 (PL-1, PL-2, PL-3, PL-4, PL-5, PL-7, PL-8, PL-9, PL-10, PL-11, PM-1, PM-2, PM-3, PM-4, PM-7, PM-8, PM-9, PM-10, PM-11, PM-12, PM-13, PM-14, PM-15, PM-28, PM-29, PM-30, PM-31, PM-32)**
+- Develop and disseminate planning policy per PL-1.
+- Develop system security and privacy plans per PL-2.
+- Update system security and privacy plans per PL-3.
+- Establish rules of behavior for personnel accessing systems per PL-4.
+- Conduct privacy impact assessments per PL-5.
+- Develop and implement concept of operations for systems per PL-7.
+- Develop and maintain security and privacy architectures per PL-8.
+- Establish and implement central management for security controls per PL-9.
+- Select the appropriate control baseline per PL-10.
+- Tailor control baselines to meet specific requirements per PL-11.
+- Develop and maintain information security program plan per PM-1.
+- Appoint senior agency information security officer per PM-2.
+- Allocate resources required to protect systems per PM-3.
+- Implement plan of action and milestones process per PM-4.
+- Develop and maintain enterprise architecture with security considerations per PM-7.
+- Address critical infrastructure security in plans per PM-8.
+- Develop comprehensive risk management strategy per PM-9.
+- Manage the security authorisation process per PM-10.
+- Define and identify mission and business processes per PM-11.
+- Implement insider threat program per PM-12.
+- Establish security and privacy workforce development program per PM-13.
+- Implement testing, training, and monitoring program per PM-14.
+- Maintain contact with security groups and associations per PM-15.
+- Establish risk management framing assumptions per PM-28.
+- Assign senior leadership roles for risk management per PM-29.
+- Develop supply chain risk management strategy per PM-30.
+- Implement continuous monitoring strategy per PM-31.
+- Identify and define the purpose of systems per PM-32.
+
+**SCF 2025 (GOV-02, GOV-04, GOV-05, GOV-06, GOV-07, GOV-08, GOV-09, GOV-10, GOV-11, GOV-12, GOV-13, GOV-14, GOV-15, GOV-16, GOV-18, GOV-19, GOV-20, CPL-05, CPL-06, CPL-07, CPL-08, CPL-09, CPL-10, CPL-11, PRM-01, PRM-02, PRM-03, PRM-04, PRM-06, PRM-08, RSK-12, IAO-01, IAO-03, IAO-04, IAO-05, IAO-06, IAO-07)**
+- Publish and maintain cybersecurity and data protection documentation per GOV-02.
+- Assign and document cybersecurity and data protection responsibilities per GOV-04.
+- Establish measures of performance for security controls per GOV-05.
+- Maintain contacts with authorities per GOV-06.
+- Maintain contacts with groups and associations per GOV-07.
+- Define business context and mission per GOV-08.
+- Define control objectives per GOV-09.
+- Implement data governance practices per GOV-10.
+- Validate the purpose of data processing per GOV-11.
+- Address forced technology transfer risks per GOV-12.
+- Implement controls to detect and respond to state-sponsored espionage per GOV-13.
+- Implement business as usual secure practices per GOV-14.
+- Operationalise cybersecurity and data protection practices per GOV-15.
+- Determine materiality of cybersecurity incidents per GOV-16.
+- Implement quality management system per GOV-18.
+- Provide assurance of control effectiveness per GOV-19.
+- Address mergers, acquisitions, and divestitures per GOV-20.
+- Conduct legal assessment of investigative inquiries per CPL-05.
+- Address government surveillance requirements per CPL-06.
+- Implement grievance processes per CPL-07.
+- Implement localised representation per CPL-08.
+- Establish control reciprocity with external parties per CPL-09.
+- Manage control inheritance per CPL-10.
+- Address dual use technology considerations per CPL-11.
+- Implement portfolio management for cybersecurity per PRM-01.
+- Manage cybersecurity and data protection resources per PRM-02.
+- Allocate resources for cybersecurity per PRM-03.
+- Integrate cybersecurity into project management per PRM-04.
+- Define business processes with security requirements per PRM-06.
+- Manage organisational knowledge per PRM-08.
+- Promote risk culture per RSK-12.
+- Implement information assurance operations per IAO-01.
+- Develop and maintain system security and privacy plan per IAO-03.
+- Conduct threat analysis and flaw remediation during development per IAO-04.
+- Implement plan of action and milestones per IAO-05.
+- Perform technical verification of controls per IAO-06.
+- Obtain security authorisation per IAO-07.
 
 ### Threat Intelligence Review
 
