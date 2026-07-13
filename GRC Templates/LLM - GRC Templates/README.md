@@ -221,5 +221,6 @@ The relationship is: **Policy Procedure** defines how something should be done â
 | Date | Change | Author |
 |------|--------|--------|
 | 2026-07-02 | Initial library: 22 policies, 99 controls, 13 frameworks (PCI DSS v4.0.1, ISO 27001:2022, ISO 27002:2022, SOC 2, NIST 800-53 Rev5, CIS v8.1, SCF 2025, NIS2, ISO 27701, ISO 45001, ISO 42001, ISO 37001, ISO 9001). Procedure tags added for all 13 frameworks. | LLM |
+| 2026-07-13 | Sync script built and operational. 22 policies and 975 compliance links created in eramba. Mapping table rebuilt from policy file tags. NIST renamed to NIST 800-53 v5. ISO 37001 prefix fixed. CONTEXT.md fully updated. | LLM |
 | 2026-07-12 | Added 3 new AI frameworks: OWASP LLM Top 10 2025, NIST AI 600-1 2024, EU AI Act 2024/1689. Added 17 new controls. Updated AI_Governance, Secure_Development, Risk_Management, Supplier_Management, Logging_Monitoring policies. | LLM |
 | 2026-07-02 | Renamed directory from `Claude - GRC Templates` to `LLM - GRC Templates`. Moved `00_mapping_table.md` into `Policies/` subdirectory. Added this README. | LLM |
