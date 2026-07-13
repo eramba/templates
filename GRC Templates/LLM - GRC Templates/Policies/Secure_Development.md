@@ -57,6 +57,9 @@ All software developed, customised, or procured by the organisation, including i
 - Application penetration testing must be conducted for critical applications by qualified testers.
 - All critical and high findings from security testing must be remediated before deployment or have a documented risk acceptance.
 
+**PCI DSS v4.0.1 (6.2.3.1)**
+- Perform manual code reviews for bespoke and custom software prior to release to production using individuals other than the author, with a review of code for known vulnerabilities per 6.2.3.1.
+
 ### Third-Party Software Components
 
 **Applies to all frameworks**
