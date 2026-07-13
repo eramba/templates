@@ -398,20 +398,17 @@ def sync_policies(dry_run=False):
             # UPDATE — must GET full record first, then PUT all fields
             rec_id = existing.get('id')
             if not dry_run:
-                full, err = eramba_request('GET', f"/api/security-policies/{rec_id}")
-                if err:
-                    log(f"GET policy {pol['name']}: {err}", 'ERR')
-                    errors += 1
-                    continue
-                # Unwrap {success, data} envelope if present
-                if isinstance(full, dict) and 'data' in full:
-                    full = full['data']
-                # Update only content fields — keep everything else as-is
-                full['index'] = pol['name']
-                full['short_description'] = pol['short_description']
-                full['description'] = pol['html']
-                full['version'] = os.environ.get('PR_NUMBER', full.get('version', '1.0'))
-                res, err = eramba_request('PUT', f"/api/security-policies/{rec_id}", full)
+                # Send only the fields we want to update — avoid sending
+                # nested objects from GET that PUT does not accept
+                update_payload = {
+                    **POLICY_DEFAULTS,
+                    'index': pol['name'],
+                    'short_description': pol['short_description'],
+                    'description': pol['html'],
+                    'published_date': str(date.today() - __import__('datetime').timedelta(days=1)),
+                    'next_review_date': str(date.today().replace(year=date.today().year + 10)),
+                }
+                res, err = eramba_request('PUT', f"/api/security-policies/{rec_id}", update_payload)
                 if err:
                     log(f"PUT policy {pol['name']}: {err}", 'ERR')
                     errors += 1
