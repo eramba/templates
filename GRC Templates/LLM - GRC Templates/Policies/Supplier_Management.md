@@ -159,6 +159,9 @@ All third-party suppliers, vendors, and service providers that access, process, 
 29. Control externally provided processes, products, and services per 8.4.1.
 30. Communicate requirements to external providers per 8.4.3.
 
+**ISO 45001:2018 (8.1.4.3)**
+- Ensure outsourced functions and processes are controlled and that outsourcing arrangements are consistent with legal requirements and OH&S objectives per 8.1.4.3.
+
 ### Supplier Review
 
 **Applies to all frameworks**
