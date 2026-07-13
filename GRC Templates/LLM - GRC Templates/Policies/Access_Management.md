@@ -68,6 +68,21 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 
 **NIS2 Article 21 (Article 21(2) (j))**
 
+**PCI DSS v4.0.1 (8.3.2, 8.3.3, 8.3.4, 8.3.7, 8.3.8, 8.3.11, 8.4.1, 8.4.3, 8.4.4, 8.5.1, 8.6.1, 8.6.2, 8.6.3)**
+- Use strong cryptography to render all authentication factors unreadable during transmission and storage per 8.3.2.
+- Verify user identity before modifying any authentication factor per 8.3.3.
+- Lock out user IDs after no more than 10 invalid authentication attempts for a minimum of 30 minutes per 8.3.4.
+- Prevent individuals from submitting a new password that is the same as any of the last four used per 8.3.7.
+- Document and communicate authentication policies and procedures to all users per 8.3.8.
+- Assign physical and logical security tokens, smart cards, and certificates to an individual user and not shared per 8.3.11.
+- Implement MFA for all non-console access into the CDE for personnel with administrative access per 8.4.1.
+- Implement MFA for all remote network access originating from outside the entity's network that could access or impact the CDE per 8.4.3.
+- Implement MFA for all non-console access into the CDE per 8.4.4.
+- Implement MFA systems that are not susceptible to replay attacks and cannot be bypassed per 8.5.1.
+- Manage application and system accounts that can be used for interactive login with controls preventing misuse per 8.6.1.
+- Ensure passwords for application and system accounts are not hard-coded in scripts or configuration files per 8.6.2.
+- Protect passwords for application and system accounts against misuse with periodic changes and access controls per 8.6.3.
+
 ### Authorization and Access Rights
 
 **Applies to all frameworks**
@@ -112,6 +127,9 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 **SCF 2025 (IAC-02, IAC-07, IAC-20)**
 
 **NIS2 Article 21 (Article 21(2) (i))**
+
+**PCI DSS v4.0.1 (7.2.5.1)**
+- Review all access by application and system accounts and related privileges periodically per 7.2.5.1.
 
 ## Standards
 
@@ -224,6 +242,10 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 
 **ISO 27701:2025 (A.3.8, A.3.9)**
 14. Confirm expired user IDs are not reissued for PII-processing systems per A.3.8.
+
+**PCI DSS v4.0.1 (8.2.7, 8.2.8)**
+- Manage third-party remote access accounts so they are enabled only during the time period needed per 8.2.7.
+- Re-authenticate users after sessions have been idle for more than 15 minutes per 8.2.8.
 
 ### Access Review
 
