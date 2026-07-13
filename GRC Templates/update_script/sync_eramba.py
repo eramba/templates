@@ -273,10 +273,20 @@ def load_policies_from_github():
                 short_desc = line.strip()[:255]
                 break
 
-        # Insert blank line after **bold** tags followed immediately by list items
-        # so markdown parser renders them as <ul><li> not <br/>- text
+        # Fix markdown list rendering: insert blank lines so parser
+        # treats - and 1. items as proper lists not inline text
         import re as _re
-        content_fixed = _re.sub(r'(\*\*[^\n]+\*\*)\n(-)', r'\1\n\n\2', content)
+        content_fixed = content
+        # blank line before headings
+        content_fixed = _re.sub(r'([^\n])\n(#{1,3} )', r'\1\n\n\2', content_fixed)
+        # blank line after **bold** before bullet list
+        content_fixed = _re.sub(r'(\*\*[^\n]+\*\*)\n(-)', r'\1\n\n\2', content_fixed)
+        # blank line after **bold** before numbered list
+        content_fixed = _re.sub(r'(\*\*[^\n]+\*\*)\n(\d+\.)', r'\1\n\n\2', content_fixed)
+        # blank line after last bullet before next **bold**
+        content_fixed = _re.sub(r'(- [^\n]+)\n(\*\*)', r'\1\n\n\2', content_fixed)
+        # blank line after last numbered item before next **bold**
+        content_fixed = _re.sub(r'(\d+\. [^\n]+)\n(\*\*)', r'\1\n\n\2', content_fixed)
         html = md_converter.markdown(content_fixed, extensions=['tables', 'fenced_code'])
 
         policies.append({
