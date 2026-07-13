@@ -29,6 +29,15 @@ All endpoint devices owned or managed by the organisation including laptops, des
 - Default accounts must be disabled or renamed; default credentials must be changed on all devices before deployment.
 - Unnecessary services, ports, and protocols must be disabled on all endpoints.
 
+**CIS Controls v8.1 (4.7, 4.8, 4.9)**
+- Manage default accounts on enterprise assets including disabling or renaming them per 4.7.
+- Uninstall or disable unnecessary services on enterprise assets per 4.8.
+- Configure trusted DNS servers on enterprise network infrastructure per 4.9.
+
+**CIS Controls v8.1 (4.11, 4.12)**
+- Enforce remote wipe capability on portable end-user devices per 4.11.
+- Ensure separate enterprise workspaces on mobile end-user devices per 4.12.
+
 ### Malware Protection
 
 **Applies to all frameworks**
@@ -40,6 +49,11 @@ All endpoint devices owned or managed by the organisation including laptops, des
 **CIS Controls v8.1 (10.1, 10.2, 10.6, 10.7)**
 - Anti-exploitation features must be enabled on all endpoints where supported.
 
+**CIS Controls v8.1 (10.3, 10.4, 10.5)**
+- Disable autorun and autoplay for removable media per 10.3.
+- Configure anti-malware to automatically scan removable media per 10.4.
+- Enable anti-exploitation features on enterprise assets where supported per 10.5.
+
 ### Web and Email Filtering
 
 **Applies to all frameworks**
@@ -48,6 +62,10 @@ All endpoint devices owned or managed by the organisation including laptops, des
 - Email security controls must include DMARC, SPF, and DKIM enforcement to prevent spoofing.
 - Email gateway anti-malware scanning must be enabled for all inbound attachments.
 - Unnecessary file types must be blocked at the email gateway.
+
+**CIS Controls v8.1 (9.1, 9.4)**
+- Ensure only fully supported browsers and email clients are allowed to execute in the enterprise per 9.1.
+- Restrict unauthorised or unnecessary browser and email client extensions and plugins per 9.4.
 
 ### Software Installation Control
 
@@ -223,3 +241,22 @@ All endpoint devices owned or managed by the organisation including laptops, des
 15. Enforce software usage restrictions per CFG-04.
 16. Restrict ability of non-privileged users to install unauthorised software per CFG-05.
 17. Prohibit software installations without explicitly assigned privileged status per END-03.
+
+### Remote Working Security
+
+**Applies to all frameworks**
+- Security measures shall be implemented for personnel working remotely to protect information accessed, processed, or stored outside the organisation's premises.
+- Remote working arrangements shall be authorised and subject to appropriate security controls proportionate to the risk.
+
+**ISO 27002:2022 (6.7)**
+- Security measures for remote working shall cover: physical protection of the remote working location, technical controls on the device and network connection, access controls, data handling requirements, and protection against interception per 6.7.
+- Remote access shall use encrypted connections and multi-factor authentication.
+
+### Remote Working Security Review Procedure
+
+**ISO 27002:2022 (6.7)**
+1. Confirm remote working security requirements are documented and communicated to all remote workers.
+2. Confirm remote access uses encrypted connections (VPN or equivalent) and multi-factor authentication.
+3. Confirm remote working devices meet the same endpoint security standards as office devices.
+4. Review any incidents involving remote working security during the period.
+5. Confirm remote working authorisations are reviewed and approved at minimum annually.
