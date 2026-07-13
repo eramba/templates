@@ -136,6 +136,9 @@ All information systems, users, and processes. Includes third parties who must r
 **ISO 42001:2023 (A.8.4)**
 21. Confirm a plan for communicating AI incidents to users is in place per A.8.4.
 
+**ISO 27002:2022 (5.5)**
+- Establish and maintain contact with relevant authorities so that obligations to notify can be fulfilled promptly per 5.5.
+
 ### Incident Response
 
 **Applies to all frameworks**
