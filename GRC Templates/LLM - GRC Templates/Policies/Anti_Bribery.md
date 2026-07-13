@@ -26,6 +26,10 @@ All employees, officers, directors, contractors, agents, and business associates
 **ISO 37001:2025 (37001:2025 - 6.1, 37001:2025 - 6.2, 37001:2025 - 6.3)**
 - The risk assessment must consider risks associated with business associates and third parties.
 
+**ISO 37001:2025 (37001:2025 - 4.5.3, 37001:2025 - 4.5.4)**
+- Review the bribery risk assessment at planned intervals and when changes or new information emerge per 4.5.3.
+- Retain documented information demonstrating the assessment was conducted and used to design the ABMS per 4.5.4.
+
 ### Prohibitions and Controls
 
 **Applies to all frameworks**
