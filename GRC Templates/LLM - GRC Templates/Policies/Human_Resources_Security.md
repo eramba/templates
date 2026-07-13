@@ -66,6 +66,20 @@ All employees, contractors, and third-party personnel with access to organizatio
 
 **ISO 37001:2025 (37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.3)**
 
+**NIST 800-53 Rev5 (AT-1, AT-4, AT-5, AT-6)**
+- Develop and disseminate awareness and training policy per AT-1.
+- Document and monitor individual system security and privacy training activities per AT-4.
+- Establish and maintain contact with groups and associations involved in security awareness per AT-5.
+- Provide feedback to personnel on organisational security and privacy training per AT-6.
+
+**SCF 2025 (SAT-01, SAT-05, HRS-12, HRS-13, HRS-14, HRS-15)**
+- Foster a cybersecurity and data protection-minded workforce per SAT-01.
+- Implement cybersecurity knowledge sharing practices per SAT-05.
+- Identify and manage incompatible roles per HRS-12.
+- Identify critical skills and gaps in the workforce per HRS-13.
+- Identify and document authorised work locations per HRS-14.
+- Establish processes for reporting suspicious activities per HRS-15.
+
 ### Termination and Role Change
 
 **Applies to all frameworks**
@@ -190,6 +204,11 @@ All employees, contractors, and third-party personnel with access to organizatio
 
 **NIS2 Article 21 (Article 21(2) (i))**
 17. Confirm offboarding maintains human resources security and access control per Article 21(2)(i).
+
+**NIST 800-53 Rev5 (PS-1, PS-7, PS-9)**
+- Develop and disseminate personnel security policy per PS-1.
+- Establish personnel security requirements for external providers per PS-7.
+- Develop position descriptions incorporating security and privacy requirements per PS-9.
 
 ### Security Training Delivery and Tracking
 

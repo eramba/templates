@@ -167,6 +167,37 @@ All AI systems developed, procured, or used by the organisation, including machi
 - Misinformation from LLM outputs must be mitigated through content verification, fact-checking, and clear AI disclosure.
 - Unbounded resource consumption must be prevented through rate limiting, quotas, and usage monitoring.
 
+**SCF 2025 (AAT-01, AAT-02, AAT-03, AAT-04, AAT-05, AAT-06, AAT-07, AAT-08, AAT-11, AAT-12, AAT-13, AAT-14, AAT-15, AAT-17, AAT-18, AAT-19, AAT-20, AAT-21, AAT-22, AAT-23, AAT-24, AAT-25, AAT-26, AAT-27, AAT-28, AAT-29, AAT-30, AAT-31, AAT-32)**
+- Establish AI and autonomous technologies governance per AAT-01.
+- Maintain situational awareness of AI and autonomous technologies per AAT-02.
+- Define AI and autonomous technologies context per AAT-03.
+- Develop AI and autonomous technologies business case per AAT-04.
+- Provide AI and autonomous technologies training per AAT-05.
+- Address AI and autonomous technologies fairness and bias per AAT-06.
+- Make risk management decisions for AI and autonomous technologies per AAT-07.
+- Assign responsibilities for AI and autonomous technologies per AAT-08.
+- Implement robust stakeholder engagement for AI per AAT-11.
+- Implement intellectual property protections for AI per AAT-12.
+- Ensure stakeholder diversity in AI per AAT-13.
+- Define AI requirements per AAT-14.
+- Make viability decisions for AI per AAT-15.
+- Implement harm prevention controls for AI per AAT-17.
+- Implement risk tracking for AI per AAT-18.
+- Ensure AI conformity per AAT-19.
+- Implement AI development practices per AAT-20.
+- Register AI systems per AAT-21.
+- Govern AI deployment per AAT-22.
+- Mark AI outputs per AAT-23.
+- Conduct real world testing of AI per AAT-24.
+- Manage AI system value chain per AAT-25.
+- Implement AI testing techniques per AAT-26.
+- Implement AI output filtering per AAT-27.
+- Implement AI model resilience per AAT-28.
+- Implement AI agent governance per AAT-29.
+- Implement agentic output traceability per AAT-30.
+- Control human-in-the-loop workload and manipulation per AAT-31.
+- Govern robotic process automation per AAT-32.
+
 ### AI Quality Management System
 
 **EU AI Act 2024/1689 (Art.17.1, Art.17.2)**

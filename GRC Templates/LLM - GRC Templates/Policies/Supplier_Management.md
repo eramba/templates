@@ -162,6 +162,16 @@ All third-party suppliers, vendors, and service providers that access, process, 
 **ISO 45001:2018 (8.1.4.3)**
 - Ensure outsourced functions and processes are controlled and that outsourcing arrangements are consistent with legal requirements and OH&S objectives per 8.1.4.3.
 
+**NIST 800-53 Rev5 (SR-1, SR-4, SR-7, SR-8, SR-9, SR-10, SR-11, SR-12)**
+- Develop and disseminate supply chain risk management policy per SR-1.
+- Identify and document supply chain provenance per SR-4.
+- Implement operations security controls for the supply chain per SR-7.
+- Establish notification agreements for supply chain events per SR-8.
+- Implement tamper resistance and detection for supply chain components per SR-9.
+- Inspect systems or components for tampering per SR-10.
+- Employ anti-counterfeit measures for supply chain components per SR-11.
+- Implement component disposal controls per SR-12.
+
 ### Supplier Review
 
 **Applies to all frameworks**

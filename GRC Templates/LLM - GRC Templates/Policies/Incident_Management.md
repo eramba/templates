@@ -187,6 +187,22 @@ All information systems, users, and processes. Includes third parties who must r
 **PCI DSS v4.0.1 (12.10.4.1)**
 - Define the frequency of periodic training for incident response personnel in the entity's targeted risk analysis per 12.10.4.1.
 
+**NIST 800-53 Rev5 (IR-1, IR-2, IR-3, IR-7, IR-9, IR-10)**
+- Develop and disseminate incident response policy per IR-1.
+- Provide incident response training to personnel per IR-2.
+- Test incident response capability using exercises per IR-3.
+- Provide incident response assistance resources per IR-7.
+- Implement information spillage response procedures per IR-9.
+- Establish an integrated information security analysis team per IR-10.
+
+**SCF 2025 (IRO-14, IRO-15, IRO-16, OPS-04, OPS-06, TPM-11)**
+- Maintain contacts with regulatory and law enforcement agencies per IRO-14.
+- Implement detonation chambers and sandboxes per IRO-15.
+- Implement public relations and reputation repair processes per IRO-16.
+- Operate security operations centre capability per OPS-04.
+- Implement security orchestration, automation, and response per OPS-06.
+- Ensure third-party incident response and recovery capabilities per TPM-11.
+
 ### Post-Incident Review
 
 **Applies to all frameworks**

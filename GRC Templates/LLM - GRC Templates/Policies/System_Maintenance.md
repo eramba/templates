@@ -32,6 +32,15 @@ All information systems, system components, and supporting infrastructure owned 
 
 **NIS2 Article 21 (Article 21(2) (e))**
 
+**NIST 800-53 Rev5 (MA-1, MA-3, MA-7)**
+- Develop and disseminate system maintenance policy per MA-1.
+- Approve, control, and monitor system maintenance tools per MA-3.
+- Perform field maintenance on systems per MA-7.
+
+**SCF 2025 (MNT-10, MNT-11)**
+- Implement maintenance validation processes per MNT-10.
+- Monitor maintenance activities per MNT-11.
+
 ### Maintenance Tools
 
 **Applies to all frameworks**

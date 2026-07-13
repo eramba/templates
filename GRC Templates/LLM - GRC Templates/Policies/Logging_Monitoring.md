@@ -51,6 +51,15 @@ All systems, applications, network devices, and infrastructure processing, stori
 - Audit logs capture all initialisation of new audit logs and starting, stopping, or pausing of existing audit logs per 10.2.1.6.
 - Audit logs capture all creation and deletion of system-level objects per 10.2.1.7.
 
+**NIST 800-53 Rev5 (AU-1, AU-4, AU-10, AU-13, AU-14, AU-15, AU-16)**
+- Develop and disseminate audit and accountability policy per AU-1.
+- Allocate sufficient audit log storage capacity per AU-4.
+- Provide non-repudiation protection for information from being denied by sender per AU-10.
+- Monitor open source systems for evidence of unauthorised exfiltration of information per AU-13.
+- Provide and implement capability to capture and log user sessions per AU-14.
+- Provide alternate audit logging capability in case of primary failure per AU-15.
+- Coordinate audit logging with organisations requiring cross-organisational audit per AU-16.
+
 ### Log Protection and Retention
 
 **Applies to all frameworks**
@@ -104,6 +113,16 @@ All systems, applications, network devices, and infrastructure processing, stori
 **PCI DSS v4.0.1 (10.4.1.1, 10.4.2.1)**
 - Use automated mechanisms to perform audit log reviews per 10.4.1.1.
 - Define the frequency of periodic log reviews for all other system components in the entity's targeted risk analysis per 10.4.2.1.
+
+**NIST 800-53 Rev5 (AU-7)**
+- Provide audit record reduction and report generation to support analysis and after-the-fact investigations per AU-7.
+
+**SCF 2025 (MON-12, MON-13, MON-14, MON-15, MON-18)**
+- Implement session audit capability per MON-12.
+- Provide alternate event logging capability per MON-13.
+- Coordinate audit logging across organisations per MON-14.
+- Implement covert channel analysis per MON-15.
+- Implement file activity monitoring per MON-18.
 
 ## Standards
 
@@ -255,3 +274,25 @@ All systems, applications, network devices, and infrastructure processing, stori
 
 **NIST AI 600-1 2024 (GV-1.5-001, MG-4.1-006)**
 6. Confirm dataset modification tracking is in place for AI training data changes.
+
+### Security Operations
+
+**NIST 800-53 Rev5 (AU-1)**
+- Develop, document, disseminate, review, and update an audit and accountability policy per AU-1.
+
+**SCF 2025 (OPS-01, OPS-02, OPS-03, OPS-04, OPS-05, OPS-06, OPS-07)**
+- Implement operations security controls to protect operational information per OPS-01.
+- Define and implement a security concept of operations per OPS-02.
+- Ensure security controls support business process delivery per OPS-03.
+- Operate a Security Operations Center or equivalent capability per OPS-04.
+- Publish and maintain secure practices guidelines per OPS-05.
+- Implement security orchestration, automation, and response capabilities per OPS-06.
+- Detect and manage shadow IT per OPS-07.
+
+### Security Operations Review Procedure
+
+**SCF 2025 (OPS-01, OPS-02, OPS-03, OPS-04, OPS-05, OPS-06, OPS-07)**
+1. Confirm operations security controls are documented and operating.
+2. Review SOC or equivalent monitoring coverage for gaps.
+3. Confirm automated response playbooks are current and tested.
+4. Review shadow IT detection findings and confirm remediation actions taken.

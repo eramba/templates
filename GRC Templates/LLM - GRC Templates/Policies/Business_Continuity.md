@@ -34,6 +34,26 @@ All critical information systems, services, and processes including disaster rec
 
 **NIS2 Article 21 (Article 21(2) (c))**
 
+**NIST 800-53 Rev5 (CP-1, CP-3, CP-5, CP-8, CP-11, CP-12, CP-13)**
+- Develop and disseminate contingency planning policy per CP-1.
+- Provide contingency training to system users per CP-3.
+- Review and update contingency plan in response to changes per CP-5.
+- Establish alternate telecommunications services for continuity per CP-8.
+- Implement alternate communications protocols if primary is compromised per CP-11.
+- Implement safe mode operations during contingency per CP-12.
+- Implement alternative security mechanisms if primary is unavailable per CP-13.
+
+**SCF 2025 (BCD-14, BCD-15, BCD-16, CAP-01, CAP-02, CAP-03, CAP-04, CAP-05, CAP-06)**
+- Establish isolated recovery environment per BCD-14.
+- Maintain reserve hardware per BCD-15.
+- Address AI and autonomous technology incidents in continuity plans per BCD-16.
+- Implement capacity and performance management per CAP-01.
+- Establish resource priority controls per CAP-02.
+- Conduct capacity planning per CAP-03.
+- Implement performance monitoring per CAP-04.
+- Implement elastic expansion capabilities per CAP-05.
+- Implement regional delivery capabilities per CAP-06.
+
 ### Backup and Recovery
 
 **Applies to all frameworks**

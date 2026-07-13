@@ -261,6 +261,12 @@ All information created, received, processed, stored, or transmitted by the orga
 **ISO 27002:2022 (5.32)**
 5. Confirm procedures address all intellectual property categories: software, documents, databases, and proprietary processes.
 
+**NIST 800-53 Rev5 (MP-1, MP-2, MP-5, MP-8)**
+- Develop and disseminate media protection policy per MP-1.
+- Restrict access to media containing sensitive information per MP-2.
+- Control the transport of media outside controlled areas per MP-5.
+- Implement media downgrading process when media sensitivity changes per MP-8.
+
 ### Records Retention Review Procedure
 
 **Applies to all frameworks**
@@ -271,6 +277,23 @@ All information created, received, processed, stored, or transmitted by the orga
 
 **ISO 27002:2022 (5.33)**
 5. Confirm records are protected against falsification and unauthorised access consistent with their classification.
+
+**SCF 2025 (CRY-10, CRY-13, DCH-14, DCH-15, DCH-16, DCH-17, DCH-18, DCH-19, DCH-20, DCH-22, DCH-23, DCH-24, DCH-25, DCH-26, DCH-27)**
+- Implement transmission of cybersecurity and data protection attributes per CRY-10.
+- Implement cryptographic hash controls per CRY-13.
+- Control information sharing per DCH-14.
+- Manage publicly accessible content per DCH-15.
+- Implement data mining protection per DCH-16.
+- Control ad-hoc data transfers per DCH-17.
+- Implement media and data retention controls per DCH-18.
+- Control geographic location of data per DCH-19.
+- Manage archived data sets per DCH-20.
+- Implement data quality operations per DCH-22.
+- Implement de-identification and anonymisation per DCH-23.
+- Document and maintain information location per DCH-24.
+- Control transfer of sensitive and regulated data per DCH-25.
+- Address data localisation requirements per DCH-26.
+- Implement data rights management per DCH-27.
 
 ### Capacity Planning Review Procedure
 

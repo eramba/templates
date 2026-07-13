@@ -40,6 +40,35 @@ All physical locations where organizational information systems or sensitive inf
 - Monitor individual physical access to sensitive areas within the CDE with video cameras or physical access control mechanisms per 9.2.1.1.
 - Control physical access for personnel to sensitive areas within the CDE based on individual job function with access reviewed at least once every three months per 9.3.1.1.
 
+**NIST 800-53 Rev5 (PE-1, PE-4, PE-5, PE-7, PE-9, PE-10, PE-11, PE-12, PE-13, PE-14, PE-15, PE-16, PE-17, PE-18, PE-19, PE-20, PE-21, PE-22, PE-23)**
+- Develop and disseminate physical and environmental protection policy per PE-1.
+- Control physical access to system distribution and transmission lines per PE-4.
+- Control physical access to output devices per PE-5.
+- Control visitor access including escort and activity monitoring per PE-7.
+- Protect power equipment and power cabling per PE-9.
+- Implement emergency shutoff capability per PE-10.
+- Implement emergency power capability per PE-11.
+- Implement emergency lighting per PE-12.
+- Implement fire protection for facilities per PE-13.
+- Implement environmental controls for temperature and humidity per PE-14.
+- Implement water damage protection per PE-15.
+- Control delivery and removal of system components per PE-16.
+- Implement controls for alternate work sites per PE-17.
+- Position system components to minimise potential damage per PE-18.
+- Implement controls to prevent information leakage via electromagnetic emissions per PE-19.
+- Implement asset monitoring and tracking per PE-20.
+- Implement electromagnetic pulse protection per PE-21.
+- Mark system components with security attributes per PE-22.
+- Consider security requirements when selecting facility locations per PE-23.
+
+**SCF 2025 (PES-14, PES-15, PES-16, PES-17, PES-18, PES-19)**
+- Implement asset monitoring and tracking per PES-14.
+- Implement electromagnetic pulse protection per PES-15.
+- Mark components with security attributes per PES-16.
+- Implement proximity sensors per PES-17.
+- Implement on-site client segregation per PES-18.
+- Maintain physical access device inventories per PES-19.
+
 ### Equipment and Asset Protection
 
 **Applies to all frameworks**

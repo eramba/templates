@@ -46,6 +46,83 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 - Deploy a host-based intrusion prevention solution on enterprise assets per 13.7.
 - Deploy a network intrusion prevention solution where appropriate per 13.8.
 
+**NIST 800-53 Rev5 (SC-1, SC-2, SC-3, SC-4, SC-6, SC-9, SC-11, SC-14, SC-15, SC-16, SC-18, SC-19, SC-21, SC-22, SC-24, SC-25, SC-26, SC-27, SC-29, SC-30, SC-31, SC-32, SC-33, SC-34, SC-35, SC-36, SC-37, SC-38, SC-39, SC-40, SC-41, SC-42, SC-43, SC-44, SC-45, SC-46, SC-47, SC-48, SC-49, SC-50, SC-51)**
+- Develop and disseminate system and communications protection policy per SC-1.
+- Separate user functionality from system management functionality per SC-2.
+- Isolate security functions from non-security functions per SC-3.
+- Prevent unauthorised and unintended information transfer in shared resources per SC-4.
+- Protect resource availability per SC-6.
+- Implement transmission confidentiality per SC-9.
+- Implement trusted path for communications per SC-11.
+- Implement public access protections per SC-14.
+- Control collaborative computing devices and applications per SC-15.
+- Bind security and privacy attributes to information in transmission per SC-16.
+- Control mobile code per SC-18.
+- Control VoIP communications per SC-19.
+- Implement secure recursive DNS service per SC-21.
+- Implement architecture for authoritative DNS service per SC-22.
+- Implement fail in known state capability per SC-24.
+- Implement thin node controls per SC-25.
+- Implement decoys (honeypots) per SC-26.
+- Use platform-independent applications where possible per SC-27.
+- Implement heterogeneity in system components per SC-29.
+- Implement concealment and misdirection per SC-30.
+- Conduct covert channel analysis per SC-31.
+- Partition systems into components based on classification per SC-32.
+- Implement transmission preparation integrity per SC-33.
+- Implement non-modifiable executable programs per SC-34.
+- Identify external malicious code per SC-35.
+- Implement distributed processing and storage per SC-36.
+- Employ out-of-band channels for security management per SC-37.
+- Implement operations security practices per SC-38.
+- Implement process isolation per SC-39.
+- Implement wireless link protection per SC-40.
+- Control access to ports and I/O devices per SC-41.
+- Control sensor capability and data collection per SC-42.
+- Implement usage restrictions on system components per SC-43.
+- Implement detonation chambers for malicious code per SC-44.
+- Implement system time synchronisation per SC-45.
+- Implement cross-domain policy enforcement per SC-46.
+- Implement alternate communications paths per SC-47.
+- Implement sensor relocation capability per SC-48.
+- Implement hardware-enforced separation per SC-49.
+- Implement software-enforced separation per SC-50.
+- Implement hardware-based protection mechanisms per SC-51.
+
+**SCF 2025 (CLD-01, CLD-02, CLD-03, CLD-04, CLD-05, CLD-06, CLD-07, CLD-08, CLD-09, CLD-10, CLD-11, CLD-12, CLD-13, CLD-14, CLD-15, NET-13, NET-16, NET-19, WEB-01, WEB-02, WEB-03, WEB-04, WEB-05, WEB-06, WEB-07, WEB-08, WEB-09, WEB-10, WEB-11, WEB-12, WEB-13, WEB-14)**
+- Govern cloud services usage per CLD-01.
+- Implement cloud security architecture per CLD-02.
+- Implement cloud infrastructure security subnet per CLD-03.
+- Implement API security per CLD-04.
+- Control virtual machine images per CLD-05.
+- Implement multi-tenant environment controls per CLD-06.
+- Implement data handling and portability in cloud per CLD-07.
+- Use standardised virtualisation formats per CLD-08.
+- Address geolocation requirements for data per CLD-09.
+- Protect sensitive data in public cloud per CLD-10.
+- Implement cloud access security broker per CLD-11.
+- Implement side channel attack prevention per CLD-12.
+- Govern hosted assets, applications, and services per CLD-13.
+- Prohibit unverified hosted assets per CLD-14.
+- Implement software-defined storage security per CLD-15.
+- Secure electronic messaging per NET-13.
+- Secure intranet connections per NET-16.
+- Implement content disarm and reconstruction per NET-19.
+- Implement web security controls per WEB-01.
+- Use demilitarised zones per WEB-02.
+- Deploy web application firewall per WEB-03.
+- Secure client-facing web services per WEB-04.
+- Implement cookie management per WEB-05.
+- Implement strong customer authentication per WEB-06.
+- Apply web security standards per WEB-07.
+- Secure web application frameworks per WEB-08.
+- Implement input validation and sanitisation per WEB-09.
+- Secure web traffic per WEB-10.
+- Implement output encoding per WEB-11.
+- Implement web browser security per WEB-12.
+- Implement website change detection per WEB-13.
+- Review publicly accessible content per WEB-14.
+
 ### Network Segmentation
 
 **Applies to all frameworks**
