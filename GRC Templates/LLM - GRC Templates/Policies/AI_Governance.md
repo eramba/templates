@@ -246,3 +246,85 @@ All AI systems developed, procured, or used by the organisation, including machi
 **EU AI Act 2024/1689 (Art.20.1, Art.20.2, Art.82.2)**
 6. Confirm corrective action is applied to all AI systems of the same type presenting the same risk.
 7. Notify the market surveillance authority where required.
+
+### AI Roles and Responsibilities
+
+**ISO 42001:2023 (A.3.2)**
+- Roles and responsibilities for AI shall be defined and allocated according to the needs of the organisation, covering the design, development, deployment, operation, monitoring, and decommissioning of AI systems.
+- Role definitions shall include accountability for AI system outcomes, oversight, and escalation.
+
+**ISO 42001:2023 (A.3.3)**
+- The organisation shall define and put in place a process to report concerns about the organisation's role with respect to AI, including concerns about AI system behaviour, ethical issues, and safety incidents.
+- Personnel shall be able to raise concerns without fear of reprisal.
+
+### AI Objectives
+
+**ISO 42001:2023 (6.2)**
+- The organisation shall establish AI objectives at relevant functions and levels consistent with the AI policy.
+- AI objectives shall be measurable, monitored, communicated, and updated as appropriate.
+- Plans to achieve AI objectives shall include what will be done, resources required, responsibility, timeline, and how results will be evaluated.
+
+### AI Operational Planning
+
+**ISO 42001:2023 (8.1)**
+- The organisation shall plan, implement, and control the processes needed to meet requirements and to implement the actions determined in risk treatment.
+- Planned changes shall be carried out in a controlled manner and unintended changes reviewed to mitigate adverse effects.
+- The organisation shall ensure that externally provided AI-related processes, products, or services are controlled.
+
+### AI Resource Documentation
+
+**ISO 42001:2023 (A.4.2, A.4.3, A.4.4, A.4.5, A.4.6)**
+- The organisation shall identify and document relevant resources required for the activities at each AI system lifecycle stage.
+- Data resources used in AI system development and operation shall be documented including source, type, ownership, and data governance arrangements.
+- Tooling resources used for AI development, testing, and deployment shall be documented.
+- System and computing resources required for AI system operation shall be documented including infrastructure, cloud services, and dependencies.
+- Human resources and their competencies required for AI system activities shall be documented.
+
+### AI Roles and Concerns Procedure
+
+**ISO 42001:2023 (A.3.2, A.3.3)**
+1. Confirm AI roles and responsibilities are documented and assigned to named individuals.
+2. Confirm role definitions cover the full AI lifecycle including design, development, deployment, and monitoring.
+3. Confirm the concerns reporting process is communicated to all personnel involved in AI activities.
+4. Review concerns raised during the period and confirm they were addressed appropriately.
+5. Document role changes and update assignments as the AI programme evolves.
+
+### AI Objectives Review Procedure
+
+**ISO 42001:2023 (6.2)**
+1. Review AI objectives for the current period and assess achievement.
+2. Confirm AI objectives remain aligned with the AI policy and organisational strategy.
+3. Set or update AI objectives for the next period with measurable targets.
+4. Confirm plans to achieve objectives include assigned responsibilities and timelines.
+5. Document and communicate updated objectives to relevant functions.
+
+### AI Resource Documentation Review Procedure
+
+**ISO 42001:2023 (A.4.2, A.4.3, A.4.4, A.4.5, A.4.6)**
+1. Review the AI resource inventory covering data, tooling, infrastructure, and human resources.
+2. Confirm all resources used in active AI systems are documented.
+3. Confirm data resource documentation includes source, ownership, and governance arrangements.
+4. Confirm infrastructure and cloud resource documentation is current.
+5. Confirm human resource competency records are up to date for all AI roles.
+6. Update documentation for any new or changed resources.
+
+### AI System User Information and Responsible Use
+
+**ISO 42001:2023 (A.8.2, A.8.3)**
+- The organisation shall determine and provide the necessary information to users of the AI system, including capabilities, limitations, and instructions for safe use per A.8.2.
+- The organisation shall provide capabilities for interested parties to report adverse impacts of the AI system per A.8.3.
+
+**ISO 42001:2023 (A.9.2, A.9.3, A.9.4)**
+- The organisation shall define and document the processes for the responsible use of AI systems per A.9.2.
+- The organisation shall identify and document objectives to guide the responsible use of AI systems per A.9.3.
+- The organisation shall ensure that the AI system is used according to its intended uses and accompanying documentation per A.9.4.
+
+### AI User Information and Responsible Use Procedure
+
+**ISO 42001:2023 (A.8.2, A.8.3, A.9.2, A.9.3, A.9.4)**
+1. Confirm user documentation exists for all deployed AI systems covering capabilities, limitations, and safe use instructions.
+2. Confirm mechanisms exist for users and interested parties to report adverse AI system impacts.
+3. Confirm responsible use processes are documented and communicated to relevant personnel.
+4. Confirm responsible use objectives are documented and monitored.
+5. Review any reports of adverse impacts received during the period and confirm they were addressed.
+6. Confirm AI systems are being used within their documented intended use boundaries.
