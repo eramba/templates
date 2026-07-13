@@ -39,6 +39,9 @@ All systems, applications, network devices, and infrastructure processing, stori
 
 **NIS2 Article 21 (Article 21(2) (a))**
 
+**CIS Controls v8.1 (13.6)**
+- Collect network traffic flow logs and/or network traffic to review and alert upon from network devices per 13.6.
+
 ### Log Protection and Retention
 
 **Applies to all frameworks**
@@ -82,6 +85,9 @@ All systems, applications, network devices, and infrastructure processing, stori
 **SCF 2025 (MON-08, MON-09, MON-10, MON-11)**
 
 **NIS2 Article 21 (Article 21(2) (a), Article 21(2) (f))**
+
+**CIS Controls v8.1 (13.11)**
+- Tune security event alerting thresholds monthly or more frequently per 13.11.
 
 ## Standards
 
