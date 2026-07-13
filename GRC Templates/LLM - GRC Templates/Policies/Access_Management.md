@@ -41,6 +41,9 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 
 **NIS2 Article 21 (Article 21(2) (i), Article 21(2) (j))**
 
+**CIS Controls v8.1 (5.6)**
+- Centralise account management through a directory or identity service per 5.6.
+
 ### Authentication
 
 **Applies to all frameworks**
@@ -259,3 +262,48 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 
 **ISO 27701:2025 (A.3.9)**
 18. Confirm access rights to PII and associated assets are reviewed per A.3.9.
+
+### Privileged Utility Programs
+
+**Applies to all frameworks**
+- The use of utility programs capable of overriding system and application controls shall be restricted, tightly controlled, and logged.
+- Privileged utility programs shall only be available to authorised personnel and used in accordance with an approved request.
+
+**ISO 27002:2022 (8.18)**
+- The use of utility programs that can override system and application controls shall be restricted to the minimum number of trusted, authorised users.
+- Use of privileged utility programs shall require specific authorisation, shall be time-limited, shall be logged, and shall be reviewed.
+
+### Privileged Utility Program Access Review Procedure
+
+**Applies to all frameworks**
+1. Confirm the inventory of privileged utility programs is current.
+2. Review who has access to each tool and confirm access is still required.
+3. Review logs of privileged utility program use during the period.
+4. Confirm each use was authorised and documented.
+5. Revoke access where it is no longer required.
+
+**ISO 27002:2022 (8.18)**
+6. Confirm privileged utility programs are not accessible to general users and require explicit authorisation for each use.
+
+### Authentication Information Management
+
+**Applies to all frameworks**
+- Allocation and management of authentication information shall be controlled through a formal management process.
+- Personnel shall be advised on the appropriate handling of authentication information including prohibition on sharing credentials.
+
+**ISO 27002:2022 (5.17)**
+- Authentication information including passwords, tokens, and certificates shall be managed through a formal process covering initial allocation, periodic change, reset, revocation, and prohibition on sharing per 5.17.
+- Default authentication information shall be changed immediately upon first use.
+- Authentication information shall be kept confidential and not recorded in an unprotected form.
+
+**ISO 27701:2025 (A.3.23)**
+- Implement secure authentication technologies and procedures for systems processing PII based on information access restrictions per A.3.23.
+
+### Authentication Information Review Procedure
+
+**ISO 27002:2022 (5.17)**
+1. Confirm a process exists for allocating, resetting, and revoking authentication information.
+2. Confirm default credentials are changed upon first use across all systems.
+3. Confirm password and credential policies enforce minimum complexity and rotation requirements.
+4. Confirm personnel have been trained on appropriate handling of authentication information.
+5. Review any incidents involving credential compromise or sharing during the period.
