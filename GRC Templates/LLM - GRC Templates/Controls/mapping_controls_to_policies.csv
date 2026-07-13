@@ -98,3 +98,41 @@ LLM Output Validation and Handling Review,Secure Development,Security Testing in
 LLM Resource and Agency Controls Review,Secure Development,Application Security Requirements Review
 GAI Red-Teaming and Adversarial Testing,AI Governance,AI System Lifecycle Management
 Third-Party GAI System Governance Review,Supplier Management,Supplier Review
+Management System Scope and Context Review,ISMS Governance,Management System Scope Review
+Management System Policy and Leadership Review,ISMS Governance,Leadership Commitment Review
+Management System Documented Information Review,ISMS Governance,Documented Information Control Procedure
+Management System Continual Improvement Review,ISMS Governance,Privacy Objectives and Operational Planning
+Scheduled Maintenance Compliance Review,System Maintenance,Controlled Maintenance
+Maintenance Tool and Access Control Review,System Maintenance,Maintenance Tools
+Remote Maintenance Session Review,System Maintenance,Remote Maintenance Session
+Physical and Environmental Threat Assessment,Physical Security,Physical Threat Assessment Procedure
+Secure Area Access and Controls Review,Physical Security,Secure Area Controls Review Procedure
+POI Device Inspection Review,Physical Security,POI Device Inspection Procedure
+Consent Management Review,Privacy,Consent Management Procedure
+PII Retention and Disposal Review,Privacy,PII Retention and Transfer Review Procedure
+Third-Party PII Disclosure Review,Privacy,Third-Party Disclosure Review Procedure
+Data Masking and DLP Effectiveness Review,Privacy,Data Leakage Prevention Review Procedure
+Cryptographic Key Storage and Access Review,Cryptography,Key Management
+Acceptable Use Policy Compliance Review,Information Classification,Acceptable Use Review Procedure
+Intellectual Property and Records Compliance Review,Information Classification,Records Retention Review Procedure
+Capacity Planning Review,Information Classification,Capacity Planning Review Procedure
+Capacity and Performance Monitoring Review,Business Continuity,Business Impact Analysis and Recovery Objectives
+Threat Hunting and Intelligence Programme Review,Vulnerability Management,Vulnerability Scanning
+Incident Response Training and Testing Review,Incident Management,Incident Response
+Threat Modeling Review,Secure Development,Application Security Requirements Review
+Design and Development Controls Review,Secure Development,Design and Development Review Procedure
+Session and Concurrent Access Controls Review,Access Management,Authentication
+Identity Proofing and Device Authentication Review,Access Management,Account Provisioning
+Remote and Mobile Device Access Review,Access Management,Authentication
+Cloud Security Controls Review,Network Security,Network Security Controls
+Web Application Security Review,Network Security,Network Security Controls
+Intrusion Detection and File Integrity Monitoring Review,Network Security,Network Security Controls
+Supply Chain Integrity and Provenance Review,Supplier Management,Supplier Onboarding
+Mobile Device Management Review,Endpoint Security,Remote Working Security
+Insider Threat Programme Review,Human Resources Security,Security Awareness and Training
+Workforce Competency and Skills Review,Human Resources Security,Security Awareness and Training
+Security Operations Effectiveness Review,Logging Monitoring,Security Operations Review Procedure
+File Integrity Monitoring Review,Logging Monitoring,Log Review and Alerting
+Enterprise Architecture and Security Review,Risk Management,Risk Register Review
+Data Governance Review,Risk Management,Risk Register Review
+Worker Consultation and Participation Review,Occupational Health Safety,Worker Consultation and Participation
