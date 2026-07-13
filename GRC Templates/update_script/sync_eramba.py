@@ -103,24 +103,11 @@ POLICY_DEFAULTS = {
 
 # How we set new controls in eramba
 CONTROL_DEFAULTS = {
-    'security_service_type_id': 4,
-    'documentation_url': None,
     'service_owners': ['User-1'],
     'collaborators': ['User-1'],
-    'opex': 1,
-    'capex': 1,
-    'resource_utilization': 1,
-    'classifications': [],
     'audit_calendar_type': 0,
-    'security_service_audit_dates': [],
+    'maintenance_calendar_type': 0,
     'audit_success_criteria': 'User Defined',
-    'audit_owners': ['User-1'],
-    'audit_evidence_owners': ['User-1'],
-    'security_service_maintenance_dates': [],
-    'maintenance_metric_description': 'Undefined',
-    'maintenance_owners': ['User-1'],
-    'service_contracts': [1],
-    'projects': None,
 }
 
 # Delay between API calls to avoid hammering the server
@@ -286,7 +273,11 @@ def load_policies_from_github():
                 short_desc = line.strip()[:255]
                 break
 
-        html = md_converter.markdown(content, extensions=['tables', 'fenced_code', 'nl2br'])
+        # Insert blank line after **bold** tags followed immediately by list items
+        # so markdown parser renders them as <ul><li> not <br/>- text
+        import re as _re
+        content_fixed = _re.sub(r'(\*\*[^\n]+\*\*)\n(-)', r'\1\n\n\2', content)
+        html = md_converter.markdown(content_fixed, extensions=['tables', 'fenced_code'])
 
         policies.append({
             'name': name,
@@ -358,7 +349,7 @@ def load_eramba_policies():
 
 def load_eramba_controls():
     """Returns dict: {name_lower: record}"""
-    records = eramba_get_all('/api/security-services/index')
+    records = eramba_get_all('/api/v2/security-services')
     result = {}
     for r in records:
         key = r.get('name', '').lower().strip()
@@ -508,13 +499,13 @@ def sync_controls(dry_run=False):
         if existing:
             rec_id = existing.get('id')
             if not dry_run:
-                full, err = eramba_request('GET', f"/api/security-services/{rec_id}")
+                full, err = eramba_request('GET', f"/api/v2/security-services/{rec_id}")
                 if err:
                     log(f"GET control {title}: {err}", 'ERR')
                     errors += 1
                     continue
                 full.update(payload_fields)
-                _, err = eramba_request('PUT', f"/api/security-services/{rec_id}", full)
+                _, err = eramba_request('PUT', f"/api/v2/security-services/{rec_id}", full)
                 if err:
                     log(f"PUT control {title}: {err}", 'ERR')
                     errors += 1
@@ -529,7 +520,7 @@ def sync_controls(dry_run=False):
                 **payload_fields,
             }
             if not dry_run:
-                res, err = eramba_request('POST', '/api/security-services/add', payload)
+                res, err = eramba_request('POST', '/api/v2/security-services', payload)
                 if err:
                     log(f"POST control {title}: {err}", 'ERR')
                     errors += 1
