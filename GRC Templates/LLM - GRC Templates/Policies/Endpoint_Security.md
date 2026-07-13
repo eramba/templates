@@ -38,6 +38,17 @@ All endpoint devices owned or managed by the organisation including laptops, des
 - Enforce remote wipe capability on portable end-user devices per 4.11.
 - Ensure separate enterprise workspaces on mobile end-user devices per 4.12.
 
+**PCI DSS v4.0.1 (2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.2.7, 2.3.1, 2.3.2)**
+- Develop, implement, and maintain configuration standards covering all system components addressing known security vulnerabilities per 2.2.1.
+- Manage vendor default accounts by disabling unused ones or changing default passwords per 2.2.2.
+- Manage system components so that primary functions requiring different security levels are separated per 2.2.3.
+- Enable only necessary services, protocols, daemons, and functions; remove or disable all unnecessary functionality per 2.2.4.
+- Document and implement additional security features for any insecure services, protocols, or daemons that are present per 2.2.5.
+- Configure system security parameters to prevent misuse per 2.2.6.
+- Encrypt all non-console administrative access using strong cryptography per 2.2.7.
+- Manage wireless vendor defaults: change wireless encryption keys and passwords, enable only necessary wireless services per 2.3.1.
+- Change wireless encryption keys when personnel with knowledge of the key leave the organisation per 2.3.2.
+
 ### Malware Protection
 
 **Applies to all frameworks**
@@ -53,6 +64,11 @@ All endpoint devices owned or managed by the organisation including laptops, des
 - Disable autorun and autoplay for removable media per 10.3.
 - Configure anti-malware to automatically scan removable media per 10.4.
 - Enable anti-exploitation features on enterprise assets where supported per 10.5.
+
+**PCI DSS v4.0.1 (5.2.3, 5.2.3.1, 5.3.2.1)**
+- Periodically evaluate system components not at risk for malware and document the evaluation per 5.2.3.
+- Define the frequency of periodic evaluations of components not at risk for malware in the entity's targeted risk analysis per 5.2.3.1.
+- Define the frequency of periodic malware scans in the entity's targeted risk analysis per 5.3.2.1.
 
 ### Web and Email Filtering
 
