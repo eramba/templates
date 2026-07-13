@@ -147,6 +147,9 @@ All information assets, processes, systems, and third-party relationships within
 **ISO 9001:2015 (6.1.1, 6.1.2)**
 24. Determine risks and opportunities relevant to the QMS per 6.1.1 and 6.1.2.
 
+**ISO 27001:2022 (6.1)**
+- Determine actions to address risks and opportunities that could affect the achievement of intended ISMS outcomes per 6.1.
+
 ### Risk Treatment
 
 **Applies to all frameworks**
@@ -229,6 +232,9 @@ All information assets, processes, systems, and third-party relationships within
 **ISO 9001:2015 (9.1.1, 9.1.3)**
 16. Analyse and evaluate QMS data and performance per 9.1.1 and 9.1.3.
 
+**ISO 27001:2022 (6.2)**
+- Confirm information security objectives are established, measurable, monitored, communicated, and updated as appropriate per 6.2.
+
 ### Threat Intelligence Review
 
 **PCI DSS v4.0.1 (12.3.1)**
@@ -243,6 +249,9 @@ All information assets, processes, systems, and third-party relationships within
 
 **SCF 2025 (THR-01, THR-03)**
 5. Maintain situational awareness via threat intelligence feeds per THR-01 and THR-03.
+
+**ISO 27002:2022 (5.6)**
+- Establish and maintain contact with special interest groups and specialist security forums to stay current on threat intelligence per 5.6.
 
 ### Threat Intelligence Review Procedure
 
@@ -274,6 +283,9 @@ All information assets, processes, systems, and third-party relationships within
 
 **ISO 37001:2025 (37001:2025 - 6.2)**
 8. Establish and maintain anti-bribery objectives per 6.2.
+
+**ISO 27002:2022 (5.31)**
+- Identify, document, and keep up to date all legal, statutory, regulatory, and contractual requirements relevant to information security per 5.31.
 
 ### Legal and Regulatory Compliance Review Procedure
 
@@ -317,6 +329,9 @@ All information assets, processes, systems, and third-party relationships within
 **ISO 9001:2015 (9.2.1)**
 11. Conduct independent QMS internal audits per 9.2.1.
 
+**ISO 27002:2022 (5.35)**
+- Confirm the approach to managing information security is reviewed independently at planned intervals or when significant changes occur per 5.35.
+
 ### Independent Information Security Review Procedure
 
 **Applies to all frameworks**
@@ -357,6 +372,9 @@ All information assets, processes, systems, and third-party relationships within
 
 **ISO 9001:2015 (9.1.1, 9.1.3)**
 10. Analyse and evaluate QMS performance per 9.1.1 and 9.1.3.
+
+**ISO 27002:2022 (5.36)**
+- Regularly review compliance with the information security policy, topic-specific policies, rules, and standards per 5.36.
 
 ### Internal Information Security Compliance Review Procedure
 
@@ -443,6 +461,9 @@ All information assets, processes, systems, and third-party relationships within
 **ISO 9001:2015 (9.3.1, 9.3.2, 9.3.3)**
 12. Conduct QMS management review per 9.3.1, 9.3.2, and 9.3.3.
 
+**ISO 27001:2022 (9.3)**
+- Conduct the ISMS management review covering all required inputs per 9.3.
+
 ### Management Review Execution Procedure
 
 **Applies to all frameworks**
@@ -461,6 +482,10 @@ All information assets, processes, systems, and third-party relationships within
 4. Implement and document corrective action.
 5. Verify effectiveness of action before closing.
 6. Review all open items monthly; escalate overdue items.
+
+**ISO 27001:2022 (10.1, 10.2)**
+- React to ISMS nonconformities, evaluate the need for corrective action, implement actions, and verify effectiveness per 10.1.
+- Continually improve the suitability, adequacy, and effectiveness of the ISMS per 10.2.
 
 ### System Security Plan Review Procedure
 
