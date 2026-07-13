@@ -45,6 +45,11 @@ This policy applies to the entire organisation and all personnel involved in est
 - The scope of the QMS shall be determined considering external and internal issues and the requirements of relevant interested parties.
 - The QMS shall be established, implemented, maintained, and continually improved including the processes needed and their interactions.
 
+**ISO 27701:2025 (4.2, 4.3, 4.4)**
+- Determine interested parties relevant to the PIMS and their relevant requirements per 4.2.
+- Determine the scope of the PIMS considering the organisation's processing of PII per 4.3.
+- Establish, implement, maintain, and continually improve a PIMS per 4.4.
+
 ### Leadership and Commitment
 
 **Applies to all frameworks**
@@ -85,6 +90,11 @@ This policy applies to the entire organisation and all personnel involved in est
 **ISO 27002:2022 (5.4)**
 - Management shall require all personnel to apply information security in accordance with the established information security policy, topic-specific policies, and procedures per 5.4.
 
+**ISO 27701:2025 (5.1, 5.2, 5.3)**
+- Top management shall demonstrate leadership with respect to the PIMS by ensuring privacy policy and objectives are established per 5.1.
+- Top management shall establish a privacy policy including a commitment to meet applicable requirements and to continual improvement per 5.2.
+- Top management shall ensure responsibilities and authorities for relevant PIMS roles are assigned and communicated per 5.3.
+
 ### Resources
 
 **Applies to all frameworks**
@@ -108,6 +118,11 @@ This policy applies to the entire organisation and all personnel involved in est
 - The organisation shall determine and provide resources needed to ensure valid and reliable results when monitoring or measuring conformity.
 - The organisation shall determine the knowledge necessary for the operation of its processes and to achieve conformity of products and services.
 
+**ISO 27701:2025 (7.1, 7.2, 7.3)**
+- Determine and provide resources needed for the PIMS per 7.1.
+- Ensure persons doing work that affects privacy performance are competent per 7.2.
+- Ensure persons are aware of the privacy policy and their contribution to PIMS effectiveness per 7.3.
+
 ### Communication
 
 **Applies to all frameworks**
@@ -130,6 +145,14 @@ This policy applies to the entire organisation and all personnel involved in est
 - The entity shall obtain or generate and use relevant, quality information to support the functioning of internal control.
 - The entity shall internally communicate information including objectives and responsibilities for internal control necessary to support the functioning of internal control.
 - The entity shall communicate with external parties regarding matters affecting the functioning of internal control.
+
+**ISO 27701:2025 (7.4)**
+- Determine internal and external communications relevant to the PIMS per 7.4.
+
+**ISO 45001:2018 (7.4.1, 7.4.2, 7.4.3)**
+- Establish, implement, and maintain processes for internal and external communications relevant to the OH&S management system per 7.4.1.
+- Internally communicate information relevant to the OH&S management system among various levels and functions of the organisation per 7.4.2.
+- Externally communicate information relevant to the OH&S management system as established by the organisation's communication process per 7.4.3.
 
 ### Documented Information
 
@@ -165,6 +188,11 @@ This policy applies to the entire organisation and all personnel involved in est
 
 **ISO 27002:2022 (5.37)**
 - Operating procedures for information processing facilities shall be documented and made available to personnel who need them per 5.37.
+
+**ISO 27701:2025 (7.5.1, 7.5.2, 7.5.3)**
+- PIMS documented information shall include documents required by ISO 27701 and documents determined necessary for effectiveness per 7.5.1.
+- When creating and updating PIMS documented information ensure appropriate identification, format, and review per 7.5.2.
+- PIMS documented information shall be controlled to ensure it is available, suitable for use, and adequately protected per 7.5.3.
 
 ## Standards
 
@@ -240,3 +268,36 @@ This policy applies to the entire organisation and all personnel involved in est
 4. Confirm quality information is generated and used to support internal control functioning.
 5. Confirm internal control information is communicated to support personnel in their responsibilities.
 6. Confirm external communications on internal control matters are managed appropriately.
+
+### Privacy Objectives and Operational Planning
+
+**ISO 27701:2025 (6.1, 6.1.1, 6.2, 6.3, 8.1, 10.1, 10.2)**
+- The organisation shall consider issues and requirements when planning for the PIMS and determine risks and opportunities that need to be addressed per 6.1 and 6.1.1.
+- Privacy objectives shall be established at relevant functions and levels, be measurable, monitored, communicated, and updated as appropriate per 6.2.
+- When the organisation determines the need for changes to the PIMS, the changes shall be carried out in a planned manner per 6.3.
+- Processes needed to meet requirements and implement risk treatment actions shall be planned, implemented, and controlled per 8.1.
+- The organisation shall continually improve the suitability, adequacy, and effectiveness of the PIMS per 10.1.
+- When a PIMS nonconformity occurs, the organisation shall react, evaluate the need for corrective action, implement actions, and verify effectiveness per 10.2.
+
+**ISO 42001:2023 (10.1, 10.2)**
+- Continually improve the suitability, adequacy, and effectiveness of the AI management system per 10.1.
+- When an AI management system nonconformity occurs, react, evaluate the need for corrective action, implement, and verify effectiveness per 10.2.
+
+**ISO 37001:2025 (37001:2025 - 10.1, 37001:2025 - 10.2)**
+- Continually improve the suitability, adequacy, and effectiveness of the ABMS per 10.1.
+- When an ABMS nonconformity occurs, react, evaluate the need for corrective action, implement, and verify effectiveness per 10.2.
+
+**ISO 9001:2015 (10.1, 10.3)**
+- Determine and select opportunities for improvement and implement actions to meet customer requirements and enhance customer satisfaction per 10.1.
+- Continually improve the suitability, adequacy, and effectiveness of the QMS per 10.3.
+
+### Privacy Objectives and Operational Planning Procedure
+
+**ISO 27701:2025 (6.1, 6.1.1, 6.2, 6.3, 8.1, 10.1, 10.2)**
+1. Confirm privacy objectives are documented, measurable, and aligned with the privacy policy.
+2. Review achievement of privacy objectives for the current period.
+3. Set or update privacy objectives for the next period with assigned responsibilities and timelines.
+4. Confirm planned changes to the PIMS are being carried out in a controlled manner.
+5. Confirm processes needed to meet privacy requirements are planned and operating.
+6. React to any PIMS nonconformities — evaluate need for corrective action, implement, and verify effectiveness.
+7. Confirm the PIMS is being continually improved based on audit results, management review outputs, and corrective actions.

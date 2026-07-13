@@ -107,3 +107,19 @@ All workers including employees, contractors, and visitors at all organisational
 3. Identify adverse trends requiring intervention.
 4. Document findings and present to management.
 5. Retain report as evidence of monitoring.
+
+### Worker Consultation and Participation
+
+**ISO 45001:2018 (5.4)**
+- The organisation shall establish, implement, and maintain a process for consultation and participation of workers at all applicable levels and functions in the development, planning, implementation, performance evaluation, and actions for improvement of the OH&S management system.
+- Workers shall be consulted on hazard identification, risk assessment, and determination of controls; on investigating incidents; and on development of OH&S objectives.
+- Non-managerial workers shall participate through involvement in OH&S committees and other mechanisms.
+
+### Worker Consultation and Participation Procedure
+
+**ISO 45001:2018 (5.4)**
+1. Confirm consultation mechanisms are in place and accessible to all workers at relevant levels.
+2. Confirm workers were consulted on hazard identification, risk assessment, and incident investigation activities during the period.
+3. Review OH&S committee records or equivalent participation records.
+4. Confirm worker feedback was considered in OH&S decisions.
+5. Document participation activities and outcomes.

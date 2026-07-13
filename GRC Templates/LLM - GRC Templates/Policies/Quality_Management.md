@@ -73,6 +73,9 @@ All processes, products, services, and functions that affect the quality of outp
 7. Confirm customer and statutory requirements are determined, understood, and met per 8.2.1 and 8.2.2.
 8. Confirm ability to meet requirements is reviewed before committing to supply per 8.2.3.1.
 
+**ISO 9001:2015 (8.6)**
+- Implement planned arrangements at appropriate stages to verify that product and service requirements have been met before release. Retain documented information as evidence of conformity per 8.6.
+
 ### Nonconformity Management
 
 **Applies to all frameworks**
@@ -96,6 +99,9 @@ All processes, products, services, and functions that affect the quality of outp
 3. Identify areas below target and define improvement actions.
 4. Document findings and present to management.
 5. Retain records as evidence.
+
+**ISO 9001:2015 (9.1.2)**
+- Monitor customers' perceptions of the degree to which their needs and expectations have been fulfilled. Determine methods for obtaining, monitoring, and reviewing this information per 9.1.2.
 
 ### Quality Nonconformity Review Procedure
 

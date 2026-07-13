@@ -153,6 +153,9 @@ All employees, contractors, and third-party personnel with access to organizatio
 **ISO 9001:2015 (7.2, 7.3)**
 30. Confirm personnel competence and awareness for QMS roles per 7.2 and 7.3.
 
+**ISO 37001:2025 (37001:2025 - 7.2.2.2)**
+- Conduct enhanced assessments for all positions exposed to more than low bribery risk as determined by the bribery risk assessment per 7.2.2.2.
+
 ### Offboarding
 
 **Applies to all frameworks**
