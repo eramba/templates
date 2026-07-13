@@ -41,6 +41,9 @@ All information systems, users, and processes. Includes third parties who must r
 
 **NIS2 Article 21 (Article 21(2) (b))**
 
+**CIS Controls v8.1 (17.1)**
+- Designate one key person and at least one backup to manage incident handling, coordination, and documentation per 17.1.
+
 ### Incident Response and Containment
 
 **Applies to all frameworks**

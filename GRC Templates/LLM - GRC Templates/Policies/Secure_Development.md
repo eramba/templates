@@ -26,12 +26,21 @@ All software developed, customised, or procured by the organisation, including i
 **ISO 27002:2022 (8.25, 8.27)**
 - System architecture and engineering must follow documented secure design principles.
 
+**CIS Controls v8.1 (16.3)**
+- Perform root cause analysis on security vulnerabilities to evaluate underlying issues that create them per 16.3.
+
 ### Application Security Requirements
 
 **Applies to all frameworks**
 - Security requirements must be defined and approved by Information Security before development begins on any new or significantly changed application.
 - Requirements must address authentication, authorisation, input validation, data protection, logging, and error handling.
 - A process must exist for receiving and handling reports of security vulnerabilities in developed software.
+
+**CIS Controls v8.1 (16.6, 16.7, 16.11, 16.14)**
+- Establish and maintain a severity rating system for application vulnerabilities per 16.6.
+- Use standard hardening configuration templates for application infrastructure components per 16.7.
+- Leverage vetted modules or services for application security components such as identity, encryption, and logging per 16.11.
+- Conduct threat modeling to identify and address application security design flaws before code is created per 16.14.
 
 ### Secure Coding
 
@@ -56,12 +65,25 @@ All software developed, customised, or procured by the organisation, including i
 - The component inventory must be kept current and reviewed at least monthly for newly disclosed vulnerabilities.
 - End-of-life or unsupported components must have a documented migration plan.
 
+**ISO 27701:2025 (A.3.30)**
+- Direct, monitor, and review activities related to outsourced PII processing system development per A.3.30.
+
+**CIS Controls v8.1 (16.4, 16.5)**
+- Establish and manage an updated inventory of third-party software components (bill of materials) per 16.4.
+- Use up-to-date and trusted third-party software components from established and proven sources per 16.5.
+
 ### Environment Separation
 
 **Applies to all frameworks**
 - Development, test, and production environments must be logically or physically separated.
 - Developers must not have direct access to production systems without a documented approval process.
 - Production data must not be used in non-production environments unless masked or anonymised.
+
+**ISO 27002:2022 (8.31)**
+- Separate and secure development, testing, and production environments with controls preventing unauthorised access between them per 8.31.
+
+**CIS Controls v8.1 (16.8)**
+- Maintain separate environments for production and non-production systems per 16.8.
 
 ### Source Code Access Control
 
@@ -290,3 +312,70 @@ All software developed, customised, or procured by the organisation, including i
 
 **EU AI Act 2024/1689 (Art.15.5)**
 7. Include testing of resilience against adversarial inputs designed to alter AI system outputs.
+
+### Test Information Management
+
+**Applies to all frameworks**
+- Test information shall be appropriately selected, protected, and managed. Production data containing sensitive or personal information shall not be used for testing unless it has been masked or anonymised.
+- Test data shall be treated with the same level of care as the information it represents.
+
+**ISO 27002:2022 (8.33)**
+- Test information shall be selected to be representative of production data without exposing sensitive data.
+- When production data must be used for testing, appropriate authorisation shall be obtained, data shall be masked or anonymised where possible, and all copies shall be deleted after testing.
+
+### Protection During Audit Testing
+
+**Applies to all frameworks**
+- Audit tests and other assurance activities involving assessment of operational systems shall be planned and agreed with management to minimise disruption.
+- Access granted to auditors shall be read-only where possible, monitored, time-limited, and revoked immediately after the assessment.
+
+**ISO 27002:2022 (8.34)**
+- Audit requirements and activities involving assessment of operational systems shall be agreed with appropriate management and controlled to minimise business disruption.
+- All access and activities during audit testing shall be logged.
+
+### Design and Development
+
+**Applies to all frameworks**
+- The organisation shall establish, implement, and maintain a design and development process appropriate to ensure the subsequent provision of products and services.
+
+**ISO 9001:2015 (8.3.1, 8.3.2, 8.3.3, 8.3.4, 8.3.5, 8.3.6)**
+- Design and development planning shall consider the nature, duration, and complexity of the design activity; required process stages including review, verification, and validation; responsibilities and authorities; internal and external resource needs.
+- Design and development inputs shall determine requirements essential for the specific types of products and services, covering functional, performance, legal, regulatory, and previously similar design requirements.
+- Controls shall be applied to the design and development process to ensure results are defined, reviews are conducted, verification and validation are performed, and actions arising are taken.
+- Design and development outputs shall meet input requirements, be adequate for subsequent processes, include or reference monitoring and measurement requirements, and specify acceptance criteria.
+- Changes made during or subsequent to design and development shall be identified, reviewed, controlled, and authorised, with the effect of changes on constituent parts and delivered products and services evaluated.
+
+### Test Data Management Procedure
+
+**Applies to all frameworks**
+1. Confirm a test data management process exists and is followed for all projects.
+2. Confirm production data is not used in test environments without masking or anonymisation.
+3. Review current test environments for any unmasked production data.
+4. Confirm test data copies are deleted after testing is complete.
+
+**ISO 27002:2022 (8.33)**
+5. Confirm authorisation is required and documented before any production data is copied to test environments.
+
+**ISO 27701:2025 (A.3.31)**
+- Test information related to PII processing shall be appropriately selected, protected, and managed. PII shall not be used for testing; false or synthetic PII should be used per A.3.31.
+
+### Audit Testing Controls Procedure
+
+**Applies to all frameworks**
+1. Confirm audit scope and access requirements are agreed with management before testing begins.
+2. Confirm auditor access is the minimum necessary — read-only where possible.
+3. Confirm all audit activities are logged.
+4. Confirm audit access is revoked immediately upon completion.
+
+**ISO 27002:2022 (8.34)**
+5. Confirm audit planning minimises disruption to operational systems.
+
+### Design and Development Review Procedure
+
+**ISO 9001:2015 (8.3.1, 8.3.2, 8.3.3, 8.3.4, 8.3.5, 8.3.6)**
+1. Confirm design and development plans are documented for each project covering stages, reviews, and responsibilities.
+2. Confirm design inputs have been identified, reviewed for adequacy, and approved.
+3. Confirm design reviews, verifications, and validations have been performed at planned stages.
+4. Confirm design outputs meet input requirements and include acceptance criteria.
+5. Confirm any design changes have been reviewed, authorised, and their impact assessed before implementation.
+6. Document findings and retain records of design and development activities.
