@@ -173,6 +173,9 @@ All systems, processes, and personnel involved in the collection, storage, proce
 14. Provide a copy of PII processed upon request per A.1.3.9.
 15. Define and document response times for handling requests per A.1.3.10.
 
+**SOC 2 (TSP 2017) (P6.7)**
+- Provide data subjects with an accounting of the personal information held and disclose the data subject's rights per P6.7.
+
 ### Data Subject Rights Request Fulfilment Review Procedure
 
 **Applies to all frameworks**
@@ -189,3 +192,112 @@ All systems, processes, and personnel involved in the collection, storage, proce
 2. Confirm legal mechanism for each transfer is current and valid.
 3. Confirm data subjects are informed of transfers as required.
 4. Document review completion and retain evidence.
+
+### Privacy and Protection of PII
+
+**ISO 27002:2022 (5.34)**
+- The organisation shall identify and meet requirements regarding the preservation of privacy and protection of PII in accordance with applicable laws and regulations.
+- A privacy programme shall be established covering collection limitation, purpose specification, use limitation, data quality, security safeguards, openness, individual participation, and accountability.
+
+### Data Masking
+
+**Applies to all frameworks**
+- Data masking shall be used to protect sensitive data in non-production environments, in outputs delivered to unauthorised parties, and in any context where the full data value is not required for the purpose.
+
+**ISO 27002:2022 (8.11)**
+- Data masking shall be used in accordance with the organisation's access control policy and other related policies, and business needs, taking applicable legislation into consideration.
+- Techniques such as tokenisation, encryption, and character substitution shall be applied proportionate to data sensitivity.
+
+### Data Leakage Prevention
+
+**Applies to all frameworks**
+- Data leakage prevention measures shall be applied to systems, networks, and devices that process, store, or transmit sensitive information to detect and prevent the unauthorised disclosure of information.
+
+**ISO 27002:2022 (8.12)**
+- Tools shall monitor and detect data leakage across email, web, endpoints, cloud services, and removable media.
+- DLP policies shall be defined based on the information classification scheme and reviewed regularly.
+
+### Data Masking Review Procedure
+
+**Applies to all frameworks**
+1. Confirm data masking is applied in all non-production environments that use production data.
+2. Review masking coverage across email, APIs, and reports delivering sensitive data to external parties.
+3. Test that masking techniques prevent reconstruction of original values.
+4. Document any gaps and assign remediation.
+
+**ISO 27002:2022 (8.11)**
+5. Confirm masking techniques are proportionate to the classification level of the data being masked.
+
+### Data Leakage Prevention Review Procedure
+
+**Applies to all frameworks**
+1. Review DLP tool coverage across email, web proxy, endpoint, and cloud channels.
+2. Review DLP policy rules against the current classification scheme — confirm sensitive data categories are covered.
+3. Review DLP alerts and incidents from the period — confirm response actions were appropriate.
+4. Document any unmonitored channels and assign coverage.
+
+**ISO 27002:2022 (8.12)**
+5. Confirm DLP policies are tuned to minimise false positives while maintaining detection effectiveness.
+
+### Explicit Consent Management
+
+**Applies to all frameworks**
+- Where the processing of personal information requires explicit consent, the organisation shall communicate the need for consent, the consequences of failing to provide it, and obtain and document consent before processing begins.
+
+**SOC 2 (TSP 2017) (P3.2)**
+- Data subjects shall be informed of the consequences of failing to provide explicit consent.
+- Explicit consent to retain and process personal information shall be documented per P3.2.
+
+### Personal Information Accuracy
+
+**Applies to all frameworks**
+- Personal information shall be collected and maintained accurately, completely, and relevantly to meet the entity's objectives.
+
+**SOC 2 (TSP 2017) (P7.1)**
+- Personal information shall be accurate and complete for the purposes for which it is to be used.
+- Processes shall be in place to ensure relevance of personal information and to correct inaccurate data upon discovery per P7.1.
+
+### Third-Party Personal Information Disclosure
+
+**Applies to all frameworks**
+- Personal information shall only be disclosed to third parties with the explicit consent of data subjects and in accordance with the organisation's privacy policy.
+- A complete, accurate, and timely record of all authorised and unauthorised disclosures of personal information shall be maintained.
+
+**SOC 2 (TSP 2017) (P6.1, P6.2, P6.3, P6.4, P6.5, P6.6)**
+- Personal information shall only be disclosed to third parties with explicit consent and subject to privacy policies communicated to those third parties per P6.1.
+- A complete and accurate record of authorised disclosures shall be created and retained per P6.2.
+- A complete and accurate record of detected or reported unauthorised disclosures shall be created and retained per P6.3.
+- Privacy commitments shall be obtained from vendors and third parties with access to personal information per P6.4.
+- Third parties shall commit to notifying the organisation of any breaches or incidents involving personal information per P6.5.
+- Notification of breaches and incidents shall be provided to affected data subjects, regulators, and others to meet applicable requirements per P6.6.
+
+### Secure Personal Information Disposal
+
+**SOC 2 (TSP 2017) (P4.3)**
+- Personal information shall be securely disposed of when no longer required to meet the entity's objectives.
+- Requests for deletion of personal information shall be captured, identified, and flagged for destruction per P4.3.
+
+### Explicit Consent Procedure
+
+**SOC 2 (TSP 2017) (P3.2)**
+1. Confirm consent collection mechanisms are in place for all processing activities requiring explicit consent.
+2. Confirm data subjects are informed of the consequences of withholding consent before consent is requested.
+3. Confirm consent records are documented with date, method, and scope.
+4. Review and archive consent records; confirm withdrawn consents result in cessation of processing.
+
+### Third-Party Disclosure Review Procedure
+
+**SOC 2 (TSP 2017) (P6.1, P6.2, P6.3, P6.4, P6.5, P6.6)**
+1. Review the register of third parties with access to personal information — confirm all have signed privacy commitments.
+2. Review the record of authorised disclosures for completeness and accuracy.
+3. Review any unauthorised disclosures detected or reported during the period.
+4. Confirm breach notification obligations were met for any reportable incidents.
+5. Confirm third-party privacy commitments include an obligation to notify the organisation of breaches.
+
+### Personal Information Accuracy Review Procedure
+
+**SOC 2 (TSP 2017) (P7.1)**
+1. Confirm processes exist to ensure personal information is accurate and complete at point of collection.
+2. Review any data quality issues or correction requests received during the period.
+3. Confirm corrections are applied promptly and documented.
+4. Confirm relevance of retained personal information against current processing purposes.

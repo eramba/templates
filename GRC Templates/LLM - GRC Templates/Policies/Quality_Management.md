@@ -106,3 +106,22 @@ All processes, products, services, and functions that affect the quality of outp
 4. Confirm corrective actions have owners and due dates.
 5. Verify effectiveness of closed corrective actions.
 6. Document review and retain records.
+
+### Processing Integrity
+
+**Applies to all frameworks**
+- The organisation shall implement policies and procedures to ensure system processing is complete, valid, accurate, timely, and authorised to meet objectives.
+
+**SOC 2 (TSP 2017) (PI1.1, PI1.2, PI1.3)**
+- The organisation shall obtain or generate, use, and communicate relevant, quality information regarding the objectives related to processing integrity per PI1.1.
+- Policies and procedures shall be implemented over system inputs including controls over completeness and accuracy to result in products, services, and reporting to meet specifications per PI1.2.
+- Policies and procedures shall be implemented over system processing to result in products, services, and reporting to meet specifications per PI1.3.
+
+### Processing Integrity Review Procedure
+
+**SOC 2 (TSP 2017) (PI1.1, PI1.2, PI1.3)**
+1. Confirm processing specifications are defined for all in-scope systems.
+2. Confirm input validation controls are implemented and operating — review error rates and exceptions.
+3. Confirm processing activities are defined and produce outputs meeting specifications.
+4. Review any processing failures or exceptions during the period and confirm root cause was identified and corrected.
+5. Confirm quality information is generated and used to support processing integrity objectives.
