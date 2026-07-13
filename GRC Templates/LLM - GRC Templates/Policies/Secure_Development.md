@@ -29,6 +29,47 @@ All software developed, customised, or procured by the organisation, including i
 **CIS Controls v8.1 (16.3)**
 - Perform root cause analysis on security vulnerabilities to evaluate underlying issues that create them per 16.3.
 
+**NIST 800-53 Rev5 (SA-1, SA-2, SA-5, SA-6, SA-7, SA-10, SA-13, SA-14, SA-16, SA-18, SA-19, SA-20, SA-21, SA-22, SA-23)**
+- Develop and disseminate system and services acquisition policy per SA-1.
+- Allocate resources to protect information systems per SA-2.
+- Obtain and maintain documentation for system components per SA-5.
+- Restrict use of software in accordance with contract agreements per SA-6.
+- Restrict installation of user-installed software per SA-7.
+- Require developer configuration management including change control per SA-10.
+- Require trustworthiness of systems per SA-13.
+- Perform criticality analysis for system components per SA-14.
+- Require developer-provided training on secure use of systems per SA-16.
+- Implement tamper resistance and detection for systems per SA-18.
+- Implement component authenticity verification per SA-19.
+- Customise development of critical system components per SA-20.
+- Screen developers and system integrators per SA-21.
+- Replace unsupported system components per SA-22.
+- Employ specialisation approaches for system development per SA-23.
+
+**SCF 2025 (SEA-01, SEA-02, SEA-03, SEA-04, SEA-05, SEA-06, SEA-07, SEA-08, SEA-09, SEA-10, SEA-11, SEA-12, SEA-13, SEA-14, SEA-15, SEA-16, SEA-17, SEA-18, SEA-19, SEA-20, SEA-21, SEA-22)**
+- Implement secure engineering principles per SEA-01.
+- Align with enterprise architecture per SEA-02.
+- Implement defence-in-depth architecture per SEA-03.
+- Implement process isolation per SEA-04.
+- Prevent information leakage in shared resources per SEA-05.
+- Implement controls to prevent unauthorised program execution per SEA-06.
+- Conduct predictable failure analysis per SEA-07.
+- Implement non-persistence for system components per SEA-08.
+- Implement information output filtering per SEA-09.
+- Implement memory protection per SEA-10.
+- Implement honeypots per SEA-11.
+- Implement honeytoken/honeyclient controls per SEA-12.
+- Implement heterogeneity in system components per SEA-13.
+- Implement concealment and misdirection techniques per SEA-14.
+- Implement distributed processing and storage per SEA-15.
+- Implement non-modifiable executable programs per SEA-16.
+- Implement secure log-on procedures per SEA-17.
+- Display system use notification banners per SEA-18.
+- Provide previous logon notification per SEA-19.
+- Implement clock synchronisation per SEA-20.
+- Implement application container security per SEA-21.
+- Implement privileged environment controls per SEA-22.
+
 ### Application Security Requirements
 
 **Applies to all frameworks**
@@ -41,6 +82,24 @@ All software developed, customised, or procured by the organisation, including i
 - Use standard hardening configuration templates for application infrastructure components per 16.7.
 - Leverage vetted modules or services for application security components such as identity, encryption, and logging per 16.11.
 - Conduct threat modeling to identify and address application security design flaws before code is created per 16.14.
+
+**NIST 800-53 Rev5 (SI-1, SI-6, SI-7, SI-9, SI-10, SI-11, SI-13, SI-14, SI-15, SI-16, SI-17, SI-18, SI-20, SI-21, SI-22, SI-23)**
+- Develop and disseminate system and information integrity policy per SI-1.
+- Verify the correct operation of security and privacy functions per SI-6.
+- Employ integrity verification tools to detect unauthorised changes per SI-7.
+- Restrict information input to trusted sources per SI-9.
+- Implement input validation for information per SI-10.
+- Implement error handling that does not reveal sensitive information per SI-11.
+- Implement predictable failure prevention per SI-13.
+- Implement non-persistence for system components per SI-14.
+- Implement information output filtering per SI-15.
+- Implement memory protection per SI-16.
+- Implement fail-safe procedures per SI-17.
+- Implement PII quality operations per SI-18.
+- Implement tainting to detect misuse per SI-20.
+- Implement information refresh controls per SI-21.
+- Implement information diversity per SI-22.
+- Implement information fragmentation per SI-23.
 
 ### Secure Coding
 
@@ -74,6 +133,22 @@ All software developed, customised, or procured by the organisation, including i
 **CIS Controls v8.1 (16.4, 16.5)**
 - Establish and manage an updated inventory of third-party software components (bill of materials) per 16.4.
 - Use up-to-date and trusted third-party software components from established and proven sources per 16.5.
+
+**SCF 2025 (TDA-01, TDA-03, TDA-04, TDA-08, TDA-10, TDA-11, TDA-12, TDA-13, TDA-14, TDA-15, TDA-16, TDA-17, TDA-21, TDA-22)**
+- Implement technology development and acquisition governance per TDA-01.
+- Evaluate commercial off-the-shelf security solutions per TDA-03.
+- Establish documentation requirements for technology per TDA-04.
+- Separate development, testing, and operational environments per TDA-08.
+- Restrict use of live data in testing per TDA-10.
+- Implement controls against product tampering and counterfeiting per TDA-11.
+- Control customised development of critical components per TDA-12.
+- Screen developers per TDA-13.
+- Implement developer configuration management per TDA-14.
+- Require developer threat analysis and flaw remediation per TDA-15.
+- Require developer-provided training per TDA-16.
+- Replace unsupported technology assets per TDA-17.
+- Implement product conformity governance per TDA-21.
+- Maintain technical documentation artifacts per TDA-22.
 
 ### Environment Separation
 
