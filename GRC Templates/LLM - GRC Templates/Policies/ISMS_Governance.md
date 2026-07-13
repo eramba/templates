@@ -95,6 +95,12 @@ This policy applies to the entire organisation and all personnel involved in est
 - Top management shall establish a privacy policy including a commitment to meet applicable requirements and to continual improvement per 5.2.
 - Top management shall ensure responsibilities and authorities for relevant PIMS roles are assigned and communicated per 5.3.
 
+**PCI DSS v4.0.1 (12.1.1, 12.1.2, 12.1.3, 12.1.4)**
+- Establish, publish, maintain, and disseminate an overall information security policy per 12.1.1.
+- Review the information security policy at least once every 12 months and update as needed per 12.1.2.
+- Clearly define information security roles and responsibilities for all personnel in the security policy per 12.1.3.
+- Assign responsibility for information security to a CISO or other information security knowledgeable member of executive management per 12.1.4.
+
 ### Resources
 
 **Applies to all frameworks**
@@ -194,6 +200,9 @@ This policy applies to the entire organisation and all personnel involved in est
 - When creating and updating PIMS documented information ensure appropriate identification, format, and review per 7.5.2.
 - PIMS documented information shall be controlled to ensure it is available, suitable for use, and adequately protected per 7.5.3.
 
+**PCI DSS v4.0.1 (1.1.2, 2.1.1, 3.1.2, 4.1.1, 4.1.2, 5.1.1, 5.1.2, 6.1.1, 6.1.2, 7.1.1, 7.1.2, 8.1.1, 8.1.2, 10.1.1, 10.1.2, 11.1.1, 11.1.2)**
+- Document, keep up to date, and communicate all security policies and operational procedures for each PCI DSS requirement area, with roles and responsibilities assigned and understood per 1.1.2, 2.1.1, 3.1.2, 4.1.1, 4.1.2, 5.1.1, 5.1.2, 6.1.1, 6.1.2, 7.1.1, 7.1.2, 8.1.1, 8.1.2, 10.1.1, 10.1.2, 11.1.1, 11.1.2.
+
 ## Standards
 
 - Management system scope documents shall be reviewed annually or when significant organisational changes occur.
@@ -221,6 +230,9 @@ This policy applies to the entire organisation and all personnel involved in est
 
 **ISO 9001:2015 (4.2, 4.3, 4.4.1, 4.4.2)**
 7. Confirm the QMS scope identifies the products and services covered and any exclusions with justification.
+
+**PCI DSS v4.0.1 (12.5.2)**
+- Document and confirm PCI DSS scope at least once every 12 months and upon significant change to the in-scope environment per 12.5.2.
 
 ### Leadership Commitment Review
 
