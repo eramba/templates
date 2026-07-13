@@ -49,6 +49,38 @@ All endpoint devices owned or managed by the organisation including laptops, des
 - Manage wireless vendor defaults: change wireless encryption keys and passwords, enable only necessary wireless services per 2.3.1.
 - Change wireless encryption keys when personnel with knowledge of the key leave the organisation per 2.3.2.
 
+**NIST 800-53 Rev5 (CM-1, CM-9, CM-12, CM-13, CM-14)**
+- Develop and disseminate configuration management policy per CM-1.
+- Develop, document, and implement configuration management plan per CM-9.
+- Document and maintain information location for system components per CM-12.
+- Document and maintain data action mapping for system components per CM-13.
+- Prohibit the use or installation of unsigned software components per CM-14.
+
+**SCF 2025 (CFG-01, CFG-06, CFG-07, CFG-08, AST-12, AST-13, AST-14, AST-15, AST-16, AST-17, AST-18, AST-19, AST-20, AST-21, AST-22, AST-23, AST-24, AST-25, AST-26, AST-27, AST-28, AST-29, AST-31)**
+- Implement configuration management program per CFG-01.
+- Enforce configuration baselines per CFG-06.
+- Implement zero-touch provisioning per CFG-07.
+- Enforce sensitive and regulated data access restrictions per CFG-08.
+- Govern use of personal devices per AST-12.
+- Govern use of third-party devices per AST-13.
+- Define usage parameters for assets per AST-14.
+- Implement logical tampering protection per AST-15.
+- Govern BYOD usage per AST-16.
+- Identify and restrict prohibited equipment and services per AST-17.
+- Protect roots of trust per AST-18.
+- Secure telecommunications equipment per AST-19.
+- Implement video teleconference security per AST-20.
+- Implement VoIP security per AST-21.
+- Control microphones and web cameras per AST-22.
+- Secure multi-function devices per AST-23.
+- Manage travel-only devices per AST-24.
+- Re-image devices after travel per AST-25.
+- Control system administrative processes per AST-26.
+- Implement jump server controls per AST-27.
+- Control database administrative processes per AST-28.
+- Implement RFID security per AST-29.
+- Implement asset categorisation per AST-31.
+
 ### Malware Protection
 
 **Applies to all frameworks**
@@ -267,6 +299,29 @@ All endpoint devices owned or managed by the organisation including laptops, des
 **ISO 27002:2022 (6.7)**
 - Security measures for remote working shall cover: physical protection of the remote working location, technical controls on the device and network connection, access controls, data handling requirements, and protection against interception per 6.7.
 - Remote access shall use encrypted connections and multi-factor authentication.
+
+**SCF 2025 (END-05, END-06, END-09, END-10, END-11, END-12, END-13, END-14, END-15, END-16, MDM-01, MDM-02, MDM-03, MDM-04, MDM-05, MDM-06, MDM-07, MDM-08, MDM-09, MDM-10, MDM-11)**
+- Implement software firewall on endpoints per END-05.
+- Implement endpoint file integrity monitoring per END-06.
+- Implement trusted path for security functions per END-09.
+- Control mobile code per END-10.
+- Implement thin node controls per END-11.
+- Control port and I/O device access per END-12.
+- Control sensor capability and data per END-13.
+- Control collaborative computing devices per END-14.
+- Control hypervisor access per END-15.
+- Restrict access to security functions per END-16.
+- Centralise management of mobile devices per MDM-01.
+- Control access for mobile devices per MDM-02.
+- Implement full device and container-based encryption per MDM-03.
+- Protect against mobile device tampering per MDM-04.
+- Implement remote purging capability per MDM-05.
+- Govern use of personally-owned mobile devices per MDM-06.
+- Govern use of organisation-owned mobile devices per MDM-07.
+- Implement mobile device data retention limitations per MDM-08.
+- Implement mobile device geofencing per MDM-09.
+- Separate mobile device profiles per MDM-10.
+- Restrict access to authorised technology assets from mobile devices per MDM-11.
 
 ### Remote Working Security Review Procedure
 
