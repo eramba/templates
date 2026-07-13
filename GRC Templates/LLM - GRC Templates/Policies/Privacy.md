@@ -199,6 +199,30 @@ All systems, processes, and personnel involved in the collection, storage, proce
 - The organisation shall identify and meet requirements regarding the preservation of privacy and protection of PII in accordance with applicable laws and regulations.
 - A privacy programme shall be established covering collection limitation, purpose specification, use limitation, data quality, security safeguards, openness, individual participation, and accountability.
 
+**NIST 800-53 Rev5 (PM-18, PM-19, PM-20, PM-21, PM-22, PM-23, PM-24, PM-25, PM-26, PM-27, PT-1, PT-6, PT-7, PT-8)**
+- Develop and maintain privacy program plan per PM-18.
+- Appoint senior agency official for privacy per PM-19.
+- Disseminate privacy program information per PM-20.
+- Implement accounting of disclosures per PM-21.
+- Implement PII quality management per PM-22.
+- Establish data governance body per PM-23.
+- Establish data integrity board per PM-24.
+- Minimise PII used in testing, training, and research per PM-25.
+- Implement complaint management for privacy per PM-26.
+- Provide privacy reporting per PM-27.
+- Develop and disseminate privacy policy per PT-1.
+- Maintain system of records notices per PT-6.
+- Address specific categories of PII per PT-7.
+- Comply with computer matching requirements per PT-8.
+
+**SCF 2025 (PRI-12, PRI-13, PRI-14, PRI-15, PRI-16, PRI-18)**
+- Implement processes to update personal data per PRI-12.
+- Establish data management board per PRI-13.
+- Document data processing activities per PRI-14.
+- Register as data controller and/or data processor per PRI-15.
+- Address potential human rights abuses per PRI-16.
+- Implement data controller communications per PRI-18.
+
 ### Data Masking
 
 **Applies to all frameworks**
@@ -301,3 +325,64 @@ All systems, processes, and personnel involved in the collection, storage, proce
 2. Review any data quality issues or correction requests received during the period.
 3. Confirm corrections are applied promptly and documented.
 4. Confirm relevance of retained personal information against current processing purposes.
+
+### Consent Determination and Recording
+
+**ISO 27701:2025 (A.1.2.4, A.1.2.5)**
+- The organisation shall determine and document a process by which it can demonstrate if, when, and how consent for the processing of PII was obtained from PII principals per A.1.2.4.
+- Consent shall be obtained and recorded according to documented processes. Consent shall be freely given, specific regarding purpose, and unambiguous per A.1.2.5.
+- The organisation shall provide a mechanism for PII principals to modify or withdraw their consent, consistent with how consent was obtained per A.1.3.5.
+- The organisation shall provide a mechanism for PII principals to object to the processing of their PII per A.1.3.6.
+
+### PII Controller Obligations and Contracts
+
+**ISO 27701:2025 (A.1.2.7, A.1.2.8, A.1.3.2, A.1.3.8, A.1.3.11)**
+- The organisation shall have a written contract with any PII processor it uses, ensuring the contract addresses implementation of appropriate controls per A.1.2.7.
+- The organisation shall determine respective roles and responsibilities for PII processing with any joint PII controller per A.1.2.8.
+- The organisation shall determine and document its legal, regulatory, and business obligations to PII principals and provide the means to meet those obligations per A.1.3.2.
+- The organisation shall inform third parties with whom PII has been shared of any modification, withdrawal, or objections pertaining to that PII per A.1.3.8.
+- The organisation shall identify obligations resulting from automated decision-making related to PII principals and provide mechanisms to fulfil them per A.1.3.11.
+
+### PII Retention, Temporary Files, and Transmission
+
+**ISO 27701:2025 (A.1.4.7, A.1.4.8, A.1.4.10)**
+- Temporary files created as a result of PII processing shall be disposed of following documented procedures within a specified, documented time period per A.1.4.7.
+- PII shall not be retained for longer than is necessary for the purposes for which it is processed. Retention schedules shall be developed and maintained per A.1.4.8.
+- PII transmitted over a data-transmission network shall be subject to appropriate controls to ensure it reaches its intended destination per A.1.4.10.
+
+### PII Transfer Between Jurisdictions and Third-Party Disclosures
+
+**ISO 27701:2025 (A.1.5.2, A.1.5.3, A.1.5.4, A.1.5.5)**
+- The relevant basis for transfers of PII between jurisdictions shall be identified and documented per A.1.5.2.
+- The countries and international organisations to which PII can be transferred shall be specified and documented per A.1.5.3.
+- Transfers of PII to or from third parties shall be recorded per A.1.5.4.
+- Disclosures of PII to third parties shall be recorded including which PII was disclosed, to whom, and at what time per A.1.5.5.
+
+### PII Processor Obligations (when acting as processor)
+
+**ISO 27701:2025 (A.2.3.2, A.2.5.2, A.2.5.3, A.2.5.4, A.2.5.5, A.2.5.6, A.2.5.7, A.2.5.8, A.2.5.9)**
+- The organisation shall provide the customer with the means to comply with obligations related to PII principals including correction or deletion of PII per A.2.3.2.
+- The organisation shall inform the customer of the basis for PII transfers between jurisdictions and any intended changes per A.2.5.2.
+- The countries and international organisations to which PII may be transferred shall be documented and communicated to the customer per A.2.5.3.
+- Disclosures of PII to third parties shall be recorded and the customer shall be notified of any legally binding requests for PII disclosure per A.2.5.4 and A.2.5.5.
+- Requests for PII disclosure that are not legally binding shall be rejected per A.2.5.6.
+- Whether subcontractors are used to process PII shall be disclosed to the customer before use, and any changes notified per A.2.5.7, A.2.5.8, and A.2.5.9.
+
+### Consent Management Procedure
+
+**ISO 27701:2025 (A.1.2.4, A.1.2.5, A.1.3.5, A.1.3.6)**
+1. Confirm the consent collection process is documented and operational for all processing activities requiring consent.
+2. Confirm consent records include timestamp, method, scope, and PII principal identity.
+3. Confirm withdrawal and objection mechanisms are available and functioning.
+4. Review any consent withdrawal or objection requests received during the period — confirm processing was ceased where required.
+5. Confirm third parties holding shared PII have been notified of any withdrawals or objections.
+
+### PII Retention and Transfer Review Procedure
+
+**ISO 27701:2025 (A.1.4.7, A.1.4.8, A.1.4.10, A.1.5.2, A.1.5.3, A.1.5.4, A.1.5.5)**
+1. Review the PII retention schedule — confirm retention periods are current and legally justified.
+2. Confirm PII scheduled for disposal has been disposed of securely.
+3. Confirm temporary files created during PII processing are disposed of within the documented time period.
+4. Review the register of cross-border PII transfers — confirm legal basis is documented for each jurisdiction.
+5. Confirm PII transmission controls are applied to all data-in-transit carrying PII.
+6. Review third-party disclosure records for completeness.
