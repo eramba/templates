@@ -1,18 +1,17 @@
 # Project Context — LLM GRC Templates
 
-This file exists so that an LLM starting a new session can read it and continue working on this project without needing a briefing. Last updated: 2026-07-02.
+This file exists so that an LLM starting a new session can read it and continue working on this project without needing a briefing. Last updated: 2026-07-13.
 
 ---
 
 ## What This Project Is
 
-eramba is an open-source GRC (Governance, Risk, and Compliance) platform. This project builds a library of reusable **policy documents** and **internal controls** that eramba customers can import with one click and then customise for their specific compliance frameworks.
+eramba is an open-source GRC (Governance, Risk, and Compliance) platform. This project builds a library of reusable **policy documents** and **internal controls** that eramba customers can import and customise for their specific compliance frameworks.
 
 **Goals:**
 - Templates that satisfy multiple compliance frameworks simultaneously
 - Per-framework tagging so customers can trim to their specific package
-- Future: LLM-assisted customisation based on customer technology stack (Azure, AWS, on-prem, etc.)
-- Future: automated control testing
+- Automated sync from this GitHub repo into eramba instances via `sync_eramba.py`
 
 ---
 
@@ -20,66 +19,52 @@ eramba is an open-source GRC (Governance, Risk, and Compliance) platform. This p
 
 - **Repo:** `https://github.com/eramba/templates`
 - **Working directory:** `GRC Templates/LLM - GRC Templates/`
-- **Branch workflow:** always push to `claude/grc-templates`, open a PR, never push directly to `master`
+- **Branch workflow:** ALWAYS push to `claude/grc-templates`, open a PR, NEVER push directly to `master`
 - **Token:** the repo owner (kisero) has a GitHub personal access token with `repo` scope
 
 ```
 GRC Templates/LLM - GRC Templates/
-├── README.md                          ← Summary of everything, keep updated
+├── README.md
+├── CONTEXT.md                         ← this file
 ├── Policies/
-│   ├── 00_mapping_table.md            ← 22 policies × 16 frameworks with req IDs
+│   ├── 00_mapping_table.md            ← SOURCE OF TRUTH: rebuilt from policy file tags
 │   ├── Access_Management.md
-│   ├── AI_Governance.md
-│   ├── Anti_Bribery.md
-│   ├── Asset_Management.md
-│   ├── Business_Continuity.md
-│   ├── Change_Management.md
-│   ├── Cryptography.md
-│   ├── Endpoint_Security.md
-│   ├── Human_Resources_Security.md
-│   ├── Incident_Management.md
-│   ├── Information_Classification.md
-│   ├── Logging_Monitoring.md
-│   ├── Network_Security.md
-│   ├── Occupational_Health_Safety.md
-│   ├── Physical_Security.md
-│   ├── Privacy.md
-│   ├── Quality_Management.md
-│   ├── Risk_Management.md
-│   ├── Secure_Development.md
-│   ├── Supplier_Management.md
-│   ├── System_Maintenance.md
-│   └── Vulnerability_Management.md
+│   └── ... (22 policies total)
 └── Controls/
     ├── internal_controls.csv
-    ├── mapping_controls_to_requirements.csv
+    ├── mapping_controls_to_requirements.csv   ← column headers = eramba package names exactly
     └── mapping_controls_to_policies.csv
+
+GRC Templates/update_script/
+├── sync_eramba.py                     ← main sync script
+├── README.md
+└── logs/                              ← local only, not in git
 ```
 
 ---
 
-## Frameworks Covered (13 total)
+## Frameworks Covered (16 total)
 
-| Key | Label | Source CSV (in /mnt/user-data/uploads/) |
-|-----|-------|----------------------------------------|
-| pci | PCI DSS v4.0.1 | PCI_DSS_v4_0_1.csv |
-| iso27001 | ISO 27001:2022 | ISO27001_2022.csv |
-| iso27002 | ISO 27002:2022 | ISO27002_2022__1_.csv |
-| soc2 | SOC 2 (TSP 2017) | SOC2.csv |
-| nist | NIST 800-53 v5 | NIST_800-53_Rev5.csv |
-| cis | CIS Controls v8.1 | CIS_v8_1.csv |
-| scf | SCF 2025 | SCF_2025.csv |
-| nis2 | NIS2 Article 21 | NIS2.csv |
-| iso27701 | ISO 27701:2025 | ISO27701.csv |
-| iso45001 | ISO 45001:2018 | ISO45001.csv |
-| iso42001 | ISO 42001:2023 | ISO42001.csv |
-| iso37001 | ISO 37001:2025 | ISO37001.csv |
-| iso9001 | ISO 9001:2015 | ISO9001.csv |
-| owasp_llm | OWASP Top 10 for LLM Applications 2025 | export_2026-07-12.csv |
-| nist_ai | NIST AI 600-1 Generative AI Profile 2024 | export_2026-07-12__1_.csv |
-| eu_ai | EU AI Act (Regulation EU 2024/1689) | export_2026-07-12__2_.csv |
+| CSV column header | eramba package name | eramba regulator ID |
+|---|---|---|
+| PCI DSS v4.0.1 | PCI-DSS | 99 |
+| ISO 27001:2022 | ISO 27001 | 74 |
+| ISO 27002:2022 | ISO 27002 | 75 |
+| SOC 2 (TSP 2017) | SOC2 | 100 |
+| NIST 800-53 v5 | NIST 800-53 v5 | 12 |
+| CIS Controls v8.1 | CIS Controls | 8 |
+| SCF 2025 | Secure Control Framework | 2 |
+| NIS2 Article 21 | NIS2 - Article 21 | 68 |
+| ISO 27701:2025 | ISO 27701 | 94 |
+| ISO 45001:2018 | ISO 45001 | 91 |
+| ISO 42001:2023 | ISO 42001 | 92 |
+| ISO 37001:2025 | ISO 37001 | 93 |
+| ISO 9001:2015 | ISO 9001 | 90 |
+| OWASP LLM Top 10 2025 | OWASP Top 10 for LLM Applications | 97 |
+| NIST AI 600-1 2024 | NIST AI 600-1 Generative AI Profile | 96 |
+| EU AI Act 2024/1689 | EU AI Act | 81 |
 
-The CSV files have columns: section_id, section_title, req_id, req_title, description (exact columns vary slightly per framework).
+**CRITICAL:** The column headers in `mapping_controls_to_requirements.csv` and the framework names in `sync_eramba.py` must exactly match the eramba package names above. If you rename one, update all three.
 
 ---
 
@@ -97,7 +82,7 @@ Every policy has these sections:
 **Applies to all frameworks**
 - bullet
 
-**Framework Label (req_id1, req_id2)**
+**Framework Tag Label (req_id1, req_id2)**
 - framework-specific bullet
 
 ## Standards
@@ -106,125 +91,198 @@ Every policy has these sections:
 **Applies to all frameworks**
 1. universal step
 
-**Framework Label (req_id1, req_id2)**
+**Framework Tag Label (req_id1, req_id2)**
 N. framework-specific step
 ```
 
-**Key rule:** Both statements AND procedure steps are tagged by framework. Each `**bold**` heading groups the requirements of that framework for that section/procedure. This lets users delete the blocks for frameworks they don't need.
+### Framework Tag Labels (used inside .md files)
+
+These are the labels used in `**bold**` tags inside policy files. They differ from eramba package names:
+
+| Tag in .md file | eramba package name |
+|---|---|
+| PCI DSS v4.0.1 | PCI-DSS |
+| ISO 27001:2022 | ISO 27001 |
+| ISO 27002:2022 | ISO 27002 |
+| SOC 2 (TSP 2017) | SOC2 |
+| NIST 800-53 Rev5 | NIST 800-53 v5 |
+| CIS Controls v8.1 | CIS Controls |
+| SCF 2025 | Secure Control Framework |
+| NIS2 Article 21 | NIS2 - Article 21 |
+| ISO 27701:2025 | ISO 27701 |
+| ISO 45001:2018 | ISO 45001 |
+| ISO 42001:2023 | ISO 42001 |
+| ISO 37001:2025 | ISO 37001 |
+| ISO 9001:2015 | ISO 9001 |
+| OWASP Top 10 for LLM Applications 2025 | OWASP Top 10 for LLM Applications |
+| NIST AI 600-1 Generative AI Profile 2024 | NIST AI 600-1 Generative AI Profile |
+| EU AI Act 2024/1689 | EU AI Act |
+
+### ISO 37001 requirement IDs
+
+ISO 37001 req IDs in the policy files are stored with a `37001:2025 - ` prefix (e.g. `37001:2025 - 8.7`). The eramba package stores them WITHOUT this prefix (e.g. `8.7`). The `00_mapping_table.md` uses the prefixed format. The sync script matches by stripping the prefix at lookup time — **do not remove the prefix from the policy files**.
+
+---
+
+## 00_mapping_table.md — Source of Truth
+
+This file is the authoritative cross-reference of which policies cover which framework requirements. It is **rebuilt from the policy files**, not maintained manually.
+
+To rebuild it after changing policy files:
+1. Read all 22 `.md` files
+2. Extract every `**Framework Tag (req1, req2)**` block
+3. Validate each req ID against the source framework CSVs
+4. Regenerate the table
+
+Do NOT edit `00_mapping_table.md` manually — edit the policy `.md` files and rebuild.
 
 ---
 
 ## Controls Structure
 
-82 controls across 3 CSV files:
+99 controls across 3 CSV files. Column headers in `mapping_controls_to_requirements.csv` exactly match eramba package names (see table above).
 
-**internal_controls.csv** — 4 columns:
-- `Title` — the activity name
-- `Description` — what the activity is and why it exists
-- `Audit Methodology` — evidence required → analysis → conclusion/documentation → frequency
-- `Policy Procedure` — `PolicyName > Procedure Section`
-
-**mapping_controls_to_requirements.csv** — 14 columns:
-- `Control Title` + one column per framework with matched req IDs (comma-separated), `—` if none
-
-**mapping_controls_to_policies.csv** — 3 columns:
-- `Control Title`, `Policy`, `Procedure Section`
-
-**Key rule about controls:** A control is an *operational activity* the organisation actually performs — not a policy, not a compliance requirement. It has an owner, happens regularly, costs money, and is testable. eramba links controls to compliance requirements, risks, and policies.
+Controls were built from ISO 27002 and CIS Controls v8.1 as the primary sources, then mapped to all 16 frameworks.
 
 ---
 
-## What Has Been Done
+## Sync Script (`GRC Templates/update_script/sync_eramba.py`)
 
-1. Built 22 policy documents in Markdown covering all 16 frameworks
-2. Tagged all policy statements by framework (done)
-3. Tagged all procedure steps by framework for all 16 frameworks (done)
-4. Built 82 internal controls with full audit methodologies
-5. Built 3 mapping CSVs (controls × requirements, controls × policies)
-6. Built policy mapping table (22 policies × 16 frameworks)
-7. Pushed everything to GitHub under `GRC Templates/LLM - GRC Templates/`
-8. Set up branch + PR workflow
+**Instance:** `https://templates-prod.cloud.eramba.org`
+**Auth:** HTTP Basic (username:password base64) over TLS, SSL verification disabled (self-signed cert)
 
----
+**Environment variables required:**
+```bash
+export ERAMBA_URL=https://templates-prod.cloud.eramba.org
+export ERAMBA_USER=admin
+export ERAMBA_PASSWORD=<password>
+export GITHUB_TOKEN=ghp_...   # required to avoid GitHub rate limits
+```
 
-## What Was Added in July 2026
+**Usage:**
+```bash
+python3 sync_eramba.py                          # full sync
+python3 sync_eramba.py --only policies          # policies only
+python3 sync_eramba.py --only controls          # controls only
+python3 sync_eramba.py --only compliance        # compliance links only
+python3 sync_eramba.py --dry-run                # preview without changes
+python3 sync_eramba.py --only compliance --max-pages 127   # limit pagination for testing
+```
 
-- 3 new AI frameworks: OWASP LLM Top 10 2025, NIST AI 600-1 2024, EU AI Act 2024/1689
-- 17 new controls (LLM security, EU AI Act compliance, NIST AI governance)
-- 5 existing policies expanded: AI_Governance, Secure_Development, Risk_Management, Supplier_Management, Logging_Monitoring
-- EU AI Act filtered to ~128 operational requirements (excluding notified body, member state, and procedural-only articles)
-- NIST AI 600-1 filtered to ~175 operational actions (excluding pure academic measurement)
-- Framework data in: /home/claude/data_ai_frameworks.json
+**Sync order matters:** always run policies before controls (controls need policy IDs).
 
----
+**Compliance sync pagination:**
+- The compliance analysis index has ~12,617 records across 127 pages
+- Pages 1-126 return 100 records each, page 127 returns 17
+- The script uses 1-second delays between pages and retries 502/503 errors
+- Full run takes ~15 minutes
+- Use `--max-pages N` to test with fewer pages
 
-## What Remains / Known Issues
+**Key API behaviours:**
+- PUT requires ALL fields — script GETs first, merges changes, then PUTs
+- Compliance analysis has no POST — links are update-only
+- Response envelope: `{success: true, data: {...}}` — script unwraps this
+- `security_policies` on a control record = the control→policy link (array of integer IDs)
 
-- **Procedure step quality review:** The framework-specific steps were generated from requirement text but have not been manually reviewed for accuracy. Some steps may be too generic or slightly off.
-- **Future: technology-specific customisation** — when a customer specifies their tech stack (Azure, AWS, on-prem, Oracle, etc.), the templates should become more specific (e.g. "run `az ad user list` to export account list" instead of "export account list from identity provider").
-- **Future: automated control testing** — controls currently describe manual audit methodology. Automated testing hooks will be added when LLM integration is built.
-- **Future: gap detection** — when a customer imports a second compliance package after customising for a first, the system should identify which policies need updating.
+**Policy POST/PUT payload key fields:**
+```json
+{
+  "index": "Policy Name",
+  "short_description": "...",
+  "description": "<html>converted from markdown</html>",
+  "security_policy_document_type_id": 1,
+  "use_attachments": 0,
+  "status": 1,
+  "permission": "public",
+  "version": "1.0",
+  "asset_label_id": null,
+  "owners": ["User-1"],
+  "collaborators": ["User-1"],
+  "projects": [1],
+  "related_documents": [1],
+  "tags": [],
+  "url": "",
+  "published_date": "YYYY-MM-DD",
+  "next_review_date": "YYYY-MM-DD"
+}
+```
 
----
+**Control POST/PUT payload key fields:**
+```json
+{
+  "name": "Control Title",
+  "objective": "Description",
+  "audit_metric_description": "Audit Methodology",
+  "security_service_type_id": 4,
+  "service_owners": ["User-1"],
+  "collaborators": ["User-1"],
+  "audit_owners": ["User-1"],
+  "audit_evidence_owners": ["User-1"],
+  "maintenance_owners": ["User-1"],
+  "maintenance_metric_description": "Undefined",
+  "audit_success_criteria": "User Defined",
+  "service_contracts": [1],
+  "security_policies": [5],
+  "opex": 1, "capex": 1, "resource_utilization": 1,
+  "projects": null
+}
+```
 
-## How to Continue Working
-
-### Start a new session
-
-1. Read this file
-2. Ask the repo owner for the GitHub token (scope: `repo` on `eramba/templates`)
-3. The framework source CSVs are in `/mnt/user-data/uploads/` if uploaded, or need to be re-uploaded
-4. All build scripts and data are local to the previous session — they do NOT persist. You will need to re-read files from GitHub or ask the user to re-upload CSVs.
-
-### Making changes
-
-Always:
-1. Push to branch `claude/grc-templates`
-2. Open a PR to `master` with a clear description
-3. Let the user merge
-4. Update `README.md` and this `CONTEXT.md` to reflect changes
-5. Add a row to the change log in `README.md`
-
-### Reading current policies from GitHub
-
-```python
-import urllib.request, urllib.parse, json, base64
-
-TOKEN = '<ask user>'
-REPO = 'eramba/templates'
-BASE = 'GRC Templates/LLM - GRC Templates'
-
-def get_file(path):
-    req = urllib.request.Request(
-        f'https://api.github.com/repos/{REPO}/contents/{urllib.parse.quote(path)}',
-        headers={'Authorization': f'token {TOKEN}', 'User-Agent': 'claude',
-                 'Accept': 'application/vnd.github.v3+json'})
-    with urllib.request.urlopen(req) as r:
-        data = json.loads(r.read())
-    return base64.b64decode(data['content']).decode('utf-8')
-
-policy = get_file(f'{BASE}/Policies/Access_Management.md')
+**Compliance analysis PUT payload:**
+```json
+{
+  "compliance_treatment_strategy_id": 1,
+  "efficacy": 0,
+  "description": "",
+  "owners": ["User-1"],
+  "projects": [],
+  "compliance_exceptions": [],
+  "security_policies": [4],
+  "security_services": [],
+  "risks": [""],
+  "third_party_risks": [""],
+  "business_continuities": [""],
+  "compliance_analysis_findings": [""],
+  "assets": [""],
+  "legal_id": [""]
+}
 ```
 
 ---
 
-## eramba-Specific Notes
+## Current State (as of 2026-07-13)
 
-- eramba imports policies as HTML or Markdown
-- Internal controls in eramba have: Title, Description, Audit Methodology, links to Compliance Requirements, Risks, Policies
-- Controls are tested via Audits (pass/fail) — manual today, automated in future
-- The eramba MCP server is available at `https://mcp.eramba.org/mcp` for direct platform interaction
-- eramba documentation: `https://www.eramba.org/learning`
+- 22 policies created in eramba ✓
+- 99 controls: creation pending (API 502 issues on security-services index — to resolve with devs Monday)
+- Compliance analysis links: 975 policy→requirement links created across 13 frameworks ✓
+- NIST 800-53 and ISO 37001 compliance links: pending (req ID format mismatch being investigated)
+- 788 completely unmapped requirements across all frameworks: pending decision
 
 ---
 
-## Decisions Made
+## Known Issues / Pending
 
-| Decision | Rationale |
-|----------|-----------|
-| Markdown format | Works with eramba import; easy for LLM processing |
-| Tagged-section model (Option B — step level, not procedure level) | More granular than procedure-level tagging; consistent with policy statement tagging; enables LLM trimming |
-| One control per operational activity, mapped to multiple frameworks | Avoids duplication; reflects how organisations actually operate |
-| Audit methodology format: evidence → analysis → conclusion → frequency | Matches eramba audit structure; gives assessors clear instructions |
-| 22 policies | Driven by framework coverage — new policies created when no existing policy covered a framework's control family |
-| No "quarterly" in control titles | Frequency belongs in methodology, not title |
+- **Controls sync 502:** `GET /api/security-services/index` returns 502 — eramba devs to advise Monday
+- **NIST 800-53 req IDs:** our IDs (AC-2, CM-3 etc.) may not match eramba's item_id format — verify with devs
+- **ISO 37001 req IDs in compliance sync:** the `37001:2025 - ` prefix needs stripping at lookup — currently handled in mapping table, verify once controls are working
+- **788 unmapped requirements:** requirements in source CSVs not covered by any policy — to be reviewed and either mapped or documented as out of scope
+
+---
+
+## Branch / PR Workflow
+
+ALWAYS:
+1. Push changes to `claude/grc-templates` branch
+2. Open a PR to `master`
+3. Let the user (kisero) review and merge
+4. Update `README.md` change log and this `CONTEXT.md`
+5. NEVER push directly to `master`
+
+---
+
+## How to Resume a Session
+
+Tell the LLM:
+> "Read https://github.com/eramba/templates/blob/master/GRC%20Templates/LLM%20-%20GRC%20Templates/CONTEXT.md and continue the project. The GitHub token is: ghp_..."
+
+The LLM should then fetch CONTEXT.md, read it fully, and ask what to work on next.
