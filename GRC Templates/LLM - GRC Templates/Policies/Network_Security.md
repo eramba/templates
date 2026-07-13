@@ -40,6 +40,12 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 
 **NIS2 Article 21 (Article 21(2) (e))**
 
+**CIS Controls v8.1 (13.2, 13.3, 13.7, 13.8)**
+- Deploy a host-based intrusion detection solution on enterprise assets per 13.2.
+- Deploy a network intrusion detection solution on enterprise assets per 13.3.
+- Deploy a host-based intrusion prevention solution on enterprise assets per 13.7.
+- Deploy a network intrusion prevention solution where appropriate per 13.8.
+
 ### Network Segmentation
 
 **Applies to all frameworks**
@@ -65,6 +71,9 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 **SCF 2025 (NET-06, NET-07, NET-08, NET-09)**
 
 **NIS2 Article 21 (Article 21(2) (e))**
+
+**CIS Controls v8.1 (13.9)**
+- Deploy port-level access control using 802.1x or equivalent per 13.9.
 
 ### Remote Access
 
