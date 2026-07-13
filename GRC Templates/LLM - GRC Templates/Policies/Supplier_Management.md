@@ -201,6 +201,10 @@ All third-party suppliers, vendors, and service providers that access, process, 
 **ISO 9001:2015 (8.4.1)**
 19. Evaluate and monitor external providers against requirements per 8.4.1.
 
+**PCI DSS v4.0.1 (12.9.1, 12.9.2)**
+- Obtain written agreements from TPSPs acknowledging they are responsible for the security of account data they possess or otherwise store, process, or transmit per 12.9.1.
+- Support customers' requests for information to meet PCI DSS requirements 12.8.4 and 12.8.5 per 12.9.2.
+
 ### Supplier Offboarding
 
 **Applies to all frameworks**

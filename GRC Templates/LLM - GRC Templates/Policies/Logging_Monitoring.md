@@ -42,6 +42,15 @@ All systems, applications, network devices, and infrastructure processing, stori
 **CIS Controls v8.1 (13.6)**
 - Collect network traffic flow logs and/or network traffic to review and alert upon from network devices per 13.6.
 
+**PCI DSS v4.0.1 (10.2.1.1, 10.2.1.2, 10.2.1.3, 10.2.1.4, 10.2.1.5, 10.2.1.6, 10.2.1.7)**
+- Audit logs capture all individual user access to cardholder data per 10.2.1.1.
+- Audit logs capture all actions by any individual with administrative access per 10.2.1.2.
+- Audit logs capture all access to audit logs per 10.2.1.3.
+- Audit logs capture all invalid logical access attempts per 10.2.1.4.
+- Audit logs capture all changes to identification and authentication credentials per 10.2.1.5.
+- Audit logs capture all initialisation of new audit logs and starting, stopping, or pausing of existing audit logs per 10.2.1.6.
+- Audit logs capture all creation and deletion of system-level objects per 10.2.1.7.
+
 ### Log Protection and Retention
 
 **Applies to all frameworks**
@@ -60,6 +69,9 @@ All systems, applications, network devices, and infrastructure processing, stori
 **CIS Controls v8.1 (8.1, 8.3, 8.9)**
 
 **SCF 2025 (MON-05, MON-06, MON-07)**
+
+**PCI DSS v4.0.1 (10.3.4)**
+- Use file integrity monitoring or change-detection mechanisms on audit logs to ensure existing log data cannot be changed without generating alerts per 10.3.4.
 
 ### Log Review and Alerting
 
@@ -88,6 +100,10 @@ All systems, applications, network devices, and infrastructure processing, stori
 
 **CIS Controls v8.1 (13.11)**
 - Tune security event alerting thresholds monthly or more frequently per 13.11.
+
+**PCI DSS v4.0.1 (10.4.1.1, 10.4.2.1)**
+- Use automated mechanisms to perform audit log reviews per 10.4.1.1.
+- Define the frequency of periodic log reviews for all other system components in the entity's targeted risk analysis per 10.4.2.1.
 
 ## Standards
 

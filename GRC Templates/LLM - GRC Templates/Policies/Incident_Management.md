@@ -184,6 +184,9 @@ All information systems, users, and processes. Includes third parties who must r
 **ISO 27701:2025 (A.3.12)**
 22. Respond to PII-related incidents per documented procedures; include breach notification actions where required per A.3.12.
 
+**PCI DSS v4.0.1 (12.10.4.1)**
+- Define the frequency of periodic training for incident response personnel in the entity's targeted risk analysis per 12.10.4.1.
+
 ### Post-Incident Review
 
 **Applies to all frameworks**

@@ -40,6 +40,15 @@ All systems, applications, and data stores that process, store, or transmit sens
 
 **NIS2 Article 21 (Article 21(2) (h))**
 
+**PCI DSS v4.0.1 (3.3.1.1, 3.3.1.2, 3.3.1.3, 3.5.1.1, 3.5.1.2, 3.5.1.3, 4.2.1.1)**
+- Do not store full track contents after authorization per 3.3.1.1.
+- Do not store card verification codes after authorization per 3.3.1.2.
+- Do not store PINs or PIN blocks after authorization per 3.3.1.3.
+- Use keyed cryptographic hashes of the entire PAN for any hashes used to render PAN unreadable per 3.5.1.1.
+- Implement additional controls when disk-level or partition-level encryption is used to render PAN unreadable per 3.5.1.2.
+- Manage disk-level encryption with logical access independent of OS authentication per 3.5.1.3.
+- Maintain an inventory of trusted keys and certificates used to protect PAN during transmission per 4.2.1.1.
+
 ### Key Management
 
 **Applies to all frameworks**
@@ -64,6 +73,11 @@ All systems, applications, and data stores that process, store, or transmit sens
 **SCF 2025 (CRY-04, CRY-05, CRY-06, CRY-07)**
 
 **NIS2 Article 21 (Article 21(2) (h))**
+
+**PCI DSS v4.0.1 (3.6.1.2, 3.6.1.3, 3.6.1.4)**
+- Store secret and private keys used to encrypt/decrypt stored account data in encrypted form, in a key-encrypting key of at least the same strength, or in a hardware security module per 3.6.1.2.
+- Restrict access to cleartext cryptographic key components to the fewest number of custodians necessary per 3.6.1.3.
+- Store cryptographic keys in the fewest possible locations per 3.6.1.4.
 
 ### Data Encryption at Rest
 

@@ -216,3 +216,93 @@ All information created, received, processed, stored, or transmitted by the orga
 3. Verify mechanisms (adequacy decisions, SCCs, etc.) are current and legally valid.
 4. Identify any new transfers not yet registered.
 5. Document review and retain evidence.
+
+### Intellectual Property Rights
+
+**Applies to all frameworks**
+- The organisation shall implement procedures to protect intellectual property rights including software licences, copyrights, and proprietary content.
+- Personnel must not copy, distribute, or modify third-party software or content in violation of licence terms or copyright law.
+
+**ISO 27002:2022 (5.32)**
+- Appropriate procedures shall be implemented to protect intellectual property rights in accordance with applicable legislation, regulation, and contractual obligations.
+
+### Protection of Records
+
+**Applies to all frameworks**
+- Records shall be protected from loss, destruction, falsification, unauthorised access, and unauthorised release in accordance with their classification and applicable legal, regulatory, and contractual requirements.
+- Retention periods for all record categories shall be defined, documented, and enforced.
+
+**ISO 27002:2022 (5.33)**
+- Records shall be protected in accordance with the organisation's classification scheme, applicable legal and regulatory requirements, and business need.
+
+### Capacity Management
+
+**Applies to all frameworks**
+- The use of resources shall be monitored and adjusted in line with current and expected capacity requirements to ensure system performance and availability.
+- Capacity planning shall identify potential bottlenecks before they affect service delivery.
+
+**ISO 27002:2022 (8.6)**
+- The use of resources shall be monitored, tuned, and projections made of future capacity requirements to ensure the required system performance.
+
+### Output and Storage Integrity
+
+**SOC 2 (TSP 2017) (PI1.4, PI1.5)**
+- The organisation shall implement policies and procedures to make available or deliver output completely, accurately, and timely in accordance with specifications, protecting output from theft, destruction, and unauthorised disclosure.
+- The organisation shall implement policies and procedures to store inputs, items in processing, and outputs completely, accurately, and timely, protecting stored items from theft, corruption, destruction, and unauthorised disclosure.
+
+### Intellectual Property Compliance Review Procedure
+
+**Applies to all frameworks**
+1. Review the software asset inventory for unlicensed or expired licences.
+2. Confirm procedures for acquiring and renewing software licences are operating.
+3. Confirm personnel are trained on copyright and intellectual property requirements.
+4. Document findings and initiate remediation for any violations.
+
+**ISO 27002:2022 (5.32)**
+5. Confirm procedures address all intellectual property categories: software, documents, databases, and proprietary processes.
+
+### Records Retention Review Procedure
+
+**Applies to all frameworks**
+1. Confirm the records retention schedule is current and covers all record categories.
+2. Sample records to confirm they are stored in approved locations with appropriate access controls.
+3. Confirm records scheduled for disposal have been disposed of securely.
+4. Review legal and regulatory changes that may affect retention requirements.
+
+**ISO 27002:2022 (5.33)**
+5. Confirm records are protected against falsification and unauthorised access consistent with their classification.
+
+### Capacity Planning Review Procedure
+
+**Applies to all frameworks**
+1. Review resource utilisation metrics for all critical systems.
+2. Identify systems approaching capacity thresholds.
+3. Produce capacity projections for the next planning period.
+4. Initiate procurement or optimisation actions for systems with forecast shortfalls.
+
+**ISO 27002:2022 (8.6)**
+5. Confirm capacity planning covers storage, processing, network bandwidth, and cloud service limits.
+
+### Acceptable Use of Information and Assets
+
+**Applies to all frameworks**
+- Rules for the acceptable use and procedures for handling information and other associated assets shall be identified, documented, and implemented.
+- Personnel shall be made aware of acceptable use rules before being granted access to information or assets.
+
+**ISO 27002:2022 (5.1)**
+- Acceptable use rules shall cover requirements for authorised and prohibited use of information processing facilities, information assets, software, and removable media per 5.1.
+- Acceptable use rules shall be reviewed at minimum annually and updated to reflect changes in technology, regulation, and business requirements.
+
+### Acceptable Use Review Procedure
+
+**ISO 27002:2022 (5.1)**
+1. Confirm an acceptable use policy exists and is current.
+2. Confirm the policy covers information processing facilities, information assets, software, and removable media.
+3. Confirm personnel have acknowledged the acceptable use policy.
+4. Review any violations during the period and confirm disciplinary process was followed.
+5. Update the policy to reflect any new technology or regulatory requirements.
+
+**PCI DSS v4.0.1 (12.2.1, 12.6.3.1, 12.6.3.2)**
+- Document and implement acceptable use policies for end-user technologies covering explicit approval, acceptable uses, and prohibited activities per 12.2.1.
+- Include awareness of threats and vulnerabilities impacting the CDE in security awareness training per 12.6.3.1.
+- Include awareness of acceptable use of end-user technologies in security awareness training per 12.6.3.2.
