@@ -98,41 +98,41 @@ LLM Output Validation and Handling Review,—,—,—,—,—,—,—,—,—,�
 LLM Resource and Agency Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM06, LLM10","MG-2.4-004, GV-1.7-001, GV-1.7-002",Art.14.3
 GAI Red-Teaming and Adversarial Testing,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM01, LLM04, LLM07","MS-2.7-007, MS-1.3-002, MP-2.3-005, MS-2.6-007, GV-3.2-001","Art.55.1, Annex.XI.p4"
 Third-Party GAI System Governance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,LLM03,"GV-6.1-004, GV-6.1-005, GV-6.1-006, GV-6.2-003, GV-6.2-004, GV-6.2-006, GV-6.2-007","Art.53.1, Art.55.1"
-Management System Scope and Context Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Management System Policy and Leadership Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Management System Documented Information Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Management System Continual Improvement Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Scheduled Maintenance Compliance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Maintenance Tool and Access Control Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Remote Maintenance Session Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Physical and Environmental Threat Assessment,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Secure Area Access and Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-POI Device Inspection Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Consent Management Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-PII Retention and Disposal Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Third-Party PII Disclosure Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Data Masking and DLP Effectiveness Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Cryptographic Key Storage and Access Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Acceptable Use Policy Compliance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Intellectual Property and Records Compliance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Capacity Planning Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Capacity and Performance Monitoring Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Threat Hunting and Intelligence Programme Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Incident Response Training and Testing Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Threat Modeling Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Design and Development Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Session and Concurrent Access Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Identity Proofing and Device Authentication Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Remote and Mobile Device Access Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Cloud Security Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Web Application Security Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Intrusion Detection and File Integrity Monitoring Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Supply Chain Integrity and Provenance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Mobile Device Management Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Insider Threat Programme Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Workforce Competency and Skills Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Security Operations Effectiveness Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-File Integrity Monitoring Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Enterprise Architecture and Security Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Data Governance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Worker Consultation and Participation Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
+Management System Scope and Context Review,—,"4.2, 4.3, 4.4",—,CC2.1,—,—,—,—,"4.2, 4.3, 4.4","4.2, 4.3, 4.4","4.2, 4.3, 4.4","37001:2025 - 4.2, 37001:2025 - 4.3, 37001:2025 - 4.4","4.2, 4.3, 4.4.1, 4.4.2",—,—,—
+Management System Policy and Leadership Review,—,"5.1, 5.2, 5.3",—,"CC5.1, CC5.2",—,—,—,—,"5.1, 5.2, 5.3","5.1, 5.2, 5.3",—,"37001:2025 - 5.1.1, 37001:2025 - 5.1.2, 37001:2025 - 5.1.3, 37001:2025 - 5.2, 37001:2025 - 5.3.1, 37001:2025 - 5.3.2, 37001:2025 - 5.3.3","5.1.1, 5.2.1, 5.2.2, 5.3",—,—,—
+Management System Documented Information Review,—,"7.5, 7.5.1, 7.5.2, 7.5.3",—,—,—,—,"TDA-04, TDA-22",—,"7.5.1, 7.5.2, 7.5.3","7.5.1, 7.5.2, 7.5.3","7.5.1, 7.5.2, 7.5.3","37001:2025 - 7.5.1, 37001:2025 - 7.5.2, 37001:2025 - 7.5.3","7.5.1, 7.5.2, 7.5.3.1, 7.5.3.2",—,—,—
+Management System Continual Improvement Review,—,"10.1, 10.2",—,CC2.2,—,—,IAO-05,—,"10.1, 10.2",9.1.2,"10.1, 10.2","37001:2025 - 10.1, 37001:2025 - 10.2","10.1, 10.3",—,—,—
+Scheduled Maintenance Compliance Review,2.1.1,—,5.37,—,—,4.1,MNT-10,—,—,—,—,—,—,—,—,—
+Maintenance Tool and Access Control Review,2.1.1,—,—,—,—,—,MNT-11,—,—,—,—,—,—,—,—,—
+Remote Maintenance Session Review,8.2.7,—,8.18,—,—,—,—,—,—,—,—,—,—,—,—,—
+Physical and Environmental Threat Assessment,—,—,7.5,—,—,—,PES-15,—,—,"6.1.2.1, 6.1.2.2",—,—,—,—,—,—
+Secure Area Access and Controls Review,9.3.1.1,—,7.6,—,—,—,PES-18,—,—,—,—,—,—,—,—,—
+POI Device Inspection Review,"9.5.1, 9.5.1.1, 9.5.1.2, 9.5.1.2.1, 9.5.1.3",—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
+Consent Management Review,—,—,—,P3.2,—,—,PRI-14,—,"A.1.2.4, A.1.2.5, A.1.3.5, A.1.3.6",—,—,—,—,—,—,—
+PII Retention and Disposal Review,—,—,5.33,P4.3,—,—,DCH-18,—,"A.1.4.7, A.1.4.8",—,—,—,—,—,—,—
+Third-Party PII Disclosure Review,—,—,—,"P6.1, P6.2, P6.3, P6.4, P6.5, P6.6",—,—,DCH-25,—,"A.1.5.4, A.1.5.5, A.2.5.4, A.2.5.5",—,—,—,—,—,—,—
+Data Masking and DLP Effectiveness Review,"3.3.1.1, 3.3.1.2",—,"8.11, 8.12",—,—,—,"NET-17, DCH-16",—,—,—,—,—,—,—,—,—
+Cryptographic Key Storage and Access Review,"3.6.1.2, 3.6.1.3, 3.6.1.4",—,8.24,—,—,3.11,—,—,—,—,—,—,—,—,—,—
+Acceptable Use Policy Compliance Review,"12.2.1, 12.6.3.1, 12.6.3.2",—,5.1,—,—,—,GOV-14,—,—,—,—,—,—,—,—,—
+Intellectual Property and Records Compliance Review,—,—,"5.32, 5.33",—,—,—,"DCH-18, DCH-27",—,—,—,—,—,—,—,—,—
+Capacity Planning Review,—,—,8.6,CC7.2,—,—,"CAP-01, CAP-03",—,—,—,—,—,—,—,—,—
+Capacity and Performance Monitoring Review,—,—,8.6,A1.1,—,—,"CAP-01, CAP-02, CAP-04",—,—,—,—,—,—,—,—,—
+Threat Hunting and Intelligence Programme Review,—,—,5.7,—,—,17.6,"THR-07, THR-09, THR-10, THR-11",—,—,—,—,—,—,—,—,—
+Incident Response Training and Testing Review,12.10.4.1,—,5.26,—,—,17.4,IRO-02,—,—,—,—,—,—,—,—,—
+Threat Modeling Review,—,—,8.25,—,—,16.14,"SEA-03, TDA-15",—,—,—,—,—,—,—,—,—
+Design and Development Controls Review,—,—,8.25,—,—,—,"TDA-01, TDA-04",—,—,—,—,—,"8.3.1, 8.3.2, 8.3.3, 8.3.4, 8.3.5, 8.3.6",—,—,—
+Session and Concurrent Access Controls Review,8.2.8,—,—,—,—,4.3,"IAC-23, IAC-24, IAC-25",—,—,—,—,—,—,—,—,—
+Identity Proofing and Device Authentication Review,8.2.1,—,—,—,—,6.1,IAC-28,—,—,—,—,—,—,—,—,—
+Remote and Mobile Device Access Review,8.4.3,—,"6.7, 8.1",—,—,12.6,"MDM-01, MDM-02, MDM-06, MDM-07",—,—,—,—,—,—,—,—,—
+Cloud Security Controls Review,—,—,5.23,—,—,4.1,"CLD-01, CLD-02, CLD-03, CLD-10, CLD-11",—,—,—,—,—,—,—,—,—
+Web Application Security Review,6.2.3.1,—,8.29,—,—,16.1,"WEB-01, WEB-03, WEB-09, WEB-10, WEB-11",—,—,—,—,—,—,—,—,—
+Intrusion Detection and File Integrity Monitoring Review,"11.5.1, 11.5.2",—,—,—,—,"13.2, 13.3, 13.7, 13.8","END-06, MON-18",—,—,—,—,—,—,—,—,—
+Supply Chain Integrity and Provenance Review,—,—,5.21,—,—,"16.4, 16.5",TDA-11,—,—,—,—,—,—,—,—,—
+Mobile Device Management Review,—,—,8.1,—,—,4.2,"MDM-01, MDM-02, MDM-03, MDM-04, MDM-05",—,—,—,—,—,—,—,—,—
+Insider Threat Programme Review,—,—,6.3,—,—,17.7,"THR-04, THR-05",—,—,—,—,—,—,—,—,—
+Workforce Competency and Skills Review,—,—,6.3,—,—,—,HRS-13,—,7.2,7.2,—,—,—,—,—,—
+Security Operations Effectiveness Review,—,—,5.25,—,—,17.1,"OPS-04, OPS-06",—,—,—,—,—,—,—,—,—
+File Integrity Monitoring Review,11.5.2,—,—,—,—,13.7,"END-06, MON-18",—,—,—,—,—,—,—,—,—
+Enterprise Architecture and Security Review,—,"6.1, 6.2",—,—,—,—,"SEA-02, GOV-09",—,—,—,—,—,—,—,—,—
+Data Governance Review,—,—,—,CC2.1,—,—,GOV-10,—,"8.2, 8.3",—,—,—,—,—,—,—
+Worker Consultation and Participation Review,—,—,—,—,—,—,—,—,—,5.4,—,—,—,—,—,—
