@@ -579,6 +579,7 @@ def load_policy_mapping_from_github():
         'ISO 9001:2015':           'ISO 9001',
         'OWASP LLM Top 10 2025':  'OWASP Top 10 for LLM Applications',
         'NIST AI 600-1 2024':     'NIST AI 600-1 Generative AI Profile',
+        'AESCSF-SP1':              'aescsf-sp1',
         'EU AI Act 2024/1689':    'EU AI Act',
     }
 
