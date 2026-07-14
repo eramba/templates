@@ -21,7 +21,7 @@ All systems, applications, and data stores that process, store, or transmit sens
 - Weak or deprecated algorithms (e.g. DES, RC4, MD5, SHA-1 for signing) must not be used.
 - Cryptographic controls must be applied to sensitive data in transit and at rest.
 
-**PCI DSS v4.0.1 (4.2.1, 4.2.2)**
+**PCI DSS v4.0.1 (3.3.1, 3.3.2, 3.3.3, 4.1.1, 4.1.2, 4.2.1, 4.2.2)**
 - TLS 1.2 or higher must be used for all data transmitted over public networks; earlier versions must be disabled.
 - Strong cryptography must be used to safeguard PANs wherever stored.
 
@@ -31,7 +31,7 @@ All systems, applications, and data stores that process, store, or transmit sens
 **SOC 2 (TSP 2017) (CC6.7)**
 - Encryption must be used to protect data transmitted over public or untrusted networks.
 
-**NIST 800-53 Rev5 (SC-8, SC-13)**
+**NIST 800-53 Rev5 (SC-13, SC-8, SC-9)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (3.1)**
