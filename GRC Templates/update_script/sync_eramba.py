@@ -642,10 +642,11 @@ def sync_compliance(dry_run=False, max_pages=0):
         result, err = eramba_request('GET', f"/api/compliance-managements/index?page={page}&limit={limit}")
         if err:
             consecutive_errors += 1
-            log(f"Page {page} error ({consecutive_errors}): {err} — waiting 5s before retry", 'WARN')
-            time.sleep(5)
-            if consecutive_errors >= 3:
-                log(f"3 consecutive errors — stopping at {len(ca_records)} records", 'WARN')
+            wait = min(5 * consecutive_errors, 60)  # 5s, 10s, 15s... up to 60s
+            log(f"Page {page} error ({consecutive_errors}): {err} — waiting {wait}s before retry", 'WARN')
+            time.sleep(wait)
+            if consecutive_errors >= 10:
+                log(f"10 consecutive errors — stopping at {len(ca_records)} records", 'WARN')
                 break
             continue  # retry same page
         consecutive_errors = 0
