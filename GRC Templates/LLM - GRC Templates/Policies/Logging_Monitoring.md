@@ -30,7 +30,7 @@ All systems, applications, network devices, and infrastructure processing, stori
 **SOC 2 (TSP 2017) (CC7.1, CC7.2)**
 - Logging must be sufficient to support detection of and response to security events.
 
-**NIST 800-53 Rev5 (AU-2, AU-3, AU-8, AU-12)**
+**NIST 800-53 Rev5 (AU-12, AU-2, AU-3, AU-8, SI-7)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (8.2, 8.4, 8.5, 8.6, 8.7, 8.8)**
