@@ -22,7 +22,7 @@ All processes, products, services, and functions that affect the quality of outp
 - Customer satisfaction must be monitored and the results used to drive improvement.
 - Statutory and regulatory requirements applicable to products and services must be identified and met.
 
-**ISO 9001:2015 (5.1.2, 8.2.1, 8.2.2, 8.2.3.1, 8.2.3.2, 8.2.4)**
+**ISO 9001:2015 (5.1.2, 8.2.1, 8.2.2, 8.2.3, 8.2.3.1, 8.2.3.2, 8.2.4, 8.5.1, 8.6, 8.7.1, 8.7.2, 9.1.2)**
 - Changes to customer requirements must be communicated to relevant personnel and documented.
 - Risks to conformity of products and services must be addressed through the planning process.
 
