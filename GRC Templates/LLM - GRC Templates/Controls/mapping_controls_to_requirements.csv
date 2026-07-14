@@ -1,138 +1,144 @@
 Control Title,PCI DSS v4.0.1,ISO 27001:2022,ISO 27002:2022,SOC 2 (TSP 2017),NIST 800-53 Rev5,CIS Controls v8.1,SCF 2025,NIS2 Article 21,ISO 27701:2025,ISO 45001:2018,ISO 42001:2023,ISO 37001:2025,ISO 9001:2015,OWASP LLM Top 10 2025,NIST AI 600-1 2024,EU AI Act 2024/1689
-User Account Inventory Review,"7.2.1, 7.2.5, 8.2.1",—,"5.15, 5.16, 5.18, 8.2","CC6.1, CC6.2, CC6.3","AC-2, IA-4","5.1, 5.3, 5.5, 6.8","IAC-01, IAC-02, IAC-15, IAC-17",Article 21(2) (i),"A.3.8, A.3.9",—,—,—,—,—,—,—
-Privileged Access Rights Review,"7.2.6, 8.2.2, 8.3.1",—,"5.18, 8.2","CC6.1, CC6.3","AC-2, AC-6","5.4, 6.5","IAC-16, IAC-21",Article 21(2) (i),—,—,—,—,—,—,—,—
-Account Provisioning and Deprovisioning Process Review,"7.2.5, 8.2.5, 8.2.6",—,"5.16, 5.18","CC6.2, CC6.3","AC-2, IA-4, PS-4","6.1, 6.2","IAC-07, HRS-09",Article 21(2) (i),"A.3.8, A.3.9",—,—,—,—,—,—,—
-Multi-Factor Authentication Coverage Review,"8.3.2, 8.3.4, 8.3.5, 8.6.3",—,8.5,"CC6.1, CC6.6",IA-2,"6.3, 6.4, 6.5",IAC-06,Article 21(2) (j),A.3.23,—,—,—,—,—,—,—
-Role-Based Access Control Review,7.2.4,—,"5.15, 8.3","CC6.1, CC6.3","AC-3, AC-5","6.8, 3.3","IAC-08, IAC-20, IAC-21",Article 21(2) (i),—,—,—,—,—,—,—,—
+User Account Inventory Review,"8.2.1, 8.2.2, 8.2.3, 8.2.4, 8.2.5, 8.2.6, 8.6.1, 8.6.2",—,"5.15, 5.16, 5.18, 8.2","CC6.1, CC6.2, CC6.3","AC-2, IA-4","5.1, 5.3, 5.5, 6.8","IAC-01, IAC-02, IAC-15, IAC-17",Article 21(2) (i),"A.3.1, A.3.2, A.3.3, A.3.4, A.3.5, A.3.6, A.3.7, A.3.8, A.3.9",—,—,—,—,—,—,—
+Privileged Access Rights Review,"7.2.6, 8.2.2, 8.3.1",—,"5.18, 8.18","CC6.1, CC6.3","AC-2, AC-6","5.4, 6.5","IAC-16, IAC-21",Article 21(2) (i),—,—,—,—,—,—,—,—
+Account Provisioning and Deprovisioning Process Review,8.2.7,—,"5.16, 5.18","CC6.2, CC6.3","AC-2, IA-4, PS-4","6.1, 6.2","IAC-07, HRS-09",Article 21(2) (i),"A.3.8, A.3.9",—,—,—,—,—,—,—
+Multi-Factor Authentication Coverage Review,"8.3.1, 8.3.2, 8.3.3, 8.3.4, 8.3.5, 8.3.6, 8.3.7, 8.3.8, 8.3.9, 8.3.11, 8.4.1, 8.4.2, 8.4.4, 8.5.1",—,"5.17, 8.5","CC6.1, CC6.6",IA-2,"6.3, 6.4, 6.5",IAC-06,Article 21(2) (j),A.3.23,—,—,—,—,—,—,—
+Role-Based Access Control Review,"7.2.1, 7.2.2, 7.2.3, 7.2.5, 7.2.6, 7.3.1, 7.3.2",—,"5.18, 7.2.5","CC6.1, CC6.3","AC-3, AC-5","3.3, 6.1, 6.2, 6.6, 6.7, 6.8","IAC-08, IAC-20, IAC-21",Article 21(2) (i),—,—,—,—,—,—,—,—
 Segregation of Duties Verification,—,—,5.3,CC5.2,AC-5,—,"HRS-11, HRS-12",—,—,—,—,—,—,—,—,—
 Default Account and Password Management Review,"8.2.1, 8.3.6",—,5.16,CC6.1,"IA-5, AC-2",4.7,"IAC-09, IAC-10",—,—,—,—,—,—,—,—,—
-Hardware Asset Inventory Review,"12.3.3, 12.3.4",—,5.9,CC6.1,"CM-8, PM-5","1.2, 1.3, 1.4","AST-02, AST-03",Article 21(2) (i),—,—,—,—,—,—,—,—
-Software Inventory and Authorisation Review,"6.3.2, 6.3.3",—,5.9,CC6.1,"CM-8, CM-10, CM-11","2.1, 2.2, 2.3","AST-02, CFG-04, CFG-05",—,—,—,—,—,—,—,—,—
-Data Inventory and Flow Review,"3.1.1, 12.5.1",—,5.9,"C1.1, PI1.1","CM-12, CM-13","3.2, 3.8","AST-04, DCH-02, DCH-24",Article 21(2) (a),"A.1.2.2, A.1.2.9, A.2.2.7",—,—,—,—,—,—,—
-Internal Vulnerability Scan,11.3.2,—,8.8,CC7.1,"RA-5, SI-2",7.5,VPM-06,Article 21(2) (e),—,—,—,—,—,—,—,—
-External Vulnerability Scan,11.3.2,—,8.8,CC7.1,RA-5,7.6,VPM-06,Article 21(2) (e),—,—,—,—,—,—,—,—
+Hardware Asset Inventory Review,"12.3.3, 12.3.4",—,5.9,CC6.1,"CM-8, PM-5","1.1, 1.2, 1.3, 1.4, 1.5","AST-02, AST-03",Article 21(2) (i),—,—,—,—,—,—,—,—
+Software Inventory and Authorisation Review,"6.3.2, 6.3.3",—,5.9,CC6.1,"CM-8, CM-10, CM-11","2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7","AST-02, CFG-04, CFG-05",—,—,—,—,—,—,—,—,—
+Data Inventory and Flow Review,"3.1.1, 12.5.1",—,5.9,PI1.5,"CM-12, CM-13","3.2, 3.8","AST-04, DCH-02, DCH-24",—,"A.1.2.2, A.1.2.9, A.2.2.7",—,—,—,—,—,—,—
+Internal Vulnerability Scan,"6.3.1, 6.3.2, 11.2.1, 11.3.1, 11.3.1.1, 11.3.1.2, 11.3.1.3",—,8.8,CC7.1,"RA-5, SI-2","7.1, 7.2, 7.5",VPM-06,Article 21(2) (e),—,—,—,—,—,—,—,—
+External Vulnerability Scan,"11.2.2, 11.3.2, 11.3.2.1",—,8.8,CC7.1,RA-5,7.6,VPM-06,Article 21(2) (e),—,—,—,—,—,—,—,—
 Patch Deployment Review,6.3.3,—,8.8,CC7.1,"SI-2, CM-3","7.3, 7.4, 7.7",VPM-05,Article 21(2) (e),—,—,—,—,—,—,—,—
-Penetration Test Execution and Finding Remediation,"11.4.1, 11.4.2, 11.4.3, 11.4.4, 11.4.5, 11.4.7",—,—,CC7.1,"CA-8, RA-5","18.2, 18.3, 18.5",VPM-07,Article 21(2) (e),—,—,—,—,—,—,—,—
-Vulnerability Remediation Tracking,"6.3.1, 6.3.2",—,8.8,"CC7.1, CC7.2","CA-5, RA-5, SI-2","7.2, 7.7, 16.3","VPM-02, VPM-03, VPM-04",—,—,—,—,—,—,—,—,Art.20.1
-Log Collection and Configuration Review,"10.2.1, 10.2.2, 10.3.1, 10.3.2, 10.6.1, 10.6.2, 10.6.3",—,"8.15, 8.17","CC7.1, CC7.2","AU-2, AU-3, AU-8, AU-12","8.2, 8.3, 8.4, 8.5, 8.9","MON-02, MON-03, MON-07",Article 21(2) (a),A.3.25,—,—,—,—,—,—,—
-Log Review and Anomaly Investigation,"10.4.1, 10.4.2, 10.4.3",—,8.16,"CC4.1, CC7.2","AU-6, SI-4","8.11, 13.1, 13.11","MON-16, MON-17",Article 21(2) (f),—,—,—,—,—,—,—,—
-Log Retention Compliance Review,"10.5.1, 10.6.1",—,8.15,CC7.1,"AU-9, AU-11","8.1, 8.3","MON-08, MON-10",—,—,—,—,—,—,—,—,—
+Penetration Test Execution and Finding Remediation,"11.4.1, 11.4.2, 11.4.3, 11.4.4, 11.4.5",—,—,CC7.1,"CA-8, RA-5","18.2, 18.3, 18.5",VPM-07,Article 21(2) (e),—,—,—,—,—,—,—,—
+Vulnerability Remediation Tracking,"6.3.1, 6.3.2",—,8.8,"CC7.1, CC7.2","CA-5, RA-5, SI-2","16.3, 16.6, 7.2, 7.6, 7.7","VPM-02, VPM-03, VPM-04",—,—,—,—,—,—,—,—,Art.20.1
+Log Collection and Configuration Review,"10.2.1, 10.2.1.1, 10.2.1.2, 10.2.1.3, 10.2.1.4, 10.2.1.5, 10.2.1.6, 10.2.1.7, 10.6.1, 10.7.1",—,"8.15, 8.17","CC7.1, CC7.2","AU-2, AU-3, AU-8, AU-12","8.1, 8.12, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.9","MON-02, MON-03, MON-07",Article 21(2) (a),A.3.25,—,—,—,—,—,—,—
+Log Review and Anomaly Investigation,"10.4.1, 10.4.1.1, 10.4.2, 10.4.2.1",—,8.16,"CC4.1, CC7.2","AU-6, SI-4","13.1, 13.11, 8.11, 8.8, 8.9","MON-16, MON-17",—,—,—,—,—,—,—,—,—
+Log Retention Compliance Review,"10.3.2, 10.3.3, 10.5.1",—,8.15,CC7.1,"AU-9, AU-11","8.1, 8.10, 8.11, 8.3","MON-08, MON-10",—,—,—,—,—,—,—,—,—
 Service Provider Log Collection Review,10.7.1,—,—,CC7.1,AU-16,8.12,MON-14,—,—,—,—,—,—,—,—,—
-Incident Response Plan Review and Test,"12.10.1, 12.10.2",—,5.24,"CC7.3, CC7.4","IR-2, IR-3, IR-8","17.4, 17.7","IRO-04, IRO-05, IRO-06",Article 21(2) (b),A.3.11,—,—,—,—,—,—,—
-Post-Incident Review Execution,"12.10.6, 12.10.7",—,5.27,CC7.5,IR-4,17.8,IRO-13,Article 21(2) (b),A.3.12,—,—,—,—,—,—,—
+Incident Response Plan Review and Test,"12.10.1, 12.10.2, 12.10.3, 12.10.5, 12.10.6, 12.10.7",—,"5.24, 5.25, 5.5","CC7.3, CC7.4","IR-2, IR-3, IR-8","17.4, 17.7","IRO-04, IRO-05, IRO-06",Article 21(2) (b),A.3.11,8.2,—,—,—,—,—,—
+Post-Incident Review Execution,"12.10.6, 12.10.7",—,"5.27, 5.28",CC7.5,IR-4,"17.8, 17.9",IRO-13,Article 21(2) (b),A.3.12,—,—,—,—,—,—,—
 Security Incident Reporting Channel Review,12.10.3,—,6.8,CC7.3,IR-6,17.3,"IRO-10, IRO-11",Article 21(2) (b),—,—,—,—,—,—,—,—
-Change Request Approval and Documentation Review,"6.5.1, 6.5.2, 6.5.3, 6.5.4, 6.5.5, 6.5.6",6.3,8.32,CC8.1,"CM-3, CM-4, CM-5",—,"CHG-01, CHG-02, CHG-03",Article 21(2) (e),—,—,—,—,"6.3, 8.5.6",—,—,—
-Security Awareness Training Completion Review,"12.6.1, 12.6.2, 12.6.3","7.2, 7.3",6.3,CC1.4,"AT-2, AT-3","14.1, 14.2, 14.6","SAT-02, SAT-03, SAT-04",Article 21(2) (g),A.3.17,"7.2, 7.3","7.2, 7.3","37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.4","7.2, 7.3",—,—,—
-Pre-Employment Background Screening Review,12.6.1,—,6.1,CC1.4,PS-3,—,HRS-04,Article 21(2) (i),—,—,—,"37001:2025 - 7.2.1, 37001:2025 - 7.2.2",—,—,—,—
-Offboarding Access Revocation Review,"8.2.5, 8.2.6",—,6.5,"CC6.2, CC6.3","PS-4, AC-2",6.2,"HRS-09, IAC-07",Article 21(2) (i),—,—,—,—,—,—,—,—
-Cryptographic Key and Certificate Lifecycle Review,"3.7.1, 3.7.2, 3.7.3, 3.7.4, 3.7.5, 3.7.6, 3.7.7, 3.7.8, 4.2.1, 4.2.2",—,8.24,CC6.7,"SC-12, SC-17",3.11,"CRY-08, CRY-09, CRY-11, CRY-12",Article 21(2) (h),A.3.26,—,—,—,—,—,—,—
-Firewall Ruleset Review,"1.2.1, 1.2.5, 1.2.6, 1.2.7, 1.3.1, 1.3.2, 1.3.3",—,"8.20, 8.21","CC6.6, CC6.7","SC-7, CM-6","12.2, 12.6, 13.4","NET-03, NET-04",Article 21(2) (e),—,—,—,—,—,—,—,—
-Network Segmentation Verification,"1.4.1, 1.4.2, 1.4.3, 1.4.4, 1.4.5",—,8.22,"CC6.6, CC6.7, CC6.8","SC-7, CA-9","12.2, 13.4",NET-06,Article 21(2) (e),—,—,—,—,—,—,—,—
-Remote Access Security Review,"1.5.1, 8.3.2",—,6.7,"CC6.6, CC6.7","AC-17, SC-8","12.7, 6.4",NET-14,Article 21(2) (j),—,—,—,—,—,—,—,—
-Network Architecture and Diagram Review,"1.2.4, 12.5.1",—,—,CC6.6,"PL-8, CM-2",12.4,"AST-04, NET-01",—,—,—,—,—,—,—,—,—
-Physical Access Rights Review,"9.2.1, 9.2.2, 9.2.3, 9.2.4",—,"7.2, 7.3, 7.4","CC6.4, CC6.5","PE-2, PE-3",—,"PES-02, PES-03, PES-05",—,—,8.1.3,—,—,—,—,—,—
+Change Request Approval and Documentation Review,"6.5.1, 6.5.2, 6.5.3, 6.5.4, 6.5.5, 6.5.6",6.3,8.32,CC8.1,"CM-3, CM-4, CM-5",—,"CHG-01, CHG-02, CHG-03",Article 21(2) (e),—,—,—,—,"6.3, 8.5.2, 8.5.6",—,—,—
+Security Awareness Training Completion Review,"12.6.1, 12.6.2, 12.6.3, 12.6.3.1, 12.6.3.2","7.2, 7.3",6.3,CC1.4,"AT-2, AT-3","14.1, 14.2, 14.6","SAT-02, SAT-03, SAT-04",Article 21(2) (g),A.3.17,"7.2, 7.3","7.2, 7.3","37001:2025 - 7.3.1, 37001:2025 - 7.3.2, 37001:2025 - 7.3.4","7.2, 7.3",—,—,—
+Pre-Employment Background Screening Review,12.7.1,—,"6.1, 6.2, 6.6",CC1.4,PS-3,—,HRS-04,Article 21(2) (i),—,—,—,"37001:2025 - 7.2.1, 37001:2025 - 7.2.2, 37001:2025 - 7.2.2.1, 37001:2025 - 7.2.2.2",—,—,—,—
+Offboarding Access Revocation Review,"8.2.5, 8.2.6",—,"5.11, 6.5",CC6.5,"PS-4, AC-2",6.2,"HRS-09, IAC-07",Article 21(2) (i),—,—,—,—,—,—,—,—
+Cryptographic Key and Certificate Lifecycle Review,"3.5.1, 3.6.1, 3.7.1, 3.7.2, 3.7.3, 3.7.4, 3.7.5, 3.7.6, 3.7.7, 3.7.8, 4.1.1, 4.1.2, 4.2.1, 4.2.1.1, 4.2.2",—,8.24,CC6.7,"SC-12, SC-17",3.11,"CRY-08, CRY-09, CRY-11, CRY-12",Article 21(2) (h),A.3.26,—,—,—,—,—,—,—
+Firewall Ruleset Review,"1.1.1, 1.2.1, 1.2.2, 1.2.5, 1.2.6, 1.2.7, 1.3.1, 1.3.2, 1.4.3, 1.4.4, 1.4.5",—,"8.21, 8.2","CC6.6, CC6.7","SC-7, CM-6","12.1, 12.2, 12.4, 12.6, 13.4","NET-03, NET-04",Article 21(2) (e),—,—,—,—,—,—,—,—
+Network Segmentation Verification,"1.3.3, 1.3.4, 1.3.5",—,8.22,"CC6.6, CC6.7, CC6.8","SC-7, CA-9","12.2, 12.3, 13.4, 13.9",NET-06,Article 21(2) (e),—,—,—,—,—,—,—,—
+Remote Access Security Review,"1.5.1, 8.3.2",—,6.7,"CC6.6, CC6.7","AC-17, SC-8","12.5, 12.7, 6.4",NET-14,Article 21(2) (j),—,—,—,—,—,—,—,—
+Network Architecture and Diagram Review,"1.2.3, 1.2.4, 1.2.8",—,—,CC6.7,"PL-8, CM-2","12.4, 12.6, 12.7, 12.8","AST-04, NET-01",—,—,—,—,—,—,—,—,—
+Physical Access Rights Review,"9.1.1, 9.1.2, 9.2.1, 9.2.1.1, 9.2.2, 9.2.3, 9.2.4, 9.3.1, 9.3.1.1, 9.3.2, 9.3.3, 9.3.4",—,"7.2, 7.3, 7.4, 7.8, 7.9","CC6.4, CC6.5","PE-2, PE-3",—,"PES-02, PES-03, PES-05",—,—,8.1.3,—,—,—,—,—,—
 Clear Desk and Clear Screen Compliance Check,—,—,7.7,—,AC-11,—,AST-06,—,A.3.19,—,—,—,—,—,—,—
-Media Disposal Verification,"9.4.5, 9.4.6, 9.4.7",—,"7.10, 7.14","CC6.4, CC6.5","MP-6, MP-7",—,"AST-09, DCH-08, DCH-09",—,"A.3.20, A.3.21",—,—,—,—,—,—,—
-Supplier Security Assessment Review,"12.8.4, 12.8.5",—,"5.19, 5.21, 5.22",CC9.2,"SR-6, SA-9","15.3, 15.5","TPM-02, TPM-08","Article 21(2) (d), Article 21(3)",—,—,—,—,8.4.1,—,"GV-6.1-005, GV-6.1-009",Art.25.4
-Supplier Contract Security Requirements Review,"12.8.2, 12.8.3",—,5.20,CC9.2,"SR-5, SA-4",15.4,"TPM-04, TPM-05",Article 21(2) (d),—,—,—,"37001:2025 - 8.6, 37001:2025 - 8.7","8.4.2, 8.4.3",—,—,—
+Media Disposal Verification,"9.4.1, 9.4.1.1, 9.4.1.2, 9.4.2, 9.4.3, 9.4.4, 9.4.5, 9.4.5.1, 9.4.6, 9.4.7",—,"7.1, 7.14","CC6.4, CC6.5","MP-6, MP-7",—,"AST-09, DCH-08, DCH-09",—,"A.3.20, A.3.21",—,—,—,—,—,—,—
+Supplier Security Assessment Review,"12.8.1, 12.8.3",—,"5.19, 5.21, 5.22",CC9.2,"SR-6, SA-9","15.3, 15.5","TPM-02, TPM-08",Article 21(2) (d),—,—,—,—,8.4.1,LLM05,"GV-6.1-005, GV-6.1-009",Art.25.4
+Supplier Contract Security Requirements Review,"12.8.2, 12.9.1",—,5.2,CC9.2,"SR-5, SA-4",15.4,"TPM-04, TPM-05",Article 21(3),—,—,—,"37001:2025 - 8.6, 37001:2025 - 8.7","8.4.2, 8.4.3",—,—,—
 Supplier Offboarding and Data Return Verification,12.8.5,—,5.22,CC9.2,"SR-3, PS-7",15.7,TPM-10,—,A.2.4.3,—,—,—,—,—,—,—
-Backup Execution and Restore Test,12.3.3,—,8.13,"A1.2, A1.3",CP-9,"11.2, 11.3, 11.5","BCD-11, BCD-12",Article 21(2) (c),A.3.24,—,—,—,—,—,—,—
-BCP and DR Plan Test,—,—,"5.29, 5.30","A1.1, A1.3","CP-4, CP-2","11.4, 11.5","BCD-04, BCD-05",Article 21(2) (c),—,—,—,—,—,—,—,—
-Data Classification and Labelling Compliance Review,"3.3.2, 3.4.1",—,"5.12, 5.13, 5.14",C1.1,"MP-3, MP-4","3.1, 3.7","DCH-02, DCH-04, DCH-05",Article 21(2) (a),"A.3.5, A.3.6, A.3.7",—,—,—,—,—,—,—
-Data Retention and Disposal Compliance Review,"3.2.1, 3.3.1",—,5.33,C1.2,SI-12,"3.4, 3.5","DCH-18, DCH-21",—,"A.1.4.8, A.1.4.9",—,—,—,—,—,—,—
-Threat Intelligence Review,"12.3.1, 12.3.2",—,5.7,—,"SI-5, PM-16",—,"THR-01, THR-03, THR-09",—,—,—,—,—,—,—,"MP-5.1-006, MS-2.7-001",—
+Backup Execution and Restore Test,12.3.3,—,"5.29, 8.13","A1.2, A1.3",CP-9,"11.1, 11.2, 11.3, 11.4, 11.5","BCD-11, BCD-12",Article 21(2) (c),A.3.24,—,—,—,—,—,—,—
+BCP and DR Plan Test,—,—,"5.29, 8.14","A1.1, A1.3","CP-4, CP-2","11.4, 11.5","BCD-04, BCD-05",Article 21(2) (c),—,—,—,—,—,—,—,—
+Data Classification and Labelling Compliance Review,"3.3.2, 3.4.1",—,"5.12, 5.13, 5.14",PI1.4,"MP-3, MP-4","3.1, 3.7","DCH-02, DCH-04, DCH-05",Article 21(2) (a),"A.3.5, A.3.6, A.3.7",—,—,—,8.5.3,—,—,—
+Data Retention and Disposal Compliance Review,"3.2.1, 3.3.1",—,"5.33, 8.1",C1.2,SI-12,"3.4, 3.5","DCH-18, DCH-21",—,"A.1.4.8, A.1.4.9",—,—,—,—,—,—,—
+Threat Intelligence Review,"12.3.1, 12.3.2",—,"5.6, 5.7",—,"SI-5, PM-16",—,"THR-01, THR-03, THR-09",—,—,—,—,—,—,—,"MP-5.1-006, MS-2.7-001",—
 Legal and Regulatory Compliance Review,—,—,5.31,—,—,—,"CPL-01, CPL-02",—,A.3.13,6.1.3,—,37001:2025 - 6.2,—,—,—,—
 Independent Information Security Review,—,"9.2, 9.2.1, 9.2.2",5.35,CC4.1,CA-2,—,"IAO-02, CPL-03",—,"9.2.1, 9.2.2","9.2.1, 9.2.2","9.2.1, 9.2.2","37001:2025 - 9.2.1, 37001:2025 - 9.2.2","9.2.1, 9.2.2",—,—,—
-Internal Information Security Compliance Review,—,9.1,5.36,CC4.2,CA-7,—,"CPL-02, CPL-04",—,9.1,9.1.1,9.1,37001:2025 - 9.1,"9.1.1, 9.1.3",—,—,—
+Internal Information Security Compliance Review,—,5.36,5.36,CC4.2,CA-7,—,"CPL-02, CPL-04",—,9.1,9.1.1,9.1,37001:2025 - 9.1,"9.1.1, 9.1.3",—,—,—
 Security Policy Violation Management Review,—,—,6.4,CC1.5,PS-8,—,HRS-07,—,—,—,—,—,—,—,—,—
-Endpoint Configuration Baseline Review,"6.3.2, 6.3.3",—,"8.1, 8.9",CC6.8,"CM-2, CM-6","4.1, 4.3, 4.6","CFG-02, END-01",Article 21(2) (e),—,—,—,—,—,—,—,—
-Malware Protection Review,"5.2.1, 5.2.2, 5.3.1, 5.3.2, 5.3.3, 5.3.4, 5.3.5",—,8.7,"CC6.8, CC7.1","SI-3, SI-4","10.1, 10.2, 10.7, 9.7, 13.2","END-04, END-07",Article 21(2) (e),—,—,—,—,—,—,—,—
-Web and Email Filtering Review,"1.2.5, 6.3.2",—,8.23,"CC6.6, CC6.8","SC-7, SI-8","9.2, 9.3, 9.5, 9.7","NET-18, NET-20, END-08",Article 21(2) (e),—,—,—,—,—,—,—,—
+Endpoint Configuration Baseline Review,"1.4.1, 1.4.2, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.2.7, 2.3.1, 2.3.2",—,"8.1, 8.9",CC6.8,"CM-2, CM-6","4.1, 4.10, 4.11, 4.12, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9","CFG-02, END-01",Article 21(2) (e),—,—,—,—,—,—,—,—
+Malware Protection Review,"5.2.1, 5.2.2, 5.2.3, 5.2.3.1, 5.3.1, 5.3.2, 5.3.2.1, 5.3.3",—,8.7,"CC6.8, CC7.1","SI-3, SI-4","10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 13.2, 9.7","END-04, END-07",Article 21(2) (e),—,—,—,—,—,—,—,—
+Web and Email Filtering Review,5.4.1,—,8.23,"CC6.6, CC6.8","SC-7, SI-8","9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7","NET-18, NET-20, END-08",Article 21(2) (e),—,—,—,—,—,—,—,—
 Software Installation Control Review,6.3.2,—,8.19,CC6.8,"CM-7, CM-11","2.5, 2.6, 2.7","CFG-03, CFG-04, CFG-05, END-03",—,—,—,—,—,—,—,—,—
 Endpoint Encryption Compliance Review,3.5.1,—,8.1,CC6.7,"SC-28, MP-5","3.6, 3.9","CRY-05, MDM-03",Article 21(2) (h),—,—,—,—,—,—,—,—
 Data Loss Prevention Review,12.5.1,—,—,C1.2,SI-12,3.13,"NET-17, DCH-16",—,—,—,—,—,—,—,—,—
-Secure Development Lifecycle Compliance Review,"6.2.1, 6.2.2, 6.2.3",—,"8.25, 8.27",CC8.1,"SA-3, SA-8, SA-15","16.1, 16.9","TDA-06, TDA-07, PRM-07",Article 21(2) (e),A.3.27,—,"A.6.1.2, A.6.1.3",—,—,"LLM03, LLM04","GV-4.1-001, GV-4.1-002","Art.8.1, Art.17.1"
-Static and Dynamic Application Security Testing Review,"6.2.4, 6.3.1, 6.4.1, 6.4.2",—,8.29,CC8.1,"SA-11, CA-2","16.12, 16.13","TDA-09, VPM-07",Article 21(2) (e),—,—,—,—,—,—,—,—
-Secure Coding Standards Compliance Review,6.2.4,—,8.28,CC8.1,"SA-15, SA-8",16.9,"TDA-06, TDA-18, TDA-19",—,A.3.28,—,—,—,—,—,—,—
-Application Security Requirements Review,"6.2.1, 6.2.2, 6.2.3",—,8.26,CC8.1,"SA-4, SA-17",16.2,"TDA-02, TDA-05, PRM-05",—,"A.3.28, A.3.29, A.3.30",—,—,—,—,—,—,—
+Secure Development Lifecycle Compliance Review,6.2.1,—,"8.25, 8.27, 8.3, 8.4",CC8.1,"SA-3, SA-8, SA-15","16.1, 16.9","TDA-06, TDA-07, PRM-07",Article 21(2) (e),"A.3.27, A.3.30",—,"A.6.1.2, A.6.1.3",—,—,"LLM03, LLM04","GV-4.1-001, GV-4.1-002","Art.8.1, Art.17.1"
+Static and Dynamic Application Security Testing Review,"6.2.3, 6.2.3.1",—,8.29,CC8.1,"SA-11, CA-2","16.12, 16.13, 16.3","TDA-09, VPM-07",Article 21(2) (e),—,—,—,—,—,—,—,—
+Secure Coding Standards Compliance Review,"6.2.2, 6.2.4",—,8.28,CC8.1,"SA-15, SA-8",16.9,"TDA-06, TDA-18, TDA-19",—,A.3.28,—,—,—,—,—,—,—
+Application Security Requirements Review,"6.2.1, 6.2.2, 6.2.3",—,8.26,CC8.1,"SA-4, SA-17","16.1, 16.2","TDA-02, TDA-05, PRM-05",—,"A.3.28, A.3.29, A.3.30",—,—,—,—,—,—,—
 Third-Party Software Component Review,"6.2.4, 6.3.2",—,8.25,CC9.2,"SA-12, SA-22, SR-4","16.4, 16.5",TDA-17,—,—,—,—,—,—,—,—,—
 "Development, Test, and Production Environment Separation Review","6.4.1, 6.4.2",—,8.31,CC8.1,"CM-4, SA-3",16.8,"TDA-08, TDA-10",—,A.3.31,—,—,—,—,—,—,—
 Internal Audit Execution,—,"9.2, 9.2.1, 9.2.2",—,"CC4.1, CC4.2","CA-2, CA-7",—,"CPL-04, IAO-02",—,"9.2.1, 9.2.2","9.2.1, 9.2.2","9.2.1, 9.2.2","37001:2025 - 9.2.1, 37001:2025 - 9.2.2","9.2.1, 9.2.2",—,—,—
 Management Review Execution,—,"9.3, 9.3.1, 9.3.2, 9.3.3",—,CC5.3,"CA-7, PM-6",—,"GOV-03, GOV-17",—,"9.3.1, 9.3.2, 9.3.3",9.3,"9.3.1, 9.3.2, 9.3.3","37001:2025 - 9.3.1, 37001:2025 - 9.3.2, 37001:2025 - 9.3.3","9.3.1, 9.3.2, 9.3.3",—,—,—
 Nonconformity and Corrective Action Tracking,—,"10.1, 10.2",—,CC4.2,"CA-5, PM-4",—,IAO-05,—,"10.1, 10.2","10.1, 10.2, 10.3","10.1, 10.2","37001:2025 - 10.1, 37001:2025 - 10.2","10.1, 10.2.1, 10.2.2, 10.3",—,—,—
-Cardholder Data Environment Scoping Review,"3.1.1, 12.5.1, 12.5.2",—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
+Cardholder Data Environment Scoping Review,"3.3.1, 3.3.1.1, 3.3.1.2, 3.3.1.3, 3.3.2, 3.3.3, 12.5.1, 12.5.2",—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
 PCI DSS Compliance Self-Assessment or Audit,"12.3.1, 12.3.2",—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Cardholder Data Discovery Scan,"3.2.1, 12.3.3",—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
+Cardholder Data Discovery Scan,"3.4.1, 3.4.2",—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
 SOC 2 Control Effectiveness Monitoring,—,—,—,"CC4.1, CC4.2, CC5.1, CC5.2, CC5.3",—,—,—,—,—,—,—,—,—,—,—,—
-Availability and Processing Integrity Monitoring,—,—,—,"A1.1, A1.2, PI1.1, PI1.2, PI1.3",—,—,—,—,—,—,—,—,—,—,—,—
-System Security Plan Review,—,—,—,—,"PL-2, CA-6",—,—,—,—,—,—,—,—,—,—,—
+Availability and Processing Integrity Monitoring,—,—,—,"A1.1, A1.2, PI1.1, PI1.2, PI1.3",—,—,—,—,—,—,—,—,8.5.1,—,—,—
+System Security Plan Review,—,—,5.8,—,"PL-2, CA-6",—,—,—,—,—,—,—,8.1,—,—,—
 Plan of Action and Milestones (POA&M) Review,—,—,—,—,"CA-5, PM-4",—,—,—,—,—,—,—,—,—,—,—
 Security Training Records Review,—,—,—,—,AT-4,—,—,—,—,—,—,—,—,—,—,—
 OH&S Legal Compliance Evaluation,—,—,—,—,—,—,—,—,—,"6.1.3, 9.1.2",—,—,—,—,—,—
-OH&S Performance Monitoring Review,—,—,—,—,—,—,—,—,—,"9.1.1, 9.1.2",—,—,—,—,—,—
-AI System Impact Assessment Review,—,—,—,—,—,—,—,—,—,—,"6.1.4, 8.4, A.5.2, A.5.3, A.5.4, A.5.5",—,—,—,"MP-5.1-002, MP-4.1-008","Art.9.1, Art.27.1, Art.27.2"
-AI System Performance and Monitoring Review,—,—,—,—,—,—,—,—,—,—,"9.1, A.6.2.6, A.8.2, A.8.3, A.8.4, A.8.5",—,—,—,"MG-4.1-002, MG-4.2-001","Art.72.1, Art.72.2"
-Anti-Bribery Risk Assessment Review,—,—,—,—,—,—,—,—,—,—,—,"37001:2025 - 4.5.1, 37001:2025 - 4.5.2, 37001:2025 - 4.5.3, 37001:2025 - 4.5.4, 37001:2025 - 6.1",—,—,—,—
+OH&S Performance Monitoring Review,—,—,—,—,—,—,—,—,—,"6.1.2.1, 6.1.2.2, 9.1.1, 9.1.2",—,—,—,—,—,—
+AI System Impact Assessment Review,—,—,—,—,—,—,—,—,—,—,"6.1.4, 8.4, A.5.1, A.5.2, A.5.3, A.5.4, A.5.5",—,—,—,"MP-5.1-002, MP-4.1-008","Art.9.1, Art.27.1, Art.27.2"
+AI System Performance and Monitoring Review,—,—,—,—,—,—,—,—,—,—,"9.1, A.6.2.6, A.7.1, A.7.2, A.7.3, A.7.4, A.7.5, A.8.2, A.8.3, A.8.4, A.8.5",—,—,—,"MG-4.1-002, MG-4.2-001","Art.72.1, Art.72.2"
+Anti-Bribery Risk Assessment Review,—,—,—,—,—,—,—,—,—,—,—,"37001:2025 - 4.5.1, 37001:2025 - 4.5.2, 37001:2025 - 4.5.3, 37001:2025 - 4.5.4, 37001:2025 - 6.1, 37001:2025 - 8.1, 37001:2025 - 8.10, 37001:2025 - 8.2, 37001:2025 - 8.3, 37001:2025 - 8.4, 37001:2025 - 8.5.1, 37001:2025 - 8.5.2, 37001:2025 - 8.6, 37001:2025 - 8.7, 37001:2025 - 8.8, 37001:2025 - 8.9",—,—,—,—
 Gifts and Hospitality Register Review,—,—,—,—,—,—,—,—,—,—,—,"37001:2025 - 8.7, 37001:2025 - 8.3, 37001:2025 - 8.4",—,—,—,—
 Anti-Bribery Due Diligence Review,—,—,—,—,—,—,—,—,—,—,—,"37001:2025 - 8.2, 37001:2025 - 8.6, 37001:2025 - 8.7, 37001:2025 - 8.8",—,—,—,—
-Customer Satisfaction Monitoring,—,—,—,—,—,—,—,—,—,—,—,—,"5.1.2, 9.1.2",—,—,—
-Quality Nonconformity Review,—,—,—,—,—,—,—,—,—,—,—,—,"8.7.1, 8.7.2, 10.2.1, 10.2.2",—,—,—
-PII Cross-Border Transfer Review,—,—,—,—,—,—,—,—,"A.1.5.2, A.1.5.3, A.1.5.4, A.2.5.2, A.2.5.3",—,—,—,—,—,—,—
-Data Subject Rights Request Fulfilment Review,—,—,—,—,—,—,—,—,"A.1.3.2, A.1.3.7, A.1.3.9, A.1.3.10, A.2.3.2",—,—,—,—,—,—,—
+Customer Satisfaction Monitoring,—,—,—,—,—,—,—,—,—,—,—,—,"5.1.2, 8.2.1, 8.2.2, 8.2.3, 8.2.4, 8.6, 9.1.2",—,—,—
+Quality Nonconformity Review,—,—,—,—,—,—,—,—,—,—,—,—,"10.2.1, 10.2.2, 8.7.1, 8.7.2",—,—,—
+PII Cross-Border Transfer Review,—,—,—,P7.1,—,—,—,—,"A.1.5.1, A.1.5.2, A.1.5.3, A.1.5.4, A.1.5.5, A.2.5.2, A.2.5.3",—,—,—,—,—,—,—
+Data Subject Rights Request Fulfilment Review,—,—,—,"P5.1, P5.2, P6.7, P8.1",—,—,—,—,"A.1.3.1, A.1.3.10, A.1.3.11, A.1.3.2, A.1.3.3, A.1.3.4, A.1.3.7, A.1.3.9, A.2.3.2",—,—,—,—,—,—,—
 Cyber Governance Programme Review,—,—,—,—,—,—,"GOV-02, GOV-03, GOV-04, GOV-05",—,—,—,—,—,—,—,—,—
 NIS2 Incident Notification Review,—,—,—,—,—,—,—,"Article 21(2) (b), Article 21(4), Article 21(5)",—,—,—,—,—,—,—,—
 AI Prohibited Practices Compliance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,"Art.5.1, Art.5.2, Art.5.3, Art.5.4"
-AI System Risk Management Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,"MP-1.1-001, MP-1.1-002, MP-5.1-001, MP-5.1-002, MP-5.1-006","Art.9.1, Art.9.2, Art.9.3, Art.9.4, Art.9.5, Art.9.6, Art.9.8, Art.9.9, Art.9.10"
-AI Training Data Governance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,LLM04,"MG-3.2-003, MG-3.2-002, MP-4.1-004, MP-4.1-005, MS-2.11-004, MS-2.11-005","Art.10.1, Art.10.2, Art.10.3, Art.10.4, Art.10.5, Art.10.6"
-AI Technical Documentation Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,"MS-2.9-002, GV-1.6-001, GV-1.6-003","Art.11.1, Art.11.2, Annex.IV, Annex.IV.1, Annex.IV.2, Annex.IV.3, Annex.IV.5, Annex.IV.6, Art.18.1"
+AI System Risk Management Review,—,—,—,—,—,—,—,—,—,—,"8.2, 8.3, A.8.1, A.8.2, A.8.3, A.8.4",—,—,—,"MP-1.1-001, MP-1.1-002, MP-5.1-001, MP-5.1-002, MP-5.1-006","Art.9.1, Art.9.2, Art.9.3, Art.9.4, Art.9.5, Art.9.6, Art.9.8, Art.9.9, Art.9.10"
+AI Training Data Governance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM02, LLM03, LLM04, LLM08","MG-3.2-003, MG-3.2-002, MP-4.1-004, MP-4.1-005, MS-2.11-004, MS-2.11-005","Art.10.1, Art.10.2, Art.10.3, Art.10.4, Art.10.5, Art.10.6"
+AI Technical Documentation Review,—,—,—,—,—,—,—,—,—,—,"A.4.1, A.4.2, A.4.3, A.4.4, A.4.5, A.4.6",—,—,—,"MS-2.9-002, GV-1.6-001, GV-1.6-003","Art.11.1, Art.11.2, Annex.IV, Annex.IV.1, Annex.IV.2, Annex.IV.3, Annex.IV.5, Annex.IV.6, Art.18.1"
 AI System Logging and Record-Keeping Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,"GV-1.5-001, GV-1.5-003, MG-4.1-006","Art.12.1, Art.12.2, Art.12.3, Art.19.1, Art.19.2, Art.26.6"
-AI Human Oversight Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,LLM06,"GV-3.2-002, GV-3.2-003, MG-3.2-008, MG-4.2-003","Art.14.1, Art.14.2, Art.14.3, Art.14.4, Art.14.5, Art.26.1, Art.26.2, Art.26.5"
+AI Human Oversight Controls Review,—,—,—,—,—,—,—,—,—,—,"A.9.1, A.9.2, A.9.3, A.9.4",—,—,LLM06,"GV-3.2-002, GV-3.2-003, MG-3.2-008, MG-4.2-003","Art.14.1, Art.14.2, Art.14.3, Art.14.4, Art.14.5, Art.26.1, Art.26.2, Art.26.5"
 AI Transparency and Disclosure Review,—,—,—,—,—,—,—,—,—,—,—,—,—,LLM09,"GV-5.1-001, GV-5.1-002, MP-5.1-003, MS-2.8-003","Art.13.1, Art.13.2, Art.13.3, Art.50.1, Art.50.2, Art.50.3, Art.50.4, Art.50.5"
 AI Serious Incident Reporting Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,"MG-4.3-001, MG-4.3-003, GV-4.3-002, GV-1.5-002","Art.73.1, Art.73.2, Art.73.3, Art.73.4, Art.73.5, Art.73.6, Art.20.1, Art.20.2, Art.82.2"
 AI Post-Market Monitoring Review,—,—,—,—,—,—,—,—,—,—,—,—,—,—,"MG-4.1-002, MG-4.2-001, MG-4.1-004, MS-2.5-003, MS-2.6-005","Art.72.1, Art.72.2, Art.72.4"
 Fundamental Rights Impact Assessment,—,—,—,—,—,—,—,—,—,—,—,—,—,—,"MS-3.3-001, MP-5.2-001","Art.27.1, Art.27.2, Art.27.3, Art.27.4"
 LLM Prompt Injection Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,LLM01,"MS-2.7-007, MS-2.6-006",Art.15.5
-LLM Sensitive Data Disclosure Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM02, LLM07","MP-4.1-009, MS-2.2-004, MS-2.10-001",Art.10.5
-LLM Supply Chain Security Review,—,—,—,—,—,—,—,—,—,—,—,—,—,LLM03,"MG-3.1-001, MG-3.1-002, MG-3.1-005, GV-6.1-001, GV-6.1-007, GV-6.2-001",Art.25.4
+LLM Sensitive Data Disclosure Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM02, LLM06, LLM07","MP-4.1-009, MS-2.2-004, MS-2.10-001",Art.10.5
+LLM Supply Chain Security Review,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM03, LLM09","MG-3.1-001, MG-3.1-002, MG-3.1-005, GV-6.1-001, GV-6.1-007, GV-6.2-001",Art.25.4
 LLM Output Validation and Handling Review,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM05, LLM08, LLM09","MG-3.2-004, MG-3.2-005, MS-2.6-004, MP-2.3-003","Art.15.1, Art.15.4"
-LLM Resource and Agency Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM06, LLM10","MG-2.4-004, GV-1.7-001, GV-1.7-002",Art.14.3
+LLM Resource and Agency Controls Review,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM04, LLM06, LLM07, LLM10","MG-2.4-004, GV-1.7-001, GV-1.7-002",Art.14.3
 GAI Red-Teaming and Adversarial Testing,—,—,—,—,—,—,—,—,—,—,—,—,—,"LLM01, LLM04, LLM07","MS-2.7-007, MS-1.3-002, MP-2.3-005, MS-2.6-007, GV-3.2-001","Art.55.1, Annex.XI.p4"
 Third-Party GAI System Governance Review,—,—,—,—,—,—,—,—,—,—,—,—,—,LLM03,"GV-6.1-004, GV-6.1-005, GV-6.1-006, GV-6.2-003, GV-6.2-004, GV-6.2-006, GV-6.2-007","Art.53.1, Art.55.1"
-Management System Scope and Context Review,—,"4.2, 4.3, 4.4",—,CC2.1,—,—,—,—,"4.2, 4.3, 4.4","4.2, 4.3, 4.4","4.2, 4.3, 4.4","37001:2025 - 4.2, 37001:2025 - 4.3, 37001:2025 - 4.4","4.2, 4.3, 4.4.1, 4.4.2",—,—,—
-Management System Policy and Leadership Review,—,"5.1, 5.2, 5.3",—,"CC5.1, CC5.2",—,—,—,—,"5.1, 5.2, 5.3","5.1, 5.2, 5.3",—,"37001:2025 - 5.1.1, 37001:2025 - 5.1.2, 37001:2025 - 5.1.3, 37001:2025 - 5.2, 37001:2025 - 5.3.1, 37001:2025 - 5.3.2, 37001:2025 - 5.3.3","5.1.1, 5.2.1, 5.2.2, 5.3",—,—,—
-Management System Documented Information Review,—,"7.5, 7.5.1, 7.5.2, 7.5.3",—,—,—,—,"TDA-04, TDA-22",—,"7.5.1, 7.5.2, 7.5.3","7.5.1, 7.5.2, 7.5.3","7.5.1, 7.5.2, 7.5.3","37001:2025 - 7.5.1, 37001:2025 - 7.5.2, 37001:2025 - 7.5.3","7.5.1, 7.5.2, 7.5.3.1, 7.5.3.2",—,—,—
+Management System Scope and Context Review,—,"4.2, 4.3, 4.4",—,CC2.1,—,—,—,—,"4.2, 4.3, 4.4","4.2, 4.3, 4.4","4.2, 4.3, 4.4","37001:2025 - 4.2, 37001:2025 - 4.3, 37001:2025 - 4.4","4.1, 4.2, 4.3, 4.4.1, 4.4.2",—,—,—
+Management System Policy and Leadership Review,"12.1.1, 12.1.2, 12.1.3, 12.1.4","5.1, 5.2, 5.3",—,"CC1.2, CC1.3, CC2.3",—,—,—,—,"5.1, 5.2, 5.3","5.1, 5.2, 5.3",—,"37001:2025 - 5.1.1, 37001:2025 - 5.1.2, 37001:2025 - 5.1.3, 37001:2025 - 5.2, 37001:2025 - 5.3.1, 37001:2025 - 5.3.2, 37001:2025 - 5.3.3","5.1.1, 5.2.1, 5.2.2, 5.3",—,—,—
+Management System Documented Information Review,"1.1.2, 2.1.1, 3.1.2, 4.1.1, 4.1.2, 5.1.1, 5.1.2, 6.1.1, 6.1.2, 7.1.1, 7.1.2, 8.1.1, 8.1.2, 10.1.1, 10.1.2, 11.1.1, 11.1.2","7.5, 7.5.1, 7.5.2, 7.5.3",5.37,—,—,—,"TDA-04, TDA-22",—,"7.5.1, 7.5.2, 7.5.3","7.5.1, 7.5.2, 7.5.3","7.5.1, 7.5.2, 7.5.3","37001:2025 - 7.5.1, 37001:2025 - 7.5.2, 37001:2025 - 7.5.3","7.5.1, 7.5.2, 7.5.3.1, 7.5.3.2",—,—,—
 Management System Continual Improvement Review,—,"10.1, 10.2",—,CC2.2,—,—,IAO-05,—,"10.1, 10.2",9.1.2,"10.1, 10.2","37001:2025 - 10.1, 37001:2025 - 10.2","10.1, 10.3",—,—,—
-Scheduled Maintenance Compliance Review,2.1.1,—,5.37,—,—,4.1,MNT-10,—,—,—,—,—,—,—,—,—
+Scheduled Maintenance Compliance Review,2.1.1,—,"5.37, 7.13",—,—,4.1,MNT-10,—,—,—,—,—,—,—,—,—
 Maintenance Tool and Access Control Review,2.1.1,—,—,—,—,—,MNT-11,—,—,—,—,—,—,—,—,—
 Remote Maintenance Session Review,8.2.7,—,8.18,—,—,—,—,—,—,—,—,—,—,—,—,—
-Physical and Environmental Threat Assessment,—,—,7.5,—,—,—,PES-15,—,—,"6.1.2.1, 6.1.2.2",—,—,—,—,—,—
+Physical and Environmental Threat Assessment,—,—,"7.5, 7.11, 7.12",—,—,—,PES-15,—,—,"6.1.2.1, 6.1.2.2",—,—,—,—,—,—
 Secure Area Access and Controls Review,9.3.1.1,—,7.6,—,—,—,PES-18,—,—,—,—,—,—,—,—,—
 POI Device Inspection Review,"9.5.1, 9.5.1.1, 9.5.1.2, 9.5.1.2.1, 9.5.1.3",—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
-Consent Management Review,—,—,—,P3.2,—,—,PRI-14,—,"A.1.2.4, A.1.2.5, A.1.3.5, A.1.3.6",—,—,—,—,—,—,—
-PII Retention and Disposal Review,—,—,5.33,P4.3,—,—,DCH-18,—,"A.1.4.7, A.1.4.8",—,—,—,—,—,—,—
-Third-Party PII Disclosure Review,—,—,—,"P6.1, P6.2, P6.3, P6.4, P6.5, P6.6",—,—,DCH-25,—,"A.1.5.4, A.1.5.5, A.2.5.4, A.2.5.5",—,—,—,—,—,—,—
+Consent Management Review,—,—,—,"P1.1, P2.1, P3.1, P3.2",—,—,PRI-14,—,"A.1.2.1, A.1.2.2, A.1.2.3, A.1.2.4, A.1.2.5, A.1.2.6, A.1.3.5, A.1.3.6",—,—,—,—,—,—,—
+PII Retention and Disposal Review,—,—,5.34,"P4.1, P4.2, P4.3",—,—,DCH-18,—,"A.1.4.1, A.1.4.10, A.1.4.2, A.1.4.3, A.1.4.4, A.1.4.5, A.1.4.6, A.1.4.7, A.1.4.8, A.1.4.9",—,—,—,—,—,—,—
+Third-Party PII Disclosure Review,—,—,—,"P6.1, P6.2, P6.3, P6.4, P6.5, P6.6",—,—,DCH-25,—,"A.1.5.4, A.1.5.5, A.2.1.1, A.2.1.2, A.2.1.3, A.2.2.1, A.2.2.2, A.2.2.3, A.2.3.1, A.2.3.2, A.2.5.1, A.2.5.2, A.2.5.3, A.2.5.4, A.2.5.5, A.2.5.6, A.2.5.7, A.2.5.8, A.2.5.9",—,—,—,—,—,—,—
 Data Masking and DLP Effectiveness Review,"3.3.1.1, 3.3.1.2",—,"8.11, 8.12",—,—,—,"NET-17, DCH-16",—,—,—,—,—,—,—,—,—
-Cryptographic Key Storage and Access Review,"3.6.1.2, 3.6.1.3, 3.6.1.4",—,8.24,—,—,3.11,—,—,—,—,—,—,—,—,—,—
-Acceptable Use Policy Compliance Review,"12.2.1, 12.6.3.1, 12.6.3.2",—,5.1,—,—,—,GOV-14,—,—,—,—,—,—,—,—,—
+Cryptographic Key Storage and Access Review,"3.5.1.1, 3.5.1.2, 3.5.1.3, 3.6.1.2, 3.6.1.3, 3.6.1.4",—,8.24,—,—,3.11,—,—,—,—,—,—,—,—,—,—
+Acceptable Use Policy Compliance Review,12.2.1,—,5.1,—,—,—,GOV-14,—,—,—,—,—,—,—,—,—
 Intellectual Property and Records Compliance Review,—,—,"5.32, 5.33",—,—,—,"DCH-18, DCH-27",—,—,—,—,—,—,—,—,—
 Capacity Planning Review,—,—,8.6,CC7.2,—,—,"CAP-01, CAP-03",—,—,—,—,—,—,—,—,—
 Capacity and Performance Monitoring Review,—,—,8.6,A1.1,—,—,"CAP-01, CAP-02, CAP-04",—,—,—,—,—,—,—,—,—
 Threat Hunting and Intelligence Programme Review,—,—,5.7,—,—,17.6,"THR-07, THR-09, THR-10, THR-11",—,—,—,—,—,—,—,—,—
-Incident Response Training and Testing Review,12.10.4.1,—,5.26,—,—,17.4,IRO-02,—,—,—,—,—,—,—,—,—
+Incident Response Training and Testing Review,"12.10.4, 12.10.4.1",—,5.26,—,—,17.4,IRO-02,—,—,—,—,—,—,—,—,—
 Threat Modeling Review,—,—,8.25,—,—,16.14,"SEA-03, TDA-15",—,—,—,—,—,—,—,—,—
 Design and Development Controls Review,—,—,8.25,—,—,—,"TDA-01, TDA-04",—,—,—,—,—,"8.3.1, 8.3.2, 8.3.3, 8.3.4, 8.3.5, 8.3.6",—,—,—
 Session and Concurrent Access Controls Review,8.2.8,—,—,—,—,4.3,"IAC-23, IAC-24, IAC-25",—,—,—,—,—,—,—,—,—
-Identity Proofing and Device Authentication Review,8.2.1,—,—,—,—,6.1,IAC-28,—,—,—,—,—,—,—,—,—
+Identity Proofing and Device Authentication Review,8.2.1,—,—,—,—,"5.6, 6.1",IAC-28,—,—,—,—,—,—,—,—,—
 Remote and Mobile Device Access Review,8.4.3,—,"6.7, 8.1",—,—,12.6,"MDM-01, MDM-02, MDM-06, MDM-07",—,—,—,—,—,—,—,—,—
 Cloud Security Controls Review,—,—,5.23,—,—,4.1,"CLD-01, CLD-02, CLD-03, CLD-10, CLD-11",—,—,—,—,—,—,—,—,—
 Web Application Security Review,6.2.3.1,—,8.29,—,—,16.1,"WEB-01, WEB-03, WEB-09, WEB-10, WEB-11",—,—,—,—,—,—,—,—,—
-Intrusion Detection and File Integrity Monitoring Review,"11.5.1, 11.5.2",—,—,—,—,"13.2, 13.3, 13.7, 13.8","END-06, MON-18",—,—,—,—,—,—,—,—,—
+Intrusion Detection and File Integrity Monitoring Review,11.5.1,—,—,—,—,"13.2, 13.3, 13.7, 13.8","END-06, MON-18",—,—,—,—,—,—,—,—,—
 Supply Chain Integrity and Provenance Review,—,—,5.21,—,—,"16.4, 16.5",TDA-11,—,—,—,—,—,—,—,—,—
 Mobile Device Management Review,—,—,8.1,—,—,4.2,"MDM-01, MDM-02, MDM-03, MDM-04, MDM-05",—,—,—,—,—,—,—,—,—
 Insider Threat Programme Review,—,—,6.3,—,—,17.7,"THR-04, THR-05",—,—,—,—,—,—,—,—,—
-Workforce Competency and Skills Review,—,—,6.3,—,—,—,HRS-13,—,7.2,7.2,—,—,—,—,—,—
+Workforce Competency and Skills Review,—,—,6.3,—,—,—,HRS-13,—,7.2,7.2,—,—,7.2,—,—,—
 Security Operations Effectiveness Review,—,—,5.25,—,—,17.1,"OPS-04, OPS-06",—,—,—,—,—,—,—,—,—
-File Integrity Monitoring Review,11.5.2,—,—,—,—,13.7,"END-06, MON-18",—,—,—,—,—,—,—,—,—
-Enterprise Architecture and Security Review,—,"6.1, 6.2",—,—,—,—,"SEA-02, GOV-09",—,—,—,—,—,—,—,—,—
+File Integrity Monitoring Review,"10.3.4, 11.5.2",—,—,—,—,13.7,"END-06, MON-18",—,—,—,—,—,—,—,—,—
+Enterprise Architecture and Security Review,—,,—,—,—,—,"SEA-02, GOV-09",—,—,—,—,—,—,—,—,—
 Data Governance Review,—,—,—,CC2.1,—,—,GOV-10,—,"8.2, 8.3",—,—,—,—,—,—,—
 Worker Consultation and Participation Review,—,—,—,—,—,—,—,—,—,5.4,—,—,—,—,—,—
+Information Security Risk Assessment,"12.3.1, 12.3.2","6.1.2, 8.2",—,"CC3.1, CC3.2, CC3.3, CC3.4",—,—,—,"Article 21(1), Article 21(2) (a), Article 21(2) (f)",—,—,—,—,6.1,—,—,—
+Risk Treatment Plan Review,—,"6.1.3, 8.3",—,CC9.1,—,—,RSK-01,—,—,—,6.1.3,—,—,—,—,—
+ISMS Resource Adequacy Review,—,7.1,—,—,—,—,—,—,7.1,7.1,—,—,"7.1.1, 7.1.2, 7.1.3, 7.1.4, 7.1.5.1, 7.1.5.2, 7.1.6",—,—,—
+ISMS Performance Measurement Review,—,9.1,—,—,—,—,—,—,9.1,9.1,9.1,37001:2025 - 9.1,"6.2, 9.1.1, 9.1.3",—,—,—
+Test Data Management Review,—,—,8.33,—,—,—,—,—,A.3.31,—,—,—,—,—,—,—
+Audit and Testing Environment Controls Review,—,—,8.34,—,—,—,—,—,—,—,—,—,—,—,—,—
