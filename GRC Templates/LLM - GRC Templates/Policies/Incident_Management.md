@@ -32,7 +32,7 @@ All information systems, users, and processes. Includes third parties who must r
 **SOC 2 (TSP 2017) (CC7.3, CC7.4)**
 - Mechanisms must exist to detect incidents from both internal and external sources.
 
-**NIST 800-53 Rev5 (IR-6, IR-8)**
+**NIST 800-53 Rev5 (IR-6, IR-8, SI-17)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (17.2, 17.3, 17.6)**
@@ -235,7 +235,7 @@ All information systems, users, and processes. Includes third parties who must r
 **NIS2 Article 21 (Article 21(2) (b))**
 14. Confirm response and recovery activities were proportionate per Article 21(2)(b).
 
-**ISO 45001:2018 (10.2)**
+**ISO 45001:2018 (10.2, 8.2)**
 15. Investigate incidents and implement corrective actions per 10.2.
 
 ### NIS2 Incident Notification Review Procedure
