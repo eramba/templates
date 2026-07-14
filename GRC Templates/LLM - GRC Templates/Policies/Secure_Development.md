@@ -29,7 +29,7 @@ All software developed, customised, or procured by the organisation, including i
 **CIS Controls v8.1 (16.3)**
 - Perform root cause analysis on security vulnerabilities to evaluate underlying issues that create them per 16.3.
 
-**NIST 800-53 Rev5 (SA-1, SA-2, SA-5, SA-6, SA-7, SA-10, SA-13, SA-14, SA-16, SA-18, SA-19, SA-20, SA-21, SA-22, SA-23)**
+**NIST 800-53 Rev5 (SA-1, SA-5, SA-6, SA-10, SA-13, SA-14, SA-16, SA-23)**
 - Develop and disseminate system and services acquisition policy per SA-1.
 - Allocate resources to protect information systems per SA-2.
 - Obtain and maintain documentation for system components per SA-5.
@@ -83,7 +83,7 @@ All software developed, customised, or procured by the organisation, including i
 - Leverage vetted modules or services for application security components such as identity, encryption, and logging per 16.11.
 - Conduct threat modeling to identify and address application security design flaws before code is created per 16.14.
 
-**NIST 800-53 Rev5 (SI-1, SI-6, SI-7, SI-9, SI-10, SI-11, SI-13, SI-14, SI-15, SI-16, SI-17, SI-18, SI-20, SI-21, SI-22, SI-23)**
+**NIST 800-53 Rev5 (SI-1, SI-6, SI-9, SI-10, SI-11, SI-14, SI-15, SI-20, SI-21, SI-22, SI-23)**
 - Develop and disseminate system and information integrity policy per SI-1.
 - Verify the correct operation of security and privacy functions per SI-6.
 - Employ integrity verification tools to detect unauthorised changes per SI-7.
@@ -126,6 +126,9 @@ All software developed, customised, or procured by the organisation, including i
 - Components must be obtained from trusted sources and assessed for known vulnerabilities before use.
 - The component inventory must be kept current and reviewed at least monthly for newly disclosed vulnerabilities.
 - End-of-life or unsupported components must have a documented migration plan.
+
+**ISO 27002:2022 (8.3)**
+- Direct, monitor, and review activities related to outsourced development with appropriate controls per 8.3.
 
 **ISO 27701:2025 (A.3.30)**
 - Direct, monitor, and review activities related to outsourced PII processing system development per A.3.30.
