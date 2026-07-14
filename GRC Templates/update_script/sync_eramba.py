@@ -665,7 +665,7 @@ def sync_compliance(dry_run=False, max_pages=0):
             if not eramba_reg:
                 continue
             for req_id in req_ids:
-                ctrl_req_index.setdefault((eramba_reg, req_id), []).append(ctrl_id)
+                ctrl_req_index.setdefault((eramba_reg, req_id.lower().strip()), []).append(ctrl_id)
     log(f"Built control requirement index with {len(ctrl_req_index)} entries")
 
     if not eramba_pols:
