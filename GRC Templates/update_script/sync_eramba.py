@@ -648,6 +648,7 @@ def sync_compliance(dry_run=False, max_pages=0):
         'owasp top 10 for llm applications':        'OWASP LLM Top 10 2025',
         'nist ai 600-1 generative ai profile':      'NIST AI 600-1 2024',
         'eu ai act':                                'EU AI Act 2024/1689',
+        'aescsf-sp1':                               'AESCSF-SP1',
     }
 
     # Build reverse index: {(eramba_reg_name, req_id): [eramba_control_id, ...]}
