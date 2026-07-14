@@ -925,12 +925,10 @@ eramba out of sync with the GitHub templates.
     parser.add_argument('--max-pages', type=int, default=0,
                         help='Only applies to --only compliance (or the compliance step in a full sync). Limits pagination to N pages (each page = 100 records). Default 0 = load all pages. Use --max-pages 1 to test with the first 100 records only.')
     args = parser.parse_args()
-    # Print help if called with no arguments (accidental bare run)
     import sys as _sys
     if len(_sys.argv) == 1:
         parser.print_help()
-        print()
-        # Still continue with full sync — just wanted to show help
+        _sys.exit(1)
 
     dry_run = args.dry_run or DRY_RUN
 
