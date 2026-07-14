@@ -628,7 +628,7 @@ def sync_compliance(dry_run=False, max_pages=0):
     eramba_pols   = load_eramba_policies()
     policy_map    = load_policy_mapping_from_github()
     eramba_ctrls  = load_eramba_controls()   # {name_lower: record}
-    control_map   = load_controls_mapping()  # {control_title: {fw_label: [req_ids]}}
+    control_map   = load_mappings_from_github()  # {control_title: {fw_label: [req_ids]}}
 
     # Map eramba regulator name (lowercase) → CSV column header used in mapping_controls_to_requirements.csv
     ERAMBA_TO_CSV_FW = {
