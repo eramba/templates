@@ -30,7 +30,7 @@ All information created, received, processed, stored, or transmitted by the orga
 **SOC 2 (TSP 2017) (CC6.1, C1.1)**
 - Classification must support the organization's confidentiality commitments to customers.
 
-**NIST 800-53 Rev5 (MP-3, MP-4)**
+**NIST 800-53 Rev5 (CM-13, MP-3, MP-4, PL-4, RA-2)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (3.1, 3.2, 3.3, 3.4, 3.5)**
@@ -47,7 +47,7 @@ All information created, received, processed, stored, or transmitted by the orga
 - Handling rules must be defined per classification level covering storage, transmission, access, sharing, retention, and disposal.
 - Confidential and Restricted information must be encrypted in transit and at rest.
 
-**PCI DSS v4.0.1 (3.3.1, 3.3.2, 3.3.3, 3.4.1, 3.4.2)**
+**PCI DSS v4.0.1 (3.4.1, 3.4.2)**
 - Sensitive authentication data must never be stored after authorization, even if encrypted.
 - PANs must be masked when displayed; full PANs must only be visible to authorized personnel with a business need.
 
@@ -74,7 +74,7 @@ All information created, received, processed, stored, or transmitted by the orga
 - Retention periods must be defined for each information category based on legal, regulatory, and business requirements.
 - Information must be securely disposed of at the end of its retention period.
 
-**PCI DSS v4.0.1 (3.2.1, 3.3.1)**
+**PCI DSS v4.0.1 (3.2.1)**
 - Cardholder data retention must be minimized; a documented retention policy must define the business justification for any retention.
 
 **ISO 27002:2022 (5.12, 5.14)**
@@ -162,7 +162,7 @@ All information created, received, processed, stored, or transmitted by the orga
 4. Confirm cardholder data is rendered unrecoverable; retain destruction evidence.
 5. Select disposal method appropriate to the classification and medium of the information.
 
-**PCI DSS v4.0.1 (3.3.1, 3.5.1)**
+**PCI DSS v4.0.1 (3.5.1)**
 6. Confirm cardholder data destruction renders data unrecoverable per 3.3.1.
 7. Confirm PAN storage is minimised and disposal follows retention policy per 3.5.1.
 
@@ -241,9 +241,6 @@ All information created, received, processed, stored, or transmitted by the orga
 - The use of resources shall be monitored and adjusted in line with current and expected capacity requirements to ensure system performance and availability.
 - Capacity planning shall identify potential bottlenecks before they affect service delivery.
 
-**ISO 27002:2022 (8.6)**
-- The use of resources shall be monitored, tuned, and projections made of future capacity requirements to ensure the required system performance.
-
 ### Output and Storage Integrity
 
 **SOC 2 (TSP 2017) (PI1.4, PI1.5)**
@@ -303,9 +300,6 @@ All information created, received, processed, stored, or transmitted by the orga
 3. Produce capacity projections for the next planning period.
 4. Initiate procurement or optimisation actions for systems with forecast shortfalls.
 
-**ISO 27002:2022 (8.6)**
-5. Confirm capacity planning covers storage, processing, network bandwidth, and cloud service limits.
-
 ### Acceptable Use of Information and Assets
 
 **Applies to all frameworks**
@@ -325,7 +319,7 @@ All information created, received, processed, stored, or transmitted by the orga
 4. Review any violations during the period and confirm disciplinary process was followed.
 5. Update the policy to reflect any new technology or regulatory requirements.
 
-**PCI DSS v4.0.1 (12.2.1, 12.6.3.1, 12.6.3.2)**
+**PCI DSS v4.0.1 (12.2.1)**
 - Document and implement acceptable use policies for end-user technologies covering explicit approval, acceptable uses, and prohibited activities per 12.2.1.
 - Include awareness of threats and vulnerabilities impacting the CDE in security awareness training per 12.6.3.1.
 - Include awareness of acceptable use of end-user technologies in security awareness training per 12.6.3.2.
