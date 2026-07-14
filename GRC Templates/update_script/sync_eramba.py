@@ -359,7 +359,7 @@ def load_eramba_policies():
 
 def load_eramba_controls():
     """Returns dict: {name_lower: record}"""
-    records = eramba_get_all('/api/v2/security-services')
+    records = eramba_get_all('/api/v2/security-services/index')
     result = {}
     for r in records:
         key = r.get('name', '').lower().strip()
