@@ -27,10 +27,10 @@ All third-party suppliers, vendors, and service providers that access, process, 
 **ISO 27002:2022 (5.19, 5.21)**
 - Supplier risk assessment must consider information security risks introduced through the supply chain.
 
-**NIST 800-53 Rev5 (SR-2, SR-3, SA-12)**
+**NIST 800-53 Rev5 (PM-30, SA-12, SA-18, SA-19, SA-20, SR-2, SR-3)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
-**CIS Controls v8.1 (15.1, 15.2, 15.3)**
+**CIS Controls v8.1 (15.1, 15.2, 15.3, 15.4, 15.5, 15.6, 15.7)**
 
 **SCF 2025 (TPM-01, TPM-02, TPM-03)**
 
@@ -38,7 +38,7 @@ All third-party suppliers, vendors, and service providers that access, process, 
 
 **ISO 37001:2025 (37001:2025 - 8.6, 37001:2025 - 8.7)**
 
-**ISO 9001:2015 (8.4.1)**
+**ISO 9001:2015 (8.4.1, 8.4.2, 8.4.3)**
 
 ### Supplier Contracts
 
@@ -145,7 +145,7 @@ All third-party suppliers, vendors, and service providers that access, process, 
 **ISO 27701:2025 (A.3.10)**
 24. Ensure supplier agreements address PII processing security requirements per A.3.10.
 
-**ISO 45001:2018 (8.1.4.1, 8.1.4.2)**
+**ISO 45001:2018 (8.1.4.1, 8.1.4.2, 8.1.4.3)**
 25. Control procurement for OH&S conformity per 8.1.4.1.
 26. Coordinate with contractors to identify and control OH&S risks per 8.1.4.2.
 
@@ -260,7 +260,7 @@ All third-party suppliers, vendors, and service providers that access, process, 
 - Contracts with third-party AI system and component providers must allocate responsibilities for compliance with applicable requirements.
 - Organisations using GPAI models must ensure appropriate obligations are placed on model providers through contractual arrangements.
 
-**OWASP Top 10 for LLM Applications 2025 (LLM03)**
+**OWASP Top 10 for LLM Applications 2025 (LLM03, LLM05)**
 - Third-party LLM supply chain components including base models, fine-tuning datasets, and plugins must be assessed for integrity and provenance before use.
 
 ### Third-Party GAI Governance Procedure
