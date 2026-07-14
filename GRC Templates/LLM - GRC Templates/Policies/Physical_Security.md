@@ -28,10 +28,10 @@ All physical locations where organizational information systems or sensitive inf
 **ISO 27002:2022 (7.2, 7.3, 7.4)**
 - Physical security perimeters must be defined and enforced with appropriate entry controls.
 
-**SOC 2 (TSP 2017) (CC6.4, CC6.5)**
+**SOC 2 (TSP 2017) (CC6.4)**
 - Physical access controls must prevent unauthorized individuals from accessing systems that process sensitive data.
 
-**NIST 800-53 Rev5 (PE-2, PE-3, PE-6, PE-8)**
+**NIST 800-53 Rev5 (MP-7, PE-2, PE-3, PE-6, PE-8)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **SCF 2025 (PES-01, PES-02, PES-03, PES-04, PES-05)**
@@ -97,7 +97,7 @@ All physical locations where organizational information systems or sensitive inf
 - Point-of-interaction devices must be inspected periodically for tampering or substitution.
 - Personnel must be trained to identify and report suspected device tampering.
 
-**ISO 27002:2022 (7.13, 7.14)**
+**ISO 27002:2022 (7.14)**
 - Equipment must be maintained in accordance with manufacturer recommendations to ensure availability and integrity.
 
 **NIST 800-53 Rev5 (PE-3)**
@@ -149,7 +149,7 @@ All physical locations where organizational information systems or sensitive inf
 6. Confirm physical access to CDE is reviewed at least every three months per 9.3.1.
 7. Confirm all physical access mechanisms are returned or disabled upon termination per 9.3.1.1.
 
-**SOC 2 (TSP 2017) (CC6.4, CC6.5)**
+**SOC 2 (TSP 2017) (CC6.4)**
 8. Confirm physical access controls are reviewed and updated per CC6.4 and CC6.5.
 
 **ISO 27002:2022 (7.2, 7.3, 7.4)**
@@ -185,7 +185,7 @@ All physical locations where organizational information systems or sensitive inf
 8. Confirm electronic media is destroyed or rendered unrecoverable per 9.4.7.
 9. Log disposal in media destruction register.
 
-**SOC 2 (TSP 2017) (CC6.5)**
+
 10. Confirm ability to read or recover data is eliminated before disposal per CC6.5.
 
 **ISO 27002:2022 (7.1, 7.14)**
