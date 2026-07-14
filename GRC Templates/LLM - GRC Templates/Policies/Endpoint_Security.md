@@ -38,7 +38,7 @@ All endpoint devices owned or managed by the organisation including laptops, des
 - Enforce remote wipe capability on portable end-user devices per 4.11.
 - Ensure separate enterprise workspaces on mobile end-user devices per 4.12.
 
-**PCI DSS v4.0.1 (2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.2.7, 2.3.1, 2.3.2)**
+**PCI DSS v4.0.1 (1.4.1, 1.4.2, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.2.7, 2.3.1, 2.3.2)**
 - Develop, implement, and maintain configuration standards covering all system components addressing known security vulnerabilities per 2.2.1.
 - Manage vendor default accounts by disabling unused ones or changing default passwords per 2.2.2.
 - Manage system components so that primary functions requiring different security levels are separated per 2.2.3.
@@ -49,7 +49,7 @@ All endpoint devices owned or managed by the organisation including laptops, des
 - Manage wireless vendor defaults: change wireless encryption keys and passwords, enable only necessary wireless services per 2.3.1.
 - Change wireless encryption keys when personnel with knowledge of the key leave the organisation per 2.3.2.
 
-**NIST 800-53 Rev5 (CM-1, CM-9, CM-12, CM-13, CM-14)**
+**NIST 800-53 Rev5 (CM-1, CM-14, CM-9, SA-7, SI-16)**
 - Develop and disseminate configuration management policy per CM-1.
 - Develop, document, and implement configuration management plan per CM-9.
 - Document and maintain information location for system components per CM-12.
@@ -232,7 +232,7 @@ All endpoint devices owned or managed by the organisation including laptops, des
 6. Confirm anti-phishing mechanisms are in place and active per 5.4.1.
 7. Confirm only approved services and protocols are permitted through network controls per 1.2.5.
 
-**SOC 2 (TSP 2017) (CC6.6, CC6.8)**
+**SOC 2 (TSP 2017) (CC6.8)**
 8. Confirm logical access security measures protect against external threats per CC6.6.
 9. Confirm controls prevent introduction of malicious software per CC6.8.
 
