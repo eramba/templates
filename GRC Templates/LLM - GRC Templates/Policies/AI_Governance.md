@@ -24,7 +24,7 @@ All AI systems developed, procured, or used by the organisation, including machi
 - AI-specific risks must be identified and assessed as part of the organisation's risk management process.
 - Objectives for responsible AI must be established and monitored.
 
-**ISO 42001:2023 (5.1, 5.2, 5.3, 6.1.1, A.2.2, A.2.3, A.2.4)**
+**ISO 42001:2023 (5.1, 5.2, 5.3, 6.1.1, 8.2, 8.3, 8.4, A.2.1, A.2.2, A.2.3, A.2.4, A.2.5, A.2.6, A.2.7, A.2.8, A.3.1, A.3.2, A.3.3, A.4.1, A.4.2, A.4.3, A.4.4, A.4.5, A.4.6, A.5.1, A.5.2, A.5.3, A.5.4, A.5.5, A.6.1.1, A.6.1.2, A.6.1.3, A.6.2.1, A.6.2.2, A.6.2.3, A.6.2.4, A.6.2.5, A.6.2.6, A.6.2.7, A.6.2.8, A.7.1, A.7.2, A.7.3, A.7.4, A.7.5, A.8.1, A.8.2, A.8.3, A.8.4, A.9.1, A.9.2, A.9.3, A.9.4)**
 - The organisation must determine its role with respect to AI systems (provider, producer, customer, or partner) and apply appropriate controls.
 - AI governance must address transparency, fairness, accountability, and human oversight.
 
@@ -155,7 +155,7 @@ All AI systems developed, procured, or used by the organisation, including machi
 **Applies to all frameworks**
 - Organisations deploying large language model applications must identify and manage LLM-specific security risks including prompt injection, sensitive data disclosure, supply chain integrity, output handling failures, and excessive agency.
 
-**OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM03, LLM04, LLM05, LLM06, LLM07, LLM08, LLM09, LLM10)**
+**OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM03, LLM04, LLM06, LLM07, LLM08, LLM09, LLM10)**
 - Prompt injection vulnerabilities must be mitigated through input validation, privilege separation, and adversarial testing.
 - Sensitive information disclosure through LLM outputs must be prevented through output scanning, data minimisation, and access controls.
 - LLM supply chain risks including compromised models, datasets, and plugins must be managed through vendor assessment and provenance verification.
@@ -258,7 +258,7 @@ All AI systems developed, procured, or used by the organisation, including machi
 4. Document findings and assign remediation owners.
 5. Retest after remediation.
 
-**OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM05, LLM06, LLM07, LLM10)**
+**OWASP Top 10 for LLM Applications 2025 (LLM01, LLM02, LLM06, LLM07, LLM10)**
 6. Include adversarial prompt testing in scope.
 7. Confirm agent permission boundaries are enforced technically, not only by policy.
 
