@@ -648,7 +648,6 @@ def sync_compliance(dry_run=False, max_pages=0):
         'owasp top 10 for llm applications':        'OWASP LLM Top 10 2025',
         'nist ai 600-1 generative ai profile':      'NIST AI 600-1 2024',
         'eu ai act':                                'EU AI Act 2024/1689',
-        'aescsf-sp1':                               'AESCSF-SP1',
     }
 
     # Build reverse index: {(eramba_reg_name, req_id): [eramba_control_id, ...]}
@@ -696,7 +695,9 @@ def sync_compliance(dry_run=False, max_pages=0):
         if not isinstance(result, list) or not result:
             break
         ca_records.extend(result)
-        log(f"  Page {page}: {len(result)} records ({len(ca_records)} total)")
+        page_packages = sorted(set(r.get('regulator_name', '') for r in result if r.get('regulator_name')))[:5]
+        pkg_str = ', '.join(page_packages)
+        log(f"  Page {page} ({len(ca_records)} total) - Packages: {pkg_str}")
         if not result:
             break
         page += 1
@@ -745,7 +746,7 @@ def sync_compliance(dry_run=False, max_pages=0):
                 ca_rec = ca_lookup.get(key)
                 if not ca_rec:
                     not_found += 1
-                    not_found_list.append(f"{policy_name} | {reg_name} | {req_id}")
+                    not_found_list.append(f"Linking (Policy) {policy_name} to Package ({reg_name}) and Item Id ({req_id}) -> Not Found")
                     continue
 
                 ca_id = ca_rec['id']
@@ -755,9 +756,11 @@ def sync_compliance(dry_run=False, max_pages=0):
                 pol_ids = [p['id'] if isinstance(p, dict) else p for p in existing_pols]
 
                 # Check if new controls need to be added too
-                new_ctrl_ids_check = ctrl_req_index.get((reg_name, req_id), [])
-                if not new_ctrl_ids_check and clean_req_id != req_id:
-                    new_ctrl_ids_check = ctrl_req_index.get((reg_name, clean_req_id), [])
+                # ctrl_req_index is keyed by eramba reg name (lowercase from ca_lookup key)
+                eramba_reg = reg_name.lower().strip()
+                new_ctrl_ids_check = ctrl_req_index.get((eramba_reg, clean_req_id.lower().strip()), [])
+                if not new_ctrl_ids_check:
+                    new_ctrl_ids_check = ctrl_req_index.get((eramba_reg, req_id.lower().strip()), [])
                 existing_svcs_check = ca_rec.get('security_services') or []
                 existing_svc_ids_check = {s['id'] if isinstance(s, dict) else s for s in existing_svcs_check}
                 new_ctrls_to_add = [c for c in new_ctrl_ids_check if c not in existing_svc_ids_check]
@@ -781,10 +784,9 @@ def sync_compliance(dry_run=False, max_pages=0):
                 svc_ids = list({s['id'] if isinstance(s, dict) else s for s in existing_svcs})
 
                 # Add controls linked to this requirement
-                new_ctrl_ids = ctrl_req_index.get((reg_name, req_id), [])
-                # Also try with stripped 37001 prefix
-                if not new_ctrl_ids and clean_req_id != req_id:
-                    new_ctrl_ids = ctrl_req_index.get((reg_name, clean_req_id), [])
+                new_ctrl_ids = ctrl_req_index.get((eramba_reg, clean_req_id.lower().strip()), [])
+                if not new_ctrl_ids:
+                    new_ctrl_ids = ctrl_req_index.get((eramba_reg, req_id.lower().strip()), [])
                 for cid in new_ctrl_ids:
                     if cid not in svc_ids:
                         svc_ids.append(cid)
@@ -806,11 +808,14 @@ def sync_compliance(dry_run=False, max_pages=0):
                     "legal_id": [""],
                 }
 
-                log(f"Linking {policy_name} → {reg_name} {req_id} (ca_id={ca_id})")
+                log(f"Linking (Policy) {policy_name} to Package ({reg_name}) and Item Id ({req_id}) -> Success")
+                for cid in new_ctrl_ids:
+                    ctrl_name = next((c['name'] for c in (ca_rec.get('security_services') or []) if (c['id'] if isinstance(c, dict) else c) == cid), str(cid))
+                    log(f"Linking (Internal Control) {ctrl_name} to Package ({reg_name}) and Item Id ({req_id}) -> Success")
                 res, err = eramba_request('PUT', f"/api/compliance-managements/{ca_id}", payload)
                 if err:
                     msg = f"{policy_name} | {reg_name} | {req_id} | ca_id={ca_id} | {err}"
-                    log(f"PUT failed: {msg}", 'ERR')
+                    log(f"Linking (Policy) {policy_name} to Package ({reg_name}) and Item Id ({req_id}) -> Failed: {err}", 'ERR')
                     error_list.append(msg)
                     errors += 1
                     continue
@@ -825,7 +830,7 @@ def sync_compliance(dry_run=False, max_pages=0):
                 ca_rec['security_policies'] = [{'id': i} for i in pol_ids]
                 time.sleep(API_DELAY)
                 updated += 1
-                log(f"✓ {updated} linked so far")
+                log(f"✓ {updated} updated so far")
 
     log(f"\n{'='*50}")
     log(f"COMPLIANCE SYNC SUMMARY")
@@ -878,13 +883,54 @@ def test_connection():
 # ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description='Sync eramba GRC templates from GitHub')
-    parser.add_argument('--dry-run', action='store_true', help='Print what would happen without making changes')
+    parser = argparse.ArgumentParser(
+        description='Sync eramba GRC templates from GitHub to a live eramba instance.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+USAGE EXAMPLES:
+
+  Full sync (recommended after any template change):
+    python3 sync_eramba.py
+
+  Preview what would change without touching eramba:
+    python3 sync_eramba.py --dry-run
+
+  Sync only one step (for debugging):
+    python3 sync_eramba.py --only policies
+    python3 sync_eramba.py --only controls
+    python3 sync_eramba.py --only compliance
+
+  Limit compliance pagination (faster test — first N*100 records only):
+    python3 sync_eramba.py --only compliance --max-pages 1
+
+STEPS (run in this order by default):
+  1. policies    — create/update all 23 policies in eramba from GitHub markdown files
+  2. controls    — create/update all 143 internal controls from GitHub CSV
+  3. compliance  — link policies and controls to framework requirements in eramba
+
+NOTE: always run all three steps after any template change. Skipping steps will leave
+eramba out of sync with the GitHub templates.
+        """
+    )
+    parser.add_argument('--dry-run', action='store_true',
+                        help='Print what would happen without making any changes to eramba')
     parser.add_argument('--only', choices=['policies', 'controls', 'compliance'],
-                        help='Run only one sync step (default: run all three in order)')
+                        help=(
+                            'Run only one sync step instead of all three. '
+                            'policies = create/update policy documents in eramba. '
+                            'controls = create/update internal controls in eramba. '
+                            'compliance = link policies and controls to framework requirements in eramba. '
+                            'Use for debugging a specific step.'
+                        ))
     parser.add_argument('--max-pages', type=int, default=0,
-                        help='Limit compliance pagination to N pages (for testing, 0 = all pages)')
+                        help='Only applies to --only compliance (or the compliance step in a full sync). Limits pagination to N pages (each page = 100 records). Default 0 = load all pages. Use --max-pages 1 to test with the first 100 records only.')
     args = parser.parse_args()
+    # Print help if called with no arguments (accidental bare run)
+    import sys as _sys
+    if len(_sys.argv) == 1:
+        parser.print_help()
+        print()
+        # Still continue with full sync — just wanted to show help
 
     dry_run = args.dry_run or DRY_RUN
 
