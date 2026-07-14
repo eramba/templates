@@ -25,13 +25,10 @@ All information assets including hardware, software, data, and services owned or
 **PCI DSS v4.0.1 (12.3.3, 12.3.4)**
 - Hardware and software assets in the cardholder data environment must be tracked including location, version, and lifecycle status.
 
-**ISO 27001:2022 (8.1)**
-- The asset inventory must support the scope of the information security management system.
-
 **ISO 27002:2022 (5.9, 5.11)**
 - Assets must be returned upon termination of employment or contract.
 
-**NIST 800-53 Rev5 (CM-8)**
+**NIST 800-53 Rev5 (CM-12, CM-8)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (1.2, 1.3, 1.4, 1.5, 2.1, 2.2, 2.3)**
@@ -69,7 +66,7 @@ All information assets including hardware, software, data, and services owned or
 **ISO 27002:2022 (5.11, 5.14)**
 - Disposal method must be appropriate to the classification of information the asset contained.
 
-**NIST 800-53 Rev5 (MP-6, MP-7)**
+**NIST 800-53 Rev5 (MP-6)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (2.7)**
@@ -93,12 +90,9 @@ All information assets including hardware, software, data, and services owned or
 4. Confirm whether the asset is in scope for the CDE; update CDE asset list if applicable.
 5. Confirm asset is reflected in the ISMS asset inventory.
 
-**PCI DSS v4.0.1 (12.3.3, 12.5.1)**
+**PCI DSS v4.0.1 (12.3.3)**
 6. Confirm whether asset is in scope for the CDE; update CDE asset list if applicable per 12.5.1.
 7. Confirm asset description includes function/use per 12.5.1.
-
-**ISO 27001:2022 (8.1)**
-8. Confirm asset is recorded in the ISMS asset inventory per 8.1.
 
 **SOC 2 (TSP 2017) (CC6.1)**
 9. Confirm asset is included in the information asset inventory per CC6.1.
@@ -131,12 +125,9 @@ All information assets including hardware, software, data, and services owned or
 6. Confirm CDE asset list is accurate and complete; reconcile against network scans.
 7. Record the review as part of ISMS management review inputs.
 
-**PCI DSS v4.0.1 (12.3.4, 12.5.1)**
+**PCI DSS v4.0.1 (12.3.4)**
 8. Confirm CDE asset list is reconciled against network scans per 12.5.1.
 9. Confirm hardware and software technology review includes analysis of ongoing vendor support per 12.3.4.
-
-**ISO 27001:2022 (8.1)**
-10. Confirm asset inventory supports ISMS scope and is current per 8.1.
 
 **SOC 2 (TSP 2017) (CC6.1)**
 11. Confirm information assets are identified, inventoried, and managed per CC6.1.

@@ -23,7 +23,7 @@ All systems, processes, and personnel involved in the collection, storage, proce
 - Processing of PII must be restricted to purposes compatible with those originally identified.
 - Changes to PII processing purposes must be reviewed and, where required, individuals must be re-notified or re-consented.
 
-**NIST 800-53 Rev5 (PT-2, PT-3)**
+**NIST 800-53 Rev5 (PL-5, PT-2, PT-3, SI-18)**
 - Processing of PII must be monitored for changes and corrective actions implemented where processing deviates from authorised purposes.
 
 **CIS Controls v8.1 (3.1, 3.2)**
@@ -32,7 +32,7 @@ All systems, processes, and personnel involved in the collection, storage, proce
 
 **NIS2 Article 21 (Article 21(2) (a))**
 
-**ISO 27701:2025 (A.3.3, A.3.4, A.3.5, A.2.2.2, A.2.2.3)**
+**ISO 27701:2025 (8.2, 8.3, A.2.2.2, A.2.2.3, A.3.3, A.3.4, A.3.5)**
 
 ### Consent
 

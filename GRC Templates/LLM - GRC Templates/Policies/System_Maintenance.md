@@ -23,7 +23,7 @@ All information systems, system components, and supporting infrastructure owned 
 - Systems or components removed for off-site maintenance must be sanitised of sensitive data before removal where technically feasible.
 - Maintenance records must be retained and reviewed periodically.
 
-**NIST 800-53 Rev5 (MA-2, MA-6)**
+**NIST 800-53 Rev5 (MA-2, MA-6, SI-13)**
 - Spare parts and maintenance support for critical system components must be obtained within organisation-defined timeframes following failure.
 
 **CIS Controls v8.1 (4.1, 4.2, 4.3)**
@@ -31,6 +31,9 @@ All information systems, system components, and supporting infrastructure owned 
 **SCF 2025 (MNT-01, MNT-02, MNT-03)**
 
 **NIS2 Article 21 (Article 21(2) (e))**
+
+**ISO 27002:2022 (7.13)**
+- Define and enforce equipment maintenance programme including authorised personnel and maintenance records per 7.13.
 
 **NIST 800-53 Rev5 (MA-1, MA-3, MA-7)**
 - Develop and disseminate system maintenance policy per MA-1.

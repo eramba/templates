@@ -34,6 +34,9 @@ All critical information systems, services, and processes including disaster rec
 
 **NIS2 Article 21 (Article 21(2) (c))**
 
+**ISO 27002:2022 (8.6)**
+- Monitor and manage resource utilisation to ensure capacity meets current and future requirements per 8.6.
+
 **NIST 800-53 Rev5 (CP-1, CP-3, CP-5, CP-8, CP-11, CP-12, CP-13)**
 - Develop and disseminate contingency planning policy per CP-1.
 - Provide contingency training to system users per CP-3.

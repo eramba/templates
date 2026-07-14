@@ -26,16 +26,16 @@ All employees, contractors, and third-party personnel with access to organizatio
 **SOC 2 (TSP 2017) (CC1.4)**
 - The organization must demonstrate commitment to integrity and ethical values in hiring practices.
 
-**NIST 800-53 Rev5 (PS-2, PS-3)**
+**NIST 800-53 Rev5 (PM-12, PM-13, PS-2, PS-3, SA-21)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
-**CIS Controls v8.1 (14.1, 14.2)**
+**CIS Controls v8.1 (14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9)**
 
 **SCF 2025 (HRS-01, HRS-02, HRS-03)**
 
 **NIS2 Article 21 (Article 21(2) (i))**
 
-**ISO 27701:2025 (A.3.20)**
+**ISO 27701:2025 (7.2, 7.3, A.3.20)**
 
 **ISO 37001:2025 (37001:2025 - 7.2.1, 37001:2025 - 7.2.2)**
 
@@ -45,14 +45,14 @@ All employees, contractors, and third-party personnel with access to organizatio
 - All personnel must complete security awareness training upon joining and at least annually thereafter.
 - Personnel must acknowledge understanding of and compliance with security policies.
 
-**PCI DSS v4.0.1 (12.6.1, 12.6.2, 12.6.3)**
+**PCI DSS v4.0.1 (12.6.1, 12.6.2, 12.6.3, 12.6.3.1, 12.6.3.2)**
 - Training must cover threats specific to the cardholder data environment including phishing and social engineering.
 - Role-specific security training must be provided for personnel with access to cardholder data.
 
 **ISO 27002:2022 (6.3)**
 - Training must be relevant to the individual's role and updated to reflect current threats.
 
-**SOC 2 (TSP 2017) (CC1.2, CC1.3)**
+
 - Management must demonstrate commitment to security through visible participation in awareness programs.
 
 **NIST 800-53 Rev5 (AT-2, AT-3)**

@@ -31,7 +31,7 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 **SOC 2 (TSP 2017) (CC6.6, CC6.7)**
 - Network controls must support detection of and protection against unauthorized access attempts.
 
-**NIST 800-53 Rev5 (SC-5, SC-7, SC-10)**
+**NIST 800-53 Rev5 (AC-4, SC-10, SC-5, SC-7)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **CIS Controls v8.1 (12.1, 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8)**
@@ -46,7 +46,7 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 - Deploy a host-based intrusion prevention solution on enterprise assets per 13.7.
 - Deploy a network intrusion prevention solution where appropriate per 13.8.
 
-**NIST 800-53 Rev5 (SC-1, SC-2, SC-3, SC-4, SC-6, SC-9, SC-11, SC-14, SC-15, SC-16, SC-18, SC-19, SC-21, SC-22, SC-24, SC-25, SC-26, SC-27, SC-29, SC-30, SC-31, SC-32, SC-33, SC-34, SC-35, SC-36, SC-37, SC-38, SC-39, SC-40, SC-41, SC-42, SC-43, SC-44, SC-45, SC-46, SC-47, SC-48, SC-49, SC-50, SC-51)**
+**NIST 800-53 Rev5 (SC-1, SC-2, SC-3, SC-4, SC-6, SC-11, SC-14, SC-15, SC-16, SC-18, SC-19, SC-21, SC-22, SC-24, SC-25, SC-26, SC-27, SC-29, SC-30, SC-31, SC-32, SC-33, SC-34, SC-35, SC-36, SC-37, SC-38, SC-39, SC-40, SC-41, SC-42, SC-43, SC-44, SC-45, SC-46, SC-47, SC-48, SC-49, SC-50, SC-51)**
 - Develop and disseminate system and communications protection policy per SC-1.
 - Separate user functionality from system management functionality per SC-2.
 - Isolate security functions from non-security functions per SC-3.
@@ -129,7 +129,7 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 - Networks must be segmented based on data sensitivity and functional requirements.
 - Direct connections between untrusted networks and systems storing sensitive data are prohibited.
 
-**PCI DSS v4.0.1 (1.3.1, 1.3.2, 1.3.3, 1.4.1, 1.4.2, 1.4.3, 1.4.4, 1.4.5)**
+**PCI DSS v4.0.1 (1.3.1, 1.3.2, 1.3.3, 1.4.3, 1.4.4, 1.4.5)**
 - The cardholder data environment must be isolated from other network segments.
 - Wireless networks must be isolated from wired internal networks unless explicitly authorized and controlled.
 - End-user devices must not be able to directly access sensitive data stores without passing through security controls.
@@ -257,7 +257,7 @@ All network infrastructure including firewalls, routers, switches, wireless netw
 4. Confirm all wireless networks are isolated from the CDE unless explicitly approved.
 5. Document authorisation status and scan results; retain as evidence.
 
-**PCI DSS v4.0.1 (1.2.3, 1.3.3, 11.2.1, 11.2.2)**
+**PCI DSS v4.0.1 (1.2.3, 1.3.3)**
 6. Confirm wireless access point inventory is maintained with business justification per 11.2.2.
 7. Confirm scanning for unauthorised access points occurs at least every three months per 11.2.1.
 8. Confirm all wireless networks are isolated from the CDE per 1.3.3.
