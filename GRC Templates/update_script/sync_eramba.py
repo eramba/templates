@@ -789,7 +789,7 @@ def sync_compliance(dry_run=False, max_pages=0):
                     if not dry_ctrl_ids:
                         dry_ctrl_ids = ctrl_req_index.get((_reg, req_id.lower().strip()), [])
                     for cid in dry_ctrl_ids:
-                        ctrl_name = next((name for name, rec in eramba_ctrls.items() if rec.get('id') == cid), str(cid))
+                        ctrl_name = next((rec.get('name', name) for name, rec in eramba_ctrls.items() if rec.get('id') == cid), str(cid))
                         log(f"Linking (Internal Control) {ctrl_name} to Package ({reg_name}) and Item Id ({req_id}) -> Would update", 'DRY')
                     updated += 1
                     ca_rec['security_policies'] = [{'id': i} for i in pol_ids]
@@ -826,7 +826,7 @@ def sync_compliance(dry_run=False, max_pages=0):
 
                 log(f"Linking (Policy) {policy_name} to Package ({reg_name}) and Item Id ({req_id}) -> Success")
                 for cid in new_ctrl_ids:
-                    ctrl_name = next((c['name'] for c in (ca_rec.get('security_services') or []) if (c['id'] if isinstance(c, dict) else c) == cid), str(cid))
+                    ctrl_name = next((rec.get('name', name) for name, rec in eramba_ctrls.items() if rec.get('id') == cid), str(cid))
                     log(f"Linking (Internal Control) {ctrl_name} to Package ({reg_name}) and Item Id ({req_id}) -> Success")
                 res, err = eramba_request('PUT', f"/api/compliance-managements/{ca_id}", payload)
                 if err:
@@ -851,7 +851,7 @@ def sync_compliance(dry_run=False, max_pages=0):
     log(f"\n{'='*50}")
     log(f"COMPLIANCE SYNC SUMMARY")
     log(f"{'='*50}")
-    log(f"  Updated (or would update in dry-run): {updated}")
+    log(f"  Compliance records updated (or would update in dry-run): {updated}")
     log(f"  Already linked: {skipped}")
     log(f"  Not found:      {not_found}")
     log(f"  Errors:         {errors}")
