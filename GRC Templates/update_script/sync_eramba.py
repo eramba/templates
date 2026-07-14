@@ -783,7 +783,10 @@ def sync_compliance(dry_run=False, max_pages=0):
 
                 if dry_run:
                     log(f"Linking (Policy) {policy_name} to Package ({reg_name}) and Item Id ({req_id}) -> Would update", 'DRY')
-                    for cid in new_ctrl_ids:
+                    dry_ctrl_ids = ctrl_req_index.get((eramba_reg, clean_req_id.lower().strip()), [])
+                    if not dry_ctrl_ids:
+                        dry_ctrl_ids = ctrl_req_index.get((eramba_reg, req_id.lower().strip()), [])
+                    for cid in dry_ctrl_ids:
                         ctrl_name = next((name for name, rec in eramba_ctrls.items() if rec.get('id') == cid), str(cid))
                         log(f"Linking (Internal Control) {ctrl_name} to Package ({reg_name}) and Item Id ({req_id}) -> Would update", 'DRY')
                     updated += 1
