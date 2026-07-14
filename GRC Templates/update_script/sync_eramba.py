@@ -917,6 +917,8 @@ eramba out of sync with the GitHub templates.
     )
     parser.add_argument('--dry-run', action='store_true',
                         help='Print what would happen without making any changes to eramba')
+    parser.add_argument('--all', action='store_true',
+                        help='Run all three sync steps in order: policies → controls → compliance. Use this after any template change.')
     parser.add_argument('--only', choices=['policies', 'controls', 'compliance'],
                         help=(
                             'Run only one sync step instead of all three. '
