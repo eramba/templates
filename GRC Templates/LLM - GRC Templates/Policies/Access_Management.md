@@ -365,3 +365,7 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 3. Confirm password and credential policies enforce minimum complexity and rotation requirements.
 4. Confirm personnel have been trained on appropriate handling of authentication information.
 5. Review any incidents involving credential compromise or sharing during the period.
+
+
+**AESCSF-SP1 (ACM-1A)**
+- Define and maintain a documented access control policy that addresses requirements for access based on business and security requirements per ACM-1A.
