@@ -83,7 +83,7 @@ This policy applies to the entire organisation and all personnel involved in est
 - The quality policy shall be available as documented information, communicated, understood, and applied within the organisation.
 - Top management shall ensure that responsibilities and authorities for relevant roles are assigned, communicated, and understood.
 
-**SOC 2 (TSP 2017) (CC5.1, CC5.2)**
+**SOC 2 (TSP 2017) (CC1.2, CC1.3, CC2.3, CC5.1, CC5.2)**
 - The entity shall select and develop control activities that contribute to the mitigation of risks to the achievement of objectives.
 - The entity shall select and develop general control activities over technology to support the achievement of objectives.
 
@@ -95,7 +95,7 @@ This policy applies to the entire organisation and all personnel involved in est
 - Top management shall establish a privacy policy including a commitment to meet applicable requirements and to continual improvement per 5.2.
 - Top management shall ensure responsibilities and authorities for relevant PIMS roles are assigned and communicated per 5.3.
 
-**PCI DSS v4.0.1 (12.1.1, 12.1.2, 12.1.3, 12.1.4)**
+**PCI DSS v4.0.1 (12.1.1, 12.1.2, 12.1.3, 12.1.4, 12.5.1)**
 - Establish, publish, maintain, and disseminate an overall information security policy per 12.1.1.
 - Review the information security policy at least once every 12 months and update as needed per 12.1.2.
 - Clearly define information security roles and responsibilities for all personnel in the security policy per 12.1.3.
@@ -124,7 +124,7 @@ This policy applies to the entire organisation and all personnel involved in est
 - The organisation shall determine and provide resources needed to ensure valid and reliable results when monitoring or measuring conformity.
 - The organisation shall determine the knowledge necessary for the operation of its processes and to achieve conformity of products and services.
 
-**ISO 27701:2025 (7.1, 7.2, 7.3)**
+**ISO 27701:2025 (7.1)**
 - Determine and provide resources needed for the PIMS per 7.1.
 - Ensure persons doing work that affects privacy performance are competent per 7.2.
 - Ensure persons are aware of the privacy policy and their contribution to PIMS effectiveness per 7.3.
@@ -200,7 +200,7 @@ This policy applies to the entire organisation and all personnel involved in est
 - When creating and updating PIMS documented information ensure appropriate identification, format, and review per 7.5.2.
 - PIMS documented information shall be controlled to ensure it is available, suitable for use, and adequately protected per 7.5.3.
 
-**PCI DSS v4.0.1 (1.1.2, 2.1.1, 3.1.2, 4.1.1, 4.1.2, 5.1.1, 5.1.2, 6.1.1, 6.1.2, 7.1.1, 7.1.2, 8.1.1, 8.1.2, 10.1.1, 10.1.2, 11.1.1, 11.1.2)**
+**PCI DSS v4.0.1 (1.1.2, 2.1.1, 3.1.2, 5.1.1, 5.1.2, 6.1.1, 6.1.2, 7.1.1, 7.1.2, 8.1.1, 8.1.2, 10.1.1, 10.1.2, 11.1.1, 11.1.2)**
 - Document, keep up to date, and communicate all security policies and operational procedures for each PCI DSS requirement area, with roles and responsibilities assigned and understood per 1.1.2, 2.1.1, 3.1.2, 4.1.1, 4.1.2, 5.1.1, 5.1.2, 6.1.1, 6.1.2, 7.1.1, 7.1.2, 8.1.1, 8.1.2, 10.1.1, 10.1.2, 11.1.1, 11.1.2.
 
 ## Standards
@@ -313,3 +313,10 @@ This policy applies to the entire organisation and all personnel involved in est
 5. Confirm processes needed to meet privacy requirements are planned and operating.
 6. React to any PIMS nonconformities — evaluate need for corrective action, implement, and verify effectiveness.
 7. Confirm the PIMS is being continually improved based on audit results, management review outputs, and corrective actions.
+
+**NIST 800-53 Rev5 (PM-1, PM-2, PM-3, PM-29, SA-2)**
+- Develop and maintain information security program plan per PM-1.
+- Appoint senior agency information security officer per PM-2.
+- Allocate resources required to protect systems per PM-3.
+- Assign senior leadership roles for risk management per PM-29.
+- Allocate resources required to protect systems per SA-2.
