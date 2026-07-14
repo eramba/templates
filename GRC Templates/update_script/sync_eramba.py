@@ -612,7 +612,7 @@ def load_policy_mapping_from_github():
     return result
 
 
-def sync_compliance(dry_run=False, max_pages=0):
+def sync_compliance(dry_run=False, max_pages=0, pace=3):
     """
     Link policies to compliance analysis requirements using 00_mapping_table.md.
 
@@ -706,7 +706,7 @@ def sync_compliance(dry_run=False, max_pages=0):
         if not result:
             break
         page += 1
-        time.sleep(1)
+        time.sleep(pace)
 
     log(f"Loaded {len(ca_records)} compliance analysis records")
 
@@ -824,6 +824,7 @@ def sync_compliance(dry_run=False, max_pages=0):
                     "legal_id": [""],
                 }
 
+                time.sleep(1)
                 log(f"Linking (Policy) {policy_name} to Package ({reg_name}) and Item Id ({req_id}) -> Success")
                 for cid in new_ctrl_ids:
                     ctrl_name = next((rec.get('name', name) for name, rec in eramba_ctrls.items() if rec.get('id') == cid), str(cid))
@@ -940,6 +941,8 @@ eramba out of sync with the GitHub templates.
                             'compliance = link policies and controls to framework requirements in eramba. '
                             'Use for debugging a specific step.'
                         ))
+    parser.add_argument('--pace', type=int, default=3,
+                        help='Only applies to compliance. Seconds to wait between pagination requests (default 3). Increase if the server returns 502/503 errors.')
     parser.add_argument('--max-pages', type=int, default=0,
                         help='Only applies to --only compliance (or the compliance step in a full sync). Limits pagination to N pages (each page = 100 records). Default 0 = load all pages. Use --max-pages 1 to test with the first 100 records only.')
     args = parser.parse_args()
@@ -975,7 +978,7 @@ eramba out of sync with the GitHub templates.
         success &= sync_controls(dry_run=dry_run)
 
     if args.all or args.only == 'compliance':
-        success &= sync_compliance(dry_run=dry_run, max_pages=args.max_pages)
+        success &= sync_compliance(dry_run=dry_run, max_pages=args.max_pages, pace=args.pace)
 
     print()
     if success:
