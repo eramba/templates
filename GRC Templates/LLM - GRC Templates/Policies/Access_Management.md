@@ -107,7 +107,7 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 - Access must be granted to roles rather than individuals where technically feasible.
 - All authorization changes must be logged and auditable.
 
-**ISO 27002:2022 (5.18, 8.2, 8.3)**
+**ISO 27002:2022 (5.18, 8.2)**
 - Temporary or non-standard access must be managed as a time-bound exception with justification, approval, and expiration.
 
 **SOC 2 (TSP 2017) (CC6.2, CC6.3)**
@@ -122,7 +122,7 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 
 **NIS2 Article 21 (Article 21(2) (i))**
 
-**NIST 800-53 Rev5 (AC-4, AC-14, AC-17, AC-19, AC-20, AC-21, AC-22, IA-1, IA-3, IA-9)**
+**NIST 800-53 Rev5 (AC-14, AC-17, AC-19, AC-20, AC-21, AC-22, IA-1, IA-3, IA-9)**
 - Enforce approved authorizations for information flow within and between systems per AC-4.
 - Identify actions that can be performed without identification or authentication per AC-14.
 - Establish and document usage restrictions and configuration requirements for remote access per AC-17.
@@ -208,7 +208,7 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 **NIS2 Article 21 (Article 21(2) (i))**
 17. Confirm provisioning supports human resources security and access control proportionate to NIS2 classification per Article 21(2)(i).
 
-**ISO 27701:2025 (A.3.8, A.3.9)**
+**ISO 27701:2025 (A.3.1, A.3.2, A.3.3, A.3.4, A.3.5, A.3.6, A.3.7, A.3.8, A.3.9)**
 18. Confirm identities for PII-processing systems are provisioned per the identity lifecycle process per A.3.8 and A.3.9.
 
 ### Exception-Based Access
@@ -297,11 +297,11 @@ All users, accounts, systems, applications, infrastructure, and data managed or 
 7. Review privileged and service accounts separately; confirm each has documented business justification per 7.2.4.
 8. Confirm all accounts inactive for more than 90 days have been disabled per 8.2.6.
 
-**SOC 2 (TSP 2017) (CC6.1, CC6.2, CC6.3)**
+**SOC 2 (TSP 2017) (CC6.1, CC6.2, CC6.3, CC6.6)**
 9. Confirm access rights reviewed align with current job function per CC6.3.
 10. Document management acknowledgement of review results per CC6.1.
 
-**ISO 27002:2022 (5.15, 5.18, 8.2, 8.3)**
+**ISO 27002:2022 (5.15, 5.18, 8.2)**
 11. Confirm access rights are reviewed and removed per the access control policy per 5.18.
 12. Confirm privileged access rights are restricted and reviewed per 8.2.
 
