@@ -721,9 +721,10 @@ def sync_compliance(dry_run=False, max_pages=0):
 
     log(f"Built lookup with {len(ca_lookup)} entries")
 
-    # Show sample regulator names for debugging
-    sample_regs = sorted(set(k[0] for k in ca_lookup.keys()))[:10]
-    log(f"Sample regulator names in lookup: {sample_regs}")
+    # Packages actually loaded into memory
+    loaded_packages = set(k[0] for k in ca_lookup.keys())
+    all_packages = sorted(loaded_packages)
+    log(f"Packages in memory ({len(all_packages)}): {', '.join(all_packages)}")
 
     log(f"Framework labels in mapping table: {sorted(set(fw for v in policy_map.values() for fw in v.keys()))[:8]}...")
 
@@ -745,9 +746,13 @@ def sync_compliance(dry_run=False, max_pages=0):
                 clean_req_id = req_id
                 if clean_req_id.startswith('37001:2025 - '):
                     clean_req_id = clean_req_id[len('37001:2025 - '):]
-                key = (reg_name.lower().strip(), clean_req_id.lower().strip())
+                eramba_reg_name = reg_name.lower().strip()
+                key = (eramba_reg_name, clean_req_id.lower().strip())
                 ca_rec = ca_lookup.get(key)
                 if not ca_rec:
+                    if eramba_reg_name not in loaded_packages:
+                        # Package not loaded — skip silently (not in paginated pages)
+                        continue
                     not_found += 1
                     not_found_list.append(f"Linking (Policy) {policy_name} to Package ({reg_name}) and Item Id ({req_id}) -> Not Found")
                     continue
@@ -760,7 +765,7 @@ def sync_compliance(dry_run=False, max_pages=0):
 
                 # Check if new controls need to be added too
                 # ctrl_req_index is keyed by eramba reg name (lowercase from ca_lookup key)
-                eramba_reg = reg_name.lower().strip()
+                eramba_reg = eramba_reg_name
                 new_ctrl_ids_check = ctrl_req_index.get((eramba_reg, clean_req_id.lower().strip()), [])
                 if not new_ctrl_ids_check:
                     new_ctrl_ids_check = ctrl_req_index.get((eramba_reg, req_id.lower().strip()), [])
