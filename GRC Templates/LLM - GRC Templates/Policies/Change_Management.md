@@ -40,7 +40,7 @@ All changes to production systems, applications, infrastructure, and configurati
 
 **NIS2 Article 21 (Article 21(2) (e))**
 
-**ISO 9001:2015 (6.3, 8.5.6)**
+**ISO 9001:2015 (6.3, 8.5.2, 8.5.6)**
 
 ### Testing and Validation
 
