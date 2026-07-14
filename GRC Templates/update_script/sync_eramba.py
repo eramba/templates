@@ -8,6 +8,8 @@ Also updates compliance analysis links (requirement → policy/control mappings)
 Usage:
     python sync_eramba.py [--dry-run] [--only policies|controls|compliance]
 
+    Default (no --only): runs all three steps in order — policies, controls, compliance.
+
 Environment variables (required):
     ERAMBA_URL      Base URL of the eramba instance, e.g. https://templates-prod.cloud.eramba.org
     ERAMBA_USER     eramba username with REST API access
@@ -623,11 +625,49 @@ def sync_compliance(dry_run=False, max_pages=0):
     # Step 1: paginate all compliance analysis records into memory
     # Load policies and mapping FIRST before the heavy pagination
     # (eramba may be too tired to respond after 14k+ records)
-    eramba_pols  = load_eramba_policies()
-    policy_map   = load_policy_mapping_from_github()
+    eramba_pols   = load_eramba_policies()
+    policy_map    = load_policy_mapping_from_github()
+    eramba_ctrls  = load_eramba_controls()   # {name_lower: record}
+    control_map   = load_controls_mapping()  # {control_title: {fw_label: [req_ids]}}
+
+    # Map eramba regulator name (lowercase) → CSV column header used in mapping_controls_to_requirements.csv
+    ERAMBA_TO_CSV_FW = {
+        'pci-dss':                                  'PCI DSS v4.0.1',
+        'iso 27001':                                'ISO 27001:2022',
+        'iso 27002':                                'ISO 27002:2022',
+        'soc2':                                     'SOC 2 (TSP 2017)',
+        'nist 800-53 v5':                           'NIST 800-53 v5',
+        'cis controls':                             'CIS Controls v8.1',
+        'secure control framework':                 'SCF 2025',
+        'nis2 - article 21':                        'NIS2 Article 21',
+        'iso 27701':                                'ISO 27701:2025',
+        'iso 45001':                                'ISO 45001:2018',
+        'iso 42001':                                'ISO 42001:2023',
+        'iso 37001':                                'ISO 37001:2025',
+        'iso 9001':                                 'ISO 9001:2015',
+        'owasp top 10 for llm applications':        'OWASP LLM Top 10 2025',
+        'nist ai 600-1 generative ai profile':      'NIST AI 600-1 2024',
+        'eu ai act':                                'EU AI Act 2024/1689',
+    }
+
+    # Build reverse index: {(eramba_reg_name, req_id): [eramba_control_id, ...]}
+    ctrl_req_index = {}
+    for ctrl_title, fw_map in control_map.items():
+        ctrl_rec = eramba_ctrls.get(ctrl_title.lower())
+        if not ctrl_rec:
+            continue
+        ctrl_id = ctrl_rec['id']
+        for csv_fw_label, req_ids in fw_map.items():
+            # Find the eramba regulator name that maps to this CSV column
+            eramba_reg = next((k for k, v in ERAMBA_TO_CSV_FW.items() if v == csv_fw_label), None)
+            if not eramba_reg:
+                continue
+            for req_id in req_ids:
+                ctrl_req_index.setdefault((eramba_reg, req_id), []).append(ctrl_id)
+    log(f"Built control requirement index with {len(ctrl_req_index)} entries")
 
     if not eramba_pols:
-        log("No policies found in eramba — run --only policies first", 'ERR')
+        log("No policies found in eramba — policies must be synced before compliance", 'ERR')
         return False
 
     log("Loading all compliance analysis records (paginating)...")
@@ -713,11 +753,20 @@ def sync_compliance(dry_run=False, max_pages=0):
                 existing_pols = ca_rec.get('security_policies') or []
                 pol_ids = [p['id'] if isinstance(p, dict) else p for p in existing_pols]
 
-                if pol_id in pol_ids:
+                # Check if new controls need to be added too
+                new_ctrl_ids_check = ctrl_req_index.get((reg_name, req_id), [])
+                if not new_ctrl_ids_check and clean_req_id != req_id:
+                    new_ctrl_ids_check = ctrl_req_index.get((reg_name, clean_req_id), [])
+                existing_svcs_check = ca_rec.get('security_services') or []
+                existing_svc_ids_check = {s['id'] if isinstance(s, dict) else s for s in existing_svcs_check}
+                new_ctrls_to_add = [c for c in new_ctrl_ids_check if c not in existing_svc_ids_check]
+
+                if pol_id in pol_ids and not new_ctrls_to_add:
                     skipped += 1
                     continue
 
-                pol_ids.append(pol_id)
+                if pol_id not in pol_ids:
+                    pol_ids.append(pol_id)
 
                 if dry_run:
                     log(f"[DRY] {reg_name} {req_id} → policy {pol_id} ({policy_name})", 'DRY')
@@ -726,9 +775,18 @@ def sync_compliance(dry_run=False, max_pages=0):
                     ca_rec['security_policies'] = [{'id': i} for i in pol_ids]
                     continue
 
-                # Keep existing security_services
+                # Merge existing security_services with controls that map to this requirement
                 existing_svcs = ca_rec.get('security_services') or []
-                svc_ids = [s['id'] if isinstance(s, dict) else s for s in existing_svcs]
+                svc_ids = list({s['id'] if isinstance(s, dict) else s for s in existing_svcs})
+
+                # Add controls linked to this requirement
+                new_ctrl_ids = ctrl_req_index.get((reg_name, req_id), [])
+                # Also try with stripped 37001 prefix
+                if not new_ctrl_ids and clean_req_id != req_id:
+                    new_ctrl_ids = ctrl_req_index.get((reg_name, clean_req_id), [])
+                for cid in new_ctrl_ids:
+                    if cid not in svc_ids:
+                        svc_ids.append(cid)
 
                 payload = {
                     "compliance_treatment_strategy_id": 1,
@@ -822,7 +880,7 @@ def main():
     parser = argparse.ArgumentParser(description='Sync eramba GRC templates from GitHub')
     parser.add_argument('--dry-run', action='store_true', help='Print what would happen without making changes')
     parser.add_argument('--only', choices=['policies', 'controls', 'compliance'],
-                        help='Run only one sync step')
+                        help='Run only one sync step (default: run all three in order)')
     parser.add_argument('--max-pages', type=int, default=0,
                         help='Limit compliance pagination to N pages (for testing, 0 = all pages)')
     args = parser.parse_args()
