@@ -25,7 +25,7 @@ All information assets, processes, systems, and third-party relationships within
 **PCI DSS v4.0.1 (12.3.1, 12.3.2)**
 - Risks specific to the cardholder data environment must be assessed separately and tracked to resolution.
 
-**ISO 27001:2022 (6.1.1, 6.1.2)**
+**ISO 27001:2022 (6.1.1, 6.1.2, 8.1)**
 - Risks must be evaluated against defined likelihood and impact criteria consistent with the organization's risk acceptance criteria.
 - The risk assessment process must be repeatable and produce consistent, valid, and comparable results.
 
@@ -35,7 +35,7 @@ All information assets, processes, systems, and third-party relationships within
 **SOC 2 (TSP 2017) (CC3.1, CC3.2, CC3.3)**
 - Risk assessment must consider fraud risk and risks arising from the use of third parties.
 
-**NIST 800-53 Rev5 (RA-2, RA-3, RA-5)**
+**NIST 800-53 Rev5 (RA-3, RA-5)**
 - Comply with NIST 800-53 Rev5 controls applicable to this area; organisation-defined parameters must be documented in the system security plan.
 
 **SCF 2025 (RSK-01, RSK-02, RSK-03, RSK-04)**
@@ -44,7 +44,7 @@ All information assets, processes, systems, and third-party relationships within
 
 **ISO 37001:2025 (37001:2025 - 6.1, 37001:2025 - 6.2)**
 
-**ISO 9001:2015 (6.1.1, 6.1.2)**
+**ISO 9001:2015 (10.2.1, 10.2.2, 6.1, 6.1.1, 6.1.2, 6.2, 8.1, 9.1.1, 9.1.3, 9.2.1, 9.2.2, 9.3.1, 9.3.2, 9.3.3)**
 
 ### Risk Treatment
 
@@ -121,7 +121,7 @@ All information assets, processes, systems, and third-party relationships within
 **SOC 2 (TSP 2017) (CC3.1, CC3.2, CC3.3)**
 14. Include fraud risk and third-party risks in the assessment scope per CC3.3.
 
-**NIST 800-53 Rev5 (RA-3, RA-2)**
+**NIST 800-53 Rev5 (RA-3)**
 15. Categorise the system and document the security categorisation per RA-2.
 16. Identify threats, vulnerabilities, likelihood, and magnitude of harm per RA-3.
 
@@ -132,13 +132,13 @@ All information assets, processes, systems, and third-party relationships within
 **NIS2 Article 21 (Article 21(2) (a))**
 19. Confirm risk analysis includes information system security policies proportionate to entity classification per Article 21(2)(a).
 
-**ISO 27701:2025 (6.1.2, 8.2)**
+**ISO 27701:2025 (6.1.2, 8.2, 9.1, 9.2.1, 9.2.2, 9.3.1, 9.3.2, 9.3.3)**
 20. Conduct privacy risk assessment covering risks to PII principals per 6.1.2 and 8.2.
 
-**ISO 45001:2018 (6.1.2.1, 6.1.2.2)**
+**ISO 45001:2018 (6.1.1, 6.1.2.1, 6.1.2.2, 6.1.2.3, 6.1.3, 6.2.1, 6.2.2, 8.1.1, 8.1.2, 8.1.3, 9.1.1, 9.2.1, 9.2.2, 9.3.1, 9.3.2, 9.3.3)**
 21. Identify hazards and assess OH&S risks and opportunities per 6.1.2.1, 6.1.2.2, and 6.1.2.3.
 
-**ISO 42001:2023 (6.1.2, 8.2)**
+**ISO 42001:2023 (6.1.2, 6.1.3, 6.2, 8.2, 9.1, 9.2.1, 9.2.2, 9.3.1, 9.3.2, 9.3.3)**
 22. Conduct AI risk assessment per 6.1.2 and 8.2.
 
 **ISO 37001:2025 (37001:2025 - 4.5.1, 37001:2025 - 4.5.2)**
@@ -245,7 +245,7 @@ All information assets, processes, systems, and third-party relationships within
 **ISO 27001:2022 (6.2)**
 - Confirm information security objectives are established, measurable, monitored, communicated, and updated as appropriate per 6.2.
 
-**NIST 800-53 Rev5 (PL-1, PL-2, PL-3, PL-4, PL-5, PL-7, PL-8, PL-9, PL-10, PL-11, PM-1, PM-2, PM-3, PM-4, PM-7, PM-8, PM-9, PM-10, PM-11, PM-12, PM-13, PM-14, PM-15, PM-28, PM-29, PM-30, PM-31, PM-32)**
+**NIST 800-53 Rev5 (PL-1, PL-2, PL-3, PL-7, PL-8, PL-9, PL-10, PL-11, PM-4, PM-7, PM-8, PM-9, PM-10, PM-11, PM-14, PM-15, PM-28, PM-31, PM-32)**
 - Develop and disseminate planning policy per PL-1.
 - Develop system security and privacy plans per PL-2.
 - Update system security and privacy plans per PL-3.
