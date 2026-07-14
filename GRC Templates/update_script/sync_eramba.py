@@ -695,7 +695,10 @@ def sync_compliance(dry_run=False, max_pages=0):
         if not isinstance(result, list) or not result:
             break
         ca_records.extend(result)
-        page_packages = sorted(set(r.get('regulator_name', '') for r in result if r.get('regulator_name')))[:5]
+        page_packages = sorted(set(
+            ((r.get('compliance_package_item') or {}).get('compliance_package') or {}).get('compliance_package_regulator', {}).get('name', '')
+            for r in result
+        ) - {''})[:5]
         pkg_str = ', '.join(page_packages)
         log(f"  Page {page} ({len(ca_records)} total) - Packages: {pkg_str}")
         if not result:
@@ -950,13 +953,13 @@ eramba out of sync with the GitHub templates.
 
     success = True
 
-    if args.only in (None, 'policies'):
+    if args.all or args.only == 'policies':
         success &= sync_policies(dry_run=dry_run)
 
-    if args.only in (None, 'controls'):
+    if args.all or args.only == 'controls':
         success &= sync_controls(dry_run=dry_run)
 
-    if args.only in (None, 'compliance'):
+    if args.all or args.only == 'compliance':
         success &= sync_compliance(dry_run=dry_run, max_pages=args.max_pages)
 
     print()
