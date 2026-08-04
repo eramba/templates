@@ -94,4 +94,4 @@ Once all steps are confirmed complete, compile everything into a single Markdown
 5. Technology Inventory per Department/Scope (table)
 6. Supplier Inventory per Department/Scope (table)
 
-Present the final document and ask the user to confirm or request edits.
+Present the final document and ask the user to confirm or request edits. Save the output file using the same name as this prompt file, with "-result.md" appended (e.g. if this prompt is "grc_key_aspects_prompt.md", the output is "grc_key_aspects_prompt-result.md").
