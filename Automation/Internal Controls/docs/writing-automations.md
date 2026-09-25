@@ -6,6 +6,8 @@ to adapt one to another technology, or to review a contribution.
 Start from [`_TEMPLATE/`](../_TEMPLATE/). The reference implementation is
 [`AWS/aws-backup-jobs-restore-tests`](../AWS/aws-backup-jobs-restore-tests/).
 
+To test locally without eramba or the real system, use the [test harness](../tools/) (§6).
+
 ---
 
 ## 1. Principles

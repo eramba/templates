@@ -106,6 +106,7 @@ Automation/Internal Controls/
 ├── docs/
 │   ├── installing.md                ← generic installation, upgrade and removal in eramba
 │   └── writing-automations.md       ← standard for writing or adapting automations
+├── tools/                           ← local test harness (eramba stubs, fake endpoints, scenario runner)
 ├── _TEMPLATE/                       ← starting point for a new automation
 │   ├── README.md
 │   └── run.php
