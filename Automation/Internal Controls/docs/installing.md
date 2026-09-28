@@ -35,11 +35,11 @@ code as `%SECRET_aws_access_key_id%`. The value is never shown in the code or in
 
 | Field | Value |
 |---|---|
-| **Name** | The automation's name from its README (e.g. *AWS Backup – Backup Execution and Restore Test*) |
+| **Name** | The automation's name from its README (e.g. *Backup Execution and Restore Test*) |
 | **Recurrent Automation** | Off. The automation runs on the audit dates of the control |
 | **Language** | PHP |
 | **Timeout** | `timeout_seconds` from the README's metadata (also in README §6). eramba's default is too short for most automations |
-| **Composer packages** | The `dependencies` from the README, one per line, e.g. `aws/aws-sdk-php:^3.300`. Empty if none |
+| **Composer packages** | The `dependencies` from the README, one per line, e.g. `aws/aws-sdk-php:^3.398`. Empty if none |
 | **Code** | The full content of `run.php` |
 
 3. In the code, edit only the **VARIABLES** block (section 2 of the script) as described in README **§7**. Variables marked ⚠️ must be reviewed. Do not change the rest.
@@ -57,18 +57,18 @@ code as `%SECRET_aws_access_key_id%`. The value is never shown in the code or in
 
 ## 5. Test
 
-> ⚠️ **A test is a real run.** The audit you select gets its result, conclusion, comment and evidence, and is completed with today's date. If you do not want to complete the next planned audit early, test first on a separate control (e.g. *TEST – Backup Execution and Restore Test* with one audit date) and delete it afterwards.
+> ⚠️ **Test executes the script.** Unless its explicit dry-run mode is enabled, the selected audit gets its result, conclusion, comment and evidence, and is completed with today's date. If you do not want to complete the next planned audit early, test first on a separate control (e.g. *TEST – Backup Execution and Restore Test* with one audit date) and delete it afterwards.
 
 1. Open the automation (Internal Controls › Audits › ⋮ › Automation), click **Test**, and select an audit.
 2. Read **STDOUT**: every step is reported (configuration, connection, what was found, result).
-3. **STDERR must be empty.** If it is not, the run failed: the audit was not changed and STDERR explains why (README **§9 Troubleshooting**).
+3. **STDERR must be empty.** If it is not, the run failed; inspect the audit and README **§9 Troubleshooting** before retrying. Collection failures leave it unchanged, but a comment failure can occur after the result was saved.
 
 ## 6. Normal operation
 
 - On every audit date, eramba runs the automation on the control's audit whose *Planned Start* is that day and has no result yet.
 - Results appear on the audit: **Audit Result**, **Audit Conclusion**, a comment with the evidence attached.
 - Every run (tests included) is logged in **Settings › Application Configuration › Automation Logs**.
-- If a run fails (exit code ≠ 0 or any STDERR output), eramba emails the administrators and the audit stays open. Fix the cause and run the automation again, or complete the audit manually.
+- If a run fails (exit code ≠ 0 or any STDERR output), eramba emails the administrators and the logs identify the failed step. Check whether the result was already saved before retrying. Resolve the cause, then rerun or complete the audit manually.
 
 Things to review periodically:
 
