@@ -42,6 +42,8 @@ code as `%SECRET_aws_access_key_id%`. The value is never shown in the code or in
 | **Composer packages** | The `dependencies` from the README, one per line, e.g. `aws/aws-sdk-php:^3.398`. Empty if none |
 | **Code** | The full content of `run.php` |
 
+Use only the official package names listed in the integration README; do not substitute unofficial SDKs or forks. Review Composer security advisories for the resolved versions before production use.
+
 3. In the code, edit only the **VARIABLES** block (section 2 of the script) as described in README **§7**. Variables marked ⚠️ must be reviewed. Do not change the rest.
 
 ## 4. Link the automation to the control

@@ -4,6 +4,8 @@ PHP scripts that read service evidence and record an internal-control audit in e
 
 Each script tests the control's **Audit Methodology**. Linked policies provide traceability, not additional checks. Read the coverage section before attaching a script to a broader control.
 
+Only official Composer packages are used: provider SDKs or libraries from their own official publishers. See [dependency and security requirements](docs/writing-automations.md#dependencies-and-security).
+
 ## Install
 
 1. Choose an automation below and read its README: scope, prerequisites and permissions.
@@ -29,9 +31,17 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 | Remote Access Security Review | [AWS Client VPN + Directory Service](AWS/Remote%20Access%20Security%20Review/) | Monthly | 0.1.0 draft |
 | Cryptographic Key and Certificate Lifecycle Review | [AWS KMS + ACM + Load Balancers](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Quarterly | 0.1.0 draft |
 | Multi-Factor Authentication Coverage Review | [Microsoft Entra ID](Microsoft/Multi-Factor%20Authentication%20Coverage%20Review/) | Monthly | 0.1.0 draft |
+| Multi-Factor Authentication Coverage Review | [Google Workspace](Google/Multi-Factor%20Authentication%20Coverage%20Review/) | Annually | 0.1.0 draft; Google-native scope, exceptions pending |
 | Endpoint Encryption Compliance Review | [Microsoft Intune + Entra ID](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | Quarterly | 0.1.0 draft |
+| Vulnerability Remediation Tracking | [Atlassian Jira Cloud](Atlassian/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.0 draft; acceptance/escalation may remain pending |
+| Vulnerability Remediation Tracking | [Linear](Linear/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.0 draft; acceptance/escalation may remain pending |
 
 Each integration covers the technology scope described in its README. A passing result does not cover systems outside that scope. Drafts require functional and installation validation before use for assurance.
+
+
+## Create your own automation
+
+Use the [PHP and README template](_TEMPLATE/) and [writing guide](docs/writing-automations.md), or give your agent the [eramba-control-automation skill](skills/eramba-control-automation/SKILL.md). Supply your control through eramba MCP, CSV, another file or text. The integrations above are examples; use your own methodology and success criteria to define the checks.
 
 
 *eramba does not provide support for developing or troubleshooting custom automation code.*
