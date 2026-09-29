@@ -71,3 +71,7 @@ Run PHP syntax checks and focused checks of the decisions that can change audit 
 Document the version actually verified. Syntax checks, simulated execution and a real persisted audit are different levels of verification. Follow [Installing an automation](installing.md) for installation and cleanup.
 
 Choose integrations that naturally hold the methodology’s evidence. Account availability or a similar check in another product is not enough: document the actual scope and sign-in paths, and defer candidates that require an artificial workflow.
+
+The [Zoom MFA review](../Zoom/Multi-Factor%20Authentication%20Coverage%20Review/) shows how to separate native enforcement from alternative authentication paths. Unsupported secure configurations stay pending; do not instruct someone to weaken their setup to obtain an automatic pass.
+
+For a platform-wide implementation request, assess the complete control list before adding scripts. Prefer full methodology coverage over provider count; check existing examples for the same coverage limitations. See the [AWS coverage guide](../AWS/README.md).

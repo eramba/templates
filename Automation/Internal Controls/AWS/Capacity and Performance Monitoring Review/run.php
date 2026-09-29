@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Capacity and Performance Monitoring Review
  *  Technology: AWS EC2 Auto Scaling and Amazon CloudWatch
- *  id: aws-capacity-performance-monitoring        version: 0.1.1
+ *  id: aws-capacity-performance-monitoring        version: 0.2.0
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -20,10 +20,10 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *            as failed in eramba.
  *
  *  Exit codes
- *    0  Check executed. Dry-run, or audit updated with Passed or Failed.
+ *    0  Evidence collected. Dry-run, or evidence saved pending manual review.
  *    1  Technical error (credentials, network, permissions, eramba API).
- *       Before result save: audit unchanged. After result save: comment may
- *       be missing. Inspect the audit before retrying.
+ *       Audit result unchanged; an upload can remain after a later failure.
+ *       Inspect the audit before retrying.
  */
 
 // ─── 1. SECRETS ─────────────────────────────────────────────────────────────
@@ -53,7 +53,7 @@ $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
 const AUTOMATION_ID = 'aws-capacity-performance-monitoring';
-const AUTOMATION_VERSION = '0.1.1';
+const AUTOMATION_VERSION = '0.2.0';
 
 function logStep(int $n, string $title): void
 {
@@ -90,7 +90,7 @@ function checkSecrets(array $secrets): void
 function abortMessage(string $kind): string
 {
     return empty($GLOBALS['auditWritten'])
-        ? "\nABORTED: $kind, audit left without result (see STDERR).\n"
+        ? "\nABORTED: $kind, audit result unchanged; inspect any uploaded evidence (see STDERR).\n"
         : "\nABORTED: $kind after the audit result was saved; the comment is missing (see STDERR).\n";
 }
 
@@ -264,7 +264,7 @@ function collectResults(array $secrets, array $config): array
             $policies = pages($as, 'describePolicies', 'ScalingPolicies', ['AutoScalingGroupName'=>$name, 'MaxRecords'=>100]);
             $plan = ['MinSize'=>$g['MinSize'] ?? null,'MaxSize'=>$g['MaxSize'] ?? null,'DesiredCapacity'=>$g['DesiredCapacity'] ?? null,
                 'DesiredCapacityType'=>$g['DesiredCapacityType'] ?? 'units','SuspendedProcesses'=>$g['SuspendedProcesses'] ?? [],'ScalingPolicies'=>$policies];
-            $results[] = result('capacity_plan', $region, $name, count($policies)>0, 'Executable AWS capacity plan: ' . json_encode($plan, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+            $results[] = result('capacity_plan', $region, $name, count($policies)>0, 'AWS scaling configuration (capacity plan requires review): ' . json_encode($plan, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
             $min = $g['MinSize'] ?? null; $max = $g['MaxSize'] ?? null; $desired = $g['DesiredCapacity'] ?? null;
             $suspended = array_column($g['SuspendedProcesses'] ?? [], 'ProcessName');
             $scaling = false;
@@ -311,20 +311,22 @@ function collectResults(array $secrets, array $config): array
     return $results;
 }
 
-// ─── 6. EVALUATE: turn raw results into Passed/Failed + human conclusion ───
+// ─── 6. EVALUATE: retain findings and require remaining evidence ───
 function evaluate(array $results, array $config): array
 {
     $failed = array_values(array_filter($results, fn ($r) => !$r['passed']));
-    $passed = count($results) > 0 && count($failed) === 0;
+    // Configuration and running capacity do not prove available elastic capacity.
+    // This version has no authoritative evidence for the remaining requirement.
+    $passed = false;
     $checks = array_count_values(array_column($results, 'check'));
 
     $lines   = [];
     $lines[] = sprintf('Automated audit by %s v%s on %s UTC.', AUTOMATION_ID, AUTOMATION_VERSION, gmdate('Y-m-d H:i'));
     $lines[] = 'Scope: EC2 Auto Scaling group CPU/compute capacity. Window: ' . ($GLOBALS['evidenceWindow'] ?? 'unavailable');
     $lines[] = sprintf('Result: %s. %d checks, %d items checked, %d passed, %d failed.',
-        $passed ? 'PASSED' : 'FAILED', count($checks), count($results), count($results) - count($failed), count($failed));
+        'PENDING MANUAL REVIEW', count($checks), count($results), count($results) - count($failed), count($failed));
     if (count($results) === 0) {
-        $lines[] = 'Nothing matched the configured scope, so the audit is FAILED. Review the variables.';
+        $lines[] = 'Nothing matched the configured scope. Confirm applicability before completing the audit.';
     }
     foreach ($checks as $check => $total) {
         $bad = count(array_filter($failed, fn ($f) => $f['check'] === $check));
@@ -344,12 +346,13 @@ function evaluate(array $results, array $config): array
         $lines[] = sprintf('… and %d more (see evidence attachment).', count($failed) - $config['MAX_LOG_ITEMS']);
     }
 
-    return ['passed' => $passed, 'conclusion' => implode("\n", $lines)];
+    $lines[] = 'Review the capacity plan and confirm elastic capacity availability for the workload. Auto Scaling limits, policies and current healthy instances alone do not establish this. Technical findings remain in the evidence; no final audit result is saved.';
+    return ['passed' => false, 'pending' => true, 'conclusion' => implode("\n", $lines)];
 }
 
 // ─── 7. REPORT: write the outcome to eramba ────────────────────────────────
 // Order matters: evidence first (if it fails, the audit stays untouched),
-// then the audit result, then the comment linking the evidence.
+// then a review comment. Completion remains pending in this version.
 function report(string $auditId, array $outcome, array $results, array $config): void
 {
     if ($config['DRY_RUN']) {
@@ -371,19 +374,8 @@ function report(string $auditId, array $outcome, array $results, array $config):
         logInfo("Evidence uploaded: $name");
     }
 
-    $data = [
-        'start_date'                              => gmdate('Y-m-d'),
-        'end_date'                                => gmdate('Y-m-d'),
-        'security_service_audit_result_option_id' => $outcome['passed'] ? $config['RESULT_PASSED_ID'] : $config['RESULT_FAILED_ID'],
-        'result_description'                      => $outcome['conclusion'],
-    ];
-    erambaCall(editObjectMacro($data, $auditId), 'edit audit');
-    $GLOBALS['auditWritten'] = true;
-    logInfo('Audit result and conclusion saved.');
-
-    $comment = sprintf('[%s v%s] %s', AUTOMATION_ID, AUTOMATION_VERSION, $outcome['passed'] ? 'PASSED' : 'FAILED');
-    erambaCall(addCommentMacro($auditId, $comment, $attachments), 'add comment');
-    logInfo('Comment added' . ($attachments ? ' with the evidence attached.' : '.'));
+    erambaCall(addCommentMacro($auditId, '[PENDING MANUAL REVIEW] ' . $outcome['conclusion'], $attachments), 'add review comment');
+    logInfo('Evidence saved. Result and completion dates unchanged pending review.');
 }
 
 /** Configuration used in this run, as plain "KEY = value" lines. */
@@ -413,7 +405,7 @@ $GLOBALS['runStarted'] = microtime(true);
 try {
     echo sprintf("%s v%s — audit #%s\n", AUTOMATION_ID, AUTOMATION_VERSION, $auditId);
 
-    logInfo($config['DRY_RUN'] ? 'SIMULATION ONLY — no audit result will be saved.' : 'LIVE RUN — audit result and evidence will be saved.');
+    logInfo($config['DRY_RUN'] ? 'SIMULATION ONLY — no audit result will be saved.' : 'LIVE RUN — evidence will be saved; audit completion remains pending.');
     logStep(1, 'Checking configuration');
     validateConfig($config, $auditId);
     checkSecrets($secrets);

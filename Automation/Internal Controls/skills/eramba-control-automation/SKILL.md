@@ -2,7 +2,7 @@
 name: eramba-control-automation
 description: Assess, create or debug eramba internal-control audit automations from existing methodologies and success criteria, supplied through eramba MCP, CSV, files or text.
 metadata:
-  version: "1.3.0"
+  version: "1.5.0"
 ---
 
 # eramba control automation
@@ -23,11 +23,17 @@ Separate absent success criteria from an absent test. A methodology may already 
 
 For an assessment, give each requested control's feasibility, evidence source, coverage and remaining dependencies. Report which records were reviewed and which were inaccessible; do not present a partial inventory as a complete assessment. Stop at the assessment unless implementation was requested.
 
+Prioritize controls whose complete methodology can be evaluated using authoritative evidence in the selected platform. For a request such as “all possible AWS controls,” inventory the supplied definitions, separate complete candidates from those requiring other sources or judgment, and maintain that distinction during implementation. Do not substitute a longer list of evidence collectors for completed control tests. An existing draft is not proof of coverage: review it against the same criteria. Preserve the user's vendor priority.
+
+For federated authentication, begin with the IdP's effective enforcement and map it to in-scope applications and bypass paths. Do not generate one native-MFA checker per SaaS product merely because accounts are available. Only narrow a control scope when it reflects the supplied definition or the user's explicit choice, never to manufacture an automatic pass.
+
 Do not force a provider fit merely because an account is available or another compliance product offers a similar check. Establish that the service actually holds the required evidence in its normal intended use. A support queue is not automatically a vulnerability register, scheduled meetings do not establish training completion, and one MFA setting does not cover alternative sign-in paths. Defer weak candidates instead of publishing contrived integrations.
 
 For implementation, map each requirement to its population, evidence, evaluation and result. Discover the population independently of successful evidence. Do not claim that one provider's inventory covers systems it has never seen. Check current official provider API documentation, permissions, licensing, pagination and history retention. Choose the integration client deliberately: check official SDK language/runtime support and required operations before adding a dependency. Only official Composer packages are allowed: provider SDKs published by the provider, or libraries published by their own official project (for example guzzlehttp/guzzle). Never use unofficial provider wrappers, forks or lookalike packages. Verify provenance through the provider/project documentation, not the package name alone. If no official PHP SDK fits, call the official API through an official HTTP library or PHP built-ins; document the choice briefly. With direct HTTP, implement authentication, pagination, timeouts, rate limits and response validation explicitly. Validate GraphQL queries against the provider schema and reject errors even when HTTP is 200. Prefer a provider's native evidence field when it represents the actual criterion; any alternative such as issue due dates must have explicit semantics, not a silent fallback. Distinguish evidence look-back, review frequency and reporting date.
 
 When mandatory human judgment or another evidence source remains, explain the gap and keep final completion pending. Do not save a full-control Passed result for partial coverage. A narrower technology scope must be explicit and agreed; do not rewrite the original methodology to fit an API. Missing records should follow the methodology's rules; incomplete API collection is a technical error, not evidence of compliance.
+
+For authentication controls, distinguish enabled methods, mandatory enforcement and actual enrollment/events. Inventory alternative sign-in paths and bypasses; a native MFA policy does not prove federated authentication is protected. A missing Boolean is unknown, not false. Describe unsupported secure configurations as pending, not as a requirement to disable them. For endpoint controls, generic health/compliance flags cannot replace a required timestamp, behavior setting or independently established population. For capacity controls, configured scaling limits and healthy running instances do not establish available elastic capacity; preserve a pending outcome until the required capacity evidence is available.
 
 Before treating a provider field as proof, document its meaning in this deployment: a priority is not automatically vulnerability severity, a due date is not automatically an agreed SLA, and a workflow status is not proof of notification delivery or risk approval. Use existing authoritative mappings or expose the required setup; do not invent business rules to eliminate configuration. Successful API pagination does not prove completeness when permissions can hide records.
 

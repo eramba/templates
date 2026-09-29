@@ -1,7 +1,7 @@
 ---
 id: aws-key-certificate-lifecycle
 name: Cryptographic Key and Certificate Lifecycle Review
-version: 0.1.0
+version: 0.2.0
 status: draft
 technology: AWS KMS, ACM and Elastic Load Balancing
 vendor: AWS
@@ -50,21 +50,21 @@ Tests **Cryptographic Key and Certificate Lifecycle Review** from the [control t
 | Certificates | Valid certificate, known SHA-256/384/512 RSA/ECDSA signature; expiry beyond the warning window or managed renewal currently pending. |
 | TLS listeners | TLS 1.2/1.3 only; no DES, RC4 or MD5 ciphers; issued ACM certificates are inventoried. |
 
-Passed requires every mandatory check to pass. Missing/unsupported evidence produces Failed. Authentication, permission, incomplete collection and reporting errors abort execution; they do not become control failures.
+Passed requires every mandatory check to pass. Unsupported rotation evidence produces Pending; it is not automatically treated as a proven violation. A definitive Failed is saved only when no required evidence review remains. Authentication, permission, incomplete collection and reporting errors abort execution; they do not become control failures.
 
 ## 3. Coverage
 
 | Methodology requirement | Implementation |
 |---|---|
 | Key register: algorithm, length, creation and next rotation | KMS metadata and automatic rotation status. Symmetric default keys use AES-256; numbered key specs identify the algorithm/size. |
-| No overdue rotation | Active AWS_KMS symmetric keys must have automatic rotation enabled and a future next rotation date. Unsupported manual/imported/asymmetric rotation fails evidence coverage. |
+| No overdue rotation | Active AWS_KMS symmetric keys must have automatic rotation enabled and a future next rotation date. Manual/imported/asymmetric rotation, or unavailable automatic scheduling evidence, remains pending for review of the applicable schedule and rotation records. |
 | Certificate inventory and expiry | ACM details; certificates within 30 days need a current renewal in progress. Expired/revoked certificates fail. |
 | No TLS 1.0/1.1 or deprecated algorithms | ALB/NLB front-end TLS policies, cipher names and ACM signature algorithms. Unknown algorithms fail rather than being assumed safe. |
 | Findings and quarterly review | Evidence and conclusion on each quarterly audit. |
 
 **Scope:** KMS keys, ACM certificates and TLS terminated on Application/Network Load Balancers in the configured regions. Classic Load Balancers, CloudFront, API Gateway, service-specific TLS, TLS behind TCP listeners, application key stores and other accounts are outside this integration.
 
-This integration supports automatic rotation evidence for AWS_KMS symmetric keys. Other active key types remain visible but cannot pass rotation verification. Disabled/deletion-pending keys and unissued certificates are retained as inactive observations. Attached listener certificates must be issued and present in ACM; IAM-stored certificates cannot pass this integration.
+This integration supports automatic rotation evidence for AWS_KMS symmetric keys. Other active key types remain visible and need rotation-record review before the audit can be completed. Disabled/deletion-pending keys and unissued certificates are retained as inactive observations. Attached listener certificates must be issued and present in ACM; IAM-stored certificates cannot pass this integration.
 
 Each required evidence category must be nonempty across the selected regions. Use a control scoped to these services; this is not a statement about every cryptographic use in an AWS account.
 
@@ -136,7 +136,7 @@ Collection has a bounded time, page and evidence budget. Exceeding a limit abort
 
 ## 8. Results
 
-Saves Passed/Failed, conclusion and UTC dates, then adds a comment with an evidence CSV and configuration TXT. Collection errors save no result. Uploads may remain after a failed edit; a failed comment can leave a saved result. Inspect before retrying.
+Saves Passed/Failed, conclusion and UTC dates only after all required evidence can be evaluated. Otherwise saves evidence and a pending-review comment without changing the result or dates. Pending does not clear prior results or schedule a retry; use a fresh audit. Evidence is CSV plus configuration TXT. Collection errors save no result. Uploads may remain after a failed edit; a failed comment can leave a saved result. Inspect before retrying.
 
 ## 9. Troubleshooting
 
@@ -161,6 +161,7 @@ Unlink the automation, retain historical audit evidence and remove its dedicated
 
 | Version | Change |
 |---|---|
+| 0.2.0 | Distinguish unsupported evidence from violations; pending review and stricter API collection. Real AWS/eramba validation pending |
 | 0.1.0 | Initial draft; functional and installation validation pending |
 
 References: [Key rotation](https://docs.aws.amazon.com/kms/latest/APIReference/API_GetKeyRotationStatus.html), [certificate renewal](https://docs.aws.amazon.com/acm/latest/APIReference/API_RenewalSummary.html), [TLS policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeSSLPolicies.html).

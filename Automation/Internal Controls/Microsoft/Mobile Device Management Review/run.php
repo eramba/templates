@@ -3,9 +3,9 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  Endpoint Encryption Compliance Review
+ *  Mobile Device Management Review
  *  Technology: Microsoft Intune and Entra ID
- *  id: intune-windows-encryption        version: 0.2.0
+ *  id: intune-mobile-management        version: 0.1.0
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -36,7 +36,7 @@ $secrets = [
 // ─── 2. VARIABLES (README §7) ────────────────────────────────────────────
 $config = [
     'MAX_OBJECTS' => 2000, // Maximum records per API collection; never truncate
-    'MAX_SYNC_AGE_HOURS' => 168, // Maximum age of encryption reports
+    'MAX_SYNC_AGE_HOURS' => 168, // Maximum age of device reports
     'DRY_RUN' => false, // True prevents all eramba writes
     'RESULT_PASSED_ID' => 2, // Passed option ID
     'RESULT_FAILED_ID' => 1, // Failed option ID
@@ -47,9 +47,9 @@ $config = [
 // Replaced by eramba with values of the audit record the automation runs on.
 $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
-// ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
-const AUTOMATION_ID = 'intune-windows-encryption';
-const AUTOMATION_VERSION = '0.2.0';
+// ─── 4. HELPERS ───────────────
+const AUTOMATION_ID = 'intune-mobile-management';
+const AUTOMATION_VERSION = '0.1.0';
 
 function logStep(int $n, string $title): void
 {
@@ -106,7 +106,7 @@ function graphRequest(string $method, string $url, array $options = []): array
         || parse_url($url,PHP_URL_USER)!==null || parse_url($url,PHP_URL_PASS)!==null || parse_url($url,PHP_URL_FRAGMENT)!==null || parse_url($url,PHP_URL_PORT)!==null) {
         throw new RuntimeException('Unexpected Microsoft endpoint.');
     }
-    $client=new \GuzzleHttp\Client(['connect_timeout'=>5,'timeout'=>20,'http_errors'=>false,'allow_redirects'=>false,'stream'=>true]);
+    $client=new \GuzzleHttp\Client(['connect_timeout'=>5,'timeout'=>20,'read_timeout'=>20,'verify'=>true,'http_errors'=>false,'allow_redirects'=>false,'stream'=>true]);
     for ($attempt=0; $attempt<3; $attempt++) {
         if (microtime(true)-$GLOBALS['runStarted']>180) throw new RuntimeException('Collection time budget exceeded; narrow the scope.');
         try { $response=$client->request($method,$url,$options); }
@@ -184,55 +184,96 @@ function validateConfig(array $c, string $auditId): void
     if (isset($c['MAX_SYNC_AGE_HOURS']) && (!is_int($c['MAX_SYNC_AGE_HOURS']) || $c['MAX_SYNC_AGE_HOURS']<1 || $c['MAX_SYNC_AGE_HOURS']>720)) throw new RuntimeException('Invalid MAX_SYNC_AGE_HOURS.');
 }
 
+/** Reject missing, invalid and timezone-free timestamps. */
+function timestamp(mixed $value): ?int
+{
+    if (!is_string($value) || !preg_match('/^\d{4}-\d{2}-\d{2}T.*(?:Z|[+-]\d{2}:?\d{2})$/D',$value)) return null;
+    $p=date_parse($value); $t=strtotime($value);
+    return $t!==false && $p['warning_count']===0 && $p['error_count']===0 ? $t : null;
+}
+
+function mobileOs(mixed $os): ?bool
+{
+    if (!is_string($os) || trim($os)==='') return null;
+    $os=strtolower($os);
+    if (in_array($os,['ios','ipados','android','androidforwork','androidenterprise'],true)) return true;
+    if (in_array($os,['windows','macos','macmdm','linux'],true)) return false;
+    return null; // Unknown platforms must not disappear from the population.
+}
+
 function collectResults(array $secrets, array $config): array
 {
-    $token=graphToken($secrets); $limit=$config['MAX_OBJECTS']; $results=[];
-    $directory=graphList('devices?$select=id,deviceId,displayName,operatingSystem,accountEnabled',$token,$limit);
-    $managed=graphList('deviceManagement/managedDevices?$select=id,deviceName,azureADDeviceId,operatingSystem,isEncrypted,lastSyncDateTime',$token,$limit);
-    $keys=graphList('informationProtection/bitlocker/recoveryKeys?$select=id,deviceId,createdDateTime,volumeType',$token,$limit);
-    $population=[]; $reports=[]; $recovery=[];
-    foreach ($directory as $device) {
-        if (($device['accountEnabled'] ?? null)===false) continue;
-        if (empty($device['operatingSystem'])) { $results[]=result('inventory','',$device['id'] ?? 'Unidentified directory device',false,'Operating system missing; Windows scope cannot be determined.'); continue; }
-        if (strtolower($device['operatingSystem'])!=='windows') continue;
-        $id=$device['deviceId'] ?? '';
-        if ($id==='') { $results[]=result('inventory','','Unidentified directory device',false,'Windows device has no deviceId.'); continue; }
-        $population[$id]=$device['displayName'] ?? $id;
-        if (($device['accountEnabled'] ?? null)!==true) $results[]=result('inventory','',$id,false,'Directory enabled status is unavailable.');
-    }
-    foreach ($managed as $device) {
-        if (empty($device['operatingSystem'])) { $results[]=result('inventory','',$device['id'] ?? 'Unidentified managed device',false,'Operating system missing; Windows scope cannot be determined.'); continue; }
-        if (strtolower($device['operatingSystem'])!=='windows') continue;
-        $id=$device['azureADDeviceId'] ?? '';
-        if ($id==='' || $id==='00000000-0000-0000-0000-000000000000') { $results[]=result('inventory','',$device['id'] ?? 'Unidentified managed device',false,'Windows managed device cannot be matched to an Entra device ID.'); continue; }
-        $population[$id]=$device['deviceName'] ?? $id; $reports[$id][]=$device;
-    }
-    foreach ($keys as $key) {
-        // Read metadata only. Never request or retain the recovery password.
-        $id=$key['deviceId'] ?? ''; $created=strtotime($key['createdDateTime'] ?? '');
-        if ($id!=='' && is_string($key['id'] ?? null) && $key['id']!=='' && in_array((string)($key['volumeType'] ?? ''),['1','operatingSystemVolume'],true) && $created!==false && $created<=time()) $recovery[$id][]=$key['id'] ?? '';
-    }
-    $encrypted=0; $now=time();
-    foreach ($population as $id=>$name) {
-        $deviceReports=$reports[$id] ?? [];
-        $results[]=result('enrolment','',$id,count($deviceReports)>0,$name.'; Intune records: '.count($deviceReports).'.');
-        $good=count($deviceReports)>0;
-        foreach ($deviceReports as $report) {
-            $sync=strtotime($report['lastSyncDateTime'] ?? '');
-            $fresh=$sync!==false && $sync<=$now && $now-$sync<=$config['MAX_SYNC_AGE_HOURS']*3600;
-            $ok=($report['isEncrypted'] ?? null)===true && $fresh; $good=$good && $ok;
-            $results[]=result('encryption','',$id,$ok,'Intune record='.($report['id'] ?? 'missing').'; isEncrypted='.json_encode($report['isEncrypted'] ?? null).'; lastSync='.($report['lastSyncDateTime'] ?? 'missing').'.');
+    $token=graphToken($secrets); $limit=$config['MAX_OBJECTS'];
+    $directory=graphList('devices?$select=id,deviceId,operatingSystem,accountEnabled',$token,$limit);
+    $managed=graphList('deviceManagement/managedDevices?$select=id,azureADDeviceId,operatingSystem,isEncrypted,lastSyncDateTime,managementAgent,deviceEnrollmentType,managementCertificateExpirationDate,complianceState',$token,$limit);
+    $apple=[];
+    foreach ($managed as $d) {
+        if (in_array(strtolower((string)($d['operatingSystem'] ?? '')),['ios','ipados'],true)) {
+            $apple=graphRequest('GET','https://graph.microsoft.com/v1.0/deviceManagement/applePushNotificationCertificate?$select=id,expirationDateTime',
+                ['headers'=>['Authorization'=>'Bearer '.$token,'Accept'=>'application/json']]);
+            // Microsoft's GET example wraps the singleton in value; also accept the entity shape.
+            if (array_key_exists('value',$apple)) {
+                if (!is_array($apple['value']) || array_is_list($apple['value'])) throw new RuntimeException('Invalid Apple push configuration response.');
+                $apple=$apple['value'];
+            }
+            break;
         }
-        if (!$deviceReports) $results[]=result('encryption','',$id,false,'No Intune encryption report for this directory device.');
-        if ($good) $encrypted++;
-        $results[]=result('key_management','',$id,!empty($recovery[$id]),'Escrowed OS-volume BitLocker recovery key metadata records: '.count($recovery[$id] ?? []).'. Recovery secrets were not retrieved.');
     }
-    $results[]=result('inventory','','Scope summary',count($population)>0,count($population).' Windows devices from the union of enabled Entra inventory and Intune management records.');
-    foreach (['enrolment','encryption','key_management'] as $check) {
-        $items=array_values(array_filter($results,fn($r)=>$r['check']===$check)); $bad=count(array_filter($items,fn($r)=>!$r['passed']));
-        $results[]=result($check,'','Scope summary',count($items)>0 && $bad===0,count($items).' observations; '.$bad.' failed.');
+    return assessDevices($directory,$managed,$apple,$config,time());
+}
+
+function assessDevices(array $directory, array $managed, array $apple, array $config, int $now): array
+{
+    $results=[]; $population=[]; $reports=[];
+    foreach ($directory as $d) {
+        if (($d['accountEnabled'] ?? null)===false) continue;
+        $mobile=mobileOs($d['operatingSystem'] ?? null);
+        if ($mobile===false) continue;
+        $id=$d['deviceId'] ?? null;
+        if (!is_string($id) || $id==='' || $id==='00000000-0000-0000-0000-000000000000') {
+            $results[]=result('inventory','',$d['id'],false,'Missing device identifier; cannot reconcile enrollment.'); continue;
+        }
+        $population[$id]=true;
+        $results[]=result('inventory','',$id,$mobile===true && ($d['accountEnabled'] ?? null)===true,
+            'Directory mobile platform and enabled status must be known.');
     }
-    $results[]=result('coverage','','Windows scope',$encrypted===count($population) && $encrypted>0,sprintf('%d/%d devices have fresh encrypted reports (%.1f%%). No unencrypted-device exception is accepted automatically.', $encrypted,count($population),$population?$encrypted/count($population)*100:0));
+    foreach ($managed as $d) {
+        $mobile=mobileOs($d['operatingSystem'] ?? null);
+        if ($mobile===false) continue;
+        $id=$d['azureADDeviceId'] ?? null;
+        if (!is_string($id) || $id==='' || $id==='00000000-0000-0000-0000-000000000000') {
+            $id='intune:'.$d['id'];
+            $results[]=result('inventory','',$id,false,'Cannot reconcile this managed device with directory inventory.');
+        }
+        $population[$id]=true; $reports[$id][]=$d;
+    }
+    $apnsExpiry=timestamp($apple['expirationDateTime'] ?? null);
+    foreach ($population as $id=>$_) {
+        $list=$reports[$id] ?? [];
+        $results[]=result('enrollment','',$id,count($list)>0,count($list).' Intune reports.');
+        foreach ($list as $d) {
+            $sync=timestamp($d['lastSyncDateTime'] ?? null);
+            $fresh=$sync!==null && $sync<=$now && $now-$sync<=$config['MAX_SYNC_AGE_HOURS']*3600;
+            $agent=$d['managementAgent'] ?? null;
+            $results[]=result('enrollment','',$id,$fresh && in_array($agent,['mdm','easMdm'],true),
+                'Record='.$d['id'].'; managementAgent='.json_encode($agent).'; lastSync='.json_encode($d['lastSyncDateTime'] ?? null).'.');
+            $results[]=result('encryption','',$id,$fresh && ($d['isEncrypted'] ?? null)===true,
+                'isEncrypted='.json_encode($d['isEncrypted'] ?? null).'; complianceState='.json_encode($d['complianceState'] ?? null).'. Aggregate compliance is informational, not proof of encryption.');
+            $ios=in_array(strtolower((string)($d['operatingSystem'] ?? '')),['ios','ipados'],true);
+            $enrollment=$d['deviceEnrollmentType'] ?? null;
+            // Full-device Apple enrollment supports remote wipe; user enrollment does not prove full-device wipe.
+            $fullDevice=in_array($enrollment,['appleBulkWithUser','appleBulkWithoutUser'],true);
+            $cert=timestamp($d['managementCertificateExpirationDate'] ?? null);
+            $wipe=$ios && $fullDevice && $fresh && in_array($agent,['mdm','easMdm'],true)
+                && $cert!==null && $cert>$now && $apnsExpiry!==null && $apnsExpiry>$now && !empty($apple['id']);
+            $results[]=result('wipe_configuration','',$id,$wipe,
+                'Enrollment='.json_encode($enrollment).'; management certificate expiry='.json_encode($d['managementCertificateExpirationDate'] ?? null).
+                '; Apple push expiry='.json_encode($apple['expirationDateTime'] ?? null).'. '.
+                ($wipe?'Full-device Apple MDM channel configured for remote wipe; no wipe was sent.':
+                'Wipe configuration unproven. Review unsupported enrollment/platform or missing/expired channel evidence.'));
+        }
+    }
+    $results[]=result('population','','Mobile inventory',count($population)>0,count($population).' devices from directory and Intune. Devices unknown to both sources require independent reconciliation.');
     if (strlen(json_encode($results,JSON_THROW_ON_ERROR))>600000) throw new RuntimeException('Evidence limit exceeded.');
     return $results;
 }
@@ -246,13 +287,13 @@ function evaluate(array $results, array $config): array
 
     $lines   = [];
     $lines[] = sprintf('Automated audit by %s v%s on %s UTC.', AUTOMATION_ID, AUTOMATION_VERSION, gmdate('Y-m-d H:i'));
-    $lines[] = 'Scope: Windows devices known to Entra ID or Intune; current encryption and recovery-key metadata.';
+    $lines[] = 'Scope: mobile devices known to Entra ID or Intune; enrollment, reported encryption and remote-wipe configuration.';
     $lines[] = sprintf('Result: %s. %d checks, %d items checked, %d passed, %d failed.',
         $passed ? 'PASSED' : 'PENDING MANUAL REVIEW', count($checks), count($results), count($results) - count($failed), count($failed));
     if (count($results) === 0) {
         $lines[] = 'No evidence was collected; review the population before completing the audit.';
     }
-    if (!$passed) $lines[]='Review missing/stale evidence, encryption gaps and documented exceptions with compensating controls before completing the audit.';
+    if (!$passed) $lines[]='Review missing enrollment, stale reports, encryption gaps and unsupported wipe configurations before completing the audit.';
     foreach ($checks as $check => $total) {
         $bad = count(array_filter($failed, fn ($f) => $f['check'] === $check));
         $lines[] = sprintf('  %-17s %s (%d/%d items ok)', $check, $bad === 0 ? 'OK' : 'FAILED', $total - $bad, $total);
@@ -338,7 +379,7 @@ $GLOBALS['runStarted'] = microtime(true);
 try {
     echo sprintf("%s v%s — audit #%s\n", AUTOMATION_ID, AUTOMATION_VERSION, $auditId);
 
-    logInfo($config['DRY_RUN'] ? 'SIMULATION ONLY — no audit result will be saved.' : 'LIVE RUN — evidence will be saved; unresolved exceptions leave the audit pending.');
+    logInfo($config['DRY_RUN'] ? 'SIMULATION ONLY — no audit result will be saved.' : 'LIVE RUN — evidence will be saved; unresolved evidence leave the audit pending.');
     logStep(1, 'Checking configuration');
     validateConfig($config, $auditId);
     checkSecrets($secrets);

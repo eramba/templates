@@ -1,7 +1,7 @@
 ---
 id: aws-client-vpn-remote-access
 name: Remote Access Security Review
-version: 0.1.0
+version: 0.2.0
 status: draft
 technology: AWS Client VPN and Directory Service
 vendor: AWS
@@ -57,7 +57,7 @@ Run on the **1st of each month**, reviewing the preceding 90 days. This exceeds 
 | Logging | Enabled; log group predates the review window and retains at least that much history |
 | Access logs | At least one successful session record per endpoint; no malformed or unrecognised records in the collected evidence |
 
-All checks are mandatory. Empty scope or missing evidence produces **Failed**. API, configuration or persistence errors abort the execution; they are not control failures. Failed login attempts remain in evidence but do not themselves fail this control.
+All checks are mandatory. SAML MFA and insufficient/unrecognised activity evidence produce **Pending**, preserving observations without changing the result or completion dates. Confirmed violations produce **Failed** only when no required review remains. Empty scope cannot pass. API, configuration or persistence errors abort the execution; they are not control failures. Failed login attempts remain in evidence but do not themselves fail this control.
 
 ## 3. Coverage of the audit methodology
 
@@ -70,7 +70,7 @@ All checks are mandatory. Empty scope or missing evidence produces **Failed**. A
 | Access logs for the review period | CloudWatch connection event timestamps, types, outcomes and connection identifiers |
 | Document exceptions; review at least annually | Audit conclusion and evidence, on the schedule in §1 |
 
-Use this for a control scoped to **AWS Client VPN with AWS Managed Microsoft AD or AD Connector**, where AWS Client VPN is an approved access channel. All endpoints in the selected regions are discovered by default. SAML and certificate-only endpoints remain in scope and fail the MFA evidence check: this script cannot validate an external identity provider.
+Use this for a control scoped to **AWS Client VPN with AWS Managed Microsoft AD or AD Connector**, where AWS Client VPN is an approved access channel. All endpoints in the selected regions are discovered by default. SAML endpoints remain in scope and leave MFA verification pending until effective enforcement is established in the IdP. Certificate-only authentication does not prove MFA. This script does not validate external identity-provider policies.
 
 The test checks current settings and retained activity, not historic configuration continuity or a live authentication attempt. Session duration is not an idle timeout. Deleted endpoints and other remote-access services are outside discovery. No sessions in the period means insufficient evidence to complete the test. Do not use this result alone for a control covering other remote-access platforms.
 
@@ -136,7 +136,7 @@ Collection is bounded to 190 seconds plus its in-flight request, 100 pages per A
 
 ## 8. Results in eramba
 
-Saves Passed/Failed, a conclusion, UTC execution dates and a comment with evidence CSV and configuration TXT. Session evidence omits usernames, IP addresses and raw messages; Directory Service secrets are never attached.
+Saves Passed/Failed and dates when the test is complete. Pending saves evidence and a review comment only. It does not clear an existing result or schedule a retry; use a fresh audit. Evidence is CSV plus configuration TXT. Session evidence omits usernames, IP addresses and raw messages; Directory Service secrets are never attached.
 
 Collection errors save no result. An upload can remain after a later failure; a comment failure can leave a saved result. Inspect the audit before retrying.
 
@@ -146,7 +146,7 @@ Collection errors save no result. An upload can remain after a later failure; a 
 |---|---|
 | Invalid configuration or missing secret | Check §6–7 and select a control audit for execution |
 | AWS access denied | Check the identity's permissions in §5.2 |
-| MFA evidence fails | Check directory type, active state and RADIUS status; SAML requires a different integration |
+| MFA failed or pending | Check Directory Service evidence; for SAML, verify effective MFA in the IdP instead of changing authentication merely to pass this script |
 | Log evidence fails | Check connection logging, retention, log-group age and successful activity in the period |
 | Collection limit or timeout | Narrow endpoint/region scope or shorten the window with a matching schedule |
 | eramba write error | Inspect existing attachments/result before retrying |
@@ -163,6 +163,7 @@ Unlink the automation, retain historical evidence and remove dedicated keys/perm
 
 | Version | Change |
 |---|---|
+| 0.2.0 | Distinguish unsupported evidence from violations; pending review and stricter API collection. Real AWS/eramba validation pending |
 | 0.1.0 | Initial implementation; AWS/eramba installation validation pending |
 
 References: [Directory MFA](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/ad.html), [endpoint settings](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-endpoint-create.html), [connection logs](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/connection-logging.html).

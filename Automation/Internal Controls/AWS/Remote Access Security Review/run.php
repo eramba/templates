@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Remote Access Security Review
  *  Technology: AWS Client VPN and Directory Service
- *  id: aws-client-vpn-remote-access        version: 0.1.0
+ *  id: aws-client-vpn-remote-access        version: 0.2.0
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -20,7 +20,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *            as failed in eramba.
  *
  *  Exit codes
- *    0  Check executed. Dry-run, or audit updated with Passed or Failed.
+ *    0  Check executed: dry-run, saved Passed/Failed, or evidence saved pending review.
  *    1  Technical error (credentials, network, permissions, eramba API).
  *       Before result save: audit unchanged. After result save: comment may
  *       be missing. Inspect the audit before retrying.
@@ -52,7 +52,7 @@ $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
 const AUTOMATION_ID = 'aws-client-vpn-remote-access';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.2.0';
 
 function logStep(int $n, string $title): void
 {
@@ -89,7 +89,7 @@ function checkSecrets(array $secrets): void
 function abortMessage(string $kind): string
 {
     return empty($GLOBALS['auditWritten'])
-        ? "\nABORTED: $kind, audit left without result (see STDERR).\n"
+        ? "\nABORTED: $kind, no confirmed new result; inspect for partial writes (see STDERR).\n"
         : "\nABORTED: $kind after the audit result was saved; the comment is missing (see STDERR).\n";
 }
 
@@ -97,6 +97,12 @@ function abortMessage(string $kind): string
 function result(string $check, string $region, string $resource, bool $passed, string $detail): array
 {
     return ['check' => $check, 'region' => $region, 'resource' => $resource, 'passed' => $passed, 'detail' => $detail];
+}
+
+/** Required evidence unavailable to this integration: retain the item without deciding compliance. */
+function pendingResult(string $check, string $region, string $resource, string $detail): array
+{
+    return result($check,$region,$resource,false,$detail) + ['pending'=>true];
 }
 
 // ─── 5. COLLECT ──────────────────────────────────────────────────────────
@@ -139,8 +145,10 @@ function vpnPages(object $client, string $operation, string $key, array $args, s
     do {
         if (++$pages > 100) throw new RuntimeException('Pagination limit exceeded; narrow the scope.');
         $page = awsCall($client,$operation,$args);
-        foreach ($page[$key] ?? [] as $item) yield $item;
+        if (!is_array($page[$key] ?? null) || !array_is_list($page[$key])) throw new RuntimeException('Incomplete AWS collection.');
+        foreach ($page[$key] as $item) { if (!is_array($item)) throw new RuntimeException('Invalid AWS record.'); yield $item; }
         $token = $page[$tokenKey] ?? '';
+        if (!is_string($token)) throw new RuntimeException('Invalid pagination token.');
         if ($token !== '' && isset($seen[$token])) throw new RuntimeException('Repeated pagination token.');
         $seen[$token] = true;
         $args[$tokenKey] = $token;
@@ -164,7 +172,7 @@ function collectResults(array $secrets, array $config): array
             if ($id==='') { $results[]=result('population',$region,'unidentified endpoint',false,'Endpoint ID is missing.'); continue; }
             $results[]=result('endpoint',$region,$id,($endpoint['Status']['Code'] ?? '')==='available','Endpoint state: '.($endpoint['Status']['Code'] ?? 'missing').'.');
             $auth=$endpoint['AuthenticationOptions'] ?? [];
-            $mfa=false; $unsupported=false; $authEvidence=[]; $directories=[];
+            $mfa=false; $unsupported=false; $federated=false; $authEvidence=[]; $directories=[];
             foreach ($auth as $method) {
                 $type=$method['Type'] ?? 'missing'; $authEvidence[]=$type;
                 if ($type==='directory-service-authentication') {
@@ -178,12 +186,16 @@ function collectResults(array $secrets, array $config): array
                     $enabled=in_array($directory['Type'] ?? '',['MicrosoftAD','ADConnector'],true) && ($directory['Stage'] ?? '')==='Active' && ($directory['RadiusStatus'] ?? '')==='Enabled';
                     $mfa=$mfa || $enabled;
                     if (!$enabled) $unsupported=true;
+                } elseif ($type==='federated-authentication') {
+                    $federated=true; $unsupported=true;
                 } elseif ($type!=='certificate-authentication') {
                     $unsupported=true;
                 }
             }
-            $results[]=result('mfa',$region,$id,$mfa && !$unsupported,
-                'Authentication: '.implode(', ',$authEvidence).'. Directory MFA evidence: '.json_encode($directories,JSON_THROW_ON_ERROR).'. SAML enforcement cannot be verified here; certificate-only authentication does not prove MFA.');
+            $mfaDetail='Authentication: '.implode(', ',$authEvidence).'. Directory MFA evidence: '.json_encode($directories,JSON_THROW_ON_ERROR).'.';
+            $results[]=$federated
+                ? pendingResult('mfa',$region,$id,$mfaDetail.' Verify effective MFA enforcement for the Client VPN application in the SAML IdP, including exclusions and bypasses.')
+                : result('mfa',$region,$id,$mfa && !$unsupported,$mfaDetail.' Certificate-only authentication does not prove MFA.');
             $split=$endpoint['SplitTunnel'] ?? null; $approval=$config['SPLIT_TUNNEL_APPROVALS'][$id] ?? '';
             $results[]=result('split_tunnel',$region,$id,$split===false || ($split===true && $approval!==''),
                 'SplitTunnel='.json_encode($split).'; documented approval: '.($approval ?: 'none').'.');
@@ -224,8 +236,11 @@ function collectResults(array $secrets, array $config): array
             } else {
                 $results[]=result('log_history',$region,$id,false,'Connection log history is unavailable.');
             }
-            $results[]=result('access_logs',$region,$id,$sessions>0 && $bad===0,
-                'Successful session records: '.$sessions.'; invalid/unattributable records: '.$bad.'; event counts: '.json_encode($counts,JSON_THROW_ON_ERROR).'. No observed sessions means insufficient activity evidence, not proven compliance.');
+            $logDetail='Successful session records: '.$sessions.'; invalid/unattributable records: '.$bad.'; event counts: '.json_encode($counts,JSON_THROW_ON_ERROR).'.';
+            $results[]=($sessions===0 || $bad>0)
+                ? pendingResult('access_logs',$region,$id,$logDetail.' Activity evidence is insufficient; review before completing the audit.')
+                : result('access_logs',$region,$id,true,$logDetail);
+
         }
     }
     $results[]=result('population','','Scope',$total>0,$total.' endpoints discovered independently of their logging and authentication settings.');
@@ -241,14 +256,15 @@ function collectResults(array $secrets, array $config): array
 function evaluate(array $results, array $config): array
 {
     $failed = array_values(array_filter($results, fn ($r) => !$r['passed']));
-    $passed = count($results) > 0 && count($failed) === 0;
+    $pending = (bool)array_filter($results,fn($r)=>($r['pending'] ?? false)===true);
+    $passed = count($results) > 0 && count($failed) === 0 && !$pending;
     $checks = array_count_values(array_column($results, 'check'));
 
     $lines   = [];
     $lines[] = sprintf('Automated audit by %s v%s on %s UTC.', AUTOMATION_ID, AUTOMATION_VERSION, gmdate('Y-m-d H:i'));
     $lines[] = 'Scope: AWS Client VPN endpoints with Directory Service MFA. Window: ' . ($GLOBALS['evidenceWindow'] ?? 'unavailable');
     $lines[] = sprintf('Result: %s. %d checks, %d items checked, %d passed, %d failed.',
-        $passed ? 'PASSED' : 'FAILED', count($checks), count($results), count($results) - count($failed), count($failed));
+        $pending ? 'PENDING MANUAL REVIEW' : ($passed ? 'PASSED' : 'FAILED'), count($checks), count($results), count($results) - count($failed), count($failed));
     if (count($results) === 0) {
         $lines[] = 'Nothing matched the configured scope, so the audit is FAILED. Review the variables.';
     }
@@ -263,7 +279,8 @@ function evaluate(array $results, array $config): array
         $lines[] = sprintf('… and %d more (see evidence attachment).', count($failed) - $config['MAX_LOG_ITEMS']);
     }
 
-    return ['passed' => $passed, 'conclusion' => implode("\n", $lines)];
+    if ($pending) $lines[]='Required evidence remains unresolved. Findings are retained, but no final result or completion dates will be saved.';
+    return ['passed' => $passed, 'pending' => $pending, 'conclusion' => implode("\n", $lines)];
 }
 
 // ─── 7. REPORT: write the outcome to eramba ────────────────────────────────
@@ -290,6 +307,11 @@ function report(string $auditId, array $outcome, array $results, array $config):
         logInfo("Evidence uploaded: $name");
     }
 
+    if ($outcome['pending']) {
+        erambaCall(addCommentMacro($auditId,'[PENDING MANUAL REVIEW] '.$outcome['conclusion'],$attachments),'add review comment');
+        logInfo('Evidence saved. Result and completion dates unchanged pending review.');
+        return;
+    }
     $data = [
         'start_date'                              => gmdate('Y-m-d'),
         'end_date'                                => gmdate('Y-m-d'),
@@ -321,7 +343,7 @@ function evidenceCsv(array $results): string
     $fh = fopen('php://temp', 'r+');
     fputcsv($fh, ['check', 'region', 'resource', 'result', 'detail'], ',', '"', '');
     foreach ($results as $r) {
-        fputcsv($fh, [$r['check'], $r['region'] ?? '', $r['resource'], $r['passed'] ? 'PASS' : 'FAIL', $r['detail']], ',', '"', '');
+        fputcsv($fh, [$r['check'], $r['region'] ?? '', $r['resource'], ($r['pending'] ?? false) ? 'PENDING' : ($r['passed'] ? 'PASS' : 'FAIL'), $r['detail']], ',', '"', '');
     }
     rewind($fh);
     return (string) stream_get_contents($fh);
@@ -332,7 +354,7 @@ $GLOBALS['runStarted'] = microtime(true);
 try {
     echo sprintf("%s v%s — audit #%s\n", AUTOMATION_ID, AUTOMATION_VERSION, $auditId);
 
-    logInfo($config['DRY_RUN'] ? 'SIMULATION ONLY — no audit result will be saved.' : 'LIVE RUN — audit result and evidence will be saved.');
+    logInfo($config['DRY_RUN'] ? 'SIMULATION ONLY — no audit result will be saved.' : 'LIVE RUN — evidence will be saved; unresolved requirements leave the audit pending.');
     logStep(1, 'Checking configuration');
     validateConfig($config, $auditId);
     checkSecrets($secrets);

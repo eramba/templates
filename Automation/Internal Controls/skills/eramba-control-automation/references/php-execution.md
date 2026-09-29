@@ -60,6 +60,7 @@ The repository examples use the following contract. Confirm it in the destinatio
 Apply these checks where relevant to the methodology rather than copying a fixed test suite:
 
 - Before excluding closed records, distinguish completion from cancellation, duplication and archival. Do not let provider storage/workflow state silently erase unresolved obligations.
+- Validate pagination against provider totals when supplied, reject duplicate identities, and keep authenticated pagination on the intended collection endpoint. If configuration is read separately from the population, check for changes where practical; do not claim a transactional snapshot.
 - Keep every required check and population member accounted for. Unknown statuses, missing identities and malformed records must not disappear or become success; report record-level failures where meaningful. Abort on an incomplete source collection rather than treating it as a complete population.
 - Keep in-progress work distinct from completion. Retain failed attempts even after successful retries; let the methodology determine their effect on the final result.
 - Distinguish unavailable values from zero. Validate missing, reversed and future dates and equality at threshold boundaries.

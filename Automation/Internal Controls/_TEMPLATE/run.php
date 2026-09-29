@@ -21,7 +21,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *            as failed in eramba.
  *
  *  Exit codes
- *    0  Check executed. Dry-run, or audit updated with Passed or Failed.
+ *    0  Check executed: dry-run, saved Passed/Failed, or evidence saved pending review.
  *    1  Technical error (credentials, network, permissions, eramba API).
  *       Before result save: audit unchanged. After result save: comment may
  *       be missing. Inspect the audit before retrying.
@@ -103,7 +103,8 @@ function result(string $check, string $region, string $resource, bool $passed, s
 // Adapt collection, validation, evaluation and reporting to the methodology.
 // Return one result() per item checked, plus ONE SUMMARY ITEM PER REQUIRED CHECK
 // (so a check with nothing to look at fails instead of silently disappearing).
-// Throw an exception on any technical error.
+// Throw an exception on incomplete collection; do not convert it into control failure.
+// Preserve unknown/missing values and unresolved exceptions as required by the methodology.
 function collectResults(array $secrets, array $config): array
 {
     $results = [];

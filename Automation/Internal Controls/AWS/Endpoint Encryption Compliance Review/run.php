@@ -3,9 +3,9 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  Cryptographic Key and Certificate Lifecycle Review
- *  Technology: AWS KMS, ACM and Elastic Load Balancing
- *  id: aws-key-certificate-lifecycle        version: 0.2.0
+ *  Endpoint Encryption Compliance Review
+ *  Technology: Amazon WorkSpaces Personal and AWS KMS
+ *  id: aws-workspaces-encryption        version: 0.1.0
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -34,13 +34,12 @@ $secrets = [
 
 // ─── 2. VARIABLES (README §7) ────────────────────────────────────────────
 $config = [
-    'REGIONS' => ['eu-west-1'], // Regions in scope
-    'EXPIRY_WARNING_DAYS' => 30, // At least 30 days as required by the methodology
-    'MAX_RESOURCES' => 100, // Abort rather than truncate the inventory
-    'DRY_RUN' => false, // True prevents all eramba writes
-    'RESULT_PASSED_ID' => 2, // Passed option ID
-    'RESULT_FAILED_ID' => 1, // Failed option ID
-    'MAX_LOG_ITEMS' => 5, // Failure examples; full detail in CSV
+    'REGIONS' => ['eu-west-1'],
+    'MAX_WORKSPACES' => 200,
+    'DRY_RUN' => false,
+    'RESULT_PASSED_ID' => 2,
+    'RESULT_FAILED_ID' => 1,
+    'MAX_LOG_ITEMS' => 5,
 ];
 
 // ─── 3. ERAMBA MACROS ───────────────────────────────────────────────────────
@@ -48,8 +47,8 @@ $config = [
 $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
-const AUTOMATION_ID = 'aws-key-certificate-lifecycle';
-const AUTOMATION_VERSION = '0.2.0';
+const AUTOMATION_ID = 'aws-workspaces-encryption';
+const AUTOMATION_VERSION = '0.1.0';
 
 function logStep(int $n, string $title): void
 {
@@ -124,13 +123,13 @@ function validateConfig(array $c, string $auditId): void
     if (!is_array($c['REGIONS']) || !$c['REGIONS'] || count($c['REGIONS'])>20) throw new RuntimeException('Configure 1–20 regions.');
     foreach ($c['REGIONS'] as $r) if (!is_string($r) || !preg_match('/^[a-z]{2}(?:-[a-z]+)+-\d+$/D',$r)) throw new RuntimeException('Invalid region.');
     if (count(array_unique($c['REGIONS']))!==count($c['REGIONS'])) throw new RuntimeException('Duplicate region.');
-    foreach (['MAX_RESOURCES'=>[1,500],'EXPIRY_WARNING_DAYS'=>[30,365],'MAX_LOG_ITEMS'=>[1,10],'RESULT_PASSED_ID'=>[1,999999],'RESULT_FAILED_ID'=>[1,999999]] as $k=>$range) {
+    foreach (['MAX_WORKSPACES'=>[1,1000],'MAX_LOG_ITEMS'=>[1,10],'RESULT_PASSED_ID'=>[1,999999],'RESULT_FAILED_ID'=>[1,999999]] as $k=>$range) {
         if (!is_int($c[$k]) || $c[$k]<$range[0] || $c[$k]>$range[1]) throw new RuntimeException('Invalid '.$k.'.');
     }
     if (!is_bool($c['DRY_RUN']) || $c['RESULT_PASSED_ID']===$c['RESULT_FAILED_ID']) throw new RuntimeException('Invalid output settings.');
 }
 
-function cryptoPages(object $client, string $operation, string $field, array $args=[], string $inputToken='NextToken', string $outputToken='NextToken'): Generator
+function awsPages(object $client, string $operation, string $field, array $args=[], string $inputToken='NextToken', string $outputToken='NextToken'): Generator
 {
     $seen=[]; $pages=0;
     do {
@@ -141,98 +140,66 @@ function cryptoPages(object $client, string $operation, string $field, array $ar
         $token=$page[$outputToken] ?? '';
         if (!is_string($token)) throw new RuntimeException('Invalid pagination token.');
         if ($token!=='' && isset($seen[$token])) throw new RuntimeException('Repeated pagination token.');
-        if (($page['Truncated'] ?? false) && $token==='') throw new RuntimeException('Incomplete KMS pagination.');
+        if (($page['Truncated'] ?? false) && $token==='') throw new RuntimeException('Incomplete AWS pagination.');
         $seen[$token]=true; $args[$inputToken]=$token;
     } while ($token!=='');
 }
 
-function awsTime(mixed $v): ?int
-{
-    if ($v instanceof \DateTimeInterface) return $v->getTimestamp();
-    if (is_string($v) && $v!=='') { $t=strtotime($v); return $t===false?null:$t; }
-    return null;
-}
-
 function collectResults(array $secrets, array $config): array
 {
-    $results=[]; $resources=0; $now=time();
-    $keySpecs=['SYMMETRIC_DEFAULT','RSA_2048','RSA_3072','RSA_4096','ECC_NIST_P256','ECC_NIST_P384','ECC_NIST_P521','ECC_SECG_P256K1','HMAC_224','HMAC_256','HMAC_384','HMAC_512','SM2','ML_DSA_44','ML_DSA_65','ML_DSA_87'];
-    $signatures=['SHA256WITHRSA','SHA384WITHRSA','SHA512WITHRSA','SHA256WITHECDSA','SHA384WITHECDSA','SHA512WITHECDSA'];
+    $workspaces=[]; $keys=[]; $ids=[];
     foreach ($config['REGIONS'] as $region) {
-        $opts=['version'=>'latest','region'=>$region,'credentials'=>['key'=>$secrets['AWS_ACCESS_KEY_ID'],'secret'=>$secrets['AWS_SECRET_ACCESS_KEY']],'http'=>['connect_timeout'=>5,'timeout'=>15],'retries'=>1];
-        $kms=new \Aws\Kms\KmsClient($opts); $acm=new \Aws\Acm\AcmClient($opts); $elb=new \Aws\ElasticLoadBalancingV2\ElasticLoadBalancingV2Client($opts);
-        $reserve=function() use (&$resources,$config): void { if (++$resources>$config['MAX_RESOURCES']) throw new RuntimeException('MAX_RESOURCES exceeded; split the regions into separate controls.'); };
-        foreach (cryptoPages($kms,'listKeys','Keys',['Limit'=>100],'Marker','NextMarker') as $key) {
-            $reserve(); $id=$key['KeyId'] ?? '';
-            if ($id==='') { $results[]=result('key_inventory',$region,'unidentified key',false,'KeyId missing.'); continue; }
-            $meta=awsCall($kms,'describeKey',['KeyId'=>$id])['KeyMetadata'] ?? [];
-            $state=$meta['KeyState'] ?? '';
-            if (in_array($state,['Disabled','PendingDeletion','PendingReplicaDeletion'],true)) {
-                $results[]=result('inactive_key',$region,$id,true,'Not active: '.$state.'.'); continue;
+        $opts=['version'=>'latest','region'=>$region,'credentials'=>['key'=>$secrets['AWS_ACCESS_KEY_ID'],'secret'=>$secrets['AWS_SECRET_ACCESS_KEY']],
+            'http'=>['connect_timeout'=>5,'timeout'=>15,'verify'=>true,'allow_redirects'=>false],'retries'=>1];
+        $client=new \Aws\WorkSpaces\WorkSpacesClient($opts);
+        $kms=new \Aws\Kms\KmsClient($opts);
+        foreach (awsPages($client,'describeWorkspaces','Workspaces',['Limit'=>25]) as $w) {
+            $id=$w['WorkspaceId'] ?? null;
+            if (!is_string($id) || !preg_match('/^ws-[a-z0-9]+$/D',$id) || isset($ids[$region.'/'.$id])) throw new RuntimeException('Missing or duplicate WorkSpace identity.');
+            $ids[$region.'/'.$id]=true;
+            if (count($ids)>$config['MAX_WORKSPACES']) throw new RuntimeException('MAX_WORKSPACES exceeded; no partial population can be evaluated.');
+            // Minimize retained evidence: no user, hostname, IP, directory or subnet information.
+            $record=['id'=>$id,'region'=>$region,'state'=>$w['State'] ?? null,
+                'root'=>$w['RootVolumeEncryptionEnabled'] ?? null,'user'=>$w['UserVolumeEncryptionEnabled'] ?? null,
+                'key'=>$w['VolumeEncryptionKey'] ?? null];
+            $workspaces[]=$record;
+            if ($record['state']==='TERMINATED') continue;
+            $arn=$record['key'];
+            if (!is_string($arn) || !preg_match('/^arn:aws(?:-us-gov|-cn)?:kms:'.preg_quote($region,'/').':\d{12}:key\/[A-Za-z0-9-]+$/D',$arn)) continue;
+            if (!isset($keys[$arn])) {
+                $meta=awsCall($kms,'describeKey',['KeyId'=>$arn])['KeyMetadata'] ?? null;
+                if (!is_array($meta) || ($meta['Arn'] ?? null)!==$arn) throw new RuntimeException('Missing or mismatched KMS metadata.');
+                $keys[$arn]=array_intersect_key($meta,array_flip(['Arn','KeyState','KeyUsage','KeySpec','KeyManager']));
             }
-            $spec=$meta['KeySpec'] ?? ''; $created=awsTime($meta['CreationDate'] ?? null);
-            $results[]=result('key_inventory',$region,$id,$state==='Enabled' && $created!==null && $created<=$now && in_array($spec,$keySpecs,true),
-                'State='.$state.'; key spec='.$spec.'; creation='.($created?gmdate('c',$created):'missing').'; origin='.($meta['Origin'] ?? 'missing').'. SYMMETRIC_DEFAULT is AES-256; numbered RSA/ECC/HMAC specs encode key size.');
-            if ($state==='Enabled' && $spec==='SYMMETRIC_DEFAULT' && ($meta['Origin'] ?? '')==='AWS_KMS') {
-                $rotation=awsCall($kms,'getKeyRotationStatus',['KeyId'=>$id]);
-                $next=awsTime($rotation['NextRotationDate'] ?? null);
-                $detail='Automatic rotation='.json_encode($rotation['KeyRotationEnabled'] ?? null).'; period days='.json_encode($rotation['RotationPeriodInDays'] ?? null).'; next rotation='.($next?gmdate('c',$next):'unavailable').'.';
-                $results[]=(($rotation['KeyRotationEnabled'] ?? null)===true && $next!==null)
-                    ? result('key_rotation',$region,$id,$next>$now,$detail)
-                    : pendingResult('key_rotation',$region,$id,$detail.' Review manual rotation records and the applicable rotation schedule.');
+        }
+    }
+    return assessWorkspaces($workspaces,$keys);
+}
 
-            } else {
-                $results[]=pendingResult('key_rotation',$region,$id,'Review the key rotation schedule and completed rotations for this key type. Manual/imported/asymmetric rotation is not verified by this integration; unsupported evidence is not proof of overdue rotation.');
-            }
-        }
-        $certs=[];
-        $certTypes=['RSA_1024','RSA_2048','RSA_3072','RSA_4096','EC_prime256v1','EC_secp384r1','EC_secp521r1'];
-        foreach (cryptoPages($acm,'listCertificates','CertificateSummaryList',['Includes'=>['keyTypes'=>$certTypes],'MaxItems'=>100]) as $summary) {
-            $reserve(); $arn=$summary['CertificateArn'] ?? '';
-            if ($arn==='') { $results[]=result('certificate_inventory',$region,'unidentified certificate',false,'Certificate ARN missing.'); continue; }
-            $cert=awsCall($acm,'describeCertificate',['CertificateArn'=>$arn])['Certificate'] ?? [];
-            $certs[$arn]=$cert;
-            $status=$cert['Status'] ?? ''; $expiry=awsTime($cert['NotAfter'] ?? null); $start=awsTime($cert['NotBefore'] ?? null);
-            if (in_array($status,['PENDING_VALIDATION','VALIDATION_TIMED_OUT','FAILED'],true)) {
-                $results[]=result('unissued_certificate',$region,$arn,true,'Certificate not issued: '.$status.'.'); continue;
-            }
-            $renewal=$cert['RenewalSummary']['RenewalStatus'] ?? '';
-            $renewalTime=awsTime($cert['RenewalSummary']['UpdatedAt'] ?? null);
-            $inProgress=in_array($renewal,['PENDING_AUTO_RENEWAL','PENDING_VALIDATION'],true) && $renewalTime!==null && $renewalTime<=$now && $renewalTime>=$now-$config['EXPIRY_WARNING_DAYS']*86400;
-            $expiryOk=$status==='ISSUED' && $start!==null && $start<=$now && $expiry!==null && $expiry>$now && ($expiry>$now+$config['EXPIRY_WARNING_DAYS']*86400 || $inProgress);
-            $results[]=result('certificate_expiry',$region,$arn,$expiryOk,'Status='.$status.'; expires='.($expiry?gmdate('c',$expiry):'missing').'; renewal='.($renewal ?: 'none').'; renewal update='.($renewalTime?gmdate('c',$renewalTime):'missing').'.');
-            $signature=strtoupper($cert['SignatureAlgorithm'] ?? '');
-            $results[]=result('certificate_algorithms',$region,$arn,in_array($signature,$signatures,true),'Key algorithm='.($cert['KeyAlgorithm'] ?? 'missing').'; signature='.$signature.'. Unknown signatures do not pass.');
-        }
-        foreach (cryptoPages($elb,'describeLoadBalancers','LoadBalancers',['PageSize'=>100],'Marker','NextMarker') as $lb) {
-            $reserve(); $arn=$lb['LoadBalancerArn'] ?? '';
-            if ($arn==='') { $results[]=result('tls_policy',$region,'unidentified load balancer',false,'LoadBalancerArn missing.'); continue; }
-            foreach (cryptoPages($elb,'describeListeners','Listeners',['LoadBalancerArn'=>$arn,'PageSize'=>100],'Marker','NextMarker') as $listener) {
-                $reserve(); $protocol=$listener['Protocol'] ?? ''; $id=$listener['ListenerArn'] ?? '(missing listener ARN)';
-                if (in_array($protocol,['HTTP','TCP','UDP','TCP_UDP'],true)) {
-                    $results[]=result('non_tls_listener',$region,$id,true,'Protocol='.$protocol.'; not a TLS termination point. Downstream TLS is outside this integration.'); continue;
-                }
-                if (!in_array($protocol,['HTTPS','TLS'],true) || empty($listener['SslPolicy'])) { $results[]=result('tls_policy',$region,$id,false,'Unknown protocol or missing TLS policy.'); continue; }
-                $policy=awsCall($elb,'describeSSLPolicies',['Names'=>[$listener['SslPolicy']]])['SslPolicies'][0] ?? [];
-                $protocols=$policy['SslProtocols'] ?? []; $ciphers=array_column($policy['Ciphers'] ?? [],'Name');
-                $old=array_filter($ciphers,fn($c)=>preg_match('/DES|RC4|MD5/i',$c));
-                $results[]=result('tls_policy',$region,$id,!empty($protocols) && !array_diff($protocols,['TLSv1.2','TLSv1.3']) && !empty($ciphers) && !$old,
-                    'Policy='.$listener['SslPolicy'].'; protocols='.implode(',',$protocols).'; deprecated ciphers='.implode(',',$old).'. SHA-1 message authentication in cipher names is not treated as SHA-1 certificate signing.');
-                $attached=0;
-                foreach (cryptoPages($elb,'describeListenerCertificates','Certificates',['ListenerArn'=>$id,'PageSize'=>100],'Marker','NextMarker') as $attachment) {
-                    $attached++; $ca=$attachment['CertificateArn'] ?? ''; $cert=$certs[$ca] ?? [];
-                    $results[]=result('listener_certificates',$region,$id,$ca!=='' && isset($certs[$ca]) && ($cert['Status'] ?? '')==='ISSUED','Attached certificate='.$ca.'; must be an issued ACM certificate included in this region\'s inventory.');
-                }
-                if (!$attached) $results[]=result('listener_certificates',$region,$id,false,'No attached certificate returned.');
-            }
-        }
-        if (strlen(json_encode($results,JSON_THROW_ON_ERROR))>600000) throw new RuntimeException('Evidence size limit exceeded.');
+function assessWorkspaces(array $workspaces, array $keys): array
+{
+    $rows=[]; $active=0; $encrypted=0; $terminated=0;
+    // Retain stopped and unhealthy desktops: inactive compute is not disposed sensitive storage.
+    $states=['PENDING','AVAILABLE','IMPAIRED','UNHEALTHY','REBOOTING','STARTING','REBUILDING','RESTORING','MAINTENANCE','ADMIN_MAINTENANCE','TERMINATING','ERROR','UPDATING','STOPPING','STOPPED','SUSPENDED'];
+    foreach ($workspaces as $w) {
+        $id=$w['id']; $region=$w['region'];
+        if ($w['state']==='TERMINATED') { $terminated++; $rows[]=result('inactive_workspace',$region,$id,true,'Terminated; excluded from current desktop population.'); continue; }
+        $active++;
+        if (!in_array($w['state'],$states,true)) $rows[]=pendingResult('inventory',$region,$id,'Unknown lifecycle state; review population membership.');
+        $ok=$w['root']===true && $w['user']===true;
+        $detail='Root volume encrypted='.json_encode($w['root']).'; user volume encrypted='.json_encode($w['user']).'; state='.json_encode($w['state']).'.';
+        $rows[]=$ok?result('volume_encryption',$region,$id,true,$detail):pendingResult('volume_encryption',$region,$id,$detail.' Review missing evidence or a documented exception with compensating controls.');
+        if ($ok) $encrypted++;
+        $key=is_string($w['key'])?($keys[$w['key']] ?? []):[];
+        $managed=($key['KeyState'] ?? null)==='Enabled' && ($key['KeyUsage'] ?? null)==='ENCRYPT_DECRYPT' && ($key['KeySpec'] ?? null)==='SYMMETRIC_DEFAULT'
+            && in_array($key['KeyManager'] ?? null,['AWS','CUSTOMER'],true);
+        $detail='Key ARN='.(is_string($w['key'])?$w['key']:'missing').'; state='.json_encode($key['KeyState'] ?? null).'; manager='.json_encode($key['KeyManager'] ?? null).'. KMS metadata only; key material is never retrieved.';
+        $rows[]=$managed?result('key_management',$region,$id,true,$detail):pendingResult('key_management',$region,$id,$detail.' Key management evidence needs review.');
     }
-    foreach (['key_inventory','key_rotation','certificate_expiry','certificate_algorithms','tls_policy','listener_certificates'] as $check) {
-        $items=array_values(array_filter($results,fn($r)=>$r['check']===$check)); $failed=count(array_filter($items,fn($r)=>!$r['passed']));
-        $results[]=result($check,'','Scope summary',count($items)>0 && $failed===0,count($items).' items; '.$failed.' failed. Empty required evidence does not pass.');
-    }
-    return $results;
+    $detail=$active.' non-terminated WorkSpaces; '.$terminated.' terminated records excluded. Both-volume encryption coverage: '.($active?sprintf('%.1f%% (%d/%d)',100*$encrypted/$active,$encrypted,$active):'not applicable (empty population)').'.';
+    $rows[]=$active>0?result('population','','Selected AWS regions',true,$detail):pendingResult('population','','Selected AWS regions',$detail.' Confirm applicability; an empty account is not a passed endpoint control.');
+    if (strlen(json_encode($rows,JSON_THROW_ON_ERROR))>600000) throw new RuntimeException('Evidence size limit exceeded.');
+    return $rows;
 }
 
 // ─── 6. EVALUATE: turn raw results into Passed/Failed + human conclusion ───
@@ -245,7 +212,7 @@ function evaluate(array $results, array $config): array
 
     $lines   = [];
     $lines[] = sprintf('Automated audit by %s v%s on %s UTC.', AUTOMATION_ID, AUTOMATION_VERSION, gmdate('Y-m-d H:i'));
-    $lines[] = 'Scope: active regional KMS keys, ACM certificates and ALB/NLB front-end TLS; current configuration.';
+    $lines[] = 'Scope: WorkSpaces Personal desktops in the configured regions; root/user volume encryption and KMS key metadata. Physical endpoints and other desktop services are outside this scope.';
     $lines[] = sprintf('Result: %s. %d checks, %d items checked, %d passed, %d failed.',
         $pending ? 'PENDING MANUAL REVIEW' : ($passed ? 'PASSED' : 'FAILED'), count($checks), count($results), count($results) - count($failed), count($failed));
     if (count($results) === 0) {
@@ -343,7 +310,7 @@ try {
     checkSecrets($secrets);
     logInfo('Secrets present.');
 
-    logStep(2, 'Collecting KMS, ACM and load balancer evidence');
+    logStep(2, 'Collecting WorkSpaces encryption and KMS metadata');
     $results = collectResults($secrets, $config);
 
     logStep(3, 'Evaluating');

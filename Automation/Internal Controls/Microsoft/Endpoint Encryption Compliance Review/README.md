@@ -1,7 +1,7 @@
 ---
 id: intune-windows-encryption
 name: Endpoint Encryption Compliance Review
-version: 0.1.0
+version: 0.2.0
 status: draft
 technology: Microsoft Intune and Entra ID
 vendor: Microsoft
@@ -15,7 +15,7 @@ audit_frequency: quarterly
 secrets:
   - entra_tenant_id
   - entra_client_id
-  - entra_client_secret
+  - entra_client_secret_b64
 variables:
   - MAX_OBJECTS
   - MAX_SYNC_AGE_HOURS
@@ -50,20 +50,20 @@ Tests **Endpoint Encryption Compliance Review** from the [control templates](../
 | Encryption | Every report shows isEncrypted=true and a valid sync within the configured age. |
 | Key management | At least one valid OS-volume recovery-key metadata record per device. |
 
-Passed requires every mandatory check to pass. Missing/unsupported evidence produces Failed. Authentication, permission, incomplete collection and reporting errors abort execution; they do not become control failures.
+Passed requires every mandatory check to pass. Encryption gaps, missing/stale evidence and potential exceptions leave the audit pending for review; the script does not automatically reject an exception it cannot evaluate. Authentication, permission, incomplete collection and reporting errors abort execution; they do not become control failures.
 
 ## 3. Coverage
 
 | Methodology requirement | Implementation |
 |---|---|
 | Encryption compliance report | Intune isEncrypted and lastSyncDateTime for each Windows device. All records for a device must be encrypted and fresh. |
-| All in-scope endpoints | Union of enabled Windows devices registered in Entra and Windows Intune records, so a directory device without an Intune report fails. |
+| All in-scope endpoints | Union of enabled Windows devices registered in Entra and Windows Intune records, so a directory device without an Intune report remains visible as a gap. |
 | Key management | Escrowed operating-system-volume BitLocker recovery-key metadata in Entra; recovery passwords are never requested. |
-| Exceptions and conclusion | Unencrypted, unreported and stale devices are identified. This version does not automatically accept exceptions or compensating controls. |
+| Exceptions and conclusion | Unencrypted, unreported and stale devices are identified. Unresolved exceptions and compensating controls remain pending, without completion writes. |
 
 **Scope:** Windows endpoints known to Entra ID or Intune in one public-cloud tenant. All discovered Windows devices are treated as potentially processing sensitive data. Devices unknown to both inventories, other operating systems and mobile-device encryption require separate coverage.
 
-The result relies on Intune's reported device encryption status and OS-volume key escrow. It does not inspect every disk, establish recovery-key access governance or perform a recovery test. Review documented exceptions separately; this version conservatively fails unencrypted devices even where an exception exists.
+The result relies on Intune's reported device encryption status and OS-volume key escrow. It does not inspect every disk, establish recovery-key access governance or perform a recovery test. Review documented exceptions and compensating controls before completing a pending audit. The script neither approves nor rejects them automatically.
 
 ## 4. Before you start
 
@@ -76,7 +76,7 @@ The result relies on Intune's reported device encryption status and OS-volume ke
 
 ### 5.1 Identity
 
-In Entra **App registrations**, register an application in your tenant. Add the Microsoft Graph **application permissions** below and grant administrator consent. Create a client secret; copy its value, tenant ID and application/client ID into eramba Secrets. Allow HTTPS to `login.microsoftonline.com` and `graph.microsoft.com`. This version supports the Microsoft public cloud.
+In Entra **App registrations**, register an application in your tenant. Add the Microsoft Graph **application permissions** below and grant administrator consent. Create a client secret; store its single-line base64-encoded value as `entra_client_secret_b64`, and store tenant ID and application/client ID unchanged in their Secrets. Base64 prevents raw PHP substitution errors; it is not encryption. Version 0.2.0 replaces the previous raw client-secret Secret. Allow HTTPS to `login.microsoftonline.com` and `graph.microsoft.com`. This version supports the Microsoft public cloud.
 
 ### 5.2 Permissions
 
@@ -92,7 +92,7 @@ Follow [Installing an automation](../../docs/installing.md).
 
 | Setting | Value |
 |---|---|
-| Secrets | `entra_tenant_id`, `entra_client_id`, `entra_client_secret` |
+| Secrets | `entra_tenant_id`, `entra_client_id`, `entra_client_secret_b64` |
 | Composer packages | `guzzlehttp/guzzle:^7.9` |
 | Timeout | 240 seconds |
 | Code | [run.php](run.php) |
@@ -108,14 +108,14 @@ Default execution saves results. Use `DRY_RUN=true` for initial inspection; rest
 | `MAX_SYNC_AGE_HOURS` | `168` | Freshness objective for Intune reports, 1–720 hours; reference default, not prescribed by the methodology. |
 | `DRY_RUN` | `false` | True prevents uploads, audit edits and comments. |
 | `RESULT_PASSED_ID` | `2` | Passed option ID. |
-| `RESULT_FAILED_ID` | `1` | Failed option ID; must differ from Passed. |
+| `RESULT_FAILED_ID` | `1` | Common reporting setting; this evaluator keeps unresolved gaps pending. Must differ from Passed. |
 | `MAX_LOG_ITEMS` | `5` | 1–10 failure examples; full detail remains in CSV. |
 
 Collection has a bounded time, page and evidence budget. Exceeding a limit aborts without saving partial results. Secrets and access tokens are excluded from evidence.
 
 ## 8. Results
 
-Saves Passed/Failed, conclusion and UTC dates, then adds a comment with an evidence CSV and configuration TXT. Collection errors save no result. Uploads may remain after a failed edit; a failed comment can leave a saved result. Inspect before retrying.
+When all evidence is satisfactory, saves Passed, conclusion and UTC dates, then adds an evidence comment. Otherwise, uploads the CSV and configuration TXT and adds a pending-review comment without changing result or execution dates. Use an audit without a previous result: pending runs do not clear it or schedule a retry. Repeated runs may duplicate attachments/comments. Collection errors save no result. Uploads may remain after a failed edit; a failed comment can leave a saved result. Inspect before retrying.
 
 ## 9. Troubleshooting
 
@@ -140,6 +140,7 @@ Unlink the automation, retain historical audit evidence and remove its dedicated
 
 | Version | Change |
 |---|---|
+| 0.2.0 | Pending exception review, base64 client-secret storage and stricter collection validation; real installation validation pending |
 | 0.1.0 | Initial draft; functional and installation validation pending |
 
 References: [Device inventory](https://learn.microsoft.com/en-us/graph/api/device-list?view=graph-rest-1.0), [managed devices](https://learn.microsoft.com/en-us/graph/api/intune-devices-manageddevice-list?view=graph-rest-1.0), [BitLocker metadata](https://learn.microsoft.com/en-us/graph/api/bitlocker-list-recoverykeys?view=graph-rest-1.0).

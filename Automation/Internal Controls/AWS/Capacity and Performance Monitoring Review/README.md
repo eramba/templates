@@ -1,7 +1,7 @@
 ---
 id: aws-capacity-performance-monitoring
 name: Capacity and Performance Monitoring Review
-version: 0.1.1
+version: 0.2.0
 status: draft
 technology: AWS EC2 Auto Scaling and Amazon CloudWatch
 vendor: AWS
@@ -38,7 +38,7 @@ last_tested: null
 
 **Technology:** AWS EC2 Auto Scaling and Amazon CloudWatch.
 
-Audit CPU/compute capacity for EC2 Auto Scaling groups and save the result and evidence in eramba.
+Collect CPU/compute capacity evidence for EC2 Auto Scaling groups. This version leaves the audit pending for review of the capacity plan and available elastic capacity.
 
 | | |
 |---|---|
@@ -46,7 +46,7 @@ Audit CPU/compute capacity for EC2 Auto Scaling groups and save the result and e
 | Population | All current groups in the configured account/regions matching the optional name filter |
 | Recommended audits | Days 1 and 15 each month (24 audits/year) |
 | Evidence | Conclusion, comment, CSV observations and TXT configuration |
-| Status | v0.1.1 draft; AWS/eramba installation validation pending |
+| Status | v0.2.0 draft; AWS/eramba installation validation pending |
 
 ## 1. Controls and policies
 
@@ -73,7 +73,7 @@ Framework mappings: ISO 27002:2022 8.6; SOC 2 A1.1; SCF CAP-01, CAP-02, CAP-04.
 
 `alarm_configuration` and `utilisation_evidence` retain supporting observations; PASS on an evidence row means it was recorded, not that every setting in it is compliant.
 
-**PASSED:** all required checks have evidence and no item fails. **FAILED:** a required check or population member fails; the audit is saved normally. **ERROR:** configuration, API collection, resource limits or eramba persistence failed. Collection errors write no audit result. An upload can remain if a later upload/edit fails; a comment error can leave an already saved result. Inspect the audit before retrying.
+**PENDING:** every successful collection saves evidence and a review comment, without changing the audit result or completion dates. PASS/FAIL rows describe technical observations, not a completed control test. **ERROR:** configuration, collection or persistence failed. Uploads can remain after a later failure; inspect the audit before retrying.
 
 ## 3. Coverage of the audit methodology
 
@@ -81,7 +81,7 @@ Framework mappings: ISO 27002:2022 8.6; SOC 2 A1.1; SCF CAP-01, CAP-02, CAP-04.
 |---|---|
 | “monitoring tool configuration, performance metrics” | DescribeAlarms plus hourly CloudWatch AWS/EC2 CPUUtilization, retained as daily summaries with hourly counts, mean of hourly averages and peak instance CPU. |
 | “alerts” | Alarm state/configuration and all available history in the review window for current matching CPU alarms, including configuration/action/state records. |
-| “capacity plans” | Retains executable AWS MinSize, DesiredCapacity, MaxSize and scaling policies as the technical capacity plan. This does not validate a separate business capacity plan. |
+| “capacity plans” | Retains MinSize, DesiredCapacity, MaxSize and scaling policies. The capacity plan remains subject to review. |
 | “thresholds defined” | Checks a supported high CPU alarm has a numeric threshold, evaluation period, enabled actions and an OK/ALARM state. |
 | “elastic capacity available” | Tests configured headroom, healthy running capacity, linked CPU target tracking, suspended processes and recorded scaling failures. It does not prove unused EC2 quota or reserve physical capacity; see the scope qualification below. |
 | “monitoring tool configuration” | Discover all selected EC2 Auto Scaling groups before retrieving evidence; no group is omitted because its metrics or policy are absent. Every discovered group is treated as critical. |
@@ -89,9 +89,9 @@ Framework mappings: ISO 27002:2022 8.6; SOC 2 A1.1; SCF CAP-01, CAP-02, CAP-04.
 
 **Scope:** current EC2 Auto Scaling groups, CPU/compute capacity and native group CPU alarms. Memory, storage, network/application bottlenecks, standalone EC2 and other services/accounts require separate coverage. Current inventory cannot reconstruct deleted resources or historical configuration; group metrics do not prove individual-instance monitoring.
 
-Elasticity means configured headroom, healthy capacity and scaling configuration/history. It does not establish spare EC2 quotas, reserved capacity or workload readiness. Where the methodology requires those, this is partial evidence.
+Elasticity means configured headroom, healthy capacity and scaling configuration/history. It does not establish spare EC2 quotas, reserved capacity or workload readiness. The methodology requires available elastic capacity, so the final review remains pending in this version.
 
-Use a control scoped to this technology. This script alone cannot complete an enterprise-wide capacity audit.
+Use the actual control scope. This script supplies partial evidence and cannot complete the control without the remaining capacity review.
 
 ## 4. Before you start
 
@@ -102,7 +102,7 @@ Use a control scoped to this technology. This script alone cannot complete an en
 - CPU target-tracking scaling per group, with its high alarm calling that policy. The group must have positive desired capacity, healthy in-service instances and maximum capacity above desired. This version does not accept step/simple/scheduled-only scaling as equivalent evidence.
 - Read-only credentials (§5), configured regions and HTTPS access to regional Auto Scaling, CloudWatch and optional STS endpoints.
 
-Defaults discover all groups; only connection details and regions need initial configuration. Missing infrastructure or evidence produces Failed. Reference thresholds are adjustable and are not mandated by the template.
+Defaults discover all groups; only connection details and regions need initial configuration. Missing infrastructure or evidence is recorded for review; completion remains pending. Reference thresholds are adjustable and are not mandated by the template.
 
 ## 5. Setup on AWS
 
@@ -152,7 +152,7 @@ Follow [Installing an automation](../../docs/installing.md).
 
 Keep the original methodology in the control description. Confirm that the control's scope is this account's selected Auto Scaling groups; see §3 before replacing a broader manual audit.
 
-Default execution saves the audit. Use `DRY_RUN=true` for an initial simulation, then restore `false` and verify a disposable audit. See the [installation guide](../../docs/installing.md).
+Default execution saves evidence and a review comment, leaving completion pending. Use `DRY_RUN=true` for an initial simulation, then restore `false` and verify a disposable audit. See the [installation guide](../../docs/installing.md).
 
 ## 7. Variables
 
@@ -166,20 +166,20 @@ Default execution saves the audit. Use `DRY_RUN=true` for an initial simulation,
 | `MIN_METRIC_COVERAGE_PERCENT` | `90` | Reference minimum percentage of hourly CPU buckets, greater than 0 and at most 100. Latest bucket must also be within two hours of the end. |
 | `MAX_GROUPS` | `20` | Maximum selected population, 1–100. Exceeding it aborts, rather than sampling or truncating. Runtime/evidence limits may require a smaller scope. |
 | `DRY_RUN` | `false` | Explicit simulation when true: no attachments, result or comment are written. |
-| `RESULT_PASSED_ID` | `2` | Your eramba Passed result option ID. |
-| `RESULT_FAILED_ID` | `1` | Your eramba Failed result option ID; must differ from Passed. |
+| `RESULT_PASSED_ID` | `2` | Reserved for compatibility; this version does not write a final result. |
+| `RESULT_FAILED_ID` | `1` | Reserved for compatibility; must differ from Passed. |
 | `MAX_LOG_ITEMS` | `5` | 1–10 failure examples in the conclusion and up to 3 capacity findings. Full details remain in CSV. |
 
 The script stops collection after approximately 190 seconds plus its bounded in-flight request, or when accumulated evidence exceeds its size budget. This leaves time for reporting inside the 240-second runner limit. It never returns a partial population as Passed. Split large scopes across separate controls.
 
 ## 8. Results in eramba
 
-A live run saves Passed/Failed, the UTC execution dates and a conclusion, then adds a comment linking two attachments:
+A live run adds the review conclusion in a comment linking two attachments. It does not edit the result or execution dates:
 
 - `evidence-<automation-id>-<date>.csv`: observations, check results and reasons.
 - `config-<automation-id>-<date>.txt`: settings used, without credentials.
 
-A failed control is a completed audit. A collection error saves no result. Uploads can remain if saving fails; a comment failure can leave the result already saved. Inspect the audit before retrying.
+Complete the audit after reviewing the remaining requirements and technical findings. A collection error saves no result. Uploads can remain if a later upload or comment fails. Inspect the audit before retrying.
 
 `DRY_RUN=true` displays the outcome without uploads, edits or comments.
 
@@ -207,6 +207,7 @@ Unlink the automation in eramba and remove dedicated credentials/permissions if 
 
 | Version | Date | Change |
 |---|---|---|
+| 0.2.0 | 2026-09-28 | Leaves completion pending: scaling configuration alone does not prove available elastic capacity or validate the capacity plan. |
 | 0.1.1 | 2026-09-28 | Removes unused code for the companion control; concise documentation. Live validation pending. |
 | 0.1.0 | 2026-09-28 | Initial implementation. |
 
