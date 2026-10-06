@@ -2,7 +2,7 @@
 id: oa-submitted-risk-review
 name: Submitted Assessment Risk Review
 version: 0.1.0
-status: draft
+status: tested
 vendor: OpenAI
 technology: OpenAI Chat Completions (optional) + eramba API v2
 eramba_module: Online Assessments
@@ -29,14 +29,14 @@ variables:
 dependencies: []
 timeout_seconds: 120
 eramba_version_tested: 3.31.1
-last_tested: null
+last_tested: 2026-10-06
 ---
 
 # Submitted Assessment Risk Review
 
 > **Tutorial templates.** This is one of the three example automations of the eramba course [Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81). It is built for the scenario of that tutorial (a Finance supplier list, supplier accounts, a supplier questionnaire). Use it as a starting point: review and adapt it to your own process before using it in production.
 
-**Technology:** OpenAI (optional). **Status:** draft. The score rule was tested on eramba 3.31.1. The AI review is pending real validation.
+**Technology:** OpenAI (optional). **Status:** tested with the score rule. Validated end to end on eramba 3.31.1: submitting an assessment from the portal ran it through the *OA has been submitted* notification and filled the assessment and supplier fields. The OpenAI review is pending real validation.
 
 Prepares the review of each supplier assessment as soon as it is submitted. It proposes a risk level and a written conclusion on the assessment, and copies the risk level and the review date to the supplier. The assessor then does the formal review in eramba.
 
@@ -74,7 +74,7 @@ The level and conclusion, from AI or from the rule, are a proposal for the asses
 
 ## 4. Before you start
 
-- eramba Enterprise, with the custom fields from the guide. *Post Assessment Risk Level* must include the options Low, Medium and High.
+- eramba Enterprise, with the custom fields from the guide. *Post Assessment Risk Level* and *Supplier Risk Level* must include the options Undefined, Low, Medium and High.
 - An Online Assessment custom field *Automated Review Conclusion* of type *Paragraph*, which holds the conclusion.
 - An eramba user with *Allow APIs* that can edit Online Assessments and Third Parties, plus an API token for it.
 - Optional: an OpenAI API key restricted to this use.
@@ -87,7 +87,7 @@ Create a project API key and give it access only to the configured model. Store 
 
 1. Create Secret `eramba_api_token`. Optionally create `openai_api_key`.
 2. In **Online Assessments**, create an automation: PHP 8.4, no Composer packages, timeout 120 s. Paste [run.php](run.php).
-3. Check the custom field IDs in §7.
+3. Check the custom field names in §7. The script finds their IDs by name, because custom field IDs differ between installations.
 4. Leave *Recurrent Automation* off: this automation runs per assessment, not on a schedule.
 5. In **Online Assessments > Notifications**, add the notification *OA has been submitted*. Turn on *Trigger Automation* and select this automation in its *Automation* tab. Email can stay off.
 6. Test it from the automation editor (*Test*) on a submitted assessment with `DRY_RUN=true` and `FORCE_REVIEW=true`. Then set both back to `false`, submit an assessment from the portal and check the log, the assessment and its supplier.
@@ -96,9 +96,8 @@ Create a project API key and give it access only to the configured model. Store 
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `OA_RISK_FIELD` | `CustomField_2` | Assessment field *Post Assessment Risk Level*. |
-| `OA_CONCLUSION_FIELD` | `CustomField_6` | Assessment field *Automated Review Conclusion* (paragraph). |
-| `TP_RISK_FIELD` / `TP_REVIEW_DATE` | `CustomField_4` / `CustomField_5` | Third Party fields *Supplier Risk Level* and *Last Review Date*. |
+| `OA_RISK_FIELD` / `OA_CONCLUSION_FIELD` | `Post Assessment Risk Level` / `Automated Review Conclusion` | Names of the assessment custom fields. |
+| `TP_RISK_FIELD` / `TP_REVIEW_DATE` | `Supplier Risk Level` / `Last Review Date` | Names of the Third Party custom fields. |
 | `UNREVIEWED_VALUES` | `''`, `Undefined` | Risk level values that mean the assessment is still pending review. |
 | `HIGH_BELOW_PCT` / `MEDIUM_BELOW_PCT` | `50` / `80` | Score thresholds (%) of the rule. These are reference defaults, not part of the guide. |
 | `OPENAI_MODEL` / `OPENAI_REASONING` | `gpt-6.1-luna` / `low` | Model and reasoning effort for the AI review. |
@@ -117,6 +116,7 @@ The log shows the assessment's level, suppliers and conclusion. The assessment f
 |---|---|
 | `Unexpected AI answer` | The model did not return valid JSON. Retry, or change `OPENAI_MODEL`. |
 | OpenAI `401` / `404` | Check the key, and the model name or its access. |
+| `Custom field '…' not found` | Create the field, or fix its name in `$config`. |
 | eramba `422` on the risk level | Add the missing option (Low, Medium or High) to the custom field. |
 | `SKIPPED` in the log | The assessment is not submitted or already has a level. Use `FORCE_REVIEW` to test. |
 | `No Online Assessment in context` | The automation ran without an item: run it from the notification or with *Test* on an assessment. |
@@ -135,4 +135,4 @@ Disable or delete the automation, delete `openai_api_key` and revoke the OpenAI 
 
 | Version | Change |
 |---|---|
-| 0.1.0 | First packaged version, run by the *OA has been submitted* notification. Validated on eramba 3.31.1 with the score rule: the notification ran it on submission, the assessment got its level and conclusion, and the supplier its level and date. The OpenAI review is pending validation. |
+| 0.1.0 | Validated end to end on eramba 3.31.1 with the score rule: portal submission → notification → risk level and conclusion on the assessment, risk level and date on the supplier; re-run skipped. OpenAI review pending validation. |

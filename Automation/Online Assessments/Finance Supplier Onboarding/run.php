@@ -21,7 +21,9 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *       (or has the same name: then the ID is stored on it instead of duplicating).
  *    2. Finds the supplier contact by email or creates the account
  *       (Online Assessment portal only, magic-link access).
- *    3. Creates the Third Party with that account as Third Party Contact.
+ *    3. Creates the Third Party with that account as Third Party Contact and
+ *       "Requires Online Assessment" = the sheet's Requies OA (Yes/No). Creating it
+ *       fires the "New Item" notification used by automation 2.
  *  Rows without contact email create the Third Party without contact; its
  *  Dynamic Status flags it until the details are completed.
  *
@@ -58,8 +60,11 @@ $config = [
     'COL_CONTACT_SURNAME' => 'Supplier Contact Surname',
     'COL_CONTACT_EMAIL' => 'Supplier Contact Email',
     'COL_FINANCE_ID'    => 'Supplier ID',
+    'COL_REQUIRES_OA'   => 'Requies OA',    // As spelled in the tutorial sheet; Yes/No
     // eramba
-    'FINANCE_ID_FIELD'  => 'CustomField_3',                         // Third Party field "Finance Supplier ID"
+    // Third Party custom fields, by name (their IDs differ between installations)
+    'FINANCE_ID_FIELD'  => 'Finance Supplier ID',                   // Text
+    'REQUIRES_OA_FIELD' => 'Requires Online Assessment',            // Dropdown: Undefined / Yes / No
     'SUPPLIER_GROUPS'   => ['No Allowed Permissions', 'Suppliers'], // Groups of new supplier accounts
     'GRC_GROUP'         => 'GRC',                                   // Third Party "GRC Contact"
     'TYPE_MAP'          => ['customer' => 1, 'supplier' => 2, 'suppliers' => 2, 'regulator' => 3],
@@ -150,6 +155,22 @@ function groupId(string $name): int
     $group = erambaFindOne('groups', 'name', $name)
         ?? throw new RuntimeException("Group '$name' not found in eramba.");
     return (int)$group['id'];
+}
+
+/**
+ * API key ("CustomField_N") of the custom field with this name in $resource.
+ * Custom field IDs differ between installations, so the scripts use names.
+ */
+function customField(string $resource, string $name): string
+{
+    static $cache = [];
+    $cache[$resource] ??= erambaApi('GET', "/api/v2/$resource/custom-fields")['data'] ?? [];
+    foreach ($cache[$resource] as $field) {
+        if (strcasecmp(trim((string)$field['name']), trim($name)) === 0) {
+            return 'CustomField_' . $field['id'];
+        }
+    }
+    throw new RuntimeException("Custom field '$name' not found in $resource: create it (README §4) or fix its name in \$config.");
 }
 
 // ─── 5. COLLECT: read the Finance supplier sheet ────────────────────────────
@@ -251,6 +272,14 @@ function findOrCreateContact(array $row, array $config, array $groupIds): ?int
     return (int)($res['data']['id'] ?? throw new RuntimeException('User created but no ID returned.'));
 }
 
+/** "Yes" or "No" from the sheet's Requies OA cell (yes, y, si, sí, true, 1, x = Yes). */
+function requiresOa(array $row, array $config): string
+{
+    $value = mb_strtolower(trim(cell($row, $config, 'COL_REQUIRES_OA')));
+    return in_array($value, ['yes', 'y', 'si', 'sí', 'true', '1', 'x'], true) ? 'Yes' : 'No';
+}
+
+/** Returns CREATED, LINKED or SKIPPED. */
 /** Returns CREATED, LINKED or SKIPPED. */
 function syncRow(array $row, array $config, array $groupIds, string $grcContact): string
 {
@@ -279,9 +308,10 @@ function syncRow(array $row, array $config, array $groupIds, string $grcContact)
         'Sponsors'            => $userId ? ["User-$userId"] : [],
         'GrcContacts'         => [$grcContact],
         $idField              => $financeId,
+        $config['REQUIRES_OA_FIELD'] => requiresOa($row, $config), // read by automation 2
     ];
     if (!$config['DRY_RUN']) {
-        erambaCall(addObjectMacro($data), "add Third Party $name");
+        erambaCall(addObjectMacro($data), "add Third Party $name"); // fires the "New Item" notification
     }
     return 'CREATED';
 }
@@ -295,6 +325,9 @@ try {
     checkSecrets($secrets);
     if (!preg_match('/^[A-Za-z0-9_-]{20,}$/', $config['SPREADSHEET_ID'])) {
         throw new RuntimeException('Set SPREADSHEET_ID (README §7).');
+    }
+    foreach (['FINANCE_ID_FIELD', 'REQUIRES_OA_FIELD'] as $key) {
+        $config[$key] = customField('third-parties', $config[$key]);
     }
     $groupIds   = array_map('groupId', $config['SUPPLIER_GROUPS']);
     $grcContact = 'Group-' . groupId($config['GRC_GROUP']);
@@ -311,7 +344,7 @@ try {
         try {
             $action = syncRow($row, $config, $groupIds, $grcContact);
             if ($action !== 'SKIPPED') {
-                logInfo("$action: $name" . (cell($row, $config, 'COL_CONTACT_EMAIL') === '' ? ' (no contact email)' : ''));
+                logInfo("$action: $name (Requires OA: " . requiresOa($row, $config) . ')' . (cell($row, $config, 'COL_CONTACT_EMAIL') === '' ? ' (no contact email)' : ''));
             }
         } catch (Throwable $e) {
             $action = 'ERROR';

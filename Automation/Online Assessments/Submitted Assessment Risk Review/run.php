@@ -47,10 +47,11 @@ $openAiApiKey = '%SECRET_openai_api_key%';
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
     // eramba fields
-    'OA_RISK_FIELD'      => 'CustomField_2', // Assessment: "Post Assessment Risk Level"
-    'OA_CONCLUSION_FIELD' => 'CustomField_6', // Assessment: "Automated Review Conclusion" (paragraph)
-    'TP_RISK_FIELD'      => 'CustomField_4', // Third Party: "Supplier Risk Level"
-    'TP_REVIEW_DATE'     => 'CustomField_5', // Third Party: "Last Review Date"
+    // Custom fields, by name (their IDs differ between installations)
+    'OA_RISK_FIELD'       => 'Post Assessment Risk Level',  // Assessment dropdown: Undefined / Low / Medium / High
+    'OA_CONCLUSION_FIELD' => 'Automated Review Conclusion', // Assessment paragraph
+    'TP_RISK_FIELD'       => 'Supplier Risk Level',         // Third Party dropdown: Undefined / Low / Medium / High
+    'TP_REVIEW_DATE'      => 'Last Review Date',            // Third Party date
     'UNREVIEWED_VALUES'  => ['', 'Undefined'], // Risk level values that mean "not reviewed yet"
     // Rule used without AI (score in %)
     'HIGH_BELOW_PCT'     => 50,              // Any open finding is also High
@@ -147,6 +148,22 @@ function erambaAll(string $resource, array $filter = []): array
         }
     }
     throw new RuntimeException("Page limit exceeded for $resource.");
+}
+
+/**
+ * API key ("CustomField_N") of the custom field with this name in $resource.
+ * Custom field IDs differ between installations, so the scripts use names.
+ */
+function customField(string $resource, string $name): string
+{
+    static $cache = [];
+    $cache[$resource] ??= erambaApi('GET', "/api/v2/$resource/custom-fields")['data'] ?? [];
+    foreach ($cache[$resource] as $field) {
+        if (strcasecmp(trim((string)$field['name']), trim($name)) === 0) {
+            return 'CustomField_' . $field['id'];
+        }
+    }
+    throw new RuntimeException("Custom field '$name' not found in $resource: create it (README §4) or fix its name in \$config.");
 }
 
 // ─── 5. COLLECT: pending assessments and their answers/findings ─────────────
@@ -264,6 +281,10 @@ try {
 
     logStep(1, 'Checking configuration');
     checkSecrets($secrets);
+    foreach (['OA_RISK_FIELD' => 'vendor-assessments', 'OA_CONCLUSION_FIELD' => 'vendor-assessments',
+              'TP_RISK_FIELD' => 'third-parties', 'TP_REVIEW_DATE' => 'third-parties'] as $key => $resource) {
+        $config[$key] = customField($resource, $config[$key]);
+    }
     $useAi = secretExists($openAiApiKey);
     logInfo('Review mode: ' . ($useAi ? "AI ({$config['OPENAI_MODEL']}, reasoning {$config['OPENAI_REASONING']})" : 'score/findings rule (no openai_api_key secret)'));
 

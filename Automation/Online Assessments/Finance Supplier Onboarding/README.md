@@ -2,7 +2,7 @@
 id: oa-finance-supplier-onboarding
 name: Finance Supplier Onboarding
 version: 0.1.0
-status: draft
+status: tested
 vendor: Google
 technology: Google Sheets API + eramba API v2
 eramba_module: Third Parties
@@ -21,7 +21,9 @@ variables:
   - COL_CONTACT_SURNAME
   - COL_CONTACT_EMAIL
   - COL_FINANCE_ID
+  - COL_REQUIRES_OA
   - FINANCE_ID_FIELD
+  - REQUIRES_OA_FIELD
   - SUPPLIER_GROUPS
   - GRC_GROUP
   - TYPE_MAP
@@ -32,14 +34,14 @@ variables:
 dependencies: []
 timeout_seconds: 60
 eramba_version_tested: 3.31.1
-last_tested: null
+last_tested: 2026-10-06
 ---
 
 # Finance Supplier Onboarding
 
 > **Tutorial templates.** This is one of the three example automations of the eramba course [Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81). It is built for the scenario of that tutorial (a Finance supplier list, supplier accounts, a supplier questionnaire). Use it as a starting point: review and adapt it to your own process before using it in production.
 
-**Technology:** Google Sheets. **Status:** draft. Its logic was tested on eramba 3.31.1; this packaged version has not been re-validated.
+**Technology:** Google Sheets. **Status:** tested. Validated end to end on eramba 3.31.1: a new sheet row created the supplier user and the Third Party (with *Requires Online Assessment*), and a second run created nothing.
 
 Keeps eramba's supplier list in sync with the list Finance maintains in Google Sheets. Each new supplier gets a supplier user account and a Third Party whose Third Party Contact is that account.
 
@@ -49,9 +51,9 @@ Keeps eramba's supplier list in sync with the list Finance maintains in Google S
 |---|---|
 | **Runs** | Recurrent, daily (section *Third Parties*). |
 | **Reads** | The Finance supplier sheet in Google Sheets (read-only), and existing users and Third Parties in eramba. |
-| **Creates** | For each new supplier: a supplier user (Online Assessment portal only, magic-link access) and a Third Party with that user as *Third Party Contact* and the GRC group as *GRC Contact*. |
+| **Creates** | For each new supplier: a supplier user (Online Assessment portal only, magic-link access) and a Third Party with that user as *Third Party Contact* and the GRC group as *GRC Contact*. It also sets *Requires Online Assessment* from the sheet's *Requies OA* (Yes/No). Creating it fires the *New Item* notification, which runs [Missing Online Assessment Launch](../Missing%20Online%20Assessment%20Launch/). |
 | **Updates** | Only the *Finance Supplier ID* of an existing Third Party with the same name and no ID yet. |
-| **Never does** | Delete or disable anything, change existing contacts, or send Online Assessments. |
+| **Never does** | Delete or disable anything, change existing contacts, or send Online Assessments itself. |
 
 ## 1. Guide and scope
 
@@ -63,8 +65,10 @@ This is automation 1 of 3 in [Online Assessments – Advanced Configurations](ht
 |---|---|
 | A Third Party already has the row's Finance Supplier ID | Nothing. |
 | A Third Party has the same name but no Finance Supplier ID | Stores the ID on it (`LINKED`). Suppliers created before the ID existed are not duplicated. |
-| New supplier with contact email | Reuses the user with that email, or creates one. Then it creates the Third Party with that user as Third Party Contact and the GRC group as GRC Contact (`CREATED`). |
+| New supplier with contact email | Reuses the user with that email, or creates one. Then it creates the Third Party with that user as Third Party Contact, the GRC group as GRC Contact, the Finance Supplier ID and *Requires Online Assessment* (`CREATED`). |
 | New supplier without contact email | Creates the Third Party without contact. The Dynamic Status *Missing Supplier Contact* flags it until the details exist. |
+
+*Requies OA* (spelled as in the tutorial sheet) counts as Yes for `yes`, `y`, `si`, `sí`, `true`, `1` or `x`; anything else, including empty, is No. It is only set when the supplier is created.
 
 New supplier accounts are active, use magic-link access (no local password) and only have the Online Assessment portal. Their groups are `SUPPLIER_GROUPS`.
 
@@ -76,6 +80,7 @@ Only rows with a supplier name are read. Rows removed from the sheet are not del
 
 - eramba Enterprise, with the configuration from the guide's *Implementation* chapter.
 - The Third Party custom field *Finance Supplier ID* (text) is in the view, and the Finance sheet has a matching *Supplier ID* column.
+- The Third Party custom field *Requires Online Assessment* (dropdown: Undefined, Yes, No), filled from the sheet's *Requies OA* column.
 - Groups *No Allowed Permissions*, *Suppliers* and *GRC* exist.
 - An eramba user with *Allow APIs* that can create users and edit Third Parties, plus an API token for it.
 
@@ -100,8 +105,8 @@ Only rows with a supplier name are read. Rows removed from the sheet are not del
 | `SPREADSHEET_ID` | Empty | Required. The ID from the sheet URL. |
 | `SHEET_RANGE` | `Sheet1!A:Z` | Tab and columns to read. The first row is the header. |
 | `MAX_ROWS` | `500` | The run aborts above this, with no partial sync. |
-| `COL_*` | Guide column names | Header names, case-insensitive. The name, email and Supplier ID columns are mandatory. |
-| `FINANCE_ID_FIELD` | `CustomField_3` | Field ID of *Finance Supplier ID*. Check it in the API documentation of your instance. |
+| `COL_*` | Guide column names | Header names, case-insensitive. The name, email and Supplier ID columns are mandatory. `COL_REQUIRES_OA` is `Requies OA`, as spelled in the tutorial sheet. |
+| `FINANCE_ID_FIELD` / `REQUIRES_OA_FIELD` | `Finance Supplier ID` / `Requires Online Assessment` | Names of the Third Party custom fields. The script finds their IDs by name, because custom field IDs differ between installations. |
 | `SUPPLIER_GROUPS` | `No Allowed Permissions`, `Suppliers` | Groups of new supplier accounts. |
 | `GRC_GROUP` | `GRC` | Group set as GRC Contact. |
 | `TYPE_MAP` / `DEFAULT_TYPE_ID` | Customer 1, Supplier 2, Regulator 3 / `2` | Maps the sheet *Type* column to Third Party type IDs. |
@@ -118,6 +123,7 @@ The log lists every created and linked supplier, plus a summary line. Row errors
 | Problem | Action |
 |---|---|
 | `Secret '…' is missing` | Create the Secret with exactly that name. |
+| `Custom field '…' not found` | Create the field, or fix its name in `$config`. |
 | Google `403 PERMISSION_DENIED` | Share the sheet with the service account email. |
 | `Column '…' not found` | Fix the `COL_*` names or the sheet header. |
 | eramba `401` | Enable *Allow APIs* on the token's user, or regenerate the token. |
@@ -136,4 +142,4 @@ Disable or delete the automation, delete the two Secrets, revoke the API token, 
 
 | Version | Change |
 |---|---|
-| 0.1.0 | First packaged version. Logic validated on eramba 3.31.1: creation, Finance ID linking and re-runs without duplicates. Packaged version pending re-validation. |
+| 0.1.0 | Validated end to end on eramba 3.31.1: new row → supplier user + Third Party with *Requires Online Assessment* = Yes; existing supplier skipped; re-run without duplicates. |

@@ -12,24 +12,27 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Online%20Assessments
  *
- *  Section: Online Assessments. Recurrent (daily, after Finance Supplier Onboarding).
+ *  Section: Third Parties. Not recurrent: run by the Third Party notification
+ *  "New Item" (Trigger Automation), once per created supplier.
  *  Composer packages: none
  * ============================================================================
  *
- *  For every Third Party of the supplier type that has a Third Party Contact
- *  and no Online Assessment, creates and starts one: configured questionnaire,
- *  GRC group as Assessor, the contact as Recipient, magic-link access.
- *  Suppliers without contact are skipped (their Dynamic Status flags them).
- *  Re-running is safe: a supplier with any Online Assessment is never re-sent.
+ *  For the Third Party that fired the notification:
+ *    1. Skips it unless it is a supplier, its "Requires Online Assessment" field
+ *       (set from the Finance sheet by automation 1) is Yes, it has a Third Party
+ *       Contact and it has no Online Assessment yet.
+ *    2. Creates and starts an Online Assessment through the eramba API:
+ *       configured questionnaire, GRC group as Assessor, the contact as Recipient,
+ *       magic-link access.
+ *  Re-running is safe: a supplier with any assessment is never re-sent.
  *
  *  Output
  *    STDOUT  Step-by-step log (visible in eramba Automation Logs, first 10 KB).
  *    STDERR  Only technical errors. Any STDERR output marks the run as failed.
  *
  *  Exit codes
- *    0  Run completed (dry-run or every supplier processed).
- *    1  Technical error, or at least one assessment failed to be created.
- *       Assessments created before the error stay saved and are not duplicated.
+ *    0  Run completed (dry-run, created, or skipped because not needed).
+ *    1  Technical error; nothing was created.
  */
 
 // ─── 1. SECRETS ─────────────────────────────────────────────────────────────
@@ -43,6 +46,7 @@ $config = [
     'QUESTIONNAIRE_NAME' => 'Supplier Security Questionnaire', // Exact questionnaire name in eramba
     'ASSESSOR_GROUP'     => 'GRC',      // Assessor of the Online Assessment
     'SUPPLIER_TYPE_ID'   => 2,          // Third Party type "Suppliers"
+    'REQUIRES_OA_FIELD'  => 'Requires Online Assessment', // Third Party custom field (by name), set from the Finance sheet
     'DURATION_DAYS'      => 30,         // Days the assessment stays open
     'TITLE_PREFIX'       => 'Supplier Security Assessment – ',
     'MAX_ITEMS'          => 2000,       // Abort above this many Third Parties / assessments
@@ -53,7 +57,8 @@ $config = [
 ];
 
 // ─── 3. ERAMBA MACROS ───────────────────────────────────────────────────────
-// None: this automation works on the whole section, not on one item.
+// Replaced by eramba with the Third Party that fired the notification.
+$thirdPartyId = '%THIRDPARTY_ID%';
 const AUTOMATION_ID      = 'oa-missing-assessment-launch';
 const AUTOMATION_VERSION = '0.1.0';
 const PERIOD_DAYS        = 1; // eramba period type: 1 day, 2 week, 3 month, 4 year
@@ -146,119 +151,127 @@ function erambaAll(string $resource, array $filter = []): array
     throw new RuntimeException("Page limit exceeded for $resource.");
 }
 
-// ─── 5. COLLECT: suppliers and existing assessments ─────────────────────────
-function collect(array $config): array
+/**
+ * API key ("CustomField_N") of the custom field with this name in $resource.
+ * Custom field IDs differ between installations, so the scripts use names.
+ */
+function customField(string $resource, string $name): string
 {
-    $assessed = [];
+    static $cache = [];
+    $cache[$resource] ??= erambaApi('GET', "/api/v2/$resource/custom-fields")['data'] ?? [];
+    foreach ($cache[$resource] as $field) {
+        if (strcasecmp(trim((string)$field['name']), trim($name)) === 0) {
+            return 'CustomField_' . $field['id'];
+        }
+    }
+    throw new RuntimeException("Custom field '$name' not found in $resource: create it (README §4) or fix its name in \$config.");
+}
+
+// ─── 5. COLLECT: the supplier and whether it already has an assessment ──────
+function loadSupplier(string $thirdPartyId): array
+{
+    if (!ctype_digit($thirdPartyId)) {
+        throw new RuntimeException('No Third Party in context: run this automation from the "New Item" notification, or Test it on an item (README §6).');
+    }
+    $match = array_values(array_filter(erambaAll('third-parties'), fn ($t) => (int)$t['id'] === (int)$thirdPartyId));
+    return $match[0] ?? throw new RuntimeException("Third Party #$thirdPartyId not found through the API.");
+}
+
+function hasAssessment(int $thirdPartyId): bool
+{
     foreach (erambaAll('vendor-assessments') as $oa) {
         foreach ($oa['third_parties'] ?? [] as $tp) {
-            $assessed[(int)$tp['id']] = true;
+            if ((int)$tp['id'] === $thirdPartyId) {
+                return true;
+            }
         }
     }
-    $suppliers = erambaAll('third-parties', ['third_party_type_id' => ['operator' => '$eq', 'value' => $config['SUPPLIER_TYPE_ID']]]);
-    return [$suppliers, $assessed];
+    return false;
 }
 
-// ─── 6. EVALUATE: which suppliers need an assessment ────────────────────────
-function plan(array $suppliers, array $assessed): array
+// ─── 6. EVALUATE: does this supplier need an assessment? ────────────────────
+/** Recipients ("User-1", "Group-2") or null with the reason it is skipped. */
+function recipients(array $tp, array $config): array
 {
-    $plan = ['launch' => [], 'assessed' => 0, 'no_contact' => []];
-    foreach ($suppliers as $tp) {
-        if (isset($assessed[(int)$tp['id']])) {
-            $plan['assessed']++;
-            continue;
-        }
-        $recipients = array_merge(
-            array_map(fn ($u) => 'User-' . $u['id'], $tp['sponsors']['users'] ?? []),
-            array_map(fn ($g) => 'Group-' . $g['id'], $tp['sponsors']['groups'] ?? []),
-        );
-        if (!$recipients) {
-            $plan['no_contact'][] = $tp['name'];
-            continue;
-        }
-        $plan['launch'][] = ['id' => (int)$tp['id'], 'name' => $tp['name'], 'recipients' => $recipients];
+    if ((int)($tp['third_party_type_id'] ?? 0) !== $config['SUPPLIER_TYPE_ID']) {
+        return [null, 'not a supplier'];
     }
-    return $plan;
+    if (trim((string)($tp[$config['REQUIRES_OA_FIELD']] ?? '')) !== 'Yes') {
+        return [null, 'Requires Online Assessment is not Yes (set from the Finance sheet)'];
+    }
+    $recipients = array_merge(
+        array_map(fn ($u) => 'User-' . $u['id'], $tp['sponsors']['users'] ?? []),
+        array_map(fn ($g) => 'Group-' . $g['id'], $tp['sponsors']['groups'] ?? []),
+    );
+    if (!$recipients) {
+        return [null, 'no Third Party Contact'];
+    }
+    if (hasAssessment((int)$tp['id'])) {
+        return [null, 'already has an Online Assessment'];
+    }
+    return [$recipients, ''];
 }
 
-// ─── 7. APPLY: create and start the assessments ─────────────────────────────
-function launch(array $supplier, int $questionnaireId, string $assessor, array $config): void
+// ─── 7. APPLY: create and start the assessment ──────────────────────────────
+function launch(array $tp, array $recipients, int $questionnaireId, string $assessor, array $config): int
 {
-    $data = [
-        'title'                          => $config['TITLE_PREFIX'] . $supplier['name'],
-        'description'                    => 'Created automatically for a supplier without Online Assessments.',
-        'VendorAssessmentQuestionnaires' => $questionnaireId,
-        'Auditors'                       => [$assessor],
-        'Auditees'                       => $supplier['recipients'],
-        'public_access'                  => 1,          // Magic-link access
-        'portal_title'                   => $supplier['name'] . ' – Security Assessment',
-        'questions_download'             => 0,
-        'report_id'                      => null,
-        'incomplete_submit'              => 0,
-        'start_after_saving'             => 1,          // Start now
-        'time_after_saving'              => 1,
-        'after_saving_period_type'       => PERIOD_DAYS,
-        'time_after_start'               => $config['DURATION_DAYS'],
-        'after_start_period_type'        => PERIOD_DAYS,
-        'recurrence'                     => 0,
-        'recurrence_period'              => 1,
-        'recurrence_period_type'         => PERIOD_DAYS,
-        'recurrence_auto_load'           => 0,
-        'ThirdParties'                   => [$supplier['id']],
-    ];
-    $res = erambaCall(addObjectMacro($data), "add Online Assessment for {$supplier['name']}");
-    logInfo(sprintf('CREATED: assessment #%s for %s -> %s', $res['data']['id'] ?? '?', $supplier['name'], implode(', ', $supplier['recipients'])));
+    $res = erambaApi('POST', '/api/v2/vendor-assessments', [
+        'title'                              => $config['TITLE_PREFIX'] . $tp['name'],
+        'description'                        => 'Created automatically for a supplier without Online Assessments.',
+        'vendor_assessment_questionnaire_id' => $questionnaireId,
+        'auditors'                           => [$assessor],
+        'auditees'                           => $recipients,
+        'public_access'                      => 1,     // Magic-link access
+        'portal_title'                       => $tp['name'] . ' – Security Assessment',
+        'questions_download'                 => 0,
+        'incomplete_submit'                  => 0,
+        'start_after_saving'                 => 1,     // Start now
+        'time_after_start'                   => $config['DURATION_DAYS'],
+        'after_start_period_type'            => PERIOD_DAYS,
+        'recurrence'                         => 0,
+        'recurrence_auto_load'               => 0,
+        'third_parties'                      => [(int)$tp['id']],
+    ]);
+    return (int)($res['data']['id'] ?? throw new RuntimeException('Assessment created but no ID returned.'));
 }
 
 // ─── 8. MAIN ────────────────────────────────────────────────────────────────
 try {
     echo sprintf("%s v%s\n", AUTOMATION_ID, AUTOMATION_VERSION);
-    logInfo($config['DRY_RUN'] ? 'SIMULATION ONLY — no assessment will be created.' : 'LIVE RUN — assessments will be created and sent.');
+    logInfo($config['DRY_RUN'] ? 'SIMULATION ONLY — no assessment will be created.' : 'LIVE RUN — the assessment will be created and sent.');
 
     logStep(1, 'Checking configuration');
     checkSecrets($secrets);
+    $config['REQUIRES_OA_FIELD'] = customField('third-parties', $config['REQUIRES_OA_FIELD']);
     $questionnaire = erambaFindOne('vendor-assessment-questionnaires', 'name', $config['QUESTIONNAIRE_NAME'])
         ?? throw new RuntimeException("Questionnaire '{$config['QUESTIONNAIRE_NAME']}' not found.");
     $assessor = 'Group-' . ((erambaFindOne('groups', 'name', $config['ASSESSOR_GROUP'])
         ?? throw new RuntimeException("Group '{$config['ASSESSOR_GROUP']}' not found."))['id']);
     logInfo('Secrets, questionnaire and assessor group present.');
 
-    logStep(2, 'Collecting suppliers and Online Assessments');
-    [$suppliers, $assessed] = collect($config);
-    logInfo(count($suppliers) . ' suppliers, ' . count($assessed) . ' with an assessment.');
+    logStep(2, "Reading Third Party #$thirdPartyId");
+    $tp = loadSupplier($thirdPartyId);
 
     logStep(3, 'Evaluating');
-    $plan = plan($suppliers, $assessed);
-    foreach ($plan['no_contact'] as $name) {
-        logInfo("SKIPPED: $name – no Third Party Contact");
-    }
-    logInfo(count($plan['launch']) . ' supplier(s) need an assessment.');
-
-    logStep(4, 'Creating Online Assessments');
-    $errors = 0;
-    foreach ($plan['launch'] as $supplier) {
-        if ($config['DRY_RUN']) {
-            logInfo("DRY RUN: would create an assessment for {$supplier['name']}.");
-            continue;
-        }
-        try {
-            launch($supplier, (int)$questionnaire['id'], $assessor, $config);
-        } catch (Throwable $e) {
-            $errors++;
-            logInfo('ERROR: ' . $e->getMessage());
-        }
+    [$recipients, $reason] = recipients($tp, $config);
+    if ($recipients === null) {
+        logInfo("SKIPPED: {$tp['name']} – $reason.");
+        echo "\nDone.\n";
+        exit(0);
     }
 
-    echo sprintf("\nTo create: %d | already assessed: %d | no contact: %d | errors: %d\n",
-        count($plan['launch']), $plan['assessed'], count($plan['no_contact']), $errors);
-    if ($errors > 0) {
-        fwrite(STDERR, "ERROR: $errors assessment(s) could not be created; see the log above.\n");
-        exit(1);
+    logStep(4, 'Creating the Online Assessment');
+    if ($config['DRY_RUN']) {
+        logInfo("DRY RUN: would create an assessment for {$tp['name']} -> " . implode(', ', $recipients));
+        echo "\nSIMULATION COMPLETE — nothing saved.\n";
+        exit(0);
     }
-    echo $config['DRY_RUN'] ? "\nSIMULATION COMPLETE — nothing saved.\n" : "\nDone.\n";
+    $id = launch($tp, $recipients, (int)$questionnaire['id'], $assessor, $config);
+    logInfo("CREATED: assessment #$id for {$tp['name']} -> " . implode(', ', $recipients));
+    echo "\nDone.\n";
     exit(0);
 } catch (Throwable $e) {
-    echo "\nABORTED: technical error; assessments created before it stay saved (see STDERR).\n";
+    echo "\nABORTED: technical error; no assessment was created (see STDERR).\n";
     fwrite(STDERR, 'ERROR: ' . $e->getMessage() . "\n");
     exit(1);
 }
