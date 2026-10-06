@@ -13,6 +13,7 @@ secrets:
   - openai_api_key (optional)
 variables:
   - OA_RISK_FIELD
+  - OA_CONCLUSION_FIELD
   - TP_RISK_FIELD
   - TP_REVIEW_DATE
   - UNREVIEWED_VALUES
@@ -37,7 +38,17 @@ last_tested: null
 
 **Technology:** OpenAI (optional). **Status:** draft. The score rule was tested on eramba 3.31.1. The AI review is pending real validation.
 
-Concludes every submitted supplier assessment. It sets a risk level and a written conclusion on the assessment, and copies the risk level and the review date to the supplier.
+Prepares the review of each supplier assessment as soon as it is submitted. It proposes a risk level and a written conclusion on the assessment, and copies the risk level and the review date to the supplier. The assessor then does the formal review in eramba.
+
+## At a glance
+
+| | |
+|---|---|
+| **Runs** | Not recurrent. The notification *OA has been submitted* runs it for the assessment that was just submitted (section *Online Assessments*). |
+| **Reads** | That assessment's score, open findings and answers. |
+| **Writes on the assessment** | *Post Assessment Risk Level* (Low, Medium or High) and *Automated Review Conclusion* (text). |
+| **Writes on its suppliers** | *Supplier Risk Level* (same level) and *Last Review Date* (today). |
+| **Never does** | The formal *Review* of the assessment: the assessor still reviews and closes it, with the automated conclusion in front of them. It also skips assessments that already have a risk level. |
 
 ## 1. Guide and scope
 
@@ -45,25 +56,26 @@ This is automation 3 of 3 in [Online Assessments – Advanced Configurations](ht
 
 ## 2. What it does
 
-The automation is not recurrent. The Online Assessments notification *OA has been submitted* runs it once for the assessment that was just submitted (macro `%VENDORASSESSMENT_ID%`). It only reviews that assessment if it is submitted and its *Post Assessment Risk Level* is empty or *Undefined*; otherwise it logs `SKIPPED`. The script reads the score, open findings and answers. It then decides a level with one of two methods:
+The automation is not recurrent. The Online Assessments notification *OA has been submitted* runs it once for the assessment that was just submitted (macro `%ONLINE_ASSESSMENT_ID%`). It only processes that assessment if it is submitted and its *Post Assessment Risk Level* is empty or *Undefined*; otherwise it logs `SKIPPED`. The script reads the score, open findings and answers. It then decides a level with one of two methods:
 
 | Mode | Rule |
 |---|---|
-| AI (Secret `openai_api_key` exists) | The answers, score and open findings go to `OPENAI_MODEL`. The model returns a level (Low, Medium or High) and a conclusion of at most 600 characters. Any other answer is an error, and the assessment stays unreviewed. |
+| AI (Secret `openai_api_key` exists) | The answers, score and open findings go to `OPENAI_MODEL`. The model returns a level (Low, Medium or High) and a conclusion of at most 600 characters. Any other answer is an error, and nothing is saved. |
 | Score rule (no Secret) | **High** if there are open findings or the score is below `HIGH_BELOW_PCT`. **Medium** if the score is below `MEDIUM_BELOW_PCT`. **Low** otherwise. |
 
 It then saves:
 
-- On the assessment: *Post Assessment Risk Level* and the conclusion in *Review Notes*.
+- On the assessment: the custom fields *Post Assessment Risk Level* and *Automated Review Conclusion*. The script does not run eramba's *Review* action: the assessor reviews the assessment with the conclusion in front of them.
 - On each linked Third Party: *Supplier Risk Level* and *Last Review Date* (today, UTC).
 
 ## 3. Coverage
 
-The AI conclusion is a proposal for the GRC team. Review it before you rely on it as evidence. Questionnaire answers are sent to OpenAI, so confirm that your data-processing terms allow this before you create the Secret. Attachments uploaded by the supplier are not read.
+The level and conclusion, from AI or from the rule, are a proposal for the assessor, not the review itself. The assessor confirms or changes them when reviewing the assessment. Questionnaire answers are sent to OpenAI, so confirm that your data-processing terms allow this before you create the Secret. Attachments uploaded by the supplier are not read.
 
 ## 4. Before you start
 
 - eramba Enterprise, with the custom fields from the guide. *Post Assessment Risk Level* must include the options Low, Medium and High.
+- An Online Assessment custom field *Automated Review Conclusion* of type *Paragraph*, which holds the conclusion.
 - An eramba user with *Allow APIs* that can edit Online Assessments and Third Parties, plus an API token for it.
 - Optional: an OpenAI API key restricted to this use.
 
@@ -85,18 +97,19 @@ Create a project API key and give it access only to the configured model. Store 
 | Variable | Default | Meaning |
 |---|---|---|
 | `OA_RISK_FIELD` | `CustomField_2` | Assessment field *Post Assessment Risk Level*. |
+| `OA_CONCLUSION_FIELD` | `CustomField_6` | Assessment field *Automated Review Conclusion* (paragraph). |
 | `TP_RISK_FIELD` / `TP_REVIEW_DATE` | `CustomField_4` / `CustomField_5` | Third Party fields *Supplier Risk Level* and *Last Review Date*. |
 | `UNREVIEWED_VALUES` | `''`, `Undefined` | Risk level values that mean the assessment is still pending review. |
 | `HIGH_BELOW_PCT` / `MEDIUM_BELOW_PCT` | `50` / `80` | Score thresholds (%) of the rule. These are reference defaults, not part of the guide. |
 | `OPENAI_MODEL` / `OPENAI_REASONING` | `gpt-6.1-luna` / `low` | Model and reasoning effort for the AI review. |
-| `FORCE_REVIEW` | `false` | `true` reviews the assessment even if it already has a level. Testing only. |
+| `FORCE_REVIEW` | `false` | `true` processes the assessment even if it already has a level. Testing only. |
 | `MAX_ITEMS` | `2000` | The run aborts above this many records. |
 | `ERAMBA_API_URL` / `ERAMBA_API_VERIFY_TLS` | Empty / `true` | See [Finance Supplier Onboarding §9](../Finance%20Supplier%20Onboarding/README.md#9-troubleshooting). |
-| `DRY_RUN` | `false` | `true` reviews and logs without saving. AI calls still run. |
+| `DRY_RUN` | `false` | `true` calculates and logs without saving. AI calls still run. |
 
 ## 8. Results
 
-The log shows each assessment's level, suppliers and conclusion. The assessment is saved first and its suppliers afterwards. If a supplier update fails, the assessment is already reviewed and is not retried. Set the supplier fields by hand, or test the automation on that assessment with `FORCE_REVIEW=true`.
+The log shows the assessment's level, suppliers and conclusion. The assessment fields are saved first and its suppliers afterwards. If a supplier update fails, the assessment already has a level and the automation will not retry it. Set the supplier fields by hand, or test the automation on that assessment with `FORCE_REVIEW=true`.
 
 ## 9. Troubleshooting
 
@@ -116,10 +129,10 @@ Adapt the prompt in `reviewByAi()` to your risk methodology, or change the thres
 
 ## 11. Removing
 
-Disable or delete the automation, delete `openai_api_key` and revoke the OpenAI key. Saved levels and conclusions remain.
+Disable or delete the automation, delete `openai_api_key` and revoke the OpenAI key. Saved levels and conclusions remain on the assessments and suppliers.
 
 ## 12. Changelog
 
 | Version | Change |
 |---|---|
-| 0.1.0 | First packaged version. The score rule was validated on eramba 3.31.1: an assessment at 50% with one open finding became High, and its supplier was updated. The OpenAI review is pending validation. |
+| 0.1.0 | First packaged version, run by the *OA has been submitted* notification. Validated on eramba 3.31.1 with the score rule: the notification ran it on submission, the assessment got its level and conclusion, and the supplier its level and date. The OpenAI review is pending validation. |

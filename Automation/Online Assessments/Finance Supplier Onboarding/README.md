@@ -43,6 +43,16 @@ last_tested: null
 
 Keeps eramba's supplier list in sync with the list Finance maintains in Google Sheets. Each new supplier gets a supplier user account and a Third Party whose Third Party Contact is that account.
 
+## At a glance
+
+| | |
+|---|---|
+| **Runs** | Recurrent, daily (section *Third Parties*). |
+| **Reads** | The Finance supplier sheet in Google Sheets (read-only), and existing users and Third Parties in eramba. |
+| **Creates** | For each new supplier: a supplier user (Online Assessment portal only, magic-link access) and a Third Party with that user as *Third Party Contact* and the GRC group as *GRC Contact*. |
+| **Updates** | Only the *Finance Supplier ID* of an existing Third Party with the same name and no ID yet. |
+| **Never does** | Delete or disable anything, change existing contacts, or send Online Assessments. |
+
 ## 1. Guide and scope
 
 This is automation 1 of 3 in [Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81). It replaces the manual step of creating the supplier test account and the Third Party. It does not create Online Assessments; [Missing Online Assessment Launch](../Missing%20Online%20Assessment%20Launch/) does.

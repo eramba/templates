@@ -2,15 +2,38 @@
 
 > **These are tutorial templates.** The three automations in this folder are the examples built in the eramba course [Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81). They follow that tutorial's scenario step by step and are meant to be followed alongside it. They are not a general-purpose product feature: review and adapt them to your own process before using them in production.
 
-PHP scripts that automate the supplier review cycle with Online Assessments. Suppliers flow from the Finance list into eramba. Each new supplier gets an assessment, and every submitted assessment is concluded with a supplier risk level.
+PHP scripts that automate the supplier review cycle with Online Assessments, as built in that course.
 
-These are the three example automations of the eramba guide **[Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81)**. They expect the configuration built in that guide's *Implementation* chapter:
+## How it works
 
-- Third Party type *Suppliers*.
-- A supplier questionnaire.
-- The *GRC* group.
-- Third Party custom fields *Supplier Risk Level*, *Last Review Date* and *Finance Supplier ID*.
-- The Online Assessment custom field *Post Assessment Risk Level*.
+```
+Finance sheet ──(1, daily)──▶ supplier user + Third Party
+                                   │
+                          (2, daily)▼
+                     Online Assessment sent to the supplier
+                                   │  supplier answers and submits
+       notification "OA has been submitted"
+                          (3, on submit)▼
+     risk level + conclusion on the assessment, risk level + date on the supplier
+                                   │
+                                   ▼
+                     the assessor reviews the assessment in eramba
+```
+
+| # | Automation | Runs | Creates or updates | Leaves to people |
+|---|---|---|---|---|
+| 1 | [Finance Supplier Onboarding](Finance%20Supplier%20Onboarding/) | Daily (Third Parties) | Supplier user and Third Party for each new row of the Finance sheet. | Completing missing contact details in the sheet. |
+| 2 | [Missing Online Assessment Launch](Missing%20Online%20Assessment%20Launch/) | Daily (Online Assessments) | One assessment, started and sent, for each supplier that has none. | Answering it (the supplier). |
+| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | When an assessment is submitted | Proposed risk level and conclusion on the assessment; risk level and review date on the supplier. | The formal review of the assessment (the assessor). |
+
+## Requirements
+
+The configuration from the course's *Implementation* chapter, plus the fields these automations write:
+
+- Third Party type *Suppliers*, a supplier questionnaire and the *GRC* group.
+- Third Party custom fields *Finance Supplier ID* (text), *Supplier Risk Level* (Low, Medium, High) and *Last Review Date* (date).
+- Online Assessment custom fields *Post Assessment Risk Level* (Low, Medium, High) and *Automated Review Conclusion* (paragraph).
+- An eramba user with *Allow APIs* and its API token in Secret `eramba_api_token`.
 
 ## Install
 
@@ -29,12 +52,13 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 |---|---|---|---|---|---|
 | 1 | [Finance Supplier Onboarding](Finance%20Supplier%20Onboarding/) | Third Parties | Google Sheets + eramba API | Daily | 0.1.0 draft; logic tested on eramba 3.31.1 |
 | 2 | [Missing Online Assessment Launch](Missing%20Online%20Assessment%20Launch/) | Online Assessments | eramba API | Daily, after #1 | 0.1.0 draft; logic tested on eramba 3.31.1 |
-| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | Online Assessments | OpenAI (optional) + eramba API | On submit (notification *OA has been submitted*) | 0.1.0 draft; score rule tested, AI review pending |
+| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | Online Assessments | OpenAI (optional) + eramba API | On submit (notification *OA has been submitted*) | 0.1.0 draft; tested end to end with the score rule, AI review pending |
 
 ## Shared design
 
-- **Section-level, not item-level.** The scripts read and update many records per run. Automation helpers can only add or edit records of their own section, and they cannot list records. So reads, and writes to other sections, use the eramba REST API v2 with a dedicated token (Secret `eramba_api_token`).
-- **Idempotent.** Every run starts from what is already in eramba. Re-running never duplicates accounts, Third Parties or assessments, and never reviews an assessment twice.
+- **eramba API for reads.** Automations #1 and #2 work on the whole section, and #3 also updates suppliers. Automation helpers can only add or edit records of their own section, and they cannot list records. So reads, and writes to other sections, use the eramba REST API v2 with a dedicated token (Secret `eramba_api_token`).
+- **Idempotent.** Every run starts from what is already in eramba. Re-running never duplicates accounts, Third Parties or assessments, and never processes a submitted assessment twice.
+- **People keep the decisions.** The automations prepare work; the formal review of each assessment stays with the assessor.
 - **Missing details are not invented.** A supplier without a contact email is created without a Third Party Contact. A Third Party Dynamic Status flags it until Finance completes the row.
 
 ## Create your own automation

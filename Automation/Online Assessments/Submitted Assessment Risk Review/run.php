@@ -21,7 +21,8 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *    1. Reads its answers, score and open findings.
  *    2. Reviews it with OpenAI (secret openai_api_key) or, without the secret,
  *       with the score/findings rule in README §2.
- *    3. Saves the risk level and the conclusion (Review Notes) on the assessment.
+ *    3. Saves the risk level and the conclusion in custom fields of the assessment
+ *       (the formal Review is left to the assessor).
  *    4. Saves "Supplier Risk Level" and "Last Review Date" on its Third Parties.
  *  Re-running is safe: an assessment that already has a risk level is skipped.
  *
@@ -47,6 +48,7 @@ $openAiApiKey = '%SECRET_openai_api_key%';
 $config = [
     // eramba fields
     'OA_RISK_FIELD'      => 'CustomField_2', // Assessment: "Post Assessment Risk Level"
+    'OA_CONCLUSION_FIELD' => 'CustomField_6', // Assessment: "Automated Review Conclusion" (paragraph)
     'TP_RISK_FIELD'      => 'CustomField_4', // Third Party: "Supplier Risk Level"
     'TP_REVIEW_DATE'     => 'CustomField_5', // Third Party: "Last Review Date"
     'UNREVIEWED_VALUES'  => ['', 'Undefined'], // Risk level values that mean "not reviewed yet"
@@ -66,7 +68,7 @@ $config = [
 
 // ─── 3. ERAMBA MACROS ───────────────────────────────────────────────────────
 // Replaced by eramba with the Online Assessment that fired the notification.
-$assessmentId = '%VENDORASSESSMENT_ID%';
+$assessmentId = '%ONLINE_ASSESSMENT_ID%';
 const AUTOMATION_ID      = 'oa-submitted-risk-review';
 const AUTOMATION_VERSION = '0.1.0';
 const LEVELS             = ['Low', 'Medium', 'High'];
@@ -207,8 +209,13 @@ function reviewByScore(array $oa, array $findings, array $config): array
 
 function reviewByAi(array $oa, array $feedbacks, array $findings, string $apiKey, array $config): array
 {
-    $answers = array_map(fn ($f) => sprintf("Q%s %s\nA: %s", $f['question_number'] ?? '', $f['question_title'] ?? '',
-        trim((string)($f['answer'] ?? '')) ?: '(no answer)'), $feedbacks);
+    $visible = array_filter($feedbacks, fn ($f) => empty($f['hidden']));
+    $answers = array_map(function ($f) {
+        $chosen = implode('; ', array_filter(array_map(fn ($o) => is_array($o) ? (string)($o['option'] ?? '') : '', $f['options'] ?? [])));
+        $text   = trim((string)($f['answer'] ?? ''));
+        $answer = trim($chosen . ($chosen !== '' && $text !== '' ? ' – ' : '') . $text);
+        return sprintf("Q%s %s\nA: %s", $f['question_number'] ?? '', $f['question_title'] ?? '', $answer !== '' ? $answer : '(no answer)');
+    }, $visible);
     $prompt = "You are a GRC analyst reviewing a supplier security questionnaire.\n"
         . "Score: " . ($oa['total_score'] ?? 'n/a') . ' / ' . ($oa['max_total_score'] ?? 'n/a') . ". Open findings: "
         . ($findings ? implode('; ', array_column($findings, 'title')) : 'none') . "\n\n"
@@ -237,9 +244,10 @@ function reviewByAi(array $oa, array $feedbacks, array $findings, string $apiKey
 // ─── 7. APPLY: assessment first, then its suppliers ─────────────────────────
 function save(array $oa, string $level, string $conclusion, array $config): void
 {
+    // Only fields are written: the formal Review stays with the assessor.
     erambaApi('PUT', "/api/v2/vendor-assessments/{$oa['id']}", [
-        $config['OA_RISK_FIELD'] => $level,
-        'review_notes'           => $conclusion,
+        $config['OA_RISK_FIELD']       => $level,
+        $config['OA_CONCLUSION_FIELD'] => $conclusion,
     ]);
     foreach ($oa['third_parties'] ?? [] as $tp) {
         erambaApi('PUT', "/api/v2/third-parties/{$tp['id']}", [

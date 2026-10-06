@@ -34,6 +34,16 @@ last_tested: null
 
 Makes sure every supplier is assessed. When a supplier has no Online Assessment, the automation creates one and sends it to the supplier's Third Party Contact.
 
+## At a glance
+
+| | |
+|---|---|
+| **Runs** | Recurrent, daily, after Finance Supplier Onboarding (section *Online Assessments*). |
+| **Reads** | Third Parties of the supplier type and all Online Assessments. |
+| **Creates** | One Online Assessment per supplier that has a *Third Party Contact* and no assessment yet. It is started at once and sent to the contact (magic link). |
+| **Updates** | Nothing. |
+| **Never does** | Re-send an assessment to a supplier that already has one, or create one for a supplier without contact. |
+
 ## 1. Guide and scope
 
 This is automation 2 of 3 in [Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81). It runs after [Finance Supplier Onboarding](../Finance%20Supplier%20Onboarding/), which creates the suppliers and their contacts.
