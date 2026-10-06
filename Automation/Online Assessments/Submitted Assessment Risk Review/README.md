@@ -6,7 +6,7 @@ status: draft
 vendor: OpenAI
 technology: OpenAI Chat Completions (optional) + eramba API v2
 eramba_module: Online Assessments
-trigger: Recurrent (hourly or daily)
+trigger: Notification "OA has been submitted" (Trigger Automation)
 guide: Online Assessments - Advanced Configurations (automation 3 of 3)
 secrets:
   - eramba_api_token
@@ -20,7 +20,7 @@ variables:
   - MEDIUM_BELOW_PCT
   - OPENAI_MODEL
   - OPENAI_REASONING
-  - FORCE_OA_IDS
+  - FORCE_REVIEW
   - MAX_ITEMS
   - ERAMBA_API_URL
   - ERAMBA_API_VERIFY_TLS
@@ -45,7 +45,7 @@ This is automation 3 of 3 in [Online Assessments – Advanced Configurations](ht
 
 ## 2. What it does
 
-An assessment is pending review when it is submitted and its *Post Assessment Risk Level* is empty or *Undefined*. For each one, the script reads the score, open findings and answers. It then decides a level with one of two methods:
+The automation is not recurrent. The Online Assessments notification *OA has been submitted* runs it once for the assessment that was just submitted (macro `%VENDORASSESSMENT_ID%`). It only reviews that assessment if it is submitted and its *Post Assessment Risk Level* is empty or *Undefined*; otherwise it logs `SKIPPED`. The script reads the score, open findings and answers. It then decides a level with one of two methods:
 
 | Mode | Rule |
 |---|---|
@@ -76,8 +76,9 @@ Create a project API key and give it access only to the configured model. Store 
 1. Create Secret `eramba_api_token`. Optionally create `openai_api_key`.
 2. In **Online Assessments**, create an automation: PHP 8.4, no Composer packages, timeout 120 s. Paste [run.php](run.php).
 3. Check the custom field IDs in §7.
-4. Test on a submitted assessment with `FORCE_OA_IDS=[<id>]` and `DRY_RUN=true`. Then run live and check the assessment and its supplier. Empty `FORCE_OA_IDS` again.
-5. Enable *Recurrent Automation* (hourly or daily).
+4. Leave *Recurrent Automation* off: this automation runs per assessment, not on a schedule.
+5. In **Online Assessments > Notifications**, add the notification *OA has been submitted*. Turn on *Trigger Automation* and select this automation in its *Automation* tab. Email can stay off.
+6. Test it from the automation editor (*Test*) on a submitted assessment with `DRY_RUN=true` and `FORCE_REVIEW=true`. Then set both back to `false`, submit an assessment from the portal and check the log, the assessment and its supplier.
 
 ## 7. Variables
 
@@ -88,14 +89,14 @@ Create a project API key and give it access only to the configured model. Store 
 | `UNREVIEWED_VALUES` | `''`, `Undefined` | Risk level values that mean the assessment is still pending review. |
 | `HIGH_BELOW_PCT` / `MEDIUM_BELOW_PCT` | `50` / `80` | Score thresholds (%) of the rule. These are reference defaults, not part of the guide. |
 | `OPENAI_MODEL` / `OPENAI_REASONING` | `gpt-6.1-luna` / `low` | Model and reasoning effort for the AI review. |
-| `FORCE_OA_IDS` | `[]` | Assessment IDs to review again, for testing only. |
+| `FORCE_REVIEW` | `false` | `true` reviews the assessment even if it already has a level. Testing only. |
 | `MAX_ITEMS` | `2000` | The run aborts above this many records. |
 | `ERAMBA_API_URL` / `ERAMBA_API_VERIFY_TLS` | Empty / `true` | See [Finance Supplier Onboarding §9](../Finance%20Supplier%20Onboarding/README.md#9-troubleshooting). |
 | `DRY_RUN` | `false` | `true` reviews and logs without saving. AI calls still run. |
 
 ## 8. Results
 
-The log shows each assessment's level, suppliers and conclusion. The assessment is saved first and its suppliers afterwards. If a supplier update fails, the assessment is already reviewed and is not retried. Set the supplier fields by hand, or re-run with `FORCE_OA_IDS`.
+The log shows each assessment's level, suppliers and conclusion. The assessment is saved first and its suppliers afterwards. If a supplier update fails, the assessment is already reviewed and is not retried. Set the supplier fields by hand, or test the automation on that assessment with `FORCE_REVIEW=true`.
 
 ## 9. Troubleshooting
 
@@ -104,7 +105,9 @@ The log shows each assessment's level, suppliers and conclusion. The assessment 
 | `Unexpected AI answer` | The model did not return valid JSON. Retry, or change `OPENAI_MODEL`. |
 | OpenAI `401` / `404` | Check the key, and the model name or its access. |
 | eramba `422` on the risk level | Add the missing option (Low, Medium or High) to the custom field. |
-| Nothing to review | The assessment is not submitted or already has a level. Use `FORCE_OA_IDS` to test. |
+| `SKIPPED` in the log | The assessment is not submitted or already has a level. Use `FORCE_REVIEW` to test. |
+| `No Online Assessment in context` | The automation ran without an item: run it from the notification or with *Test* on an assessment. |
+| Never runs | Check that the *OA has been submitted* notification is enabled and has *Trigger Automation* with this automation selected. |
 | eramba `401` / TLS errors | See [Finance Supplier Onboarding §9](../Finance%20Supplier%20Onboarding/README.md#9-troubleshooting). |
 
 ## 10. Customising

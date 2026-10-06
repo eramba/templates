@@ -7,30 +7,31 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *  Technology: OpenAI (optional) + eramba API
  *  id: oa-submitted-risk-review        version: 0.1.0
  *  TUTORIAL TEMPLATE – example 3 of 3 of the eramba course
- *  \"Online Assessments - Advanced Configurations\" (https://www.eramba.org/learning/courses/81).
+ *  "Online Assessments - Advanced Configurations" (https://www.eramba.org/learning/courses/81).
  *  Built for that tutorial's scenario: review and adapt before production use.
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Online%20Assessments
  *
- *  Section: Online Assessments. Recurrent (hourly or daily).
+ *  Section: Online Assessments. Not recurrent: run by the notification
+ *  "OA has been submitted" (Trigger Automation), once per submitted assessment.
  *  Composer packages: none
  * ============================================================================
  *
- *  For every submitted Online Assessment without a risk level yet:
+ *  For the submitted Online Assessment that fired the notification:
  *    1. Reads its answers, score and open findings.
  *    2. Reviews it with OpenAI (secret openai_api_key) or, without the secret,
  *       with the score/findings rule in README §2.
  *    3. Saves the risk level and the conclusion (Review Notes) on the assessment.
  *    4. Saves "Supplier Risk Level" and "Last Review Date" on its Third Parties.
- *  Re-running is safe: reviewed assessments already have a risk level.
+ *  Re-running is safe: an assessment that already has a risk level is skipped.
  *
  *  Output
  *    STDOUT  Step-by-step log (visible in eramba Automation Logs, first 10 KB).
  *    STDERR  Only technical errors. Any STDERR output marks the run as failed.
  *
  *  Exit codes
- *    0  Run completed (dry-run or every pending assessment reviewed).
- *    1  Technical error, or at least one review failed. If the assessment was
+ *    0  Run completed (dry-run, reviewed, or skipped because not pending).
+ *    1  Technical error or failed review. If the assessment was
  *       saved but a Third Party update failed, fix it manually (see README §8).
  */
 
@@ -56,7 +57,7 @@ $config = [
     'OPENAI_MODEL'       => 'gpt-6.1-luna',
     'OPENAI_REASONING'   => 'low',
     // Run
-    'FORCE_OA_IDS'       => [],              // e.g. [3] to review an assessment again while testing
+    'FORCE_REVIEW'       => false,           // True = review again even if it already has a level (testing)
     'MAX_ITEMS'          => 2000,
     'ERAMBA_API_URL'     => '',              // Empty = runner-provided ERAMBA_BASE_URL
     'ERAMBA_API_VERIFY_TLS' => true,         // See README §9 before changing
@@ -64,7 +65,8 @@ $config = [
 ];
 
 // ─── 3. ERAMBA MACROS ───────────────────────────────────────────────────────
-// None: this automation works on the whole section, not on one item.
+// Replaced by eramba with the Online Assessment that fired the notification.
+$assessmentId = '%VENDORASSESSMENT_ID%';
 const AUTOMATION_ID      = 'oa-submitted-risk-review';
 const AUTOMATION_VERSION = '0.1.0';
 const LEVELS             = ['Low', 'Medium', 'High'];
@@ -146,13 +148,30 @@ function erambaAll(string $resource, array $filter = []): array
 }
 
 // ─── 5. COLLECT: pending assessments and their answers/findings ─────────────
-function pendingAssessments(array $config): array
+/** The assessment that fired the notification, or null if it does not need a review. */
+function pendingAssessment(string $assessmentId, array $config): ?array
 {
-    return array_values(array_filter(erambaAll('vendor-assessments'), function ($oa) use ($config) {
-        $level = trim((string)($oa[$config['OA_RISK_FIELD']] ?? ''));
-        return in_array((int)$oa['id'], $config['FORCE_OA_IDS'], true)
-            || ((int)($oa['submited'] ?? 0) === 1 && in_array($level, $config['UNREVIEWED_VALUES'], true));
-    }));
+    if (!ctype_digit($assessmentId)) {
+        throw new RuntimeException('No Online Assessment in context: run this automation from the "OA has been submitted" notification, or Test it on an item (README §6).');
+    }
+    $matches = array_filter(erambaAll('vendor-assessments'), fn ($i) => (int)$i['id'] === (int)$assessmentId);
+    $oa = array_values($matches)[0] ?? null;
+    if ($oa === null) {
+        throw new RuntimeException("Online Assessment #$assessmentId not found through the API.");
+    }
+    $level = trim((string)($oa[$config['OA_RISK_FIELD']] ?? ''));
+    if ($config['FORCE_REVIEW']) {
+        return $oa;
+    }
+    if ((int)($oa['submited'] ?? 0) !== 1) {
+        logInfo("SKIPPED: #{$oa['id']} is not submitted.");
+        return null;
+    }
+    if (!in_array($level, $config['UNREVIEWED_VALUES'], true)) {
+        logInfo("SKIPPED: #{$oa['id']} already reviewed ($level).");
+        return null;
+    }
+    return $oa;
 }
 
 /** Items of $resource that belong to assessment $oaId. */
@@ -240,9 +259,9 @@ try {
     $useAi = secretExists($openAiApiKey);
     logInfo('Review mode: ' . ($useAi ? "AI ({$config['OPENAI_MODEL']}, reasoning {$config['OPENAI_REASONING']})" : 'score/findings rule (no openai_api_key secret)'));
 
-    logStep(2, 'Collecting submitted Online Assessments');
-    $pending = pendingAssessments($config);
-    logInfo(count($pending) . ' assessment(s) to review.');
+    logStep(2, "Reading Online Assessment #$assessmentId");
+    $oa = pendingAssessment($assessmentId, $config);
+    $pending = $oa ? [$oa] : [];
 
     logStep(3, 'Reviewing and saving');
     $reviewed = $errors = 0;

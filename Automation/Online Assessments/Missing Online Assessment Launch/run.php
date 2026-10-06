@@ -7,7 +7,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *  Technology: eramba API
  *  id: oa-missing-assessment-launch        version: 0.1.0
  *  TUTORIAL TEMPLATE – example 2 of 3 of the eramba course
- *  \"Online Assessments - Advanced Configurations\" (https://www.eramba.org/learning/courses/81).
+ *  "Online Assessments - Advanced Configurations" (https://www.eramba.org/learning/courses/81).
  *  Built for that tutorial's scenario: review and adapt before production use.
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Online%20Assessments

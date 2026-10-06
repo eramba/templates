@@ -17,7 +17,7 @@ These are the three example automations of the eramba guide **[Online Assessment
 1. Read the README of each automation below: scope, prerequisites and permissions.
 2. Create the Secrets, paste `run.php` into an automation of the indicated section, and set the variables of README §7.
 3. Run once with `DRY_RUN=true` and read the log. Then run live and check the result.
-4. Enable *Recurrent Automation* only after the log is clean, as the guide recommends. Keep the order 1 → 2 → 3.
+4. Enable *Recurrent Automation* for #1 and #2 only after the log is clean, as the guide recommends (#1 before #2). #3 is not recurrent: it runs from the *OA has been submitted* notification.
 
 Requires eramba Enterprise. None of the automations needs Composer packages.
 
@@ -29,7 +29,7 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 |---|---|---|---|---|---|
 | 1 | [Finance Supplier Onboarding](Finance%20Supplier%20Onboarding/) | Third Parties | Google Sheets + eramba API | Daily | 0.1.0 draft; logic tested on eramba 3.31.1 |
 | 2 | [Missing Online Assessment Launch](Missing%20Online%20Assessment%20Launch/) | Online Assessments | eramba API | Daily, after #1 | 0.1.0 draft; logic tested on eramba 3.31.1 |
-| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | Online Assessments | OpenAI (optional) + eramba API | Hourly or daily | 0.1.0 draft; score rule tested, AI review pending |
+| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | Online Assessments | OpenAI (optional) + eramba API | On submit (notification *OA has been submitted*) | 0.1.0 draft; score rule tested, AI review pending |
 
 ## Shared design
 
