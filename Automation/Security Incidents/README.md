@@ -15,7 +15,7 @@ incident created ──notification "New Item Created"──▶ Urgent Incident 
 
 - Incident custom fields *Incident Priority* (dropdown: Normal, Urgent) and *Jira Issue Key* (short text).
 - An eramba user with *Allow APIs* and its API token in Secret `eramba_api_token`.
-- A Jira Cloud account email and API token in Secrets `jira_email` and `jira_api_token`.
+- Your Jira Cloud site, account email and API token in Secrets `jira_site_url`, `jira_email` and `jira_api_token`. The site is a Secret so every Jira automation reads it from one place.
 
 ## Catalogue
 

@@ -37,6 +37,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 // ─── 1. SECRETS ─────────────────────────────────────────────────────────────
 // Create them in Settings / Application Configuration / Automation Secrets.
 $secrets = [
+    'JIRA_SITE_URL'    => '%SECRET_jira_site_url%', // e.g. https://example.atlassian.net
     'JIRA_EMAIL'       => '%SECRET_jira_email%',
     'JIRA_API_TOKEN'   => '%SECRET_jira_api_token%',
     'ERAMBA_API_TOKEN' => '%SECRET_eramba_api_token%',
@@ -45,7 +46,6 @@ $secrets = [
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
     // Jira
-    'SITE_URL'           => 'https://example.atlassian.net', // Your Jira Cloud site
     'PROJECT_KEY'        => 'KAN',               // Project where issues are created
     'ISSUE_TYPE'         => 'Task',              // Issue type name in that project
     // Custom fields, by name (their IDs differ between installations)
@@ -173,7 +173,7 @@ function jiraApi(string $method, string $path, ?array $payload = null, array $qu
 {
     global $config, $secrets;
     $auth = base64_encode(trim($secrets['JIRA_EMAIL']) . ':' . trim($secrets['JIRA_API_TOKEN']));
-    return httpJson($method, rtrim($config['SITE_URL'], '/') . "/rest/api/3/$path" . ($query ? '?' . http_build_query($query) : ''), [
+    return httpJson($method, rtrim(trim($secrets['JIRA_SITE_URL']), '/') . "/rest/api/3/$path" . ($query ? '?' . http_build_query($query) : ''), [
         'Accept: application/json', 'Content-Type: application/json', "Authorization: Basic $auth",
     ], $payload === null ? null : json_encode($payload, JSON_THROW_ON_ERROR));
 }
