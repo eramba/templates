@@ -57,7 +57,7 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 ## Shared design
 
 - **eramba API.** #1 works on the whole section, #2 creates assessments from the Third Parties section, and #3 also updates suppliers. Automation helpers can only add or edit records of their own section, and they cannot list records. So reads, and writes to other sections, use the eramba REST API v2 with a dedicated token (Secret `eramba_api_token`).
-- **Custom fields by name.** The scripts find custom fields by their name, not by `CustomField_N`, because IDs differ between installations. If you rename a field, change its name in `$config`.
+- **Custom fields by name.** The scripts find custom fields by their name, not by `CustomField_N`, because IDs differ between installations. If you rename a field, change its name in `$config`, or put its key (`CustomField_6`) there instead.
 - **Idempotent.** Every run starts from what is already in eramba. Re-running never duplicates accounts, Third Parties or assessments, and never processes a submitted assessment twice.
 - **People keep the decisions.** The automations prepare work; the formal review of each assessment stays with the assessor.
 - **Missing details are not invented.** A supplier without a contact email is created without a Third Party Contact. A Third Party Dynamic Status flags it until Finance completes the row.

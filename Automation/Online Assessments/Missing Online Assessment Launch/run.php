@@ -154,9 +154,13 @@ function erambaAll(string $resource, array $filter = []): array
 /**
  * API key ("CustomField_N") of the custom field with this name in $resource.
  * Custom field IDs differ between installations, so the scripts use names.
+ * A value that is already a key ("CustomField_6") is used as is.
  */
 function customField(string $resource, string $name): string
 {
+    if (preg_match('/^CustomField_\d+$/', trim($name)) === 1) {
+        return trim($name);
+    }
     static $cache = [];
     $cache[$resource] ??= erambaApi('GET', "/api/v2/$resource/custom-fields")['data'] ?? [];
     foreach ($cache[$resource] as $field) {
