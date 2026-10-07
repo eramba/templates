@@ -8,6 +8,8 @@ These examples are written for the Online Assessments section. The item IDs, pay
 
 - [Internal Controls](Internal%20Controls/) contains ready-to-use automations that audit the internal controls of the eramba GRC templates (e.g. AWS Backup), grouped by technology, plus a `_TEMPLATE` to build new ones.
 
+- [Security Incidents](Security%20Incidents/) contains the automation of the course *Security Incident Management in eramba*: a Jira issue for each urgent incident.
+
 - [Function Examples](Function%20Examples/) contains PHP 8.4 single-execution examples for Online Assessments:
   - edit an Online Assessment
   - add an Online Assessment
