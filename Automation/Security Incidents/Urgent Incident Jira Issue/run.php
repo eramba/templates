@@ -42,6 +42,9 @@ $secrets = [
     'JIRA_API_TOKEN'   => '%SECRET_jira_api_token%',
     'ERAMBA_API_TOKEN' => '%SECRET_eramba_api_token%',
 ];
+// Optional, shared by all Jira automations: only for API tokens with scopes (README §5).
+// Without it, requests go to the site URL.
+$jiraCloudId = '%SECRET_jira_cloud_id%';
 
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
@@ -168,12 +171,17 @@ function customField(string $resource, string $name): string
     throw new RuntimeException("Custom field '$name' not found in $resource: create it (README §4) or fix its name in \$config.");
 }
 
-/** Jira Cloud REST API v3 with an Atlassian account email and API token. */
+/**
+ * Jira Cloud REST API v3 with an Atlassian account email and API token.
+ * Tokens with scopes must use api.atlassian.com with the site's Cloud ID.
+ */
 function jiraApi(string $method, string $path, ?array $payload = null, array $query = []): array
 {
-    global $config, $secrets;
+    global $secrets, $jiraCloudId;
+    $cloudId = preg_match('/^%SECRET_[^%]+%$/', trim($jiraCloudId)) === 1 ? '' : trim($jiraCloudId);
+    $base = $cloudId === '' ? rtrim(trim($secrets['JIRA_SITE_URL']), '/') : "https://api.atlassian.com/ex/jira/$cloudId";
     $auth = base64_encode(trim($secrets['JIRA_EMAIL']) . ':' . trim($secrets['JIRA_API_TOKEN']));
-    return httpJson($method, rtrim(trim($secrets['JIRA_SITE_URL']), '/') . "/rest/api/3/$path" . ($query ? '?' . http_build_query($query) : ''), [
+    return httpJson($method, "$base/rest/api/3/$path" . ($query ? '?' . http_build_query($query) : ''), [
         'Accept: application/json', 'Content-Type: application/json', "Authorization: Basic $auth",
     ], $payload === null ? null : json_encode($payload, JSON_THROW_ON_ERROR));
 }
@@ -198,10 +206,22 @@ function existingIssueKey(int $incidentId, array $config): ?string
 {
     $res = jiraApi('GET', 'search/jql', null, [
         'jql'        => sprintf('project = "%s" AND labels = "%s"', $config['PROJECT_KEY'], issueLabel($incidentId)),
-        'fields'     => 'key',
+        'fields'     => 'summary',
         'maxResults' => 1,
     ]);
     return $res['issues'][0]['key'] ?? null;
+}
+
+/** ID of the issue type with this name in the project (Create issue takes the issue type ID). */
+function issueTypeId(array $config): string
+{
+    $res = jiraApi('GET', 'issue/createmeta/' . rawurlencode($config['PROJECT_KEY']) . '/issuetypes', null, ['maxResults' => 200]);
+    foreach ($res['issueTypes'] ?? [] as $type) {
+        if (strcasecmp((string)$type['name'], $config['ISSUE_TYPE']) === 0) {
+            return (string)$type['id'];
+        }
+    }
+    throw new RuntimeException("Issue type '{$config['ISSUE_TYPE']}' not found in Jira project {$config['PROJECT_KEY']} (or no permission to create issues there).");
 }
 
 // ─── 6. EVALUATE: does this incident need a Jira issue? ─────────────────────
@@ -220,7 +240,7 @@ function skipReason(array $incident, array $config): ?string
 }
 
 // ─── 7. APPLY: create the issue, then save its key on the incident ──────────
-function createIssue(array $incident, array $config): string
+function createIssue(array $incident, string $issueTypeId, array $config): string
 {
     $base = rtrim($config['ERAMBA_UI_URL'] ?: ($config['ERAMBA_API_URL'] ?: (string)getenv('ERAMBA_BASE_URL')), '/');
     $link = "$base/security-incidents/index?id={$incident['id']}";
@@ -230,7 +250,7 @@ function createIssue(array $incident, array $config): string
     $description = substr(trim(strip_tags((string)($incident['description'] ?? ''))), 0, 5000);
     $res = jiraApi('POST', 'issue', ['fields' => [
         'project'     => ['key' => $config['PROJECT_KEY']],
-        'issuetype'   => ['name' => $config['ISSUE_TYPE']],
+        'issuetype'   => ['id' => $issueTypeId],
         'summary'     => substr((string)$incident['title'], 0, 250),
         'labels'      => [issueLabel((int)$incident['id'])],
         'description' => ['type' => 'doc', 'version' => 1, 'content' => array_values(array_filter([
@@ -274,6 +294,7 @@ try {
 
     logStep(4, 'Creating the Jira issue');
     $key = existingIssueKey((int)$incident['id'], $config);
+    $typeId = $key === null ? issueTypeId($config) : null; // Checked in DRY_RUN too
     if ($key !== null) {
         logInfo("FOUND: $key already exists for this incident (earlier run); it is saved, not created again.");
     }
@@ -285,7 +306,7 @@ try {
         exit(0);
     }
     if ($key === null) {
-        $key = createIssue($incident, $config);
+        $key = createIssue($incident, $typeId, $config);
         logInfo("CREATED: $key for \"{$incident['title']}\".");
     }
 

@@ -12,6 +12,7 @@ secrets:
   - jira_site_url
   - jira_email
   - jira_api_token
+  - jira_cloud_id (optional, API tokens with scopes only)
   - eramba_api_token
 variables:
   - PROJECT_KEY
@@ -80,11 +81,12 @@ It only runs when an incident is created. An existing incident changed to Urgent
 
 1. In Jira, note the project key (for example `KAN`) and check that the issue type `ISSUE_TYPE` (default `Task`) exists in it.
 2. Use an Atlassian account that can browse and create issues in that project. A dedicated service account is best.
-3. Create an API token for that account at [id.atlassian.com/manage-profile/security/api-tokens](https://id.atlassian.com/manage-profile/security/api-tokens).
+3. Create an API token for that account, following Atlassian's [token instructions](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/). It needs to browse and create issues in the project.
+4. Only if it is an API token **with scopes**: Atlassian requires those tokens to call `api.atlassian.com/ex/jira/{cloudId}`. Find your site's Cloud ID in [admin.atlassian.com](https://admin.atlassian.com) (the string after `/s/` in the URL; not the Organization ID) and store it in Secret `jira_cloud_id`. See [Manage API tokens for service accounts](https://support.atlassian.com/user-management/docs/manage-api-tokens-for-service-accounts/).
 
 ## 6. Setup in eramba
 
-1. Create the Secrets `jira_site_url` (your Jira Cloud site, for example `https://example.atlassian.net`), `jira_email` (the Atlassian account email), `jira_api_token` and `eramba_api_token`. Share them with your other automations: if your Jira site changes, you update `jira_site_url` once.
+1. Create the Secrets `jira_site_url` (your Jira Cloud site, for example `https://example.atlassian.net`), `jira_email` (the Atlassian account email), `jira_api_token` and `eramba_api_token`, plus `jira_cloud_id` if you use a token with scopes (§5). Share them with your other automations: if your Jira site changes, you update `jira_site_url` once.
 2. In **Security Incidents**, create an automation: PHP 8.4, no Composer packages, timeout 60 s. Paste [run.php](run.php). Leave *Recurrent Automation* off.
 3. Set `PROJECT_KEY` (§7).
 4. In **Security Incidents > Notifications**, open *New Item Created*. Turn on *Trigger Automation*, select this automation in the *Automation* tab and set *Status* to enabled. Email can stay off.
@@ -95,7 +97,7 @@ It only runs when an incident is created. An existing incident changed to Urgent
 | Variable | Default | Meaning |
 |---|---|---|
 | `PROJECT_KEY` | `KAN` | Jira project where issues are created. |
-| `ISSUE_TYPE` | `Task` | Issue type name in that project. |
+| `ISSUE_TYPE` | `Task` | Issue type name in that project. The script finds its ID through the Jira API. |
 | `PRIORITY_FIELD` | `Incident Priority` | Name of the incident custom field with the priority. The script finds its ID by name, because custom field IDs differ between installations. You can also put its key (`CustomField_8`). |
 | `JIRA_KEY_FIELD` | `Jira Issue Key` | Name (or key) of the incident custom field where the issue key is saved. |
 | `URGENT_VALUE` | `Urgent` | Priority value that creates an issue. |
@@ -120,8 +122,9 @@ If the run fails after the issue is created, the incident stays without key. Run
 | `No incident in context` | The automation ran without an item: run it from the notification or with *Test* on an incident. |
 | Never runs | Check that *New Item Created* is enabled and has *Trigger Automation* with this automation selected. |
 | Incident skipped | Check the reason in the log: *Incident Priority* must be Urgent and *Jira Issue Key* empty. |
-| Jira `401` / `403` / `404` | Check `jira_site_url`, `jira_email`, `jira_api_token` and that the account can create issues in `PROJECT_KEY`. |
-| Jira `400` on creation | Usually a wrong `PROJECT_KEY` or `ISSUE_TYPE`, or a field that the project requires; read the message in the log. |
+| Jira `401` / `403` / `404` | Check `jira_site_url`, `jira_email`, `jira_api_token` and that the account can create issues in `PROJECT_KEY`. With a token with scopes, check `jira_cloud_id` (Cloud ID, not Organization ID) and the token's scopes. |
+| `Issue type '…' not found` | Fix `ISSUE_TYPE` (exact name in that project), or give the account *Create issues* in `PROJECT_KEY`. |
+| Jira `400` on creation | Usually a field that the project requires; read the message in the log. |
 | eramba `401` | The eramba token is wrong or its user lacks *Allow APIs*. |
 | TLS errors | Fix the certificate of your eramba. Set `ERAMBA_API_VERIFY_TLS=false` only on a test instance with a self-signed certificate. |
 
