@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Missing Online Assessment Launch
  *  Technology: eramba API
- *  id: oa-missing-assessment-launch        version: 0.1.0
+ *  id: oa-missing-assessment-launch        version: 0.1.1
  *  TUTORIAL TEMPLATE – example 2 of 3 of the eramba course
  *  "Online Assessments - Advanced Configurations" (https://www.eramba.org/learning/courses/81).
  *  Built for that tutorial's scenario: review and adapt before production use.
@@ -60,7 +60,7 @@ $config = [
 // Replaced by eramba with the Third Party that fired the notification.
 $thirdPartyId = '%THIRDPARTY_ID%';
 const AUTOMATION_ID      = 'oa-missing-assessment-launch';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.1.1';
 const PERIOD_DAYS        = 1; // eramba period type: 1 day, 2 week, 3 month, 4 year
 
 // ─── 4. HELPERS ─────────────────────────────────────────────────────────────
@@ -177,8 +177,8 @@ function loadSupplier(string $thirdPartyId): array
     if (!ctype_digit($thirdPartyId)) {
         throw new RuntimeException('No Third Party in context: run this automation from the "New Item" notification, or Test it on an item (README §6).');
     }
-    $match = array_values(array_filter(erambaAll('third-parties'), fn ($t) => (int)$t['id'] === (int)$thirdPartyId));
-    return $match[0] ?? throw new RuntimeException("Third Party #$thirdPartyId not found through the API.");
+    return erambaApi('GET', "/api/v2/third-parties/$thirdPartyId")['data']
+        ?? throw new RuntimeException("Third Party #$thirdPartyId not found through the API.");
 }
 
 function hasAssessment(int $thirdPartyId): bool

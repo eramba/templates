@@ -183,11 +183,8 @@ function pendingAssessment(string $assessmentId, array $config): ?array
     if (!ctype_digit($assessmentId)) {
         throw new RuntimeException('No Online Assessment in context: run this automation from the "OA has been submitted" notification, or Test it on an item (README §6).');
     }
-    $matches = array_filter(erambaAll('vendor-assessments'), fn ($i) => (int)$i['id'] === (int)$assessmentId);
-    $oa = array_values($matches)[0] ?? null;
-    if ($oa === null) {
-        throw new RuntimeException("Online Assessment #$assessmentId not found through the API.");
-    }
+    $oa = erambaApi('GET', "/api/v2/vendor-assessments/$assessmentId")['data']
+        ?? throw new RuntimeException("Online Assessment #$assessmentId not found through the API.");
     $level = trim((string)($oa[$config['OA_RISK_FIELD']] ?? ''));
     if ($config['FORCE_REVIEW']) {
         return $oa;

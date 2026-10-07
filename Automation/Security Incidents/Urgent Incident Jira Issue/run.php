@@ -56,7 +56,6 @@ $config = [
     'JIRA_KEY_FIELD'     => 'Jira Issue Key',    // Short text, filled by this script
     'URGENT_VALUE'       => 'Urgent',            // Priority value that creates an issue
     // eramba
-    'MAX_ITEMS'          => 5000,                // Abort above this many incidents
     'ERAMBA_API_URL'     => '',                  // Empty = runner-provided ERAMBA_BASE_URL
     'ERAMBA_API_VERIFY_TLS' => true,             // See README §9 before changing
     'ERAMBA_UI_URL'      => '',                  // eramba address for the link in the issue; empty = ERAMBA_API_URL
@@ -133,24 +132,6 @@ function erambaApi(string $method, string $path, ?array $payload = null, array $
     ], $payload === null ? null : json_encode($payload, JSON_THROW_ON_ERROR), $config['ERAMBA_API_VERIFY_TLS']);
 }
 
-/** Every item of a collection, bounded by MAX_ITEMS (no partial population). */
-function erambaAll(string $resource): array
-{
-    global $config;
-    $items = [];
-    for ($page = 1; $page <= 100; $page++) {
-        $res = erambaApi('GET', "/api/v2/$resource/index", null, ['page' => $page, 'limit' => 100]);
-        $items = array_merge($items, $res['data'] ?? []);
-        if (count($items) > $config['MAX_ITEMS']) {
-            throw new RuntimeException("MAX_ITEMS exceeded for $resource.");
-        }
-        if (empty($res['pagination']['has_next_page'])) {
-            return $items;
-        }
-    }
-    throw new RuntimeException("Page limit exceeded for $resource.");
-}
-
 /**
  * API key ("CustomField_N") of the custom field with this name in $resource.
  * Custom field IDs differ between installations, so the scripts use names.
@@ -192,8 +173,8 @@ function loadIncident(string $incidentId): array
     if (!ctype_digit($incidentId)) {
         throw new RuntimeException('No incident in context: run this automation from the "New Item Created" notification, or Test it on an item (README §6).');
     }
-    $match = array_values(array_filter(erambaAll('security-incidents'), fn ($i) => (int)$i['id'] === (int)$incidentId));
-    return $match[0] ?? throw new RuntimeException("Incident #$incidentId not found through the API.");
+    return erambaApi('GET', "/api/v2/security-incidents/$incidentId")['data']
+        ?? throw new RuntimeException("Incident #$incidentId not found through the API.");
 }
 
 /** Label that ties a Jira issue to its incident, so a retry finds it instead of creating another. */

@@ -1,7 +1,7 @@
 ---
 id: oa-missing-assessment-launch
 name: Missing Online Assessment Launch
-version: 0.1.0
+version: 0.1.1
 status: tested
 vendor: eramba
 technology: eramba API v2
@@ -127,4 +127,5 @@ Turn off *Trigger Automation* in the *New Item* notification, then disable or de
 
 | Version | Change |
 |---|---|
+| 0.1.1 | Reads only the Third Party that fired the notification (`GET /api/v2/third-parties/{id}`) instead of listing all of them. |
 | 0.1.0 | Validated end to end on eramba 3.31.1: *New Item* → assessment created and sent to the supplier contact; skip cases (field not Yes, assessment already exists) checked. |

@@ -152,6 +152,6 @@ Disable or delete the automation, delete the AI Secret (`openai_api_key` or `ant
 
 | Version | Change |
 |---|---|
-| 0.2.0 | Anthropic as an alternative AI provider (`AI_PROVIDER`, `ANTHROPIC_MODEL`). Default OpenAI model `gpt-6.1-sol`. `OPENAI_REASONING` renamed `AI_REASONING`. |
+| 0.2.0 | Anthropic as an alternative AI provider (`AI_PROVIDER`, `ANTHROPIC_MODEL`). Default OpenAI model `gpt-6.1-sol`. `OPENAI_REASONING` renamed `AI_REASONING`. Reads only the submitted assessment (`GET /api/v2/vendor-assessments/{id}`) instead of listing all of them. |
 | 0.1.1 | Default `OPENAI_MODEL` fixed to `gpt-5.6-luna` (`gpt-6.1-luna` does not exist). |
 | 0.1.0 | Validated end to end on eramba 3.31.1 with the score rule: portal submission → notification → risk level and conclusion on the assessment, risk level and date on the supplier; re-run skipped. OpenAI review pending validation. |

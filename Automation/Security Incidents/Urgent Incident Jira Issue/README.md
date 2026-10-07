@@ -20,7 +20,6 @@ variables:
   - PRIORITY_FIELD
   - JIRA_KEY_FIELD
   - URGENT_VALUE
-  - MAX_ITEMS
   - ERAMBA_API_URL
   - ERAMBA_API_VERIFY_TLS
   - ERAMBA_UI_URL
@@ -101,7 +100,6 @@ It only runs when an incident is created. An existing incident changed to Urgent
 | `PRIORITY_FIELD` | `Incident Priority` | Name of the incident custom field with the priority. The script finds its ID by name, because custom field IDs differ between installations. You can also put its key (`CustomField_8`). |
 | `JIRA_KEY_FIELD` | `Jira Issue Key` | Name (or key) of the incident custom field where the issue key is saved. |
 | `URGENT_VALUE` | `Urgent` | Priority value that creates an issue. |
-| `MAX_ITEMS` | `5000` | The run aborts above this many incidents. |
 | `ERAMBA_API_URL` | Empty | eramba address for API calls. Empty uses the address the automation runner provides. |
 | `ERAMBA_API_VERIFY_TLS` | `true` | See §9. |
 | `ERAMBA_UI_URL` | Empty | eramba address used in the link inside the Jira issue. Set it if your users open eramba at a different address from `ERAMBA_API_URL`. |
