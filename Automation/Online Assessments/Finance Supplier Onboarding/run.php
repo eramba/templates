@@ -284,7 +284,6 @@ function requiresOa(array $row, array $config): string
 }
 
 /** Returns CREATED, LINKED or SKIPPED. */
-/** Returns CREATED, LINKED or SKIPPED. */
 function syncRow(array $row, array $config, array $groupIds, string $grcContact): string
 {
     $name      = cell($row, $config, 'COL_NAME');
