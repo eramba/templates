@@ -41,7 +41,7 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 | Endpoint Encryption Compliance Review | [Microsoft Intune + Entra ID](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | Quarterly | 0.2.0 draft; exceptions remain pending |
 | Mobile Device Management Review | [Microsoft Intune + Entra ID](Microsoft/Mobile%20Device%20Management%20Review/) | Quarterly | 0.1.0 draft; Apple bulk enrollment supported, other wipe configurations pending |
 | Nonconformity and Corrective Action Tracking | [Linear](Linear/Nonconformity%20and%20Corrective%20Action%20Tracking/) | Monthly | 0.1.0 draft; requires recorded evidence review |
-| Vulnerability Remediation Tracking | [Atlassian Jira Cloud](Atlassian/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.0 draft; acceptance/escalation may remain pending |
+| Vulnerability Remediation Tracking | [Atlassian Jira Cloud](Atlassian/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.1 draft; acceptance/escalation may remain pending |
 | Vulnerability Remediation Tracking | [Linear](Linear/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.0 draft; acceptance/escalation may remain pending |
 
 Each integration covers the technology scope described in its README. A passing result does not cover systems outside that scope. Drafts require functional and installation validation before use for assurance.

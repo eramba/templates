@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Submitted Assessment Risk Review
  *  Technology: OpenAI (optional) + eramba API
- *  id: oa-submitted-risk-review        version: 0.1.0
+ *  id: oa-submitted-risk-review        version: 0.1.1
  *  TUTORIAL TEMPLATE – example 3 of 3 of the eramba course
  *  "Online Assessments - Advanced Configurations" (https://www.eramba.org/learning/courses/81).
  *  Built for that tutorial's scenario: review and adapt before production use.
@@ -57,7 +57,7 @@ $config = [
     'HIGH_BELOW_PCT'     => 50,              // Any open finding is also High
     'MEDIUM_BELOW_PCT'   => 80,
     // AI review
-    'OPENAI_MODEL'       => 'gpt-6.1-luna',
+    'OPENAI_MODEL'       => 'gpt-5.6-luna',     // Any Chat Completions model with reasoning effort
     'OPENAI_REASONING'   => 'low',
     // Run
     'FORCE_REVIEW'       => false,           // True = review again even if it already has a level (testing)
@@ -71,7 +71,7 @@ $config = [
 // Replaced by eramba with the Online Assessment that fired the notification.
 $assessmentId = '%ONLINE_ASSESSMENT_ID%';
 const AUTOMATION_ID      = 'oa-submitted-risk-review';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.1.1';
 const LEVELS             = ['Low', 'Medium', 'High'];
 
 // ─── 4. HELPERS ─────────────────────────────────────────────────────────────

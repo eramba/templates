@@ -1,7 +1,7 @@
 ---
 id: oa-submitted-risk-review
 name: Submitted Assessment Risk Review
-version: 0.1.0
+version: 0.1.1
 status: tested
 vendor: OpenAI
 technology: OpenAI Chat Completions (optional) + eramba API v2
@@ -100,7 +100,7 @@ Create a project API key and give it access only to the configured model. Store 
 | `TP_RISK_FIELD` / `TP_REVIEW_DATE` | `Supplier Risk Level` / `Last Review Date` | Names of the Third Party custom fields. |
 | `UNREVIEWED_VALUES` | `''`, `Undefined` | Risk level values that mean the assessment is still pending review. |
 | `HIGH_BELOW_PCT` / `MEDIUM_BELOW_PCT` | `50` / `80` | Score thresholds (%) of the rule. These are reference defaults, not part of the guide. |
-| `OPENAI_MODEL` / `OPENAI_REASONING` | `gpt-6.1-luna` / `low` | Model and reasoning effort for the AI review. |
+| `OPENAI_MODEL` / `OPENAI_REASONING` | `gpt-5.6-luna` / `low` | Model and reasoning effort for the AI review. The model must support Chat Completions and reasoning effort. |
 | `FORCE_REVIEW` | `false` | `true` processes the assessment even if it already has a level. Testing only. |
 | `MAX_ITEMS` | `2000` | The run aborts above this many records. |
 | `ERAMBA_API_URL` / `ERAMBA_API_VERIFY_TLS` | Empty / `true` | See [Finance Supplier Onboarding §9](../Finance%20Supplier%20Onboarding/README.md#9-troubleshooting). |
@@ -115,6 +115,7 @@ The log shows the assessment's level, suppliers and conclusion. The assessment f
 | Problem | Action |
 |---|---|
 | `Unexpected AI answer` | The model did not return valid JSON. Retry, or change `OPENAI_MODEL`. |
+| OpenAI `404` *model does not exist* | `OPENAI_MODEL` is not available to your API key. Use a model listed in your OpenAI account. |
 | OpenAI `401` / `404` | Check the key, and the model name or its access. |
 | `Custom field '…' not found` | Create the field, or fix its name in `$config`. |
 | eramba `422` on the risk level | Add the missing option (Low, Medium or High) to the custom field. |
@@ -135,4 +136,5 @@ Disable or delete the automation, delete `openai_api_key` and revoke the OpenAI 
 
 | Version | Change |
 |---|---|
+| 0.1.1 | Default `OPENAI_MODEL` fixed to `gpt-5.6-luna` (`gpt-6.1-luna` does not exist). |
 | 0.1.0 | Validated end to end on eramba 3.31.1 with the score rule: portal submission → notification → risk level and conclusion on the assessment, risk level and date on the supplier; re-run skipped. OpenAI review pending validation. |

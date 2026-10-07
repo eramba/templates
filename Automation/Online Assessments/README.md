@@ -52,7 +52,7 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 |---|---|---|---|---|---|
 | 1 | [Finance Supplier Onboarding](Finance%20Supplier%20Onboarding/) | Third Parties | Google Sheets + eramba API | Daily | 0.1.0 tested |
 | 2 | [Missing Online Assessment Launch](Missing%20Online%20Assessment%20Launch/) | Third Parties | eramba API | On create (notification *New Item*) | 0.1.0 tested |
-| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | Online Assessments | OpenAI (optional) + eramba API | On submit (notification *OA has been submitted*) | 0.1.0 tested (score rule); AI review pending |
+| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | Online Assessments | OpenAI (optional) + eramba API | On submit (notification *OA has been submitted*) | 0.1.1 tested (score rule); AI review pending |
 
 ## Shared design
 
