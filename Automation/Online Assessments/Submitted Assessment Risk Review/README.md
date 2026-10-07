@@ -1,7 +1,7 @@
 ---
 id: oa-submitted-risk-review
 name: Submitted Assessment Risk Review
-version: 0.2.0
+version: 0.3.0
 status: tested
 vendor: OpenAI or Anthropic
 technology: OpenAI Chat Completions or Anthropic Messages API (optional) + eramba API v2
@@ -40,7 +40,7 @@ last_tested: 2026-10-06
 
 **Technology:** OpenAI or Anthropic (optional). **Status:** tested with the score rule. Validated end to end on eramba 3.31.1: submitting an assessment from the portal ran it through the *OA has been submitted* notification and filled the assessment and supplier fields. The AI review (OpenAI or Anthropic) is pending real validation.
 
-Prepares the review of each supplier assessment as soon as it is submitted. It proposes a risk level and a written conclusion on the assessment, and copies the risk level and the review date to the supplier. The assessor then does the formal review in eramba.
+Prepares the review of each supplier assessment as soon as it is submitted. It proposes a risk level and a written conclusion on the assessment, and copies the risk level and the submission date to the supplier. The assessor then does the formal review in eramba.
 
 ## At a glance
 
@@ -49,7 +49,7 @@ Prepares the review of each supplier assessment as soon as it is submitted. It p
 | **Runs** | Not recurrent. The notification *OA has been submitted* runs it for the assessment that was just submitted (section *Online Assessments*). |
 | **Reads** | That assessment's score, open findings and answers. |
 | **Writes on the assessment** | *Post Assessment Risk Level* (Low, Medium or High) and *Automated Review Conclusion* (text). |
-| **Writes on its suppliers** | *Supplier Risk Level* (same level) and *Last Review Date* (today). |
+| **Writes on its suppliers** | *Risk Profile* (same level) and *Last Reviewed* (the date the assessment was submitted). |
 | **Never does** | The formal *Review* of the assessment: the assessor still reviews and closes it, with the automated conclusion in front of them. It also skips assessments that already have a risk level. |
 
 ## 1. Guide and scope
@@ -68,7 +68,7 @@ The automation is not recurrent. The Online Assessments notification *OA has bee
 It then saves:
 
 - On the assessment: the custom fields *Post Assessment Risk Level* and *Automated Review Conclusion*. The script does not run eramba's *Review* action: the assessor reviews the assessment with the conclusion in front of them.
-- On each linked Third Party: *Supplier Risk Level* and *Last Review Date* (today, UTC).
+- On each linked Third Party: *Risk Profile* (the same level) and *Last Reviewed* (the assessment's submit date; today, UTC, if eramba does not return it).
 
 ## 3. Coverage
 
@@ -76,7 +76,7 @@ The level and conclusion, from AI or from the rule, are a proposal for the asses
 
 ## 4. Before you start
 
-- eramba Enterprise, with the custom fields from the guide. *Post Assessment Risk Level* and *Supplier Risk Level* must include the options Undefined, Low, Medium and High.
+- eramba Enterprise, with the custom fields from the guide. *Post Assessment Risk Level* and the Third Party dropdown *Risk Profile* must include the options Undefined, Low, Medium and High. The Third Party also needs a *Date* custom field *Last Reviewed*.
 - An Online Assessment custom field *Automated Review Conclusion* of type *Paragraph*, which holds the conclusion.
 - An eramba user with *Allow APIs* that can edit Online Assessments and Third Parties, plus an API token for it.
 - Optional: an OpenAI or Anthropic API key restricted to this use.
@@ -108,7 +108,7 @@ The default models are the balanced, lower-cost model of each provider's latest 
 | Variable | Default | Meaning |
 |---|---|---|
 | `OA_RISK_FIELD` / `OA_CONCLUSION_FIELD` | `Post Assessment Risk Level` / `Automated Review Conclusion` | Names of the assessment custom fields. |
-| `TP_RISK_FIELD` / `TP_REVIEW_DATE` | `Supplier Risk Level` / `Last Review Date` | Names of the Third Party custom fields. |
+| `TP_RISK_FIELD` / `TP_REVIEW_DATE` | `Risk Profile` / `Last Reviewed` | Names of the Third Party custom fields. |
 | `UNREVIEWED_VALUES` | `''`, `Undefined` | Risk level values that mean the assessment is still pending review. |
 | `HIGH_BELOW_PCT` / `MEDIUM_BELOW_PCT` | `50` / `80` | Score thresholds (%) of the rule. These are reference defaults, not part of the guide. |
 | `AI_PROVIDER` | `openai` | AI used for the review: `openai` or `anthropic` (§5). |
@@ -152,6 +152,7 @@ Disable or delete the automation, delete the AI Secret (`openai_api_key` or `ant
 
 | Version | Change |
 |---|---|
+| 0.3.0 | Third Party fields renamed to *Risk Profile* and *Last Reviewed*. *Last Reviewed* is now the assessment's submit date instead of the run date. |
 | 0.2.0 | Anthropic as an alternative AI provider (`AI_PROVIDER`, `ANTHROPIC_MODEL`). Default OpenAI model `gpt-6.1-sol`. `OPENAI_REASONING` renamed `AI_REASONING`. Reads only the submitted assessment (`GET /api/v2/vendor-assessments/{id}`) instead of listing all of them. |
 | 0.1.1 | Default `OPENAI_MODEL` fixed to `gpt-5.6-luna` (`gpt-6.1-luna` does not exist). |
 | 0.1.0 | Validated end to end on eramba 3.31.1 with the score rule: portal submission → notification → risk level and conclusion on the assessment, risk level and date on the supplier; re-run skipped. OpenAI review pending validation. |

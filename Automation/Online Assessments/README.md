@@ -31,7 +31,7 @@ Finance sheet ──(1, daily)──▶ supplier user + Third Party
 The configuration from the course's *Implementation* chapter, plus the fields these automations write:
 
 - Third Party type *Suppliers*, a supplier questionnaire and the *GRC* group.
-- Third Party custom fields *Finance Supplier ID* (text), *Requires Online Assessment* (Undefined, Yes, No), *Supplier Risk Level* (Undefined, Low, Medium, High) and *Last Review Date* (date).
+- Third Party custom fields *Finance Supplier ID* (text), *Requires Online Assessment* (Undefined, Yes, No), *Risk Profile* (Undefined, Low, Medium, High) and *Last Reviewed* (date).
 - Online Assessment custom fields *Post Assessment Risk Level* (Undefined, Low, Medium, High) and *Automated Review Conclusion* (paragraph).
 - An eramba user with *Allow APIs* and its API token in Secret `eramba_api_token`, and the Google service account key in Secret `google_service_account` (#1 reads the Finance sheet).
 

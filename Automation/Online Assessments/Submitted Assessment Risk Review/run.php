@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Submitted Assessment Risk Review
  *  Technology: OpenAI or Anthropic (optional) + eramba API
- *  id: oa-submitted-risk-review        version: 0.2.0
+ *  id: oa-submitted-risk-review        version: 0.3.0
  *  TUTORIAL TEMPLATE – example 3 of 3 of the eramba course
  *  "Online Assessments - Advanced Configurations" (https://www.eramba.org/learning/courses/81).
  *  Built for that tutorial's scenario: review and adapt before production use.
@@ -23,7 +23,8 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *       without that provider's API key secret, with the score/findings rule in README §2.
  *    3. Saves the risk level and the conclusion in custom fields of the assessment
  *       (the formal Review is left to the assessor).
- *    4. Saves "Supplier Risk Level" and "Last Review Date" on its Third Parties.
+ *    4. Saves "Risk Profile" (the risk level) and "Last Reviewed" (the date the
+ *       assessment was submitted) on its Third Parties.
  *  Re-running is safe: an assessment that already has a risk level is skipped.
  *
  *  Output
@@ -54,8 +55,8 @@ $config = [
     // Custom fields, by name (their IDs differ between installations)
     'OA_RISK_FIELD'       => 'Post Assessment Risk Level',  // Assessment dropdown: Undefined / Low / Medium / High
     'OA_CONCLUSION_FIELD' => 'Automated Review Conclusion', // Assessment paragraph
-    'TP_RISK_FIELD'       => 'Supplier Risk Level',         // Third Party dropdown: Undefined / Low / Medium / High
-    'TP_REVIEW_DATE'      => 'Last Review Date',            // Third Party date
+    'TP_RISK_FIELD'       => 'Risk Profile',                // Third Party dropdown: Undefined / Low / Medium / High
+    'TP_REVIEW_DATE'      => 'Last Reviewed',               // Third Party date: set to the assessment's submit date
     'UNREVIEWED_VALUES'  => ['', 'Undefined'], // Risk level values that mean "not reviewed yet"
     // Rule used without AI (score in %)
     'HIGH_BELOW_PCT'     => 50,              // Any open finding is also High
@@ -77,7 +78,7 @@ $config = [
 // Replaced by eramba with the Online Assessment that fired the notification.
 $assessmentId = '%ONLINE_ASSESSMENT_ID%';
 const AUTOMATION_ID      = 'oa-submitted-risk-review';
-const AUTOMATION_VERSION = '0.2.0';
+const AUTOMATION_VERSION = '0.3.0';
 const LEVELS             = ['Low', 'Medium', 'High'];
 
 // ─── 4. HELPERS ─────────────────────────────────────────────────────────────
@@ -300,6 +301,13 @@ function reviewByAi(array $oa, array $feedbacks, array $findings, string $apiKey
 }
 
 // ─── 7. APPLY: assessment first, then its suppliers ─────────────────────────
+/** Date (Y-m-d) the assessment was submitted; today (UTC) if eramba did not return it. */
+function submitDate(array $oa): string
+{
+    $ts = strtotime((string)($oa['submit_date'] ?? ''));
+    return $ts !== false ? gmdate('Y-m-d', $ts) : gmdate('Y-m-d');
+}
+
 function save(array $oa, string $level, string $conclusion, array $config): void
 {
     // Only fields are written: the formal Review stays with the assessor.
@@ -310,7 +318,7 @@ function save(array $oa, string $level, string $conclusion, array $config): void
     foreach ($oa['third_parties'] ?? [] as $tp) {
         erambaApi('PUT', "/api/v2/third-parties/{$tp['id']}", [
             $config['TP_RISK_FIELD']  => $level,
-            $config['TP_REVIEW_DATE'] => gmdate('Y-m-d'),
+            $config['TP_REVIEW_DATE'] => submitDate($oa),
         ]);
     }
 }
@@ -345,10 +353,10 @@ try {
                 : reviewByScore($oa, $findings, $config);
             $suppliers = implode(', ', array_column($oa['third_parties'] ?? [], 'name')) ?: 'none';
             if ($config['DRY_RUN']) {
-                logInfo("DRY RUN: #{$oa['id']} \"{$oa['title']}\" would be $level | suppliers: $suppliers");
+                logInfo("DRY RUN: #{$oa['id']} \"{$oa['title']}\" would be $level (submitted " . submitDate($oa) . ") | suppliers: $suppliers");
             } else {
                 save($oa, $level, $conclusion, $config);
-                logInfo("REVIEWED: #{$oa['id']} \"{$oa['title']}\" -> $level | suppliers: $suppliers");
+                logInfo("REVIEWED: #{$oa['id']} \"{$oa['title']}\" -> $level (submitted " . submitDate($oa) . ") | suppliers: $suppliers");
             }
             logInfo('  ' . $conclusion);
             $reviewed++;
