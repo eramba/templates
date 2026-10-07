@@ -4,8 +4,8 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 /**
  * ============================================================================
  *  Submitted Assessment Risk Review
- *  Technology: OpenAI (optional) + eramba API
- *  id: oa-submitted-risk-review        version: 0.1.1
+ *  Technology: OpenAI or Anthropic (optional) + eramba API
+ *  id: oa-submitted-risk-review        version: 0.2.0
  *  TUTORIAL TEMPLATE – example 3 of 3 of the eramba course
  *  "Online Assessments - Advanced Configurations" (https://www.eramba.org/learning/courses/81).
  *  Built for that tutorial's scenario: review and adapt before production use.
@@ -19,8 +19,8 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *
  *  For the submitted Online Assessment that fired the notification:
  *    1. Reads its answers, score and open findings.
- *    2. Reviews it with OpenAI (secret openai_api_key) or, without the secret,
- *       with the score/findings rule in README §2.
+ *    2. Reviews it with AI (OpenAI by default, or Anthropic: see AI_PROVIDER) or,
+ *       without that provider's API key secret, with the score/findings rule in README §2.
  *    3. Saves the risk level and the conclusion in custom fields of the assessment
  *       (the formal Review is left to the assessor).
  *    4. Saves "Supplier Risk Level" and "Last Review Date" on its Third Parties.
@@ -41,8 +41,12 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 $secrets = [
     'ERAMBA_API_TOKEN' => '%SECRET_eramba_api_token%',
 ];
-// Optional: without it the score/findings rule is used.
-$openAiApiKey = '%SECRET_openai_api_key%';
+// Optional AI review: create only the key of the provider set in AI_PROVIDER.
+// Without it, the score/findings rule is used.
+$aiApiKeys = [
+    'openai'    => '%SECRET_openai_api_key%',
+    'anthropic' => '%SECRET_anthropic_api_key%',
+];
 
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
@@ -56,9 +60,11 @@ $config = [
     // Rule used without AI (score in %)
     'HIGH_BELOW_PCT'     => 50,              // Any open finding is also High
     'MEDIUM_BELOW_PCT'   => 80,
-    // AI review
-    'OPENAI_MODEL'       => 'gpt-5.6-luna',     // Any Chat Completions model with reasoning effort
-    'OPENAI_REASONING'   => 'low',
+    // AI review: to use Claude, set AI_PROVIDER to 'anthropic' and create Secret anthropic_api_key
+    'AI_PROVIDER'        => 'openai',            // 'openai' or 'anthropic'
+    'OPENAI_MODEL'       => 'gpt-6.1-sol',       // Used when AI_PROVIDER is 'openai'
+    'ANTHROPIC_MODEL'    => 'claude-sonnet-5-5', // Used when AI_PROVIDER is 'anthropic'
+    'AI_REASONING'       => 'low',               // low / medium / high (both providers)
     // Run
     'FORCE_REVIEW'       => false,           // True = review again even if it already has a level (testing)
     'MAX_ITEMS'          => 2000,
@@ -71,7 +77,7 @@ $config = [
 // Replaced by eramba with the Online Assessment that fired the notification.
 $assessmentId = '%ONLINE_ASSESSMENT_ID%';
 const AUTOMATION_ID      = 'oa-submitted-risk-review';
-const AUTOMATION_VERSION = '0.1.1';
+const AUTOMATION_VERSION = '0.2.0';
 const LEVELS             = ['Low', 'Medium', 'High'];
 
 // ─── 4. HELPERS ─────────────────────────────────────────────────────────────
@@ -228,6 +234,48 @@ function reviewByScore(array $oa, array $findings, array $config): array
         AUTOMATION_ID, AUTOMATION_VERSION, $pct ?? 'n/a', count($findings), $level)];
 }
 
+/** Model answer (JSON text) from OpenAI Chat Completions. */
+function askOpenAi(string $prompt, string $apiKey, array $config): string
+{
+    $res = httpJson('POST', 'https://api.openai.com/v1/chat/completions', [
+        'Content-Type: application/json', 'Authorization: Bearer ' . trim($apiKey),
+    ], json_encode([
+        'model'                 => $config['OPENAI_MODEL'],
+        'reasoning_effort'      => $config['AI_REASONING'],
+        'max_completion_tokens' => 4000,
+        'response_format'       => ['type' => 'json_object'],
+        'messages'              => [['role' => 'user', 'content' => $prompt]],
+    ], JSON_THROW_ON_ERROR), true, 90);
+    return (string)($res['choices'][0]['message']['content'] ?? '');
+}
+
+/** Model answer (JSON text) from the Anthropic Messages API. */
+function askAnthropic(string $prompt, string $apiKey, array $config): string
+{
+    $res = httpJson('POST', 'https://api.anthropic.com/v1/messages', [
+        'Content-Type: application/json', 'x-api-key: ' . trim($apiKey), 'anthropic-version: 2023-06-01',
+        'anthropic-beta: server-side-fallback-2026-07-01', // Retries a declined request on Anthropic's fallback model
+    ], json_encode([
+        'model'         => $config['ANTHROPIC_MODEL'],
+        'max_tokens'    => 16000,
+        'fallbacks'     => 'default',
+        'output_config' => [
+            'effort' => $config['AI_REASONING'],
+            'format' => ['type' => 'json_schema', 'schema' => [
+                'type'                 => 'object',
+                'properties'           => ['risk_level' => ['type' => 'string', 'enum' => LEVELS], 'conclusion' => ['type' => 'string']],
+                'required'             => ['risk_level', 'conclusion'],
+                'additionalProperties' => false,
+            ]],
+        ],
+        'messages'      => [['role' => 'user', 'content' => $prompt]],
+    ], JSON_THROW_ON_ERROR), true, 90);
+    if (($res['stop_reason'] ?? '') === 'refusal') {
+        throw new RuntimeException('The model declined the review; the assessment was left unreviewed.');
+    }
+    return implode('', array_column(array_filter($res['content'] ?? [], fn ($b) => ($b['type'] ?? '') === 'text'), 'text'));
+}
+
 function reviewByAi(array $oa, array $feedbacks, array $findings, string $apiKey, array $config): array
 {
     $visible = array_filter($feedbacks, fn ($f) => empty($f['hidden']));
@@ -243,23 +291,15 @@ function reviewByAi(array $oa, array $feedbacks, array $findings, string $apiKey
         . implode("\n\n", $answers)
         . "\n\nReply ONLY with JSON: {\"risk_level\": \"Low|Medium|High\", \"conclusion\": \"<max 600 chars>\"}";
 
-    $res = httpJson('POST', 'https://api.openai.com/v1/chat/completions', [
-        'Content-Type: application/json', 'Authorization: Bearer ' . trim($apiKey),
-    ], json_encode([
-        'model'                 => $config['OPENAI_MODEL'],
-        'reasoning_effort'      => $config['OPENAI_REASONING'],
-        'max_completion_tokens' => 4000,
-        'response_format'       => ['type' => 'json_object'],
-        'messages'              => [['role' => 'user', 'content' => $prompt]],
-    ], JSON_THROW_ON_ERROR), true, 90);
-
-    $json  = json_decode((string)($res['choices'][0]['message']['content'] ?? ''), true);
+    $anthropic = $config['AI_PROVIDER'] === 'anthropic';
+    $model = $anthropic ? $config['ANTHROPIC_MODEL'] : $config['OPENAI_MODEL'];
+    $json  = json_decode($anthropic ? askAnthropic($prompt, $apiKey, $config) : askOpenAi($prompt, $apiKey, $config), true);
     $level = ucfirst(strtolower((string)($json['risk_level'] ?? '')));
     if (!in_array($level, LEVELS, true) || trim((string)($json['conclusion'] ?? '')) === '') {
         throw new RuntimeException('Unexpected AI answer; the assessment was left unreviewed.');
     }
     return [$level, sprintf('AI review by %s v%s (%s): %s', AUTOMATION_ID, AUTOMATION_VERSION,
-        $config['OPENAI_MODEL'], substr(trim((string)$json['conclusion']), 0, 600))];
+        $model, substr(trim((string)$json['conclusion']), 0, 600))];
 }
 
 // ─── 7. APPLY: assessment first, then its suppliers ─────────────────────────
@@ -289,8 +329,10 @@ try {
               'TP_RISK_FIELD' => 'third-parties', 'TP_REVIEW_DATE' => 'third-parties'] as $key => $resource) {
         $config[$key] = customField($resource, $config[$key]);
     }
-    $useAi = secretExists($openAiApiKey);
-    logInfo('Review mode: ' . ($useAi ? "AI ({$config['OPENAI_MODEL']}, reasoning {$config['OPENAI_REASONING']})" : 'score/findings rule (no openai_api_key secret)'));
+    $aiKey = $aiApiKeys[$config['AI_PROVIDER']] ?? throw new RuntimeException("AI_PROVIDER must be 'openai' or 'anthropic'.");
+    $useAi = secretExists($aiKey);
+    $model = $config['AI_PROVIDER'] === 'anthropic' ? $config['ANTHROPIC_MODEL'] : $config['OPENAI_MODEL'];
+    logInfo('Review mode: ' . ($useAi ? "AI ({$config['AI_PROVIDER']} $model, reasoning {$config['AI_REASONING']})" : "score/findings rule (no {$config['AI_PROVIDER']}_api_key secret)"));
 
     logStep(2, "Reading Online Assessment #$assessmentId");
     $oa = pendingAssessment($assessmentId, $config);
@@ -302,7 +344,7 @@ try {
         try {
             $findings = openFindings((int)$oa['id']);
             [$level, $conclusion] = $useAi
-                ? reviewByAi($oa, forAssessment('vendor-assessment-feedbacks', (int)$oa['id']), $findings, $openAiApiKey, $config)
+                ? reviewByAi($oa, forAssessment('vendor-assessment-feedbacks', (int)$oa['id']), $findings, $aiKey, $config)
                 : reviewByScore($oa, $findings, $config);
             $suppliers = implode(', ', array_column($oa['third_parties'] ?? [], 'name')) ?: 'none';
             if ($config['DRY_RUN']) {
