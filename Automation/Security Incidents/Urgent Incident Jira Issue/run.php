@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Urgent Incident Jira Issue
  *  Technology: Atlassian Jira Cloud + eramba API
- *  id: incident-urgent-jira-issue        version: 0.1.0
+ *  id: incident-urgent-jira-issue        version: 0.1.1
  *  TUTORIAL TEMPLATE – automation of the eramba course
  *  "Security Incident Management in eramba" (https://www.eramba.org/learning/courses/94).
  *  Built for that tutorial's scenario: review and adapt before production use.
@@ -67,7 +67,7 @@ $config = [
 // Replaced by eramba with the incident that fired the notification.
 $incidentId = '%SECURITYINCIDENT_ID%';
 const AUTOMATION_ID      = 'incident-urgent-jira-issue';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.1.1';
 
 // ─── 4. HELPERS ─────────────────────────────────────────────────────────────
 function logStep(int $n, string $title): void
@@ -85,7 +85,9 @@ function erambaCall(string $response, string $action): array
 {
     $decoded = json_decode($response, true);
     if (!is_array($decoded) || empty($decoded['success'])) {
-        throw new RuntimeException("eramba $action failed: " . substr(trim($response), 0, 300));
+        // Only the names of the rejected fields: their values may hold personal data.
+        $fields = is_array($decoded['errors'] ?? null) ? implode(', ', array_keys($decoded['errors'])) : '';
+        throw new RuntimeException("eramba $action failed" . ($fields !== '' ? " (invalid fields: $fields)" : '') . '.');
     }
     return $decoded;
 }
@@ -116,9 +118,24 @@ function httpJson(string $method, string $url, array $headers, ?string $body = n
     $status = (int)($m[1] ?? 0);
     $path = (string)parse_url($url, PHP_URL_HOST) . (string)parse_url($url, PHP_URL_PATH);
     if ($resp === false || $status < 200 || $status >= 300) {
-        throw new RuntimeException("HTTP $status $method $path: " . substr((string)$resp, 0, 300));
+        throw new RuntimeException("HTTP $status $method $path"); // Body not logged: it may hold personal data
     }
     return json_decode($resp, true, 64, JSON_THROW_ON_ERROR) ?? [];
+}
+
+/**
+ * True for https://, or for http:// to a private or loopback address: the runner
+ * reaches eramba on an internal network (e.g. http://eramba-<instance>).
+ */
+function erambaUrlAllowed(string $base): bool
+{
+    if (preg_match('#^https://#i', $base) === 1) {
+        return true;
+    }
+    $host = (string)parse_url($base, PHP_URL_HOST);
+    $ip   = filter_var($host, FILTER_VALIDATE_IP) !== false ? $host : gethostbyname($host);
+    return preg_match('#^http://#i', $base) === 1 && filter_var($ip, FILTER_VALIDATE_IP) !== false
+        && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
 }
 
 /** eramba REST API (v2). Used because automations have no read/list helpers. */
@@ -126,6 +143,10 @@ function erambaApi(string $method, string $path, ?array $payload = null, array $
 {
     global $config, $secrets;
     $base = rtrim($config['ERAMBA_API_URL'] ?: (string)getenv('ERAMBA_BASE_URL'), '/');
+    static $allowed = [];
+    if (!($allowed[$base] ??= erambaUrlAllowed($base))) {
+        throw new RuntimeException('The eramba API URL (ERAMBA_API_URL or the runner-provided ERAMBA_BASE_URL) must use https://, or http:// to a private network address: the API token never crosses the Internet unencrypted.');
+    }
     return httpJson($method, $base . $path . ($query ? '?' . http_build_query($query) : ''), [
         'Accept: application/json', 'Content-Type: application/json',
         'Authorization: Bearer ' . trim($secrets['ERAMBA_API_TOKEN']),
@@ -161,6 +182,13 @@ function jiraApi(string $method, string $path, ?array $payload = null, array $qu
     global $secrets, $jiraCloudId;
     $cloudId = preg_match('/^%SECRET_[^%]+%$/', trim($jiraCloudId)) === 1 ? '' : trim($jiraCloudId);
     $base = $cloudId === '' ? rtrim(trim($secrets['JIRA_SITE_URL']), '/') : "https://api.atlassian.com/ex/jira/$cloudId";
+    // The API token only goes to an HTTPS Atlassian host.
+    if ($cloudId !== '' && preg_match('/^[a-f0-9-]{36}$/iD', $cloudId) !== 1) {
+        throw new RuntimeException('Invalid Secret jira_cloud_id: use the Cloud ID from admin.atlassian.com, not the Organization ID.');
+    }
+    if ($cloudId === '' && preg_match('~^https://[a-z0-9][a-z0-9-]*\.atlassian\.net$~iD', $base) !== 1) {
+        throw new RuntimeException('Secret jira_site_url must be an HTTPS Jira Cloud site, e.g. https://example.atlassian.net.');
+    }
     $auth = base64_encode(trim($secrets['JIRA_EMAIL']) . ':' . trim($secrets['JIRA_API_TOKEN']));
     return httpJson($method, "$base/rest/api/3/$path" . ($query ? '?' . http_build_query($query) : ''), [
         'Accept: application/json', 'Content-Type: application/json', "Authorization: Basic $auth",

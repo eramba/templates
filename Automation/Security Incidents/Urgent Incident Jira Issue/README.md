@@ -1,7 +1,7 @@
 ---
 id: incident-urgent-jira-issue
 name: Urgent Incident Jira Issue
-version: 0.1.0
+version: 0.1.1
 status: draft
 vendor: Atlassian
 technology: Jira Cloud REST API v3 + eramba API v2
@@ -123,6 +123,8 @@ If the run fails after the issue is created, the incident stays without key. Run
 | Jira `401` / `403` / `404` | Check `jira_site_url`, `jira_email`, `jira_api_token` and that the account can create issues in `PROJECT_KEY`. With a token with scopes, check `jira_cloud_id` (Cloud ID, not Organization ID) and the token's scopes. |
 | `Issue type '…' not found` | Fix `ISSUE_TYPE` (exact name in that project), or give the account *Create issues* in `PROJECT_KEY`. |
 | Jira `400` on creation | Usually a field that the project requires; read the message in the log. |
+| `Secret jira_site_url must be an HTTPS Jira Cloud site` / `Invalid Secret jira_cloud_id` | Use `https://<your-site>.atlassian.net` (no path) and the Cloud ID (a 36-character ID), not the Organization ID. The Jira credentials are only sent to that HTTPS Atlassian host. |
+| `The eramba API URL … must use https://, or http:// to a private network address` | `ERAMBA_API_URL` or the runner's `ERAMBA_BASE_URL` is plain HTTP to a public address. Use the HTTPS URL of eramba: the API token never crosses the Internet unencrypted. Plain HTTP is accepted only to a private or loopback address, such as the internal URL eramba Cloud gives the runner (`http://eramba-<instance>`). |
 | eramba `401` | The eramba token is wrong or its user lacks *Allow APIs*. |
 | TLS errors | Fix the certificate of your eramba. Set `ERAMBA_API_VERIFY_TLS=false` only on a test instance with a self-signed certificate. |
 
@@ -138,4 +140,5 @@ Turn off *Trigger Automation* in the *New Item Created* notification, then disab
 
 | Version | Change |
 |---|---|
+| 0.1.1 | `jira_site_url` must be an HTTPS `*.atlassian.net` site and `jira_cloud_id` a Cloud ID; the eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
 | 0.1.0 | First version, from the course example: custom fields found by name, issue reused by label on retry. |

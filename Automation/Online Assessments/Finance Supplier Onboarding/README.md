@@ -1,7 +1,7 @@
 ---
 id: oa-finance-supplier-onboarding
 name: Finance Supplier Onboarding
-version: 0.1.0
+version: 0.1.1
 status: tested
 vendor: Google
 technology: Google Sheets API + eramba API v2
@@ -128,6 +128,7 @@ The log lists every created and linked supplier, plus a summary line. Row errors
 | `Column '…' not found` | Fix the `COL_*` names or the sheet header. |
 | eramba `401` | Enable *Allow APIs* on the token's user, or regenerate the token. |
 | eramba `422` | A required field is missing or has the wrong type. Check custom fields marked as required. |
+| `The eramba API URL … must use https://, or http:// to a private network address` | `ERAMBA_API_URL` or the runner's `ERAMBA_BASE_URL` is plain HTTP to a public address. Use the HTTPS URL of eramba: the API token never crosses the Internet unencrypted. Plain HTTP is accepted only to a private or loopback address, such as the internal URL eramba Cloud gives the runner (`http://eramba-<instance>`). |
 | TLS error to the eramba API | The runner reaches eramba through an internal URL with a self-signed certificate. Prefer a trusted certificate or a URL with one in `ERAMBA_API_URL`. Set `ERAMBA_API_VERIFY_TLS=false` only for that internal URL, never for an Internet host. |
 
 ## 10. Customising
@@ -142,4 +143,5 @@ Disable or delete the automation, delete the two Secrets, revoke the API token, 
 
 | Version | Change |
 |---|---|
+| 0.1.1 | The eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
 | 0.1.0 | Validated end to end on eramba 3.31.1: new row → supplier user + Third Party with *Requires Online Assessment* = Yes; existing supplier skipped; re-run without duplicates. |

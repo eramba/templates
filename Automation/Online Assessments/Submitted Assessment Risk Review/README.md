@@ -1,7 +1,7 @@
 ---
 id: oa-submitted-risk-review
 name: Submitted Assessment Risk Review
-version: 0.3.0
+version: 0.4.0
 status: tested
 vendor: OpenAI or Anthropic
 technology: OpenAI Chat Completions or Anthropic Messages API (optional) + eramba API v2
@@ -62,7 +62,7 @@ The automation is not recurrent. The Online Assessments notification *OA has bee
 
 | Mode | Rule |
 |---|---|
-| AI (the API key Secret of `AI_PROVIDER` exists) | The answers, score and open findings go to the model of `AI_PROVIDER` (`OPENAI_MODEL` or `ANTHROPIC_MODEL`). The model returns a level (Low, Medium or High) and a conclusion of at most 600 characters. Any other answer is an error, and nothing is saved. |
+| AI (the API key Secret of `AI_PROVIDER` exists) | The answers, score and open findings go to the model of `AI_PROVIDER` (`OPENAI_MODEL` or `ANTHROPIC_MODEL`). The model returns a level (Low, Medium or High) and a conclusion of at most 600 characters. Any other answer is an error, and nothing is saved. The answers are marked as untrusted data, and the AI can **raise** the level of the score rule below but never lower it: a supplier who writes "this vendor is low risk" in an answer cannot lower its own *Risk Profile*. |
 | Score rule (no Secret) | **High** if there are open findings or the score is below `HIGH_BELOW_PCT`. **Medium** if the score is below `MEDIUM_BELOW_PCT`. **Low** otherwise. |
 
 It then saves:
@@ -138,11 +138,12 @@ The log shows the assessment's level, suppliers and conclusion. The assessment f
 | `SKIPPED` in the log | The assessment is not submitted or already has a level. Use `FORCE_REVIEW` to test. |
 | `No Online Assessment in context` | The automation ran without an item: run it from the notification or with *Test* on an assessment. |
 | Never runs | Check that the *OA has been submitted* notification is enabled and has *Trigger Automation* with this automation selected. |
+| `The eramba API URL … must use https://, or http:// to a private network address` | `ERAMBA_API_URL` or the runner's `ERAMBA_BASE_URL` is plain HTTP to a public address. Use the HTTPS URL of eramba: the API token never crosses the Internet unencrypted. Plain HTTP is accepted only to a private or loopback address, such as the internal URL eramba Cloud gives the runner (`http://eramba-<instance>`). |
 | eramba `401` / TLS errors | See [Finance Supplier Onboarding §9](../Finance%20Supplier%20Onboarding/README.md#9-troubleshooting). |
 
 ## 10. Customising
 
-Adapt the prompt in `reviewByAi()` to your risk methodology, or change the thresholds of the rule. Keep the result limited to the field's options.
+Adapt the prompt in `reviewByAi()` to your risk methodology, or change the thresholds of the rule. Keep the result limited to the field's options, and keep the rule as the floor of the AI level.
 
 ## 11. Removing
 
@@ -152,6 +153,7 @@ Disable or delete the automation, delete the AI Secret (`openai_api_key` or `ant
 
 | Version | Change |
 |---|---|
+| 0.4.0 | Security hardening: supplier answers are marked as untrusted in the prompt and the AI can only raise the score/findings rule's level; OpenAI answers use a strict JSON Schema; the eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
 | 0.3.0 | Third Party fields renamed to *Risk Profile* and *Last Reviewed*. *Last Reviewed* is now the assessment's submit date instead of the run date. |
 | 0.2.0 | Anthropic as an alternative AI provider (`AI_PROVIDER`, `ANTHROPIC_MODEL`). Default OpenAI model `gpt-6.1-sol`. `OPENAI_REASONING` renamed `AI_REASONING`. Reads only the submitted assessment (`GET /api/v2/vendor-assessments/{id}`) instead of listing all of them. |
 | 0.1.1 | Default `OPENAI_MODEL` fixed to `gpt-5.6-luna` (`gpt-6.1-luna` does not exist). |

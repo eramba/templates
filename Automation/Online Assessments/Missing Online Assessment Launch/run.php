@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Missing Online Assessment Launch
  *  Technology: eramba API
- *  id: oa-missing-assessment-launch        version: 0.1.1
+ *  id: oa-missing-assessment-launch        version: 0.1.2
  *  TUTORIAL TEMPLATE – example 2 of 3 of the eramba course
  *  "Online Assessments - Advanced Configurations" (https://www.eramba.org/learning/courses/81).
  *  Built for that tutorial's scenario: review and adapt before production use.
@@ -60,7 +60,7 @@ $config = [
 // Replaced by eramba with the Third Party that fired the notification.
 $thirdPartyId = '%THIRDPARTY_ID%';
 const AUTOMATION_ID      = 'oa-missing-assessment-launch';
-const AUTOMATION_VERSION = '0.1.1';
+const AUTOMATION_VERSION = '0.1.2';
 const PERIOD_DAYS        = 1; // eramba period type: 1 day, 2 week, 3 month, 4 year
 
 // ─── 4. HELPERS ─────────────────────────────────────────────────────────────
@@ -79,7 +79,9 @@ function erambaCall(string $response, string $action): array
 {
     $decoded = json_decode($response, true);
     if (!is_array($decoded) || empty($decoded['success'])) {
-        throw new RuntimeException("eramba $action failed: " . substr(trim($response), 0, 300));
+        // Only the names of the rejected fields: their values may hold personal data.
+        $fields = is_array($decoded['errors'] ?? null) ? implode(', ', array_keys($decoded['errors'])) : '';
+        throw new RuntimeException("eramba $action failed" . ($fields !== '' ? " (invalid fields: $fields)" : '') . '.');
     }
     return $decoded;
 }
@@ -110,9 +112,24 @@ function httpJson(string $method, string $url, array $headers, ?string $body = n
     $status = (int)($m[1] ?? 0);
     $path = (string)parse_url($url, PHP_URL_HOST) . (string)parse_url($url, PHP_URL_PATH);
     if ($resp === false || $status < 200 || $status >= 300) {
-        throw new RuntimeException("HTTP $status $method $path: " . substr((string)$resp, 0, 300));
+        throw new RuntimeException("HTTP $status $method $path"); // Body not logged: it may hold personal data
     }
     return json_decode($resp, true, 64, JSON_THROW_ON_ERROR) ?? [];
+}
+
+/**
+ * True for https://, or for http:// to a private or loopback address: the runner
+ * reaches eramba on an internal network (e.g. http://eramba-<instance>).
+ */
+function erambaUrlAllowed(string $base): bool
+{
+    if (preg_match('#^https://#i', $base) === 1) {
+        return true;
+    }
+    $host = (string)parse_url($base, PHP_URL_HOST);
+    $ip   = filter_var($host, FILTER_VALIDATE_IP) !== false ? $host : gethostbyname($host);
+    return preg_match('#^http://#i', $base) === 1 && filter_var($ip, FILTER_VALIDATE_IP) !== false
+        && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
 }
 
 /** eramba REST API (v2). Used because automations have no read/list helpers. */
@@ -120,6 +137,10 @@ function erambaApi(string $method, string $path, ?array $payload = null, array $
 {
     global $config, $secrets;
     $base = rtrim($config['ERAMBA_API_URL'] ?: (string)getenv('ERAMBA_BASE_URL'), '/');
+    static $allowed = [];
+    if (!($allowed[$base] ??= erambaUrlAllowed($base))) {
+        throw new RuntimeException('The eramba API URL (ERAMBA_API_URL or the runner-provided ERAMBA_BASE_URL) must use https://, or http:// to a private network address: the API token never crosses the Internet unencrypted.');
+    }
     return httpJson($method, $base . $path . ($query ? '?' . http_build_query($query) : ''), [
         'Accept: application/json', 'Content-Type: application/json',
         'Authorization: Bearer ' . trim($secrets['ERAMBA_API_TOKEN']),
