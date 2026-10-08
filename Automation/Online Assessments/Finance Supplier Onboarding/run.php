@@ -155,6 +155,9 @@ function erambaApi(string $method, string $path, ?array $payload = null, array $
 {
     global $config, $secrets;
     $base = rtrim($config['ERAMBA_API_URL'] ?: (string)getenv('ERAMBA_BASE_URL'), '/');
+    if ($base === '') {
+        throw new RuntimeException('Set ERAMBA_API_URL: the runner provided no ERAMBA_BASE_URL.');
+    }
     static $allowed = [];
     if (!($allowed[$base] ??= erambaUrlAllowed($base))) {
         throw new RuntimeException('The eramba API URL (ERAMBA_API_URL or the runner-provided ERAMBA_BASE_URL) must use https://, or http:// to a private network address: the API token never crosses the Internet unencrypted.');
@@ -374,8 +377,9 @@ try {
         try {
             $action = syncRow($row, $config, $groupIds, $grcContact);
             if ($action !== 'SKIPPED') {
-                logInfo("$action: $name (Requires OA: " . requiresOa($row, $config) . ')' . (cell($row, $config, 'COL_CONTACT_EMAIL') === '' ? ' (no contact email)' : '')
-                    . ($action === 'LINKED' ? ' (matched by name only: check it is the same supplier)' : ''));
+                logInfo($action === 'LINKED'
+                    ? "LINKED: $name (Finance Supplier ID stored; matched by name only: check it is the same supplier)"
+                    : "CREATED: $name (Requires OA: " . requiresOa($row, $config) . ')' . (cell($row, $config, 'COL_CONTACT_EMAIL') === '' ? ' (no contact email)' : ''));
             }
         } catch (Throwable $e) {
             $action = 'ERROR';

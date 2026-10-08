@@ -36,7 +36,7 @@ variables:
   - MAX_LOG_ITEMS
 dependencies:
   - aws/aws-sdk-php:^3.398
-timeout_seconds: 60
+timeout_seconds: 240
 eramba_version_tested: null
 last_tested: null
 ---
@@ -52,7 +52,7 @@ Reviews backup jobs and restore tests with ready-to-run defaults for the Backup 
 | **Control** | Backup Execution and Restore Test |
 | **Technology** | AWS Backup |
 | **Schedule** | At least weekly; restore evidence covers the last 90 days |
-| **Version** | 0.3.1 — candidate for validation |
+| **Version** | 0.3.2 — candidate for validation |
 | **Validation** | Validate this version and its audit calendar in your AWS/eramba installation before use |
 | **Default execution** | Live: saves results and evidence |
 | **Default RPO / RTO** | 24 hours / 240 minutes |
@@ -222,7 +222,7 @@ Follow [Installing an automation](../../docs/installing.md), using these values:
 | Automation field | Value |
 |---|---|
 | Name | Backup Execution and Restore Test |
-| Timeout | 60 seconds initially; allow more for additional regions, maximum 240 seconds |
+| Timeout | 240 seconds (the maximum): collection stops at about 190 seconds to leave time for reporting |
 | Composer packages | `aws/aws-sdk-php:^3.398` |
 | Code | Full content of `run.php` |
 | Recurrent Automation | Off; execute on the control's planned audit dates |
@@ -250,6 +250,8 @@ Set regions and optional role in §7. For an initial simulation use `DRY_RUN=tru
 | `RESULT_PASSED_ID` | `2` | Passed option ID in your installation |
 | `RESULT_FAILED_ID` | `1` | Failed option ID; must differ from Passed |
 | `MAX_LOG_ITEMS` | `20` | Maximum failures listed in the conclusion; the CSV retains all items |
+
+The script stops collection after about 190 seconds, above 5,000 items in one AWS list, or when the evidence CSV exceeds 600 KB. This leaves time for reporting inside the 240-second runner limit. It never returns a partial population as Passed. Split large scopes across separate controls.
 
 The mandatory checks and evidence attachments have no on/off switches. Different test requirements require an explicitly different methodology and implementation.
 
@@ -296,7 +298,7 @@ Follow [Removing an automation](../../docs/installing.md#removing-an-automation)
 
 | Version | Date | Change |
 |---|---|---|
-| 0.3.2 | 2026-10-08 | Enforces the collection limits the README already described (190 s time budget, 5,000 items per AWS list, 600 KB evidence): a large account fails cleanly instead of overrunning the runner. `AWS_EXTERNAL_ID` is no longer copied into the config attachment. |
+| 0.3.2 | 2026-10-08 | Collection limits (190 s time budget, 5,000 items per AWS list, 600 KB evidence) and a 240-second timeout: a large account fails cleanly instead of overrunning the runner. `AWS_EXTERNAL_ID` is no longer copied into the config attachment. Evidence CSV cells cannot start a spreadsheet formula; conclusion lines are single-line and capped at 400 characters. |
 | 0.3.1 | 2026-09-27 | Ready-to-run test defaults: automatic restore population, RPO 24 hours, RTO 240 minutes; explicit sampling remains optional |
 | 0.3.0 | 2026-09-25 | Adds restore-test RPO and explicit ARN sample; removes policy-only checks and mandatory-check switches; evaluates sample coverage across regions; retains invalid records as failed evidence; adds explicit simulation; documents weekly execution and recovery objectives |
 | 0.2.0 | 2026-09-25 | Summary items for empty checks; 30-day backup history; missing timestamp handling |

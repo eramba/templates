@@ -33,7 +33,7 @@ The configuration from the course's *Implementation* chapter, plus the fields th
 - Third Party type *Suppliers*, a supplier questionnaire and the *GRC* group.
 - Third Party custom fields *Finance Supplier ID* (text), *Requires Online Assessment* (Undefined, Yes, No), *Risk Profile* (Undefined, Low, Medium, High) and *Last Reviewed* (date).
 - Online Assessment custom fields *Post Assessment Risk Level* (Undefined, Low, Medium, High) and *Automated Review Conclusion* (paragraph).
-- An eramba user with *Allow APIs* and its API token in Secret `eramba_api_token`, and the Google service account key in Secret `google_service_account` (#1 reads the Finance sheet).
+- An eramba user with *Allow APIs* and its API token in Secret `eramba_api_token`, and the Google service account key in Secret `google_service_account` (#1 reads the Finance sheet). Optionally `openai_api_key` or `anthropic_api_key` for the AI review of #3.
 
 ## Install
 
@@ -50,9 +50,9 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 
 | # | Automation | Section | Technology | Recommended schedule | Version / status |
 |---|---|---|---|---|---|
-| 1 | [Finance Supplier Onboarding](Finance%20Supplier%20Onboarding/) | Third Parties | Google Sheets + eramba API | Daily | 0.1.0 tested |
-| 2 | [Missing Online Assessment Launch](Missing%20Online%20Assessment%20Launch/) | Third Parties | eramba API | On create (notification *New Item*) | 0.1.1 tested |
-| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | Online Assessments | OpenAI or Anthropic (optional) + eramba API | On submit (notification *OA has been submitted*) | 0.2.0 tested (score rule); AI review pending |
+| 1 | [Finance Supplier Onboarding](Finance%20Supplier%20Onboarding/) | Third Parties | Google Sheets + eramba API | Daily | 0.1.1 tested |
+| 2 | [Missing Online Assessment Launch](Missing%20Online%20Assessment%20Launch/) | Third Parties | eramba API | On create (notification *New Item*) | 0.1.2 tested |
+| 3 | [Submitted Assessment Risk Review](Submitted%20Assessment%20Risk%20Review/) | Online Assessments | OpenAI or Anthropic (optional) + eramba API | On submit (notification *OA has been submitted*) | 0.4.0 tested (score rule and OpenAI review); Anthropic review pending |
 
 ## Shared design
 

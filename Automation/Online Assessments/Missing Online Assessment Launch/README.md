@@ -31,7 +31,7 @@ last_tested: 2026-10-06
 
 > **Tutorial templates.** This is one of the three example automations of the eramba course [Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81). It is built for the scenario of that tutorial (a Finance supplier list, supplier accounts, a supplier questionnaire). Use it as a starting point: review and adapt it to your own process before using it in production.
 
-**Technology:** eramba. **Status:** tested. Validated end to end on eramba 3.31.1: the *New Item* notification ran it for a new supplier and the assessment was created and sent; suppliers without *Requires Online Assessment* = Yes and suppliers with an assessment were skipped.
+**Technology:** eramba. **Status:** tested. Validated end to end on eramba 3.31.1 (version 0.1.0): the *New Item* notification ran it for a new supplier and the assessment was created and sent; suppliers without *Requires Online Assessment* = Yes and suppliers with an assessment were skipped.
 
 Makes sure every supplier is assessed. As soon as a supplier is created, the automation checks its *Requires Online Assessment* field (set from the Finance sheet's *Requies OA*). If it is Yes, it creates an Online Assessment and sends it to the supplier's Third Party Contact.
 
@@ -112,7 +112,7 @@ The log shows `CREATED` with the assessment ID and its Recipients, or `SKIPPED` 
 | Never runs | Check that *New Item* is enabled and has *Trigger Automation* with this automation selected. |
 | `Custom field '…' not found` | Create the field, or fix its name in `$config`. |
 | Supplier skipped | Check the reason in the log: *Requires Online Assessment* must be Yes (from the sheet) and the supplier needs a Third Party Contact. |
-| eramba `422` on creation | A required assessment field is missing or invalid; read the message in the log. |
+| `HTTP 422 POST …/vendor-assessments` | A required assessment field is missing or invalid. The log shows only the status (response bodies are not logged): check the questionnaire, recipients and required custom fields of Online Assessments. |
 | eramba `401` / TLS errors | See [Finance Supplier Onboarding §9](../Finance%20Supplier%20Onboarding/README.md#9-troubleshooting). |
 
 ## 10. Customising

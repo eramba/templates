@@ -462,7 +462,7 @@ function evaluate(array $results, array $config): array
         $lines[] = sprintf('  %-17s %s (%d/%d items ok)', $check, $bad === 0 ? 'OK' : 'FAILED', $total - $bad, $total);
     }
     foreach (array_slice($failed, 0, $config['MAX_LOG_ITEMS']) as $f) {
-        $lines[] = sprintf('- [%s] %s%s: %s', $f['check'], $f['region'] !== '' ? $f['region'] . ' ' : '', $f['resource'], $f['detail']);
+        $lines[] = mb_substr(sprintf('- [%s] %s%s: %s', $f['check'], $f['region'] !== '' ? $f['region'] . ' ' : '', $f['resource'], preg_replace('/[\r\n]+/', ' ', $f['detail'])), 0, 400);
     }
     if (count($failed) > $config['MAX_LOG_ITEMS']) {
         $lines[] = sprintf('… and %d more (see evidence attachment).', count($failed) - $config['MAX_LOG_ITEMS']);
@@ -530,7 +530,7 @@ function evidenceCsv(array $results): string
     $fh = fopen('php://temp', 'r+');
     fputcsv($fh, ['check', 'region', 'resource', 'result', 'detail'], ',', '"', '');
     foreach ($results as $r) {
-        fputcsv($fh, [$r['check'], $r['region'] ?? '', $r['resource'], $r['passed'] ? 'PASS' : 'FAIL', $r['detail']], ',', '"', '');
+        fputcsv($fh, array_map(fn($v)=>preg_match('/^[=+@\-\t\r]/',(string)$v) ? "'".$v : $v, [$r['check'], $r['region'] ?? '', $r['resource'], $r['passed'] ? 'PASS' : 'FAIL', $r['detail']]), ',', '"', '');
     }
     rewind($fh);
     return (string) stream_get_contents($fh);

@@ -31,14 +31,14 @@ variables:
 dependencies: []
 timeout_seconds: 120
 eramba_version_tested: 3.31.1
-last_tested: 2026-10-06
+last_tested: 2026-10-08
 ---
 
 # Submitted Assessment Risk Review
 
 > **Tutorial templates.** This is one of the three example automations of the eramba course [Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81). It is built for the scenario of that tutorial (a Finance supplier list, supplier accounts, a supplier questionnaire). Use it as a starting point: review and adapt it to your own process before using it in production.
 
-**Technology:** OpenAI or Anthropic (optional). **Status:** tested with the score rule. Validated end to end on eramba 3.31.1: submitting an assessment from the portal ran it through the *OA has been submitted* notification and filled the assessment and supplier fields. The AI review (OpenAI or Anthropic) is pending real validation.
+**Technology:** OpenAI or Anthropic (optional). **Status:** tested. Validated end to end on eramba 3.31.1 with the score rule (version 0.1.0): submitting an assessment from the portal ran it through the *OA has been submitted* notification and filled the assessment and supplier fields. Version 0.4.0 tested on eramba 3.31.1 with the OpenAI review (*Test* on a submitted assessment): it saved the level and conclusion, and *Risk Profile* and *Last Reviewed* (the submit date) on the supplier. The Anthropic review is pending real validation.
 
 Prepares the review of each supplier assessment as soon as it is submitted. It proposes a risk level and a written conclusion on the assessment, and copies the risk level and the submission date to the supplier. The assessor then does the formal review in eramba.
 
@@ -115,7 +115,7 @@ The default models are the balanced, lower-cost model of each provider's latest 
 | `OPENAI_MODEL` | `gpt-6.1-sol` | OpenAI model. It must support Chat Completions and reasoning effort. |
 | `ANTHROPIC_MODEL` | `claude-sonnet-5-5` | Anthropic model. It must support effort and structured outputs. |
 | `AI_REASONING` | `low` | Reasoning effort, for both providers: `low`, `medium` or `high`. |
-| `FORCE_REVIEW` | `false` | `true` processes the assessment even if it already has a level. Testing only. |
+| `FORCE_REVIEW` | `false` | `true` processes the assessment even if it is not submitted or already has a level. Testing only. |
 | `MAX_ITEMS` | `2000` | The run aborts above this many records. |
 | `ERAMBA_API_URL` / `ERAMBA_API_VERIFY_TLS` | Empty / `true` | See [Finance Supplier Onboarding §9](../Finance%20Supplier%20Onboarding/README.md#9-troubleshooting). |
 | `DRY_RUN` | `false` | `true` calculates and logs without saving. AI calls still run. |
@@ -130,7 +130,7 @@ The log shows the assessment's level, suppliers and conclusion. The assessment f
 |---|---|
 | `Unexpected AI answer` | The model did not return valid JSON. Retry, or change the model. |
 | `The model declined the review` | Anthropic's safety checks declined the request. Retry; if it repeats, use the score rule for that assessment. |
-| OpenAI `404` *model does not exist* | `OPENAI_MODEL` is not available to your API key. Use a model listed in your OpenAI account. |
+| `HTTP 404 POST api.openai.com/v1/chat/completions` | `OPENAI_MODEL` does not exist or is not available to your API key. Use a model listed in your OpenAI account. |
 | OpenAI or Anthropic `401` / `404` | Check the key and that it matches `AI_PROVIDER`, and the model name or its access. |
 | Log says *score/findings rule* but you expected AI | The Secret of the selected provider is missing: `openai_api_key` for `openai`, `anthropic_api_key` for `anthropic`. |
 | `Custom field '…' not found` | Create the field, or fix its name in `$config`. |

@@ -143,6 +143,9 @@ function erambaApi(string $method, string $path, ?array $payload = null, array $
 {
     global $config, $secrets;
     $base = rtrim($config['ERAMBA_API_URL'] ?: (string)getenv('ERAMBA_BASE_URL'), '/');
+    if ($base === '') {
+        throw new RuntimeException('Set ERAMBA_API_URL: the runner provided no ERAMBA_BASE_URL.');
+    }
     static $allowed = [];
     if (!($allowed[$base] ??= erambaUrlAllowed($base))) {
         throw new RuntimeException('The eramba API URL (ERAMBA_API_URL or the runner-provided ERAMBA_BASE_URL) must use https://, or http:// to a private network address: the API token never crosses the Internet unencrypted.');
@@ -253,6 +256,9 @@ function createIssue(array $incident, string $issueTypeId, array $config): strin
 {
     $base = rtrim($config['ERAMBA_UI_URL'] ?: ($config['ERAMBA_API_URL'] ?: (string)getenv('ERAMBA_BASE_URL')), '/');
     $link = "$base/security-incidents/index?id={$incident['id']}";
+    if (preg_match('#^https://#i', $base) !== 1) {
+        logInfo("WARNING: the link in the issue uses $base, which your users may not reach (on eramba Cloud it is the runner's internal URL). Set ERAMBA_UI_URL.");
+    }
     $paragraph = fn (array $content) => ['type' => 'paragraph', 'content' => $content];
     $text = fn (string $value, array $marks = []) => ['type' => 'text', 'text' => $value] + ($marks ? ['marks' => $marks] : []);
 

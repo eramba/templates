@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Endpoint Encryption Compliance Review
  *  Technology: Amazon WorkSpaces Personal and AWS KMS
- *  id: aws-workspaces-encryption        version: 0.1.0
+ *  id: aws-workspaces-encryption        version: 0.1.1
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -48,7 +48,7 @@ $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
 const AUTOMATION_ID = 'aws-workspaces-encryption';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.1.1';
 
 function logStep(int $n, string $title): void
 {
@@ -293,7 +293,7 @@ function evidenceCsv(array $results): string
     $fh = fopen('php://temp', 'r+');
     fputcsv($fh, ['check', 'region', 'resource', 'result', 'detail'], ',', '"', '');
     foreach ($results as $r) {
-        fputcsv($fh, [$r['check'], $r['region'] ?? '', $r['resource'], ($r['pending'] ?? false) ? 'PENDING' : ($r['passed'] ? 'PASS' : 'FAIL'), $r['detail']], ',', '"', '');
+        fputcsv($fh, array_map(fn($v)=>preg_match('/^[=+@\-\t\r]/',(string)$v) ? "'".$v : $v, [$r['check'], $r['region'] ?? '', $r['resource'], ($r['pending'] ?? false) ? 'PENDING' : ($r['passed'] ? 'PASS' : 'FAIL'), $r['detail']]), ',', '"', '');
     }
     rewind($fh);
     return (string) stream_get_contents($fh);

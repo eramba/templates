@@ -23,7 +23,7 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 
 | Automation | Section | Technology | Recommended schedule | Version / status |
 |---|---|---|---|---|
-| [Urgent Incident Jira Issue](Urgent%20Incident%20Jira%20Issue/) | Security Incidents | Jira Cloud + eramba API | On create (notification *New Item Created*) | 0.1.0 draft |
+| [Urgent Incident Jira Issue](Urgent%20Incident%20Jira%20Issue/) | Security Incidents | Jira Cloud + eramba API | On create (notification *New Item Created*) | 0.1.1 draft |
 
 ## Shared design
 

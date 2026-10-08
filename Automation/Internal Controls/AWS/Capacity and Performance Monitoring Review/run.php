@@ -285,7 +285,7 @@ function collectResults(array $secrets, array $config): array
             $blocked = array_intersect($suspended, ['Launch','AlarmNotification','AddToLoadBalancer']);
             $activities = pages($as, 'describeScalingActivities', 'Activities', ['AutoScalingGroupName'=>$name, 'MaxRecords'=>100]);
             $activityOk = true; $count = 0;
-            $known = ['Successful','Failed','Cancelled','PendingSpotBidPlacement','WaitingForSpotInstanceRequestId','WaitingForSpotInstanceId','WaitingForInstanceId','PreInService','InProgress','WaitingForELBConnectionDraining','MidLifecycleAction','WaitingForInstanceWarmup'];
+            $known = ['Successful','Failed','Cancelled','PendingSpotBidPlacement','WaitingForSpotInstanceRequestId','WaitingForSpotInstanceId','WaitingForInstanceId','PreInService','InProgress','WaitingForELBConnectionDraining','MidLifecycleAction','WaitingForInstanceWarmup','WaitingForConnectionDraining','WaitingForInPlaceUpdateToStart','WaitingForInPlaceUpdateToFinalize','InPlaceUpdateInProgress'];
             foreach ($activities as $a) {
                 $ts = stamp($a['StartTime'] ?? null);
                 if ($ts !== null && $ts < $start) continue;
@@ -395,7 +395,7 @@ function evidenceCsv(array $results): string
     $fh = fopen('php://temp', 'r+');
     fputcsv($fh, ['check', 'region', 'resource', 'result', 'detail'], ',', '"', '');
     foreach ($results as $r) {
-        fputcsv($fh, [$r['check'], $r['region'] ?? '', $r['resource'], $r['passed'] ? 'PASS' : 'FAIL', $r['detail']], ',', '"', '');
+        fputcsv($fh, array_map(fn($v)=>preg_match('/^[=+@\-\t\r]/',(string)$v) ? "'".$v : $v, [$r['check'], $r['region'] ?? '', $r['resource'], $r['passed'] ? 'PASS' : 'FAIL', $r['detail']]), ',', '"', '');
     }
     rewind($fh);
     return (string) stream_get_contents($fh);

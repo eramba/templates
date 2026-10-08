@@ -1,7 +1,7 @@
 ---
 id: aws-workspaces-encryption
 name: Endpoint Encryption Compliance Review
-version: 0.1.0
+version: 0.1.1
 status: draft
 vendor: AWS
 technology: Amazon WorkSpaces Personal and AWS KMS
@@ -123,6 +123,7 @@ Unlink the automation and remove its unused credentials/permissions. Retain hist
 
 | Version | Change |
 |---|---|
+| 0.1.1 | Evidence CSV cells cannot start a spreadsheet formula. Real validation pending. |
 | 0.1.0 | Initial WorkSpaces Personal volume encryption and KMS metadata review; real validation pending. |
 
 References: [WorkSpaces discovery](https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html), [WorkSpaces encryption](https://docs.aws.amazon.com/workspaces/latest/adminguide/encrypt-workspaces.html).

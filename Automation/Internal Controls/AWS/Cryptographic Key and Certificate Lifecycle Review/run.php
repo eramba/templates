@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Cryptographic Key and Certificate Lifecycle Review
  *  Technology: AWS KMS, ACM and Elastic Load Balancing
- *  id: aws-key-certificate-lifecycle        version: 0.2.0
+ *  id: aws-key-certificate-lifecycle        version: 0.2.1
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -49,7 +49,7 @@ $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
 const AUTOMATION_ID = 'aws-key-certificate-lifecycle';
-const AUTOMATION_VERSION = '0.2.0';
+const AUTOMATION_VERSION = '0.2.1';
 
 function logStep(int $n, string $title): void
 {
@@ -156,7 +156,7 @@ function awsTime(mixed $v): ?int
 function collectResults(array $secrets, array $config): array
 {
     $results=[]; $resources=0; $now=time();
-    $keySpecs=['SYMMETRIC_DEFAULT','RSA_2048','RSA_3072','RSA_4096','ECC_NIST_P256','ECC_NIST_P384','ECC_NIST_P521','ECC_SECG_P256K1','HMAC_224','HMAC_256','HMAC_384','HMAC_512','SM2','ML_DSA_44','ML_DSA_65','ML_DSA_87'];
+    $keySpecs=['SYMMETRIC_DEFAULT','RSA_2048','RSA_3072','RSA_4096','ECC_NIST_P256','ECC_NIST_P384','ECC_NIST_P521','ECC_SECG_P256K1','HMAC_224','HMAC_256','HMAC_384','HMAC_512','SM2','ML_DSA_44','ML_DSA_65','ML_DSA_87','ECC_NIST_EDWARDS25519'];
     $signatures=['SHA256WITHRSA','SHA384WITHRSA','SHA512WITHRSA','SHA256WITHECDSA','SHA384WITHECDSA','SHA512WITHECDSA'];
     foreach ($config['REGIONS'] as $region) {
         $opts=['version'=>'latest','region'=>$region,'credentials'=>['key'=>$secrets['AWS_ACCESS_KEY_ID'],'secret'=>$secrets['AWS_SECRET_ACCESS_KEY']],'http'=>['connect_timeout'=>5,'timeout'=>15],'retries'=>1];
@@ -209,7 +209,7 @@ function collectResults(array $secrets, array $config): array
             if ($arn==='') { $results[]=result('tls_policy',$region,'unidentified load balancer',false,'LoadBalancerArn missing.'); continue; }
             foreach (cryptoPages($elb,'describeListeners','Listeners',['LoadBalancerArn'=>$arn,'PageSize'=>100],'Marker','NextMarker') as $listener) {
                 $reserve(); $protocol=$listener['Protocol'] ?? ''; $id=$listener['ListenerArn'] ?? '(missing listener ARN)';
-                if (in_array($protocol,['HTTP','TCP','UDP','TCP_UDP'],true)) {
+                if (in_array($protocol,['HTTP','TCP','UDP','TCP_UDP','GENEVE','QUIC','TCP_QUIC'],true)) {
                     $results[]=result('non_tls_listener',$region,$id,true,'Protocol='.$protocol.'; not a TLS termination point. Downstream TLS is outside this integration.'); continue;
                 }
                 if (!in_array($protocol,['HTTPS','TLS'],true) || empty($listener['SslPolicy'])) { $results[]=result('tls_policy',$region,$id,false,'Unknown protocol or missing TLS policy.'); continue; }
@@ -326,7 +326,7 @@ function evidenceCsv(array $results): string
     $fh = fopen('php://temp', 'r+');
     fputcsv($fh, ['check', 'region', 'resource', 'result', 'detail'], ',', '"', '');
     foreach ($results as $r) {
-        fputcsv($fh, [$r['check'], $r['region'] ?? '', $r['resource'], ($r['pending'] ?? false) ? 'PENDING' : ($r['passed'] ? 'PASS' : 'FAIL'), $r['detail']], ',', '"', '');
+        fputcsv($fh, array_map(fn($v)=>preg_match('/^[=+@\-\t\r]/',(string)$v) ? "'".$v : $v, [$r['check'], $r['region'] ?? '', $r['resource'], ($r['pending'] ?? false) ? 'PENDING' : ($r['passed'] ? 'PASS' : 'FAIL'), $r['detail']]), ',', '"', '');
     }
     rewind($fh);
     return (string) stream_get_contents($fh);

@@ -1,7 +1,7 @@
 ---
 id: entra-mfa-coverage
 name: Multi-Factor Authentication Coverage Review
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: Microsoft Entra ID
 vendor: Microsoft
@@ -15,7 +15,7 @@ audit_frequency: monthly
 secrets:
   - entra_tenant_id
   - entra_client_id
-  - entra_client_secret
+  - entra_client_secret_b64
 variables:
   - MAX_OBJECTS
   - DRY_RUN
@@ -74,7 +74,7 @@ This version proves a strict all-users/all-resources policy without exceptions. 
 
 ### 5.1 Identity
 
-In Entra **App registrations**, register an application in your tenant. Add the Microsoft Graph **application permissions** below and grant administrator consent. Create a client secret; copy its value, tenant ID and application/client ID into eramba Secrets. Allow HTTPS to `login.microsoftonline.com` and `graph.microsoft.com`. This version supports the Microsoft public cloud.
+In Entra **App registrations**, register an application in your tenant. Add the Microsoft Graph **application permissions** below and grant administrator consent. Create a client secret; store its single-line base64-encoded value as `entra_client_secret_b64`, and store tenant ID and application/client ID unchanged in their Secrets. Base64 prevents raw PHP substitution errors; it is not encryption. The same Secrets serve the other Entra automations. Allow HTTPS to `login.microsoftonline.com` and `graph.microsoft.com`. This version supports the Microsoft public cloud.
 
 ### 5.2 Permissions
 
@@ -89,7 +89,7 @@ Follow [Installing an automation](../../docs/installing.md).
 
 | Setting | Value |
 |---|---|
-| Secrets | `entra_tenant_id`, `entra_client_id`, `entra_client_secret` |
+| Secrets | `entra_tenant_id`, `entra_client_id`, `entra_client_secret_b64` |
 | Composer packages | `guzzlehttp/guzzle:^7.9` |
 | Timeout | 240 seconds |
 | Code | [run.php](run.php) |
@@ -136,6 +136,7 @@ Unlink the automation, retain historical audit evidence and remove its dedicated
 
 | Version | Change |
 |---|---|
+| 0.1.1 | Client secret stored as base64 in `entra_client_secret_b64`, shared with the other Entra automations (replaces `entra_client_secret`). Enabled `Legacy` and `ServiceIdentity` service principals covered by MFA policies now pass instead of always failing. Functional and installation validation pending |
 | 0.1.0 | Initial draft; functional and installation validation pending |
 
 References: [Conditional Access policies](https://learn.microsoft.com/graph/api/conditionalaccessroot-list-policies), [grant controls](https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccessgrantcontrols?view=graph-rest-1.0), [authentication strengths](https://learn.microsoft.com/en-us/graph/api/authenticationstrengthroot-list-policies?view=graph-rest-1.0).

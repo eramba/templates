@@ -1,7 +1,7 @@
 ---
 id: aws-client-vpn-remote-access
 name: Remote Access Security Review
-version: 0.2.0
+version: 0.2.1
 status: draft
 technology: AWS Client VPN and Directory Service
 vendor: AWS
@@ -163,6 +163,7 @@ Unlink the automation, retain historical evidence and remove dedicated keys/perm
 
 | Version | Change |
 |---|---|
+| 0.2.1 | Evidence CSV cells cannot start a spreadsheet formula. Real AWS/eramba validation pending |
 | 0.2.0 | Distinguish unsupported evidence from violations; pending review and stricter API collection. Real AWS/eramba validation pending |
 | 0.1.0 | Initial implementation; AWS/eramba installation validation pending |
 

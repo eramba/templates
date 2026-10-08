@@ -29,20 +29,20 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 
 | Control | Technology and automation | Recommended audits | Version / status |
 |---|---|---|---|
-| Backup Execution and Restore Test | [AWS Backup](AWS/Backup%20Execution%20and%20Restore%20Test/) | At least weekly | 0.3.1 candidate; current-version validation pending |
-| Capacity Planning Review | [AWS Auto Scaling + CloudWatch](AWS/Capacity%20Planning%20Review/) | Days 1 and 15 monthly | 0.1.1 draft |
-| Capacity and Performance Monitoring Review | [AWS Auto Scaling + CloudWatch](AWS/Capacity%20and%20Performance%20Monitoring%20Review/) | Days 1 and 15 monthly | 0.2.0 draft; completion pending manual review |
-| Remote Access Security Review | [AWS Client VPN + Directory Service](AWS/Remote%20Access%20Security%20Review/) | Monthly | 0.2.0 draft; SAML MFA requires IdP evidence |
-| Cryptographic Key and Certificate Lifecycle Review | [AWS KMS + ACM + Load Balancers](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Quarterly | 0.2.0 draft; manual rotation requires review |
-| Multi-Factor Authentication Coverage Review | [Microsoft Entra ID](Microsoft/Multi-Factor%20Authentication%20Coverage%20Review/) | Monthly | 0.1.0 draft |
+| Backup Execution and Restore Test | [AWS Backup](AWS/Backup%20Execution%20and%20Restore%20Test/) | At least weekly | 0.3.2 candidate; current-version validation pending |
+| Capacity Planning Review | [AWS Auto Scaling + CloudWatch](AWS/Capacity%20Planning%20Review/) | Days 1 and 15 monthly | 0.1.2 draft |
+| Capacity and Performance Monitoring Review | [AWS Auto Scaling + CloudWatch](AWS/Capacity%20and%20Performance%20Monitoring%20Review/) | Days 1 and 15 monthly | 0.2.1 draft; completion pending manual review |
+| Remote Access Security Review | [AWS Client VPN + Directory Service](AWS/Remote%20Access%20Security%20Review/) | Monthly | 0.2.1 draft; SAML MFA requires IdP evidence |
+| Cryptographic Key and Certificate Lifecycle Review | [AWS KMS + ACM + Load Balancers](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Quarterly | 0.2.1 draft; manual rotation requires review |
+| Multi-Factor Authentication Coverage Review | [Microsoft Entra ID](Microsoft/Multi-Factor%20Authentication%20Coverage%20Review/) | Monthly | 0.1.1 draft |
 | Multi-Factor Authentication Coverage Review | [Google Workspace](Google/Multi-Factor%20Authentication%20Coverage%20Review/) | Annually | 0.1.0 draft; Google-native scope, exceptions pending |
 | Multi-Factor Authentication Coverage Review | [Zoom](Zoom/Multi-Factor%20Authentication%20Coverage%20Review/) | Annually | 0.1.0 limited-scope draft; not an SSO/IdP MFA review |
-| Endpoint Encryption Compliance Review | [AWS WorkSpaces Personal + KMS](AWS/Endpoint%20Encryption%20Compliance%20Review/) | Quarterly | 0.1.0 draft; documented exceptions remain pending |
+| Endpoint Encryption Compliance Review | [AWS WorkSpaces Personal + KMS](AWS/Endpoint%20Encryption%20Compliance%20Review/) | Quarterly | 0.1.1 draft; documented exceptions remain pending |
 | Endpoint Encryption Compliance Review | [Microsoft Intune + Entra ID](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | Quarterly | 0.2.0 draft; exceptions remain pending |
 | Mobile Device Management Review | [Microsoft Intune + Entra ID](Microsoft/Mobile%20Device%20Management%20Review/) | Quarterly | 0.1.0 draft; Apple bulk enrollment supported, other wipe configurations pending |
 | Nonconformity and Corrective Action Tracking | [Linear](Linear/Nonconformity%20and%20Corrective%20Action%20Tracking/) | Monthly | 0.1.0 draft; requires recorded evidence review |
-| Vulnerability Remediation Tracking | [Atlassian Jira Cloud](Atlassian/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.1 draft; acceptance/escalation may remain pending |
-| Vulnerability Remediation Tracking | [Linear](Linear/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.0 draft; acceptance/escalation may remain pending |
+| Vulnerability Remediation Tracking | [Atlassian Jira Cloud](Atlassian/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.2 draft; acceptance/escalation may remain pending |
+| Vulnerability Remediation Tracking | [Linear](Linear/Vulnerability%20Remediation%20Tracking/) | Monthly | 0.1.1 draft; acceptance/escalation may remain pending |
 
 Each integration covers the technology scope described in its README. A passing result does not cover systems outside that scope. Drafts require functional and installation validation before use for assurance.
 

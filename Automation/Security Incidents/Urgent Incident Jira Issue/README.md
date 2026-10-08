@@ -87,7 +87,7 @@ It only runs when an incident is created. An existing incident changed to Urgent
 
 1. Create the Secrets `jira_site_url` (your Jira Cloud site, for example `https://example.atlassian.net`), `jira_email` (the Atlassian account email), `jira_api_token` and `eramba_api_token`, plus `jira_cloud_id` if you use a token with scopes (§5). Share them with your other automations: if your Jira site changes, you update `jira_site_url` once.
 2. In **Security Incidents**, create an automation: PHP 8.4, no Composer packages, timeout 60 s. Paste [run.php](run.php). Leave *Recurrent Automation* off.
-3. Set `PROJECT_KEY` (§7).
+3. Set `PROJECT_KEY` and, on eramba Cloud, `ERAMBA_UI_URL` (§7).
 4. In **Security Incidents > Notifications**, open *New Item Created*. Turn on *Trigger Automation*, select this automation in the *Automation* tab and set *Status* to enabled. Email can stay off.
 5. Test it with fictional incidents, as the guide describes: with *Test* on a Normal incident (it must log `SKIPPED`), then with `DRY_RUN=true` on an Urgent one. Then create an Urgent incident and check that one issue is created, its key is saved, and the link in the issue opens the incident. Run *Test* on it again: it must log `SKIPPED`.
 
@@ -102,7 +102,7 @@ It only runs when an incident is created. An existing incident changed to Urgent
 | `URGENT_VALUE` | `Urgent` | Priority value that creates an issue. |
 | `ERAMBA_API_URL` | Empty | eramba address for API calls. Empty uses the address the automation runner provides. |
 | `ERAMBA_API_VERIFY_TLS` | `true` | See §9. |
-| `ERAMBA_UI_URL` | Empty | eramba address used in the link inside the Jira issue. Set it if your users open eramba at a different address from `ERAMBA_API_URL`. |
+| `ERAMBA_UI_URL` | Empty | eramba address used in the link inside the Jira issue, e.g. `https://yourcompany.cloud.eramba.org`. Set it on eramba Cloud: there the runner's URL is internal (`http://eramba-<instance>`) and the link would not open. Empty = `ERAMBA_API_URL`, else the runner's URL; the log warns when the link is not HTTPS. |
 | `DRY_RUN` | `false` | `true` logs what would be created without creating or saving anything. |
 
 ## 8. Results
@@ -122,7 +122,7 @@ If the run fails after the issue is created, the incident stays without key. Run
 | Incident skipped | Check the reason in the log: *Incident Priority* must be Urgent and *Jira Issue Key* empty. |
 | Jira `401` / `403` / `404` | Check `jira_site_url`, `jira_email`, `jira_api_token` and that the account can create issues in `PROJECT_KEY`. With a token with scopes, check `jira_cloud_id` (Cloud ID, not Organization ID) and the token's scopes. |
 | `Issue type '…' not found` | Fix `ISSUE_TYPE` (exact name in that project), or give the account *Create issues* in `PROJECT_KEY`. |
-| Jira `400` on creation | Usually a field that the project requires; read the message in the log. |
+| `HTTP 400 POST …/rest/api/3/issue` | Usually a field that the project requires. The log shows only the status (response bodies are not logged): create a test issue by hand in `PROJECT_KEY` to see which field is required. |
 | `Secret jira_site_url must be an HTTPS Jira Cloud site` / `Invalid Secret jira_cloud_id` | Use `https://<your-site>.atlassian.net` (no path) and the Cloud ID (a 36-character ID), not the Organization ID. The Jira credentials are only sent to that HTTPS Atlassian host. |
 | `The eramba API URL … must use https://, or http:// to a private network address` | `ERAMBA_API_URL` or the runner's `ERAMBA_BASE_URL` is plain HTTP to a public address. Use the HTTPS URL of eramba: the API token never crosses the Internet unencrypted. Plain HTTP is accepted only to a private or loopback address, such as the internal URL eramba Cloud gives the runner (`http://eramba-<instance>`). |
 | eramba `401` | The eramba token is wrong or its user lacks *Allow APIs*. |

@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Multi-Factor Authentication Coverage Review
  *  Technology: Microsoft Entra ID
- *  id: entra-mfa-coverage        version: 0.1.0
+ *  id: entra-mfa-coverage        version: 0.1.1
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -30,7 +30,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 $secrets = [
     'ENTRA_TENANT_ID' => '%SECRET_entra_tenant_id%',
     'ENTRA_CLIENT_ID' => '%SECRET_entra_client_id%',
-    'ENTRA_CLIENT_SECRET' => '%SECRET_entra_client_secret%',
+    'ENTRA_CLIENT_SECRET_B64' => '%SECRET_entra_client_secret_b64%', // Base64 of the client secret, shared with the other Entra automations
 ];
 
 // ─── 2. VARIABLES (README §7) ────────────────────────────────────────────
@@ -48,7 +48,7 @@ $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
 const AUTOMATION_ID = 'entra-mfa-coverage';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.1.1';
 
 function logStep(int $n, string $title): void
 {
@@ -138,8 +138,10 @@ function graphToken(array $secrets): string
     foreach (['ENTRA_TENANT_ID','ENTRA_CLIENT_ID'] as $key) {
         if (!preg_match('/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/iD',$secrets[$key])) throw new RuntimeException('Invalid '.$key.'.');
     }
+    $clientSecret=base64_decode($secrets['ENTRA_CLIENT_SECRET_B64'],true);
+    if ($clientSecret===false || $clientSecret==='' || strlen($clientSecret)>8192) throw new RuntimeException('Invalid base64 client secret.');
     $response=graphRequest('POST','https://login.microsoftonline.com/'.$secrets['ENTRA_TENANT_ID'].'/oauth2/v2.0/token',[
-        'form_params'=>['grant_type'=>'client_credentials','client_id'=>$secrets['ENTRA_CLIENT_ID'],'client_secret'=>$secrets['ENTRA_CLIENT_SECRET'],'scope'=>'https://graph.microsoft.com/.default']]);
+        'form_params'=>['grant_type'=>'client_credentials','client_id'=>$secrets['ENTRA_CLIENT_ID'],'client_secret'=>$clientSecret,'scope'=>'https://graph.microsoft.com/.default']]);
     if (!is_string($response['access_token'] ?? null) || $response['access_token']==='') throw new RuntimeException('Microsoft returned no access token.');
     return $response['access_token'];
 }
@@ -223,7 +225,7 @@ function collectResults(array $secrets, array $config): array
     foreach ($apps as $app) {
         if (($app['servicePrincipalType'] ?? '')==='ManagedIdentity' || ($app['accountEnabled'] ?? null)===false) continue;
         $count++; $id=$app['id'] ?? '(missing id)'; $appId=$app['appId'] ?? '';
-        $ok=$appId!=='' && ($app['accountEnabled'] ?? null)===true && ($app['servicePrincipalType'] ?? '')==='Application' && ($global || isset($proof[$appId]));
+        $ok=$appId!=='' && ($app['accountEnabled'] ?? null)===true && ($global || isset($proof[$appId]));
         if ($ok) $covered++;
         $results[]=result('mfa_coverage','',$id,$ok,($app['displayName'] ?? 'Unnamed application').'; appId='.$appId.'; MFA policies='.implode(',',$proof['All'] ?? $proof[$appId] ?? []).'; enabled='.json_encode($app['accountEnabled'] ?? null).'.');
     }

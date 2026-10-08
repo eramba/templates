@@ -1,7 +1,7 @@
 ---
 id: aws-key-certificate-lifecycle
 name: Cryptographic Key and Certificate Lifecycle Review
-version: 0.2.0
+version: 0.2.1
 status: draft
 technology: AWS KMS, ACM and Elastic Load Balancing
 vendor: AWS
@@ -161,6 +161,7 @@ Unlink the automation, retain historical audit evidence and remove its dedicated
 
 | Version | Change |
 |---|---|
+| 0.2.1 | GENEVE, QUIC and TCP_QUIC listeners are recognised as non-TLS (they no longer fail as unknown); Ed25519 KMS keys (`ECC_NIST_EDWARDS25519`) are valid; evidence CSV cells cannot start a spreadsheet formula. Real AWS/eramba validation pending |
 | 0.2.0 | Distinguish unsupported evidence from violations; pending review and stricter API collection. Real AWS/eramba validation pending |
 | 0.1.0 | Initial draft; functional and installation validation pending |
 

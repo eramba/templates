@@ -46,7 +46,7 @@ Collect CPU/compute capacity evidence for EC2 Auto Scaling groups. This version 
 | Population | All current groups in the configured account/regions matching the optional name filter |
 | Recommended audits | Days 1 and 15 each month (24 audits/year) |
 | Evidence | Conclusion, comment, CSV observations and TXT configuration |
-| Status | v0.2.0 draft; AWS/eramba installation validation pending |
+| Status | v0.2.1 draft; AWS/eramba installation validation pending |
 
 ## 1. Controls and policies
 
@@ -207,7 +207,7 @@ Unlink the automation in eramba and remove dedicated credentials/permissions if 
 
 | Version | Date | Change |
 |---|---|---|
-| 0.2.1 | 2026-10-08 | `AWS_EXTERNAL_ID` is no longer copied into the config attachment. |
+| 0.2.1 | 2026-10-08 | `AWS_EXTERNAL_ID` is no longer copied into the config attachment; the four in-place-update and connection-draining scaling activity statuses are recognised instead of failing; evidence CSV cells cannot start a spreadsheet formula. |
 | 0.2.0 | 2026-09-28 | Leaves completion pending: scaling configuration alone does not prove available elastic capacity or validate the capacity plan. |
 | 0.1.1 | 2026-09-28 | Removes unused code for the companion control; concise documentation. Live validation pending. |
 | 0.1.0 | 2026-09-28 | Initial implementation. |

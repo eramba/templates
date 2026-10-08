@@ -399,7 +399,7 @@ function evidenceCsv(array $results): string
     $fh = fopen('php://temp', 'r+');
     fputcsv($fh, ['check', 'region', 'resource', 'result', 'detail'], ',', '"', '');
     foreach ($results as $r) {
-        fputcsv($fh, [$r['check'], $r['region'] ?? '', $r['resource'], $r['passed'] ? 'PASS' : 'FAIL', $r['detail']], ',', '"', '');
+        fputcsv($fh, array_map(fn($v)=>preg_match('/^[=+@\-\t\r]/',(string)$v) ? "'".$v : $v, [$r['check'], $r['region'] ?? '', $r['resource'], $r['passed'] ? 'PASS' : 'FAIL', $r['detail']]), ',', '"', '');
     }
     rewind($fh);
     return (string) stream_get_contents($fh);

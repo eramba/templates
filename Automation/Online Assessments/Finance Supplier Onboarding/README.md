@@ -41,7 +41,7 @@ last_tested: 2026-10-06
 
 > **Tutorial templates.** This is one of the three example automations of the eramba course [Online Assessments – Advanced Configurations](https://www.eramba.org/learning/courses/81). It is built for the scenario of that tutorial (a Finance supplier list, supplier accounts, a supplier questionnaire). Use it as a starting point: review and adapt it to your own process before using it in production.
 
-**Technology:** Google Sheets. **Status:** tested. Validated end to end on eramba 3.31.1: a new sheet row created the supplier user and the Third Party (with *Requires Online Assessment*), and a second run created nothing.
+**Technology:** Google Sheets. **Status:** tested. Validated end to end on eramba 3.31.1 (version 0.1.0): a new sheet row created the supplier user and the Third Party (with *Requires Online Assessment*), and a second run created nothing.
 
 Keeps eramba's supplier list in sync with the list Finance maintains in Google Sheets. Each new supplier gets a supplier user account and a Third Party whose Third Party Contact is that account.
 
@@ -125,7 +125,7 @@ The log lists every created and linked supplier, plus a summary line. Row errors
 | `Secret '…' is missing` | Create the Secret with exactly that name. |
 | `Custom field '…' not found` | Create the field, or fix its name in `$config`. |
 | `… is an internal eramba user … not a supplier account` | The sheet's contact email belongs to an internal eramba user. Put the supplier's own contact email in the sheet. |
-| Google `403 PERMISSION_DENIED` | Share the sheet with the service account email. |
+| `HTTP 403 GET sheets.googleapis.com/…` | Share the sheet with the service account email (`client_email`). |
 | `Column '…' not found` | Fix the `COL_*` names or the sheet header. |
 | eramba `401` | Enable *Allow APIs* on the token's user, or regenerate the token. |
 | eramba `422` | A required field is missing or has the wrong type. Check custom fields marked as required. |

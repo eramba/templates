@@ -4,7 +4,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 /**
  * ============================================================================
  *  <Control title>
- *  id: <technology>-<what-it-checks>        version: 0.2.0
+ *  id: <technology>-<what-it-checks>        version: 0.1.0
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -52,7 +52,7 @@ $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (adapt to the verified runner contract) ───────────────
 const AUTOMATION_ID = '<technology>-<what-it-checks>';
-const AUTOMATION_VERSION = '0.2.0';
+const AUTOMATION_VERSION = '0.1.0';
 
 function logStep(int $n, string $title): void
 {

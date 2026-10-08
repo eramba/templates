@@ -74,18 +74,6 @@ function logInfo(string $message): void
     echo '  ' . $message . "\n";
 }
 
-/** eramba wrappers return a JSON string on success and "ERROR: …"/"WARNING: …" text otherwise. */
-function erambaCall(string $response, string $action): array
-{
-    $decoded = json_decode($response, true);
-    if (!is_array($decoded) || empty($decoded['success'])) {
-        // Only the names of the rejected fields: their values may hold personal data.
-        $fields = is_array($decoded['errors'] ?? null) ? implode(', ', array_keys($decoded['errors'])) : '';
-        throw new RuntimeException("eramba $action failed" . ($fields !== '' ? " (invalid fields: $fields)" : '') . '.');
-    }
-    return $decoded;
-}
-
 /** A secret that eramba did not replace is still "%SECRET_<name>%": it does not exist. */
 function checkSecrets(array $secrets): void
 {
@@ -137,6 +125,9 @@ function erambaApi(string $method, string $path, ?array $payload = null, array $
 {
     global $config, $secrets;
     $base = rtrim($config['ERAMBA_API_URL'] ?: (string)getenv('ERAMBA_BASE_URL'), '/');
+    if ($base === '') {
+        throw new RuntimeException('Set ERAMBA_API_URL: the runner provided no ERAMBA_BASE_URL.');
+    }
     static $allowed = [];
     if (!($allowed[$base] ??= erambaUrlAllowed($base))) {
         throw new RuntimeException('The eramba API URL (ERAMBA_API_URL or the runner-provided ERAMBA_BASE_URL) must use https://, or http:// to a private network address: the API token never crosses the Internet unencrypted.');
