@@ -140,5 +140,5 @@ Turn off *Trigger Automation* in the *New Item Created* notification, then disab
 
 | Version | Change |
 |---|---|
-| 0.1.1 | `jira_site_url` must be an HTTPS `*.atlassian.net` site and `jira_cloud_id` a Cloud ID; the eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
+| 0.1.1 | `jira_site_url` must be an HTTPS `*.atlassian.net` site and `jira_cloud_id` a Cloud ID; the eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. Title and description are cut by characters, not bytes, so non-English text no longer breaks the Jira request. |
 | 0.1.0 | First version, from the course example: custom fields found by name, issue reused by label on retry. |

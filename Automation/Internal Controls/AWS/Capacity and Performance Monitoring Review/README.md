@@ -1,7 +1,7 @@
 ---
 id: aws-capacity-performance-monitoring
 name: Capacity and Performance Monitoring Review
-version: 0.2.0
+version: 0.2.1
 status: draft
 technology: AWS EC2 Auto Scaling and Amazon CloudWatch
 vendor: AWS
@@ -207,6 +207,7 @@ Unlink the automation in eramba and remove dedicated credentials/permissions if 
 
 | Version | Date | Change |
 |---|---|---|
+| 0.2.1 | 2026-10-08 | `AWS_EXTERNAL_ID` is no longer copied into the config attachment. |
 | 0.2.0 | 2026-09-28 | Leaves completion pending: scaling configuration alone does not prove available elastic capacity or validate the capacity plan. |
 | 0.1.1 | 2026-09-28 | Removes unused code for the companion control; concise documentation. Live validation pending. |
 | 0.1.0 | 2026-09-28 | Initial implementation. |

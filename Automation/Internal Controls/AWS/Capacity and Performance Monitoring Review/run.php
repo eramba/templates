@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Capacity and Performance Monitoring Review
  *  Technology: AWS EC2 Auto Scaling and Amazon CloudWatch
- *  id: aws-capacity-performance-monitoring        version: 0.2.0
+ *  id: aws-capacity-performance-monitoring        version: 0.2.1
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -53,7 +53,7 @@ $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
 const AUTOMATION_ID = 'aws-capacity-performance-monitoring';
-const AUTOMATION_VERSION = '0.2.0';
+const AUTOMATION_VERSION = '0.2.1';
 
 function logStep(int $n, string $title): void
 {
@@ -382,6 +382,7 @@ function report(string $auditId, array $outcome, array $results, array $config):
 function configText(array $config): string
 {
     $lines = [sprintf('%s v%s, run at %s UTC', AUTOMATION_ID, AUTOMATION_VERSION, gmdate('Y-m-d H:i:s')), ''];
+    $config['AWS_EXTERNAL_ID'] = $config['AWS_EXTERNAL_ID'] === '' ? '' : '(set)'; // Not copied into attachments
     foreach ($config as $key => $value) {
         $lines[] = sprintf('%s = %s', $key, json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }

@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Backup Execution and Restore Test
  *  Technology: AWS Backup
- *  id: aws-backup-jobs-restore-tests        version: 0.3.1
+ *  id: aws-backup-jobs-restore-tests        version: 0.3.2
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Internal%20Controls
  *
@@ -71,7 +71,7 @@ $auditId = '%SECURITYSERVICEAUDIT_ID%';
 
 // ─── 4. HELPERS (identical in every automation, do not edit) ───────────────
 const AUTOMATION_ID = 'aws-backup-jobs-restore-tests';
-const AUTOMATION_VERSION = '0.3.1';
+const AUTOMATION_VERSION = '0.3.2';
 
 function logStep(int $n, string $title): void
 {
@@ -209,13 +209,19 @@ function awsClientOptions(string $region, array|Aws\Credentials\Credentials $cre
     ];
 }
 
-/** Runs an SDK paginator and returns all items of $key. */
+/** Runs an SDK paginator and returns all items of $key, within the run's time and item limits. */
 function paginate(Aws\AwsClient $client, string $operation, array $params, string $key): array
 {
     $items = [];
     foreach ($client->getPaginator($operation, $params) as $page) {
+        if (microtime(true) - $GLOBALS['runStarted'] > 190) {
+            throw new RuntimeException('Collection time budget exceeded; narrow the scope or split controls by region.');
+        }
         foreach ($page[$key] ?? [] as $item) {
             $items[] = $item;
+            if (count($items) > 5000) {
+                throw new RuntimeException("Collection item limit exceeded: $operation; split the control scope.");
+            }
         }
     }
     return $items;
@@ -470,6 +476,9 @@ function evaluate(array $results, array $config): array
 // then the audit result, then the comment linking the evidence.
 function report(string $auditId, array $outcome, array $results, array $config): void
 {
+    if (strlen(evidenceCsv($results)) > 600000) {
+        throw new RuntimeException('Evidence size limit exceeded; split the control scope.');
+    }
     if ($config['DRY_RUN']) {
         logInfo('DRY RUN: no uploads, audit edits or comments were made.');
         return;
@@ -508,6 +517,7 @@ function report(string $auditId, array $outcome, array $results, array $config):
 function configText(array $config): string
 {
     $lines = [sprintf('%s v%s, run at %s UTC', AUTOMATION_ID, AUTOMATION_VERSION, gmdate('Y-m-d H:i:s')), ''];
+    $config['AWS_EXTERNAL_ID'] = $config['AWS_EXTERNAL_ID'] === '' ? '' : '(set)'; // Not copied into attachments
     foreach ($config as $key => $value) {
         $lines[] = sprintf('%s = %s', $key, json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }
@@ -527,6 +537,7 @@ function evidenceCsv(array $results): string
 }
 
 // ─── 8. MAIN ────────────────────────────────────────────────────────────────
+$GLOBALS['runStarted'] = microtime(true);
 try {
     echo sprintf("%s v%s — audit #%s\n", AUTOMATION_ID, AUTOMATION_VERSION, $auditId);
 

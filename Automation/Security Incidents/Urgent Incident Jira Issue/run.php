@@ -256,11 +256,11 @@ function createIssue(array $incident, string $issueTypeId, array $config): strin
     $paragraph = fn (array $content) => ['type' => 'paragraph', 'content' => $content];
     $text = fn (string $value, array $marks = []) => ['type' => 'text', 'text' => $value] + ($marks ? ['marks' => $marks] : []);
 
-    $description = substr(trim(strip_tags((string)($incident['description'] ?? ''))), 0, 5000);
+    $description = mb_substr(trim(strip_tags((string)($incident['description'] ?? ''))), 0, 5000);
     $res = jiraApi('POST', 'issue', ['fields' => [
         'project'     => ['key' => $config['PROJECT_KEY']],
         'issuetype'   => ['id' => $issueTypeId],
-        'summary'     => substr((string)$incident['title'], 0, 250),
+        'summary'     => mb_substr((string)$incident['title'], 0, 250),
         'labels'      => [issueLabel((int)$incident['id'])],
         'description' => ['type' => 'doc', 'version' => 1, 'content' => array_values(array_filter([
             $description !== '' ? $paragraph([$text($description)]) : null,

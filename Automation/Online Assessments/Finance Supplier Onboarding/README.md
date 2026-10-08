@@ -64,8 +64,8 @@ This is automation 1 of 3 in [Online Assessments – Advanced Configurations](ht
 | Case | Action |
 |---|---|
 | A Third Party already has the row's Finance Supplier ID | Nothing. |
-| A Third Party has the same name but no Finance Supplier ID | Stores the ID on it (`LINKED`). Suppliers created before the ID existed are not duplicated. |
-| New supplier with contact email | Reuses the user with that email, or creates one. Then it creates the Third Party with that user as Third Party Contact, the GRC group as GRC Contact, the Finance Supplier ID and *Requires Online Assessment* (`CREATED`). |
+| A Third Party has the same name but no Finance Supplier ID | Stores the ID on it (`LINKED`). Suppliers created before the ID existed are not duplicated. The log flags it as matched by name only, so you can check it is the same supplier. |
+| New supplier with contact email | Reuses the user with that email if it is a supplier account (no access to the main eramba app), or creates one. If the email belongs to an internal user, the row fails (`ERROR`) and nothing is created: a sheet row must not make an internal user the recipient of supplier assessments. Then it creates the Third Party with that user as Third Party Contact, the GRC group as GRC Contact, the Finance Supplier ID and *Requires Online Assessment* (`CREATED`). |
 | New supplier without contact email | Creates the Third Party without contact. The Dynamic Status *Missing Supplier Contact* flags it until the details exist. |
 
 *Requies OA* (spelled as in the tutorial sheet) counts as Yes for `yes`, `y`, `si`, `sí`, `true`, `1` or `x`; anything else, including empty, is No. It is only set when the supplier is created.
@@ -124,6 +124,7 @@ The log lists every created and linked supplier, plus a summary line. Row errors
 |---|---|
 | `Secret '…' is missing` | Create the Secret with exactly that name. |
 | `Custom field '…' not found` | Create the field, or fix its name in `$config`. |
+| `… is an internal eramba user … not a supplier account` | The sheet's contact email belongs to an internal eramba user. Put the supplier's own contact email in the sheet. |
 | Google `403 PERMISSION_DENIED` | Share the sheet with the service account email. |
 | `Column '…' not found` | Fix the `COL_*` names or the sheet header. |
 | eramba `401` | Enable *Allow APIs* on the token's user, or regenerate the token. |
@@ -143,5 +144,5 @@ Disable or delete the automation, delete the two Secrets, revoke the API token, 
 
 | Version | Change |
 |---|---|
-| 0.1.1 | The eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
+| 0.1.1 | The eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. An existing internal user is never used as supplier contact; name-only matches are flagged in the log. |
 | 0.1.0 | Validated end to end on eramba 3.31.1: new row → supplier user + Third Party with *Requires Online Assessment* = Yes; existing supplier skipped; re-run without duplicates. |

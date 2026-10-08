@@ -2,7 +2,7 @@
 # ─── Metadata: keep in sync with run.php. Used to build the catalogue. ───
 id: aws-backup-jobs-restore-tests
 name: Backup Execution and Restore Test
-version: 0.3.1
+version: 0.3.2
 status: draft                            # draft | tested | stable | deprecated
 technology: AWS Backup
 vendor: AWS
@@ -296,6 +296,7 @@ Follow [Removing an automation](../../docs/installing.md#removing-an-automation)
 
 | Version | Date | Change |
 |---|---|---|
+| 0.3.2 | 2026-10-08 | Enforces the collection limits the README already described (190 s time budget, 5,000 items per AWS list, 600 KB evidence): a large account fails cleanly instead of overrunning the runner. `AWS_EXTERNAL_ID` is no longer copied into the config attachment. |
 | 0.3.1 | 2026-09-27 | Ready-to-run test defaults: automatic restore population, RPO 24 hours, RTO 240 minutes; explicit sampling remains optional |
 | 0.3.0 | 2026-09-25 | Adds restore-test RPO and explicit ARN sample; removes policy-only checks and mandatory-check switches; evaluates sample coverage across regions; retains invalid records as failed evidence; adds explicit simulation; documents weekly execution and recovery objectives |
 | 0.2.0 | 2026-09-25 | Summary items for empty checks; 30-day backup history; missing timestamp handling |

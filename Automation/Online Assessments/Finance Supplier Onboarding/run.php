@@ -20,7 +20,8 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *    1. Skips it if a Third Party already has its Finance Supplier ID
  *       (or has the same name: then the ID is stored on it instead of duplicating).
  *    2. Finds the supplier contact by email or creates the account
- *       (Online Assessment portal only, magic-link access).
+ *       (Online Assessment portal only, magic-link access). An existing internal
+ *       user (main app access) is never used as supplier contact: the row fails.
  *    3. Creates the Third Party with that account as Third Party Contact and
  *       "Requires Online Assessment" = the sheet's Requies OA (Yes/No). Creating it
  *       fires the "New Item" notification used by automation 2.
@@ -273,6 +274,11 @@ function findOrCreateContact(array $row, array $config, array $groupIds): ?int
         throw new RuntimeException("Invalid contact email '$email'.");
     }
     if ($user = erambaFindOne('users', 'email', $email)) {
+        // Only a supplier account (no access to the main eramba app) becomes the contact:
+        // a sheet row must not make an internal user the recipient of supplier assessments.
+        if (!array_key_exists('main_portal', $user) || (int)$user['main_portal'] !== 0) {
+            throw new RuntimeException("$email is an internal eramba user (main app access), not a supplier account: fix the contact email in the sheet.");
+        }
         return (int)$user['id'];
     }
     if ($config['DRY_RUN']) {
@@ -368,7 +374,8 @@ try {
         try {
             $action = syncRow($row, $config, $groupIds, $grcContact);
             if ($action !== 'SKIPPED') {
-                logInfo("$action: $name (Requires OA: " . requiresOa($row, $config) . ')' . (cell($row, $config, 'COL_CONTACT_EMAIL') === '' ? ' (no contact email)' : ''));
+                logInfo("$action: $name (Requires OA: " . requiresOa($row, $config) . ')' . (cell($row, $config, 'COL_CONTACT_EMAIL') === '' ? ' (no contact email)' : '')
+                    . ($action === 'LINKED' ? ' (matched by name only: check it is the same supplier)' : ''));
             }
         } catch (Throwable $e) {
             $action = 'ERROR';

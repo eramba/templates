@@ -1,7 +1,7 @@
 ---
 id: aws-capacity-planning
 name: Capacity Planning Review
-version: 0.1.1
+version: 0.1.2
 status: draft
 technology: AWS EC2 Auto Scaling and Amazon CloudWatch
 vendor: AWS
@@ -208,6 +208,7 @@ Unlink the automation in eramba and remove dedicated credentials/permissions if 
 
 | Version | Date | Change |
 |---|---|---|
+| 0.1.2 | 2026-10-08 | `AWS_EXTERNAL_ID` is no longer copied into the config attachment. |
 | 0.1.1 | 2026-09-28 | Removes unused code for the companion control; concise documentation. Live validation pending. |
 | 0.1.0 | 2026-09-28 | Initial implementation. |
 
