@@ -70,7 +70,7 @@ $config = [
     'GRC_GROUP'         => 'GRC',                                   // Third Party "GRC Contact"
     'TYPE_MAP'          => ['customer' => 1, 'supplier' => 2, 'suppliers' => 2, 'regulator' => 3],
     'DEFAULT_TYPE_ID'   => 2,                                       // Third Party type "Suppliers"
-    'ERAMBA_API_URL'    => '',            // Empty = runner-provided ERAMBA_BASE_URL
+    'ERAMBA_API_URL'    => '',            // HTTPS address of your eramba; empty = runner-provided ERAMBA_BASE_URL (must also be https://)
     'ERAMBA_API_VERIFY_TLS' => true,      // See README §9 before changing
     // Output
     'DRY_RUN'           => false,         // True = read and log only, no writes
@@ -135,32 +135,13 @@ function httpJson(string $method, string $url, array $headers, ?string $body = n
     return json_decode($resp, true, 64, JSON_THROW_ON_ERROR) ?? [];
 }
 
-/**
- * True for https://, or for http:// to a private or loopback address: the runner
- * reaches eramba on an internal network (e.g. http://eramba-<instance>).
- */
-function erambaUrlAllowed(string $base): bool
-{
-    if (preg_match('#^https://#i', $base) === 1) {
-        return true;
-    }
-    $host = (string)parse_url($base, PHP_URL_HOST);
-    $ip   = filter_var($host, FILTER_VALIDATE_IP) !== false ? $host : gethostbyname($host);
-    return preg_match('#^http://#i', $base) === 1 && filter_var($ip, FILTER_VALIDATE_IP) !== false
-        && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
-}
-
 /** eramba REST API (v2). Used because automations have no read/list helpers. */
 function erambaApi(string $method, string $path, ?array $payload = null, array $query = []): array
 {
     global $config, $secrets;
     $base = rtrim($config['ERAMBA_API_URL'] ?: (string)getenv('ERAMBA_BASE_URL'), '/');
-    if ($base === '') {
-        throw new RuntimeException('Set ERAMBA_API_URL: the runner provided no ERAMBA_BASE_URL.');
-    }
-    static $allowed = [];
-    if (!($allowed[$base] ??= erambaUrlAllowed($base))) {
-        throw new RuntimeException('The eramba API URL (ERAMBA_API_URL or the runner-provided ERAMBA_BASE_URL) must use https://, or http:// to a private network address: the API token never crosses the Internet unencrypted.');
+    if (preg_match('#^https://#i', $base) !== 1) {
+        throw new RuntimeException("The eramba API URL must use https:// (got $base). Set ERAMBA_API_URL to the HTTPS address of your eramba, e.g. https://yourcompany.cloud.eramba.org.");
     }
     return httpJson($method, $base . $path . ($query ? '?' . http_build_query($query) : ''), [
         'Accept: application/json', 'Content-Type: application/json',

@@ -11,7 +11,7 @@ controls:
   - Multi-Factor Authentication Coverage Review
 policies:
   - Access Management > Authentication
-audit_frequency: monthly
+audit_frequency: annually
 secrets:
   - entra_tenant_id
   - entra_client_id
@@ -39,7 +39,7 @@ Read service evidence and save the audit result in eramba. **Draft: functional a
 
 Tests **Multi-Factor Authentication Coverage Review** from the [control templates](../../../../GRC%20Templates/LLM%20-%20GRC%20Templates/Controls/internal_controls.csv). Policy mapping: Access Management > Authentication. The methodology defines the checks.
 
-**Schedule:** monthly; this is a current-state review. It does not prove configuration was unchanged between executions.
+**Schedule:** at least annually, as the control methodology requires (e.g. January 1); this is a current-state review. It does not prove configuration was unchanged between executions.
 
 ## 2. What it checks
 
@@ -93,7 +93,7 @@ Follow [Installing an automation](../../docs/installing.md).
 | Composer packages | `guzzlehttp/guzzle:^7.9` |
 | Timeout | 240 seconds |
 | Code | [run.php](run.php) |
-| Audit dates | 1st of each month; Automated execution |
+| Audit dates | January 1 or your annual review date; Automated execution |
 
 Default execution saves results. Use `DRY_RUN=true` for initial inspection; restore `false` and validate a disposable audit before scheduling.
 
@@ -136,7 +136,7 @@ Unlink the automation, retain historical audit evidence and remove its dedicated
 
 | Version | Change |
 |---|---|
-| 0.1.1 | Client secret stored as base64 in `entra_client_secret_b64`, shared with the other Entra automations (replaces `entra_client_secret`). Enabled `Legacy` and `ServiceIdentity` service principals covered by MFA policies now pass instead of always failing. Functional and installation validation pending |
+| 0.1.1 | Client secret stored as base64 in `entra_client_secret_b64`, shared with the other Entra automations (replaces `entra_client_secret`). Enabled `Legacy` and `ServiceIdentity` service principals covered by MFA policies now pass instead of always failing. Recommended schedule aligned with the control methodology and the Google and Zoom versions: at least annually. Functional and installation validation pending |
 | 0.1.0 | Initial draft; functional and installation validation pending |
 
 References: [Conditional Access policies](https://learn.microsoft.com/graph/api/conditionalaccessroot-list-policies), [grant controls](https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccessgrantcontrols?view=graph-rest-1.0), [authentication strengths](https://learn.microsoft.com/en-us/graph/api/authenticationstrengthroot-list-policies?view=graph-rest-1.0).

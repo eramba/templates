@@ -98,7 +98,7 @@ The default models are the balanced, lower-cost model of each provider's latest 
 
 1. Create Secret `eramba_api_token`. Optionally create the AI key of §5 (`openai_api_key`, or `anthropic_api_key` with `AI_PROVIDER` = `anthropic`).
 2. In **Online Assessments**, create an automation: PHP 8.4, no Composer packages, timeout 120 s. Paste [run.php](run.php).
-3. Check the custom field names in §7. The script finds their IDs by name, because custom field IDs differ between installations.
+3. Check the custom field names in §7. The script finds their IDs by name, because custom field IDs differ between installations. Set `ERAMBA_API_URL` to the HTTPS address of your eramba (required on eramba Cloud).
 4. Leave *Recurrent Automation* off: this automation runs per assessment, not on a schedule.
 5. In **Online Assessments > Notifications**, add the notification *OA has been submitted*. Turn on *Trigger Automation* and select this automation in its *Automation* tab. Email can stay off.
 6. Test it from the automation editor (*Test*) on a submitted assessment with `DRY_RUN=true` and `FORCE_REVIEW=true`. Then set both back to `false`, submit an assessment from the portal and check the log, the assessment and its supplier.
@@ -138,7 +138,7 @@ The log shows the assessment's level, suppliers and conclusion. The assessment f
 | `SKIPPED` in the log | The assessment is not submitted or already has a level. Use `FORCE_REVIEW` to test. |
 | `No Online Assessment in context` | The automation ran without an item: run it from the notification or with *Test* on an assessment. |
 | Never runs | Check that the *OA has been submitted* notification is enabled and has *Trigger Automation* with this automation selected. |
-| `The eramba API URL … must use https://, or http:// to a private network address` | `ERAMBA_API_URL` or the runner's `ERAMBA_BASE_URL` is plain HTTP to a public address. Use the HTTPS URL of eramba: the API token never crosses the Internet unencrypted. Plain HTTP is accepted only to a private or loopback address, such as the internal URL eramba Cloud gives the runner (`http://eramba-<instance>`). |
+| `The eramba API URL must use https://` | Set `ERAMBA_API_URL` to the HTTPS address of your eramba, the one you open in the browser (e.g. `https://yourcompany.cloud.eramba.org`). On eramba Cloud the runner's own `ERAMBA_BASE_URL` is an internal `http://` address, so this is required there. The API token is never sent over plain HTTP. |
 | eramba `401` / TLS errors | See [Finance Supplier Onboarding §9](../Finance%20Supplier%20Onboarding/README.md#9-troubleshooting). |
 
 ## 10. Customising
@@ -153,7 +153,7 @@ Disable or delete the automation, delete the AI Secret (`openai_api_key` or `ant
 
 | Version | Change |
 |---|---|
-| 0.4.0 | Security hardening: supplier answers are marked as untrusted in the prompt and the AI can only raise the score/findings rule's level; OpenAI answers use a strict JSON Schema; the eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
+| 0.4.0 | Security hardening: supplier answers are marked as untrusted in the prompt and the AI can only raise the score/findings rule's level; OpenAI answers use a strict JSON Schema; the eramba API URL must be HTTPS (set `ERAMBA_API_URL` on eramba Cloud). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
 | 0.3.0 | Third Party fields renamed to *Risk Profile* and *Last Reviewed*. *Last Reviewed* is now the assessment's submit date instead of the run date. |
 | 0.2.0 | Anthropic as an alternative AI provider (`AI_PROVIDER`, `ANTHROPIC_MODEL`). Default OpenAI model `gpt-6.1-sol`. `OPENAI_REASONING` renamed `AI_REASONING`. Reads only the submitted assessment (`GET /api/v2/vendor-assessments/{id}`) instead of listing all of them. |
 | 0.1.1 | Default `OPENAI_MODEL` fixed to `gpt-5.6-luna` (`gpt-6.1-luna` does not exist). |

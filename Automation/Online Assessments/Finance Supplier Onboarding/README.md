@@ -94,7 +94,7 @@ Only rows with a supplier name are read. Rows removed from the sheet are not del
 
 1. Create Secrets `google_service_account` and `eramba_api_token` in Settings / Application Configuration / Automation Secrets.
 2. In **Third Parties**, create an automation: PHP 8.4, no Composer packages, timeout 60 s. Paste [run.php](run.php).
-3. Set `SPREADSHEET_ID` and review the column names and IDs in §7.
+3. Set `SPREADSHEET_ID` and `ERAMBA_API_URL` (the HTTPS address of your eramba; required on eramba Cloud), and review the column names and IDs in §7.
 4. Run with `DRY_RUN=true`, check the log, then run live. Run it again to confirm that nothing is duplicated.
 5. Enable *Recurrent Automation* (daily).
 
@@ -110,7 +110,7 @@ Only rows with a supplier name are read. Rows removed from the sheet are not del
 | `SUPPLIER_GROUPS` | `No Allowed Permissions`, `Suppliers` | Groups of new supplier accounts. |
 | `GRC_GROUP` | `GRC` | Group set as GRC Contact. |
 | `TYPE_MAP` / `DEFAULT_TYPE_ID` | Customer 1, Supplier 2, Regulator 3 / `2` | Maps the sheet *Type* column to Third Party type IDs. |
-| `ERAMBA_API_URL` | Empty | eramba URL as seen from the runner. Empty uses the runner's `ERAMBA_BASE_URL`. |
+| `ERAMBA_API_URL` | Empty | HTTPS address of your eramba, e.g. `https://yourcompany.cloud.eramba.org`. Empty uses the runner's `ERAMBA_BASE_URL`, which must then also be `https://`; on eramba Cloud it is an internal `http://` address, so set this variable. |
 | `ERAMBA_API_VERIFY_TLS` | `true` | See §9. |
 | `DRY_RUN` | `false` | `true` reads everything and logs the planned actions without writing. |
 
@@ -129,7 +129,7 @@ The log lists every created and linked supplier, plus a summary line. Row errors
 | `Column '…' not found` | Fix the `COL_*` names or the sheet header. |
 | eramba `401` | Enable *Allow APIs* on the token's user, or regenerate the token. |
 | eramba `422` | A required field is missing or has the wrong type. Check custom fields marked as required. |
-| `The eramba API URL … must use https://, or http:// to a private network address` | `ERAMBA_API_URL` or the runner's `ERAMBA_BASE_URL` is plain HTTP to a public address. Use the HTTPS URL of eramba: the API token never crosses the Internet unencrypted. Plain HTTP is accepted only to a private or loopback address, such as the internal URL eramba Cloud gives the runner (`http://eramba-<instance>`). |
+| `The eramba API URL must use https://` | Set `ERAMBA_API_URL` to the HTTPS address of your eramba, the one you open in the browser (e.g. `https://yourcompany.cloud.eramba.org`). On eramba Cloud the runner's own `ERAMBA_BASE_URL` is an internal `http://` address, so this is required there. The API token is never sent over plain HTTP. |
 | TLS error to the eramba API | The runner reaches eramba through an internal URL with a self-signed certificate. Prefer a trusted certificate or a URL with one in `ERAMBA_API_URL`. Set `ERAMBA_API_VERIFY_TLS=false` only for that internal URL, never for an Internet host. |
 
 ## 10. Customising
@@ -144,5 +144,5 @@ Disable or delete the automation, delete the two Secrets, revoke the API token, 
 
 | Version | Change |
 |---|---|
-| 0.1.1 | The eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. An existing internal user is never used as supplier contact; name-only matches are flagged in the log. |
+| 0.1.1 | The eramba API URL must be HTTPS (set `ERAMBA_API_URL` on eramba Cloud). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. An existing internal user is never used as supplier contact; name-only matches are flagged in the log. |
 | 0.1.0 | Validated end to end on eramba 3.31.1: new row → supplier user + Third Party with *Requires Online Assessment* = Yes; existing supplier skipped; re-run without duplicates. |

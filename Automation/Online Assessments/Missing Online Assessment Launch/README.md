@@ -81,7 +81,7 @@ No external system is used.
 
 1. Create Secret `eramba_api_token`. You can share it with the other automations.
 2. In **Third Parties**, create an automation: PHP 8.4, no Composer packages, timeout 60 s. Paste [run.php](run.php). Leave *Recurrent Automation* off.
-3. Set `QUESTIONNAIRE_NAME` to your questionnaire's exact name.
+3. Set `QUESTIONNAIRE_NAME` to your questionnaire's exact name, and `ERAMBA_API_URL` to the HTTPS address of your eramba (required on eramba Cloud, see [Finance Supplier Onboarding §7](../Finance%20Supplier%20Onboarding/README.md#7-variables)).
 4. In **Third Parties > Notifications**, open *New Item*. Turn on *Trigger Automation*, select this automation in the *Automation* tab and set *Status* to enabled. Email can stay off.
 5. Test it with *Test* on a supplier that already has an assessment (it must log `SKIPPED`), and with `DRY_RUN=true` on one without. Then create a supplier with a contact and check that its assessment is created and sent.
 
@@ -127,6 +127,6 @@ Turn off *Trigger Automation* in the *New Item* notification, then disable or de
 
 | Version | Change |
 |---|---|
-| 0.1.2 | The eramba API URL must be HTTPS, or HTTP only to a private network address (the runner's internal URL). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
+| 0.1.2 | The eramba API URL must be HTTPS (set `ERAMBA_API_URL` on eramba Cloud). Error messages show only the HTTP status and path, never the response body, so no personal data reaches the Automation Logs. |
 | 0.1.1 | Reads only the Third Party that fired the notification (`GET /api/v2/third-parties/{id}`) instead of listing all of them. |
 | 0.1.0 | Validated end to end on eramba 3.31.1: *New Item* → assessment created and sent to the supplier contact; skip cases (field not Yes, assessment already exists) checked. |

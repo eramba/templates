@@ -34,7 +34,7 @@ Status: `draft` (not yet validated on real eramba and the target system) · `tes
 | Capacity and Performance Monitoring Review | [AWS Auto Scaling + CloudWatch](AWS/Capacity%20and%20Performance%20Monitoring%20Review/) | Days 1 and 15 monthly | 0.2.1 draft; completion pending manual review |
 | Remote Access Security Review | [AWS Client VPN + Directory Service](AWS/Remote%20Access%20Security%20Review/) | Monthly | 0.2.1 draft; SAML MFA requires IdP evidence |
 | Cryptographic Key and Certificate Lifecycle Review | [AWS KMS + ACM + Load Balancers](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Quarterly | 0.2.1 draft; manual rotation requires review |
-| Multi-Factor Authentication Coverage Review | [Microsoft Entra ID](Microsoft/Multi-Factor%20Authentication%20Coverage%20Review/) | Monthly | 0.1.1 draft |
+| Multi-Factor Authentication Coverage Review | [Microsoft Entra ID](Microsoft/Multi-Factor%20Authentication%20Coverage%20Review/) | Annually | 0.1.1 draft |
 | Multi-Factor Authentication Coverage Review | [Google Workspace](Google/Multi-Factor%20Authentication%20Coverage%20Review/) | Annually | 0.1.0 draft; Google-native scope, exceptions pending |
 | Multi-Factor Authentication Coverage Review | [Zoom](Zoom/Multi-Factor%20Authentication%20Coverage%20Review/) | Annually | 0.1.0 limited-scope draft; not an SSO/IdP MFA review |
 | Endpoint Encryption Compliance Review | [AWS WorkSpaces Personal + KMS](AWS/Endpoint%20Encryption%20Compliance%20Review/) | Quarterly | 0.1.1 draft; documented exceptions remain pending |
