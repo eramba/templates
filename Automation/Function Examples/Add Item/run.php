@@ -1,6 +1,5 @@
 <?php
-
-declare(strict_types=1);
+declare(strict_types=1); // Keep on line 2: eramba inserts its includes right after it.
 
 $data = [
     // Title
