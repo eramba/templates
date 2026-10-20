@@ -1,8 +1,12 @@
 # Eramba Automation Examples
 
-PHP automations for eramba: internal control audits, the automations built in eramba's tutorial courses, and small examples of the automation functions. Each folder explains its section, setup and variables.
+PHP automations for eramba: account review feeds, internal control audits, the automations built in eramba's tutorial courses, and small examples of the automation functions. Each folder explains its section, setup and variables.
 
 ## Available examples
+
+- [Account Reviews](Account%20Reviews/) contains automations that send accounts and their access to eramba Account Review feeds (e.g. Microsoft Entra ID).
+
+- [_shared](_shared/) holds code blocks reused by several automations and copied into each `run.php` by `tools/sync.php`. Users never install it: every `run.php` stays a single file to paste into eramba.
 
 - [Internal Controls](Internal%20Controls/) contains ready-to-use automations that audit the internal controls of the eramba GRC templates (e.g. AWS Backup), grouped by technology, plus a `_TEMPLATE` to build new ones.
 
