@@ -547,9 +547,9 @@ function validateConfig(array $c): void
     if (!is_bool($c['ALLOW_EMPTY_FEED'])) {
         throw new RuntimeException('ALLOW_EMPTY_FEED must be true or false.');
     }
-    foreach (['MAX_USERS', 'MAX_OBJECTS'] as $key) {
-        if (!is_int($c[$key]) || $c[$key] < 1 || $c[$key] > 10000) {
-            throw new RuntimeException("$key must be a number from 1 to 10000.");
+    foreach (['MAX_USERS' => 50000, 'MAX_OBJECTS' => 10000] as $key => $max) {
+        if (!is_int($c[$key]) || $c[$key] < 1 || $c[$key] > $max) {
+            throw new RuntimeException("$key must be a number from 1 to $max.");
         }
     }
     if (!is_array($c['USER_IDS']) || !array_is_list($c['USER_IDS'])) {
@@ -578,19 +578,23 @@ function directoryRoles(string $token, array $config): array
         $names[entraId($role['id'])] = $role['displayName'] ?? null;
     }
     $byPrincipal = [];
-    $select = 'roleManagement/directory/roleAssignments?$select=id,principalId,roleDefinitionId,directoryScopeId,appScopeId';
+    // The directory provider rejects appScopeId in $select: its assignments are scoped by directoryScopeId only.
+    $select = 'roleManagement/directory/roleAssignments?$select=id,principalId,roleDefinitionId,directoryScopeId';
     foreach (tpl_graphList($select, $token, $config['MAX_OBJECTS'], false) as $assignment) {
         $roleId = entraId($assignment['roleDefinitionId'] ?? null);
         if (!array_key_exists($roleId, $names)) {
-            throw new RuntimeException('A directory role assignment cannot be resolved.');
+            // Some built-in roles (e.g. AdHoc License Administrator) are left out of the list but can be read by ID.
+            $role = tpl_graphGet("roleManagement/directory/roleDefinitions/$roleId?\$select=id,displayName", $token);
+            if (entraId($role['id'] ?? null) !== $roleId) {
+                throw new RuntimeException('A directory role assignment cannot be resolved.');
+            }
+            $names[$roleId] = $role['displayName'] ?? null;
         }
-        $scope = is_string($assignment['directoryScopeId'] ?? null) ? $assignment['directoryScopeId'] : '';
-        $appScope = is_string($assignment['appScopeId'] ?? null) ? $assignment['appScopeId'] : '';
-        if ($scope === '' && $appScope === '') {
+        $scope = $assignment['directoryScopeId'] ?? null;
+        if (!is_string($scope) || $scope === '') {
             throw new RuntimeException('A directory role assignment has no scope.');
         }
-        $id = sprintf('%s; directory=%s; app=%s', $roleId, $scope === '' ? '-' : $scope, $appScope === '' ? '-' : $appScope);
-        $byPrincipal[entraId($assignment['principalId'] ?? null)][] = tpl_roleString('Directory role', $names[$roleId], $id);
+        $byPrincipal[entraId($assignment['principalId'] ?? null)][] = tpl_roleString('Directory role', $names[$roleId], "$roleId; scope=$scope");
     }
     return $byPrincipal;
 }
