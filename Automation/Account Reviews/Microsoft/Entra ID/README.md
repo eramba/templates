@@ -1,12 +1,11 @@
 ---
 id: entra-account-review
-name: Entra ID Accounts and Assigned Access
+name: Entra ID – Accounts
 version: 0.1.1
 status: draft
 technology: Microsoft Entra ID
 vendor: Microsoft
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - entra_tenant_id
   - entra_client_id
@@ -25,38 +24,63 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Entra ID Accounts and Assigned Access
+# Entra ID – Accounts
 
-**Technology:** Microsoft Entra ID (public cloud), including Microsoft 365 licences.
+**Technology:** Microsoft Entra ID (formerly Azure Active Directory), including Microsoft 365 licences.
 
-Send Entra user accounts and their assigned access to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user account in your Microsoft Entra ID and the access each one has: its groups, its administrator rights, the business applications it can sign in to and its licences. Reviewers then keep or revoke each account and each access in eramba. **Draft: tested on a lab tenant, not yet released as tested.**
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of accounts to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | User principal name by default; configurable to object ID or mail |
-| `description` | Display name, Member/Guest, enabled/disabled and object ID |
-| `roles` | `Group: <name> [<id>]` for direct and nested group memberships |
-| | `Directory role: <name> [<role id>; scope=<directory scope>]` for active role assignments, direct or through a role-assignable group |
-| | `Application: <app> / <role> [<app id> / <role id>]` for app role assignments, direct or through a group, including default access |
-| | `License: <SKU part number> [<SKU id>]` for Microsoft 365 and other licences assigned to the user, directly or through a group |
+| **Family** | Account review |
+| **Each row is** | One user account (a person or a guest), identified by its sign-in name, for example `ana.garcia@example.com` |
+| **Connects to** | Your Microsoft Entra ID, through Microsoft's official API (Microsoft Graph). Read-only |
+| **Permission needed** | Microsoft Graph application permissions `Directory.Read.All` and `Member.Read.Hidden`, read-only. An Entra administrator creates the connection and grants admin consent (§5) |
+| **Included** | Every user account: employees and guests, active and disabled. To test, or to review only some people, list their user object IDs in `USER_IDS` (§7) |
+| **Not included** | Accounts used by applications, services and devices rather than people; deleted users; administrator rights people can switch on only when needed (Entra PIM "eligible" roles); applications open to everyone without an assignment, apps people allowed to read their data, and Azure cloud resources; sign-in activity, multi-factor status and ownership; other Entra organisations (one per automation) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short |
+| **Roles listed** | Groups (nested included), administrator rights with their scope, business applications with their role, and licences |
 
-All users are included, disabled users and guests too, so reviewers see accounts that still exist after someone left. To list the people who should have access, use [Entra ID Current Employees](../Entra%20ID%20Current%20Employees/).
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-One tenant per automation. Not covered: deleted users, service principals, managed identities, devices, Azure resource RBAC, eligible (inactive) PIM roles and permissions inside each application. An application assignment shows who can sign in, not what they can do inside the app.
+One row is one person's account. Its roles are every access that account holds. This automation lists four kinds:
 
-Any collection error, count mismatch or limit aborts the run and nothing is published. An incomplete list is never sent: a differential review would report the missing accounts as removed.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Group** | The person belongs to this group, directly or because they are in another group that belongs to it. Groups usually give access to files, applications or email lists. All group types are listed, including email lists that give no access | `Group: Finance [<id>]` |
+| **Directory role** | An administrator right in Entra itself, such as *User Administrator*, given to the person or to a group they are in. `scope=/` means the right covers the whole organisation; any other scope means only part of it | `Directory role: User Administrator [<id>; scope=/]` |
+| **Application** | A business application the person may sign in to, such as Salesforce, and the role it gives them there. *Default access* means they can sign in but have no specific role | `Application: Salesforce / Sales Manager [<id> / <id>]` |
+| **License** | A Microsoft 365 or other paid licence assigned to the person. Licences show Microsoft's product codes: for example `ENTERPRISEPACK` is Office 365 E3 | `License: ENTERPRISEPACK [<id>]` |
 
-Names and IDs are kept together, so renaming a group, role or application appears as a role change in differential reviews. A name that would make a role longer than 255 bytes is shortened; the IDs are always kept whole.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; Member; enabled; object=d7b79fe7-…
+Roles:       Application: Salesforce / Sales Manager [3a1d… / 9b2e…]
+             Directory role: User Administrator [fe930be7-…; scope=/]
+             Group: Finance [7f3c…]
+             Group: All employees [12db…]
+             License: ENTERPRISEPACK [6fd2c87f-…]
+```
+
+The codes in square brackets are Microsoft's internal identifiers. They keep two items with the same name apart; reviewers can ignore them. The description gives the name, whether the account is an employee account (*Member*) or a guest (*Guest*), and whether it is *enabled* or *disabled*.
+
+You choose which kinds are listed with `ROLES` (§7). With none, only the accounts are listed.
+
+A row shows *that* Ana is in *Finance* or is a *User Administrator*, not what those give her. Not yet verified: whether administrator rights switched on temporarily (Entra PIM) appear while they are active.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each group grants | *Entra ID – Group permissions* (planned) |
+| See what data each connected application can reach | *Entra ID – Application permissions* (planned) |
+| See who the administrators are, and only them | This automation, scope option (planned) |
+| Find people who left | Pair this feed with [Entra ID – Current employees](../Entra%20ID%20Current%20Employees/) in an Exit review. Guests match no employee, so they also appear; disabled accounts of leavers stay listed until deleted |
+| See what someone can do inside an application, such as Salesforce | That application's own automation, for example [Salesforce](../../Salesforce/Salesforce/) |
 
 ## 4. Before you start
 
@@ -111,11 +135,7 @@ The key must be unique ignoring case, as eramba compares accounts ignoring case.
 
 ## 8. Results
 
-stdout only contains the artifact declaration written by `writeAccountReviewArtifact()`. **Unlike the control automations, the step log goes to stderr**, which feed automations accept when the run exits 0. Logs contain counts only, never account names, IDs, tokens or Microsoft responses.
-
-Accounts are staged in a private temporary file and published once, after the whole population is collected. Exit 1 means nothing was published and the pull failed.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts enabled and disabled accounts, members and guests, and the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 
@@ -131,7 +151,7 @@ When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with
 
 ## 10. Customising
 
-Adjust the documented variables. Other access types need new collection code; they are not enabled by changing the role format. Section 4 is a copy of the [shared code blocks](../../../_shared/): do not edit it here.
+Adjust the documented variables. Other access types need new collection code; they are not enabled by changing the role format. Section 4 of `run.php` is a copy of the [shared code blocks](../../../_shared/): do not edit it there.
 
 ## 11. Removing
 
