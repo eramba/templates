@@ -28,18 +28,18 @@ last_tested: null
 
 **Technology:** Microsoft Entra ID (formerly Azure Active Directory), including Microsoft 365 licences.
 
-Sends eramba every user account in your Microsoft Entra ID and the access each one has: its groups, its administrator rights, the business applications it can sign in to and its licences. Reviewers then keep or revoke each account and each access in eramba. **Draft: tested on a lab tenant, not yet released as tested.**
+Sends eramba every user account in your Microsoft Entra ID and the access each one has: its groups, its administrator rights, the business applications it can sign in to and its licences. Reviewers then mark in eramba which accounts and accesses should stay and which should be removed; nothing is changed in Entra.
 
 ## 1. At a glance
 
 | | |
 |---|---|
 | **Family** | Account review |
-| **Each row is** | One user account (a person or a guest), identified by its sign-in name, for example `ana.garcia@example.com` |
+| **Each row is** | One user account (an employee or a guest), identified by its sign-in name, for example `ana.garcia@example.com` |
 | **Connects to** | Your Microsoft Entra ID, through Microsoft's official API (Microsoft Graph). Read-only |
 | **Permission needed** | Microsoft Graph application permissions `Directory.Read.All` and `Member.Read.Hidden`, read-only. An Entra administrator creates the connection and grants admin consent (§5) |
 | **Included** | Every user account: employees and guests, active and disabled. To test, or to review only some people, list their user object IDs in `USER_IDS` (§7) |
-| **Not included** | Accounts used by applications, services and devices rather than people; deleted users; administrator rights people can switch on only when needed (Entra PIM "eligible" roles); applications open to everyone without an assignment, apps people allowed to read their data, and Azure cloud resources; sign-in activity, multi-factor status and ownership; other Entra organisations (one per automation) |
+| **Not included** | Accounts used by applications, services and devices rather than people; deleted users; administrator rights people can switch on only when needed (Entra PIM "eligible" roles); applications open to everyone without an assignment, apps a person gave permission to read their own data (user consent), and Azure cloud resources; sign-in activity, multi-factor status and ownership; other Entra organisations (one per automation) |
 | **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short |
 | **Roles listed** | Groups (nested included), administrator rights with their scope, business applications with their role, and licences |
 
@@ -51,7 +51,7 @@ One row is one person's account. Its roles are every access that account holds. 
 
 | Kind | What it means for the person | How reviewers see it |
 |---|---|---|
-| **Group** | The person belongs to this group, directly or because they are in another group that belongs to it. Groups usually give access to files, applications or email lists. All group types are listed, including email lists that give no access | `Group: Finance [<id>]` |
+| **Group** | The person belongs to this group, directly or because they are in another group that belongs to it. Groups usually give access to files or applications; email-only groups are listed too, even though they give no access. | `Group: Finance [<id>]` |
 | **Directory role** | An administrator right in Entra itself, such as *User Administrator*, given to the person or to a group they are in. `scope=/` means the right covers the whole organisation; any other scope means only part of it | `Directory role: User Administrator [<id>; scope=/]` |
 | **Application** | A business application the person may sign in to, such as Salesforce, and the role it gives them there. *Default access* means they can sign in but have no specific role | `Application: Salesforce / Sales Manager [<id> / <id>]` |
 | **License** | A Microsoft 365 or other paid licence assigned to the person. Licences show Microsoft's product codes: for example `ENTERPRISEPACK` is Office 365 E3 | `License: ENTERPRISEPACK [<id>]` |
@@ -80,7 +80,7 @@ A row shows *that* Ana is in *Finance* or is a *User Administrator*, not what th
 | See what data each connected application can reach | *Entra ID – Application permissions* (planned) |
 | See who the administrators are, and only them | This automation, scope option (planned) |
 | Find people who left | Pair this feed with [Entra ID – Current employees](../Entra%20ID%20Current%20Employees/) in an Exit review. Guests match no employee, so they also appear; disabled accounts of leavers stay listed until deleted |
-| See what someone can do inside an application, such as Salesforce | That application's own automation, for example [Salesforce](../../Salesforce/Salesforce/) |
+| See what someone can do inside an application, such as Salesforce | That application's own automation, if there is one in the [catalogue](../../README.md), for example [Salesforce](../../Salesforce/Salesforce/) |
 
 ## 4. Before you start
 
