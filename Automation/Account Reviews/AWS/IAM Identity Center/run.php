@@ -209,7 +209,7 @@ function tpl_awsPages(object $client, string $operation, array $args, array $key
     return $lists;
 }
 // ─── end shared:providers/aws v1 sha256:4fa124f9a6f94e04 ───
-// ─── shared:feed v5 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+// ─── shared:feed v6 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
 {
@@ -360,7 +360,7 @@ function tpl_logSummary(string $what, array $details = []): void
 {
     $stats = tpl_feedStats();
     tpl_log("\n──────────── SUMMARY ────────────", true);
-    tpl_log(sprintf('RESULT: OK. Published the complete list of %d %s. eramba compares it after this run: added, deleted or creeping accounts are review results, not errors.', $stats['rows'], $what), true);
+    tpl_log(sprintf('RESULT: OK. Published the complete list of %d %s.', $stats['rows'], $what), true);
     foreach ($details as $detail) {
         tpl_log('  ' . $detail, true);
     }
@@ -385,7 +385,7 @@ function tpl_logFailure(string $what, Throwable $e): void
     }
     tpl_log("RESULT: FAILED. No $what was published; eramba keeps the last successful pull. ERROR: " . $e->getMessage(), true);
 }
-// ─── end shared:feed v5 sha256:9c55ee771dbfe4ae ───
+// ─── end shared:feed v6 sha256:124b2c93fef309f8 ───
 
 // ─── 5. COLLECT: AWS IAM Identity Center ────────────────────────────────────
 

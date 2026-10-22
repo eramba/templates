@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-// version: 5 — Account Review feed rows, staging, publication and run summary
+// version: 6 — Account Review feed rows, staging, publication and run summary
 
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -152,7 +152,7 @@ function tpl_logSummary(string $what, array $details = []): void
 {
     $stats = tpl_feedStats();
     tpl_log("\n──────────── SUMMARY ────────────", true);
-    tpl_log(sprintf('RESULT: OK. Published the complete list of %d %s. eramba compares it after this run: added, deleted or creeping accounts are review results, not errors.', $stats['rows'], $what), true);
+    tpl_log(sprintf('RESULT: OK. Published the complete list of %d %s.', $stats['rows'], $what), true);
     foreach ($details as $detail) {
         tpl_log('  ' . $detail, true);
     }
