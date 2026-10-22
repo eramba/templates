@@ -91,9 +91,7 @@ Numbered steps to create the identity and the exact read-only permissions, with 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only. The list is published once, after it is complete. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of employees published; `RESULT: NOT PUBLISHED` when a current-employees list is empty; or `RESULT: FAILED` with the error. Creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this list: an empty list is never published.
 
 ## 9. Troubleshooting
 

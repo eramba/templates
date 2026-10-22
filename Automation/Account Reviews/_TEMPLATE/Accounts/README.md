@@ -29,7 +29,7 @@ Send <Product> accounts and their assigned access to an eramba Account Review fe
 
 | | |
 |---|---|
-| **Family** | Account list (for account reviews) |
+| **Family** | <Account review or Permission review> |
 | **Each row is** | <One <Product> account, and what identifies it> |
 | **Connects to** | <Product> <API or service>, read-only |
 | **Permission needed** | <Exact read-only permission>. Approved by <who grants it in Product>. |
@@ -93,9 +93,7 @@ Numbered steps to create the identity and the exact read-only permissions, with 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: the details line of the summary counts <what is counted, for example accounts and the roles listed per kind>, and an empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 
