@@ -34,7 +34,7 @@ Sends eramba every member of your Claude Console organization and the access eac
 | **Family** | Account review |
 | **Each row is** | One member of one Claude Console organization, identified by its email, for example `ana.garcia@example.com` (or its `user_…` ID with `USER_KEY`) |
 | **Connects to** | Your Claude Console organization (`api.anthropic.com`), through Anthropic's official Admin API. Read-only requests |
-| **Permission needed** | An Admin API key, created by an organization admin. Admin keys have no selectable scopes: the key has full access to the Admin API, including writes, but the script only sends `GET` requests to read members and workspaces (§5) |
+| **Permission needed** | An Admin API key, created by an organization admin. Claude Console Admin keys have no selectable scopes: the key has full access to the Admin API, including writes, but the script only sends `GET` requests to read members and workspaces (§5) |
 | **Included** | Every member the organization users list returns |
 | **Not included** | Pending invitations; API keys, service accounts and Admin keys; what each member does inside a workspace; archived workspaces; Claude Enterprise (`claude.ai`) organizations beyond the organization role; Claude Platform on AWS; other organizations (one per automation) |
 | **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. This version has no filter to split a larger population |

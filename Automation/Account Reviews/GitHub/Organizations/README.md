@@ -70,7 +70,7 @@ You choose which kinds are listed with `ROLES` (§7). With none, only the accoun
 
 A row shows *that* octo-dev is in the *platform* team, not which repositories that team can reach.
 
-A GitHub login is not an email and GitHub never returns a member's work email. Exit reviews only match when both feeds hold the same value, so either set `USER_KEY` to `saml_name_id` or `email` (for organizations that use organization-level SAML SSO, §7), or keep `login` and compare with an employee list that holds GitHub logins.
+A GitHub login is not an email and GitHub never returns a member's work email. Exit reviews only match when both feeds hold the same value, so either set `USER_KEY` to `saml_name_id` or `email` (for organizations that use organization-level SAML SSO, §7; with these keys also turn off `INCLUDE_OUTSIDE_COLLABORATORS`, because outside collaborators have no SAML identity and the run would stop), or keep `login` and compare with an employee list that holds GitHub logins.
 
 ## 3. Looking to review something else?
 
