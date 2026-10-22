@@ -1,7 +1,7 @@
 ---
 id: entra-account-review
 name: Entra ID Accounts and Assigned Access
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: Microsoft Entra ID
 vendor: Microsoft
@@ -113,9 +113,9 @@ The key must be unique ignoring case, as eramba compares accounts ignoring case.
 
 stdout only contains the artifact declaration written by `writeAccountReviewArtifact()`. **Unlike the control automations, the step log goes to stderr**, which feed automations accept when the run exits 0. Logs contain counts only, never account names, IDs, tokens or Microsoft responses.
 
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published, enabled/disabled and members/guests, and how many group, directory role, application and licence entries were listed; or `RESULT: FAILED` with the reason.
-
 Accounts are staged in a private temporary file and published once, after the whole population is collected. Exit 1 means nothing was published and the pull failed.
+
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
 
 ## 9. Troubleshooting
 
@@ -142,5 +142,6 @@ Stop or reconfigure the Account Reviews that use the feed before removing it. Re
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | Directory role assignments no longer select `appScopeId` (rejected by Graph) and deprecated built-in roles missing from the role list are read by ID; `MAX_USERS` up to 50000; progress logged every 1,000 accounts; the log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: [client credentials](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow), [users](https://learn.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0), [transitiveMemberOf](https://learn.microsoft.com/en-us/graph/api/user-list-transitivememberof?view=graph-rest-1.0), [role assignments](https://learn.microsoft.com/en-us/graph/api/rbacapplication-list-roleassignments?view=graph-rest-1.0), [role definitions](https://learn.microsoft.com/en-us/graph/api/rbacapplication-list-roledefinitions?view=graph-rest-1.0), [app role assignments](https://learn.microsoft.com/en-us/graph/api/user-list-approleassignments?view=graph-rest-1.0), [service principal](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-get?view=graph-rest-1.0), [JSON batching](https://learn.microsoft.com/en-us/graph/json-batching), [throttling](https://learn.microsoft.com/en-us/graph/throttling).

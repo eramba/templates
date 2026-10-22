@@ -1,7 +1,7 @@
 ---
 id: openai-account-review
 name: OpenAI Organization Members and Project Access
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: OpenAI API Platform
 vendor: OpenAI
@@ -105,6 +105,8 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, emails or keys. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |
@@ -130,5 +132,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the Adm
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: [Administration API overview](https://platform.openai.com/docs/api-reference/administration), [users](https://platform.openai.com/docs/api-reference/users), [projects](https://platform.openai.com/docs/api-reference/projects), [project users](https://platform.openai.com/docs/api-reference/project-users), [Admin API keys](https://platform.openai.com/docs/api-reference/admin-api-keys), [roles and permissions](https://developers.openai.com/api/docs/guides/rbac), [OpenAPI specification](https://github.com/openai/openai-openapi).

@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Google Workspace Users and Assigned Access
  *  Technology: Google Workspace (Admin SDK Directory API)
- *  id: google-workspace-account-review        version: 0.1.0 (draft)
+ *  id: google-workspace-account-review        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Account%20Reviews
  *
@@ -48,7 +48,7 @@ $config = [
 
 // ─── 3. SETTINGS (do not edit) ──────────────────────────────────────────────
 const AUTOMATION_ID = 'google-workspace-account-review';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.1.1';
 const TPL_LOG_STREAM = 'stderr'; // stdout belongs to the artifact declaration
 const TPL_RUN_SECONDS = 200; // Collection budget inside the 240-second timeout
 
@@ -130,7 +130,7 @@ function tpl_base64Secret(string $value, string $name): string
     return $decoded;
 }
 // ─── end shared:core v1 sha256:277e2f6c5d57b964 ───
-// ─── shared:feed v3 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+// ─── shared:feed v4 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
 {
@@ -222,7 +222,27 @@ function tpl_feedAdd($feed, string $user, string $description, array $roles): in
     if ($bytes > 8 * 1024 * 1024 || fwrite($feed, $line) !== strlen($line)) {
         throw new RuntimeException('Feed larger than 8 MiB or staging write failed; narrow the scope.');
     }
+    tpl_feedStats($roles);
     return $bytes;
+}
+
+/**
+ * Running counts of the staged rows for the run summary: rows, rows without roles and roles per kind
+ * (the "<kind>" of tpl_roleString). Called with the roles of each new row; without arguments it only reads.
+ */
+function tpl_feedStats(?array $roles = null): array
+{
+    static $stats = ['rows' => 0, 'without roles' => 0, 'kinds' => []];
+    if ($roles !== null) {
+        $stats['rows']++;
+        $stats['without roles'] += $roles === [] ? 1 : 0;
+        foreach ($roles as $role) {
+            $kind = strstr($role, ': ', true);
+            $kind = $kind === false ? 'Other' : $kind;
+            $stats['kinds'][$kind] = ($stats['kinds'][$kind] ?? 0) + 1;
+        }
+    }
+    return $stats;
 }
 
 /** Publishes every staged row through eramba's Account Review artifact helper. */
@@ -243,7 +263,37 @@ function tpl_feedPublish($feed): void
         }
     })());
 }
-// ─── end shared:feed v3 sha256:39800df21bc1737d ───
+
+/**
+ * Ends a successful run with a block people can read at a glance in eramba's Test output.
+ * $what names the rows ("accounts", "current employees"); $details adds script-specific counts.
+ * Counts only, never names: the output may be shared or screenshotted.
+ */
+function tpl_logSummary(string $what, array $details = []): void
+{
+    $stats = tpl_feedStats();
+    tpl_log("\n──────────── SUMMARY ────────────");
+    tpl_log(sprintf('RESULT: OK. eramba received the complete list of %d %s.', $stats['rows'], $what));
+    foreach ($details as $detail) {
+        tpl_logInfo($detail);
+    }
+    if ($stats['kinds'] !== []) {
+        ksort($stats['kinds'], SORT_STRING);
+        $kinds = [];
+        foreach ($stats['kinds'] as $kind => $count) {
+            $kinds[] = "$count $kind";
+        }
+        tpl_logInfo('Roles listed: ' . implode(', ', $kinds) . '.');
+        tpl_logInfo(sprintf('%s without any role: %d.', ucfirst($what), $stats['without roles']));
+    }
+}
+
+/** Ends a failed run: nothing reached eramba, and why. */
+function tpl_logFailure(string $what, Throwable $e): void
+{
+    tpl_log("\n──────────── SUMMARY ────────────\nRESULT: FAILED. No $what was published.\nERROR: " . $e->getMessage());
+}
+// ─── end shared:feed v4 sha256:c6a059301e52f3e0 ───
 // ─── shared:providers/google v1 (edit Automation/_shared/providers/google.php, then run Automation/tools/sync.php) ───
 /**
  * The fields of a service-account JSON key that sign the token request. Credential URLs in the key
@@ -701,9 +751,9 @@ try {
 
     tpl_logStep(3, 'Publishing the account review feed');
     tpl_feedPublish($feed);
-    tpl_log("\nDone.");
+    tpl_logSummary('accounts');
     exit(0);
 } catch (Throwable $e) {
-    tpl_log("\nABORTED: no account review feed was published.\nERROR: " . $e->getMessage());
+    tpl_logFailure('account review feed', $e);
     exit(1);
 }

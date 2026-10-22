@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-// version: 3 — Account Review feed rows, staging and publication
+// version: 4 — Account Review feed rows, staging, publication and run summary
 
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -93,7 +93,27 @@ function tpl_feedAdd($feed, string $user, string $description, array $roles): in
     if ($bytes > 8 * 1024 * 1024 || fwrite($feed, $line) !== strlen($line)) {
         throw new RuntimeException('Feed larger than 8 MiB or staging write failed; narrow the scope.');
     }
+    tpl_feedStats($roles);
     return $bytes;
+}
+
+/**
+ * Running counts of the staged rows for the run summary: rows, rows without roles and roles per kind
+ * (the "<kind>" of tpl_roleString). Called with the roles of each new row; without arguments it only reads.
+ */
+function tpl_feedStats(?array $roles = null): array
+{
+    static $stats = ['rows' => 0, 'without roles' => 0, 'kinds' => []];
+    if ($roles !== null) {
+        $stats['rows']++;
+        $stats['without roles'] += $roles === [] ? 1 : 0;
+        foreach ($roles as $role) {
+            $kind = strstr($role, ': ', true);
+            $kind = $kind === false ? 'Other' : $kind;
+            $stats['kinds'][$kind] = ($stats['kinds'][$kind] ?? 0) + 1;
+        }
+    }
+    return $stats;
 }
 
 /** Publishes every staged row through eramba's Account Review artifact helper. */
@@ -113,4 +133,34 @@ function tpl_feedPublish($feed): void
             throw new RuntimeException('Could not read the complete staged feed.');
         }
     })());
+}
+
+/**
+ * Ends a successful run with a block people can read at a glance in eramba's Test output.
+ * $what names the rows ("accounts", "current employees"); $details adds script-specific counts.
+ * Counts only, never names: the output may be shared or screenshotted.
+ */
+function tpl_logSummary(string $what, array $details = []): void
+{
+    $stats = tpl_feedStats();
+    tpl_log("\n──────────── SUMMARY ────────────");
+    tpl_log(sprintf('RESULT: OK. eramba received the complete list of %d %s.', $stats['rows'], $what));
+    foreach ($details as $detail) {
+        tpl_logInfo($detail);
+    }
+    if ($stats['kinds'] !== []) {
+        ksort($stats['kinds'], SORT_STRING);
+        $kinds = [];
+        foreach ($stats['kinds'] as $kind => $count) {
+            $kinds[] = "$count $kind";
+        }
+        tpl_logInfo('Roles listed: ' . implode(', ', $kinds) . '.');
+        tpl_logInfo(sprintf('%s without any role: %d.', ucfirst($what), $stats['without roles']));
+    }
+}
+
+/** Ends a failed run: nothing reached eramba, and why. */
+function tpl_logFailure(string $what, Throwable $e): void
+{
+    tpl_log("\n──────────── SUMMARY ────────────\nRESULT: FAILED. No $what was published.\nERROR: " . $e->getMessage());
 }

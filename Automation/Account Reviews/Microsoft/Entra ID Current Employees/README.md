@@ -1,7 +1,7 @@
 ---
 id: entra-current-employees
 name: Entra ID Current Employees
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: Microsoft Entra ID
 vendor: Microsoft
@@ -94,7 +94,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 100 pages, 8 MiB of 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only (employees, and how many were left out and why). Exit 1 means nothing was published.
 
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of employees sent and how many were left out and why, or `RESULT: FAILED` with the reason.
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of current employees eramba received, or `RESULT: FAILED` with the reason.
 
 ## 9. Troubleshooting
 
@@ -119,5 +119,6 @@ Stop the Exit reviews that use the feed, then remove the feed and, if nothing el
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: [list users](https://learn.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0), [advanced queries](https://learn.microsoft.com/en-us/graph/aad-advanced-queries), [group transitive members](https://learn.microsoft.com/en-us/graph/api/group-list-transitivemembers?view=graph-rest-1.0), [JSON batching](https://learn.microsoft.com/en-us/graph/json-batching).

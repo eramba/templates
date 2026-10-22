@@ -1,7 +1,7 @@
 ---
 id: google-workspace-account-review
 name: Google Workspace Users and Assigned Access
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: Google Workspace
 vendor: Google
@@ -125,6 +125,8 @@ Keep `USER_KEY` unchanged once a Differential review has a baseline. Renaming a 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only, never emails, names or keys. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published. Errors show the HTTP status and Google's one-word reason, never response bodies.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |
@@ -150,5 +152,6 @@ Stop the Account Reviews that use the feed, then remove the feed and, if no othe
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: [users.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/users/list), [groups.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/groups/list), [members.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/members/list), [roles.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/roles/list), [roleAssignments.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/roleAssignments/list), [authorization scopes](https://developers.google.com/workspace/admin/directory/v1/guides/authorizing), [domain-wide delegation](https://support.google.com/a/answer/162106), [assign admin roles to groups](https://support.google.com/a/answer/9807615), [Google API PHP client](https://github.com/googleapis/google-api-php-client).

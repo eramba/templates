@@ -7,7 +7,7 @@ PHP scripts that send the list of accounts and their access to an eramba **Accou
 1. Choose an automation below and read its README: scope, prerequisites and permissions.
 2. Create a dedicated read-only identity at the provider and store its credentials in eramba **Automation Secrets** with the exact names in the README.
 3. Add an **Account Review Feed** with **Source = Automation** and **Type = List of accounts to be reviewed**, and add the automation from that form: PHP version, Composer packages, timeout and the full `run.php`.
-4. Test the automation and the feed. Compare the accounts and roles with the provider before scheduling a review.
+4. Test the automation and the feed. The Test output ends with a **SUMMARY** block: `RESULT: OK` with the number of rows eramba received (and roles per kind), or `RESULT: FAILED` with the reason. Compare the accounts and roles with the provider before scheduling a review.
 5. Attach the feed to an Account Review and configure frequency and reviewers.
 
 ## Review types
@@ -60,7 +60,7 @@ Status: `draft` (not yet validated on real eramba and the provider) · `tested` 
 
 They follow the same structure as the [Internal Controls](../Internal%20Controls/) scripts (numbered sections, `$secrets`, `$config`, official Composer packages) and reuse the [shared code blocks](../_shared/), with three differences:
 
-- **stdout is reserved** for the artifact declaration written by `writeAccountReviewArtifact()`. The step log goes to stderr, which feed automations accept when the run exits 0. Never `echo` to stdout.
+- **stdout is reserved** for the artifact declaration written by `writeAccountReviewArtifact()`. The step log goes to stderr, which feed automations accept when the run exits 0, and ends with `tpl_logSummary()` or `tpl_logFailure()`. Never `echo` to stdout.
 - **Each row** has `user`, `description` and `roles`. Account keys must be unique ignoring case, as eramba compares them ignoring case, and values must fit 255 characters.
 - **Never publish a partial list.** Any collection, permission or limit error exits 1 without publishing; otherwise a differential review would report the missing accounts as removed. An empty population must be allowed explicitly.
 

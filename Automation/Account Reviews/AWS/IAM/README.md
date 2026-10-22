@@ -1,7 +1,7 @@
 ---
 id: aws-iam-account-review
 name: AWS IAM Users and Assigned Access
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: AWS Identity and Access Management
 vendor: AWS
@@ -116,6 +116,8 @@ Fixed limits: 200 seconds of collection, 200 pages, up to 20 seconds waiting for
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only, never user names or keys. Access key IDs are not included in the feed. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |
@@ -139,5 +141,6 @@ Stop the Account Reviews that use the feed, then remove the feed and, if no othe
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: [GetAccountAuthorizationDetails](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html), [credential report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html), [AWS SDK for PHP](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/welcome.html).

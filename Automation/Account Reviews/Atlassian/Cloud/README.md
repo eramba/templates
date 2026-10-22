@@ -1,7 +1,7 @@
 ---
 id: atlassian-cloud-account-review
 name: Atlassian Cloud (Jira, Confluence…) Accounts and Assigned Access
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: Atlassian Cloud (Jira, Confluence, Jira Service Management…)
 vendor: Atlassian
@@ -117,6 +117,8 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list (
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, emails or keys. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |
@@ -144,5 +146,6 @@ Stop the Account Reviews that use the feed, then remove the feed, revoke the API
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: [Admin API: users](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/), [groups](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-groups/), [directories](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-directory/), [Admin API scopes](https://developer.atlassian.com/cloud/admin/scopes/), [manage an organization with the Admin APIs](https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/).

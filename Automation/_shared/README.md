@@ -22,7 +22,7 @@ The comments do nothing in eramba. They tell readers where the code comes from a
 |---|---|
 | [`core`](core.php) | Turns PHP warnings into errors, writes the step log, enforces the time and memory budget, checks secrets |
 | [`http`](http.php) | Read-only HTTPS calls to provider APIs: only the endpoints the script declares, TLS verified, no redirects, timeouts, retries when the provider throttles, size limit |
-| [`feed`](feed.php) | Account Review feed rows: field limits, unique account keys, publication only after the whole list is collected |
+| [`feed`](feed.php) | Account Review feed rows: field limits, unique account keys, publication only after the whole list is collected, and the SUMMARY block (counts only) that ends every run |
 | [`providers/graph`](providers/graph.php) | Microsoft Graph: application token, complete collections, request batching |
 | [`providers/okta`](providers/okta.php) | Okta: org URL validation, complete lists following the `Link` header |
 | [`providers/auth0`](providers/auth0.php) | Auth0: Management API token, page-based and checkpoint lists |

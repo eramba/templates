@@ -1,7 +1,7 @@
 ---
 id: servicenow-account-review
 name: ServiceNow Accounts and Assigned Access
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: ServiceNow
 vendor: ServiceNow
@@ -118,6 +118,8 @@ Fixed limits: 5000 records per page, 200 seconds of collection, 4 MB per respons
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only, never emails, names or tokens. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |
@@ -144,5 +146,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the OAu
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: [Table API](https://www.servicenow.com/docs/csh?topicname=c_TableAPI.html&version=latest), [REST API authentication](https://www.servicenow.com/docs/csh?topicname=c_RESTAPI.html&version=latest), [OAuth client credentials grant](https://www.servicenow.com/docs/csh?topicname=client-credentials.html&version=latest), [read-only role `snc_read_only`](https://www.servicenow.com/docs/csh?topicname=r_ReadOnlyRole.html&version=latest), [web service access only users](https://www.servicenow.com/docs/csh?topicname=t_CreateAUser.html&version=latest).

@@ -1,7 +1,7 @@
 ---
 id: auth0-account-review
 name: Auth0 Accounts and Assigned Access
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: Auth0
 vendor: Auth0 (Okta)
@@ -104,6 +104,8 @@ Fixed limits: 1000 users, 200 seconds of collection, 4 MB per response, 8 MiB of
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only, never emails, IDs or tokens. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |
@@ -128,5 +130,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the mac
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: [Management API access tokens](https://auth0.com/docs/secure/tokens/access-tokens/management-api-access-tokens), [users](https://auth0.com/docs/api/management/v2/users/get-users), [roles](https://auth0.com/docs/api/management/v2/roles/get-roles), [role users](https://auth0.com/docs/api/management/v2/roles/get-role-user), [organizations](https://auth0.com/docs/api/management/v2/organizations/get-organizations), [organization members](https://auth0.com/docs/api/management/v2/organizations/get-members), [pagination](https://auth0.com/docs/api/management/v2#!/introduction/pagination), [rate limits](https://auth0.com/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy).

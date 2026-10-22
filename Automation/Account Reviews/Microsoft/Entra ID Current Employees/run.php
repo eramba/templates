@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Entra ID Current Employees
  *  Technology: Microsoft Entra ID
- *  id: entra-current-employees        version: 0.1.0 (draft)
+ *  id: entra-current-employees        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Account%20Reviews
  *
@@ -47,7 +47,7 @@ $config = [
 
 // ─── 3. SETTINGS (do not edit) ──────────────────────────────────────────────
 const AUTOMATION_ID = 'entra-current-employees';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.1.1';
 const TPL_LOG_STREAM = 'stderr'; // stdout belongs to the artifact declaration
 const TPL_RUN_SECONDS = 200; // Collection budget inside the 240-second timeout
 const TPL_ALLOWED_REQUESTS = [
@@ -420,7 +420,7 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
     return $state;
 }
 // ─── end shared:providers/graph v1 sha256:0f75dd180874adb4 ───
-// ─── shared:feed v3 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+// ─── shared:feed v4 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
 {
@@ -512,7 +512,27 @@ function tpl_feedAdd($feed, string $user, string $description, array $roles): in
     if ($bytes > 8 * 1024 * 1024 || fwrite($feed, $line) !== strlen($line)) {
         throw new RuntimeException('Feed larger than 8 MiB or staging write failed; narrow the scope.');
     }
+    tpl_feedStats($roles);
     return $bytes;
+}
+
+/**
+ * Running counts of the staged rows for the run summary: rows, rows without roles and roles per kind
+ * (the "<kind>" of tpl_roleString). Called with the roles of each new row; without arguments it only reads.
+ */
+function tpl_feedStats(?array $roles = null): array
+{
+    static $stats = ['rows' => 0, 'without roles' => 0, 'kinds' => []];
+    if ($roles !== null) {
+        $stats['rows']++;
+        $stats['without roles'] += $roles === [] ? 1 : 0;
+        foreach ($roles as $role) {
+            $kind = strstr($role, ': ', true);
+            $kind = $kind === false ? 'Other' : $kind;
+            $stats['kinds'][$kind] = ($stats['kinds'][$kind] ?? 0) + 1;
+        }
+    }
+    return $stats;
 }
 
 /** Publishes every staged row through eramba's Account Review artifact helper. */
@@ -533,7 +553,37 @@ function tpl_feedPublish($feed): void
         }
     })());
 }
-// ─── end shared:feed v3 sha256:39800df21bc1737d ───
+
+/**
+ * Ends a successful run with a block people can read at a glance in eramba's Test output.
+ * $what names the rows ("accounts", "current employees"); $details adds script-specific counts.
+ * Counts only, never names: the output may be shared or screenshotted.
+ */
+function tpl_logSummary(string $what, array $details = []): void
+{
+    $stats = tpl_feedStats();
+    tpl_log("\n──────────── SUMMARY ────────────");
+    tpl_log(sprintf('RESULT: OK. eramba received the complete list of %d %s.', $stats['rows'], $what));
+    foreach ($details as $detail) {
+        tpl_logInfo($detail);
+    }
+    if ($stats['kinds'] !== []) {
+        ksort($stats['kinds'], SORT_STRING);
+        $kinds = [];
+        foreach ($stats['kinds'] as $kind => $count) {
+            $kinds[] = "$count $kind";
+        }
+        tpl_logInfo('Roles listed: ' . implode(', ', $kinds) . '.');
+        tpl_logInfo(sprintf('%s without any role: %d.', ucfirst($what), $stats['without roles']));
+    }
+}
+
+/** Ends a failed run: nothing reached eramba, and why. */
+function tpl_logFailure(string $what, Throwable $e): void
+{
+    tpl_log("\n──────────── SUMMARY ────────────\nRESULT: FAILED. No $what was published.\nERROR: " . $e->getMessage());
+}
+// ─── end shared:feed v4 sha256:c6a059301e52f3e0 ───
 
 // ─── 5. COLLECT: Entra ID ───────────────────────────────────────────────────
 
@@ -598,19 +648,7 @@ function collectFeed(string $token, array $config): array
         throw new RuntimeException('No employees found; check GROUP_ID, REQUIRE_EMPLOYEE_ID and USER_KEY.');
     }
     tpl_logInfo(sprintf('%d employees staged; %d skipped without %s; %d skipped without Employee ID.', $count, $withoutKey, $config['USER_KEY'], $withoutEmployeeId));
-    return [$feed, ['employees' => $count, 'found' => count($users), 'without key' => $withoutKey, 'without employee id' => $withoutEmployeeId]];
-}
-
-/** Counts only, never names: the test output may be shared or screenshotted. */
-function logSummary(array $stats, array $config): void
-{
-    tpl_log("\n──────────── SUMMARY ────────────");
-    tpl_log(sprintf('RESULT: OK. eramba received %d current employees.', $stats['employees']));
-    tpl_logInfo(sprintf('Enabled members found: %d (%s).', $stats['found'], $config['GROUP_ID'] === '' ? 'whole tenant' : 'one group, nested members included'));
-    tpl_logInfo(sprintf('Left out without %s: %d. Left out without Employee ID: %d.', $config['USER_KEY'], $stats['without key'], $stats['without employee id']));
-    if ($stats['without key'] > 0) {
-        tpl_logInfo("Accounts of people left out will be flagged in Exit reviews; check USER_KEY if this number is high.");
-    }
+    return [$feed, ['found' => count($users), 'without key' => $withoutKey, 'without employee id' => $withoutEmployeeId]];
 }
 
 // ─── 6. MAIN ────────────────────────────────────────────────────────────────
@@ -632,9 +670,16 @@ try {
 
     tpl_logStep(4, 'Publishing the employee list');
     tpl_feedPublish($feed);
-    logSummary($stats, $config);
+    $details = [
+        sprintf('Enabled members found: %d (%s).', $stats['found'], $config['GROUP_ID'] === '' ? 'whole tenant' : 'one group, nested members included'),
+        sprintf('Left out without %s: %d. Left out without Employee ID: %d.', $config['USER_KEY'], $stats['without key'], $stats['without employee id']),
+    ];
+    if ($stats['without key'] > 0) {
+        $details[] = 'Accounts of people left out will be flagged in Exit reviews; check USER_KEY if this number is high.';
+    }
+    tpl_logSummary('current employees', $details);
     exit(0);
 } catch (Throwable $e) {
-    tpl_log("\n──────────── SUMMARY ────────────\nRESULT: FAILED. No employee list was published.\nERROR: " . $e->getMessage());
+    tpl_logFailure('employee list', $e);
     exit(1);
 }

@@ -77,6 +77,8 @@ Numbered steps to create the identity and the exact read-only permissions, with 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |

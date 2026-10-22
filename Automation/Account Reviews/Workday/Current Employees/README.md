@@ -1,7 +1,7 @@
 ---
 id: workday-current-employees
 name: Workday Current Employees
-version: 0.1.0
+version: 0.1.1
 status: draft
 technology: Workday HCM
 vendor: Workday
@@ -125,6 +125,8 @@ Fixed limits: 200 seconds of collection, one response of at most 4 MB, 8 MiB of 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only (report rows, employees staged, and how many were left out and why). No names, emails or IDs are logged. Exit 1 means nothing was published.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of current employees eramba received, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |
@@ -154,5 +156,6 @@ Stop the Exit reviews that use the feed, then remove the feed and, if nothing el
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
+| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
 
 References: Workday Community / Workday Administrator Guide (sign-in required): *Reporting as a Service (RaaS)*, *Create Custom Report*, *Create Integration System User*, *Integration System Security Groups*, *Activate Pending Security Policy Changes*. Public: [Reports as a Service (RaaS)](https://doc.workday.com/admin-guide/en-us/reporting-and-analytics/custom-reports-and-analytics/reports-as-a-service-raas-/dan1370796320263.html), [Workday integrations overview](https://doc.workday.com/workday-education/en-us/course-manuals/creating-and-securing-integrations/workday-integrations-overview.html).
