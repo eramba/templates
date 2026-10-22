@@ -671,6 +671,11 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
             if ($resource === null) {
                 throw new RuntimeException($unresolved);
             }
+            if ($assignment['appRoleId'] === '00000000-0000-0000-0000-000000000000') {
+                // Default access: the application is assigned to the resource without a specific app role.
+                $roles[] = tpl_roleString('Application permission', $resource['displayName'] . ' / Default access', $resource['id'] . ' / ' . $assignment['appRoleId']);
+                continue;
+            }
             $appRole = null;
             foreach ($resource['appRoles'] ?? [] as $candidate) {
                 if (($candidate['id'] ?? null) === $assignment['appRoleId']) {
@@ -698,7 +703,7 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
                 $kind = 'Delegated permission (some users)';
                 $someUsers[(string) ($grant['principalId'] ?? '')] = true;
             } else {
-                throw new RuntimeException('A delegated permission grant has an unknown consent type; retry later.');
+                throw new RuntimeException('A delegated permission grant has an unsupported consent type; update the automation.');
             }
             foreach ($scopes as $scope) {
                 $roles[] = tpl_roleString($kind, $resource['displayName'] . ' / ' . $scope, $resource['id'] . ' / ' . $scope);
