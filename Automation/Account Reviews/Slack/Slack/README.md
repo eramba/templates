@@ -105,7 +105,7 @@ On Enterprise Grid with an org-level app, install it on the org, then set `TEAM_
 | `INCLUDE_BOTS` | `false` | Also list bots, workflow bots and Slackbot. Requires `USER_KEY = id`. |
 | `TEAM_ID` | `''` | Enterprise Grid org-level token only: workspace ID to list. Leave empty with a workspace token. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 listed members (excluded bots and external members count too); exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 listed members (excluded bots and external members count too); exceeding it aborts instead of truncating. For more members on Enterprise Grid, use one feed per workspace (`TEAM_ID`). |
 | `MAX_OBJECTS` | `2000` | 1–10000 user groups, and members per user group; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages, 8 MiB of feed, 48 MiB of memory. Only `GET https://slack.com/api/users.list`, `usergroups.list` and `usergroups.users.list` requests are allowed.
@@ -143,6 +143,6 @@ Stop the Account Reviews that use the feed, then remove the feed, uninstall the 
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [users.list](https://docs.slack.dev/reference/methods/users.list), [user object](https://docs.slack.dev/reference/objects/user-object), [usergroups.list](https://docs.slack.dev/reference/methods/usergroups.list), [usergroups.users.list](https://docs.slack.dev/reference/methods/usergroups.users.list), [pagination](https://docs.slack.dev/apis/web-api/pagination), [rate limits](https://docs.slack.dev/apis/web-api/rate-limits), [scopes](https://docs.slack.dev/reference/scopes).

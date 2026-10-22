@@ -489,9 +489,9 @@ function validateConfig(array $c): void
     if (!is_string($c['TEAM_ID']) || ($c['TEAM_ID'] !== '' && preg_match('/^T[A-Z0-9]{2,30}$/D', $c['TEAM_ID']) !== 1)) {
         throw new RuntimeException("TEAM_ID must be '' or a Slack workspace ID such as T0123ABCD.");
     }
-    foreach (['MAX_USERS', 'MAX_OBJECTS'] as $key) {
-        if (!is_int($c[$key]) || $c[$key] < 1 || $c[$key] > 10000) {
-            throw new RuntimeException("$key must be a number from 1 to 10000.");
+    foreach (['MAX_USERS' => 5000, 'MAX_OBJECTS' => 10000] as $key => $max) {
+        if (!is_int($c[$key]) || $c[$key] < 1 || $c[$key] > $max) {
+            throw new RuntimeException("$key must be a number from 1 to $max.");
         }
     }
 }

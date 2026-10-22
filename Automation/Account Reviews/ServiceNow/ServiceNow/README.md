@@ -109,7 +109,7 @@ ServiceNow's REST APIs accept OAuth 2.0 bearer tokens and basic authentication. 
 | `USER_KEY` | `email` | Account identifier: `email`, `user_name` or `sys_id`. Users without email (often system or integration users) abort the run; use `user_name` then. |
 | `ROLES` | `['roles', 'groups']` | Access listed as roles. `[]` lists users only; tables for kinds not listed are not read. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `10000` | 1–20000 users; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 users; exceeding it aborts instead of truncating. This version has no scope filter to split a larger population. |
 | `MAX_ASSIGNMENTS` | `300000` | 1–1000000 records per list (role assignments, group memberships); exceeding it aborts. |
 
 Fixed limits: 5000 records per page, 200 seconds of collection, 4 MB per response, 8 MiB of feed, 48 MiB of memory. Rate limits (HTTP 429) are respected when the wait fits the budget. Only `POST https://<instance>/oauth_token.do` (OAuth only) and `GET https://<instance>/api/now/table/sys_user`, `sys_user_has_role` and `sys_user_grmember` are allowed.
@@ -146,6 +146,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the OAu
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [Table API](https://www.servicenow.com/docs/csh?topicname=c_TableAPI.html&version=latest), [REST API authentication](https://www.servicenow.com/docs/csh?topicname=c_RESTAPI.html&version=latest), [OAuth client credentials grant](https://www.servicenow.com/docs/csh?topicname=client-credentials.html&version=latest), [read-only role `snc_read_only`](https://www.servicenow.com/docs/csh?topicname=r_ReadOnlyRole.html&version=latest), [web service access only users](https://www.servicenow.com/docs/csh?topicname=t_CreateAUser.html&version=latest).

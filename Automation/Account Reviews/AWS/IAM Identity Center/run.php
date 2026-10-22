@@ -40,7 +40,7 @@ $config = [
     'USER_KEY' => 'email', // Account identifier: email (primary email), UserName or UserId (no fallback)
     'ROLES' => ['groups', 'permission_sets'], // Access listed as roles; [] = accounts only (README §7)
     'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
-    'MAX_USERS' => 5000, // Maximum users; never truncate
+    'MAX_USERS' => 2000, // Maximum users; never truncate
     'MAX_GROUPS' => 2000, // Maximum groups and maximum permission sets
     'MAX_ASSIGNMENTS' => 20000, // Maximum account assignments and permission set / account pairs
 ];
@@ -408,7 +408,7 @@ function validateConfig(array $c): void
     if (!is_bool($c['ALLOW_EMPTY_FEED'])) {
         throw new RuntimeException('ALLOW_EMPTY_FEED must be true or false.');
     }
-    foreach (['MAX_USERS' => 50000, 'MAX_GROUPS' => 10000, 'MAX_ASSIGNMENTS' => 100000] as $key => $max) {
+    foreach (['MAX_USERS' => 5000, 'MAX_GROUPS' => 10000, 'MAX_ASSIGNMENTS' => 100000] as $key => $max) {
         if (!is_int($c[$key]) || $c[$key] < 1 || $c[$key] > $max) {
             throw new RuntimeException("$key must be a number from 1 to $max.");
         }

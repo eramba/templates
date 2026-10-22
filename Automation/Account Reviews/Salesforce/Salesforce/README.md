@@ -110,7 +110,7 @@ Salesforce recommends the **OAuth 2.0 client credentials flow** for server-to-se
 | `ROLES` | `['profile', 'role', 'permission_sets', 'permission_set_groups']` | Access listed as roles. `[]` lists users only; queries for kinds not listed are skipped. |
 | `USER_TYPES` | `[]` | Salesforce user types to include, e.g. `['Standard']` for internal licensed users only (excludes Experience Cloud, Chatter and automated users). `[]` includes every type. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `5000` | 1–10000 users; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 users; exceeding it aborts instead of truncating. For more accounts, split the review into several feeds with `USER_TYPES`. |
 | `MAX_ASSIGNMENTS` | `100000` | 1–500000 permission set (group) assignments; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection, 4 MB per response, 8 MiB of feed, 48 MiB of memory. Salesforce API request limits apply to the org (one request per 2000 records). Only `POST https://<my domain>/services/oauth2/token` and `GET https://<my domain>/services/data/v62.0/query` are allowed; the token must be issued for the same My Domain.
@@ -148,6 +148,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the ext
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [OAuth 2.0 client credentials flow](https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_client_credentials_flow.htm), [external client apps](https://help.salesforce.com/s/articleView?id=sf.external_client_apps.htm), [REST API query](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_query.htm), [User](https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_user.htm), [PermissionSetAssignment](https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_permissionsetassignment.htm), [PermissionSetGroup](https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_permissionsetgroup.htm), [API request limits](https://developer.salesforce.com/docs/atlas.en-us.salesforce_app_limits_cheatsheet.meta/salesforce_app_limits_cheatsheet/salesforce_app_limits_platform_api.htm).

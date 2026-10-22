@@ -108,7 +108,7 @@ When Atlassian adds read scopes for the searches, a key **with scopes** limited 
 | `ROLES` | `['product_access', 'groups', 'platform_roles']` | Access listed as roles. `[]` lists users only (one search). |
 | `PRODUCTS` | `[]` | Empty: every product. Otherwise only users with access to these products, and only their roles, e.g. `['jira-software']`, `['jira-servicedesk']`, `['confluence']`. The key is the product part of the site ARI shown in `Product access` roles (to validate on a real organization). |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 users; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 users; exceeding it aborts instead of truncating. For more accounts, split the review into several feeds with `PRODUCTS`. |
 | `MAX_OBJECTS` | `2000` | 1–10000 groups, group members or role assignments per list; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list (100 records per page), 8 MiB of feed, 48 MiB of memory. Throttling (HTTP 429) is retried with `Retry-After` when the wait fits the budget.
@@ -146,6 +146,6 @@ Stop the Account Reviews that use the feed, then remove the feed, revoke the API
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [Admin API: users](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/), [groups](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-groups/), [directories](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-directory/), [Admin API scopes](https://developer.atlassian.com/cloud/admin/scopes/), [manage an organization with the Admin APIs](https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/).

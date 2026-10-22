@@ -129,7 +129,7 @@ The AWS managed policies `AWSSSOReadOnly` and `AWSSSODirectoryReadOnly` also inc
 | `USER_KEY` | `email` | Account identifier: `email` (the email marked primary, or the user's only email), `UserName` or `UserId`. A user without one aborts the run. |
 | `ROLES` | `['groups', 'permission_sets']` | Access listed as roles. `[]` lists users only and skips every group and assignment call. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `5000` | 1–50000 users (also members of one group); exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 users (also members of one group); exceeding it aborts instead of truncating. This version has no scope filter to split a larger population. |
 | `MAX_GROUPS` | `2000` | 1–10000 groups, and permission sets. |
 | `MAX_ASSIGNMENTS` | `20000` | 1–100000 account assignments, and permission set / account pairs. |
 
@@ -167,6 +167,6 @@ Stop the Account Reviews that use the feed, then remove the feed and, if no othe
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [ListInstances](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html), [ListPermissionSets](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListPermissionSets.html), [DescribePermissionSet](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribePermissionSet.html), [ListAccountsForProvisionedPermissionSet](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListAccountsForProvisionedPermissionSet.html), [ListAccountAssignments](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListAccountAssignments.html), [Identity Store ListUsers](https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListUsers.html), [ListGroups](https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListGroups.html), [ListGroupMemberships](https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListGroupMemberships.html), [User](https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html), [delegated administration](https://docs.aws.amazon.com/singlesignon/latest/userguide/delegated-admin.html), [AWS SDK for PHP](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/welcome.html).

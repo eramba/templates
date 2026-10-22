@@ -95,7 +95,7 @@ An API token acts with the permissions of the account that created it and expire
 | `ROLES` | `['groups', 'applications', 'admin_roles']` | Access listed as roles. `[]` lists users only. |
 | `INCLUDE_DEPROVISIONED` | `true` | Also list deactivated users. Turn off to review active, suspended and locked users only. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 users; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 users; exceeding it aborts instead of truncating. This version has no scope filter to split a larger population. |
 | `MAX_OBJECTS` | `2000` | 1–10000 groups, applications or members per list; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 8 MiB of feed, 48 MiB of memory. Okta rate limits are respected (`X-Rate-Limit-Reset`) when the wait fits the budget. Only `GET https://<org>/api/v1/` requests are allowed.
@@ -131,6 +131,6 @@ Stop the Account Reviews that use the feed, then remove the feed, revoke the API
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [users](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/), [groups](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/), [applications](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Application/), [role assignments](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/RoleAssignmentAUser/), [pagination](https://developer.okta.com/docs/api/#pagination), [rate limits](https://developer.okta.com/docs/reference/rl-best-practices/).

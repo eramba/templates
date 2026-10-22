@@ -399,8 +399,8 @@ function validateConfig(array $c): void
             throw new RuntimeException("$key must be true or false.");
         }
     }
-    if (!is_int($c['MAX_USERS']) || $c['MAX_USERS'] < 1 || $c['MAX_USERS'] > 10000) {
-        throw new RuntimeException('MAX_USERS must be a number from 1 to 10000.');
+    if (!is_int($c['MAX_USERS']) || $c['MAX_USERS'] < 1 || $c['MAX_USERS'] > 5000) {
+        throw new RuntimeException('MAX_USERS must be a number from 1 to 5000.');
     }
 }
 

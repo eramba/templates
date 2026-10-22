@@ -96,7 +96,7 @@ Claude Console Admin keys have no selectable scopes: every key has full access t
 | `USER_KEY` | `email` | Account identifier: `email` or `id` (the stable `user_…` ID). Must exist on every member; no fallback. |
 | `ROLES` | `['org_role', 'workspaces']` | Access listed as roles. `[]` lists members only and skips the workspace calls. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero members is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 members; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 members; exceeding it aborts instead of truncating. This version has no scope filter to split a larger population. |
 | `MAX_OBJECTS` | `2000` | 1–10000 workspaces, members per workspace, or roles per member; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 8 MiB of feed, 48 MiB of memory. Throttling (HTTP 429) is retried when the `retry-after` wait fits the budget. Only `GET https://api.anthropic.com/v1/organizations/users` and `/v1/organizations/workspaces` requests are allowed.
@@ -132,6 +132,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the Adm
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api), [Admin API keys](https://platform.claude.com/docs/en/manage-claude/admin-api-keys), [list users](https://platform.claude.com/docs/en/api/admin-api/users/list-users), [list workspaces](https://platform.claude.com/docs/en/api/admin-api/workspaces/list-workspaces), [list workspace members](https://platform.claude.com/docs/en/api/admin-api/workspace_members/list-workspace-members), [workspaces and roles](https://platform.claude.com/docs/en/manage-claude/workspaces), [API versioning](https://platform.claude.com/docs/en/api/versioning).

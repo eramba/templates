@@ -106,7 +106,7 @@ The token is requested on every run with the `account_credentials` grant and exp
 | `ROLES` | `['role', 'user_type']` | Access listed as roles: `role`, `user_type`, `groups`. `[]` lists users only. |
 | `STATUSES` | `['active', 'inactive', 'pending']` | User statuses to list. Remove `inactive` to review only users who can sign in. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 users across all statuses; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 users across all statuses; exceeding it aborts instead of truncating. For more accounts, split the review into several feeds with `STATUSES`. |
 | `MAX_OBJECTS` | `2000` | 1–10000 roles or groups in the account, and groups per user; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 8 MiB of feed, 48 MiB of memory. Only `POST https://zoom.us/oauth/token` and `GET https://api.zoom.us/v2/users`, `/v2/roles` and `/v2/groups` requests are allowed.
@@ -143,6 +143,6 @@ Stop the Account Reviews that use the feed, then remove the feed, deactivate or 
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [Server-to-Server OAuth](https://developers.zoom.us/docs/internal-apps/s2s-oauth/), [Users API (List users, List groups)](https://developers.zoom.us/docs/api/users/), [Accounts API (List roles)](https://developers.zoom.us/docs/api/accounts/), [granular scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/), [rate limits](https://developers.zoom.us/docs/api/rate-limits/).

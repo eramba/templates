@@ -116,7 +116,7 @@ Only the signing fields of the key are used; its credential URLs are ignored, an
 | `CUSTOMER_ID` | `my_customer` | The customer account of the delegated administrator, or a customer ID such as `C0abc123`. |
 | `DELEGATED_ADMIN_EMAIL` | empty | Administrator the service account acts as. Required. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero users is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 users; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 users; exceeding it aborts instead of truncating. This version has no scope filter to split a larger population. |
 | `MAX_GROUPS` | `1000` | 1–5000 groups; exceeding it aborts. Lower `ROLES` to `['admin_roles']` or `[]` for very large tenants. |
 
 Keep `USER_KEY` unchanged once a Differential review has a baseline. Renaming a group email or an admin role appears as a role change.
@@ -152,6 +152,6 @@ Stop the Account Reviews that use the feed, then remove the feed and, if no othe
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [users.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/users/list), [groups.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/groups/list), [members.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/members/list), [roles.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/roles/list), [roleAssignments.list](https://developers.google.com/workspace/admin/directory/reference/rest/v1/roleAssignments/list), [authorization scopes](https://developers.google.com/workspace/admin/directory/v1/guides/authorizing), [domain-wide delegation](https://support.google.com/a/answer/162106), [assign admin roles to groups](https://support.google.com/a/answer/9807615), [Google API PHP client](https://github.com/googleapis/google-api-php-client).

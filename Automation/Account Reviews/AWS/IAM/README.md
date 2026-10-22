@@ -108,7 +108,7 @@ The AWS managed policy `SecurityAudit` also includes these actions.
 | `ROLES` | `['groups', 'policies', 'credentials']` | Access listed as roles: groups, policies (user, group, inline, boundary) and active credentials. `[]` lists users only. |
 | `INCLUDE_ROOT` | `true` | Also list the account root user. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 IAM users or groups; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 IAM users or groups; exceeding it aborts instead of truncating. This version has no scope filter to split a larger population. |
 
 Fixed limits: 200 seconds of collection, 200 pages, up to 20 seconds waiting for the credential report, 8 MiB of feed, 48 MiB of memory. The AWS SDK retries throttled requests.
 
@@ -141,6 +141,6 @@ Stop the Account Reviews that use the feed, then remove the feed and, if no othe
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [GetAccountAuthorizationDetails](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html), [credential report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html), [AWS SDK for PHP](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/welcome.html).

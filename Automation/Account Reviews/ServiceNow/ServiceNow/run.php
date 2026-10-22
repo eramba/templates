@@ -45,7 +45,7 @@ $config = [
     'USER_KEY' => 'email', // Account identifier: email, user_name or sys_id (no fallback)
     'ROLES' => ['roles', 'groups'], // Access listed as roles; [] = accounts only
     'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
-    'MAX_USERS' => 10000, // Maximum users in the feed; never truncate
+    'MAX_USERS' => 2000, // Maximum users in the feed; never truncate
     'MAX_ASSIGNMENTS' => 300000, // Maximum role or group membership records per list; never truncate
 ];
 
@@ -493,8 +493,8 @@ function validateConfig(array $c): void
     if (!is_bool($c['ALLOW_EMPTY_FEED'])) {
         throw new RuntimeException('ALLOW_EMPTY_FEED must be true or false.');
     }
-    if (!is_int($c['MAX_USERS']) || $c['MAX_USERS'] < 1 || $c['MAX_USERS'] > 20000) {
-        throw new RuntimeException('MAX_USERS must be a number from 1 to 20000.');
+    if (!is_int($c['MAX_USERS']) || $c['MAX_USERS'] < 1 || $c['MAX_USERS'] > 5000) {
+        throw new RuntimeException('MAX_USERS must be a number from 1 to 5000.');
     }
     if (!is_int($c['MAX_ASSIGNMENTS']) || $c['MAX_ASSIGNMENTS'] < 1 || $c['MAX_ASSIGNMENTS'] > 1000000) {
         throw new RuntimeException('MAX_ASSIGNMENTS must be a number from 1 to 1000000.');

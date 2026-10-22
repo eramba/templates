@@ -625,8 +625,7 @@ function validateConfig(array $c): void
     if (!is_bool($c['ALLOW_EMPTY_FEED'])) {
         throw new RuntimeException('ALLOW_EMPTY_FEED must be true or false.');
     }
-    // 15000: decoded users take ~25 MiB at that size, within the 48 MiB budget of eramba's 64 MB runner.
-    foreach (['MAX_USERS' => 15000, 'MAX_OBJECTS' => 10000] as $key => $max) {
+    foreach (['MAX_USERS' => 5000, 'MAX_OBJECTS' => 10000] as $key => $max) {
         if (!is_int($c[$key]) || $c[$key] < 1 || $c[$key] > $max) {
             throw new RuntimeException("$key must be a number from 1 to $max.");
         }

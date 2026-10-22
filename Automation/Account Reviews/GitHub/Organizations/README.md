@@ -117,7 +117,7 @@ The account must be an **organization owner** for a complete list: concealed mem
 | `ROLES` | `['org_role', 'teams']` | Access listed as roles. `[]` lists accounts only (one members list per organization). |
 | `INCLUDE_OUTSIDE_COLLABORATORS` | `true` | Also list outside collaborators. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 accounts; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 accounts; exceeding it aborts instead of truncating. For more accounts, split the review into several feeds with `ORGANIZATIONS`. |
 | `MAX_OBJECTS` | `2000` | 1–10000 records per list (members, teams, team members, identities); exceeding it aborts. |
 
 `saml_name_id` uses the NameID of the account's linked SAML identity, often the work email; `email` uses its primary SAML email (or the only one). Both require organization-level SAML SSO on every listed organization and a linked identity for **every** listed account, the same in all organizations. Outside collaborators never have one, so set `INCLUDE_OUTSIDE_COLLABORATORS = false` with these keys and review collaborators in a separate feed keyed by `login`. A login changes when the user renames the account; `id` does not.
@@ -156,6 +156,6 @@ Stop the Account Reviews that use the feed, then remove the feed, uninstall and 
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [organization members](https://docs.github.com/en/rest/orgs/members), [outside collaborators](https://docs.github.com/en/rest/orgs/outside-collaborators), [teams](https://docs.github.com/en/rest/teams/teams), [team members](https://docs.github.com/en/rest/teams/members), [fine-grained token permissions](https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens), [GitHub App JWT](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-json-web-token-jwt-for-a-github-app), [installation tokens](https://docs.github.com/en/rest/apps/apps#create-an-installation-access-token-for-an-app), [GraphQL `OrganizationIdentityProvider`](https://docs.github.com/en/graphql/reference/objects#organizationidentityprovider), [pagination](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api), [rate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).

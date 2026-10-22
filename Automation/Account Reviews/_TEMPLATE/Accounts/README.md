@@ -71,7 +71,7 @@ Numbered steps to create the identity and the exact read-only permissions, with 
 |---|---|---|
 | `ROLES` | `['groups']` | Access listed as roles; `[]` lists accounts only. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 accounts; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 accounts; exceeding it aborts instead of truncating. This version has no scope filter to split a larger population. |
 
 ## 8. Results
 

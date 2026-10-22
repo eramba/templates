@@ -42,7 +42,7 @@ $config = [
     'ROLES' => ['profile', 'role', 'permission_sets', 'permission_set_groups'], // Access listed as roles; [] = accounts only
     'USER_TYPES' => [], // Salesforce user types to include, e.g. ['Standard']; [] = every user type
     'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
-    'MAX_USERS' => 5000, // Maximum users in the feed; never truncate
+    'MAX_USERS' => 2000, // Maximum users in the feed; never truncate
     'MAX_ASSIGNMENTS' => 100000, // Maximum permission set (group) assignments; never truncate
 ];
 
@@ -491,8 +491,8 @@ function validateConfig(array $c): void
     if (!is_bool($c['ALLOW_EMPTY_FEED'])) {
         throw new RuntimeException('ALLOW_EMPTY_FEED must be true or false.');
     }
-    if (!is_int($c['MAX_USERS']) || $c['MAX_USERS'] < 1 || $c['MAX_USERS'] > 10000) {
-        throw new RuntimeException('MAX_USERS must be a number from 1 to 10000.');
+    if (!is_int($c['MAX_USERS']) || $c['MAX_USERS'] < 1 || $c['MAX_USERS'] > 5000) {
+        throw new RuntimeException('MAX_USERS must be a number from 1 to 5000.');
     }
     if (!is_int($c['MAX_ASSIGNMENTS']) || $c['MAX_ASSIGNMENTS'] < 1 || $c['MAX_ASSIGNMENTS'] > 500000) {
         throw new RuntimeException('MAX_ASSIGNMENTS must be a number from 1 to 500000.');

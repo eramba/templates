@@ -96,7 +96,7 @@ Admin API keys are separate from project API keys: a project key cannot call the
 | `USER_KEY` | `email` | Account identifier: `email` or `id` (the stable `user-…` ID). Must exist on every member; no fallback. |
 | `ROLES` | `['org_role', 'projects']` | Access listed as roles. `[]` lists members only and skips the project calls. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero members is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–10000 members; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `2000` | 1–5000 members; exceeding it aborts instead of truncating. This version has no scope filter to split a larger population. |
 | `MAX_OBJECTS` | `2000` | 1–10000 projects, members per project, or roles per member; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 8 MiB of feed, 48 MiB of memory. Throttling (HTTP 429) is retried when the requested wait fits the budget. Only `GET https://api.openai.com/v1/organization/users` and `/v1/organization/projects` requests are allowed.
@@ -132,6 +132,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the Adm
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
 
 References: [Administration API overview](https://platform.openai.com/docs/api-reference/administration), [users](https://platform.openai.com/docs/api-reference/users), [projects](https://platform.openai.com/docs/api-reference/projects), [project users](https://platform.openai.com/docs/api-reference/project-users), [Admin API keys](https://platform.openai.com/docs/api-reference/admin-api-keys), [roles and permissions](https://developers.openai.com/api/docs/guides/rbac), [OpenAPI specification](https://github.com/openai/openai-openapi).
