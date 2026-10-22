@@ -9,7 +9,7 @@ This page explains everything that is the same for every Account Review automati
 - An automation sends eramba a **feed**: a list of rows.
 - Reviewers see the list and make **one yes/no decision for each row**: keep it or revoke it. So every row must be something a person can judge at a glance.
 - Each row has three parts:
-  - an **identifier** (the `user` value), for example an email address or a group name;
+  - an **identifier**, for example an email address or a group name;
   - a **description**, shown to reviewers to help them decide but never compared between reviews;
   - a list of **roles**. A "role" is simply one item the reviewer must accept for that row, such as a group, a licence or a permission.
 - The scripts **only read**. They never change anything in the source system.
@@ -31,8 +31,6 @@ Every automation belongs to exactly one family. The family decides what a row is
 | **Exit reviews** | Yes: accounts that belong to no current employee | No: there is no person to compare |
 
 The two families complement each other: an account review shows **who has** the IT group; a permission review shows **what** the IT group gives. Neither replaces the other.
-
-In eramba the first column of a review is labelled *Account*. In a permission review it holds the group, policy, role or application instead.
 
 ### Which family applies to an application
 
@@ -56,6 +54,8 @@ eramba reviews one feed, and for Exit reviews compares it with a second feed of 
 | **Differential** | One feed | *Added account* and *Deleted account* since the last successful pull; *Change in roles* when the feed lists roles |
 | **Exits** | Accounts + current or former employees | *Creeping account*: an account that matches no current employee (or matches a former employee), *with roles* when the feed lists them. Account reviews only |
 
+The scenario names, and the first column of a review, say *account*. In a permission review, "account" means the group, policy, role or application of the row.
+
 Each account review script has a `ROLES` variable. With roles, reviews also show what each account can do and Differential reviews report role changes. With `ROLES = []` the feed only lists accounts: reviews then answer whether someone has an account at all, which is often enough for Exit reviews and is faster to collect.
 
 For Exit reviews, the usual setup compares each application (GitHub, Zoom, Zendesk, AI tools…) with the identity provider, where access is removed when someone leaves, for example with [Entra ID Current Employees](Microsoft/Entra%20ID%20Current%20Employees/). An HR list can play the same role.
@@ -64,12 +64,18 @@ Matching uses the `user` value of both feeds, ignoring case. Choose each script'
 
 ### What counts as a change in a Differential review
 
-| Reported | Not reported |
-|---|---|
-| A new row, or a row that disappeared (the account, group or policy was deleted) | Any change in the description: a name change, an account changing between employee and guest |
-| A role added or removed: a group, an administrator right, an application, a licence, a permission | An account being disabled or enabled again |
-| A renamed group, role or application: it shows as one role removed and one added | In an account review, a change in what a group, role or application allows. A permission review shows that |
-| A changed identifier: if `USER_KEY` is changed once a Differential review has a baseline, every account shows as removed and added again. Keep it unchanged | |
+**Reported**
+
+- A new row, or a row that disappeared (the account, group or policy was deleted).
+- A role added or removed: a group, an administrator right, an application, a licence, a permission.
+- A renamed group, role or application. It shows as one role removed and one added.
+- A changed identifier. If `USER_KEY` is changed once a Differential review has a baseline, every account shows as removed and added again, so keep it unchanged.
+
+**Not reported**
+
+- Any change in the description, such as a name change or an account changing between employee and guest.
+- An account being disabled or enabled again.
+- In an account review, a change in what a group, role or application allows. A permission review shows that.
 
 ## Results and failures
 
@@ -77,8 +83,8 @@ When you test an automation, its log ends with a **SUMMARY** block and one resul
 
 | Result | What it means | What eramba does |
 |---|---|---|
-| `RESULT: OK` | The list was sent. The line gives the number of rows published and the roles listed per kind | Uses the new list for the review |
-| `RESULT: NOT PUBLISHED` | The provider returned an empty list, so nothing was sent. Each README says when an empty list is allowed | Same as a failure: nothing new is used |
+| `RESULT: OK` | The list was sent. The result line gives the number of rows published; the lines below it give the roles listed per kind | Uses the new list for the review |
+| `RESULT: NOT PUBLISHED` | The provider returned an empty list, so nothing was sent. Each README says when an empty list is allowed | eramba records a failed pull and keeps the last successful pull |
 | `RESULT: FAILED` | The script stopped with an error, given on the same line | Records the failed pull, emails the eramba administrator and keeps the last successful pull |
 
 - **A failed run publishes nothing.** The scripts never send part of a list: if one page, permission or limit fails, nothing is sent. Otherwise a Differential review would report the missing accounts as removed.
@@ -117,9 +123,6 @@ Feed type *List of accounts to be reviewed*. Snapshot, Differential and Exit rev
 ### Permission reviews
 
 Feed type *List of accounts to be reviewed*. Snapshot and Differential reviews only.
-
-| Automation | Each row is | Roles listed | Status |
-|---|---|---|---|
 
 Planned: Entra ID – Application permissions.
 
