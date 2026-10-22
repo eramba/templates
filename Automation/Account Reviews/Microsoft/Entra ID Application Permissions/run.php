@@ -636,7 +636,7 @@ function validateConfig(array $c): void
  * Builds one row per application that holds at least one API permission.
  *
  * @param array $servicePrincipals    Graph servicePrincipals (id, appId, displayName, appOwnerOrganizationId,
- *                                    accountEnabled, appRoleAssignmentRequired, appRoles, oauth2PermissionScopes)
+ *                                    accountEnabled, appRoleAssignmentRequired, appRoles)
  * @param array $appRoleAssignments   Client service principal id => list of {resourceId, appRoleId}
  * @param array $grants               oauth2PermissionGrants (clientId, consentType, principalId, resourceId, scope)
  * @param array $config               INCLUDE_MICROSOFT_APPS (bool), TENANT_ID (string)
@@ -750,7 +750,7 @@ function collectPermissions(string $token, array $config): array
 {
     // Resources (Microsoft Graph, other APIs) are service principals too, so the limit is wider than MAX_APPS.
     $servicePrincipals = tpl_graphList(
-        'servicePrincipals?$select=id,appId,displayName,appOwnerOrganizationId,accountEnabled,appRoleAssignmentRequired,appRoles,oauth2PermissionScopes&$top=999',
+        'servicePrincipals?$select=id,appId,displayName,appOwnerOrganizationId,accountEnabled,appRoleAssignmentRequired,appRoles&$top=999',
         $token,
         min($config['MAX_APPS'] * 10, 10000)
     );
