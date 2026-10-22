@@ -1,12 +1,11 @@
 ---
 id: github-account-review
-name: GitHub Organization Members and Assigned Access
+name: GitHub – Accounts
 version: 0.1.1
 status: draft
 technology: GitHub (GitHub.com, Free to Enterprise Cloud)
 vendor: GitHub
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - github_token
   - github_app_private_key_b64
@@ -27,40 +26,58 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# GitHub Organization Members and Assigned Access
+# GitHub – Accounts
 
 **Technology:** GitHub.com organizations, Free, Team and Enterprise Cloud plans.
 
-Send the members and outside collaborators of one or more GitHub organizations, with their organization role and teams, to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every member and outside collaborator of the GitHub organizations you list, with their organization role and teams. Reviewers then mark in eramba which people and accesses should stay and which should be removed; nothing is changed in GitHub.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of people who can reach your GitHub organizations. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
-
-GitHub accounts belong to people, not to your company: a login such as `octo-dev` is not an email and the API never returns a member's work email. Exit reviews only match when both feeds hold the same value, so either use `USER_KEY = 'saml_name_id'` or `'email'` when your organizations use **organization-level SAML SSO** (§7), or keep `login` and compare with an employee feed that contains GitHub logins.
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | GitHub login by default; configurable to the numeric user ID, or to the SAML NameID or SAML email linked to the account |
-| `description` | Login, account type (`User` or `Bot`), user ID and the organizations with the relationship in each, e.g. `octo-dev; User; id=123; example-org: owner, second-org: member` |
-| `roles` | `Org role: owner [<org>]`, `Org role: member [<org>]` or `Org role: outside collaborator [<org>]` for each organization |
-| | `Team: <org>/<team name> [<team id>]` for every team the account belongs to, directly or through a child team |
+| **Family** | Account review |
+| **Each row is** | One GitHub account that belongs to at least one of your organizations, identified by its login, for example `octo-dev`. An account in several organizations is one row with the roles of all of them |
+| **Connects to** | GitHub.com (`api.github.com`), through GitHub's official REST and GraphQL APIs. Read-only |
+| **Permission needed** | A GitHub App installed on every listed organization with the organization permission **Members: Read-only** (recommended), or a token of a dedicated organization owner with that read access. An organization owner creates it (§5) |
+| **Included** | Owners and members of the organizations in `ORGANIZATIONS`, and their outside collaborators (`INCLUDE_OUTSIDE_COLLABORATORS`, on by default) |
+| **Not included** | Pending invitations; billing managers; enterprise owners and members who belong to no listed organization; team maintainer roles; repository permissions and custom roles; deploy keys, GitHub Apps and personal access tokens; GitHub Enterprise Server and GHE.com hosts; two-factor status. GitHub has no disabled state for members: people who were removed are simply absent |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. To review more, split the organizations into several feeds with `ORGANIZATIONS` |
+| **Roles listed** | Organization role (per organization) and teams |
 
-An account in several organizations is one row with the roles of all of them. Outside collaborators are listed when `INCLUDE_OUTSIDE_COLLABORATORS` is on; they have repository access without being members.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-The organizations in `ORGANIZATIONS` on GitHub.com (`api.github.com`). Owners and members are read with the `role` filter of the members list, outside collaborators with their own list, and teams with their member lists (which include members of child teams).
+One row is one GitHub account. Its roles are every access that account holds. This automation lists two kinds:
 
-Not covered: pending invitations, billing managers, enterprise owners and enterprise members that belong to no listed organization, team maintainer roles, repository-level permissions and custom repository or organization roles, deploy keys, GitHub Apps and their installations, personal access tokens approved for the organization, GitHub Enterprise Server and GHE.com (data residency) hosts. GitHub.com has no disabled state for organization members: removed people are absent. 2FA status is not read (the `2fa_disabled` filter needs an owner).
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Org role** | The account is an *owner* or a *member* of the organization, or an *outside collaborator* with access to its repositories without being a member. One entry per organization | `Org role: owner [example-org]` |
+| **Team** | The account belongs to this team, directly or through a child team. Shown as *organization/team* | `Team: example-org/platform [<id>]` |
 
-`saml_name_id` and `email` keys read **organization-level** SAML identities through GraphQL (`externalIdentities`). Enterprise-level SAML and Enterprise Managed Users identities live on the enterprise account and are not read: use `login` (for Enterprise Managed Users, the login already carries the IdP-derived short code).
+```
+Account:     octo-dev
+Description: octo-dev; User; id=123456; example-org: owner, second-org: member
+Roles:       Org role: member [second-org]
+             Org role: owner [example-org]
+             Team: example-org/platform [7890123]
+```
 
-Any collection error, a team member that is not a listed member, an account listed twice, a missing identity for a SAML key, or a limit aborts the run and nothing is published.
+The text in square brackets is the organization name or GitHub's team ID. It keeps two items with the same name apart; reviewers can ignore it. The description gives the login, whether the account is a `User` or a `Bot`, its ID and its relationship to each organization.
+
+You choose which kinds are listed with `ROLES` (§7). With none, only the accounts are listed.
+
+A row shows *that* octo-dev is in the *platform* team, not which repositories that team can reach.
+
+A GitHub login is not an email and GitHub never returns a member's work email. Exit reviews only match when both feeds hold the same value, so either set `USER_KEY` to `saml_name_id` or `email` (for organizations that use organization-level SAML SSO, §7), or keep `login` and compare with an employee list that holds GitHub logins.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what someone can do in GitHub | The organization role sits on the account itself, so this account review already shows it. Repository access through teams is not read by any automation yet |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). See the note about keys in §2 |
 
 ## 4. Before you start
 
@@ -126,9 +143,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never logins, emails or tokens. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

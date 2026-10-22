@@ -3,7 +3,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  Salesforce Accounts and Assigned Access
+ *  Salesforce – Accounts
  *  Technology: Salesforce Platform (Sales Cloud, Service Cloud and other orgs)
  *  id: salesforce-account-review        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).

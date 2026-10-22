@@ -111,14 +111,14 @@ Feed type *List of accounts to be reviewed*. Snapshot, Differential and Exit rev
 | [AWS IAM – Accounts](AWS/IAM/) | One IAM user or the root user of one AWS account | Groups, policies, permissions boundaries and active credentials | draft |
 | [AWS IAM Identity Center – Accounts](AWS/IAM%20Identity%20Center/) | One Identity Center user | Permission sets per AWS account, direct or through a group, and groups | draft |
 | [Google Workspace – Accounts](Google/Workspace/) | One user account, suspended and archived included | Groups, admin roles and optionally org unit | draft |
-| [GitHub Organizations](GitHub/Organizations/) | One member or outside collaborator of one or more organizations | Org role and teams | draft |
-| [Atlassian Cloud: Jira, Confluence, Jira Service Management…](Atlassian/Cloud/) | One organization user | Product access per site (all products or only the ones in `PRODUCTS`), groups and platform roles | draft |
-| [Slack](Slack/Slack/) | One workspace member, deactivated and invited included | Workspace role and user groups | draft |
-| [Zoom](Zoom/Zoom/) | One user, active, inactive or pending | Role, licence type and groups | draft |
-| [Salesforce](Salesforce/Salesforce/) | One user, inactive included | Profile, role, permission sets and permission set groups | draft |
-| [ServiceNow](ServiceNow/ServiceNow/) | One user, inactive and locked included | Direct and inherited roles, groups | draft |
-| [OpenAI](OpenAI/Organization/) | One organization member | Organization role and project roles | draft |
-| [Anthropic](Anthropic/Organization/) | One organization member | Organization role and workspace roles | draft |
+| [GitHub – Accounts](GitHub/Organizations/) | One member or outside collaborator of one or more organizations | Org role and teams | draft |
+| [Atlassian – Accounts](Atlassian/Cloud/) | One organization user | Product access per site (all products or only the ones in `PRODUCTS`), groups and platform roles | draft |
+| [Slack – Accounts](Slack/Slack/) | One workspace member, deactivated and invited included | Workspace role and user groups | draft |
+| [Zoom – Accounts](Zoom/Zoom/) | One user, active, inactive or pending | Role, licence type and groups | draft |
+| [Salesforce – Accounts](Salesforce/Salesforce/) | One user, inactive included | Profile, role, permission sets and permission set groups | draft |
+| [ServiceNow – Accounts](ServiceNow/ServiceNow/) | One user, inactive and locked included | Direct and inherited roles, groups | draft |
+| [OpenAI – Accounts](OpenAI/Organization/) | One organization member | Organization role and project roles | draft |
+| [Anthropic – Accounts](Anthropic/Organization/) | One organization member | Organization role and workspace roles | draft |
 
 ### Permission reviews
 

@@ -1,12 +1,11 @@
 ---
 id: openai-account-review
-name: OpenAI Organization Members and Project Access
+name: OpenAI – Accounts
 version: 0.1.1
 status: draft
 technology: OpenAI API Platform
 vendor: OpenAI
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - openai_admin_key
 variables:
@@ -22,42 +21,53 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# OpenAI Organization Members and Project Access
+# OpenAI – Accounts
 
 **Technology:** OpenAI API Platform (`platform.openai.com`).
 
-Send the members of an OpenAI API Platform organization, their organization role and their project memberships to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every member of your OpenAI API Platform organization and the access each one has: its organization role and its projects. Reviewers then mark in eramba which members and accesses should stay and which should be removed; nothing is changed in OpenAI.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of OpenAI organization members to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value (the work email by default); see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Member email by default; configurable to the OpenAI user ID (`user-…`) |
-| `description` | Name (or email), organization role, `service account`, `disabled` or `banned` when OpenAI reports it, and user ID |
-| `roles` | `Organization role: <Role> [<role>]`, e.g. `Organization role: Owner [owner]` or `Organization role: Reader [reader]` (`org_role`) |
-| | `Project: <project name> [<project id> / <project role>]`, e.g. `Project: Payments [proj_abc / owner]` (`projects`) |
+| **Family** | Account review |
+| **Each row is** | One member of one OpenAI organization, identified by its email, for example `ana.garcia@example.com` (or its `user-…` ID with `USER_KEY`) |
+| **Connects to** | Your OpenAI organization (`api.openai.com`), through OpenAI's official Administration API. Read-only requests |
+| **Permission needed** | An Admin API key of the organization, created by an organization owner. Admin keys are separate from project keys. Whether a read-only Admin key is enough is still to be confirmed (§5) |
+| **Included** | Every member the organization users list returns |
+| **Not included** | Pending invitations; project service accounts and API keys; groups; custom roles assigned through role-based access control; ChatGPT workspaces; what each project role allows; archived projects (they grant no access); other organizations (one per automation) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. This version has no filter to split a larger population |
+| **Roles listed** | Organization role and project memberships with their project role |
 
-Every member returned by the organization users list is included. The `disabled`, `banned` and `service account` markers come from optional fields of the user object and only appear when OpenAI returns them.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-One OpenAI organization per automation (the organization of the Admin API key). Calls, all `GET`:
+One row is one person's membership of the organization. Its roles are every access that member holds. This automation lists two kinds:
 
-- `/v1/organization/users`: organization members and their role.
-- `/v1/organization/projects`: active projects (archived projects are not listed and grant no access).
-- `/v1/organization/projects/{project_id}/users`: members of each project and their project role.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Organization role** | The member's role in the organization, such as *Owner* or *Reader*. One per row | `Organization role: Owner [owner]` |
+| **Project** | The member can work in this project, with the project role shown. One entry per project | `Project: Payments [proj_abc / owner]` |
 
-Not covered: pending invites, project service accounts and their API keys, project and organization API keys, groups, custom roles assigned through role-based access control, ChatGPT workspaces (ChatGPT Enterprise/Team members are managed elsewhere), and permissions inside each project. A project membership shows who can work in the project; what they can do there also depends on the project role and any custom roles.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; organization owner; id=user-…
+Roles:       Organization role: Owner [owner]
+             Project: Payments [proj_abc / owner]
+```
 
-To validate on a real organization: whether the organization users list includes service-account users and whether they have an email (with the default `USER_KEY`, a member without an email aborts the run), whether the optional `user.enabled` and `user.banned` fields are returned, and whether every member has a `role` in organizations that use custom roles (a missing role aborts the run while `org_role` is selected).
+The text in square brackets is OpenAI's role code or project ID, with the project role. It keeps two items with the same name apart; reviewers can ignore it. The description gives the name, the organization role, `service account`, `disabled` or `banned` when OpenAI reports it, and the user ID.
 
-Lists are read with `limit=100` and the `after` cursor until `has_more` is false. A missing or repeated cursor, a duplicate member, a project member missing from the organization list, any other API error or a limit aborts the run and nothing is published.
+You choose which kinds are listed with `ROLES` (§7). With none, only the members are listed.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what someone can do in OpenAI | In OpenAI, permissions sit on the account itself (its organization role and project roles), so this account review already shows them |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). A leaver's membership stays listed until it is removed from the organization |
 
 ## 4. Before you start
 
@@ -103,9 +113,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, emails or keys. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

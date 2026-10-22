@@ -1,12 +1,11 @@
 ---
 id: servicenow-account-review
-name: ServiceNow Accounts and Assigned Access
+name: ServiceNow – Accounts
 version: 0.1.1
 status: draft
 technology: ServiceNow
 vendor: ServiceNow
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - servicenow_instance
   - servicenow_client_id
@@ -27,41 +26,57 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# ServiceNow Accounts and Assigned Access
+# ServiceNow – Accounts
 
 **Technology:** ServiceNow AI Platform (Now Platform) instance.
 
-Send ServiceNow users with their roles (direct and inherited) and group memberships to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user of your ServiceNow instance and the access each one has: its roles, direct and inherited, and its groups. Reviewers then mark in eramba which users and accesses should stay and which should be removed; nothing is changed in ServiceNow.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of users of one ServiceNow instance to review: who has an account, whether it is active or locked out, which roles they hold and which groups they belong to. eramba owns the schedule, comparison, reviewers, decisions and findings. The script is read-only: it only reads the Table API.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value (the work email by default); see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | `email` by default; configurable to `user_name` (User ID) or `sys_id` |
-| `description` | Name, `active` or `inactive`, `locked out` when set, and `sys_id` |
-| `roles` | `Role: <role name> [<role sys_id>]` for every role granted directly |
-| | `Role (inherited): <role name> [<role sys_id>]` for every role inherited from a group or a containing role |
-| | `Group: <group name> [<group sys_id>]` for every group membership |
+| **Family** | Account review |
+| **Each row is** | One ServiceNow user of one instance, identified by its email, for example `ana.garcia@example.com` (or its user name or `sys_id` with `USER_KEY`) |
+| **Connects to** | Your ServiceNow instance, through ServiceNow's official Table API. Read-only |
+| **Permission needed** | A dedicated integration user (web service access only) with read access to `sys_user`, `sys_user_has_role` and `sys_user_grmember` and to the role and group names, reached with OAuth client credentials (preferred) or basic authentication. A ServiceNow administrator creates it (§5) |
+| **Included** | Every user of the instance, inactive and locked out included |
+| **Not included** | Delegated roles with a validity window; group roles that no member holds; domain separation scoping; contextual (application) roles managed outside `sys_user_has_role`; group active state; role elevation; other instances (one per automation). Rows hidden from the integration user by access rules stop the run instead of being left out |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. This version has no filter to split a larger population |
+| **Roles listed** | Roles granted directly, roles inherited, and groups |
 
-All users are included, inactive and locked-out ones too. A role both granted directly and inherited appears twice, once with each kind.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-Collected through the Table API from `sys_user`, `sys_user_has_role` and `sys_user_grmember`, ordered by `sys_id`, with `sysparm_limit`/`sysparm_offset` pages of 5000 records. When ServiceNow returns `X-Total-Count`, it must stay the same on every page and match the records received; without it, a list ends at its first short page. `sys_id`s must keep increasing, so records shifting between pages stop the run.
+One row is one person's ServiceNow user. Its roles are every access that user holds. This automation lists three kinds:
 
-Rows hidden by ACLs make the received count lower than `X-Total-Count`, and the run stops instead of publishing a partial list.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Role** | A role granted to the user directly | `Role: itil [<sys_id>]` |
+| **Role (inherited)** | A role the user holds through a group or a role that contains it. A role both granted directly and inherited appears once for each | `Role (inherited): approver_user [<sys_id>]` |
+| **Group** | The user is a member of this group | `Group: Service Desk [<sys_id>]` |
 
-Not covered: delegated roles with a validity window beyond what `sys_user_has_role` shows, group roles that no member holds, domain separation scoping, contextual (application) roles managed outside `sys_user_has_role`, and other instances. Group active state and role elevation (`security_admin` elevation) are not shown.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; active; sys_id=6816f79c…
+Roles:       Group: Service Desk [d625dc…]
+             Role (inherited): approver_user [282bf1…]
+             Role: itil [282bf1…]
+```
 
-**To validate on a real instance:** the minimum read access below, `X-Total-Count` behaviour on your release, the client credentials grant on your release, and run time on instances with many users (inherited roles can reach hundreds of thousands of records; each page is one request).
+The text in square brackets is ServiceNow's `sys_id`. It keeps two items with the same name apart; reviewers can ignore it. The description gives the name, whether the user is `active` or `inactive`, `locked out` when it is, and the `sys_id`.
 
-Any collection error, an assignment for a user outside the collected list, or a limit aborts the run and nothing is published.
+You choose which kinds are listed with `ROLES` (§7): `roles` (both role kinds) and `groups`. With none, only the users are listed.
+
+A row shows *that* Ana holds *itil*, not what that role allows.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each role grants | *ServiceNow – Role permissions* (planned) |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). Inactive users of leavers stay listed until deleted |
 
 ## 4. Before you start
 
@@ -116,9 +131,7 @@ Fixed limits: 5000 records per page, 200 seconds of collection, 4 MB per respons
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never emails, names or tokens. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

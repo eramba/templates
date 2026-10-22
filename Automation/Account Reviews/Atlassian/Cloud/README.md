@@ -1,12 +1,11 @@
 ---
 id: atlassian-cloud-account-review
-name: Atlassian Cloud (Jira, Confluence…) Accounts and Assigned Access
+name: Atlassian – Accounts
 version: 0.1.1
 status: draft
 technology: Atlassian Cloud (Jira, Confluence, Jira Service Management…)
 vendor: Atlassian
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - atlassian_org_id
   - atlassian_admin_api_key
@@ -24,43 +23,59 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Atlassian Cloud (Jira, Confluence…) Accounts and Assigned Access
+# Atlassian – Accounts
 
 **Technology:** Atlassian Cloud organizations (Jira, Confluence, Jira Service Management and the other products of the organization).
 
-Send the users of an Atlassian organization, with their product access, groups and organization-level admin roles, to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user of your Atlassian organization and the access each one has: its product access (Jira, Confluence, Jira Service Management and others), its groups and its organization admin roles. Reviewers then mark in eramba which users and accesses should stay and which should be removed; nothing is changed in Atlassian.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of Atlassian accounts of your organization to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value (the work email by default); see [review types](../../README.md#review-types).
-
-**One automation for every product, or one per product.** Jira, Confluence, Jira Service Management and the other products share the organization's users, so one feed can review them all, with one role per product and site. To review a product on its own, with its own reviewers and schedule, create one automation and feed per product and set `PRODUCTS`, for example `['jira-software']` for Jira or `['confluence']` for Confluence: the feed then lists only the users who can access that product, with only that product's roles.
-
-## 2. What it gathers
-
-Data comes from the organization-level [Atlassian Admin API](https://developer.atlassian.com/cloud/admin/organization/rest/) for all directories the API key can manage (directory `-`), not from a Jira or Confluence site API.
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Account email by default; configurable to the Atlassian account ID |
-| `description` | Name, status (`active`, `suspended`, `not_invited`, `deactivated` or `for_deletion`), claim status (`managed` or `unmanaged`) and account ID, e.g. `Ana Example; suspended; managed; id=712020:…` |
-| `roles` | `Product access: <product> (<role>) [<resource ARI>]` for every product role on every site, direct or through a group, e.g. `Product access: jira-software (atlassian/admin) [ari:cloud:jira-software::site/<cloud id>]` |
-| | `Group: <name> [<group id>]` for every group membership |
-| | `Platform role: <role> [atlassian/<role>]` for organization-level admin roles: `org-admin`, `site-admin`, `user-access-admin`, `ai-access`, `unit-admin` |
+| **Family** | Account review |
+| **Each row is** | One Atlassian user of your organization, identified by its email, for example `ana.garcia@example.com` (or its Atlassian account ID with `USER_KEY`) |
+| **Connects to** | Your Atlassian organization, through the Atlassian Admin API of every directory the key can manage. Read-only |
+| **Permission needed** | An organization API key without scopes, created in Atlassian Administration by an organization admin. Atlassian does not offer read-only scopes for these requests yet, so the key can do more than the script uses; the script only sends the three requests listed in §5 |
+| **Included** | Every user the Admin API's user search returns: active, suspended, not invited, deactivated and for deletion |
+| **Not included** | Permissions inside products (Jira project roles and permission schemes, Confluence space permissions); Jira Service Management customer accounts outside the organization's directories; app and bot accounts the search does not return; API tokens; Bitbucket workspace permissions; site names (sites show as an ARI containing the site's cloud ID); other organizations (one per automation) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. To split a larger population, use `PRODUCTS` (one feed per product) |
+| **Roles listed** | Product access per site, groups and organization-level platform roles |
 
-Every user returned by the user search is listed, suspended and deactivated users included, with their status in the description.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+One automation can review every product at once, or you can create one per product and set `PRODUCTS`, for example `['jira-software']`: the feed then lists only the users who can access that product, with only that product's roles, so each product can have its own reviewers and schedule.
 
-One organization per automation, every directory the API key can manage. Product roles are the Atlassian canonical roles (`atlassian/user`, `atlassian/admin`, `atlassian/guest`, `atlassian/customer`, `atlassian/basic`…); platform roles are listed once under `Platform role` and left out of `Product access`.
+## 2. What one row looks like
 
-Not covered: permissions inside products (Jira project roles and permission schemes, Confluence space permissions), Jira Service Management customer accounts outside the organization's directories, app and bot accounts the user search does not return, API tokens, Bitbucket workspace permissions, and site names (sites are identified by their ARI, which contains the site's cloud ID).
+One row is one person's Atlassian user. Its roles are every access that user holds. This automation lists three kinds:
 
-Product access needs one request per user (role assignments), so large organizations may reach the 200-second budget: the run then aborts, see §9. Groups need one search per group.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Product access** | The person can use this product on this site, with the role shown, directly or through a group. Roles such as `atlassian/user`, `atlassian/admin`, `atlassian/guest`. One entry per product and site | `Product access: jira-software (atlassian/admin) [ari:cloud:jira-software::site/<cloud id>]` |
+| **Group** | The person is a member of this group | `Group: jira-administrators [<id>]` |
+| **Platform role** | An organization-level administrator role: `org-admin`, `site-admin`, `user-access-admin`, `ai-access` or `unit-admin` | `Platform role: org-admin [atlassian/org-admin]` |
 
-Any collection error, a group member outside the collected users, a repeated cursor, a user without email (with `USER_KEY = 'email'`) or a limit aborts the run and nothing is published.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; active; managed; id=712020:…
+Roles:       Group: jira-administrators [3f9a…]
+             Platform role: org-admin [atlassian/org-admin]
+             Product access: confluence (atlassian/user) [ari:cloud:confluence::site/<cloud id>]
+```
+
+The text in square brackets is Atlassian's identifier. It keeps two items with the same name apart; reviewers can ignore it. The description gives the name, the account status (`active`, `suspended`, `not_invited`, `deactivated` or `for_deletion`), whether the account is `managed` or `unmanaged` by your organization, and the account ID.
+
+You choose which kinds are listed with `ROLES` (§7). With none, only the users are listed.
+
+A row shows *that* Ana is in *jira-administrators* or has access to Confluence, not what she can do inside it.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each group grants | *Atlassian – Group permissions* (planned) |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). Suspended and deactivated users of leavers stay listed until deleted |
 
 ## 4. Before you start
 
@@ -115,9 +130,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list (
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, emails or keys. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

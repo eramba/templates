@@ -1,12 +1,11 @@
 ---
 id: slack-account-review
-name: Slack Members and Assigned Access
+name: Slack – Accounts
 version: 0.1.1
 status: draft
 technology: Slack
 vendor: Slack
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - slack_token
 variables:
@@ -24,42 +23,52 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Slack Members and Assigned Access
+# Slack – Accounts
 
 **Technology:** Slack.
 
-Send the members of a Slack workspace and their workspace role and user groups to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every member of your Slack workspace and the access each one has: its workspace role and, optionally, its user groups. Reviewers then mark in eramba which members and accesses should stay and which should be removed; nothing is changed in Slack.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of Slack members to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value (the work email by default); see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Member email (`profile.email`) by default; configurable to the Slack member ID |
-| `description` | Real name (or display name), kind (`member`, `guest` or `bot`), state (`active`, `invited` or `deactivated`) and member ID |
-| `roles` | `Workspace role: <label> [<id>]`, one per member, the highest that applies: `Primary Owner [primary_owner]`, `Owner [owner]`, `Admin [admin]`, `Single-channel guest [ultra_restricted]`, `Multi-channel guest [restricted]`, `Member [member]` or `Bot [bot]` |
-| | `User group: <name> [<user group id>]` for every enabled user group the member belongs to (optional, `user_groups`) |
+| **Family** | Account review |
+| **Each row is** | One member of one Slack workspace, identified by its email, for example `ana.garcia@example.com` (or its Slack member ID with `USER_KEY`) |
+| **Connects to** | Your Slack workspace, through Slack's official Web API. Read-only |
+| **Permission needed** | A Slack app installed in the workspace with the bot token scopes `users:read` and `users:read.email`, plus `usergroups:read` only if you list user groups. A workspace admin installs it (§5) |
+| **Included** | Every member: full members, guests and invited members who have not signed in, plus deactivated members. Members of other organizations seen through Slack Connect are left out and counted. Bots, workflow bots and Slackbot are left out unless you set `INCLUDE_BOTS` |
+| **Not included** | Channel memberships and channel managers; Enterprise Grid organization roles and custom admin roles; app installations and their scopes; Slack Connect channels; SCIM or identity-provider group sync; other workspaces (one per automation, with `TEAM_ID` on Enterprise Grid) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. On Enterprise Grid, use one feed per workspace (`TEAM_ID`) for more |
+| **Roles listed** | Workspace role and, optionally, user groups |
 
-Deactivated members (`deleted: true`) are listed with state `deactivated`, as Slack keeps them in the member list. Invited members who have not signed in yet are listed as `invited`.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-**Bots and app users:** bot users (`is_bot`), workflow bots (`is_workflow_bot`) and Slackbot (`USLACKBOT`, for which Slack reports `is_bot: false`) are excluded by default: they have no email and no person behind them. Set `INCLUDE_BOTS` (with `USER_KEY = id`) to list them with `Workspace role: Bot [bot]`. Members flagged `is_app_user` are people who authorised an app; they are ordinary members and are always listed.
+## 2. What one row looks like
 
-## 3. Coverage
+One row is one person's Slack account. Its roles are every access that account holds. This automation lists two kinds:
 
-One Slack workspace per automation (on Enterprise Grid, one workspace of the org per automation, with `TEAM_ID`). Members of other organisations visible through Slack Connect (`is_stranger`) are excluded and counted: review them in their own organisation.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Workspace role** | The highest role the person has in the workspace: *Primary Owner*, *Owner*, *Admin*, *Single-channel guest*, *Multi-channel guest*, *Member* or, with `INCLUDE_BOTS`, *Bot*. One per row | `Workspace role: Admin [admin]` |
+| **User group** | The person belongs to this enabled user group. A user group is a mention group, not a permission, but it often mirrors a team or manages channel access. Listed only when you add `user_groups` to `ROLES` | `User group: security-team [<id>]` |
 
-Not covered: channel memberships and channel managers, Enterprise Grid org-level roles (Org Owner, Org Admin) and custom admin roles, app installations and their scopes, Slack Connect channels, and SCIM or identity-provider group sync. A user group shows a mention group, not a permission; it is useful when user groups mirror teams or are used to manage channel access.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; member; active; id=U0123ABCD
+Roles:       Workspace role: Admin [admin]
+```
 
-Calls: `users.list` with 200 members per page, then (only with `user_groups`) one `usergroups.list` and one `usergroups.users.list` per enabled user group. These are Tier 2 methods (about 20 calls per minute); Slack throttling (HTTP 429) is retried with `Retry-After` when the wait fits the budget. Large workspaces with many user groups can exceed the 200-second budget; the run then aborts.
+The text in square brackets is Slack's identifier. It keeps two items with the same name apart; reviewers can ignore it. The description gives the name, whether the account is a `member`, `guest` or `bot`, whether it is `active`, `invited` or `deactivated`, and the member ID.
 
-Any collection error, a member appearing twice, a user group member outside the collected list, a member without email (with `USER_KEY = email`), or a limit aborts the run and nothing is published.
+You choose which kinds are listed with `ROLES` (§7). With none, only the members are listed.
 
-To validate on a real workspace: that deactivated members keep `profile.email`, and the exact behaviour of `usergroups.users.list` for very large user groups (the method documents no pagination).
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what someone can do in Slack | In Slack, permissions sit on the account itself (its workspace role), so this account review already shows them |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). Deactivated members of leavers stay listed as deactivated |
 
 ## 4. Before you start
 
@@ -112,9 +121,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages, 8 MiB of 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, emails or tokens. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result. The log also counts the members left out: Slack Connect members and bots.
 
 ## 9. Troubleshooting
 

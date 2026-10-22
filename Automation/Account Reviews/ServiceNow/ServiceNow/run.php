@@ -3,7 +3,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  ServiceNow Accounts and Assigned Access
+ *  ServiceNow – Accounts
  *  Technology: ServiceNow AI Platform (Now Platform) instance
  *  id: servicenow-account-review        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).

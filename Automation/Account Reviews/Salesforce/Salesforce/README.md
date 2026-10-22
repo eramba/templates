@@ -1,12 +1,11 @@
 ---
 id: salesforce-account-review
-name: Salesforce Accounts and Assigned Access
+name: Salesforce – Accounts
 version: 0.1.1
 status: draft
 technology: Salesforce
 vendor: Salesforce
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - salesforce_my_domain
   - salesforce_client_id
@@ -25,43 +24,59 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Salesforce Accounts and Assigned Access
+# Salesforce – Accounts
 
 **Technology:** Salesforce Platform (Sales Cloud, Service Cloud and any other org).
 
-Send Salesforce users with their profile, role, permission sets and permission set groups to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user of your Salesforce org and the access each one has: its profile, role, permission sets and permission set groups. Reviewers then mark in eramba which users and accesses should stay and which should be removed; nothing is changed in Salesforce.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of users of one Salesforce org to review: who has an account, whether it is active, and which profile, role, permission sets and permission set groups grant their access. eramba owns the schedule, comparison, reviewers, decisions and findings. The script is read-only: it only runs SOQL queries.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value (the work email by default); see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | `Email` by default; configurable to `Username` or the 18-character user `Id` |
-| `description` | Name, `active` or `inactive`, user type (e.g. `Standard`) and user ID |
-| `roles` | `Profile: <profile name> [<profile id>]` (one per user) |
-| | `Role: <role name> [<role id>]` (the user's position in the role hierarchy, when set) |
-| | `Permission set: <label> [<permission set id>]` for every permission set assigned directly |
-| | `Permission set group: <label> [<permission set group id>]` for every permission set group assigned |
+| **Family** | Account review |
+| **Each row is** | One Salesforce user of one org, identified by its email, for example `ana.garcia@example.com` (or its username or 18-character user ID with `USER_KEY`) |
+| **Connects to** | Your Salesforce org (My Domain), through Salesforce's official REST API (v62.0) with read-only SOQL queries |
+| **Permission needed** | A dedicated integration user with the permissions **API Enabled**, **View Setup and Configuration** and **View All Users**, reached through an external client app using the OAuth client credentials flow. A Salesforce administrator creates it (§5) |
+| **Included** | Every user of the org, active or inactive, of every user type unless `USER_TYPES` narrows it |
+| **Not included** | Frozen users (they still show as `active`); public groups and queues; sharing rules and manual sharing; delegated administration; permission set licences; Experience Cloud (community) membership details; what each profile or permission set allows; other orgs (one per automation) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. To split a larger population, use `USER_TYPES` |
+| **Roles listed** | Profile, role in the role hierarchy, permission sets and permission set groups |
 
-All users are included, inactive ones too (`IsActive = false`), of every user type unless `USER_TYPES` narrows it.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-Collected through the REST API query resource (API v62.0) with complete `nextRecordsUrl` pagination: `User` and `PermissionSetAssignment`. The `totalSize` Salesforce reports must stay the same on every page and match the records received, otherwise the run stops.
+One row is one person's Salesforce user. Its roles are every access that user holds. This automation lists four kinds:
 
-- Permission sets owned by a profile (`PermissionSet.IsOwnedByProfile = true`) are not listed separately: they are the profile, listed as `Profile`.
-- An assignment of a permission set group is listed only as the group, not as the group's aggregate permission set or its member permission sets.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Profile** | The user's base set of permissions. Every user has exactly one | `Profile: Standard User [<id>]` |
+| **Role** | The user's position in the role hierarchy, which decides the records they can see. Listed when the user has one | `Role: Sales Manager [<id>]` |
+| **Permission set** | An extra set of permissions assigned directly to the user, on top of the profile | `Permission set: Reports Export [<id>]` |
+| **Permission set group** | A bundle of permission sets assigned to the user. Only the group is listed, not the sets inside it | `Permission set group: Sales Operations [<id>]` |
 
-Not covered: frozen users (`UserLogin.IsFrozen`; a frozen user still shows as `active`), public groups and queues, sharing rules and manual sharing, delegated administration, permission set licences, Experience Cloud (community) membership details, and other orgs. Access is listed as granted, not as effectively used.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; active; Standard; id=005…
+Roles:       Permission set: Reports Export [0PS…]
+             Permission set group: Sales Operations [0PG…]
+             Profile: Standard User [00e…]
+             Role: Sales Manager [00E…]
+```
 
-**To validate on a real org:** the minimum permissions of the run-as user (§5), the permission set group fields on `PermissionSetAssignment` (`PermissionSetGroupId`, `PermissionSetGroup.MasterLabel`), and run time on orgs with many users and assignments.
+The text in square brackets is Salesforce's identifier. It keeps two items with the same name apart; reviewers can ignore it. The description gives the name, whether the user is `active` or `inactive`, the user type and the user ID.
 
-Any collection error, an assignment for a user outside the collected list, or a limit aborts the run and nothing is published.
+You choose which kinds are listed with `ROLES` (§7). With none, only the users are listed.
+
+A row shows *that* Ana has the *Standard User* profile and a permission set, not what they allow.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each permission set grants | *Salesforce – Permission set permissions* (planned) |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). Inactive users of leavers stay listed as inactive |
 
 ## 4. Before you start
 
@@ -117,9 +132,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 8 MiB of feed, 48 Mi
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never emails, names or tokens. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

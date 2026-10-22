@@ -1,12 +1,11 @@
 ---
 id: zoom-account-review
-name: Zoom Users and Assigned Access
+name: Zoom – Accounts
 version: 0.1.1
 status: draft
 technology: Zoom Workplace
 vendor: Zoom
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - zoom_account_id
   - zoom_client_id
@@ -25,39 +24,54 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Zoom Users and Assigned Access
+# Zoom – Accounts
 
 **Technology:** Zoom Workplace.
 
-Send the users of a Zoom account with their role, user type and groups to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user of your Zoom account and the access each one has: its role, its user type (licence) and, optionally, its groups. Reviewers then mark in eramba which users and accesses should stay and which should be removed; nothing is changed in Zoom.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of Zoom users to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value (the work email by default); see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | User email by default; configurable to the Zoom user ID |
-| `description` | Display name (or first and last name), user type, status (`active`, `inactive`, `pending`) and user ID |
-| `roles` | `Role: <role name> [<role id>]`: the account role (Owner, Admin, Member or a custom role) |
-| | `User type: <label> [<type>]`: `Basic [1]`, `Licensed [2]`, `Unassigned without Meetings Basic [4]` or `None [99]` |
-| | `Group: <group name> [<group id>]` for every group the user belongs to (optional, `groups`) |
+| **Family** | Account review |
+| **Each row is** | One Zoom user of one Zoom account, identified by its email, for example `ana.garcia@example.com` (or its Zoom user ID with `USER_KEY`) |
+| **Connects to** | Your Zoom account, through Zoom's official REST API (`api.zoom.us`). Read-only |
+| **Permission needed** | A Server-to-Server OAuth app with only the read scopes `user:read:list_users:admin`, `role:read:list_roles:admin` (to list roles) and `group:read:list_groups:admin` (to list groups). A Zoom account admin creates and activates it (§5) |
+| **Included** | Users with the statuses in `STATUSES`: by default `active`, `inactive` (deactivated) and `pending` (invited, not yet activated) |
+| **Not included** | The privileges inside each role; add-on licences (Phone, Webinars, Contact Center); IM directory groups; sub-accounts of a master account; Zoom Rooms; meeting participants and guests with no user in the account; Zoom for Government; other accounts (one per automation) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. To split a larger population, use `STATUSES` |
+| **Roles listed** | Role, user type (licence) and, optionally, groups |
 
-Users of the three statuses are listed by default: `active`, `inactive` (deactivated) and `pending` (invited, not yet activated). Zoom returns no user ID for pending users: their description shows `id=none (pending)`, and a pending user that has no role yet is listed without a `Role:` entry (the count is logged).
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-One Zoom account per automation, on `api.zoom.us` (Zoom for Government is not covered). Not covered: the privileges inside each role (read them in **User Management → Roles**), add-on licences (Phone, Webinars, Contact Center), IM directory groups, sub-accounts of a master account, Zoom Rooms, and meeting participants or guests who have no Zoom user in the account.
+One row is one person's Zoom user. Its roles are every access that user holds. This automation lists three kinds:
 
-Calls: one OAuth token request, then `GET /users` with 300 users per page for each status in `STATUSES`, one `GET /roles` (only with `role`) and `GET /groups` (only with `groups`). Group membership is read from each user's `group_ids`, so no call is made per group. Zoom rate limits (HTTP 429) are retried with `Retry-After` when the wait fits the budget.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Role** | The user's account role: *Owner*, *Admin*, *Member* or a custom role | `Role: Admin [<id>]` |
+| **User type** | The licence the user holds: *Basic*, *Licensed*, *Unassigned without Meetings Basic* or *None* | `User type: Licensed [2]` |
+| **Group** | The user belongs to this Zoom group. Listed only when you add `groups` to `ROLES` | `Group: IT [<id>]` |
 
-Completeness: each list must reach a page without `next_page_token`, the number of records must equal `total_records`, and `total_records` must not change between pages. A user whose role or group is not in the collected lists, a duplicate user ID or key, an unknown user type, or any limit aborts the run and nothing is published.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; Licensed; active; id=AbC12…
+Roles:       Role: Admin [1a2b…]
+             User type: Licensed [2]
+```
 
-To validate on a real account: that `GET /roles` lists the built-in Owner, Admin and Member roles with the IDs used in `role_id`, that `page_size = 300` is accepted for users, and whether pending users carry a `role_id`.
+The text in square brackets is Zoom's identifier or code. It keeps two items with the same name apart; reviewers can ignore it. The description gives the name, the user type, the status (`active`, `inactive` or `pending`) and the user ID. Zoom gives pending users no ID, so theirs reads `id=none (pending)`, and a pending user with no role yet has no `Role:` entry.
+
+You choose which kinds are listed with `ROLES` (§7). With none, only the users are listed.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what someone can do in Zoom | In Zoom, permissions sit on the account itself (its role and licence), so this account review already shows them |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). Inactive users of leavers stay listed until deleted |
 
 ## 4. Before you start
 
@@ -113,9 +127,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, emails or tokens. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

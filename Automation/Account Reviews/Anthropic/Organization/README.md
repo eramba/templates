@@ -1,12 +1,11 @@
 ---
 id: anthropic-account-review
-name: Anthropic Organization Members and Workspace Access
+name: Anthropic – Accounts
 version: 0.1.1
 status: draft
 technology: Claude Console (Anthropic API)
 vendor: Anthropic
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - anthropic_admin_key
 variables:
@@ -22,42 +21,55 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Anthropic Organization Members and Workspace Access
+# Anthropic – Accounts
 
 **Technology:** Claude Console (Anthropic API, `platform.claude.com`).
 
-Send the members of a Claude Console organization, their organization role and their workspace memberships to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every member of your Claude Console organization and the access each one has: its organization role and its workspaces. Reviewers then mark in eramba which members and accesses should stay and which should be removed; nothing is changed in Anthropic.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of Claude Console organization members to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value (the work email by default); see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Member email by default; configurable to the Anthropic user ID (`user_…`) |
-| `description` | Name (or email), organization role and user ID |
-| `roles` | `Organization role: <Role> [<role>]`, e.g. `Organization role: Admin [admin]` or `Organization role: Claude code user [claude_code_user]` (`org_role`) |
-| | `Workspace: <workspace name> [<workspace id> / <workspace role>]`, e.g. `Workspace: Production [wrkspc_01… / workspace_developer]` (`workspaces`) |
+| **Family** | Account review |
+| **Each row is** | One member of one Claude Console organization, identified by its email, for example `ana.garcia@example.com` (or its `user_…` ID with `USER_KEY`) |
+| **Connects to** | Your Claude Console organization (`api.anthropic.com`), through Anthropic's official Admin API. Read-only requests |
+| **Permission needed** | An Admin API key, created by an organization admin. Admin keys have no selectable scopes: the key has full access to the Admin API, including writes, but the script only sends `GET` requests to read members and workspaces (§5) |
+| **Included** | Every member the organization users list returns |
+| **Not included** | Pending invitations; API keys, service accounts and Admin keys; what each member does inside a workspace; archived workspaces; Claude Enterprise (`claude.ai`) organizations beyond the organization role; Claude Platform on AWS; other organizations (one per automation) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. This version has no filter to split a larger population |
+| **Roles listed** | Organization role and workspace memberships with their workspace role |
 
-Organization roles are `user`, `claude_code_user`, `developer`, `billing` and `admin` in Console organizations (`owner` and `primary_owner` also exist). Workspace roles are `workspace_user`, `workspace_restricted_developer`, `workspace_developer`, `workspace_admin` and `workspace_billing`. Every member returned by the organization users list is included.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-One Claude Console organization per automation (the organization of the Admin API key). Calls, all `GET`, with the `x-api-key` and `anthropic-version: 2023-06-01` headers:
+One row is one person's membership of the organization. Its roles are every access that member holds. This automation lists two kinds:
 
-- `/v1/organizations/users`: organization members and their role.
-- `/v1/organizations/workspaces`: active workspaces, without archived workspaces and without the Default Workspace.
-- `/v1/organizations/workspaces/{workspace_id}/members`: members of each workspace and their workspace role.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Organization role** | The member's role in the organization: *User*, *Claude code user*, *Developer*, *Billing* or *Admin* (*Owner* and *Primary owner* also exist). One per row | `Organization role: Admin [admin]` |
+| **Workspace** | The member belongs to this workspace, with the workspace role shown (for example `workspace_developer`). One entry per workspace. The Default Workspace has no member list: access to it follows the organization role | `Workspace: Production [wrkspc_01… / workspace_developer]` |
 
-The **Default Workspace** has no member list: access to it follows the organization role, which the `org_role` roles already show. Organization admins automatically hold Workspace Admin, and billing members Workspace Billing, in every workspace; whether the members endpoint lists those inherited roles is to validate on a real organization. The organization role is always in the feed when `org_role` is selected, so this inherited access stays visible.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; organization admin; id=user_…
+Roles:       Organization role: Admin [admin]
+             Workspace: Production [wrkspc_01… / workspace_developer]
+```
 
-Not covered: pending invites, API keys (workspace, personal and service account keys), service accounts, Admin API keys, and what each member does inside a workspace. **Claude Enterprise** (`claude.ai`) organizations: only the members endpoint applies to them, with a key carrying the `read:members` or `read:org_audit` scope; set `ROLES` to `['org_role']` (to validate on a real Enterprise organization). Claude Platform on AWS offers no member endpoints and is not supported.
+The text in square brackets is Anthropic's role code or workspace ID, with the workspace role. It keeps two items with the same name apart; reviewers can ignore it. The description gives the name, the organization role and the user ID.
 
-Lists are read with `limit=100` and the `after_id` cursor until `has_more` is false. A missing or repeated cursor, a duplicate member, a workspace member missing from the organization list, any other API error or a limit aborts the run and nothing is published.
+You choose which kinds are listed with `ROLES` (§7). With none, only the members are listed.
+
+Organization admins automatically hold Workspace Admin in every workspace, and billing members Workspace Billing; the organization role in the feed keeps that inherited access visible.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what someone can do in Anthropic | In Anthropic, permissions sit on the account itself (its organization role and workspace roles), so this account review already shows them |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). A leaver's membership stays listed until it is removed from the organization |
 
 ## 4. Before you start
 
@@ -103,9 +115,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, emails or keys. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

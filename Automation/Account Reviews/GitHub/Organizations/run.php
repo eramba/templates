@@ -3,7 +3,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  GitHub Organization Members and Assigned Access
+ *  GitHub – Accounts
  *  Technology: GitHub (GitHub.com, Free to Enterprise Cloud)
  *  id: github-account-review        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).
