@@ -6,7 +6,6 @@ status: draft
 technology: <Source>
 vendor: <Vendor>
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 feed_type: List of current employees
 secrets:
   - <secret_name>
@@ -26,22 +25,39 @@ last_tested: null
 
 Send the people who should have access today to an eramba feed of type **List of current employees** (or **List of former employees**). **Draft: functional and installation validation pending.**
 
-## 1. Purpose
+## 1. At a glance
 
-The comparison side of an Exit review: who counts as a current (or former) employee, and why this source is authoritative.
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | The identifier the compared application accounts also hold (usually the work email) |
-| `description` | What identifies the person for a reviewer |
+| **Family** | Employee list (for Exit reviews) |
+| **Each row is** | <One current (or former) employee, and what identifies them> |
+| **Connects to** | <Source> <API or service>, read-only |
+| **Permission needed** | <Exact read-only permission>. Approved by <who grants it in Source>. |
+| **Included** | <Who counts as an employee> |
+| **Not included** | <Who is left out, for example contractors or people on leave> |
+| **Size limit** | Up to 10000 people by default (`MAX_USERS`, maximum 50000). A larger list stops the run instead of being cut short. |
+| **Roles listed** | None: employee lists carry no roles |
 
-Employee feeds have no roles.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-Who is included and left out, how keys are matched with application accounts, and that an empty list or any incomplete collection aborts without publishing.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| None | Employee lists carry no roles; the list only says who is an employee. | Only the person's name and identifier are shown. |
+
+```
+Account: <Name> <person@example.com>
+```
+
+If an identifier in square brackets appears, reviewers can ignore it.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| <Review the accounts of an application against this list> | [<Product> Accounts](../../<Provider>/<Accounts automation>/README.md) |
+| <Use another source of employees> | [<Other Source> Current Employees](../../<Provider>/<Employees automation>/README.md) |
 
 ## 4. Before you start
 

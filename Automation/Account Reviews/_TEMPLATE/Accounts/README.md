@@ -6,7 +6,6 @@ status: draft
 technology: <Product>
 vendor: <Vendor>
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - <secret_name>
 variables:
@@ -26,21 +25,40 @@ last_tested: null
 
 Send <Product> accounts and their assigned access to an eramba Account Review feed. **Draft: functional and installation validation pending.**
 
-## 1. Purpose
+## 1. At a glance
 
-What population this feed supplies and which reviews it supports (snapshot, differential, leaver).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Account key and why it is unique and stable |
-| `description` | What identifies the account for a reviewer |
-| `roles` | Every access type, with its exact `<kind>: <name> [<id>]` format |
+| **Family** | Account list (for account reviews) |
+| **Each row is** | <One <Product> account, and what identifies it> |
+| **Connects to** | <Product> <API or service>, read-only |
+| **Permission needed** | <Exact read-only permission>. Approved by <who grants it in Product>. |
+| **Included** | <Account types and access types listed> |
+| **Not included** | <Account types, access types or environments left out> |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. |
+| **Roles listed** | <Access types listed, for example groups, roles, apps> |
 
-## 3. Coverage
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-What is included, what is not (account types, access types, environments), and that any incomplete collection aborts without publishing.
+## 2. What one row looks like
+
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| `<kind>` | <What this access lets the person do> | `<kind>: <name> [<id>]` |
+
+```
+Account: <Name or login> <person@example.com>
+Roles: <kind>: <name> [<id>]; <kind>: <name> [<id>]
+```
+
+The IDs in square brackets only make the entry exact. Reviewers can ignore them.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| <Review another part of this product> | [<Other automation>](../<Other automation>/README.md) |
+| <Compare with the people who work here today> | [<Source> Current Employees](../../<Provider>/<Employees automation>/README.md) |
 
 ## 4. Before you start
 
