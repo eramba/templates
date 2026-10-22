@@ -469,7 +469,7 @@ function tpl_logFailure(string $what, Throwable $e): void
 
 const ROLE_KINDS = ['product_access', 'groups', 'platform_roles'];
 // Organization-level admin roles (the PlatformRole values of the Admin API); every other role is product access.
-const PLATFORM_ROLES = ['atlassian/org-admin', 'atlassian/site-admin', 'atlassian/user-access-admin', 'atlassian/ai-access'];
+const PLATFORM_ROLES = ['atlassian/org-admin', 'atlassian/site-admin', 'atlassian/user-access-admin', 'atlassian/ai-access', 'atlassian/unit-admin'];
 
 function validateConfig(array $c): void
 {
@@ -547,9 +547,10 @@ function adminSearch(string $url, array $body, string $key, string $idField, int
 
 /**
  * Product roles of one user on every site and product, direct or through a group, without the platform roles.
- * With $products, only those products count. Returns [role strings, products the user can access].
+ * With $products, only those products count. $platformRoles (the user's own) are skipped too, so a platform
+ * role Atlassian adds later is still listed once. Returns [role strings, products the user can access].
  */
-function productAccess(string $base, string $key, string $accountId, int $limit, array $products = []): array
+function productAccess(string $base, string $key, string $accountId, int $limit, array $products = [], array $platformRoles = []): array
 {
     $roles = [];
     $found = [];
@@ -582,7 +583,7 @@ function productAccess(string $base, string $key, string $accountId, int $limit,
                 if (!is_string($role) || $role === '') {
                     throw new RuntimeException('Atlassian returned an invalid role assignment.');
                 }
-                if (!in_array($role, PLATFORM_ROLES, true)) {
+                if (!in_array($role, PLATFORM_ROLES, true) && !in_array($role, $platformRoles, true)) {
                     $roles[] = tpl_roleString('Product access', "$product ($role)", $resourceId);
                     $found[strtolower($product)] = true;
                 }
@@ -639,7 +640,8 @@ function collectFeed(string $base, string $key, array $config)
     // With PRODUCTS, the population is the users with access to those products, so product access is always read.
     if (isset($kinds['product_access']) || $config['PRODUCTS'] !== []) {
         foreach (array_keys($users) as $id) {
-            [$productRoles, $found] = productAccess($base, $key, (string) $id, $limit, $config['PRODUCTS']);
+            $platformRoles = is_array($users[$id]['platformRoles'] ?? null) ? $users[$id]['platformRoles'] : [];
+            [$productRoles, $found] = productAccess($base, $key, (string) $id, $limit, $config['PRODUCTS'], $platformRoles);
             if ($config['PRODUCTS'] !== [] && $found === []) {
                 unset($users[$id]);
                 continue;

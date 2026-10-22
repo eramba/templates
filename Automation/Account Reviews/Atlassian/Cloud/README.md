@@ -48,7 +48,7 @@ Data comes from the organization-level [Atlassian Admin API](https://developer.a
 | `description` | Name, status (`active`, `suspended`, `not_invited`, `deactivated` or `for_deletion`), claim status (`managed` or `unmanaged`) and account ID, e.g. `Ana Example; suspended; managed; id=712020:…` |
 | `roles` | `Product access: <product> (<role>) [<resource ARI>]` for every product role on every site, direct or through a group, e.g. `Product access: jira-software (atlassian/admin) [ari:cloud:jira-software::site/<cloud id>]` |
 | | `Group: <name> [<group id>]` for every group membership |
-| | `Platform role: <role> [atlassian/<role>]` for organization-level admin roles: `org-admin`, `site-admin`, `user-access-admin`, `ai-access` |
+| | `Platform role: <role> [atlassian/<role>]` for organization-level admin roles: `org-admin`, `site-admin`, `user-access-admin`, `ai-access`, `unit-admin` |
 
 Every user returned by the user search is listed, suspended and deactivated users included, with their status in the description.
 
@@ -56,7 +56,7 @@ Every user returned by the user search is listed, suspended and deactivated user
 
 One organization per automation, every directory the API key can manage. Product roles are the Atlassian canonical roles (`atlassian/user`, `atlassian/admin`, `atlassian/guest`, `atlassian/customer`, `atlassian/basic`…); platform roles are listed once under `Platform role` and left out of `Product access`.
 
-Not covered: permissions inside products (Jira project roles and permission schemes, Confluence space permissions), Jira Service Management customer accounts outside the organization's directories, app and bot accounts the user search does not return, API tokens, Bitbucket workspace permissions, and site names (sites are identified by their ARI, which contains the site's cloud ID). Unit admin roles are not read.
+Not covered: permissions inside products (Jira project roles and permission schemes, Confluence space permissions), Jira Service Management customer accounts outside the organization's directories, app and bot accounts the user search does not return, API tokens, Bitbucket workspace permissions, and site names (sites are identified by their ARI, which contains the site's cloud ID).
 
 Product access needs one request per user (role assignments), so large organizations may reach the 200-second budget: the run then aborts, see §9. Groups need one search per group.
 
@@ -146,6 +146,6 @@ Stop the Account Reviews that use the feed, then remove the feed, revoke the API
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000 |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); `MAX_USERS` defaults to 2000 and is limited to 5000; platform roles, `unit-admin` included, are listed once under `Platform role` and no longer repeated under `Product access` |
 
 References: [Admin API: users](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/), [groups](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-groups/), [directories](https://developer.atlassian.com/cloud/admin/organization/rest/api-group-directory/), [Admin API scopes](https://developer.atlassian.com/cloud/admin/scopes/), [manage an organization with the Admin APIs](https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/).

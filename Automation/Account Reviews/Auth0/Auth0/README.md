@@ -69,7 +69,8 @@ Any collection error, a role or organization member outside the collected users,
 |---|---|
 | `read:users` | Users |
 | `read:roles` | Roles and the users of each role |
-| `read:organizations` | Organizations and their members (only if `ROLES` contains `organizations`) |
+| `read:organizations` | Organizations (only if `ROLES` contains `organizations`) |
+| `read:organization_members` | Members of each organization (only if `ROLES` contains `organizations`) |
 
 3. In the application's **Settings**, copy the **Domain**, **Client ID** and **Client Secret**. Base64-encode the client secret on one line.
 
@@ -112,7 +113,7 @@ When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with
 |---|---|
 | `Secret '…' is missing` / invalid base64 | Check the secret names and that the value is the base64 of the client secret |
 | `HTTP 401` on the token | Wrong client ID or secret, or the application is not authorized for the Management API |
-| `HTTP 403` | A scope from §5 is missing |
+| `HTTP 403` | A scope from §5 is missing; after roles are collected, it is usually `read:organization_members` (needed as soon as the tenant has an organization) |
 | `Auth0 reports N users; this feed supports up to 1000` | The tenant is too large for this version |
 | Account key missing | Some users have no email; set `USER_KEY` to `user_id` |
 | Access outside the collected users | Users changed during the pull; retry later |
@@ -130,6 +131,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the mac
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published); documents the `read:organization_members` scope, without which tenants with organizations fail with HTTP 403 |
 
-References: [Management API access tokens](https://auth0.com/docs/secure/tokens/access-tokens/management-api-access-tokens), [users](https://auth0.com/docs/api/management/v2/users/get-users), [roles](https://auth0.com/docs/api/management/v2/roles/get-roles), [role users](https://auth0.com/docs/api/management/v2/roles/get-role-user), [organizations](https://auth0.com/docs/api/management/v2/organizations/get-organizations), [organization members](https://auth0.com/docs/api/management/v2/organizations/get-members), [pagination](https://auth0.com/docs/api/management/v2#!/introduction/pagination), [rate limits](https://auth0.com/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy).
+References: [Management API access tokens](https://auth0.com/docs/secure/tokens/access-tokens/management-api-access-tokens), [users](https://auth0.com/docs/api/management/v2/users/get-users), [roles](https://auth0.com/docs/api/management/v2/roles/get-roles), [role users](https://auth0.com/docs/api/management/v2/roles/get-role-user), [organizations](https://auth0.com/docs/api/management/v2/organizations/get-organizations), [organization members](https://auth0.com/docs/api/management/v2/organizations/get-organization-members), [pagination](https://auth0.com/docs/api/management/v2#!/introduction/pagination), [rate limits](https://auth0.com/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy).
