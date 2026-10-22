@@ -730,9 +730,89 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
     return $rows;
 }
 
+/** Aborts instead of publishing an empty or oversized list. */
+function checkRows(array $rows, array $config): void
+{
+    if ($rows === [] && $config['ALLOW_EMPTY_FEED'] !== true) {
+        throw new TplEmptyFeedException('No applications with permissions found; set INCLUDE_MICROSOFT_APPS to include Microsoft applications, or ALLOW_EMPTY_FEED if none is expected.');
+    }
+    if (count($rows) > $config['MAX_APPS']) {
+        throw new RuntimeException('More applications than MAX_APPS; raise it (up to 5000).');
+    }
+}
+
+/**
+ * Reads the three inputs of permissionRows(). Every list aborts the run when it exceeds its limit.
+ *
+ * @return array{0: array, 1: array, 2: array} service principals, app role assignments by client id, delegated grants
+ */
+function collectPermissions(string $token, array $config): array
+{
+    // Resources (Microsoft Graph, other APIs) are service principals too, so the limit is wider than MAX_APPS.
+    $servicePrincipals = tpl_graphList(
+        'servicePrincipals?$select=id,appId,displayName,appOwnerOrganizationId,accountEnabled,appRoleAssignmentRequired,appRoles,oauth2PermissionScopes&$top=999',
+        $token,
+        min($config['MAX_APPS'] * 10, 10000)
+    );
+    tpl_logInfo(count($servicePrincipals) . ' service principals.');
+
+    $grants = tpl_graphList('oauth2PermissionGrants?$top=999', $token, $config['MAX_OBJECTS'], false);
+    tpl_logInfo(count($grants) . ' delegated permission grants.');
+
+    $paths = [];
+    foreach ($servicePrincipals as $sp) {
+        $owner = strtolower((string) ($sp['appOwnerOrganizationId'] ?? ''));
+        if (in_array($owner, MICROSOFT_TENANTS, true) && $config['INCLUDE_MICROSOFT_APPS'] !== true) {
+            continue;
+        }
+        $paths[$sp['id']] = 'servicePrincipals/' . rawurlencode($sp['id']) . '/appRoleAssignments?$select=id,resourceId,appRoleId&$top=999';
+    }
+    $assignments = [];
+    $total = 0;
+    $ids = array_keys($paths);
+    foreach (array_chunk($ids, 100) as $chunk) {
+        $lists = tpl_graphLists(array_map(static fn($id) => $paths[$id], $chunk), $token, $config['MAX_OBJECTS'], false);
+        foreach ($chunk as $n => $id) {
+            if ($lists[$n] !== []) {
+                $assignments[$id] = $lists[$n];
+                $total += count($lists[$n]);
+            }
+        }
+    }
+    tpl_logInfo(sprintf('%d application permission assignments across %d applications checked.', $total, count($ids)));
+    return [$servicePrincipals, $assignments, $grants];
+}
+
 // ─── 6. MAIN ────────────────────────────────────────────────────────────────
 tpl_installErrorHandler();
 tpl_elapsed();
-tpl_log(sprintf('%s v%s', AUTOMATION_ID, AUTOMATION_VERSION));
-tpl_log('Not implemented yet: collection and publishing are added in the next step.', true);
-exit(1);
+try {
+    tpl_log(sprintf('%s v%s', AUTOMATION_ID, AUTOMATION_VERSION));
+
+    tpl_logStep(1, 'Checking configuration');
+    validateConfig($config);
+    tpl_checkSecrets($secrets);
+    tpl_logInfo('Secrets present. Microsoft applications ' . ($config['INCLUDE_MICROSOFT_APPS'] ? 'included.' : 'excluded.'));
+
+    tpl_logStep(2, 'Authenticating to Microsoft Graph');
+    $token = tpl_graphToken($secrets['ENTRA_TENANT_ID'], $secrets['ENTRA_CLIENT_ID'], tpl_base64Secret($secrets['ENTRA_CLIENT_SECRET_B64'], 'entra_client_secret_b64'));
+
+    tpl_logStep(3, 'Collecting applications and permissions');
+    [$servicePrincipals, $assignments, $grants] = collectPermissions($token, $config);
+    $rows = permissionRows($servicePrincipals, $assignments, $grants, $config + ['TENANT_ID' => $secrets['ENTRA_TENANT_ID']]);
+    checkRows($rows, $config);
+
+    tpl_logStep(4, 'Publishing the permission review feed');
+    $feed = tpl_feedOpen();
+    $publishers = ['Third party' => 0, 'Your organization' => 0, 'Microsoft' => 0];
+    foreach ($rows as $row) {
+        tpl_feedAdd($feed, $row['key'], $row['description'], $row['roles']);
+        $publishers[explode(';', $row['description'], 2)[0]]++;
+    }
+    tpl_feedPublish($feed);
+    tpl_logSummary('applications', [sprintf('%d third-party, %d your organization, %d Microsoft.', $publishers['Third party'], $publishers['Your organization'], $publishers['Microsoft'])]);
+    exit(0);
+} catch (Throwable $e) {
+    tpl_logFailure('permission review feed', $e);
+    exit(1);
+}
