@@ -86,7 +86,7 @@ Any collection error or limit aborts the run and nothing is published.
 | `USER_KEY` | `mail` | `mail`, `userPrincipalName` or `id`. Must hold the same value as the compared application accounts. |
 | `GROUP_ID` | `''` | Empty: all enabled member users. Otherwise the object ID of a group such as "All employees"; nested members included. |
 | `REQUIRE_EMPLOYEE_ID` | `false` | True keeps only users with an Employee ID, typically those provisioned from HR, and leaves out admin and test accounts. |
-| `MAX_USERS` | `10000` | 1–50000 users; exceeding it aborts instead of truncating. |
+| `MAX_USERS` | `10000` | 1–30000 users (eramba runs automations with 64 MB of memory); exceeding it aborts instead of truncating. |
 
 Fixed limits: 200 seconds of collection, 4 MB per response, 100 pages, 8 MiB of feed.
 
@@ -94,7 +94,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 100 pages, 8 MiB of 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only (employees, and how many were left out and why). Exit 1 means nothing was published.
 
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of current employees eramba received, or `RESULT: FAILED` with the reason.
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of employees published; `RESULT: NOT PUBLISHED` when a current-employees list is empty; or `RESULT: FAILED` with the error. Creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
 
 ## 9. Troubleshooting
 
@@ -119,6 +119,6 @@ Stop the Exit reviews that use the feed, then remove the feed and, if nothing el
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
+| 0.1.1 | `MAX_USERS` limited to 30000 (memory); the log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
 
 References: [list users](https://learn.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0), [advanced queries](https://learn.microsoft.com/en-us/graph/aad-advanced-queries), [group transitive members](https://learn.microsoft.com/en-us/graph/api/group-list-transitivemembers?view=graph-rest-1.0), [JSON batching](https://learn.microsoft.com/en-us/graph/json-batching).

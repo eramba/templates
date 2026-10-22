@@ -7,7 +7,7 @@ PHP scripts that send the list of accounts and their access to an eramba **Accou
 1. Choose an automation below and read its README: scope, prerequisites and permissions.
 2. Create a dedicated read-only identity at the provider and store its credentials in eramba **Automation Secrets** with the exact names in the README.
 3. Add an **Account Review Feed** with **Source = Automation** and **Type = List of accounts to be reviewed**, and add the automation from that form: PHP version, Composer packages, timeout and the full `run.php`.
-4. Test the automation and the feed. The Test output ends with a **SUMMARY** block: `RESULT: OK` with the number of rows eramba received (and roles per kind), or `RESULT: FAILED` with the reason. Compare the accounts and roles with the provider before scheduling a review.
+4. Test the automation and the feed. The Test output ends with a **SUMMARY** block: `RESULT: OK` with the number of rows published (and roles per kind), `RESULT: NOT PUBLISHED` for an empty list the script refuses to send, or `RESULT: FAILED` with the error. Differences found later by the review are results, not failures. Compare the accounts and roles with the provider before scheduling a review.
 5. Attach the feed to an Account Review and configure frequency and reviewers.
 
 ## Review types

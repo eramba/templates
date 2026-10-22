@@ -102,7 +102,7 @@ No write permission is needed. Directory-wide read access is broad: protect and 
 | `USER_IDS` | `[]` | Empty: whole tenant. Otherwise a list of user object IDs. |
 | `ROLES` | `['groups', 'directory_roles', 'applications', 'licenses']` | Access listed as roles. `[]` lists accounts only (no membership calls, no role changes). |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
-| `MAX_USERS` | `2000` | 1–50000 accounts; exceeding it aborts instead of truncating. Above a few thousand accounts, list roles only for a `USER_IDS` subset or set `ROLES` to `[]`: every account adds membership calls to the 200-second budget. |
+| `MAX_USERS` | `2000` | 1–15000 accounts (eramba runs automations with 64 MB of memory); exceeding it aborts instead of truncating. Above a few thousand accounts, list roles only for a `USER_IDS` subset or set `ROLES` to `[]`: every account adds membership calls to the 200-second budget. |
 | `MAX_OBJECTS` | `2000` | 1–10000 records per API collection and roles per account; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection (`TPL_RUN_SECONDS`), 4 MB per response, 100 pages per collection, 8 MiB of feed, 48 MiB of memory, three attempts when Microsoft throttles for up to 30 seconds. Requests are grouped 20 at a time with Graph JSON batching; only the token endpoint and Graph reads are allowed (`TPL_ALLOWED_REQUESTS`).
@@ -115,7 +115,7 @@ stdout only contains the artifact declaration written by `writeAccountReviewArti
 
 Accounts are staged in a private temporary file and published once, after the whole population is collected. Exit 1 means nothing was published and the pull failed.
 
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
 
 ## 9. Troubleshooting
 
@@ -142,6 +142,6 @@ Stop or reconfigure the Account Reviews that use the feed before removing it. Re
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | Directory role assignments no longer select `appScopeId` (rejected by Graph) and deprecated built-in roles missing from the role list are read by ID; `MAX_USERS` up to 50000; progress logged every 1,000 accounts; the log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
+| 0.1.1 | Directory role assignments no longer select `appScopeId` (rejected by Graph) and deprecated built-in roles missing from the role list are read by ID; directory role values change from `[<id>; directory=…; app=…]` to `[<id>; scope=…]`, so a Differential review with an earlier baseline shows one Change in Roles per directory-role holder; `MAX_USERS` up to 15000 (memory); progress logged every 1,000 accounts; the log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
 
 References: [client credentials](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow), [users](https://learn.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0), [transitiveMemberOf](https://learn.microsoft.com/en-us/graph/api/user-list-transitivememberof?view=graph-rest-1.0), [role assignments](https://learn.microsoft.com/en-us/graph/api/rbacapplication-list-roleassignments?view=graph-rest-1.0), [role definitions](https://learn.microsoft.com/en-us/graph/api/rbacapplication-list-roledefinitions?view=graph-rest-1.0), [app role assignments](https://learn.microsoft.com/en-us/graph/api/user-list-approleassignments?view=graph-rest-1.0), [service principal](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-get?view=graph-rest-1.0), [JSON batching](https://learn.microsoft.com/en-us/graph/json-batching), [throttling](https://learn.microsoft.com/en-us/graph/throttling).

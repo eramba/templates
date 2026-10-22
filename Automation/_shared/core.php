@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-// version: 1 — error handling, logging, run budget and secrets
+// version: 2 — error handling, logging (kept within eramba's output limit), run budget and secrets
 
 /**
  * Turns every PHP warning or notice into an exception, so it fails the run
@@ -29,9 +29,24 @@ function tpl_logInfo(string $message): void
     tpl_log('  ' . $message);
 }
 
-function tpl_log(string $line): void
+/**
+ * eramba keeps only the first 10,000 bytes of a run's output, so step lines stop after 8,000 bytes
+ * and the rest is left for the result. $keep writes the line regardless (the final result).
+ */
+function tpl_log(string $line, bool $keep = false): void
 {
-    fwrite(TPL_LOG_STREAM === 'stdout' ? STDOUT : STDERR, $line . "\n");
+    static $bytes = 0;
+    static $shortened = false;
+    $text = $line . "\n";
+    if (!$keep && $bytes + strlen($text) > 8000) {
+        if ($shortened) {
+            return;
+        }
+        $shortened = true;
+        $text = "  [Further steps not logged: eramba keeps only the first 10,000 bytes of output.]\n";
+    }
+    $bytes += strlen($text);
+    fwrite(TPL_LOG_STREAM === 'stdout' ? STDOUT : STDERR, $text);
 }
 
 /** Seconds since the first call. MAIN calls it once at start. */

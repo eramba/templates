@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-// version: 4 — Account Review feed rows, staging, publication and run summary
+// version: 5 — Account Review feed rows, staging, publication and run summary
 
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -136,6 +136,14 @@ function tpl_feedPublish($feed): void
 }
 
 /**
+ * Thrown when the provider returns no rows and the script must not publish an empty list. It is not an
+ * error of the run: tpl_logFailure() reports it as NOT PUBLISHED, with the reason in the message.
+ */
+final class TplEmptyFeedException extends RuntimeException
+{
+}
+
+/**
  * Ends a successful run with a block people can read at a glance in eramba's Test output.
  * $what names the rows ("accounts", "current employees"); $details adds script-specific counts.
  * Counts only, never names: the output may be shared or screenshotted.
@@ -143,10 +151,10 @@ function tpl_feedPublish($feed): void
 function tpl_logSummary(string $what, array $details = []): void
 {
     $stats = tpl_feedStats();
-    tpl_log("\n──────────── SUMMARY ────────────");
-    tpl_log(sprintf('RESULT: OK. eramba received the complete list of %d %s.', $stats['rows'], $what));
+    tpl_log("\n──────────── SUMMARY ────────────", true);
+    tpl_log(sprintf('RESULT: OK. Published the complete list of %d %s. eramba compares it after this run: added, deleted or creeping accounts are review results, not errors.', $stats['rows'], $what), true);
     foreach ($details as $detail) {
-        tpl_logInfo($detail);
+        tpl_log('  ' . $detail, true);
     }
     if ($stats['kinds'] !== []) {
         ksort($stats['kinds'], SORT_STRING);
@@ -154,13 +162,18 @@ function tpl_logSummary(string $what, array $details = []): void
         foreach ($stats['kinds'] as $kind => $count) {
             $kinds[] = "$count $kind";
         }
-        tpl_logInfo('Roles listed: ' . implode(', ', $kinds) . '.');
-        tpl_logInfo(sprintf('%s without any role: %d.', ucfirst($what), $stats['without roles']));
+        tpl_log('  Roles listed: ' . implode(', ', $kinds) . '.', true);
+        tpl_log(sprintf('  %s without any role: %d.', ucfirst($what), $stats['without roles']), true);
     }
 }
 
-/** Ends a failed run: nothing reached eramba, and why. */
+/** Ends a run that published nothing: eramba records a failed pull and keeps the last successful one. */
 function tpl_logFailure(string $what, Throwable $e): void
 {
-    tpl_log("\n──────────── SUMMARY ────────────\nRESULT: FAILED. No $what was published.\nERROR: " . $e->getMessage());
+    tpl_log("\n──────────── SUMMARY ────────────", true);
+    if ($e instanceof TplEmptyFeedException) {
+        tpl_log("RESULT: NOT PUBLISHED. The provider returned an empty list, so no $what was sent. REASON: " . $e->getMessage(), true);
+        return;
+    }
+    tpl_log("RESULT: FAILED. No $what was published; eramba keeps the last successful pull. ERROR: " . $e->getMessage(), true);
 }

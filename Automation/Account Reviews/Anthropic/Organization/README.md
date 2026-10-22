@@ -105,7 +105,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, emails or keys. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
 
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
 
 ## 9. Troubleshooting
 
@@ -132,6 +132,6 @@ Stop the Account Reviews that use the feed, then remove the feed, delete the Adm
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
 
 References: [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api), [Admin API keys](https://platform.claude.com/docs/en/manage-claude/admin-api-keys), [list users](https://platform.claude.com/docs/en/api/admin-api/users/list-users), [list workspaces](https://platform.claude.com/docs/en/api/admin-api/workspaces/list-workspaces), [list workspace members](https://platform.claude.com/docs/en/api/admin-api/workspace_members/list-workspace-members), [workspaces and roles](https://platform.claude.com/docs/en/manage-claude/workspaces), [API versioning](https://platform.claude.com/docs/en/api/versioning).

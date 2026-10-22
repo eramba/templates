@@ -59,7 +59,7 @@ Employee feeds have no roles.
 - Workers without the key field (no work email, for example) are left out and counted in the log. Leaving someone out of a current-employees list can only add findings, never hide one.
 - The key must hold the same value as the application accounts it is compared with, usually the work email. An application account with a different email (a personal address, an alias, a service account) will be flagged; that is expected and reviewers decide on it.
 - Not covered: report prompts (set defaults in the report instead), multi-instance fields (each field must be a single text value), OAuth 2.0 API clients, and the Workday REST API.
-- Limits: RaaS returns the whole report in one response (no pages); responses over 4 MB, more rows than `MAX_USERS`, duplicate keys (ignoring case), an unexpected format or an empty list abort the run and nothing is published. Keep the report to the 3–4 fields below; 4 MB is roughly 25,000–30,000 rows.
+- Limits: RaaS returns the whole report in one response (no pages); responses over 4 MB, more rows than `MAX_USERS`, duplicate keys (ignoring case), an unexpected format or an empty current-employees list abort the run and nothing is published. Keep the report to the 3–4 fields below; 4 MB is roughly 25,000–30,000 rows.
 
 ## 4. Before you start
 
@@ -119,13 +119,13 @@ For a **former employees** feed, build a second report from terminated workers (
 | `FEED_MODE` | `current` | `current` for a List of current employees; `former` for a List of former employees (only changes the `FIELD_ACTIVE` check). |
 | `MAX_USERS` | `10000` | 1–50000 rows; exceeding it aborts instead of truncating. |
 
-Fixed limits: 200 seconds of collection, one response of at most 4 MB, 8 MiB of feed. An empty list always aborts: an empty current list would flag every account, an empty former list would hide every leaver.
+Fixed limits: 200 seconds of collection, one response of at most 4 MB, 8 MiB of feed. An empty current list aborts, as it would flag every account. An empty former list is published: it means no leavers in the report, and the Exit review reports none.
 
 ## 8. Results
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only (report rows, employees staged, and how many were left out and why). No names, emails or IDs are logged. Exit 1 means nothing was published.
 
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of current employees eramba received, or `RESULT: FAILED` with the reason.
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of employees published; `RESULT: NOT PUBLISHED` when a current-employees list is empty; or `RESULT: FAILED` with the error. Creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
 
 ## 9. Troubleshooting
 
@@ -156,6 +156,6 @@ Stop the Exit reviews that use the feed, then remove the feed and, if nothing el
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
+| 0.1.1 | An empty former-employees list is published (no leavers) instead of aborting; the log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
 
 References: Workday Community / Workday Administrator Guide (sign-in required): *Reporting as a Service (RaaS)*, *Create Custom Report*, *Create Integration System User*, *Integration System Security Groups*, *Activate Pending Security Policy Changes*. Public: [Reports as a Service (RaaS)](https://doc.workday.com/admin-guide/en-us/reporting-and-analytics/custom-reports-and-analytics/reports-as-a-service-raas-/dan1370796320263.html), [Workday integrations overview](https://doc.workday.com/workday-education/en-us/course-manuals/creating-and-securing-integrations/workday-integrations-overview.html).

@@ -128,7 +128,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only, never logins, emails or tokens. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
 
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts eramba received and the roles listed per kind, or `RESULT: FAILED` with the reason.
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
 
 ## 9. Troubleshooting
 
@@ -156,6 +156,6 @@ Stop the Account Reviews that use the feed, then remove the feed, uninstall and 
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
-| 0.1.1 | The log ends with a SUMMARY block (`RESULT: OK` or `RESULT: FAILED` and counts) |
+| 0.1.1 | The log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
 
 References: [organization members](https://docs.github.com/en/rest/orgs/members), [outside collaborators](https://docs.github.com/en/rest/orgs/outside-collaborators), [teams](https://docs.github.com/en/rest/teams/teams), [team members](https://docs.github.com/en/rest/teams/members), [fine-grained token permissions](https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens), [GitHub App JWT](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-json-web-token-jwt-for-a-github-app), [installation tokens](https://docs.github.com/en/rest/apps/apps#create-an-installation-access-token-for-an-app), [GraphQL `OrganizationIdentityProvider`](https://docs.github.com/en/graphql/reference/objects#organizationidentityprovider), [pagination](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api), [rate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).

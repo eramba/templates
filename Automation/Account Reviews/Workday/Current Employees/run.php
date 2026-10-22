@@ -63,7 +63,7 @@ const TPL_RUN_SECONDS = 200; // Collection budget inside the 240-second timeout
 // GET https://<workday host>/ccx/service/customreport2/<tenant>/<owner>/<report> is allowed.
 
 // ─── 4. SHARED CODE (copied from Automation/_shared, do not edit here) ──────
-// ─── shared:core v1 (edit Automation/_shared/core.php, then run Automation/tools/sync.php) ───
+// ─── shared:core v2 (edit Automation/_shared/core.php, then run Automation/tools/sync.php) ───
 /**
  * Turns every PHP warning or notice into an exception, so it fails the run
  * instead of being printed on stdout (where it would corrupt a feed or hide a problem).
@@ -91,9 +91,24 @@ function tpl_logInfo(string $message): void
     tpl_log('  ' . $message);
 }
 
-function tpl_log(string $line): void
+/**
+ * eramba keeps only the first 10,000 bytes of a run's output, so step lines stop after 8,000 bytes
+ * and the rest is left for the result. $keep writes the line regardless (the final result).
+ */
+function tpl_log(string $line, bool $keep = false): void
 {
-    fwrite(TPL_LOG_STREAM === 'stdout' ? STDOUT : STDERR, $line . "\n");
+    static $bytes = 0;
+    static $shortened = false;
+    $text = $line . "\n";
+    if (!$keep && $bytes + strlen($text) > 8000) {
+        if ($shortened) {
+            return;
+        }
+        $shortened = true;
+        $text = "  [Further steps not logged: eramba keeps only the first 10,000 bytes of output.]\n";
+    }
+    $bytes += strlen($text);
+    fwrite(TPL_LOG_STREAM === 'stdout' ? STDOUT : STDERR, $text);
 }
 
 /** Seconds since the first call. MAIN calls it once at start. */
@@ -139,7 +154,7 @@ function tpl_base64Secret(string $value, string $name): string
     }
     return $decoded;
 }
-// ─── end shared:core v1 sha256:277e2f6c5d57b964 ───
+// ─── end shared:core v2 sha256:54b06b7248971a34 ───
 // ─── shared:http v2 (edit Automation/_shared/http.php, then run Automation/tools/sync.php) ───
 /**
  * One JSON request to a provider API. Returns ['status' => int, 'headers' => [lower-case name => value], 'data' => array].
@@ -282,7 +297,7 @@ function tpl_readBody(\Psr\Http\Message\StreamInterface $stream, int $maxBytes, 
     return $body;
 }
 // ─── end shared:http v2 sha256:2fa2c253cb37e4d7 ───
-// ─── shared:feed v4 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+// ─── shared:feed v5 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
 {
@@ -417,6 +432,14 @@ function tpl_feedPublish($feed): void
 }
 
 /**
+ * Thrown when the provider returns no rows and the script must not publish an empty list. It is not an
+ * error of the run: tpl_logFailure() reports it as NOT PUBLISHED, with the reason in the message.
+ */
+final class TplEmptyFeedException extends RuntimeException
+{
+}
+
+/**
  * Ends a successful run with a block people can read at a glance in eramba's Test output.
  * $what names the rows ("accounts", "current employees"); $details adds script-specific counts.
  * Counts only, never names: the output may be shared or screenshotted.
@@ -424,10 +447,10 @@ function tpl_feedPublish($feed): void
 function tpl_logSummary(string $what, array $details = []): void
 {
     $stats = tpl_feedStats();
-    tpl_log("\n──────────── SUMMARY ────────────");
-    tpl_log(sprintf('RESULT: OK. eramba received the complete list of %d %s.', $stats['rows'], $what));
+    tpl_log("\n──────────── SUMMARY ────────────", true);
+    tpl_log(sprintf('RESULT: OK. Published the complete list of %d %s. eramba compares it after this run: added, deleted or creeping accounts are review results, not errors.', $stats['rows'], $what), true);
     foreach ($details as $detail) {
-        tpl_logInfo($detail);
+        tpl_log('  ' . $detail, true);
     }
     if ($stats['kinds'] !== []) {
         ksort($stats['kinds'], SORT_STRING);
@@ -435,17 +458,22 @@ function tpl_logSummary(string $what, array $details = []): void
         foreach ($stats['kinds'] as $kind => $count) {
             $kinds[] = "$count $kind";
         }
-        tpl_logInfo('Roles listed: ' . implode(', ', $kinds) . '.');
-        tpl_logInfo(sprintf('%s without any role: %d.', ucfirst($what), $stats['without roles']));
+        tpl_log('  Roles listed: ' . implode(', ', $kinds) . '.', true);
+        tpl_log(sprintf('  %s without any role: %d.', ucfirst($what), $stats['without roles']), true);
     }
 }
 
-/** Ends a failed run: nothing reached eramba, and why. */
+/** Ends a run that published nothing: eramba records a failed pull and keeps the last successful one. */
 function tpl_logFailure(string $what, Throwable $e): void
 {
-    tpl_log("\n──────────── SUMMARY ────────────\nRESULT: FAILED. No $what was published.\nERROR: " . $e->getMessage());
+    tpl_log("\n──────────── SUMMARY ────────────", true);
+    if ($e instanceof TplEmptyFeedException) {
+        tpl_log("RESULT: NOT PUBLISHED. The provider returned an empty list, so no $what was sent. REASON: " . $e->getMessage(), true);
+        return;
+    }
+    tpl_log("RESULT: FAILED. No $what was published; eramba keeps the last successful pull. ERROR: " . $e->getMessage(), true);
 }
-// ─── end shared:feed v4 sha256:c6a059301e52f3e0 ───
+// ─── end shared:feed v5 sha256:9c55ee771dbfe4ae ───
 
 // ─── 5. COLLECT: Workday ────────────────────────────────────────────────────
 // The custom report returns every row in one response (RaaS has no pages); the report's data source
@@ -581,10 +609,13 @@ function collectFeed(array $entries, array $config)
         tpl_feedAdd($feed, $key, tpl_feedText($name . $suffix, 'Description'), []);
         $count++;
     }
-    // An empty current-employees list would flag every application account, and an empty former-employees
-    // list would hide every leaver: never publish one.
+    // An empty current-employees list would flag every application account: never publish one. An empty
+    // former-employees list is a normal result (no leavers in the report) and only produces no findings.
+    if ($count === 0 && $wantActive) {
+        throw new TplEmptyFeedException('No current employees found, so an Exit review would flag every account; check the report filter, the field aliases and USER_KEY.');
+    }
     if ($count === 0) {
-        throw new RuntimeException('No employees found; check the report filter, the field aliases and USER_KEY.');
+        tpl_logInfo('No former employees in the report: the Exit review will report no leavers. If there were leavers, check the report filter.');
     }
     tpl_logInfo(sprintf('%d employees staged; %d skipped without %s; %d skipped with another status.', $count, $withoutKey, $keyField, $otherStatus));
     return $feed;
@@ -613,7 +644,7 @@ try {
 
     tpl_logStep(4, 'Publishing the employee list');
     tpl_feedPublish($feed);
-    tpl_logSummary('current employees');
+    tpl_logSummary($config['FEED_MODE'] . ' employees');
     exit(0);
 } catch (Throwable $e) {
     tpl_logFailure('employee list', $e);
