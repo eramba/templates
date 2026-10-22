@@ -583,7 +583,9 @@ function directoryRoles(string $token, array $config): array
     foreach (tpl_graphList($select, $token, $config['MAX_OBJECTS'], false) as $assignment) {
         $roleId = entraId($assignment['roleDefinitionId'] ?? null);
         if (!array_key_exists($roleId, $names)) {
-            // Some built-in roles (e.g. AdHoc License Administrator) are left out of the list but can be read by ID.
+            // The list leaves out built-in roles Microsoft has deprecated ("Deprecated - Do Not Use.", also absent
+            // from directoryRoleTemplates), yet tenants can still hold assignments to them, e.g. AdHoc License
+            // Administrator on Microsoft's own Office 365 Portal service principal. They are still readable by ID.
             $role = tpl_graphGet("roleManagement/directory/roleDefinitions/$roleId?\$select=id,displayName", $token);
             if (entraId($role['id'] ?? null) !== $roleId) {
                 throw new RuntimeException('A directory role assignment cannot be resolved.');
@@ -701,8 +703,11 @@ function userRoles(string $id, array $memberships, array $appAssignments, string
     return $roles;
 }
 
-/** Collects every account, 100 users at a time (memberships and app assignments batched), into the staged feed. */
-function collectFeed(string $token, array $config, array $directoryRoles, array $kinds)
+/**
+ * Collects every account, 100 users at a time (memberships and app assignments batched), into the staged feed.
+ * Returns the feed and the counts shown in the run summary.
+ */
+function collectFeed(string $token, array $config, array $directoryRoles, array $kinds): array
 {
     $feed = tpl_feedOpen();
     $users = listUsers($token, $config);
@@ -710,6 +715,8 @@ function collectFeed(string $token, array $config, array $directoryRoles, array 
     $keys = [];
     $apps = [];
     $bytes = 0;
+    $stats = ['accounts' => 0, 'enabled' => 0, 'disabled' => 0, 'Member' => 0, 'Guest' => 0, 'without access' => 0,
+        'Group' => 0, 'Directory role' => 0, 'Application' => 0, 'License' => 0];
     foreach (array_chunk($users, 100) as $chunk) {
         // Memberships are needed for groups, group-held directory roles and to verify group-based app assignments.
         $paths = [];
@@ -738,14 +745,43 @@ function collectFeed(string $token, array $config, array $directoryRoles, array 
                 throw new RuntimeException('Combined account access limit exceeded.');
             }
             $bytes = tpl_feedAdd($feed, $key, tpl_feedText($description, 'Description'), $roles);
+            $roles = array_unique($roles);
+            $stats['accounts']++;
+            $stats[$user['accountEnabled'] ? 'enabled' : 'disabled']++;
+            $stats[$user['userType']]++;
+            $stats['without access'] += $roles === [] ? 1 : 0;
+            foreach ($roles as $role) {
+                $stats[strstr($role, ':', true)]++;
+            }
         }
-        tpl_logInfo(sprintf('%d/%d accounts collected.', count($keys), count($users)));
+        // One progress line per 1,000 accounts keeps the log short on large tenants.
+        if (count($keys) % 1000 === 0 || count($keys) === count($users)) {
+            tpl_logInfo(sprintf('%d/%d accounts collected.', count($keys), count($users)));
+        }
     }
     if ($users === [] && !$config['ALLOW_EMPTY_FEED']) {
         throw new RuntimeException('No accounts found; check USER_IDS, or set ALLOW_EMPTY_FEED if zero accounts is intended.');
     }
     tpl_logInfo(sprintf('%d accounts staged (%d bytes), %d applications resolved.', count($users), $bytes, count($apps)));
-    return $feed;
+    return [$feed, $stats];
+}
+
+/** Counts only, never names: the test output may be shared or screenshotted. */
+function logSummary(array $stats, array $kinds): void
+{
+    $access = [];
+    foreach (['groups' => 'Group', 'directory_roles' => 'Directory role', 'applications' => 'Application', 'licenses' => 'License'] as $kind => $prefix) {
+        if (isset($kinds[$kind])) {
+            $access[] = sprintf('%d %s', $stats[$prefix], strtolower($prefix));
+        }
+    }
+    tpl_log("\n──────────── SUMMARY ────────────");
+    tpl_log(sprintf('RESULT: OK. eramba received the complete list of %d accounts.', $stats['accounts']));
+    tpl_logInfo(sprintf('Accounts: %d enabled, %d disabled; %d members, %d guests.', $stats['enabled'], $stats['disabled'], $stats['Member'], $stats['Guest']));
+    tpl_logInfo($access === [] ? 'Access: not collected (ROLES is empty).' : 'Access listed as roles: ' . implode(', ', $access) . '.');
+    if ($access !== []) {
+        tpl_logInfo(sprintf('Accounts without any listed access: %d.', $stats['without access']));
+    }
 }
 
 // ─── 6. MAIN ────────────────────────────────────────────────────────────────
@@ -768,13 +804,13 @@ try {
     tpl_logInfo(isset($kinds['directory_roles']) ? count($directoryRoles) . ' principals hold active directory roles.' : 'Skipped (not in ROLES).');
 
     tpl_logStep(4, 'Collecting accounts' . ($kinds === [] ? '' : ' and ' . implode(', ', array_keys($kinds))));
-    $feed = collectFeed($token, $config, $directoryRoles, $kinds);
+    [$feed, $stats] = collectFeed($token, $config, $directoryRoles, $kinds);
 
     tpl_logStep(5, 'Publishing the account review feed');
     tpl_feedPublish($feed);
-    tpl_log("\nDone.");
+    logSummary($stats, $kinds);
     exit(0);
 } catch (Throwable $e) {
-    tpl_log("\nABORTED: no account review feed was published.\nERROR: " . $e->getMessage());
+    tpl_log("\n──────────── SUMMARY ────────────\nRESULT: FAILED. No account review feed was published.\nERROR: " . $e->getMessage());
     exit(1);
 }

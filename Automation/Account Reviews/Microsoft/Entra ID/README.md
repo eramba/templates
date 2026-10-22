@@ -113,6 +113,8 @@ The key must be unique ignoring case, as eramba compares accounts ignoring case.
 
 stdout only contains the artifact declaration written by `writeAccountReviewArtifact()`. **Unlike the control automations, the step log goes to stderr**, which feed automations accept when the run exits 0. Logs contain counts only, never account names, IDs, tokens or Microsoft responses.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published, enabled/disabled and members/guests, and how many group, directory role, application and licence entries were listed; or `RESULT: FAILED` with the reason.
+
 Accounts are staged in a private temporary file and published once, after the whole population is collected. Exit 1 means nothing was published and the pull failed.
 
 ## 9. Troubleshooting

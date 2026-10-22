@@ -566,7 +566,8 @@ function listUsers(string $token, array $config): array
     return array_values(array_filter($users, fn ($u) => ($u['accountEnabled'] ?? null) === true && ($u['userType'] ?? null) === 'Member'));
 }
 
-function collectFeed(string $token, array $config)
+/** Returns the staged feed and the counts shown in the run summary. */
+function collectFeed(string $token, array $config): array
 {
     $users = listUsers($token, $config);
     $feed = tpl_feedOpen();
@@ -597,7 +598,19 @@ function collectFeed(string $token, array $config)
         throw new RuntimeException('No employees found; check GROUP_ID, REQUIRE_EMPLOYEE_ID and USER_KEY.');
     }
     tpl_logInfo(sprintf('%d employees staged; %d skipped without %s; %d skipped without Employee ID.', $count, $withoutKey, $config['USER_KEY'], $withoutEmployeeId));
-    return $feed;
+    return [$feed, ['employees' => $count, 'found' => count($users), 'without key' => $withoutKey, 'without employee id' => $withoutEmployeeId]];
+}
+
+/** Counts only, never names: the test output may be shared or screenshotted. */
+function logSummary(array $stats, array $config): void
+{
+    tpl_log("\n──────────── SUMMARY ────────────");
+    tpl_log(sprintf('RESULT: OK. eramba received %d current employees.', $stats['employees']));
+    tpl_logInfo(sprintf('Enabled members found: %d (%s).', $stats['found'], $config['GROUP_ID'] === '' ? 'whole tenant' : 'one group, nested members included'));
+    tpl_logInfo(sprintf('Left out without %s: %d. Left out without Employee ID: %d.', $config['USER_KEY'], $stats['without key'], $stats['without employee id']));
+    if ($stats['without key'] > 0) {
+        tpl_logInfo("Accounts of people left out will be flagged in Exit reviews; check USER_KEY if this number is high.");
+    }
 }
 
 // ─── 6. MAIN ────────────────────────────────────────────────────────────────
@@ -615,13 +628,13 @@ try {
     $token = tpl_graphToken($secrets['ENTRA_TENANT_ID'], $secrets['ENTRA_CLIENT_ID'], tpl_base64Secret($secrets['ENTRA_CLIENT_SECRET_B64'], 'entra_client_secret_b64'));
 
     tpl_logStep(3, 'Collecting current employees');
-    $feed = collectFeed($token, $config);
+    [$feed, $stats] = collectFeed($token, $config);
 
     tpl_logStep(4, 'Publishing the employee list');
     tpl_feedPublish($feed);
-    tpl_log("\nDone.");
+    logSummary($stats, $config);
     exit(0);
 } catch (Throwable $e) {
-    tpl_log("\nABORTED: no employee list was published.\nERROR: " . $e->getMessage());
+    tpl_log("\n──────────── SUMMARY ────────────\nRESULT: FAILED. No employee list was published.\nERROR: " . $e->getMessage());
     exit(1);
 }

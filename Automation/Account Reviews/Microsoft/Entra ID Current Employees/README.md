@@ -94,6 +94,8 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 100 pages, 8 MiB of 
 
 stdout only contains the artifact declaration; the step log goes to stderr with counts only (employees, and how many were left out and why). Exit 1 means nothing was published.
 
+When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of employees sent and how many were left out and why, or `RESULT: FAILED` with the reason.
+
 ## 9. Troubleshooting
 
 | Problem | Action |
