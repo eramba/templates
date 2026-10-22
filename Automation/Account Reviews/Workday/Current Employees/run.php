@@ -3,7 +3,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  Workday Current Employees
+ *  Workday – Current employees
  *  Technology: Workday HCM
  *  id: workday-current-employees        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (report, ISU, secrets, variables).

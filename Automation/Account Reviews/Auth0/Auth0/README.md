@@ -1,12 +1,11 @@
 ---
 id: auth0-account-review
-name: Auth0 Accounts and Assigned Access
+name: Auth0 – Accounts
 version: 0.1.1
 status: draft
 technology: Auth0
 vendor: Auth0 (Okta)
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - auth0_domain
   - auth0_client_id
@@ -23,36 +22,55 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Auth0 Accounts and Assigned Access
+# Auth0 – Accounts
 
 **Technology:** Auth0.
 
-Send Auth0 users, their roles and organization memberships to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user account of one Auth0 tenant and the access each one has: its roles and its organization memberships. Reviewers then mark in eramba which accounts and accesses should stay and which should be removed; nothing is changed in Auth0.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of users of one Auth0 tenant to review, for example the administrators and staff of an application that signs in with Auth0. eramba owns the schedule, comparison, reviewers, decisions and findings. The script is read-only.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Email by default; configurable to the Auth0 user ID |
-| `description` | Name, active or blocked, and user ID |
-| `roles` | `Role: <name> [<role id>]` for every role assigned to the user |
-| | `Organization: <display name> [<org id>]` for every organization membership |
+| **Family** | Account review |
+| **Each row is** | One Auth0 user account, identified by its email, for example `ana.garcia@example.com` (or its user ID with `USER_KEY`) |
+| **Connects to** | Your Auth0 tenant, through Auth0's official Management API. Read-only |
+| **Permission needed** | A machine-to-machine application authorized for the Auth0 Management API with `read:users` and `read:roles`, plus `read:organizations` and `read:organization_members` when organizations are listed (§5). A tenant administrator creates it |
+| **Included** | Every user of the tenant, blocked ones too |
+| **Not included** | Permissions given directly to users (outside roles); roles given inside an organization; application metadata used for authorization; other tenants (one per automation); tenants with more than 1000 users |
+| **Size limit** | At most 1000 users, the most Auth0's user list returns. A larger tenant stops the run instead of publishing part of it; this version does not use Auth0's user export |
+| **Roles listed** | Roles and organization memberships |
 
-All users are included, blocked ones too.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-**At most 1000 users.** Auth0's user list returns the first 1000 results; with more users the run stops with a clear error instead of publishing part of the tenant. Larger tenants need Auth0's user export job, which this version does not use.
+One row is one person's account. Its roles are every access that account holds. This automation lists two kinds:
 
-Not covered: permissions assigned directly to users (outside roles), roles assigned inside an organization, application-specific metadata (`app_metadata`) used as authorization, and other tenants. Roles show what the user was granted in Auth0, not how each application uses them.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Role** | An Auth0 role assigned to the person. Roles are what applications that sign in with Auth0 usually check to decide what a person may do | `Role: Admin [<id>]` |
+| **Organization** | The person is a member of this Auth0 organization, which groups the users of one customer or business unit | `Organization: Acme Corp [<id>]` |
 
-Any collection error, a role or organization member outside the collected users, or a limit aborts the run and nothing is published.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; active; id=auth0|64f1…
+Roles:       Organization: Acme Corp [org_Ab12…]
+             Role: Admin [rol_Cd34…]
+```
+
+The codes in square brackets are Auth0's identifiers. They keep two items with the same name apart; reviewers can ignore them. The description gives the name, whether the account is *active* or *blocked*, and the user ID.
+
+You choose which kinds are listed with `ROLES` (§7). With none, only the accounts are listed. Users without an email (some social or passwordless sign-ins) stop the run with the default key; use `user_id` then.
+
+A row shows *that* Ana has the *Admin* role, not what that role allows in each application.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each Auth0 role allows | Not covered by any automation yet. Roles show what a person was granted in Auth0, not how each application uses them |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). Choose `USER_KEY` so both feeds hold the same value, usually the work email |
 
 ## 4. Before you start
 
@@ -103,9 +121,7 @@ Fixed limits: 1000 users, 200 seconds of collection, 4 MB per response, 8 MiB of
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never emails, IDs or tokens. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

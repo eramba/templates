@@ -58,7 +58,7 @@ The scenario names, and the first column of a review, say *account*. In a permis
 
 Each account review script has a `ROLES` variable. With roles, reviews also show what each account can do and Differential reviews report role changes. With `ROLES = []` the feed only lists accounts: reviews then answer whether someone has an account at all, which is often enough for Exit reviews and is faster to collect.
 
-For Exit reviews, the usual setup compares each application (GitHub, Zoom, Zendesk, AI tools…) with the identity provider, where access is removed when someone leaves, for example with [Entra ID Current Employees](Microsoft/Entra%20ID%20Current%20Employees/). An HR list can play the same role.
+For Exit reviews, the usual setup compares each application (GitHub, Zoom, Zendesk, AI tools…) with the identity provider, where access is removed when someone leaves, for example with [Entra ID – Current employees](Microsoft/Entra%20ID%20Current%20Employees/). An HR list can play the same role.
 
 Matching uses the `user` value of both feeds, ignoring case. Choose each script's `USER_KEY` so both feeds hold the same value, usually the work email.
 
@@ -106,11 +106,11 @@ Feed type *List of accounts to be reviewed*. Snapshot, Differential and Exit rev
 | Automation | Each row is | Roles listed | Status |
 |---|---|---|---|
 | [Microsoft Entra ID / Microsoft 365](Microsoft/Entra%20ID/) | One user account, employee or guest | Nested groups, scoped directory roles, application role assignments and licences | draft |
-| [Okta Workforce Identity](Okta/Workforce%20Identity/) | One user account, deactivated included | Groups, application assignments and admin roles | draft |
-| [Auth0](Auth0/Auth0/) | One user account (up to 1000) | Roles and organization memberships | draft |
+| [Okta – Accounts](Okta/Workforce%20Identity/) | One user account, deactivated included | Groups, application assignments and admin roles | draft |
+| [Auth0 – Accounts](Auth0/Auth0/) | One user account (up to 1000) | Roles and organization memberships | draft |
 | [AWS IAM](AWS/IAM/) | One IAM user or the root user of one AWS account | Groups, policies, permissions boundaries and active credentials | draft |
 | [AWS IAM Identity Center](AWS/IAM%20Identity%20Center/) | One Identity Center user | Permission sets per AWS account, direct or through a group, and groups | draft |
-| [Google Workspace](Google/Workspace/) | One user account, suspended and archived included | Groups, admin roles and optionally org unit | draft |
+| [Google Workspace – Accounts](Google/Workspace/) | One user account, suspended and archived included | Groups, admin roles and optionally org unit | draft |
 | [GitHub Organizations](GitHub/Organizations/) | One member or outside collaborator of one or more organizations | Org role and teams | draft |
 | [Atlassian Cloud: Jira, Confluence, Jira Service Management…](Atlassian/Cloud/) | One organization user | Product access per site (all products or only the ones in `PRODUCTS`), groups and platform roles | draft |
 | [Slack](Slack/Slack/) | One workspace member, deactivated and invited included | Workspace role and user groups | draft |
@@ -132,8 +132,8 @@ Feed type *List of current employees*. Used as the second feed of an Exit review
 
 | Automation | Each row is | Roles listed | Status |
 |---|---|---|---|
-| [Entra ID Current Employees](Microsoft/Entra%20ID%20Current%20Employees/) | One enabled member user of the tenant or of one group, optionally only those with an Employee ID | None | draft |
-| [Workday Current Employees](Workday/Current%20Employees/) | One active worker from a Workday custom report (RaaS); also a former-employees mode | None | draft |
+| [Entra ID – Current employees](Microsoft/Entra%20ID%20Current%20Employees/) | One enabled member user of the tenant or of one group, optionally only those with an Employee ID | None | draft |
+| [Workday – Current employees](Workday/Current%20Employees/) | One active worker from a Workday custom report (RaaS); also a former-employees mode | None | draft |
 
 ## Install
 

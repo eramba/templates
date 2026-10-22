@@ -3,7 +3,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  Google Workspace Users and Assigned Access
+ *  Google Workspace – Accounts
  *  Technology: Google Workspace (Admin SDK Directory API)
  *  id: google-workspace-account-review        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).

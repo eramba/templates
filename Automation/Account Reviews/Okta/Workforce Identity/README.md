@@ -1,12 +1,11 @@
 ---
 id: okta-account-review
-name: Okta Accounts and Assigned Access
+name: Okta – Accounts
 version: 0.1.1
 status: draft
 technology: Okta Workforce Identity
 vendor: Okta
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - okta_org_url
   - okta_api_token
@@ -24,37 +23,58 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Okta Accounts and Assigned Access
+# Okta – Accounts
 
 **Technology:** Okta Workforce Identity.
 
-Send Okta users and their assigned access to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user account in your Okta org and the access each one has: its groups, the applications assigned to it and its administrator roles. Reviewers then mark in eramba which accounts and accesses should stay and which should be removed; nothing is changed in Okta.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of Okta users to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Okta login by default; configurable to email or user ID |
-| `description` | Display name (or first and last name), Okta status and user ID |
-| `roles` | `Group: <name> [<group id>]` for every group, Okta, app and built-in groups included |
-| | `Application: <label> [<app id>]` for every application assignment, direct or through a group |
-| | `Admin role: <label> [<type>]` for standard admin roles, `[<role id>]` for custom roles, direct or through a group |
+| **Family** | Account review |
+| **Each row is** | One Okta user account, identified by its login, for example `ana.garcia@example.com` |
+| **Connects to** | Your Okta org, through Okta's official Management API. Read-only |
+| **Permission needed** | An API token created by an Okta administrator account that holds the **Read-only Administrator** role. The token acts with that account's permissions (§5) |
+| **Included** | Every user: active, suspended, locked out and deactivated. Set `INCLUDE_DEPROVISIONED` to false to leave deactivated users out (§7) |
+| **Not included** | What an administrator role is limited to (resource sets and targets); permissions inside each application; devices; API service integrations; Okta Identity Governance entitlements; other Okta orgs (one per automation) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. This version has no filter to split a larger population |
+| **Roles listed** | Groups, applications assigned to the user, and administrator roles |
 
-All users are included, suspended and locked ones too. Okta's user list hides deactivated (`DEPROVISIONED`) users; they are fetched separately unless `INCLUDE_DEPROVISIONED` is off.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-One Okta org per automation. Not covered: resource sets and targets of admin roles, application-level permissions inside each app, devices, API service integrations, and Okta Identity Governance entitlements. An application assignment shows who can sign in, not what they can do inside the app.
+One row is one person's account. Its roles are every access that account holds. This automation lists three kinds:
 
-Access is collected per group and per application, so the number of calls grows with groups and applications, not with users. Admin roles of groups are read for Okta groups only, the only type that can hold them.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Group** | The person is a member of this group. Okta groups, groups imported from other directories and built-in groups are all listed | `Group: Engineering [<id>]` |
+| **Application** | The person is assigned this application, directly or through a group. It shows that they can sign in, not what they can do inside it | `Application: Salesforce [<id>]` |
+| **Admin role** | An administrator role in Okta itself, given to the person or to a group they are in. Standard roles show Okta's role code in the brackets; custom roles show their ID | `Admin role: Read-only Administrator [READ_ONLY_ADMIN]` |
 
-Any collection error, access assigned to a user outside the collected list, or limit aborts the run and nothing is published.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; ACTIVE; id=00u1abcd…
+Roles:       Admin role: Read-only Administrator [READ_ONLY_ADMIN]
+             Application: Salesforce [0oa2efgh…]
+             Group: Engineering [00g3ijkl…]
+```
+
+The codes in square brackets are Okta's identifiers. They keep two items with the same name apart; reviewers can ignore them. The description gives the name and Okta's status for the account, for example `ACTIVE`, `SUSPENDED` or `DEPROVISIONED` (deactivated).
+
+You choose which kinds are listed with `ROLES` (§7). With none, only the accounts are listed.
+
+A row shows *that* Ana is in *Engineering* or has an application, not what those give her.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each group grants, such as its applications and administrator roles | *Okta – Group permissions* (planned) |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). Deactivated Okta accounts of leavers stay listed until deleted |
+| See what someone can do inside an application, such as Salesforce | That application's own automation, if there is one in the [catalogue](../../README.md), for example [Salesforce](../../Salesforce/Salesforce/) |
 
 ## 4. Before you start
 
@@ -102,9 +122,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 200 pages per list, 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never names, logins or tokens. Accounts are published once, after the whole population is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

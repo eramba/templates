@@ -1,12 +1,11 @@
 ---
 id: workday-current-employees
-name: Workday Current Employees
+name: Workday – Current employees
 version: 0.1.1
 status: draft
 technology: Workday HCM
 vendor: Workday
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 feed_type: List of current employees
 secrets:
   - workday_report_url
@@ -27,39 +26,48 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Workday Current Employees
+# Workday – Current employees
 
 **Technology:** Workday HCM.
 
-Send the people who work for you today, as Workday knows them, to an eramba feed of type **List of current employees**. **Draft: functional and installation validation pending.**
+Sends eramba the people who work for you today, as Workday knows them, as a list of type **List of current employees**. It is the comparison side of an Exit review: eramba flags the accounts of an application that match no one on this list, and reviewers decide whether each should stay or be removed. Nothing is changed in Workday. With `FEED_MODE` set to `former`, the same automation sends a **List of former employees** instead (§7).
 
-## 1. Purpose
+## 1. At a glance
 
-The comparison side of an **Exit** review. When someone leaves, HR terminates them in Workday, but their accounts in other applications (GitHub, Zoom, Zendesk, AI tools…) can stay active. An Exit review compares an application's account feed with this list and flags every application account that matches no current employee.
-
-**Review types.** Employee feeds are only used by Exit reviews; Snapshot and Differential reviews use account feeds. See [review types](../../README.md#review-types). If your identity provider is a better source of truth for who has access, use [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) instead; Workday is the better source when HR terminations are what should end access.
-
-With `FEED_MODE` set to `former`, the same script feeds a **List of former employees** from a report of terminated workers (see §7).
-
-## 2. What it gathers
-
-The script reads one Workday custom report that you build and expose as a web service (Report-as-a-Service, RaaS), in JSON, with an Integration System User (ISU). The report decides who is a current employee; the script reads it whole, validates it and publishes it.
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Primary work email (`FIELD_EMAIL`) by default; Employee ID (`FIELD_EMPLOYEE_ID`) with `USER_KEY = 'employee_id'` |
-| `description` | Worker name (`FIELD_NAME`) and Employee ID, e.g. `Ana Ruiz; employee 21001` |
+| **Family** | Employee list (for Exit reviews) |
+| **Each row is** | One worker from a Workday report, identified by their primary work email, for example `ana.garcia@example.com` (or their Employee ID with `USER_KEY`) |
+| **Connects to** | One Workday custom report you build and expose as a web service (Report-as-a-Service), read as JSON. Read-only |
+| **Permission needed** | An Integration System User with view-only access to the report and to the data domains its fields come from. A Workday administrator creates it (§5) |
+| **Included** | Every row of the report. The report decides who counts as an employee, so build it as described in §5 |
+| **Not included** | Anyone the report leaves out; workers without the key field, such as a work email (counted in the log); report prompts, fields holding several values, OAuth 2.0 API clients and the Workday REST API |
+| **Size limit** | Up to 10000 people by default (`MAX_USERS`, maximum 50000), and 4 MB of report data in one response, roughly 25,000 to 30,000 rows. A larger report stops the run instead of being cut short |
+| **Roles listed** | None: employee lists carry no roles |
 
-Employee feeds have no roles.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-- Included: every row of the report. Who appears is decided by the report's data source and filters, so build it as described in §5.
-- Optional safety check: with `FIELD_ACTIVE` set, rows whose Active status does not match `FEED_MODE` (inactive rows in a current list, active rows in a former list) are left out and counted in the log.
-- Workers without the key field (no work email, for example) are left out and counted in the log. Leaving someone out of a current-employees list can only add findings, never hide one.
-- The key must hold the same value as the application accounts it is compared with, usually the work email. An application account with a different email (a personal address, an alias, a service account) will be flagged; that is expected and reviewers decide on it.
-- Not covered: report prompts (set defaults in the report instead), multi-instance fields (each field must be a single text value), OAuth 2.0 API clients, and the Workday REST API.
-- Limits: RaaS returns the whole report in one response (no pages); responses over 4 MB, more rows than `MAX_USERS`, duplicate keys (ignoring case), an unexpected format or an empty current-employees list abort the run and nothing is published. Keep the report to the 3–4 fields below; 4 MB is roughly 25,000–30,000 rows.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| None | Employee lists carry no roles; the list only says who is an employee. | Only the person's identifier and name are shown. |
+
+```
+Account:     ana.garcia@example.com
+Description: Ana Ruiz; employee 21001
+```
+
+The description gives the worker's name and Employee ID.
+
+Workday is the better source when HR terminations are what should end access: when someone leaves, HR terminates them in Workday, but their accounts in other applications can stay active. The key must hold the same value as the application accounts it is compared with, usually the work email; an application account with a different address, such as a personal email or an alias, is flagged, and reviewers decide on it.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| Review the accounts of an application against this list | Any account feed in the [catalogue](../../README.md), for example [Entra ID – Accounts](../../Microsoft/Entra%20ID/), [Okta – Accounts](../../Okta/Workforce%20Identity/) or [Google Workspace – Accounts](../../Google/Workspace/) |
+| Use the identity provider as the source of employees | [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) |
 
 ## 4. Before you start
 
@@ -123,9 +131,7 @@ Fixed limits: 200 seconds of collection, one response of at most 4 MB, 8 MiB of 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only (report rows, employees staged, and how many were left out and why). No names, emails or IDs are logged. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of employees published; `RESULT: NOT PUBLISHED` when a current-employees list is empty; or `RESULT: FAILED` with the error. Creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this list: below the `RESULT: OK` line, the summary counts the employees published and how many were left out and why. An empty current-employees list is never published, because an Exit review would flag every account. An empty former-employees list is published: it means the report has no leavers.
 
 ## 9. Troubleshooting
 

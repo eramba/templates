@@ -1,12 +1,11 @@
 ---
 id: entra-current-employees
-name: Entra ID Current Employees
+name: Entra ID – Current employees
 version: 0.1.1
 status: draft
 technology: Microsoft Entra ID
 vendor: Microsoft
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 feed_type: List of current employees
 secrets:
   - entra_tenant_id
@@ -24,34 +23,48 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Entra ID Current Employees
+# Entra ID – Current employees
 
 **Technology:** Microsoft Entra ID (public cloud).
 
-Send the people who should have access today, as Entra knows them, to an eramba feed of type **List of current employees**. **Draft: functional and installation validation pending.**
+Sends eramba the people who should have access today, as Entra ID knows them, as a list of type **List of current employees**. It is the comparison side of an Exit review: eramba flags the accounts of an application that match no one on this list, and reviewers decide whether each should stay or be removed. Nothing is changed in Entra.
 
-## 1. Purpose
+## 1. At a glance
 
-The comparison side of an **Exit** review. When someone leaves, their Entra account is disabled, but their accounts in other applications (GitHub, Zoom, Zendesk, AI tools…) can stay active. An Exit review compares an application's account feed with this list and flags every application account that matches no current employee.
-
-Entra is the source of truth here because it is where access is removed. If your HR system keeps a more reliable list, an HR feed can play the same role.
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Work email (`mail`) by default; configurable to user principal name or object ID |
-| `description` | Display name and Employee ID when present |
+| **Family** | Employee list (for Exit reviews) |
+| **Each row is** | One current employee, identified by their work email, for example `ana.garcia@example.com` (or user principal name or object ID with `USER_KEY`) |
+| **Connects to** | Your Microsoft Entra ID, through Microsoft's official API (Microsoft Graph). Read-only |
+| **Permission needed** | Microsoft Graph application permission `User.Read.All`, plus `GroupMember.Read.All` when `GROUP_ID` is set. An Entra administrator creates the connection and grants admin consent (§5) |
+| **Included** | Enabled users of type Member, of the whole tenant or of one group (nested members included) |
+| **Not included** | Disabled users and guests; users without the chosen key field (counted in the log); with `REQUIRE_EMPLOYEE_ID`, users without an Employee ID, such as admin and test accounts |
+| **Size limit** | Up to 10000 people by default (`MAX_USERS`, maximum 30000). A larger list stops the run instead of being cut short |
+| **Roles listed** | None: employee lists carry no roles |
 
-Employee feeds have no roles. Included: enabled users of type Member, of the whole tenant or of one group (nested members included). Excluded: disabled users and guests.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-The key must hold the same value as the application accounts it is compared with, usually the work email. An application account with a different email (a personal address, an alias, a service account) will be flagged; that is expected and reviewers decide on it.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| None | Employee lists carry no roles; the list only says who is an employee. | Only the person's identifier and name are shown. |
 
-Users without the chosen key field are left out and counted in the log. Leaving someone out of this list can only add findings, never hide one. An empty list aborts the run: it would flag every account.
+```
+Account:     ana.garcia@example.com
+Description: Ana García; employee 21001
+```
 
-Any collection error or limit aborts the run and nothing is published.
+The description gives the display name, and the Employee ID when Entra has one.
+
+Entra is the source of truth here because it is where access is removed. When someone leaves, their Entra account is disabled, but their accounts in other applications can stay active. The key must hold the same value as the application accounts it is compared with, usually the work email; an application account with a different address, such as a personal email or an alias, is flagged, and reviewers decide on it.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| Review the accounts of an application against this list | Any account feed in the [catalogue](../../README.md), for example [Entra ID – Accounts](../Entra%20ID/), [Okta – Accounts](../../Okta/Workforce%20Identity/) or [Google Workspace – Accounts](../../Google/Workspace/) |
+| Use HR as the source of employees | [Workday – Current employees](../../Workday/Current%20Employees/) |
 
 ## 4. Before you start
 
@@ -92,9 +105,7 @@ Fixed limits: 200 seconds of collection, 4 MB per response, 100 pages, 8 MiB of 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only (employees, and how many were left out and why). Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of employees published; `RESULT: NOT PUBLISHED` when a current-employees list is empty; or `RESULT: FAILED` with the error. Creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this list: below the `RESULT: OK` line, the summary counts the employees published and how many were left out and why. An empty list is never published, because an Exit review would flag every account.
 
 ## 9. Troubleshooting
 

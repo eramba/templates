@@ -3,7 +3,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  Auth0 Accounts and Assigned Access
+ *  Auth0 – Accounts
  *  Technology: Auth0 (Okta Customer Identity)
  *  id: auth0-account-review        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).

@@ -1,12 +1,11 @@
 ---
 id: google-workspace-account-review
-name: Google Workspace Users and Assigned Access
+name: Google Workspace – Accounts
 version: 0.1.1
 status: draft
 technology: Google Workspace
 vendor: Google
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - google_service_account_json_b64
 variables:
@@ -25,46 +24,59 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# Google Workspace Users and Assigned Access
+# Google Workspace – Accounts
 
 **Technology:** Google Workspace (Admin SDK Directory API), one customer account.
 
-Send Google Workspace users, their group memberships and admin roles to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user account in your Google Workspace and the access each one has: its groups and its administrator roles, and optionally its organizational unit. Reviewers then mark in eramba which accounts and accesses should stay and which should be removed; nothing is changed in Google Workspace.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of Google Workspace users to review: active, suspended and archived. eramba owns the schedule, comparison, reviewers, decisions and findings. The script is read-only.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or an HR list whose key holds the same value (usually the work email); see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | Primary email by default; configurable to the immutable user ID |
-| `description` | Full name; `active`, `suspended (<reason>)` and/or `archived`; `super admin` or `delegated admin`; org unit path; last sign-in date or `never signed in`; creation date; user ID |
-| `roles` | `Group: <group email> (owner)`, `(manager)` or `(member) [<group id>]` for direct memberships |
-| | `Group: <group email> (nested) [<group id>]` when the user belongs through a nested group |
-| | `Group: <group email> (all users) [<group id>]` on every user when the group contains the whole organization |
-| | `Admin role: <role name> [<role id>]` for roles assigned to the whole organization |
-| | `Admin role: <role name> (org unit <org unit id>) [<role id>/<org unit id>]` for roles limited to an organizational unit |
-| | `Admin role: <role name> (via group <group email>) [<role id>]` for roles assigned to a group the user belongs to, directly or nested |
-| | ` (conditional)` is added to the role name when the assignment has a condition |
-| | `Org unit: <path> [path]` with the optional `org_unit` kind |
+| **Family** | Account review |
+| **Each row is** | One user account, identified by its primary email, for example `ana.garcia@example.com` (or its immutable user ID with `USER_KEY`) |
+| **Connects to** | Your Google Workspace, through Google's official Admin SDK Directory API. Read-only |
+| **Permission needed** | A service account with domain-wide delegation for the read-only scopes `admin.directory.user.readonly`, `admin.directory.group.readonly` and `admin.directory.rolemanagement.readonly`, acting as an administrator you name in `DELEGATED_ADMIN_EMAIL`. A Google Cloud administrator creates the service account and a super admin authorizes the delegation once (§5) |
+| **Included** | Every user of the customer account, across all domains and organizational units: active, suspended and archived |
+| **Not included** | Deleted users; applications assigned through SAML or OIDC; Google Cloud IAM; shared drives and file sharing; aliases; what each admin role can do; members of groups that are not users or groups of your customer (external addresses are ignored) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000) and 1000 groups (`MAX_GROUPS`, maximum 5000). A larger population stops the run instead of being cut short. This version has no filter to split a larger population |
+| **Roles listed** | Groups (nested included), administrator roles with their scope, and optionally the organizational unit |
 
-The super admin role is returned by Google under its system name `_SEED_ADMIN_ROLE`. A user with both a direct and a nested membership of the same group gets the direct one only.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-Every user of the customer account (all domains and organizational units), from `users.list`, including suspended and archived users. Deleted users are not accounts and are not listed.
+One row is one person's account. Its roles are every access that account holds. This automation lists three kinds:
 
-Groups and memberships are read once per group (`groups.list`, then `members.list` per group) and inverted, so the cost grows with the number of groups, not users. Nested groups are resolved; members that are not users or groups of this customer (external addresses, groups of other organizations) are ignored and only counted in the log. Admin roles come from `roles.list` and `roleAssignments.list`; roles assigned to groups are expanded to the group's members, nested included. Role assignments to service accounts or other principals that are not users are counted in the log, not listed.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Group** | The person belongs to this group, as *owner*, *manager* or *member*, or *nested* when they are in another group that belongs to it. *all users* means the group contains the whole organization, so it appears on every account. Groups usually give access to files, shared mailboxes or applications; email-only groups are listed too | `Group: finance@example.com (member) [<id>]` |
+| **Admin role** | An administrator role in Google Workspace, such as *User Management Admin*, given to the person or to a group they are in (*via group*). *org unit* means it covers only that part of the organization; *conditional* means the assignment has a condition. A super admin shows as `_SEED_ADMIN_ROLE`, Google's name for that role | `Admin role: User Management Admin [<id>]` |
+| **Org unit** | The organizational unit the account sits in. Listed only when you add `org_unit` to `ROLES` | `Org unit: /Sales [path]` |
 
-Not covered: third-party SAML/OIDC application assignments, Google Cloud IAM, shared drives and file sharing, group settings such as who can post, dynamic group queries (their current members are listed like any other group), aliases, and the effective privileges of each admin role. Org unit IDs in role scopes are not resolved to paths (that needs another scope).
+```
+Account:     ana.garcia@example.com
+Description: Ana García; active; org unit /Sales; last sign-in 2026-10-02; created 2023-04-17; id=1034…
+Roles:       Admin role: User Management Admin [1234…]
+             Group: finance@example.com (member) [03abc…]
+             Group: all-staff@example.com (nested) [04def…]
+```
 
-Any collection error, a role assignment pointing to a role that was not listed, a repeated page token, or a limit aborts the run and nothing is published.
+The codes in square brackets are Google's identifiers. They keep two items with the same name apart; reviewers can ignore them. The description gives the name, whether the account is *active*, *suspended* or *archived*, whether it is a *super admin* or *delegated admin*, its organizational unit, its last sign-in date (or *never signed in*) and its creation date.
 
-Limits: `MAX_USERS` users, `MAX_GROUPS` groups, 100,000 direct memberships, 10,000 roles or role assignments, 200 pages per list, 200 seconds of collection. Reading memberships takes one request per 200 members of each group: with about 0.2–0.5 seconds per request, a few hundred groups fit the budget. **To validate on a real tenant:** the time per request, that `roleAssignments.list` includes super admin assignments, the exact admin privileges listed in §5, and that `scopeType` and `assigneeType` values match the reference.
+You choose which kinds are listed with `ROLES` (§7). With none, only the accounts are listed.
+
+A row shows *that* Ana is in *finance@example.com* or holds *User Management Admin*, not what those give her.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each group grants | *Google Workspace – Group permissions* (planned) |
+| See what each administrator role allows | *Google Workspace – Admin role permissions* (planned) |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). Suspended and archived accounts of leavers stay listed until deleted |
+| See what someone can do inside an application, such as Salesforce | That application's own automation, if there is one in the [catalogue](../../README.md), for example [Salesforce](../../Salesforce/Salesforce/) |
 
 ## 4. Before you start
 
@@ -123,9 +135,7 @@ Keep `USER_KEY` unchanged once a Differential review has a baseline. Renaming a 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never emails, names or keys. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published. Errors show the HTTP status and Google's one-word reason, never response bodies.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 
