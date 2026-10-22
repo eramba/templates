@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-// version: 1 — Account Review feed rows, staging and publication
+// version: 3 — Account Review feed rows, staging and publication
 
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -16,6 +16,20 @@ function tpl_feedText(mixed $value, string $what): string
         throw new RuntimeException("$what is longer than 255 bytes.");
     }
     return $value;
+}
+
+/**
+ * The role kinds a script collects, from its ROLES variable. Empty means accounts only: reviews then
+ * compare which accounts exist (added, deleted, creeping accounts) and never report role changes.
+ * Returns the selection as a set, e.g. ['groups' => true].
+ */
+function tpl_roleKinds(mixed $selected, array $allowed): array
+{
+    if (!is_array($selected) || !array_is_list($selected) || count($selected) !== count(array_unique($selected))
+        || array_diff($selected, $allowed) !== []) {
+        throw new RuntimeException('ROLES must be a list chosen from: ' . implode(', ', $allowed) . ' (or empty for accounts only).');
+    }
+    return array_fill_keys($selected, true);
 }
 
 /**
@@ -36,8 +50,8 @@ function tpl_roleString(string $kind, mixed $name, string $id): string
 }
 
 /**
- * The account key eramba matches between pulls. eramba compares accounts case-insensitively,
- * so two accounts must never share a key ignoring case.
+ * The key eramba matches between pulls and between feeds. eramba compares keys ignoring case,
+ * so two rows must never share a key ignoring case.
  */
 function tpl_feedKey(mixed $value, array &$seen, bool $allowSpaces = false): string
 {

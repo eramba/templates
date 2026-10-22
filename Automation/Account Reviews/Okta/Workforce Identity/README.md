@@ -12,6 +12,7 @@ secrets:
   - okta_api_token
 variables:
   - USER_KEY
+  - ROLES
   - INCLUDE_DEPROVISIONED
   - ALLOW_EMPTY_FEED
   - MAX_USERS
@@ -32,6 +33,8 @@ Send Okta users and their assigned access to an eramba Account Review feed. **Dr
 ## 1. Purpose
 
 Supplies the current list of Okta users to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
+
+**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
 
 ## 2. What it gathers
 
@@ -89,6 +92,7 @@ An API token acts with the permissions of the account that created it and expire
 | Variable | Default | Meaning |
 |---|---|---|
 | `USER_KEY` | `login` | Account identifier: `login`, `email` or `id`. Must exist on every user; no fallback. |
+| `ROLES` | `['groups', 'applications', 'admin_roles']` | Access listed as roles. `[]` lists users only. |
 | `INCLUDE_DEPROVISIONED` | `true` | Also list deactivated users. Turn off to review active, suspended and locked users only. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
 | `MAX_USERS` | `2000` | 1–10000 users; exceeding it aborts instead of truncating. |

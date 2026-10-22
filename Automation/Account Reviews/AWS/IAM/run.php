@@ -36,6 +36,7 @@ $secrets = [
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
     'USER_KEY' => 'UserName', // Account identifier: UserName, Arn or UserId (no fallback)
+    'ROLES' => ['groups', 'policies', 'credentials'], // Access listed as roles; [] = accounts only (README §7)
     'INCLUDE_ROOT' => true, // Also list the account root user and its credentials
     'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
     'MAX_USERS' => 2000, // Maximum IAM users and groups; never truncate
@@ -190,7 +191,7 @@ function tpl_awsPages(object $client, string $operation, array $args, array $key
     return $lists;
 }
 // ─── end shared:providers/aws v1 sha256:4fa124f9a6f94e04 ───
-// ─── shared:feed v1 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+// ─── shared:feed v3 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
 {
@@ -205,6 +206,20 @@ function tpl_feedText(mixed $value, string $what): string
         throw new RuntimeException("$what is longer than 255 bytes.");
     }
     return $value;
+}
+
+/**
+ * The role kinds a script collects, from its ROLES variable. Empty means accounts only: reviews then
+ * compare which accounts exist (added, deleted, creeping accounts) and never report role changes.
+ * Returns the selection as a set, e.g. ['groups' => true].
+ */
+function tpl_roleKinds(mixed $selected, array $allowed): array
+{
+    if (!is_array($selected) || !array_is_list($selected) || count($selected) !== count(array_unique($selected))
+        || array_diff($selected, $allowed) !== []) {
+        throw new RuntimeException('ROLES must be a list chosen from: ' . implode(', ', $allowed) . ' (or empty for accounts only).');
+    }
+    return array_fill_keys($selected, true);
 }
 
 /**
@@ -225,8 +240,8 @@ function tpl_roleString(string $kind, mixed $name, string $id): string
 }
 
 /**
- * The account key eramba matches between pulls. eramba compares accounts case-insensitively,
- * so two accounts must never share a key ignoring case.
+ * The key eramba matches between pulls and between feeds. eramba compares keys ignoring case,
+ * so two rows must never share a key ignoring case.
  */
 function tpl_feedKey(mixed $value, array &$seen, bool $allowSpaces = false): string
 {
@@ -289,12 +304,15 @@ function tpl_feedPublish($feed): void
         }
     })());
 }
-// ─── end shared:feed v1 sha256:f50e84d2b8389d2b ───
+// ─── end shared:feed v3 sha256:39800df21bc1737d ───
 
 // ─── 5. COLLECT: AWS IAM ────────────────────────────────────────────────────
 
+const ROLE_KINDS = ['groups', 'policies', 'credentials'];
+
 function validateConfig(array $c): void
 {
+    tpl_roleKinds($c['ROLES'], ROLE_KINDS);
     if (!in_array($c['USER_KEY'], ['UserName', 'Arn', 'UserId'], true)) {
         throw new RuntimeException('USER_KEY must be UserName, Arn or UserId.');
     }
@@ -362,16 +380,18 @@ function policyName(array $policy): mixed
 
 function collectFeed(object $iam, array $config)
 {
+    $kinds = tpl_roleKinds($config['ROLES'], ROLE_KINDS);
     $details = tpl_awsPages($iam, 'getAccountAuthorizationDetails', ['Filter' => ['User', 'Group'], 'MaxItems' => 1000],
         ['UserDetailList', 'GroupDetailList'], $config['MAX_USERS']);
     $groups = [];
     foreach ($details['GroupDetailList'] as $group) {
         $name = tpl_feedText($group['GroupName'] ?? null, 'Group name');
-        $roles = [tpl_roleString('Group', $name, tpl_feedText($group['Arn'] ?? null, 'Group ARN'))];
-        foreach ($group['AttachedManagedPolicies'] ?? [] as $policy) {
+        $arn = tpl_feedText($group['Arn'] ?? null, 'Group ARN');
+        $roles = isset($kinds['groups']) ? [tpl_roleString('Group', $name, $arn)] : [];
+        foreach (isset($kinds['policies']) ? $group['AttachedManagedPolicies'] ?? [] : [] as $policy) {
             $roles[] = tpl_roleString('Group policy', $name . ' / ' . tpl_feedText(policyName($policy), 'Policy name'), tpl_feedText($policy['PolicyArn'] ?? null, 'Policy ARN'));
         }
-        foreach ($group['GroupPolicyList'] ?? [] as $policy) {
+        foreach (isset($kinds['policies']) ? $group['GroupPolicyList'] ?? [] : [] as $policy) {
             $roles[] = tpl_roleString('Group inline policy', $name . ' / ' . tpl_feedText(policyName($policy), 'Policy name'), 'inline');
         }
         $groups[$name] = $roles;
@@ -392,13 +412,13 @@ function collectFeed(object $iam, array $config)
             }
             array_push($roles, ...$groups[$groupName]);
         }
-        foreach ($user['AttachedManagedPolicies'] ?? [] as $policy) {
+        foreach (isset($kinds['policies']) ? $user['AttachedManagedPolicies'] ?? [] : [] as $policy) {
             $roles[] = tpl_roleString('Policy', policyName($policy), tpl_feedText($policy['PolicyArn'] ?? null, 'Policy ARN'));
         }
-        foreach ($user['UserPolicyList'] ?? [] as $policy) {
+        foreach (isset($kinds['policies']) ? $user['UserPolicyList'] ?? [] : [] as $policy) {
             $roles[] = tpl_roleString('Inline policy', policyName($policy), 'inline');
         }
-        if (isset($user['PermissionsBoundary']['PermissionsBoundaryArn'])) {
+        if (isset($kinds['policies'], $user['PermissionsBoundary']['PermissionsBoundaryArn'])) {
             $arn = tpl_feedText($user['PermissionsBoundary']['PermissionsBoundaryArn'], 'Boundary ARN');
             $roles[] = tpl_roleString('Permissions boundary', substr(strrchr($arn, '/') ?: $arn, 1) ?: $arn, $arn);
         }
@@ -406,7 +426,9 @@ function collectFeed(object $iam, array $config)
             throw new RuntimeException('A user is missing from the credential report; IAM changed during the pull, retry later.');
         }
         [$credentialRoles, $mfa] = credentials($report[$name]);
-        array_push($roles, ...$credentialRoles);
+        if (isset($kinds['credentials'])) {
+            array_push($roles, ...$credentialRoles);
+        }
         $created = ($user['CreateDate'] ?? null) instanceof DateTimeInterface ? $user['CreateDate']->format('Y-m-d') : '-';
         $userId = tpl_feedText($user['UserId'] ?? null, 'User ID');
         $key = tpl_feedKey($user[$config['USER_KEY']] ?? null, $keys);
@@ -419,6 +441,7 @@ function collectFeed(object $iam, array $config)
             throw new RuntimeException('The credential report has no root account row.');
         }
         [$credentialRoles, $mfa] = credentials($report['<root_account>']);
+        $credentialRoles = isset($kinds['credentials']) ? $credentialRoles : [];
         $key = tpl_feedKey($config['USER_KEY'] === 'Arn' ? ($report['<root_account>']['arn'] ?? null) : '<root_account>', $keys);
         $bytes = tpl_feedAdd($feed, $key, "AWS account root user; $mfa", $credentialRoles);
         $count++;

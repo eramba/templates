@@ -38,6 +38,7 @@ $secrets = [
 $config = [
     'USER_KEY' => 'userPrincipalName', // Account identifier: userPrincipalName, id or mail (no fallback)
     'USER_IDS' => [], // Empty: whole tenant. Otherwise a list of Entra user object IDs
+    'ROLES' => ['groups', 'directory_roles', 'applications', 'licenses'], // Access listed as roles; [] = accounts only (README §7)
     'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
     'MAX_USERS' => 2000, // Maximum accounts in the feed; never truncate
     'MAX_OBJECTS' => 2000, // Maximum records per API collection; never truncate
@@ -132,14 +133,14 @@ function tpl_base64Secret(string $value, string $name): string
     return $decoded;
 }
 // ─── end shared:core v1 sha256:277e2f6c5d57b964 ───
-// ─── shared:http v1 (edit Automation/_shared/http.php, then run Automation/tools/sync.php) ───
+// ─── shared:http v2 (edit Automation/_shared/http.php, then run Automation/tools/sync.php) ───
 /**
  * One JSON request to a provider API. Returns ['status' => int, 'headers' => [lower-case name => value], 'data' => array].
  *
  * - Only "METHOD https://host/path" combinations starting with an entry of TPL_ALLOWED_REQUESTS are sent,
  *   so the script cannot write to the provider or send its token to another host.
  * - TLS verification on, redirects off, timeouts capped to the remaining run budget.
- * - 429/503/504 are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
+ * - 429/503/504, and 403 with X-RateLimit-Remaining: 0 (GitHub's rate limit), are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
  *   or X-RateLimit-Reset) when it fits the budget; otherwise the run stops.
  * - Responses over 4 MB, non-JSON bodies and any other non-2xx status stop the run. Response bodies and
  *   request URLs are never included in errors: they may contain account data or tokens.
@@ -167,7 +168,8 @@ function tpl_http(string $method, string $url, array $options = []): array
             throw new RuntimeException("Connection to $host failed; check connectivity and credentials.");
         }
         $status = $response->getStatusCode();
-        if (in_array($status, [429, 503, 504], true) && $attempt < 3) {
+        $rateLimited = $status === 403 && trim($response->getHeaderLine('X-RateLimit-Remaining')) === '0';
+        if ((in_array($status, [429, 503, 504], true) || $rateLimited) && $attempt < 3) {
             $response->getBody()->close();
             $wait = tpl_retryDelay($response, $attempt);
             if ($wait > min(30, tpl_remaining() - 5)) {
@@ -272,7 +274,7 @@ function tpl_readBody(\Psr\Http\Message\StreamInterface $stream, int $maxBytes, 
     }
     return $body;
 }
-// ─── end shared:http v1 sha256:a387e044ee2df920 ───
+// ─── end shared:http v2 sha256:2fa2c253cb37e4d7 ───
 // ─── shared:providers/graph v1 (edit Automation/_shared/providers/graph.php, then run Automation/tools/sync.php) ───
 /** Application token through the client-credentials flow. */
 function tpl_graphToken(string $tenantId, string $clientId, string $clientSecret): string
@@ -417,7 +419,7 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
     return $state;
 }
 // ─── end shared:providers/graph v1 sha256:0f75dd180874adb4 ───
-// ─── shared:feed v1 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+// ─── shared:feed v3 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
 {
@@ -432,6 +434,20 @@ function tpl_feedText(mixed $value, string $what): string
         throw new RuntimeException("$what is longer than 255 bytes.");
     }
     return $value;
+}
+
+/**
+ * The role kinds a script collects, from its ROLES variable. Empty means accounts only: reviews then
+ * compare which accounts exist (added, deleted, creeping accounts) and never report role changes.
+ * Returns the selection as a set, e.g. ['groups' => true].
+ */
+function tpl_roleKinds(mixed $selected, array $allowed): array
+{
+    if (!is_array($selected) || !array_is_list($selected) || count($selected) !== count(array_unique($selected))
+        || array_diff($selected, $allowed) !== []) {
+        throw new RuntimeException('ROLES must be a list chosen from: ' . implode(', ', $allowed) . ' (or empty for accounts only).');
+    }
+    return array_fill_keys($selected, true);
 }
 
 /**
@@ -452,8 +468,8 @@ function tpl_roleString(string $kind, mixed $name, string $id): string
 }
 
 /**
- * The account key eramba matches between pulls. eramba compares accounts case-insensitively,
- * so two accounts must never share a key ignoring case.
+ * The key eramba matches between pulls and between feeds. eramba compares keys ignoring case,
+ * so two rows must never share a key ignoring case.
  */
 function tpl_feedKey(mixed $value, array &$seen, bool $allowSpaces = false): string
 {
@@ -516,12 +532,15 @@ function tpl_feedPublish($feed): void
         }
     })());
 }
-// ─── end shared:feed v1 sha256:f50e84d2b8389d2b ───
+// ─── end shared:feed v3 sha256:39800df21bc1737d ───
 
 // ─── 5. COLLECT: Entra ID ───────────────────────────────────────────────────
 
+const ROLE_KINDS = ['groups', 'directory_roles', 'applications', 'licenses'];
+
 function validateConfig(array $c): void
 {
+    tpl_roleKinds($c['ROLES'], ROLE_KINDS);
     if (!in_array($c['USER_KEY'], ['userPrincipalName', 'id', 'mail'], true)) {
         throw new RuntimeException('USER_KEY must be userPrincipalName, id or mail.');
     }
@@ -579,7 +598,7 @@ function directoryRoles(string $token, array $config): array
 /** The whole tenant, or exactly the configured USER_IDS. */
 function listUsers(string $token, array $config): array
 {
-    $select = '$select=id,displayName,userPrincipalName,mail,accountEnabled,userType';
+    $select = '$select=id,displayName,userPrincipalName,mail,accountEnabled,userType,assignedLicenses';
     if ($config['USER_IDS'] === []) {
         return tpl_graphList('users?' . $select . '&$top=999', $token, $config['MAX_USERS']);
     }
@@ -592,6 +611,33 @@ function listUsers(string $token, array $config): array
         $users[] = $user;
     }
     return $users;
+}
+
+/** Microsoft 365 and other licences the tenant subscribes to: SKU ID => SKU part number (e.g. ENTERPRISEPACK). */
+function licenseNames(string $token): array
+{
+    $names = [];
+    foreach (tpl_graphGet('subscribedSkus?$select=skuId,skuPartNumber', $token)['value'] ?? null ?: [] as $sku) {
+        $names[entraId($sku['skuId'] ?? null)] = tpl_feedText($sku['skuPartNumber'] ?? null, 'Licence name');
+    }
+    return $names;
+}
+
+/** Licences assigned to one user, directly or through a group. */
+function userLicenses(array $user, array $licenseNames): array
+{
+    if (!is_array($user['assignedLicenses'] ?? null)) {
+        throw new RuntimeException('Assigned licences are missing; cannot establish licence coverage.');
+    }
+    $roles = [];
+    foreach ($user['assignedLicenses'] as $license) {
+        $skuId = entraId(is_array($license) ? ($license['skuId'] ?? null) : null);
+        if (!isset($licenseNames[$skuId])) {
+            throw new RuntimeException('A user has a licence the tenant does not list; retry later.');
+        }
+        $roles[] = tpl_roleString('License', $licenseNames[$skuId], $skuId);
+    }
+    return $roles;
 }
 
 /** Application and role names, fetched once per service principal. */
@@ -615,7 +661,7 @@ function application(string $id, string $token, array &$cache): array
  * Groups (nested included), directory roles (direct or through a role-assignable group) and
  * application roles (direct or through a group) of one user.
  */
-function userRoles(string $id, array $memberships, array $appAssignments, string $token, array $directoryRoles, array &$apps): array
+function userRoles(string $id, array $memberships, array $appAssignments, string $token, array $directoryRoles, array &$apps, array $kinds): array
 {
     $roles = $directoryRoles[$id] ?? [];
     $groups = [];
@@ -624,7 +670,9 @@ function userRoles(string $id, array $memberships, array $appAssignments, string
         if ($type === '#microsoft.graph.group') {
             $groupId = entraId($member['id']);
             $groups[$groupId] = true;
-            $roles[] = tpl_roleString('Group', $member['displayName'] ?? null, $groupId);
+            if (isset($kinds['groups'])) {
+                $roles[] = tpl_roleString('Group', $member['displayName'] ?? null, $groupId);
+            }
             // Role-assignable groups cannot contain other groups, so their members are direct members.
             array_push($roles, ...($directoryRoles[$groupId] ?? []));
         } elseif (!in_array($type, ['#microsoft.graph.directoryRole', '#microsoft.graph.administrativeUnit'], true)) {
@@ -650,21 +698,28 @@ function userRoles(string $id, array $memberships, array $appAssignments, string
 }
 
 /** Collects every account, 100 users at a time (memberships and app assignments batched), into the staged feed. */
-function collectFeed(string $token, array $config, array $directoryRoles)
+function collectFeed(string $token, array $config, array $directoryRoles, array $kinds)
 {
     $feed = tpl_feedOpen();
     $users = listUsers($token, $config);
+    $licenseNames = isset($kinds['licenses']) ? licenseNames($token) : [];
     $keys = [];
     $apps = [];
     $bytes = 0;
     foreach (array_chunk($users, 100) as $chunk) {
+        // Memberships are needed for groups, group-held directory roles and to verify group-based app assignments.
         $paths = [];
         foreach ($chunk as $user) {
             $id = entraId($user['id'] ?? null);
-            $paths[] = "users/$id/transitiveMemberOf?\$select=id,displayName";
-            $paths[] = "users/$id/appRoleAssignments?\$select=id,principalId,principalType,resourceId,appRoleId";
+            if ($kinds !== []) {
+                $paths[] = "users/$id/transitiveMemberOf?\$select=id,displayName";
+            }
+            if (isset($kinds['applications'])) {
+                $paths[] = "users/$id/appRoleAssignments?\$select=id,principalId,principalType,resourceId,appRoleId";
+            }
         }
-        $lists = tpl_graphLists($paths, $token, $config['MAX_OBJECTS']);
+        $lists = $paths === [] ? [] : tpl_graphLists($paths, $token, $config['MAX_OBJECTS']);
+        $perUser = $kinds === [] ? 0 : (isset($kinds['applications']) ? 2 : 1);
         foreach ($chunk as $n => $user) {
             $id = entraId($user['id']);
             $key = tpl_feedKey($config['USER_KEY'] === 'id' ? $id : ($user[$config['USER_KEY']] ?? null), $keys);
@@ -673,7 +728,8 @@ function collectFeed(string $token, array $config, array $directoryRoles)
             }
             $name = mb_strcut(tpl_feedText($user['displayName'] ?? null, 'Display name'), 0, 150, 'UTF-8');
             $description = sprintf('%s; %s; %s; object=%s', $name, $user['userType'], $user['accountEnabled'] ? 'enabled' : 'disabled', $id);
-            $roles = userRoles($id, $lists[2 * $n], $lists[2 * $n + 1], $token, $directoryRoles, $apps);
+            $roles = isset($kinds['licenses']) ? userLicenses($user, $licenseNames) : [];
+            $roles = [...$roles, ...($perUser === 0 ? [] : userRoles($id, $lists[$perUser * $n], $perUser === 2 ? $lists[2 * $n + 1] : [], $token, $directoryRoles, $apps, $kinds))];
             if (count(array_unique($roles)) > $config['MAX_OBJECTS']) {
                 throw new RuntimeException('Combined account access limit exceeded.');
             }
@@ -702,12 +758,13 @@ try {
     tpl_logStep(2, 'Authenticating to Microsoft Graph');
     $token = tpl_graphToken($secrets['ENTRA_TENANT_ID'], $secrets['ENTRA_CLIENT_ID'], tpl_base64Secret($secrets['ENTRA_CLIENT_SECRET_B64'], 'entra_client_secret_b64'));
 
+    $kinds = tpl_roleKinds($config['ROLES'], ROLE_KINDS);
     tpl_logStep(3, 'Collecting directory role assignments');
-    $directoryRoles = directoryRoles($token, $config);
-    tpl_logInfo(count($directoryRoles) . ' principals hold active directory roles.');
+    $directoryRoles = isset($kinds['directory_roles']) ? directoryRoles($token, $config) : [];
+    tpl_logInfo(isset($kinds['directory_roles']) ? count($directoryRoles) . ' principals hold active directory roles.' : 'Skipped (not in ROLES).');
 
-    tpl_logStep(4, 'Collecting accounts, groups and application assignments');
-    $feed = collectFeed($token, $config, $directoryRoles);
+    tpl_logStep(4, 'Collecting accounts' . ($kinds === [] ? '' : ' and ' . implode(', ', array_keys($kinds))));
+    $feed = collectFeed($token, $config, $directoryRoles, $kinds);
 
     tpl_logStep(5, 'Publishing the account review feed');
     tpl_feedPublish($feed);

@@ -27,6 +27,10 @@ The comments do nothing in eramba. They tell readers where the code comes from a
 | [`providers/okta`](providers/okta.php) | Okta: org URL validation, complete lists following the `Link` header |
 | [`providers/auth0`](providers/auth0.php) | Auth0: Management API token, page-based and checkpoint lists |
 | [`providers/aws`](providers/aws.php) | AWS SDK: client options, calls that never expose credentials, `Marker` pagination |
+| [`providers/google`](providers/google.php) | Google API client: service-account key, delegated admin, bounded client, `nextPageToken` lists |
+| [`providers/github`](providers/github.php) | GitHub REST API: headers, `Link` pagination, stops before the rate limit runs out |
+| [`providers/openai`](providers/openai.php) | OpenAI Administration API: complete `after` / `has_more` lists |
+| [`providers/anthropic`](providers/anthropic.php) | Anthropic Admin API: complete `after_id` / `has_more` lists |
 
 Blocks only declare functions whose names start with `tpl_`. Each script sets their options with constants in its section 3 (`TPL_LOG_STREAM`, `TPL_RUN_SECONDS`, `TPL_ALLOWED_REQUESTS`). A setting that depends on a secret, such as the allowed host of an Okta org, is set with `define()` in MAIN once the secret is validated.
 

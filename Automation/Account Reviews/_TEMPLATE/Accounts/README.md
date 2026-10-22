@@ -10,6 +10,7 @@ trigger: Account Review pull
 secrets:
   - <secret_name>
 variables:
+  - ROLES
   - ALLOW_EMPTY_FEED
   - MAX_USERS
 dependencies:
@@ -68,6 +69,7 @@ Numbered steps to create the identity and the exact read-only permissions, with 
 
 | Variable | Default | Meaning |
 |---|---|---|
+| `ROLES` | `['groups']` | Access listed as roles; `[]` lists accounts only. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
 | `MAX_USERS` | `2000` | 1–10000 accounts; exceeding it aborts instead of truncating. |
 

@@ -1,0 +1,628 @@
+<?php
+declare(strict_types=1); // Keep on line 2: eramba inserts its includes right after it.
+
+/**
+ * ============================================================================
+ *  Atlassian Cloud Accounts and Assigned Access
+ *  Technology: Atlassian Cloud (Jira, Confluence, Jira Service Management…)
+ *  id: atlassian-cloud-account-review        version: 0.1.0 (draft)
+ *  Docs: README.md in the same folder (secrets, permissions, variables).
+ *  Repository: https://github.com/eramba/templates/tree/master/Automation/Account%20Reviews
+ *
+ *  Composer packages (paste in the automation's composer field):
+ *    guzzlehttp/guzzle:^7.9
+ * ============================================================================
+ *
+ *  Output
+ *    STDOUT  Reserved for the Account Review artifact declaration written by
+ *            writeAccountReviewArtifact(). Nothing else is ever printed there.
+ *    STDERR  Step-by-step log with counts only, and technical errors.
+ *            Account Review feeds accept STDERR when the run exits 0.
+ *
+ *  Exit codes
+ *    0  Complete account list collected and published.
+ *    1  Technical error (credentials, network, permissions, limits). Nothing
+ *       is published, so the pull fails instead of returning a partial list.
+ *
+ *  Read-only: the script never changes the organization and makes no review decisions.
+ *  The two POST requests it may send are the Admin API's user and group searches.
+ */
+
+// ─── 1. SECRETS ─────────────────────────────────────────────────────────────
+$secrets = [
+    'ATLASSIAN_ORG_ID' => '%SECRET_atlassian_org_id%', // Organization ID from Atlassian Administration
+    'ATLASSIAN_ADMIN_API_KEY' => '%SECRET_atlassian_admin_api_key%', // Organization API key (README §5)
+];
+
+// ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
+$config = [
+    'USER_KEY' => 'email', // Account identifier: email or account_id (no fallback)
+    'ROLES' => ['product_access', 'groups', 'platform_roles'], // Access listed as roles; [] = accounts only (README §7)
+    'PRODUCTS' => [], // Empty: every product. Otherwise only users with access to these products, e.g. ['jira-software'] or ['confluence']
+    'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
+    'MAX_USERS' => 2000, // Maximum accounts in the feed; never truncate
+    'MAX_OBJECTS' => 2000, // Maximum records per API list (groups, group members, role assignments); never truncate
+];
+
+// ─── 3. SETTINGS (do not edit) ──────────────────────────────────────────────
+const AUTOMATION_ID = 'atlassian-cloud-account-review';
+const AUTOMATION_VERSION = '0.1.0';
+const TPL_LOG_STREAM = 'stderr'; // stdout belongs to the artifact declaration
+const TPL_RUN_SECONDS = 200; // Collection budget inside the 240-second timeout
+// TPL_ALLOWED_REQUESTS is defined in MAIN from the organization ID: only the user search, the group search
+// and the user role assignments of https://api.atlassian.com/admin/v2/orgs/<org>/directories/-/ are allowed.
+
+// ─── 4. SHARED CODE (copied from Automation/_shared, do not edit here) ──────
+// ─── shared:core v1 (edit Automation/_shared/core.php, then run Automation/tools/sync.php) ───
+/**
+ * Turns every PHP warning or notice into an exception, so it fails the run
+ * instead of being printed on stdout (where it would corrupt a feed or hide a problem).
+ * Call it first in MAIN.
+ */
+function tpl_installErrorHandler(): void
+{
+    ini_set('display_errors', 'stderr');
+    set_error_handler(static function (int $severity, string $message, string $file = '', int $line = 0): bool {
+        if ((error_reporting() & $severity) === 0) {
+            return false;
+        }
+        throw new ErrorException($message, 0, $severity, $file, $line);
+    });
+}
+
+/** Step log. The script chooses the stream: 'stdout' for control audits, 'stderr' for feeds. */
+function tpl_logStep(int $n, string $title): void
+{
+    tpl_log(sprintf("\n[%s] STEP %d: %s", gmdate('H:i:s'), $n, $title));
+}
+
+function tpl_logInfo(string $message): void
+{
+    tpl_log('  ' . $message);
+}
+
+function tpl_log(string $line): void
+{
+    fwrite(TPL_LOG_STREAM === 'stdout' ? STDOUT : STDERR, $line . "\n");
+}
+
+/** Seconds since the first call. MAIN calls it once at start. */
+function tpl_elapsed(): float
+{
+    static $start = null;
+    $start ??= microtime(true);
+    return microtime(true) - $start;
+}
+
+/** Seconds left of TPL_RUN_SECONDS; throws when the time or memory budget is spent. */
+function tpl_remaining(): float
+{
+    $remaining = TPL_RUN_SECONDS - tpl_elapsed();
+    if ($remaining <= 0) {
+        throw new RuntimeException('Time budget exceeded; narrow the scope.');
+    }
+    if (memory_get_usage(true) > 48 * 1024 * 1024) {
+        throw new RuntimeException('Memory budget exceeded; narrow the scope.');
+    }
+    return $remaining;
+}
+
+/** A secret that eramba did not replace is still "%SECRET_<name>%": it does not exist. */
+function tpl_checkSecrets(array $secrets): void
+{
+    foreach ($secrets as $key => $value) {
+        if (!is_string($value) || $value === '' || preg_match('/^%SECRET_([^%]+)%$/', $value, $m) === 1) {
+            $secretName = $m[1] ?? strtolower((string) $key);
+            throw new RuntimeException(
+                "Secret '$secretName' is missing: create it with exactly that name in Settings / Application Configuration / Automation Secrets (see README §6)."
+            );
+        }
+    }
+}
+
+/** Secrets that may contain quotes or backslashes are stored base64-encoded (encoding, not encryption). */
+function tpl_base64Secret(string $value, string $name): string
+{
+    $decoded = base64_decode($value, true);
+    if ($decoded === false || $decoded === '' || strlen($decoded) > 8192 || base64_encode($decoded) !== $value) {
+        throw new RuntimeException("Secret '$name' is not valid single-line base64.");
+    }
+    return $decoded;
+}
+// ─── end shared:core v1 sha256:277e2f6c5d57b964 ───
+// ─── shared:http v2 (edit Automation/_shared/http.php, then run Automation/tools/sync.php) ───
+/**
+ * One JSON request to a provider API. Returns ['status' => int, 'headers' => [lower-case name => value], 'data' => array].
+ *
+ * - Only "METHOD https://host/path" combinations starting with an entry of TPL_ALLOWED_REQUESTS are sent,
+ *   so the script cannot write to the provider or send its token to another host.
+ * - TLS verification on, redirects off, timeouts capped to the remaining run budget.
+ * - 429/503/504, and 403 with X-RateLimit-Remaining: 0 (GitHub's rate limit), are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
+ *   or X-RateLimit-Reset) when it fits the budget; otherwise the run stops.
+ * - Responses over 4 MB, non-JSON bodies and any other non-2xx status stop the run. Response bodies and
+ *   request URLs are never included in errors: they may contain account data or tokens.
+ */
+function tpl_http(string $method, string $url, array $options = []): array
+{
+    tpl_assertAllowedRequest($method, $url);
+    static $client = null;
+    $client ??= new \GuzzleHttp\Client(['http_errors' => false, 'allow_redirects' => false, 'verify' => true]);
+    $host = (string) parse_url($url, PHP_URL_HOST);
+    for ($attempt = 1; $attempt <= 3; $attempt++) {
+        $remaining = tpl_remaining();
+        if ($remaining < 2) {
+            throw new RuntimeException('Time budget exceeded; narrow the scope.');
+        }
+        $timeout = min(20.0, $remaining - 1);
+        $request = ['connect_timeout' => min(5.0, $timeout), 'timeout' => $timeout, 'read_timeout' => $timeout, 'stream' => true]
+            + $options + ['headers' => []];
+        $request['headers'] += ['Accept' => 'application/json'];
+        $request['verify'] = true;
+        $request['allow_redirects'] = false;
+        try {
+            $response = $client->request($method, $url, $request);
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            throw new RuntimeException("Connection to $host failed; check connectivity and credentials.");
+        }
+        $status = $response->getStatusCode();
+        $rateLimited = $status === 403 && trim($response->getHeaderLine('X-RateLimit-Remaining')) === '0';
+        if ((in_array($status, [429, 503, 504], true) || $rateLimited) && $attempt < 3) {
+            $response->getBody()->close();
+            $wait = tpl_retryDelay($response, $attempt);
+            if ($wait > min(30, tpl_remaining() - 5)) {
+                throw new RuntimeException("$host is throttling this run; retry later.");
+            }
+            tpl_logInfo(sprintf('%s asked to slow down (HTTP %d); waiting %d s.', $host, $status, $wait));
+            sleep($wait);
+            continue;
+        }
+        $body = tpl_readBody($response->getBody(), 4 * 1024 * 1024, $host);
+        if ($status < 200 || $status > 299) {
+            throw new RuntimeException("$host returned HTTP $status; check permissions, consent and configuration.");
+        }
+        try {
+            $data = $body === '' ? [] : json_decode($body, true, 64, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            throw new RuntimeException("$host returned invalid JSON.");
+        }
+        if (!is_array($data)) {
+            throw new RuntimeException("$host returned an unexpected response.");
+        }
+        $headers = [];
+        foreach ($response->getHeaders() as $name => $values) {
+            $headers[strtolower($name)] = implode(', ', $values);
+        }
+        return ['status' => $status, 'headers' => $headers, 'data' => $data];
+    }
+    throw new RuntimeException("$host retry limit reached; retry later.");
+}
+
+function tpl_assertAllowedRequest(string $method, string $url): void
+{
+    $parts = parse_url($url);
+    if (!is_array($parts) || ($parts['scheme'] ?? '') !== 'https' || !isset($parts['host'])
+        || isset($parts['user']) || isset($parts['pass']) || isset($parts['port']) || isset($parts['fragment'])
+        || preg_match('/[\x00-\x20\\\\]/', $url) === 1) {
+        throw new RuntimeException('Rejected an unexpected request URL.');
+    }
+    $request = strtoupper($method) . ' https://' . strtolower($parts['host']) . ($parts['path'] ?? '/');
+    foreach (TPL_ALLOWED_REQUESTS as $allowed) {
+        if (str_starts_with($request, $allowed)) {
+            return;
+        }
+    }
+    throw new RuntimeException('Rejected a request outside TPL_ALLOWED_REQUESTS (' . strtoupper($method) . ' ' . strtolower($parts['host']) . ').');
+}
+
+/** Pagination links must stay on the same endpoint as the first page, so the token never leaves it. */
+function tpl_assertNextUrl(string $first, string $next): void
+{
+    $a = parse_url($first);
+    $b = parse_url($next);
+    foreach (['scheme', 'host', 'path'] as $part) {
+        if (!is_array($a) || !is_array($b) || strtolower((string) ($a[$part] ?? '')) !== strtolower((string) ($b[$part] ?? ''))) {
+            throw new RuntimeException('Pagination link points to a different endpoint; stopping.');
+        }
+    }
+    if (isset($b['user']) || isset($b['pass']) || isset($b['port']) || isset($b['fragment'])) {
+        throw new RuntimeException('Pagination link points to a different endpoint; stopping.');
+    }
+}
+
+/** Seconds to wait before retrying: Retry-After (seconds or HTTP date), then reset epochs, then backoff. */
+function tpl_retryDelay(\Psr\Http\Message\ResponseInterface $response, int $attempt): int
+{
+    $retryAfter = trim($response->getHeaderLine('Retry-After'));
+    if ($retryAfter !== '') {
+        if (ctype_digit($retryAfter)) {
+            return max(1, (int) $retryAfter);
+        }
+        $date = strtotime($retryAfter);
+        if ($date !== false) {
+            return max(1, $date - time());
+        }
+    }
+    foreach (['X-Rate-Limit-Reset', 'X-RateLimit-Reset'] as $header) {
+        $reset = trim($response->getHeaderLine($header));
+        if (ctype_digit($reset) && (int) $reset > time()) {
+            return max(1, (int) $reset - time());
+        }
+    }
+    return 2 ** ($attempt - 1);
+}
+
+function tpl_readBody(\Psr\Http\Message\StreamInterface $stream, int $maxBytes, string $host): string
+{
+    $body = '';
+    try {
+        while (!$stream->eof()) {
+            tpl_remaining();
+            $chunk = $stream->read(min(65536, $maxBytes + 1 - strlen($body)));
+            if ($chunk === '' && !$stream->eof()) {
+                throw new RuntimeException("$host response could not be read completely.");
+            }
+            $body .= $chunk;
+            if (strlen($body) > $maxBytes) {
+                throw new RuntimeException("$host response too large; narrow the scope.");
+            }
+        }
+    } finally {
+        $stream->close();
+    }
+    return $body;
+}
+// ─── end shared:http v2 sha256:2fa2c253cb37e4d7 ───
+// ─── shared:feed v3 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+/** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
+function tpl_feedText(mixed $value, string $what): string
+{
+    if (!is_string($value) || preg_match('//u', $value) !== 1) {
+        throw new RuntimeException("$what is missing or not valid text.");
+    }
+    $value = trim(preg_replace('/[\x00-\x1f\x7f]+/', ' ', $value));
+    if ($value === '') {
+        throw new RuntimeException("$what is missing.");
+    }
+    if (strlen($value) > 255) {
+        throw new RuntimeException("$what is longer than 255 bytes.");
+    }
+    return $value;
+}
+
+/**
+ * The role kinds a script collects, from its ROLES variable. Empty means accounts only: reviews then
+ * compare which accounts exist (added, deleted, creeping accounts) and never report role changes.
+ * Returns the selection as a set, e.g. ['groups' => true].
+ */
+function tpl_roleKinds(mixed $selected, array $allowed): array
+{
+    if (!is_array($selected) || !array_is_list($selected) || count($selected) !== count(array_unique($selected))
+        || array_diff($selected, $allowed) !== []) {
+        throw new RuntimeException('ROLES must be a list chosen from: ' . implode(', ', $allowed) . ' (or empty for accounts only).');
+    }
+    return array_fill_keys($selected, true);
+}
+
+/**
+ * One role string: "<kind>: <name> [<id>]". The ID is what keeps two roles with the same name apart,
+ * so only the human-readable name is shortened (at a UTF-8 boundary) when the string would exceed 255 bytes.
+ */
+function tpl_roleString(string $kind, mixed $name, string $id): string
+{
+    $name = tpl_feedText($name, "$kind name");
+    $fixed = strlen($kind) + strlen($id) + 5; // ": " + " [" + "]"
+    if ($fixed + 3 > 255) {
+        throw new RuntimeException("$kind identifier is too long for a role value.");
+    }
+    if ($fixed + strlen($name) > 255) {
+        $name = mb_strcut($name, 0, 255 - $fixed - 3, 'UTF-8') . '…';
+    }
+    return sprintf('%s: %s [%s]', $kind, $name, $id);
+}
+
+/**
+ * The key eramba matches between pulls and between feeds. eramba compares keys ignoring case,
+ * so two rows must never share a key ignoring case.
+ */
+function tpl_feedKey(mixed $value, array &$seen, bool $allowSpaces = false): string
+{
+    $key = tpl_feedText($value, 'Account key');
+    if (!$allowSpaces && preg_match('/\s/u', $key) === 1) {
+        throw new RuntimeException('An account key contains spaces; choose another key field.');
+    }
+    $folded = mb_strtolower($key, 'UTF-8');
+    if (isset($seen[$folded])) {
+        throw new RuntimeException('Two accounts share the same key (ignoring case); choose a unique key field.');
+    }
+    $seen[$folded] = true;
+    return $key;
+}
+
+/**
+ * Accounts are staged in a private temporary file and published once, after the whole population
+ * has been collected: a partial list must never reach eramba (a differential review would report
+ * the missing accounts as removed).
+ */
+function tpl_feedOpen()
+{
+    $feed = tmpfile();
+    if ($feed === false) {
+        throw new RuntimeException('Private staging file is unavailable.');
+    }
+    return $feed;
+}
+
+/** Adds one row. $roles may be empty. Returns the staged size in bytes. */
+function tpl_feedAdd($feed, string $user, string $description, array $roles): int
+{
+    static $bytes = 0;
+    $roles = array_values(array_unique($roles));
+    sort($roles, SORT_STRING);
+    $line = json_encode(['user' => $user, 'description' => $description, 'roles' => $roles],
+        JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n";
+    $bytes += strlen($line);
+    if ($bytes > 8 * 1024 * 1024 || fwrite($feed, $line) !== strlen($line)) {
+        throw new RuntimeException('Feed larger than 8 MiB or staging write failed; narrow the scope.');
+    }
+    return $bytes;
+}
+
+/** Publishes every staged row through eramba's Account Review artifact helper. */
+function tpl_feedPublish($feed): void
+{
+    if (!function_exists('writeAccountReviewArtifact')) {
+        throw new RuntimeException('writeAccountReviewArtifact() is unavailable; create the automation from the Account Review feed form.');
+    }
+    if (!fflush($feed) || !rewind($feed)) {
+        throw new RuntimeException('Could not finalize the staged feed.');
+    }
+    writeAccountReviewArtifact((static function () use ($feed): Generator {
+        while (($line = fgets($feed)) !== false) {
+            yield json_decode($line, true, 64, JSON_THROW_ON_ERROR);
+        }
+        if (!feof($feed)) {
+            throw new RuntimeException('Could not read the complete staged feed.');
+        }
+    })());
+}
+// ─── end shared:feed v3 sha256:39800df21bc1737d ───
+
+// ─── 5. COLLECT: Atlassian Cloud ────────────────────────────────────────────
+
+const ROLE_KINDS = ['product_access', 'groups', 'platform_roles'];
+// Organization-level admin roles (the PlatformRole values of the Admin API); every other role is product access.
+const PLATFORM_ROLES = ['atlassian/org-admin', 'atlassian/site-admin', 'atlassian/user-access-admin', 'atlassian/ai-access'];
+
+function validateConfig(array $c): void
+{
+    tpl_roleKinds($c['ROLES'], ROLE_KINDS);
+    if (!in_array($c['USER_KEY'], ['email', 'account_id'], true)) {
+        throw new RuntimeException('USER_KEY must be email or account_id.');
+    }
+    if (!is_array($c['PRODUCTS']) || !array_is_list($c['PRODUCTS'])
+        || array_filter($c['PRODUCTS'], fn ($p) => !is_string($p) || preg_match('/^[a-z0-9-]{1,64}$/D', $p) !== 1) !== []) {
+        throw new RuntimeException("PRODUCTS must be empty or a list of product keys such as 'jira-software' or 'confluence'.");
+    }
+    if (!is_bool($c['ALLOW_EMPTY_FEED'])) {
+        throw new RuntimeException('ALLOW_EMPTY_FEED must be true or false.');
+    }
+    foreach (['MAX_USERS', 'MAX_OBJECTS'] as $key) {
+        if (!is_int($c[$key]) || $c[$key] < 1 || $c[$key] > 10000) {
+            throw new RuntimeException("$key must be a number from 1 to 10000.");
+        }
+    }
+}
+
+/** The Admin API base for all directories of the organization ("-" = every directory the key can manage). */
+function orgBase(string $orgId): string
+{
+    $orgId = trim($orgId);
+    if (preg_match('/^[A-Za-z0-9-]{1,64}$/D', $orgId) !== 1) {
+        throw new RuntimeException("Secret 'atlassian_org_id' must be the organization ID (letters, digits and hyphens).");
+    }
+    return 'https://api.atlassian.com/admin/v2/orgs/' . $orgId . '/directories/-';
+}
+
+/**
+ * Every item of an Admin API search (POST). The cursor of the next page is links.next and is sent back in the body.
+ * Completeness relies on reaching a page without a next cursor.
+ */
+function adminSearch(string $url, array $body, string $key, string $idField, int $limit): array
+{
+    $items = [];
+    $cursors = [];
+    $cursor = null;
+    do {
+        if (count($cursors) >= 200) {
+            throw new RuntimeException('Atlassian pagination exceeds 200 pages; narrow the scope.');
+        }
+        $response = tpl_http('POST', $url, [
+            'headers' => ['Authorization' => 'Bearer ' . $key],
+            'json' => $body + ($cursor === null ? [] : ['cursor' => $cursor]),
+        ])['data'];
+        if (!is_array($response['data'] ?? null) || !array_is_list($response['data'])) {
+            throw new RuntimeException('Atlassian returned an unexpected list.');
+        }
+        foreach ($response['data'] as $item) {
+            $id = is_array($item) ? ($item[$idField] ?? null) : null;
+            if (!is_string($id) || $id === '') {
+                throw new RuntimeException('Atlassian list contains an invalid item.');
+            }
+            if (isset($items[$id])) {
+                throw new RuntimeException('Atlassian list contains a duplicate item; data changed during the pull, retry later.');
+            }
+            $items[$id] = $item;
+            if (count($items) > $limit) {
+                throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+            }
+        }
+        $cursor = $response['links']['next'] ?? null;
+        if ($cursor !== null && (!is_string($cursor) || $cursor === '' || isset($cursors[$cursor]))) {
+            throw new RuntimeException('Atlassian pagination cursor is invalid or repeats.');
+        }
+        if ($cursor !== null) {
+            $cursors[$cursor] = true;
+        }
+    } while ($cursor !== null);
+    return $items;
+}
+
+/**
+ * Product roles of one user on every site and product, direct or through a group, without the platform roles.
+ * With $products, only those products count. Returns [role strings, products the user can access].
+ */
+function productAccess(string $base, string $key, string $accountId, int $limit, array $products = []): array
+{
+    $roles = [];
+    $found = [];
+    $url = $base . '/users/' . rawurlencode($accountId) . '/role-assignments';
+    $cursor = null;
+    $pages = 0;
+    do {
+        if (++$pages > 50) {
+            throw new RuntimeException('Atlassian role assignments exceed 50 pages for one user.');
+        }
+        $query = ['limit' => 100] + ($cursor === null ? [] : ['cursor' => $cursor]);
+        $response = tpl_http('GET', $url . '?' . http_build_query($query), ['headers' => ['Authorization' => 'Bearer ' . $key]])['data'];
+        if (!is_array($response['data'] ?? null) || !array_is_list($response['data'])) {
+            throw new RuntimeException('Atlassian returned unexpected role assignments.');
+        }
+        foreach ($response['data'] as $assignment) {
+            $resourceId = is_array($assignment) ? ($assignment['resourceId'] ?? null) : null;
+            if (!is_string($resourceId) || $resourceId === '' || !is_array($assignment['roleAssignments'] ?? null)) {
+                throw new RuntimeException('Atlassian returned an invalid role assignment.');
+            }
+            // The product is the resource owner, which is also the product segment of the ARI (ari:cloud:<product>::…).
+            $product = is_string($assignment['resourceOwner'] ?? null) && $assignment['resourceOwner'] !== ''
+                ? $assignment['resourceOwner']
+                : (preg_match('~^ari:cloud:([a-z0-9-]+)::~', $resourceId, $m) === 1 ? $m[1] : 'resource');
+            if ($products !== [] && !in_array(strtolower($product), $products, true)) {
+                continue;
+            }
+            foreach ($assignment['roleAssignments'] as $roleAssignment) {
+                $role = is_array($roleAssignment) ? ($roleAssignment['role'] ?? null) : null;
+                if (!is_string($role) || $role === '') {
+                    throw new RuntimeException('Atlassian returned an invalid role assignment.');
+                }
+                if (!in_array($role, PLATFORM_ROLES, true)) {
+                    $roles[] = tpl_roleString('Product access', "$product ($role)", $resourceId);
+                    $found[strtolower($product)] = true;
+                }
+            }
+            if (count($roles) > $limit) {
+                throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+            }
+        }
+        $next = $response['links']['next'] ?? null;
+        if ($next !== null && (!is_string($next) || $next === '' || $next === $cursor)) {
+            throw new RuntimeException('Atlassian pagination cursor is invalid or repeats.');
+        }
+        $cursor = $next;
+    } while ($cursor !== null);
+    return [$roles, $found];
+}
+
+function collectFeed(string $base, string $key, array $config)
+{
+    $kinds = tpl_roleKinds($config['ROLES'], ROLE_KINDS);
+    $limit = $config['MAX_OBJECTS'];
+
+    // Every user of every directory, whatever the status (active, suspended, deactivated…).
+    $body = ['limit' => 100] + (isset($kinds['platform_roles']) ? ['expand' => ['platformRoles']] : []);
+    $users = adminSearch($base . '/users/search', $body, $key, 'accountId', $config['MAX_USERS']);
+    tpl_logInfo(count($users) . ' users found.');
+
+    $roles = [];
+    foreach ($users as $id => $user) {
+        $roles[$id] = [];
+        if (isset($kinds['platform_roles'])) {
+            $platformRoles = $user['platformRoles'] ?? [];
+            if (!is_array($platformRoles) || !array_is_list($platformRoles)) {
+                throw new RuntimeException('Atlassian returned invalid platform roles.');
+            }
+            foreach ($platformRoles as $role) {
+                $roles[$id][] = tpl_roleString('Platform role', is_string($role) ? preg_replace('~^atlassian/~', '', $role) : null, (string) $role);
+            }
+        }
+    }
+
+    $groups = isset($kinds['groups']) ? adminSearch($base . '/groups/search', ['limit' => 100], $key, 'id', $limit) : [];
+    foreach ($groups as $groupId => $group) {
+        $role = tpl_roleString('Group', $group['name'] ?? null, $groupId);
+        foreach (adminSearch($base . '/users/search', ['limit' => 100, 'groupIds' => [$groupId]], $key, 'accountId', $limit) as $id => $member) {
+            if (!isset($users[$id])) {
+                throw new RuntimeException('A group member is outside the collected users; users changed during the pull, retry later.');
+            }
+            $roles[$id][] = $role;
+        }
+    }
+    tpl_logInfo(count($groups) . ' groups collected.');
+
+    // With PRODUCTS, the population is the users with access to those products, so product access is always read.
+    if (isset($kinds['product_access']) || $config['PRODUCTS'] !== []) {
+        foreach (array_keys($users) as $id) {
+            [$productRoles, $found] = productAccess($base, $key, (string) $id, $limit, $config['PRODUCTS']);
+            if ($config['PRODUCTS'] !== [] && $found === []) {
+                unset($users[$id]);
+                continue;
+            }
+            if (isset($kinds['product_access'])) {
+                array_push($roles[$id], ...$productRoles);
+            }
+        }
+        tpl_logInfo('Product access collected' . ($config['PRODUCTS'] === [] ? '.' : '; ' . count($users) . ' users can access the selected products.'));
+    }
+
+    $feed = tpl_feedOpen();
+    $keys = [];
+    $bytes = 0;
+    foreach ($users as $id => $user) {
+        $id = (string) $id;
+        if ($config['USER_KEY'] === 'email' && (!is_string($user['email'] ?? null) || $user['email'] === '')) {
+            throw new RuntimeException('A user has no email address visible to the API key; use USER_KEY account_id (README §7).');
+        }
+        $accountKey = tpl_feedKey($config['USER_KEY'] === 'account_id' ? $id : $user['email'], $keys);
+        $name = mb_strcut(tpl_feedText($user['name'] ?? ($user['nickname'] ?? $id), 'User name'), 0, 120, 'UTF-8');
+        $status = tpl_feedText($user['status'] ?? ($user['accountStatus'] ?? null), 'User status');
+        $claim = is_string($user['claimStatus'] ?? null) ? $user['claimStatus'] : 'unknown';
+        $description = mb_strcut(tpl_feedText("$name; $status; $claim; id=$id", 'Description'), 0, 255, 'UTF-8');
+        if (count(array_unique($roles[$id])) > $limit) {
+            throw new RuntimeException('Combined account access limit exceeded.');
+        }
+        $bytes = tpl_feedAdd($feed, $accountKey, $description, $roles[$id]);
+    }
+    if ($users === [] && !$config['ALLOW_EMPTY_FEED']) {
+        throw new RuntimeException('No accounts found; check the API key, or set ALLOW_EMPTY_FEED if zero accounts is intended.');
+    }
+    tpl_logInfo(sprintf('%d accounts staged (%d bytes).', count($users), $bytes));
+    return $feed;
+}
+
+// ─── 6. MAIN ────────────────────────────────────────────────────────────────
+tpl_installErrorHandler();
+tpl_elapsed();
+try {
+    tpl_log(sprintf('%s v%s', AUTOMATION_ID, AUTOMATION_VERSION));
+
+    tpl_logStep(1, 'Checking configuration');
+    validateConfig($config);
+    tpl_checkSecrets($secrets);
+    $base = orgBase($secrets['ATLASSIAN_ORG_ID']);
+    define('TPL_ALLOWED_REQUESTS', [
+        'POST ' . $base . '/users/search', // User search (read-only query)
+        'POST ' . $base . '/groups/search', // Group search (read-only query)
+        'GET ' . $base . '/users/', // User role assignments
+    ]);
+    tpl_logInfo('Secrets present.');
+
+    tpl_logStep(2, 'Collecting users, groups, platform roles and product access');
+    $feed = collectFeed($base, $secrets['ATLASSIAN_ADMIN_API_KEY'], $config);
+
+    tpl_logStep(3, 'Publishing the account review feed');
+    tpl_feedPublish($feed);
+    tpl_log("\nDone.");
+    exit(0);
+} catch (Throwable $e) {
+    tpl_log("\nABORTED: no account review feed was published.\nERROR: " . $e->getMessage());
+    exit(1);
+}

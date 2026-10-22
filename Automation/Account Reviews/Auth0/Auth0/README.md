@@ -4,7 +4,7 @@ name: Auth0 Accounts and Assigned Access
 version: 0.1.0
 status: draft
 technology: Auth0
-vendor: Okta
+vendor: Auth0 (Okta)
 eramba_module: Account Review Feeds
 trigger: Account Review pull
 secrets:
@@ -13,7 +13,7 @@ secrets:
   - auth0_client_secret_b64
 variables:
   - USER_KEY
-  - INCLUDE_ORGANIZATIONS
+  - ROLES
   - ALLOW_EMPTY_FEED
   - MAX_OBJECTS
 dependencies:
@@ -32,6 +32,8 @@ Send Auth0 users, their roles and organization memberships to an eramba Account 
 ## 1. Purpose
 
 Supplies the current list of users of one Auth0 tenant to review, for example the administrators and staff of an application that signs in with Auth0. eramba owns the schedule, comparison, reviewers, decisions and findings. The script is read-only.
+
+**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
 
 ## 2. What it gathers
 
@@ -67,7 +69,7 @@ Any collection error, a role or organization member outside the collected users,
 |---|---|
 | `read:users` | Users |
 | `read:roles` | Roles and the users of each role |
-| `read:organizations` | Organizations and their members (only if `INCLUDE_ORGANIZATIONS` is on) |
+| `read:organizations` | Organizations and their members (only if `ROLES` contains `organizations`) |
 
 3. In the application's **Settings**, copy the **Domain**, **Client ID** and **Client Secret**. Base64-encode the client secret on one line.
 
@@ -92,7 +94,7 @@ Any collection error, a role or organization member outside the collected users,
 | Variable | Default | Meaning |
 |---|---|---|
 | `USER_KEY` | `email` | Account identifier: `email` or `user_id`. Users without email (some social or passwordless connections) abort the run; use `user_id` then. |
-| `INCLUDE_ORGANIZATIONS` | `true` | Also list organization memberships. Turn off if the tenant does not use Organizations. |
+| `ROLES` | `['roles', 'organizations']` | Access listed as roles. Remove `organizations` if the tenant does not use Organizations; `[]` lists users only. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
 | `MAX_OBJECTS` | `1000` | 1–10000 roles or organizations per list; exceeding it aborts instead of truncating. |
 

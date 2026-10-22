@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-// version: 1 — bounded, read-only HTTPS client for provider APIs (Composer package guzzlehttp/guzzle)
+// version: 2 — bounded, read-only HTTPS client for provider APIs (Composer package guzzlehttp/guzzle)
 
 /**
  * One JSON request to a provider API. Returns ['status' => int, 'headers' => [lower-case name => value], 'data' => array].
@@ -8,7 +8,7 @@ declare(strict_types=1);
  * - Only "METHOD https://host/path" combinations starting with an entry of TPL_ALLOWED_REQUESTS are sent,
  *   so the script cannot write to the provider or send its token to another host.
  * - TLS verification on, redirects off, timeouts capped to the remaining run budget.
- * - 429/503/504 are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
+ * - 429/503/504, and 403 with X-RateLimit-Remaining: 0 (GitHub's rate limit), are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
  *   or X-RateLimit-Reset) when it fits the budget; otherwise the run stops.
  * - Responses over 4 MB, non-JSON bodies and any other non-2xx status stop the run. Response bodies and
  *   request URLs are never included in errors: they may contain account data or tokens.
@@ -36,7 +36,8 @@ function tpl_http(string $method, string $url, array $options = []): array
             throw new RuntimeException("Connection to $host failed; check connectivity and credentials.");
         }
         $status = $response->getStatusCode();
-        if (in_array($status, [429, 503, 504], true) && $attempt < 3) {
+        $rateLimited = $status === 403 && trim($response->getHeaderLine('X-RateLimit-Remaining')) === '0';
+        if ((in_array($status, [429, 503, 504], true) || $rateLimited) && $attempt < 3) {
             $response->getBody()->close();
             $wait = tpl_retryDelay($response, $attempt);
             if ($wait > min(30, tpl_remaining() - 5)) {

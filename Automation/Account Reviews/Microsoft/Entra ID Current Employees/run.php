@@ -3,9 +3,9 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  Auth0 Accounts and Assigned Access
- *  Technology: Auth0 (Okta Customer Identity)
- *  id: auth0-account-review        version: 0.1.0 (draft)
+ *  Entra ID Current Employees
+ *  Technology: Microsoft Entra ID
+ *  id: entra-current-employees        version: 0.1.0 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Account%20Reviews
  *
@@ -13,41 +13,48 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  *    guzzlehttp/guzzle:^7.9
  * ============================================================================
  *
+ *  For a feed of type "List of current employees": the people who should have
+ *  access today. An Exit review flags every application account that does not
+ *  match one of them.
+ *
  *  Output
  *    STDOUT  Reserved for the Account Review artifact declaration written by
  *            writeAccountReviewArtifact(). Nothing else is ever printed there.
  *    STDERR  Step-by-step log with counts only, and technical errors.
- *            Account Review feeds accept STDERR when the run exits 0.
  *
  *  Exit codes
- *    0  Complete account list collected and published.
+ *    0  Complete employee list collected and published.
  *    1  Technical error (credentials, network, permissions, limits). Nothing
  *       is published, so the pull fails instead of returning a partial list.
  *
- *  Read-only: the script never changes Auth0 and makes no review decisions.
+ *  Read-only: the script never changes Entra ID and makes no review decisions.
  */
 
 // ─── 1. SECRETS ─────────────────────────────────────────────────────────────
 $secrets = [
-    'AUTH0_DOMAIN' => '%SECRET_auth0_domain%', // Canonical tenant domain, e.g. example.eu.auth0.com
-    'AUTH0_CLIENT_ID' => '%SECRET_auth0_client_id%',
-    'AUTH0_CLIENT_SECRET_B64' => '%SECRET_auth0_client_secret_b64%', // Base64 of the client secret
+    'ENTRA_TENANT_ID' => '%SECRET_entra_tenant_id%',
+    'ENTRA_CLIENT_ID' => '%SECRET_entra_client_id%',
+    'ENTRA_CLIENT_SECRET_B64' => '%SECRET_entra_client_secret_b64%', // Base64 of the client secret, shared with the other Entra automations
 ];
 
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
-    'USER_KEY' => 'email', // Account identifier: email or user_id (no fallback)
-    'INCLUDE_ORGANIZATIONS' => true, // Also list organization memberships (Auth0 Organizations)
-    'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
-    'MAX_OBJECTS' => 1000, // Maximum records per API list (roles, organizations, members); never truncate
+    'USER_KEY' => 'mail', // Identifier compared with the application accounts: mail, userPrincipalName or id
+    'GROUP_ID' => '', // Empty: every enabled member user. Otherwise only enabled users in this group (nested included)
+    'REQUIRE_EMPLOYEE_ID' => false, // True: only users with an Employee ID (typically those provisioned from HR)
+    'MAX_USERS' => 10000, // Maximum employees; never truncate
 ];
 
 // ─── 3. SETTINGS (do not edit) ──────────────────────────────────────────────
-const AUTOMATION_ID = 'auth0-account-review';
+const AUTOMATION_ID = 'entra-current-employees';
 const AUTOMATION_VERSION = '0.1.0';
 const TPL_LOG_STREAM = 'stderr'; // stdout belongs to the artifact declaration
 const TPL_RUN_SECONDS = 200; // Collection budget inside the 240-second timeout
-// TPL_ALLOWED_REQUESTS is defined in MAIN from the domain: the token POST and GET https://<domain>/api/v2/.
+const TPL_ALLOWED_REQUESTS = [
+    'POST https://login.microsoftonline.com/', // Token
+    'GET https://graph.microsoft.com/v1.0/',
+    'POST https://graph.microsoft.com/v1.0/$batch', // Read requests grouped 20 at a time
+];
 
 // ─── 4. SHARED CODE (copied from Automation/_shared, do not edit here) ──────
 // ─── shared:core v1 (edit Automation/_shared/core.php, then run Automation/tools/sync.php) ───
@@ -127,14 +134,14 @@ function tpl_base64Secret(string $value, string $name): string
     return $decoded;
 }
 // ─── end shared:core v1 sha256:277e2f6c5d57b964 ───
-// ─── shared:http v1 (edit Automation/_shared/http.php, then run Automation/tools/sync.php) ───
+// ─── shared:http v2 (edit Automation/_shared/http.php, then run Automation/tools/sync.php) ───
 /**
  * One JSON request to a provider API. Returns ['status' => int, 'headers' => [lower-case name => value], 'data' => array].
  *
  * - Only "METHOD https://host/path" combinations starting with an entry of TPL_ALLOWED_REQUESTS are sent,
  *   so the script cannot write to the provider or send its token to another host.
  * - TLS verification on, redirects off, timeouts capped to the remaining run budget.
- * - 429/503/504 are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
+ * - 429/503/504, and 403 with X-RateLimit-Remaining: 0 (GitHub's rate limit), are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
  *   or X-RateLimit-Reset) when it fits the budget; otherwise the run stops.
  * - Responses over 4 MB, non-JSON bodies and any other non-2xx status stop the run. Response bodies and
  *   request URLs are never included in errors: they may contain account data or tokens.
@@ -162,7 +169,8 @@ function tpl_http(string $method, string $url, array $options = []): array
             throw new RuntimeException("Connection to $host failed; check connectivity and credentials.");
         }
         $status = $response->getStatusCode();
-        if (in_array($status, [429, 503, 504], true) && $attempt < 3) {
+        $rateLimited = $status === 403 && trim($response->getHeaderLine('X-RateLimit-Remaining')) === '0';
+        if ((in_array($status, [429, 503, 504], true) || $rateLimited) && $attempt < 3) {
             $response->getBody()->close();
             $wait = tpl_retryDelay($response, $attempt);
             if ($wait > min(30, tpl_remaining() - 5)) {
@@ -267,115 +275,152 @@ function tpl_readBody(\Psr\Http\Message\StreamInterface $stream, int $maxBytes, 
     }
     return $body;
 }
-// ─── end shared:http v1 sha256:a387e044ee2df920 ───
-// ─── shared:providers/auth0 v1 (edit Automation/_shared/providers/auth0.php, then run Automation/tools/sync.php) ───
-/** The canonical tenant domain (e.g. example.eu.auth0.com), as "https://host". */
-function tpl_auth0BaseUrl(string $domain): string
+// ─── end shared:http v2 sha256:2fa2c253cb37e4d7 ───
+// ─── shared:providers/graph v1 (edit Automation/_shared/providers/graph.php, then run Automation/tools/sync.php) ───
+/** Application token through the client-credentials flow. */
+function tpl_graphToken(string $tenantId, string $clientId, string $clientSecret): string
 {
-    $domain = strtolower(trim(preg_replace('~^https://~i', '', trim($domain)), '/'));
-    if (preg_match('~^[a-z0-9-]+(?:\.[a-z0-9-]+)+$~D', $domain) !== 1) {
-        throw new RuntimeException('The Auth0 domain must look like example.eu.auth0.com (no path).');
+    foreach (['tenant ID' => $tenantId, 'client ID' => $clientId] as $what => $value) {
+        if (preg_match('/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/iD', $value) !== 1) {
+            throw new RuntimeException("Invalid Entra $what.");
+        }
     }
-    return 'https://' . $domain;
-}
-
-/** Management API token through the client-credentials grant of a machine-to-machine application. */
-function tpl_auth0Token(string $base, string $clientId, string $clientSecret): string
-{
-    $response = tpl_http('POST', $base . '/oauth/token', ['json' => [
-        'grant_type' => 'client_credentials',
-        'client_id' => $clientId,
-        'client_secret' => $clientSecret,
-        'audience' => $base . '/api/v2/',
-    ]]);
+    $response = tpl_http('POST', 'https://login.microsoftonline.com/' . strtolower($tenantId) . '/oauth2/v2.0/token', [
+        'form_params' => [
+            'grant_type' => 'client_credentials',
+            'client_id' => $clientId,
+            'client_secret' => $clientSecret,
+            'scope' => 'https://graph.microsoft.com/.default',
+        ],
+    ]);
     $token = $response['data']['access_token'] ?? null;
     if (!is_string($token) || $token === '') {
-        throw new RuntimeException('Auth0 returned no access token.');
+        throw new RuntimeException('Microsoft returned no access token.');
     }
     return $token;
 }
 
-/**
- * Every item of a page-based list (page, per_page=100, include_totals). Auth0 only returns the first
- * 1000 results this way: a larger total stops the run instead of returning a partial list.
- */
-function tpl_auth0Pages(string $base, string $path, string $key, string $token, int $limit, string $itemId = 'id'): array
+/** One Graph object, e.g. tpl_graphGet('users/<id>?$select=id', $token). */
+function tpl_graphGet(string $path, string $token): array
 {
-    $items = [];
-    $total = null;
-    for ($page = 0; $page < 10; $page++) {
-        $url = $base . $path . (str_contains($path, '?') ? '&' : '?') . "page=$page&per_page=100&include_totals=true";
-        $data = tpl_http('GET', $url, ['headers' => ['Authorization' => 'Bearer ' . $token]])['data'];
-        if (!is_array($data[$key] ?? null) || !is_int($data['total'] ?? null)) {
-            throw new RuntimeException("Auth0 returned an unexpected $key list.");
-        }
-        if ($total === null) {
-            $total = $data['total'];
-            if ($total > 1000) {
-                throw new RuntimeException("Auth0 reports $total $key; this feed supports up to 1000 (Auth0's page limit).");
-            }
-            if ($total > $limit) {
-                throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
-            }
-        } elseif ($data['total'] !== $total) {
-            throw new RuntimeException("Auth0 $key changed during the pull; retry later.");
-        }
-        $items = tpl_auth0Add($items, $data[$key], $itemId);
-        if ($data[$key] === [] || count($items) >= $total) {
-            break;
-        }
-    }
-    if (count($items) !== $total) {
-        throw new RuntimeException("Auth0 $key list is incomplete or changed during the pull; retry later.");
-    }
-    return array_values($items);
+    return tpl_http('GET', 'https://graph.microsoft.com/v1.0/' . $path, ['headers' => ['Authorization' => 'Bearer ' . $token]])['data'];
 }
 
-/** Every item of a checkpoint list (take=100, from=<next>), used by role members and organizations. */
-function tpl_auth0Checkpoint(string $base, string $path, string $key, string $token, int $limit, string $itemId = 'id'): array
+/**
+ * Every item of one collection, or an exception. With $counted the request asks for @odata.count
+ * (advanced query, ConsistencyLevel: eventual) and the items received must match it.
+ */
+function tpl_graphList(string $path, string $token, int $limit, bool $counted = true): array
 {
-    $items = [];
-    $from = null;
-    $seen = [];
-    do {
-        if (count($seen) >= 200) {
-            throw new RuntimeException("Auth0 $key list exceeds 200 pages; narrow the scope.");
+    return tpl_graphLists([$path], $token, $limit, $counted)[0];
+}
+
+/**
+ * Several collections at once through Graph JSON batching (20 requests per call), each followed to its
+ * last page. Returns the items of each path, in the order given. Any failed sub-request stops the run.
+ */
+function tpl_graphLists(array $paths, string $token, int $limit, bool $counted = true): array
+{
+    $auth = ['Authorization' => 'Bearer ' . $token];
+    $headers = $counted ? ['ConsistencyLevel' => 'eventual'] : [];
+    $pending = [];
+    foreach (array_values($paths) as $i => $path) {
+        $url = '/' . $path . ($counted ? (str_contains($path, '?') ? '&' : '?') . '$count=true' : '');
+        $pending[$i] = ['url' => $url, 'first' => 'https://graph.microsoft.com/v1.0' . $url, 'pages' => 0, 'expected' => null, 'items' => [], 'attempts' => 0];
+    }
+    $done = [];
+    while ($pending !== []) {
+        foreach (array_chunk($pending, 20, true) as $chunk) {
+            $requests = [];
+            foreach ($chunk as $i => $state) {
+                $requests[] = ['id' => (string) $i, 'method' => 'GET', 'url' => $state['url'], 'headers' => (object) $headers];
+            }
+            $batch = tpl_http('POST', 'https://graph.microsoft.com/v1.0/$batch', ['headers' => $auth, 'json' => ['requests' => $requests]])['data'];
+            if (!is_array($batch['responses'] ?? null) || count($batch['responses']) !== count($requests)) {
+                throw new RuntimeException('Graph batch response is incomplete.');
+            }
+            $wait = 0;
+            foreach ($batch['responses'] as $answer) {
+                $i = (int) ($answer['id'] ?? -1);
+                if (!isset($chunk[$i])) {
+                    throw new RuntimeException('Graph batch response does not match its requests.');
+                }
+                $status = (int) ($answer['status'] ?? 0);
+                if (in_array($status, [429, 503, 504], true) && ++$pending[$i]['attempts'] < 3) {
+                    $wait = max($wait, (int) ($answer['headers']['Retry-After'] ?? 1));
+                    continue;
+                }
+                if ($status !== 200) {
+                    throw new RuntimeException("Microsoft Graph returned HTTP $status for a collection; check permissions and consent.");
+                }
+                $pending[$i] = tpl_graphPage($pending[$i], $answer['body'] ?? null, $limit, $counted);
+                if ($pending[$i]['url'] === null) {
+                    $done[$i] = $pending[$i]['items'];
+                    unset($pending[$i]);
+                }
+            }
+            if ($wait > 0) {
+                if ($wait > min(30, tpl_remaining() - 5)) {
+                    throw new RuntimeException('Microsoft Graph is throttling this run; retry later.');
+                }
+                tpl_logInfo(sprintf('Microsoft Graph asked to slow down; waiting %d s.', $wait));
+                sleep($wait);
+            }
         }
-        $url = $base . $path . (str_contains($path, '?') ? '&' : '?') . 'take=100' . ($from === null ? '' : '&from=' . rawurlencode($from));
-        $data = tpl_http('GET', $url, ['headers' => ['Authorization' => 'Bearer ' . $token]])['data'];
-        if (!is_array($data[$key] ?? null)) {
-            throw new RuntimeException("Auth0 returned an unexpected $key list.");
+    }
+    ksort($done);
+    return array_values($done);
+}
+
+/** Applies one page to a collection's state; sets 'url' to the next page or null when complete. */
+function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): array
+{
+    if (!is_array($page) || !is_array($page['value'] ?? null)) {
+        throw new RuntimeException('Graph collection is missing or malformed.');
+    }
+    $count = $page['@odata.count'] ?? null;
+    if (++$state['pages'] === 1) {
+        if ($counted && (!is_int($count) || $count < 0)) {
+            throw new RuntimeException('Graph collection count is missing.');
         }
-        $items = tpl_auth0Add($items, $data[$key], $itemId);
-        if (count($items) > $limit) {
+        $state['expected'] = $count;
+    } elseif ($count !== null && $count !== $state['expected']) {
+        throw new RuntimeException('Graph collection changed during the pull; retry later.');
+    }
+    if ($state['pages'] > 100) {
+        throw new RuntimeException('Graph collection has more than 100 pages; narrow the scope.');
+    }
+    foreach ($page['value'] as $item) {
+        if (!is_array($item) || !is_string($item['id'] ?? null) || $item['id'] === '') {
+            throw new RuntimeException('Graph collection contains an invalid item.');
+        }
+        $id = strtolower($item['id']);
+        if (isset($state['items'][$id])) {
+            throw new RuntimeException('Graph collection contains a duplicate item.');
+        }
+        $state['items'][$id] = $item;
+        if (count($state['items']) > $limit) {
             throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
         }
-        $from = $data['next'] ?? null;
-        if ($from !== null && (!is_string($from) || $from === '' || isset($seen[$from]))) {
-            throw new RuntimeException('Auth0 pagination checkpoint is invalid or repeats.');
-        }
-        if ($from !== null) {
-            $seen[$from] = true;
-        }
-    } while ($from !== null);
-    return array_values($items);
-}
-
-function tpl_auth0Add(array $items, array $page, string $itemId): array
-{
-    foreach ($page as $item) {
-        if (!is_array($item) || !is_string($item[$itemId] ?? null) || $item[$itemId] === '') {
-            throw new RuntimeException('Auth0 list contains an invalid item.');
-        }
-        if (isset($items[$item[$itemId]])) {
-            throw new RuntimeException('Auth0 list contains a duplicate item.');
-        }
-        $items[$item[$itemId]] = $item;
     }
-    return $items;
+    $next = $page['@odata.nextLink'] ?? null;
+    if ($next === null) {
+        if ($state['expected'] !== null && count($state['items']) !== $state['expected']) {
+            throw new RuntimeException('Graph collection is incomplete or changed during the pull; retry later.');
+        }
+        $state['items'] = array_values($state['items']);
+        $state['url'] = null;
+        return $state;
+    }
+    if (!is_string($next) || !str_starts_with($next, 'https://graph.microsoft.com/v1.0/')) {
+        throw new RuntimeException('Graph pagination link is invalid.');
+    }
+    tpl_assertNextUrl($state['first'], $next);
+    $state['url'] = substr($next, strlen('https://graph.microsoft.com/v1.0'));
+    return $state;
 }
-// ─── end shared:providers/auth0 v1 sha256:a599915fd183eec4 ───
-// ─── shared:feed v1 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+// ─── end shared:providers/graph v1 sha256:0f75dd180874adb4 ───
+// ─── shared:feed v3 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
 {
@@ -390,6 +435,20 @@ function tpl_feedText(mixed $value, string $what): string
         throw new RuntimeException("$what is longer than 255 bytes.");
     }
     return $value;
+}
+
+/**
+ * The role kinds a script collects, from its ROLES variable. Empty means accounts only: reviews then
+ * compare which accounts exist (added, deleted, creeping accounts) and never report role changes.
+ * Returns the selection as a set, e.g. ['groups' => true].
+ */
+function tpl_roleKinds(mixed $selected, array $allowed): array
+{
+    if (!is_array($selected) || !array_is_list($selected) || count($selected) !== count(array_unique($selected))
+        || array_diff($selected, $allowed) !== []) {
+        throw new RuntimeException('ROLES must be a list chosen from: ' . implode(', ', $allowed) . ' (or empty for accounts only).');
+    }
+    return array_fill_keys($selected, true);
 }
 
 /**
@@ -410,8 +469,8 @@ function tpl_roleString(string $kind, mixed $name, string $id): string
 }
 
 /**
- * The account key eramba matches between pulls. eramba compares accounts case-insensitively,
- * so two accounts must never share a key ignoring case.
+ * The key eramba matches between pulls and between feeds. eramba compares keys ignoring case,
+ * so two rows must never share a key ignoring case.
  */
 function tpl_feedKey(mixed $value, array &$seen, bool $allowSpaces = false): string
 {
@@ -474,78 +533,70 @@ function tpl_feedPublish($feed): void
         }
     })());
 }
-// ─── end shared:feed v1 sha256:f50e84d2b8389d2b ───
+// ─── end shared:feed v3 sha256:39800df21bc1737d ───
 
-// ─── 5. COLLECT: Auth0 ──────────────────────────────────────────────────────
+// ─── 5. COLLECT: Entra ID ───────────────────────────────────────────────────
 
 function validateConfig(array $c): void
 {
-    if (!in_array($c['USER_KEY'], ['email', 'user_id'], true)) {
-        throw new RuntimeException('USER_KEY must be email or user_id.');
+    if (!in_array($c['USER_KEY'], ['mail', 'userPrincipalName', 'id'], true)) {
+        throw new RuntimeException('USER_KEY must be mail, userPrincipalName or id.');
     }
-    foreach (['INCLUDE_ORGANIZATIONS', 'ALLOW_EMPTY_FEED'] as $key) {
-        if (!is_bool($c[$key])) {
-            throw new RuntimeException("$key must be true or false.");
-        }
+    if (!is_string($c['GROUP_ID']) || ($c['GROUP_ID'] !== '' && preg_match('/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/iD', $c['GROUP_ID']) !== 1)) {
+        throw new RuntimeException('GROUP_ID must be empty or an Entra group object ID.');
     }
-    if (!is_int($c['MAX_OBJECTS']) || $c['MAX_OBJECTS'] < 1 || $c['MAX_OBJECTS'] > 10000) {
-        throw new RuntimeException('MAX_OBJECTS must be a number from 1 to 10000.');
+    if (!is_bool($c['REQUIRE_EMPLOYEE_ID'])) {
+        throw new RuntimeException('REQUIRE_EMPLOYEE_ID must be true or false.');
     }
-}
-
-/** Adds $role to every listed member, which must belong to the collected users. */
-function grant(array &$roles, array $users, array $members, string $role): void
-{
-    foreach ($members as $member) {
-        if (!isset($users[$member['user_id']])) {
-            throw new RuntimeException('Access is assigned to a user outside the collected list; users changed during the pull, retry later.');
-        }
-        $roles[$member['user_id']][] = $role;
+    if (!is_int($c['MAX_USERS']) || $c['MAX_USERS'] < 1 || $c['MAX_USERS'] > 50000) {
+        throw new RuntimeException('MAX_USERS must be a number from 1 to 50000.');
     }
 }
 
-function collectFeed(string $base, string $token, array $config)
+/** Enabled member users of the tenant, or of the configured group (nested members included). */
+function listUsers(string $token, array $config): array
 {
-    // At most 1000 users: the page-based list stops there, and a larger total aborts the run.
-    $fields = 'fields=' . rawurlencode('user_id,email,name,blocked') . '&include_fields=true&sort=' . rawurlencode('created_at:1');
-    $users = [];
-    foreach (tpl_auth0Pages($base, '/api/v2/users?' . $fields, 'users', $token, 1000, 'user_id') as $user) {
-        $users[$user['user_id']] = $user;
+    $select = '$select=id,displayName,userPrincipalName,mail,employeeId,accountEnabled,userType';
+    if ($config['GROUP_ID'] !== '') {
+        $path = 'groups/' . strtolower($config['GROUP_ID']) . '/transitiveMembers/microsoft.graph.user?' . $select . '&$top=999';
+    } else {
+        $path = 'users?' . $select . '&$filter=' . rawurlencode("accountEnabled eq true and userType eq 'Member'") . '&$top=999';
     }
-    tpl_logInfo(count($users) . ' users found.');
+    $users = tpl_graphList($path, $token, $config['MAX_USERS']);
+    return array_values(array_filter($users, fn ($u) => ($u['accountEnabled'] ?? null) === true && ($u['userType'] ?? null) === 'Member'));
+}
 
-    $roles = [];
-    $limit = $config['MAX_OBJECTS'];
-    $roleList = tpl_auth0Pages($base, '/api/v2/roles', 'roles', $token, $limit);
-    foreach ($roleList as $role) {
-        $members = tpl_auth0Checkpoint($base, '/api/v2/roles/' . rawurlencode($role['id']) . '/users', 'users', $token, 1000, 'user_id');
-        grant($roles, $users, $members, tpl_roleString('Role', $role['name'] ?? null, $role['id']));
-    }
-    tpl_logInfo(count($roleList) . ' roles collected.');
-
-    if ($config['INCLUDE_ORGANIZATIONS']) {
-        $organizations = tpl_auth0Checkpoint($base, '/api/v2/organizations', 'organizations', $token, $limit);
-        foreach ($organizations as $organization) {
-            $members = tpl_auth0Checkpoint($base, '/api/v2/organizations/' . rawurlencode($organization['id']) . '/members', 'members', $token, 1000, 'user_id');
-            $name = $organization['display_name'] ?? $organization['name'] ?? null;
-            grant($roles, $users, $members, tpl_roleString('Organization', $name, $organization['id']));
-        }
-        tpl_logInfo(count($organizations) . ' organizations collected.');
-    }
-
+function collectFeed(string $token, array $config)
+{
+    $users = listUsers($token, $config);
     $feed = tpl_feedOpen();
     $keys = [];
-    $bytes = 0;
-    foreach ($users as $id => $user) {
-        $key = tpl_feedKey($user[$config['USER_KEY']] ?? null, $keys);
-        $name = mb_strcut(tpl_feedText($user['name'] ?? ($user['email'] ?? $id), 'User name'), 0, 120, 'UTF-8');
-        $state = ($user['blocked'] ?? false) === true ? 'blocked' : 'active';
-        $bytes = tpl_feedAdd($feed, $key, tpl_feedText("$name; $state; id=$id", 'Description'), $roles[$id] ?? []);
+    $count = 0;
+    $withoutKey = 0;
+    $withoutEmployeeId = 0;
+    foreach ($users as $user) {
+        if ($config['REQUIRE_EMPLOYEE_ID'] && !is_string($user['employeeId'] ?? null)) {
+            $withoutEmployeeId++;
+            continue;
+        }
+        $value = $user[$config['USER_KEY']] ?? null;
+        if (!is_string($value) || trim($value) === '') {
+            // Leaving someone out of a current-employees list only adds findings (their accounts get
+            // flagged); it can never hide one. Users without the key field are therefore counted, not fatal.
+            $withoutKey++;
+            continue;
+        }
+        $key = tpl_feedKey($value, $keys);
+        $name = mb_strcut(tpl_feedText($user['displayName'] ?? $value, 'Display name'), 0, 150, 'UTF-8');
+        $employeeId = is_string($user['employeeId'] ?? null) ? '; employee ' . mb_strcut($user['employeeId'], 0, 40, 'UTF-8') : '';
+        tpl_feedAdd($feed, $key, tpl_feedText($name . $employeeId, 'Description'), []);
+        $count++;
     }
-    if ($users === [] && !$config['ALLOW_EMPTY_FEED']) {
-        throw new RuntimeException('No accounts found; set ALLOW_EMPTY_FEED if zero accounts is intended.');
+    // An empty current-employees list would flag every application account: never publish one.
+    if ($count === 0) {
+        throw new RuntimeException('No employees found; check GROUP_ID, REQUIRE_EMPLOYEE_ID and USER_KEY.');
     }
-    tpl_logInfo(sprintf('%d accounts staged (%d bytes).', count($users), $bytes));
+    tpl_logInfo(sprintf('%d employees staged; %d skipped without %s; %d skipped without Employee ID.', $count, $withoutKey, $config['USER_KEY'], $withoutEmployeeId));
     return $feed;
 }
 
@@ -558,21 +609,19 @@ try {
     tpl_logStep(1, 'Checking configuration');
     validateConfig($config);
     tpl_checkSecrets($secrets);
-    $base = tpl_auth0BaseUrl($secrets['AUTH0_DOMAIN']);
-    define('TPL_ALLOWED_REQUESTS', ['POST ' . $base . '/oauth/token', 'GET ' . $base . '/api/v2/']);
-    tpl_logInfo('Secrets present.');
+    tpl_logInfo('Secrets present. Scope: ' . ($config['GROUP_ID'] === '' ? 'all enabled member users.' : 'enabled users of one group.'));
 
-    tpl_logStep(2, 'Authenticating to the Auth0 Management API');
-    $token = tpl_auth0Token($base, $secrets['AUTH0_CLIENT_ID'], tpl_base64Secret($secrets['AUTH0_CLIENT_SECRET_B64'], 'auth0_client_secret_b64'));
+    tpl_logStep(2, 'Authenticating to Microsoft Graph');
+    $token = tpl_graphToken($secrets['ENTRA_TENANT_ID'], $secrets['ENTRA_CLIENT_ID'], tpl_base64Secret($secrets['ENTRA_CLIENT_SECRET_B64'], 'entra_client_secret_b64'));
 
-    tpl_logStep(3, 'Collecting users, roles and organizations');
-    $feed = collectFeed($base, $token, $config);
+    tpl_logStep(3, 'Collecting current employees');
+    $feed = collectFeed($token, $config);
 
-    tpl_logStep(4, 'Publishing the account review feed');
+    tpl_logStep(4, 'Publishing the employee list');
     tpl_feedPublish($feed);
     tpl_log("\nDone.");
     exit(0);
 } catch (Throwable $e) {
-    tpl_log("\nABORTED: no account review feed was published.\nERROR: " . $e->getMessage());
+    tpl_log("\nABORTED: no employee list was published.\nERROR: " . $e->getMessage());
     exit(1);
 }

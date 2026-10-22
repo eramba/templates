@@ -36,6 +36,7 @@ $secrets = [
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
     'USER_KEY' => 'login', // Account identifier: login, email or id (no fallback)
+    'ROLES' => ['groups', 'applications', 'admin_roles'], // Access listed as roles; [] = accounts only (README §7)
     'INCLUDE_DEPROVISIONED' => true, // Also list deactivated (DEPROVISIONED) users, which Okta hides by default
     'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
     'MAX_USERS' => 2000, // Maximum accounts in the feed; never truncate
@@ -127,14 +128,14 @@ function tpl_base64Secret(string $value, string $name): string
     return $decoded;
 }
 // ─── end shared:core v1 sha256:277e2f6c5d57b964 ───
-// ─── shared:http v1 (edit Automation/_shared/http.php, then run Automation/tools/sync.php) ───
+// ─── shared:http v2 (edit Automation/_shared/http.php, then run Automation/tools/sync.php) ───
 /**
  * One JSON request to a provider API. Returns ['status' => int, 'headers' => [lower-case name => value], 'data' => array].
  *
  * - Only "METHOD https://host/path" combinations starting with an entry of TPL_ALLOWED_REQUESTS are sent,
  *   so the script cannot write to the provider or send its token to another host.
  * - TLS verification on, redirects off, timeouts capped to the remaining run budget.
- * - 429/503/504 are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
+ * - 429/503/504, and 403 with X-RateLimit-Remaining: 0 (GitHub's rate limit), are retried up to 3 attempts, waiting what the provider asks (Retry-After, X-Rate-Limit-Reset
  *   or X-RateLimit-Reset) when it fits the budget; otherwise the run stops.
  * - Responses over 4 MB, non-JSON bodies and any other non-2xx status stop the run. Response bodies and
  *   request URLs are never included in errors: they may contain account data or tokens.
@@ -162,7 +163,8 @@ function tpl_http(string $method, string $url, array $options = []): array
             throw new RuntimeException("Connection to $host failed; check connectivity and credentials.");
         }
         $status = $response->getStatusCode();
-        if (in_array($status, [429, 503, 504], true) && $attempt < 3) {
+        $rateLimited = $status === 403 && trim($response->getHeaderLine('X-RateLimit-Remaining')) === '0';
+        if ((in_array($status, [429, 503, 504], true) || $rateLimited) && $attempt < 3) {
             $response->getBody()->close();
             $wait = tpl_retryDelay($response, $attempt);
             if ($wait > min(30, tpl_remaining() - 5)) {
@@ -267,7 +269,7 @@ function tpl_readBody(\Psr\Http\Message\StreamInterface $stream, int $maxBytes, 
     }
     return $body;
 }
-// ─── end shared:http v1 sha256:a387e044ee2df920 ───
+// ─── end shared:http v2 sha256:2fa2c253cb37e4d7 ───
 // ─── shared:providers/okta v1 (edit Automation/_shared/providers/okta.php, then run Automation/tools/sync.php) ───
 /** The Okta org URL (e.g. https://example.okta.com), as "https://host" without path, port or credentials. */
 function tpl_oktaBaseUrl(string $url): string
@@ -327,7 +329,7 @@ function tpl_oktaList(string $base, string $path, string $token, int $limit): ar
     return array_values($items);
 }
 // ─── end shared:providers/okta v1 sha256:3193527228e2d298 ───
-// ─── shared:feed v1 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
+// ─── shared:feed v3 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
 {
@@ -342,6 +344,20 @@ function tpl_feedText(mixed $value, string $what): string
         throw new RuntimeException("$what is longer than 255 bytes.");
     }
     return $value;
+}
+
+/**
+ * The role kinds a script collects, from its ROLES variable. Empty means accounts only: reviews then
+ * compare which accounts exist (added, deleted, creeping accounts) and never report role changes.
+ * Returns the selection as a set, e.g. ['groups' => true].
+ */
+function tpl_roleKinds(mixed $selected, array $allowed): array
+{
+    if (!is_array($selected) || !array_is_list($selected) || count($selected) !== count(array_unique($selected))
+        || array_diff($selected, $allowed) !== []) {
+        throw new RuntimeException('ROLES must be a list chosen from: ' . implode(', ', $allowed) . ' (or empty for accounts only).');
+    }
+    return array_fill_keys($selected, true);
 }
 
 /**
@@ -362,8 +378,8 @@ function tpl_roleString(string $kind, mixed $name, string $id): string
 }
 
 /**
- * The account key eramba matches between pulls. eramba compares accounts case-insensitively,
- * so two accounts must never share a key ignoring case.
+ * The key eramba matches between pulls and between feeds. eramba compares keys ignoring case,
+ * so two rows must never share a key ignoring case.
  */
 function tpl_feedKey(mixed $value, array &$seen, bool $allowSpaces = false): string
 {
@@ -426,12 +442,15 @@ function tpl_feedPublish($feed): void
         }
     })());
 }
-// ─── end shared:feed v1 sha256:f50e84d2b8389d2b ───
+// ─── end shared:feed v3 sha256:39800df21bc1737d ───
 
 // ─── 5. COLLECT: Okta ───────────────────────────────────────────────────────
 
+const ROLE_KINDS = ['groups', 'applications', 'admin_roles'];
+
 function validateConfig(array $c): void
 {
+    tpl_roleKinds($c['ROLES'], ROLE_KINDS);
     if (!in_array($c['USER_KEY'], ['login', 'email', 'id'], true)) {
         throw new RuntimeException('USER_KEY must be login, email or id.');
     }
@@ -508,12 +527,19 @@ function collectRoles(string $base, string $token, array $users, array $config):
 {
     $roles = [];
     $limit = $config['MAX_OBJECTS'];
+    $kinds = tpl_roleKinds($config['ROLES'], ROLE_KINDS);
 
-    $groups = tpl_oktaList($base, '/api/v1/groups?limit=200', $token, $limit);
+    $groups = isset($kinds['groups']) || isset($kinds['admin_roles']) ? tpl_oktaList($base, '/api/v1/groups?limit=200', $token, $limit) : [];
     foreach ($groups as $group) {
+        $isOktaGroup = ($group['type'] ?? '') === 'OKTA_GROUP'; // Admin roles can only be assigned to Okta groups
+        if (!isset($kinds['groups']) && !$isOktaGroup) {
+            continue;
+        }
         $members = tpl_oktaList($base, '/api/v1/groups/' . rawurlencode($group['id']) . '/users?limit=200', $token, $limit);
-        grant($roles, $users, $members, tpl_roleString('Group', $group['profile']['name'] ?? null, $group['id']), $config);
-        if (($group['type'] ?? '') === 'OKTA_GROUP') { // Admin roles can only be assigned to Okta groups
+        if (isset($kinds['groups'])) {
+            grant($roles, $users, $members, tpl_roleString('Group', $group['profile']['name'] ?? null, $group['id']), $config);
+        }
+        if ($isOktaGroup && isset($kinds['admin_roles'])) {
             foreach (tpl_oktaList($base, '/api/v1/groups/' . rawurlencode($group['id']) . '/roles', $token, $limit) as $role) {
                 grant($roles, $users, $members, adminRole($role), $config);
             }
@@ -521,7 +547,7 @@ function collectRoles(string $base, string $token, array $users, array $config):
     }
     tpl_logInfo(count($groups) . ' groups collected.');
 
-    $apps = tpl_oktaList($base, '/api/v1/apps?limit=200', $token, $limit);
+    $apps = isset($kinds['applications']) ? tpl_oktaList($base, '/api/v1/apps?limit=200', $token, $limit) : [];
     foreach ($apps as $app) {
         $assigned = tpl_oktaList($base, '/api/v1/apps/' . rawurlencode($app['id']) . '/users?limit=200', $token, $limit);
         grant($roles, $users, $assigned, tpl_roleString('Application', $app['label'] ?? null, $app['id']), $config);
@@ -530,7 +556,7 @@ function collectRoles(string $base, string $token, array $users, array $config):
 
     // Users holding admin roles directly. The response is {"value": [...], "_links": {"next": {"href": …}}}.
     $first = $base . '/api/v1/iam/assignees/users?limit=200';
-    $url = $first;
+    $url = isset($kinds['admin_roles']) ? $first : null;
     $admins = 0;
     for ($page = 0; $url !== null; $page++) {
         if ($page >= 100) {

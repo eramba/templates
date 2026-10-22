@@ -13,6 +13,7 @@ secrets:
   - entra_client_secret_b64
 variables:
   - USER_KEY
+  - ROLES
   - USER_IDS
   - ALLOW_EMPTY_FEED
   - MAX_USERS
@@ -26,13 +27,15 @@ last_tested: null
 
 # Entra ID Accounts and Assigned Access
 
-**Technology:** Microsoft Entra ID (public cloud).
+**Technology:** Microsoft Entra ID (public cloud), including Microsoft 365 licences.
 
 Send Entra user accounts and their assigned access to an eramba Account Review feed. **Draft: functional and installation validation pending.**
 
 ## 1. Purpose
 
 Supplies the current list of accounts to review. eramba owns the schedule, snapshot/differential comparison, reviewers, decisions and findings. The script is read-only: it approves nothing and revokes nothing.
+
+**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
 
 ## 2. What it gathers
 
@@ -43,8 +46,9 @@ Supplies the current list of accounts to review. eramba owns the schedule, snaps
 | `roles` | `Group: <name> [<id>]` for direct and nested group memberships |
 | | `Directory role: <name> [<role id>; directory=<scope>; app=<scope>]` for active role assignments, direct or through a role-assignable group |
 | | `Application: <app> / <role> [<app id> / <role id>]` for app role assignments, direct or through a group, including default access |
+| | `License: <SKU part number> [<SKU id>]` for Microsoft 365 and other licences assigned to the user, directly or through a group |
 
-All users are included, disabled users and guests too. A disabled account is not proof of a leaver; use an HR feed for leaver reviews.
+All users are included, disabled users and guests too, so reviewers see accounts that still exist after someone left. To list the people who should have access, use [Entra ID Current Employees](../Entra%20ID%20Current%20Employees/).
 
 ## 3. Coverage
 
@@ -69,7 +73,7 @@ Names and IDs are kept together, so renaming a group, role or application appear
 
 | Permission | Why |
 |---|---|
-| `Directory.Read.All` | Users, memberships, directory role definitions/assignments, app role assignments and application names |
+| `Directory.Read.All` | Users, memberships, directory role definitions/assignments, app role assignments, application names and subscribed licences |
 | `Member.Read.Hidden` | Members of groups with hidden membership |
 
 No write permission is needed. Directory-wide read access is broad: protect and rotate the secret.
@@ -96,13 +100,14 @@ No write permission is needed. Directory-wide read access is broad: protect and 
 |---|---|---|
 | `USER_KEY` | `userPrincipalName` | Account identifier: `userPrincipalName`, `id` or `mail`. Must exist on every account; no fallback. |
 | `USER_IDS` | `[]` | Empty: whole tenant. Otherwise a list of user object IDs. |
+| `ROLES` | `['groups', 'directory_roles', 'applications', 'licenses']` | Access listed as roles. `[]` lists accounts only (no membership calls, no role changes). |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
 | `MAX_USERS` | `2000` | 1–10000 accounts; exceeding it aborts instead of truncating. |
 | `MAX_OBJECTS` | `2000` | 1–10000 records per API collection and roles per account; exceeding it aborts. |
 
 Fixed limits: 200 seconds of collection (`TPL_RUN_SECONDS`), 4 MB per response, 100 pages per collection, 8 MiB of feed, 48 MiB of memory, three attempts when Microsoft throttles for up to 30 seconds. Requests are grouped 20 at a time with Graph JSON batching; only the token endpoint and Graph reads are allowed (`TPL_ALLOWED_REQUESTS`).
 
-The key must be unique ignoring case, as eramba compares accounts case-insensitively. Changing `USER_KEY` or `USER_IDS` changes the population: take a new baseline.
+The key must be unique ignoring case, as eramba compares accounts ignoring case. Changing `USER_KEY` or `USER_IDS` changes the population: take a new baseline.
 
 ## 8. Results
 

@@ -12,6 +12,7 @@ secrets:
   - aws_secret_access_key
 variables:
   - USER_KEY
+  - ROLES
   - INCLUDE_ROOT
   - ALLOW_EMPTY_FEED
   - MAX_USERS
@@ -31,6 +32,8 @@ Send IAM users, their groups, policies and credentials to an eramba Account Revi
 ## 1. Purpose
 
 Supplies the current list of IAM users of one AWS account to review. eramba owns the schedule, comparison, reviewers, decisions and findings. The script is read-only.
+
+**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
 
 ## 2. What it gathers
 
@@ -102,6 +105,7 @@ The AWS managed policy `SecurityAudit` also includes these actions.
 | Variable | Default | Meaning |
 |---|---|---|
 | `USER_KEY` | `UserName` | Account identifier: `UserName`, `Arn` or `UserId`. |
+| `ROLES` | `['groups', 'policies', 'credentials']` | Access listed as roles: groups, policies (user, group, inline, boundary) and active credentials. `[]` lists users only. |
 | `INCLUDE_ROOT` | `true` | Also list the account root user. |
 | `ALLOW_EMPTY_FEED` | `false` | True only if zero accounts is a legitimate result. |
 | `MAX_USERS` | `2000` | 1–10000 IAM users or groups; exceeding it aborts instead of truncating. |
