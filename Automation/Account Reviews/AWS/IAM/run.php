@@ -3,7 +3,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  AWS IAM Users and Assigned Access
+ *  AWS IAM – Accounts
  *  Technology: AWS Identity and Access Management (one AWS account)
  *  id: aws-iam-account-review        version: 0.1.1 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).

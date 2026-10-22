@@ -1,12 +1,11 @@
 ---
 id: aws-identity-center-account-review
-name: AWS IAM Identity Center Users and Assigned Access
+name: AWS IAM Identity Center – Accounts
 version: 0.1.1
 status: draft
 technology: AWS IAM Identity Center
 vendor: AWS
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - aws_access_key_id
   - aws_secret_access_key
@@ -26,41 +25,57 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# AWS IAM Identity Center Users and Assigned Access
+# AWS IAM Identity Center – Accounts
 
 **Technology:** AWS IAM Identity Center (successor to AWS Single Sign-On), one organization instance.
 
-Send IAM Identity Center users, their groups and their AWS account access (permission sets) to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every user of your IAM Identity Center and the access each one has: its groups and the permission sets that give it access to AWS accounts. Reviewers then mark in eramba which users and accesses should stay and which should be removed; nothing is changed in AWS.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of IAM Identity Center users to review, with the AWS accounts and permission sets each one can use. eramba owns the schedule, comparison, reviewers, decisions and findings. The script is read-only.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value (the work email by default); see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | The user's primary email by default; configurable to `UserName` or `UserId` |
-| `description` | Display name, user name, `enabled` / `disabled` (or `status not reported`), creation date and user ID |
-| `roles` | `Group: <group name> [<group id>]` for every Identity Store group the user belongs to |
-| | `Permission set: <account id> / <permission set name> [<permission set ARN>]` for an account assignment made directly to the user |
-| | `Permission set: <account id> / <permission set name> via <group name> [<permission set ARN>]` for an assignment made to one of the user's groups |
+| **Family** | Account review |
+| **Each row is** | One IAM Identity Center user, identified by its primary email, for example `ana.garcia@example.com` (or its user name or user ID with `USER_KEY`) |
+| **Connects to** | One IAM Identity Center organization instance, in the region you set in `REGION`, through the official AWS SDK for PHP. Read-only |
+| **Permission needed** | An IAM user with an access key, in the AWS Organizations management account or the delegated administrator account for IAM Identity Center, allowed to list instances, permission sets, account assignments, users, groups and group memberships (§5). An AWS administrator creates it |
+| **Included** | Every user of the instance's identity store, enabled or disabled, whatever the identity source (Identity Center directory, or an external identity provider through SCIM) |
+| **Not included** | Application assignments; what each permission set allows; IAM users and roles inside the AWS accounts (see §3); account names (the 12-digit account ID is shown); Active Directory identity sources, whose users are only partly visible through the Identity Store API; other instances (one per automation) |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000), 2000 groups and permission sets (`MAX_GROUPS`, maximum 10000) and 20000 account assignments (`MAX_ASSIGNMENTS`, maximum 100000). A larger population stops the run instead of being cut short. This version has no filter to split a larger population |
+| **Roles listed** | Groups and permission sets per AWS account, direct or through a group |
 
-Disabled users are included with their state in the description. The same access granted directly and through a group, or through two groups, appears once per path, so a reviewer can see why the user has it.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-One IAM Identity Center organization instance per automation, in the region set in `REGION`. The script collects every user and group of the instance's identity store, every permission set, every AWS account each permission set is provisioned to, and every account assignment of each permission set and account pair. Users come from the identity store whatever the identity source (Identity Center directory, or an external identity provider through SCIM).
+One row is one person's Identity Center user. Its roles are every access that user holds. This automation lists two kinds:
 
-Not covered: application assignments (customer managed and AWS managed applications), what each permission set allows (managed, inline and customer managed policies, permissions boundary), IAM users and roles inside the accounts (see [AWS IAM](../IAM/)), account names (the 12-digit account ID is shown), and Active Directory identity sources, whose users are only partially visible through the Identity Store API (to validate on a real tenant). A group member or an assignment pointing to a user or group that was not collected aborts the run.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Group** | The user is a member of this group in the Identity Center directory | `Group: Engineering [<id>]` |
+| **Permission set** | The user can sign in to this AWS account with this set of permissions. Shown as *account ID / permission set*. *via* followed by a group name means the access comes from that group; with no *via* it was given to the user directly. The same access reached in two ways is listed once for each way | `Permission set: 123456789012 / AdministratorAccess via Engineering [arn:aws:sso:::permissionSet/ssoins-…/ps-…]` |
 
-Account assignments are found through the accounts each permission set is provisioned to (`ListAccountsForProvisionedPermissionSet`), which avoids calling every permission set against every account of the organization. To validate on a real tenant: an assignment whose provisioning failed may not be listed.
+```
+Account:     ana.garcia@example.com
+Description: Ana García (ana.garcia); enabled; created 2024-03-12; id=9067…
+Roles:       Group: Engineering [a1b2…]
+             Permission set: 123456789012 / AdministratorAccess via Engineering [arn:aws:sso:::permissionSet/…]
+             Permission set: 210987654321 / ReadOnlyAccess [arn:aws:sso:::permissionSet/…]
+```
 
-Call volume: one call per 100 users, groups or permission sets; one `DescribePermissionSet` and one account listing per permission set; one assignment listing per permission set and account pair; one membership listing per group (only the groups that hold assignments when `ROLES` has no `groups`). Large organizations may hit the 200-second budget; the AWS SDK retries throttled requests.
+The text in square brackets is AWS's identifier. It keeps two items with the same name apart; reviewers can ignore it. The description gives the display name, user name, whether the user is *enabled* or *disabled*, the creation date and the user ID.
 
-Any collection error, an unexpected answer, a repeating pagination token or an exceeded limit aborts the run and nothing is published.
+You choose which kinds are listed with `ROLES` (§7): `groups` and `permission_sets`. With none, only the users are listed.
+
+A row shows *that* Ana can use *AdministratorAccess* in an AWS account, not what that permission set allows.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each permission set allows | *AWS IAM Identity Center – Permission set permissions* (planned) |
+| Review the IAM users inside an AWS account | [AWS IAM – Accounts](../IAM/) |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). A leaver's disabled Identity Center user stays listed until it is deleted |
 
 ## 4. Before you start
 
@@ -137,9 +152,7 @@ Fixed limits: 200 seconds of collection, 1000 pages per list, 8 MiB of feed, 48 
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never emails, names or IDs. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

@@ -1,12 +1,11 @@
 ---
 id: aws-iam-account-review
-name: AWS IAM Users and Assigned Access
+name: AWS IAM – Accounts
 version: 0.1.1
 status: draft
 technology: AWS Identity and Access Management
 vendor: AWS
 eramba_module: Account Review Feeds
-trigger: Account Review pull
 secrets:
   - aws_access_key_id
   - aws_secret_access_key
@@ -23,39 +22,63 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# AWS IAM Users and Assigned Access
+# AWS IAM – Accounts
 
 **Technology:** AWS Identity and Access Management (IAM), one AWS account.
 
-Send IAM users, their groups, policies and credentials to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Sends eramba every IAM user of one AWS account, plus the account's root user, and the access each one has: its groups, policies, permissions boundary and active credentials. Reviewers then mark in eramba which users and accesses should stay and which should be removed; nothing is changed in AWS.
 
-## 1. Purpose
+## 1. At a glance
 
-Supplies the current list of IAM users of one AWS account to review. eramba owns the schedule, comparison, reviewers, decisions and findings. The script is read-only.
-
-**Review types:** use this script as a feed of type *List of accounts to be reviewed* in Snapshot, Differential or Exit reviews. For Exit reviews, compare it with an employee feed such as [Entra ID Current Employees](../../Microsoft/Entra%20ID%20Current%20Employees/) whose key holds the same value; see [review types](../../README.md#review-types).
-
-## 2. What it gathers
-
-| Feed field | Source |
+| | |
 |---|---|
-| `user` | IAM user name by default; configurable to ARN or user ID |
-| `description` | Path and name, MFA or no MFA, creation date and user ID |
-| `roles` | `Group: <name> [<arn>]` for every group |
-| | `Group policy: <group> / <policy> [<arn or inline>]` for the policies of each group |
-| | `Policy: <name> [<arn>]` and `Inline policy: <name> [inline]` attached to the user |
-| | `Permissions boundary: <name> [<arn>]` |
-| | `Credential: Console password [password]` and `Credential: Access key [key 1]` or `[key 2]` when active |
+| **Family** | Account review |
+| **Each row is** | One IAM user of one AWS account, identified by its user name, for example `ana.garcia`, or the account's root user, shown as `<root_account>` |
+| **Connects to** | AWS IAM, through the official AWS SDK for PHP. Read-only |
+| **Permission needed** | An IAM user with an access key and a policy allowing `iam:GetAccountAuthorizationDetails`, `iam:GenerateCredentialReport` and `iam:GetCredentialReport`. The AWS managed policy `SecurityAudit` includes them. An AWS administrator creates it (§5) |
+| **Included** | Every IAM user of the AWS account and, by default, the root user (`INCLUDE_ROOT`). Whether each has MFA is shown in the description |
+| **Not included** | IAM roles and who can assume them; IAM Identity Center users and permission sets (see §3); resource-based policies; service control policies; other accounts of an organization (one per automation). Policies show what was granted, not what remains after boundaries, conditions and service control policies |
+| **Size limit** | Up to 2000 accounts by default (`MAX_USERS`, maximum 5000). A larger population stops the run instead of being cut short. This version has no filter to split a larger population |
+| **Roles listed** | Groups, policies (of the user and of its groups), permissions boundary and active credentials |
 
-The account root user is included by default with its MFA status and active access keys.
+How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
-## 3. Coverage
+## 2. What one row looks like
 
-One AWS account per automation. Not covered: IAM roles and who can assume them (working that out needs policy evaluation), IAM Identity Center users and permission sets (a separate API), resource-based policies, service control policies and other accounts of an organization. Policies show what was granted, not the effective permissions after boundaries, conditions and SCPs.
+One row is one IAM user. Its roles are every access that user holds. This automation lists seven kinds:
 
-Users and groups come from `GetAccountAuthorizationDetails`; credentials from the IAM credential report, which AWS refreshes at most every four hours.
+| Kind | What it means for the person | How reviewers see it |
+|---|---|---|
+| **Group** | The user belongs to this IAM group | `Group: Developers [arn:aws:iam::123456789012:group/Developers]` |
+| **Group policy** | A policy attached to one of the user's groups, so the user receives it through that group. Shown as *group / policy* | `Group policy: Developers / ReadOnlyAccess [arn:aws:iam::aws:policy/ReadOnlyAccess]` |
+| **Group inline policy** | A policy written directly into one of the user's groups. Shown as *group / policy* | `Group inline policy: Developers / deploy-bucket [inline]` |
+| **Policy** | A managed policy attached directly to the user | `Policy: AmazonS3FullAccess [arn:aws:iam::aws:policy/AmazonS3FullAccess]` |
+| **Inline policy** | A policy written directly into the user | `Inline policy: temp-access [inline]` |
+| **Permissions boundary** | A policy that caps what the user can be granted, whatever else is attached | `Permissions boundary: DeveloperBoundary [arn:aws:iam::123456789012:policy/DeveloperBoundary]` |
+| **Credential** | A way to sign in or call AWS that is active: the console password or an access key (*key 1* or *key 2*). Access key IDs are not listed | `Credential: Access key [key 1]` |
 
-Any collection error, a user in a group that was not collected, a user missing from the credential report, or a limit aborts the run and nothing is published.
+```
+Account:     ana.garcia
+Description: /engineering/ana.garcia; MFA; created 2024-03-12; id=AIDA…
+Roles:       Credential: Console password [password]
+             Group policy: Developers / ReadOnlyAccess [arn:aws:iam::aws:policy/ReadOnlyAccess]
+             Group: Developers [arn:aws:iam::123456789012:group/Developers]
+             Policy: AmazonS3FullAccess [arn:aws:iam::aws:policy/AmazonS3FullAccess]
+```
+
+The text in square brackets is AWS's identifier (an ARN), `inline` for policies written into the user or group, or the credential slot. It keeps two items with the same name apart; reviewers can ignore it. The description gives the path and name, whether the user has MFA or *no MFA*, the creation date and the user ID. The root user has no groups or policies: it only shows its MFA status and active access keys.
+
+You choose which kinds are listed with `ROLES` (§7): `groups`, `policies` (all policy and boundary kinds) and `credentials`. With none, only the accounts are listed.
+
+A row shows *that* Ana is in *Developers* or has a policy, not what the policy allows.
+
+## 3. Looking to review something else?
+
+| I want to... | Use |
+|---|---|
+| See what each policy grants | *AWS IAM – Policy permissions* (planned) |
+| Review people who sign in to AWS through IAM Identity Center | [AWS IAM Identity Center – Accounts](../IAM%20Identity%20Center/) |
+| Find people who left | Pair this feed with an employee list in an Exit review, for example [Entra ID – Current employees](../../Microsoft/Entra%20ID%20Current%20Employees/) or [Workday – Current employees](../../Workday/Current%20Employees/). A leaver's IAM user stays listed until it is deleted |
 
 ## 4. Before you start
 
@@ -114,9 +137,7 @@ Fixed limits: 200 seconds of collection, 200 pages, up to 20 seconds waiting for
 
 ## 8. Results
 
-stdout only contains the artifact declaration; the step log goes to stderr with counts only, never user names or keys. Access key IDs are not included in the feed. Accounts are published once, after the whole list is collected. Exit 1 means nothing was published.
-
-When testing, read the **SUMMARY** block at the end of stderr: `RESULT: OK` with the number of accounts published and the roles listed per kind; `RESULT: NOT PUBLISHED` when the provider returned no accounts and `ALLOW_EMPTY_FEED` is off; or `RESULT: FAILED` with the error. Added, deleted or creeping accounts are computed by eramba afterwards: they are review results, never a failure of the script.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 
