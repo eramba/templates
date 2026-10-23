@@ -25,7 +25,7 @@ Every automation belongs to exactly one family. The family decides what a row is
 | **The roles of a row are** | The accesses that account holds | The permissions that thing grants |
 | **Question for the reviewer** | Should this person still have this account and these accesses? | Does this grant more than it should? |
 | **Typical reviewer** | The person's manager, the application owner, IT | IT, security, the owner of the group or policy |
-| **Example (Entra ID)** | `ana@example.com` → Group: Finance, Application: Salesforce / Sales Manager, License: Office 365 E3 | `Group: Finance` → Application: Salesforce / Sales Manager, License: Office 365 E3 |
+| **Example (Entra ID)** | `ana@example.com` → Group: Finance, Application: Salesforce / Sales Manager, License: ENTERPRISEPACK | `Contoso Expenses` → Application permission: Microsoft Graph / User.Read.All, Delegated permission (all users): Microsoft Graph / Mail.Read |
 | **Example (AWS IAM)** | `ana` → Policy: ReadOnlyAccess, Group: Developers | `Policy: DevelopersPolicy` → `s3:GetObject on arn:…`, `ec2:Describe*` |
 | **What a Differential review flags** | A person who gained or lost an access; accounts created or deleted | A group, policy or role that gained or lost a permission; things created or deleted |
 | **Exit reviews** | Yes: accounts that belong to no current employee | No: there is no person to compare |
@@ -84,7 +84,7 @@ When you test an automation, its log ends with a **SUMMARY** block and one resul
 | Result | What it means | What eramba does |
 |---|---|---|
 | `RESULT: OK` | The list was sent. The result line gives the number of rows published; the lines below it give the roles listed per kind | Uses the new list for the review |
-| `RESULT: NOT PUBLISHED` | The provider returned an empty list, so nothing was sent. Each README says when an empty list is allowed | eramba records a failed pull and keeps the last successful pull |
+| `RESULT: NOT PUBLISHED` | There were no rows to publish (for example the provider returned an empty list), so nothing was sent. Each README says when an empty list is allowed | eramba records a failed pull and keeps the last successful pull |
 | `RESULT: FAILED` | The script stopped with an error, given on the same line | Records the failed pull, emails the eramba administrator and keeps the last successful pull |
 
 - **A failed run publishes nothing.** The scripts never send part of a list: if one page, permission or limit fails, nothing is sent. Otherwise a Differential review would report the missing accounts as removed.
@@ -105,7 +105,7 @@ Feed type *List of accounts to be reviewed*. Snapshot, Differential and Exit rev
 
 | Automation | Each row is | Roles listed | Status |
 |---|---|---|---|
-| [Microsoft Entra ID / Microsoft 365](Microsoft/Entra%20ID/) | One user account, employee or guest | Nested groups, scoped directory roles, application role assignments and licences | draft |
+| [Entra ID – Accounts](Microsoft/Entra%20ID/) | One user account, employee or guest | Nested groups, scoped directory roles, application role assignments and licences | draft |
 | [Okta – Accounts](Okta/Workforce%20Identity/) | One user account, deactivated included | Groups, application assignments and admin roles | draft |
 | [Auth0 – Accounts](Auth0/Auth0/) | One user account (up to 1000) | Roles and organization memberships | draft |
 | [AWS IAM – Accounts](AWS/IAM/) | One IAM user or the root user of one AWS account | Groups, policies, permissions boundaries and active credentials | draft |

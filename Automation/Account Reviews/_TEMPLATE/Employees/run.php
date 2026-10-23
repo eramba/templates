@@ -3,7 +3,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
 
 /**
  * ============================================================================
- *  <Source> Current Employees
+ *  <Provider> – Current employees
  *  Technology: <Source>
  *  id: <source>-current-employees        version: 0.1.0 (draft)
  *  Docs: README.md in the same folder (secrets, permissions, variables).

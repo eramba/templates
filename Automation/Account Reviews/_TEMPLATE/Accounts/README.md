@@ -1,6 +1,6 @@
 ---
 id: <product>-account-review
-name: <Product> Accounts and Assigned Access
+name: <Provider> – Accounts
 version: 0.1.0
 status: draft
 technology: <Product>
@@ -19,11 +19,11 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# <Product> Accounts and Assigned Access
+# <Provider> – Accounts
 
 **Technology:** <Product>.
 
-Send <Product> accounts and their assigned access to an eramba Account Review feed. **Draft: functional and installation validation pending.**
+Send <Product> accounts and their assigned access to an eramba Account Review feed.
 
 ## 1. At a glance
 
@@ -47,18 +47,20 @@ How the review families, review types and results work is explained once in the 
 | `<kind>` | <What this access lets the person do> | `<kind>: <name> [<id>]` |
 
 ```
-Account: <Name or login> <person@example.com>
-Roles: <kind>: <name> [<id>]; <kind>: <name> [<id>]
+Account:     person@example.com
+Description: <Name>; <account type, for example Member or Guest>; <enabled or disabled>
+Roles:       <Kind>: <name> [<id>]
+             <Kind>: <name> [<id>]
 ```
 
-The IDs in square brackets only make the entry exact. Reviewers can ignore them.
+The codes in square brackets are <Provider>'s internal identifiers. They keep two items with the same name apart; reviewers can ignore them. The description gives <what the description shows>.
 
 ## 3. Looking to review something else?
 
 | I want to... | Use |
 |---|---|
 | <Review another part of this product> | [<Other automation>](../<Other automation>/README.md) |
-| <Compare with the people who work here today> | [<Source> Current Employees](../../<Provider>/<Employees automation>/README.md) |
+| <Compare with the people who work here today> | [<Provider> – Current employees](../../<Provider>/<Employees automation>/README.md) |
 
 ## 4. Before you start
 
@@ -93,7 +95,7 @@ Numbered steps to create the identity and the exact read-only permissions, with 
 
 ## 8. Results
 
-How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: the details line of the summary counts <what is counted, for example accounts and the roles listed per kind>, and an empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: <any extra counts in the summary, for example enabled and disabled accounts>; an empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 

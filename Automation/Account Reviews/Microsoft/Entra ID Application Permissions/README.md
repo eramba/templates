@@ -37,7 +37,7 @@ Sends eramba every connected application in your Microsoft Entra ID that has bee
 | **Connects to** | Your Microsoft Entra ID, through Microsoft's official API (Microsoft Graph). Read-only |
 | **Permission needed** | Microsoft Graph application permission `Directory.Read.All`, read-only: the same app registration as *Entra ID – Accounts* can be used. An Entra administrator grants admin consent (§5) |
 | **Included** | Every application with at least one permission: apps your organisation built and apps from other companies. Applications owned by Microsoft are left out unless `INCLUDE_MICROSOFT_APPS` is on (§7) |
-| **Not included** | What each permission lets the application reach inside SharePoint, Exchange or other services beyond the permission's name; which users consented for themselves (only their number is given); applications with no permission at all; who may sign in to each application (that is in *Entra ID – Accounts*); Azure cloud resource roles; what each group grants (planned automation *Entra ID – Group permissions*); other Entra organisations (one per automation) |
+| **Not included** | • What each permission lets the application reach inside SharePoint, Exchange or other services, beyond the permission's name<br>• Which users consented for themselves (only their number is given)<br>• Applications with no permission at all<br>• Who may sign in to each application (that is in *Entra ID – Accounts*)<br>• Azure cloud resource roles<br>• What each group grants (planned automation *Entra ID – Group permissions*)<br>• Other Entra organisations (one per automation) |
 | **Size limit** | Up to 2000 applications by default (`MAX_APPS`, maximum 5000). More stops the run instead of being cut short. A tenant with more than 10,000 enterprise applications in total, Microsoft's included, also stops the run |
 | **Roles listed** | Application permissions (including default access to another application) and delegated permissions consented for all users or for some users |
 
@@ -68,9 +68,10 @@ The codes in square brackets are Microsoft's internal identifiers. They keep two
 - who owns the application: *Your organization* (built in your Entra), *Third party* (another company) or *Microsoft* (only with `INCLUDE_MICROSOFT_APPS`);
 - whether it is *enabled* or *disabled* (a disabled application cannot sign in or use its permissions);
 - who may sign in to it: *everyone* in your organisation, or *assigned users only*;
-- how many users consented for themselves (*some-user consents*), and the application ID.
+- how many users consented for themselves, for example *some-user consents: 1 user* or *some-user consents: 3 users*. This part only appears when at least one user did;
+- the application ID.
 
-Microsoft applications are recognised by the Microsoft organisation that owns them. A few Microsoft tools are owned by other Microsoft organisations, for example Graph Explorer or Microsoft Graph Command Line Tools, and applications with no owner, such as managed identities, are not marked as Microsoft either: they appear as *Third party*. They are shown, not hidden, so reviewers can judge them like any other application.
+Microsoft applications are recognised by the Microsoft organisation that owns them. A few Microsoft tools are owned by other Microsoft organisations, for example Graph Explorer or Microsoft Graph Command Line Tools, and applications with no owning organisation (for example those Azure creates for its own services, called managed identities) are not marked as Microsoft either: they appear as *Third party*. They are shown, not hidden, so reviewers can judge them like any other application.
 
 ## 3. Looking to review something else?
 
@@ -125,7 +126,7 @@ No write permission is needed. Directory-wide read access is broad: protect and 
 | `MAX_APPS` | `2000` | 1–5000 applications in the feed; exceeding it aborts instead of truncating. The run also reads up to ten times this number of enterprise applications in total, capped at 10,000. |
 | `MAX_OBJECTS` | `10000` | 1–10000 delegated permission grants in the tenant, and application permission assignments per application; exceeding it aborts. |
 
-Fixed limits: 200 seconds of collection (`TPL_RUN_SECONDS`), 4 MB per response, 100 pages per collection, 8 MiB of feed, 48 MiB of memory, three attempts when Microsoft throttles for up to 30 seconds. Requests are grouped 20 at a time with Graph JSON batching; only the token endpoint and Graph reads are allowed (`TPL_ALLOWED_REQUESTS`).
+Fixed limits: the run stops after about 200 seconds of collection, which leaves time to publish within the 240-second timeout. It also stops if one Microsoft response is larger than 4 MB, a list needs more than 100 pages, the feed is larger than 8 MB or the script uses more than 48 MB of memory. When Microsoft asks it to slow down, it waits up to 30 seconds and tries up to three times. It only reads from Microsoft: it signs in and reads Microsoft Graph, and sends no other request.
 
 Changing `INCLUDE_MICROSOFT_APPS` changes the population: take a new baseline.
 
@@ -133,7 +134,7 @@ Changing `INCLUDE_MICROSOFT_APPS` changes the population: take a new baseline.
 
 How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed:
 
-- Below the `RESULT: OK` line, the summary counts the applications by owner (third-party, your organization, Microsoft) and the permissions listed per kind.
+- Below the `RESULT: OK` line, the summary also counts the applications by owner (third-party, your organization, Microsoft).
 - An empty list is not published (`RESULT: NOT PUBLISHED`); the reason suggests turning on `INCLUDE_MICROSOFT_APPS` to include Microsoft applications, or `ALLOW_EMPTY_FEED` if no application with permissions is expected.
 - A Differential review reports an application that gained or lost a permission (*Change in roles*), and a new application with permissions (*Added account*). An application whose last permission was removed, or that was deleted, shows as *Deleted account*. The application's name is part of the row's identifier, so renaming an application shows it as deleted and added again.
 - The number of users who consented for themselves is in the description and is never compared: a new user consenting to a permission already listed is not reported.
@@ -147,10 +148,10 @@ How results and failures are shown is explained in the [Account Reviews overview
 | `Microsoft API HTTP 401/403` or `HTTP 403 for a collection` | Check secret expiry, `Directory.Read.All` and admin consent |
 | `No applications with permissions found` | Turn on `INCLUDE_MICROSOFT_APPS` to include Microsoft applications, or `ALLOW_EMPTY_FEED` if none is expected |
 | `More applications than MAX_APPS` | Raise `MAX_APPS` (up to 5000) |
-| `Collection limit exceeded` | More than 10,000 enterprise applications or delegated permission grants: this version cannot review the tenant in one feed |
+| `Collection limit exceeded` | One of these lists was longer than its limit: the enterprise applications in the tenant (ten times `MAX_APPS`, and never more than 10,000), the delegated permission grants in the tenant (`MAX_OBJECTS`), or the application permission assignments of one application (`MAX_OBJECTS`). If the limit hit is below 10,000 (a `MAX_APPS` lowered below 1000, or a `MAX_OBJECTS` lowered below 10000), raise that variable. Otherwise there are more than 10,000 of them, and this version cannot review the tenant in one feed |
 | `An application permission cannot be resolved` or collection changed | Applications changed during the pull; retry later |
 | `unsupported consent type` | Microsoft added a consent type this version does not know; update the automation |
-| Time or size limit | Turn off `INCLUDE_MICROSOFT_APPS` |
+| Time or size limit | Turn off `INCLUDE_MICROSOFT_APPS`. If it is already off, this version cannot review the tenant in one feed |
 
 ## 10. Customising
 

@@ -1,6 +1,6 @@
 ---
 id: <source>-current-employees
-name: <Source> Current Employees
+name: <Provider> – Current employees
 version: 0.1.0
 status: draft
 technology: <Source>
@@ -19,11 +19,11 @@ eramba_version_tested: null
 last_tested: null
 ---
 
-# <Source> Current Employees
+# <Provider> – Current employees
 
 **Technology:** <Source>.
 
-Send the people who should have access today to an eramba feed of type **List of current employees** (or **List of former employees**). **Draft: functional and installation validation pending.**
+Send the people who should have access today to an eramba feed of type **List of current employees** (or **List of former employees**).
 
 ## 1. At a glance
 
@@ -47,17 +47,18 @@ How the review families, review types and results work is explained once in the 
 | None | Employee lists carry no roles; the list only says who is an employee. | Only the person's name and identifier are shown. |
 
 ```
-Account: <Name> <person@example.com>
+Account:     person@example.com
+Description: <Name>; <what else identifies the person, for example the employee ID>
 ```
 
-If an identifier in square brackets appears, reviewers can ignore it.
+The description gives <what the description shows>.
 
 ## 3. Looking to review something else?
 
 | I want to... | Use |
 |---|---|
-| <Review the accounts of an application against this list> | [<Product> Accounts](../../<Provider>/<Accounts automation>/README.md) |
-| <Use another source of employees> | [<Other Source> Current Employees](../../<Provider>/<Employees automation>/README.md) |
+| <Review the accounts of an application against this list> | [<Provider> – Accounts](../../<Provider>/<Accounts automation>/README.md) |
+| <Use another source of employees> | [<Other provider> – Current employees](../../<Provider>/<Employees automation>/README.md) |
 
 ## 4. Before you start
 

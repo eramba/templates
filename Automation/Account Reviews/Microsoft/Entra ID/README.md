@@ -135,7 +135,7 @@ The key must be unique ignoring case, as eramba compares accounts ignoring case.
 
 ## 8. Results
 
-How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary counts enabled and disabled accounts, members and guests, and the roles listed per kind. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
+How results and failures are shown is explained in the [Account Reviews overview](../../README.md). Specific to this feed: below the `RESULT: OK` line, the summary also counts enabled and disabled accounts, members and guests. An empty feed is only accepted when `ALLOW_EMPTY_FEED` is on, which is right only if zero accounts is a legitimate result.
 
 ## 9. Troubleshooting
 
