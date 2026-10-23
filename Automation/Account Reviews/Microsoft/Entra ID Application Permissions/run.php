@@ -716,12 +716,13 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
         }
         $publisher = $isMicrosoft ? 'Microsoft' : ($tenant !== '' && $owner === $tenant ? 'Your organization' : 'Third party');
         $key = tpl_feedKey($sp['displayName'] . ' [' . $sp['appId'] . ']', $seen, true);
+        $consents = count($someUsers);
         $description = sprintf(
-            '%s; %s; sign-in: %s; some-user consents: %d users; appId=%s',
+            '%s; %s; sign-in: %s; %sappId=%s',
             $publisher,
             ($sp['accountEnabled'] ?? false) === true ? 'enabled' : 'disabled',
             ($sp['appRoleAssignmentRequired'] ?? false) === true ? 'assigned users only' : 'everyone',
-            count($someUsers),
+            $consents > 0 ? sprintf('some-user consents: %d %s; ', $consents, $consents === 1 ? 'user' : 'users') : '',
             $sp['appId']
         );
         $rows[] = ['key' => $key, 'description' => $description, 'roles' => $roles];
