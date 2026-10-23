@@ -455,7 +455,8 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
 
 /**
  * One Entra role as reviewers read it, without object IDs: "<kind>: <name>", then any details in brackets,
- * e.g. "Group: Finance (through group Finance EU)". At most 255 bytes: only the name is shortened.
+ * e.g. "Group: Finance (through group Finance EU)". At most 244 bytes, which leaves room for the " [<id>]"
+ * that tells equal names apart: only the name is shortened.
  */
 function tpl_entraRole(string $kind, mixed $name, array $details = []): string
 {
@@ -464,40 +465,94 @@ function tpl_entraRole(string $kind, mixed $name, array $details = []): string
     }
     $suffix = $details === [] ? '' : ' (' . implode('; ', $details) . ')';
     $fixed = strlen($kind) + 2 + strlen($suffix);
-    if ($fixed + 3 > 255) {
+    if ($fixed + 3 > 244) {
         throw new RuntimeException("$kind details are too long for a role value.");
     }
-    if ($fixed + strlen($name) > 255) {
-        $name = mb_strcut($name, 0, 255 - $fixed - 3, 'UTF-8') . '…';
+    if ($fixed + strlen($name) > 244) {
+        $name = mb_strcut($name, 0, 244 - $fixed - 3, 'UTF-8') . '…';
     }
     return "$kind: $name$suffix";
 }
 
 /**
- * Rows whose roles are lists of [text, identity]. Names in Entra are not unique, so when one role text stands
- * for two different objects anywhere in the feed (two groups named "Finance"), each of those roles gets
- * " [<first 8 characters of its object ID>]". Returns the rows with plain, sorted role lists.
+ * Names in Entra are not unique, so each role travels with its identity: the object IDs it stands for, e.g.
+ * [application, app role, group]. Records the roles of one row in $names (text => identity => IDs), so that
+ * equal texts can be told apart once the whole feed is known, and returns them as [text, identity] pairs.
  */
+function tpl_entraNote(array $roles, array &$names): array
+{
+    $noted = [];
+    foreach ($roles as [$text, $ids]) {
+        $ids = array_map('strval', (array) $ids);
+        $identity = implode(';', $ids);
+        $names[$text][$identity] = $ids;
+        $noted[] = [$text, $identity];
+    }
+    return $noted;
+}
+
+/**
+ * For each role text that stands for two or more different objects, the text each of them gets: the text plus
+ * " [<first characters of the object ID that tells them apart>]", e.g. the group when one application role
+ * comes through two groups named "Sales". Returns text => identity => final text, only for those texts.
+ */
+function tpl_entraTags(array $names): array
+{
+    $tags = [];
+    foreach ($names as $text => $identities) {
+        if (count($identities) < 2) {
+            continue;
+        }
+        $width = max(array_map('count', $identities));
+        $short = null;
+        for ($position = 0; $position < $width && $short === null; $position++) {
+            $values = array_map(static fn (array $ids): string => $ids[$position] ?? '', $identities);
+            if (count(array_unique($values)) !== count($values)) {
+                continue; // this ID is shared by some of them: it does not tell them apart
+            }
+            foreach ([8, 12, 36] as $length) {
+                $cut = array_map(static fn (string $id): string => substr($id, 0, $length), $values);
+                if (count(array_unique($cut)) === count($cut)) {
+                    $short = $cut;
+                    break;
+                }
+            }
+        }
+        // No single ID tells them all apart: fall back to a short fingerprint of the whole identity.
+        $short ??= array_combine(array_keys($identities), array_map(static fn ($identity): string => substr(hash('sha256', (string) $identity), 0, 8), array_keys($identities)));
+        foreach ($short as $identity => $id) {
+            $tags[$text][$identity] = "$text [$id]";
+        }
+    }
+    return $tags;
+}
+
+/** The final, de-duplicated role list of one row from its [text, identity] pairs. */
+function tpl_entraFinal(array $roles, array $tags): array
+{
+    $final = [];
+    foreach ($roles as [$text, $identity]) {
+        $final[] = $tags[$text][$identity] ?? $text;
+    }
+    return array_values(array_unique($final));
+}
+
+/** Rows held in memory (small feeds): roles as [text, IDs] in, plain role lists out. */
 function tpl_entraDisambiguate(array $rows): array
 {
-    $identities = [];
-    foreach ($rows as $row) {
-        foreach ($row['roles'] as [$text, $identity]) {
-            $identities[$text][$identity] = true;
-        }
-    }
+    $names = [];
     foreach ($rows as &$row) {
-        $roles = [];
-        foreach ($row['roles'] as [$text, $identity]) {
-            $roles[] = count($identities[$text]) > 1
-                ? mb_strcut($text, 0, 244, 'UTF-8') . ' [' . substr($identity, 0, 8) . ']'
-                : $text;
-        }
-        $row['roles'] = array_values(array_unique($roles));
+        $row['roles'] = tpl_entraNote($row['roles'], $names);
     }
+    unset($row);
+    $tags = tpl_entraTags($names);
+    foreach ($rows as &$row) {
+        $row['roles'] = tpl_entraFinal($row['roles'], $tags);
+    }
+    unset($row);
     return $rows;
 }
-// ─── end shared:providers/graph v2 sha256:b64e3db3f3e9f8b2 ───
+// ─── end shared:providers/graph v2 sha256:de9983d9a373aeb9 ───
 // ─── shared:feed v6 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -741,7 +796,7 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
             }
             if ($assignment['appRoleId'] === '00000000-0000-0000-0000-000000000000') {
                 // Default access: the application is assigned to the resource without a specific app role.
-                $roles[] = [tpl_entraRole(ADMIN_APP, $resource['displayName'] . ' / Default access'), $resource['id']];
+                $roles[] = [tpl_entraRole(ADMIN_APP, apiPermission($resource, 'Default access')), [$resource['id'], $assignment['appRoleId']]];
                 continue;
             }
             $appRole = null;
@@ -755,7 +810,7 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
                 throw new RuntimeException($unresolved);
             }
             $name = ($appRole['value'] ?? '') !== '' ? $appRole['value'] : $appRole['displayName'];
-            $roles[] = [tpl_entraRole(ADMIN_APP, $resource['displayName'] . ' / ' . $name), $resource['id']];
+            $roles[] = [tpl_entraRole(ADMIN_APP, apiPermission($resource, $name)), [$resource['id'], $assignment['appRoleId']]];
         }
 
         $someUsers = [];
@@ -774,7 +829,7 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
                 throw new RuntimeException('A delegated permission grant has an unsupported consent type; update the automation.');
             }
             foreach ($scopes as $scope) {
-                $roles[] = [tpl_entraRole($kind, $resource['displayName'] . ' / ' . $scope), $resource['id']];
+                $roles[] = [tpl_entraRole($kind, apiPermission($resource, $scope)), [$resource['id'], $scope]];
             }
         }
 
@@ -791,20 +846,35 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
             $consents > 0 ? sprintf('some-user consents: %d %s; ', $consents, $consents === 1 ? 'user' : 'users') : '',
             $sp['appId']
         );
-        $rows[] = ['name' => tpl_feedText($sp['displayName'] ?? null, 'Application name'), 'appId' => $sp['appId'], 'description' => $description, 'roles' => $roles];
+        $name = is_string($sp['displayName'] ?? null) ? mb_strcut(trim($sp['displayName']), 0, 240, 'UTF-8') : null;
+        $rows[] = ['name' => tpl_feedText($name, 'Application name'), 'appId' => $sp['appId'], 'description' => $description, 'roles' => $roles];
     }
     // The row is the application's name; only applications that share a name also show the start of their
     // application ID, so reviewers can tell them apart.
     $names = array_count_values(array_map(static fn (array $row): string => mb_strtolower($row['name'], 'UTF-8'), $rows));
     foreach ($rows as &$row) {
         $shared = $names[mb_strtolower($row['name'], 'UTF-8')] > 1;
-        $row = ['key' => tpl_feedKey($shared ? $row['name'] . ' [' . substr($row['appId'], 0, 8) . ']' : $row['name'], $seen, true)] + $row;
+        $key = $shared ? mb_strcut($row['name'], 0, 240, 'UTF-8') . ' [' . substr($row['appId'], 0, 8) . ']' : $row['name'];
+        $row = ['key' => tpl_feedKey($key, $seen, true)] + $row;
         unset($row['name'], $row['appId']);
     }
     unset($row);
     $rows = tpl_entraDisambiguate($rows);
     usort($rows, static fn(array $a, array $b): int => strcmp($a['key'], $b['key']));
     return $rows;
+}
+
+/**
+ * "<API> / <permission>": a long API name is shortened first, so the permission name, which tells two
+ * permissions of one API apart, is always kept whole.
+ */
+function apiPermission(array $resource, string $permission): string
+{
+    $api = $resource['displayName'] ?? null;
+    if (!is_string($api) || preg_match('//u', $api) !== 1 || ($api = trim($api)) === '') {
+        throw new RuntimeException('API name is missing or not valid text.');
+    }
+    return (strlen($api) > 100 ? mb_strcut($api, 0, 97, 'UTF-8') . '…' : $api) . ' / ' . $permission;
 }
 
 /** Aborts instead of publishing an empty or oversized list. */

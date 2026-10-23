@@ -114,7 +114,7 @@ How results and failures are shown is explained in the [Account Reviews overview
 | `Secret '…' is missing` / invalid base64 | Check the secret names and the base64 value |
 | `HTTP 403` | Grant `User.Read.All` (and `GroupMember.Read.All` for a group) with admin consent |
 | `No employees found` | Check `GROUP_ID`, `REQUIRE_EMPLOYEE_ID` and that users have the `USER_KEY` field |
-| `The tenant has N users, more than MAX_USERS` | Raise `MAX_USERS` (up to 30000), or set `GROUP_ID` to the group that holds your employees |
+| `The tenant has N users, more than MAX_USERS` / `The group has N users…` | Raise `MAX_USERS` (up to 30000), or set `GROUP_ID` to the group that holds your employees |
 | Many users left out without `mail` | Use `userPrincipalName` if it equals the email in your tenant |
 | Every application account flagged | The keys differ: compare a few values of both feeds |
 

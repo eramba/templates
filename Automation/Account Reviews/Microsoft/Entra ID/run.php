@@ -454,7 +454,8 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
 
 /**
  * One Entra role as reviewers read it, without object IDs: "<kind>: <name>", then any details in brackets,
- * e.g. "Group: Finance (through group Finance EU)". At most 255 bytes: only the name is shortened.
+ * e.g. "Group: Finance (through group Finance EU)". At most 244 bytes, which leaves room for the " [<id>]"
+ * that tells equal names apart: only the name is shortened.
  */
 function tpl_entraRole(string $kind, mixed $name, array $details = []): string
 {
@@ -463,40 +464,94 @@ function tpl_entraRole(string $kind, mixed $name, array $details = []): string
     }
     $suffix = $details === [] ? '' : ' (' . implode('; ', $details) . ')';
     $fixed = strlen($kind) + 2 + strlen($suffix);
-    if ($fixed + 3 > 255) {
+    if ($fixed + 3 > 244) {
         throw new RuntimeException("$kind details are too long for a role value.");
     }
-    if ($fixed + strlen($name) > 255) {
-        $name = mb_strcut($name, 0, 255 - $fixed - 3, 'UTF-8') . '…';
+    if ($fixed + strlen($name) > 244) {
+        $name = mb_strcut($name, 0, 244 - $fixed - 3, 'UTF-8') . '…';
     }
     return "$kind: $name$suffix";
 }
 
 /**
- * Rows whose roles are lists of [text, identity]. Names in Entra are not unique, so when one role text stands
- * for two different objects anywhere in the feed (two groups named "Finance"), each of those roles gets
- * " [<first 8 characters of its object ID>]". Returns the rows with plain, sorted role lists.
+ * Names in Entra are not unique, so each role travels with its identity: the object IDs it stands for, e.g.
+ * [application, app role, group]. Records the roles of one row in $names (text => identity => IDs), so that
+ * equal texts can be told apart once the whole feed is known, and returns them as [text, identity] pairs.
  */
+function tpl_entraNote(array $roles, array &$names): array
+{
+    $noted = [];
+    foreach ($roles as [$text, $ids]) {
+        $ids = array_map('strval', (array) $ids);
+        $identity = implode(';', $ids);
+        $names[$text][$identity] = $ids;
+        $noted[] = [$text, $identity];
+    }
+    return $noted;
+}
+
+/**
+ * For each role text that stands for two or more different objects, the text each of them gets: the text plus
+ * " [<first characters of the object ID that tells them apart>]", e.g. the group when one application role
+ * comes through two groups named "Sales". Returns text => identity => final text, only for those texts.
+ */
+function tpl_entraTags(array $names): array
+{
+    $tags = [];
+    foreach ($names as $text => $identities) {
+        if (count($identities) < 2) {
+            continue;
+        }
+        $width = max(array_map('count', $identities));
+        $short = null;
+        for ($position = 0; $position < $width && $short === null; $position++) {
+            $values = array_map(static fn (array $ids): string => $ids[$position] ?? '', $identities);
+            if (count(array_unique($values)) !== count($values)) {
+                continue; // this ID is shared by some of them: it does not tell them apart
+            }
+            foreach ([8, 12, 36] as $length) {
+                $cut = array_map(static fn (string $id): string => substr($id, 0, $length), $values);
+                if (count(array_unique($cut)) === count($cut)) {
+                    $short = $cut;
+                    break;
+                }
+            }
+        }
+        // No single ID tells them all apart: fall back to a short fingerprint of the whole identity.
+        $short ??= array_combine(array_keys($identities), array_map(static fn ($identity): string => substr(hash('sha256', (string) $identity), 0, 8), array_keys($identities)));
+        foreach ($short as $identity => $id) {
+            $tags[$text][$identity] = "$text [$id]";
+        }
+    }
+    return $tags;
+}
+
+/** The final, de-duplicated role list of one row from its [text, identity] pairs. */
+function tpl_entraFinal(array $roles, array $tags): array
+{
+    $final = [];
+    foreach ($roles as [$text, $identity]) {
+        $final[] = $tags[$text][$identity] ?? $text;
+    }
+    return array_values(array_unique($final));
+}
+
+/** Rows held in memory (small feeds): roles as [text, IDs] in, plain role lists out. */
 function tpl_entraDisambiguate(array $rows): array
 {
-    $identities = [];
-    foreach ($rows as $row) {
-        foreach ($row['roles'] as [$text, $identity]) {
-            $identities[$text][$identity] = true;
-        }
-    }
+    $names = [];
     foreach ($rows as &$row) {
-        $roles = [];
-        foreach ($row['roles'] as [$text, $identity]) {
-            $roles[] = count($identities[$text]) > 1
-                ? mb_strcut($text, 0, 244, 'UTF-8') . ' [' . substr($identity, 0, 8) . ']'
-                : $text;
-        }
-        $row['roles'] = array_values(array_unique($roles));
+        $row['roles'] = tpl_entraNote($row['roles'], $names);
     }
+    unset($row);
+    $tags = tpl_entraTags($names);
+    foreach ($rows as &$row) {
+        $row['roles'] = tpl_entraFinal($row['roles'], $tags);
+    }
+    unset($row);
     return $rows;
 }
-// ─── end shared:providers/graph v2 sha256:b64e3db3f3e9f8b2 ───
+// ─── end shared:providers/graph v2 sha256:de9983d9a373aeb9 ───
 // ─── shared:feed v6 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -717,6 +772,16 @@ function entraId(mixed $value): string
     return strtolower($value);
 }
 
+/** Runs one Graph collection call; a list longer than MAX_OBJECTS stops the run naming the variable to raise. */
+function withinObjects(callable $call, string $what): array
+{
+    try {
+        return $call();
+    } catch (TplGraphLimitException $e) {
+        throw new RuntimeException(sprintf('%s has more than MAX_OBJECTS (%d) entries; raise MAX_OBJECTS (up to 10000).', $what, $e->limit), 0, $e);
+    }
+}
+
 /**
  * Active admin role assignments, keyed by principal (user or role-assignable group). Each holds the role name,
  * where it applies when that is not the whole organisation, and an identity for telling equal names apart.
@@ -724,14 +789,15 @@ function entraId(mixed $value): string
 function directoryRoles(string $token, array $config): array
 {
     $names = [];
-    foreach (tpl_graphList('roleManagement/directory/roleDefinitions?$select=id,displayName', $token, $config['MAX_OBJECTS'], false) as $role) {
+    $definitions = withinObjects(fn () => tpl_graphList('roleManagement/directory/roleDefinitions?$select=id,displayName', $token, $config['MAX_OBJECTS'], false), 'The list of admin roles');
+    foreach ($definitions as $role) {
         $names[entraId($role['id'])] = $role['displayName'] ?? null;
     }
     $scopes = ['/' => null];
     $byPrincipal = [];
     // The directory provider rejects appScopeId in $select: its assignments are scoped by directoryScopeId only.
     $select = 'roleManagement/directory/roleAssignments?$select=id,principalId,roleDefinitionId,directoryScopeId';
-    foreach (tpl_graphList($select, $token, $config['MAX_OBJECTS'], false) as $assignment) {
+    foreach (withinObjects(fn () => tpl_graphList($select, $token, $config['MAX_OBJECTS'], false), 'The list of admin role assignments') as $assignment) {
         $roleId = entraId($assignment['roleDefinitionId'] ?? null);
         if (!array_key_exists($roleId, $names)) {
             // The list leaves out built-in roles Microsoft has deprecated ("Deprecated - Do Not Use.", also absent
@@ -751,7 +817,7 @@ function directoryRoles(string $token, array $config): array
             $scopes[$scope] = roleScope($scope, $token);
         }
         $byPrincipal[entraId($assignment['principalId'] ?? null)][] = [
-            'name' => $names[$roleId], 'scope' => $scopes[$scope], 'id' => "$roleId;$scope",
+            'name' => $names[$roleId], 'scope' => $scopes[$scope], 'ids' => [$roleId, $scope],
         ];
     }
     return $byPrincipal;
@@ -894,7 +960,7 @@ function parentGroups(array $groupIds, string $token, array $config, array &$cac
     $missing = array_values(array_diff($groupIds, array_keys($cache)));
     foreach (array_chunk($missing, 100) as $chunk) {
         $paths = array_map(fn ($g) => "groups/$g/transitiveMemberOf/microsoft.graph.group?\$select=id,displayName", $chunk);
-        foreach (tpl_graphLists($paths, $token, $config['MAX_OBJECTS']) as $n => $parents) {
+        foreach (withinObjects(fn () => tpl_graphLists($paths, $token, $config['MAX_OBJECTS']), 'The list of groups one group belongs to') as $n => $parents) {
             $cache[$chunk[$n]] = [];
             foreach ($parents as $parent) {
                 $cache[$chunk[$n]][entraId($parent['id'])] = $parent['displayName'] ?? null;
@@ -903,27 +969,50 @@ function parentGroups(array $groupIds, string $token, array $config, array &$cac
     }
 }
 
+/** A group name for "through group …": at most 100 bytes, so the role always fits. */
+function groupLabel(mixed $name): string
+{
+    if (!is_string($name) || preg_match('//u', $name) !== 1 || ($name = trim($name)) === '') {
+        throw new RuntimeException('Group name is missing or not valid text.');
+    }
+    return strlen($name) > 100 ? mb_strcut($name, 0, 97, 'UTF-8') . '…' : $name;
+}
+
+/** The name of a group the user is no longer listed in (group-based licences lag behind), fetched once. */
+function groupName(string $groupId, string $token, array &$cache): string
+{
+    if (!isset($cache[$groupId])) {
+        try {
+            $group = tpl_graphGet("groups/$groupId?\$select=id,displayName", $token);
+        } catch (RuntimeException $e) {
+            throw new RuntimeException('A group-based licence comes from a group that cannot be read; retry later.', 0, $e);
+        }
+        $cache[$groupId] = groupLabel($group['displayName'] ?? null);
+    }
+    return $cache[$groupId];
+}
+
 /**
- * The access of one user as [text, identity] pairs, named as on the user's page in Entra (Groups, Assigned
+ * The access of one user as [text, IDs] pairs, named as on the user's page in Entra (Groups, Assigned
  * roles, Applications, Licenses) and saying how it was obtained: directly, or through which group.
  * $direct are the user's direct groups (id => name); $parents maps each group to the groups it belongs to.
  */
-function userRoles(string $id, array $user, array $direct, array $parents, array $appAssignments, string $token, array $directoryRoles, array $licenseNames, array &$apps, array $kinds): array
+function userRoles(string $id, array $user, array $direct, array $parents, array $appAssignments, string $token, array $directoryRoles, array $licenseNames, array &$apps, array &$groupNames, array $kinds): array
 {
-    // Every group the user belongs to, with the direct groups it comes through (none when it is direct).
+    // Every group the user belongs to, and the direct groups it (also) comes through.
     $groups = [];
     foreach ($direct as $groupId => $name) {
-        $groups[$groupId] = ['name' => $name, 'through' => []];
+        $groups[$groupId] = ['name' => $name, 'direct' => true, 'through' => []];
     }
     foreach ($direct as $groupId => $name) {
         foreach ($parents[$groupId] as $parentId => $parentName) {
-            if (!isset($direct[$parentId])) {
-                $groups[$parentId] ??= ['name' => $parentName, 'through' => []];
-                $groups[$parentId]['through'][] = tpl_feedText($name, 'Group name');
-            }
+            $groups[$parentId] ??= ['name' => $parentName, 'direct' => false, 'through' => []];
+            $groups[$parentId]['through'][] = groupLabel($name);
         }
     }
-    $via = fn (?string $groupId): array => $groupId === null ? [] : ['through group ' . mb_strcut(tpl_feedText($groups[$groupId]['name'], 'Group name'), 0, 100, 'UTF-8')];
+    $via = function (?string $groupId) use (&$groups): array {
+        return $groupId === null ? [] : ['through group ' . groupLabel($groups[$groupId]['name'])];
+    };
 
     $roles = [];
     if (isset($kinds['groups'])) {
@@ -936,15 +1025,17 @@ function userRoles(string $id, array $user, array $direct, array $parents, array
                 array_pop($shown);
             }
             $more = count($through) - count($shown);
-            $details = $through === [] ? [] : ['through group ' . mb_strcut(implode(', ', $shown), 0, 120, 'UTF-8') . ($more > 0 ? " and $more more" : '')];
-            $roles[] = [tpl_entraRole('Group', $group['name'], $details), $groupId];
+            // A direct member who is also in it through another group keeps the access after leaving it directly.
+            $how = $group['direct'] ? 'also through group ' : 'through group ';
+            $details = $through === [] ? [] : [$how . mb_strcut(implode(', ', $shown), 0, 120, 'UTF-8') . ($more > 0 ? " and $more more" : '')];
+            $roles[] = [tpl_entraRole('Group', $group['name'], $details), [$groupId]];
         }
     }
     if (isset($kinds['directory_roles'])) {
         foreach ([$id => null] + array_fill_keys(array_keys($groups), true) as $principal => $isGroup) {
             foreach ($directoryRoles[$principal] ?? [] as $role) {
                 $details = [...($role['scope'] === null ? [] : [$role['scope']]), ...$via($isGroup ? $principal : null)];
-                $roles[] = [tpl_entraRole('Admin role', $role['name'], $details), $role['id'] . ($isGroup ? ";$principal" : '')];
+                $roles[] = [tpl_entraRole('Admin role', $role['name'], $details), [...$role['ids'], ...($isGroup ? [$principal] : [])]];
             }
         }
     }
@@ -961,8 +1052,9 @@ function userRoles(string $id, array $user, array $direct, array $parents, array
             if (!array_key_exists($roleId, $app['roles'])) {
                 throw new RuntimeException('An application role assignment cannot be resolved.');
             }
-            $details = [...($app['roles'][$roleId] === null ? [] : ['role ' . $app['roles'][$roleId]]), ...$via($type === 'Group' ? $principal : null)];
-            $roles[] = [tpl_entraRole('Application', $app['name'], $details), "$resource;$roleId" . ($type === 'Group' ? ";$principal" : '')];
+            $role = $app['roles'][$roleId] === null ? [] : ['role ' . mb_strcut($app['roles'][$roleId], 0, 80, 'UTF-8')];
+            $details = [...$role, ...$via($type === 'Group' ? $principal : null)];
+            $roles[] = [tpl_entraRole('Application', $app['name'], $details), [$resource, $roleId, ...($type === 'Group' ? [$principal] : [])]];
         }
     }
     if (isset($kinds['licenses'])) {
@@ -971,15 +1063,20 @@ function userRoles(string $id, array $user, array $direct, array $parents, array
         }
         foreach ($user['licenseAssignmentStates'] as $state) {
             $skuId = entraId(is_array($state) ? ($state['skuId'] ?? null) : null);
+            // Only licences the person holds: "Error" means it could not be applied (for example no seats left).
+            if (!in_array($state['state'] ?? 'Active', ['Active', 'ActiveWithError'], true)) {
+                continue;
+            }
             if (!isset($licenseNames[$skuId])) {
                 throw new RuntimeException('A user has a licence the tenant does not list; retry later.');
             }
             $group = $state['assignedByGroup'] ?? null;
             $group = $group === null ? null : entraId($group);
             if ($group !== null && !isset($groups[$group])) {
-                throw new RuntimeException('A group-based licence comes from a group the user is not in.');
+                // Group-based licensing catches up with membership changes after a while; name the group anyway.
+                $groups[$group] = ['name' => groupName($group, $token, $groupNames), 'direct' => false, 'through' => []];
             }
-            $roles[] = [tpl_entraRole('License', $licenseNames[$skuId], $via($group)), $skuId . ($group === null ? '' : ";$group")];
+            $roles[] = [tpl_entraRole('License', $licenseNames[$skuId], $via($group)), [$skuId, ...($group === null ? [] : [$group])]];
         }
     }
     return $roles;
@@ -1000,7 +1097,11 @@ function collectFeed(string $token, array $config, array $directoryRoles, array 
     $keys = [];
     $apps = [];
     $parents = [];
-    $rows = [];
+    $groupNames = [];
+    // Rows are staged with role identities first, then named once the whole feed is known; only the role names
+    // and their identities stay in memory (they repeat across accounts), never the rows.
+    $staged = tpl_feedOpen();
+    $names = [];
     $stats = ['enabled' => 0, 'disabled' => 0, 'Member' => 0, 'Guest' => 0];
     foreach (array_chunk($users, 100) as $chunk) {
         $paths = [];
@@ -1013,7 +1114,7 @@ function collectFeed(string $token, array $config, array $directoryRoles, array 
                 $paths[] = "users/$id/appRoleAssignments?\$select=id,principalId,principalType,resourceId,appRoleId";
             }
         }
-        $lists = $paths === [] ? [] : tpl_graphLists($paths, $token, $config['MAX_OBJECTS']);
+        $lists = $paths === [] ? [] : withinObjects(fn () => tpl_graphLists($paths, $token, $config['MAX_OBJECTS']), "One account's list of groups or applications");
         $perUser = !$needGroups ? 0 : (isset($kinds['applications']) ? 2 : 1);
         $direct = [];
         foreach ($chunk as $n => $user) {
@@ -1036,11 +1137,14 @@ function collectFeed(string $token, array $config, array $directoryRoles, array 
             }
             $name = mb_strcut(tpl_feedText($user['displayName'] ?? null, 'Display name'), 0, 150, 'UTF-8');
             $description = sprintf('%s; %s; %s; object=%s', $name, $user['userType'], $user['accountEnabled'] ? 'enabled' : 'disabled', $id);
-            $roles = $kinds === [] ? [] : userRoles($id, $user, $direct[$n], $parents, $perUser === 2 ? $lists[2 * $n + 1] : [], $token, $directoryRoles, $licenseNames, $apps, $kinds);
+            $roles = $kinds === [] ? [] : userRoles($id, $user, $direct[$n], $parents, $perUser === 2 ? $lists[2 * $n + 1] : [], $token, $directoryRoles, $licenseNames, $apps, $groupNames, $kinds);
             if (count($roles) > $config['MAX_OBJECTS']) {
-                throw new RuntimeException('Combined account access limit exceeded.');
+                throw new RuntimeException(sprintf('One account holds more than MAX_OBJECTS (%d) accesses; raise MAX_OBJECTS (up to 10000).', $config['MAX_OBJECTS']));
             }
-            $rows[] = ['key' => $key, 'description' => tpl_feedText($description, 'Description'), 'roles' => $roles];
+            $line = json_encode([$key, tpl_feedText($description, 'Description'), tpl_entraNote($roles, $names)], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n";
+            if (fwrite($staged, $line) !== strlen($line)) {
+                throw new RuntimeException('Staging write failed.');
+            }
             $stats[$user['accountEnabled'] ? 'enabled' : 'disabled']++;
             $stats[$user['userType']]++;
         }
@@ -1052,11 +1156,17 @@ function collectFeed(string $token, array $config, array $directoryRoles, array 
     if ($users === [] && !$config['ALLOW_EMPTY_FEED']) {
         throw new TplEmptyFeedException('No accounts found; check GROUP_ID and USER_IDS, or set ALLOW_EMPTY_FEED if zero accounts is intended.');
     }
+    $tags = tpl_entraTags($names);
     $feed = tpl_feedOpen();
     $bytes = 0;
-    foreach (tpl_entraDisambiguate($rows) as $row) {
-        $bytes = tpl_feedAdd($feed, $row['key'], $row['description'], $row['roles']);
+    if (!fflush($staged) || !rewind($staged)) {
+        throw new RuntimeException('Could not read back the staged accounts.');
     }
+    while (($line = fgets($staged)) !== false) {
+        [$key, $description, $roles] = json_decode($line, true, 64, JSON_THROW_ON_ERROR);
+        $bytes = tpl_feedAdd($feed, $key, $description, tpl_entraFinal($roles, $tags));
+    }
+    fclose($staged);
     tpl_logInfo(sprintf('%d accounts staged (%d bytes), %d groups and %d applications resolved.', count($users), $bytes, count($parents), count($apps)));
     return [$feed, $stats];
 }

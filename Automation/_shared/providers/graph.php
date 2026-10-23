@@ -164,7 +164,8 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
 
 /**
  * One Entra role as reviewers read it, without object IDs: "<kind>: <name>", then any details in brackets,
- * e.g. "Group: Finance (through group Finance EU)". At most 255 bytes: only the name is shortened.
+ * e.g. "Group: Finance (through group Finance EU)". At most 244 bytes, which leaves room for the " [<id>]"
+ * that tells equal names apart: only the name is shortened.
  */
 function tpl_entraRole(string $kind, mixed $name, array $details = []): string
 {
@@ -173,36 +174,90 @@ function tpl_entraRole(string $kind, mixed $name, array $details = []): string
     }
     $suffix = $details === [] ? '' : ' (' . implode('; ', $details) . ')';
     $fixed = strlen($kind) + 2 + strlen($suffix);
-    if ($fixed + 3 > 255) {
+    if ($fixed + 3 > 244) {
         throw new RuntimeException("$kind details are too long for a role value.");
     }
-    if ($fixed + strlen($name) > 255) {
-        $name = mb_strcut($name, 0, 255 - $fixed - 3, 'UTF-8') . '…';
+    if ($fixed + strlen($name) > 244) {
+        $name = mb_strcut($name, 0, 244 - $fixed - 3, 'UTF-8') . '…';
     }
     return "$kind: $name$suffix";
 }
 
 /**
- * Rows whose roles are lists of [text, identity]. Names in Entra are not unique, so when one role text stands
- * for two different objects anywhere in the feed (two groups named "Finance"), each of those roles gets
- * " [<first 8 characters of its object ID>]". Returns the rows with plain, sorted role lists.
+ * Names in Entra are not unique, so each role travels with its identity: the object IDs it stands for, e.g.
+ * [application, app role, group]. Records the roles of one row in $names (text => identity => IDs), so that
+ * equal texts can be told apart once the whole feed is known, and returns them as [text, identity] pairs.
  */
+function tpl_entraNote(array $roles, array &$names): array
+{
+    $noted = [];
+    foreach ($roles as [$text, $ids]) {
+        $ids = array_map('strval', (array) $ids);
+        $identity = implode(';', $ids);
+        $names[$text][$identity] = $ids;
+        $noted[] = [$text, $identity];
+    }
+    return $noted;
+}
+
+/**
+ * For each role text that stands for two or more different objects, the text each of them gets: the text plus
+ * " [<first characters of the object ID that tells them apart>]", e.g. the group when one application role
+ * comes through two groups named "Sales". Returns text => identity => final text, only for those texts.
+ */
+function tpl_entraTags(array $names): array
+{
+    $tags = [];
+    foreach ($names as $text => $identities) {
+        if (count($identities) < 2) {
+            continue;
+        }
+        $width = max(array_map('count', $identities));
+        $short = null;
+        for ($position = 0; $position < $width && $short === null; $position++) {
+            $values = array_map(static fn (array $ids): string => $ids[$position] ?? '', $identities);
+            if (count(array_unique($values)) !== count($values)) {
+                continue; // this ID is shared by some of them: it does not tell them apart
+            }
+            foreach ([8, 12, 36] as $length) {
+                $cut = array_map(static fn (string $id): string => substr($id, 0, $length), $values);
+                if (count(array_unique($cut)) === count($cut)) {
+                    $short = $cut;
+                    break;
+                }
+            }
+        }
+        // No single ID tells them all apart: fall back to a short fingerprint of the whole identity.
+        $short ??= array_combine(array_keys($identities), array_map(static fn ($identity): string => substr(hash('sha256', (string) $identity), 0, 8), array_keys($identities)));
+        foreach ($short as $identity => $id) {
+            $tags[$text][$identity] = "$text [$id]";
+        }
+    }
+    return $tags;
+}
+
+/** The final, de-duplicated role list of one row from its [text, identity] pairs. */
+function tpl_entraFinal(array $roles, array $tags): array
+{
+    $final = [];
+    foreach ($roles as [$text, $identity]) {
+        $final[] = $tags[$text][$identity] ?? $text;
+    }
+    return array_values(array_unique($final));
+}
+
+/** Rows held in memory (small feeds): roles as [text, IDs] in, plain role lists out. */
 function tpl_entraDisambiguate(array $rows): array
 {
-    $identities = [];
-    foreach ($rows as $row) {
-        foreach ($row['roles'] as [$text, $identity]) {
-            $identities[$text][$identity] = true;
-        }
-    }
+    $names = [];
     foreach ($rows as &$row) {
-        $roles = [];
-        foreach ($row['roles'] as [$text, $identity]) {
-            $roles[] = count($identities[$text]) > 1
-                ? mb_strcut($text, 0, 244, 'UTF-8') . ' [' . substr($identity, 0, 8) . ']'
-                : $text;
-        }
-        $row['roles'] = array_values(array_unique($roles));
+        $row['roles'] = tpl_entraNote($row['roles'], $names);
     }
+    unset($row);
+    $tags = tpl_entraTags($names);
+    foreach ($rows as &$row) {
+        $row['roles'] = tpl_entraFinal($row['roles'], $tags);
+    }
+    unset($row);
     return $rows;
 }
