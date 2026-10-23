@@ -1,8 +1,8 @@
 ---
 id: entra-current-employees
 name: Entra ID – Current employees
-version: 0.1.1
-status: draft
+version: 0.1.2
+status: tested
 technology: Microsoft Entra ID
 vendor: Microsoft
 eramba_module: Account Review Feeds
@@ -19,8 +19,8 @@ variables:
 dependencies:
   - guzzlehttp/guzzle:^7.9
 timeout_seconds: 240
-eramba_version_tested: null
-last_tested: null
+eramba_version_tested: 3.31.0
+last_tested: 2026-10-23
 ---
 
 # Entra ID – Current employees
@@ -114,6 +114,7 @@ How results and failures are shown is explained in the [Account Reviews overview
 | `Secret '…' is missing` / invalid base64 | Check the secret names and the base64 value |
 | `HTTP 403` | Grant `User.Read.All` (and `GroupMember.Read.All` for a group) with admin consent |
 | `No employees found` | Check `GROUP_ID`, `REQUIRE_EMPLOYEE_ID` and that users have the `USER_KEY` field |
+| `The tenant has N users, more than MAX_USERS` | Raise `MAX_USERS` (up to 30000), or set `GROUP_ID` to the group that holds your employees |
 | Many users left out without `mail` | Use `userPrincipalName` if it equals the email in your tenant |
 | Every application account flagged | The keys differ: compare a few values of both feeds |
 
@@ -131,5 +132,6 @@ Stop the Exit reviews that use the feed, then remove the feed and, if nothing el
 |---|---|
 | 0.1.0 | Initial draft; functional and installation validation pending |
 | 0.1.1 | `MAX_USERS` limited to 30000 (memory); the log ends with a SUMMARY block: `RESULT: OK` (list published, with counts), `RESULT: NOT PUBLISHED` (empty list refused) or `RESULT: FAILED` (error, nothing published) |
+| 0.1.2 | A list above `MAX_USERS` now names the real number of users and the variable to change. Tested on eramba 3.31.0 with Exit reviews |
 
 References: [list users](https://learn.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0), [advanced queries](https://learn.microsoft.com/en-us/graph/aad-advanced-queries), [group transitive members](https://learn.microsoft.com/en-us/graph/api/group-list-transitivemembers?view=graph-rest-1.0), [JSON batching](https://learn.microsoft.com/en-us/graph/json-batching).

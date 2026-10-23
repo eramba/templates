@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Entra ID – Application permissions
  *  Technology: Microsoft Entra ID
- *  id: entra-app-permissions-review        version: 0.1.0 (draft)
+ *  id: entra-app-permissions-review        version: 0.2.0 (tested)
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Account%20Reviews
  *
@@ -48,7 +48,7 @@ $config = [
 
 // ─── 3. SETTINGS (do not edit) ──────────────────────────────────────────────
 const AUTOMATION_ID = 'entra-app-permissions-review';
-const AUTOMATION_VERSION = '0.1.0';
+const AUTOMATION_VERSION = '0.2.0';
 const TPL_LOG_STREAM = 'stderr'; // stdout belongs to the artifact declaration
 const TPL_RUN_SECONDS = 200; // Collection budget inside the 240-second timeout
 const TPL_ALLOWED_REQUESTS = [
@@ -292,7 +292,21 @@ function tpl_readBody(\Psr\Http\Message\StreamInterface $stream, int $maxBytes, 
     return $body;
 }
 // ─── end shared:http v2 sha256:2fa2c253cb37e4d7 ───
-// ─── shared:providers/graph v1 (edit Automation/_shared/providers/graph.php, then run Automation/tools/sync.php) ───
+// ─── shared:providers/graph v2 (edit Automation/_shared/providers/graph.php, then run Automation/tools/sync.php) ───
+/**
+ * Thrown when a list holds more records than the caller's limit. The script never truncates: it stops, and the
+ * caller can turn this into a message that names its own variable. $total is Graph's count when it is known.
+ */
+final class TplGraphLimitException extends RuntimeException
+{
+    public function __construct(public readonly int $limit, public readonly ?int $total)
+    {
+        parent::__construct($total === null
+            ? sprintf('More than %d records in one list; narrow the scope or raise the limit.', $limit)
+            : sprintf('The list has %d records, more than the limit of %d; narrow the scope or raise the limit.', $total, $limit));
+    }
+}
+
 /** Application token through the client-credentials flow. */
 function tpl_graphToken(string $tenantId, string $clientId, string $clientSecret): string
 {
@@ -400,6 +414,9 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
             throw new RuntimeException('Graph collection count is missing.');
         }
         $state['expected'] = $count;
+        if (is_int($count) && $count > $limit) {
+            throw new TplGraphLimitException($limit, $count);
+        }
     } elseif ($count !== null && $count !== $state['expected']) {
         throw new RuntimeException('Graph collection changed during the pull; retry later.');
     }
@@ -416,7 +433,7 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
         }
         $state['items'][$id] = $item;
         if (count($state['items']) > $limit) {
-            throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+            throw new TplGraphLimitException($limit, $state['expected']);
         }
     }
     $next = $page['@odata.nextLink'] ?? null;
@@ -435,7 +452,52 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
     $state['url'] = substr($next, strlen('https://graph.microsoft.com/v1.0'));
     return $state;
 }
-// ─── end shared:providers/graph v1 sha256:0f75dd180874adb4 ───
+
+/**
+ * One Entra role as reviewers read it, without object IDs: "<kind>: <name>", then any details in brackets,
+ * e.g. "Group: Finance (through group Finance EU)". At most 255 bytes: only the name is shortened.
+ */
+function tpl_entraRole(string $kind, mixed $name, array $details = []): string
+{
+    if (!is_string($name) || preg_match('//u', $name) !== 1 || ($name = trim(preg_replace('/[\x00-\x1f\x7f]+/', ' ', $name))) === '') {
+        throw new RuntimeException("$kind name is missing or not valid text.");
+    }
+    $suffix = $details === [] ? '' : ' (' . implode('; ', $details) . ')';
+    $fixed = strlen($kind) + 2 + strlen($suffix);
+    if ($fixed + 3 > 255) {
+        throw new RuntimeException("$kind details are too long for a role value.");
+    }
+    if ($fixed + strlen($name) > 255) {
+        $name = mb_strcut($name, 0, 255 - $fixed - 3, 'UTF-8') . '…';
+    }
+    return "$kind: $name$suffix";
+}
+
+/**
+ * Rows whose roles are lists of [text, identity]. Names in Entra are not unique, so when one role text stands
+ * for two different objects anywhere in the feed (two groups named "Finance"), each of those roles gets
+ * " [<first 8 characters of its object ID>]". Returns the rows with plain, sorted role lists.
+ */
+function tpl_entraDisambiguate(array $rows): array
+{
+    $identities = [];
+    foreach ($rows as $row) {
+        foreach ($row['roles'] as [$text, $identity]) {
+            $identities[$text][$identity] = true;
+        }
+    }
+    foreach ($rows as &$row) {
+        $roles = [];
+        foreach ($row['roles'] as [$text, $identity]) {
+            $roles[] = count($identities[$text]) > 1
+                ? mb_strcut($text, 0, 244, 'UTF-8') . ' [' . substr($identity, 0, 8) . ']'
+                : $text;
+        }
+        $row['roles'] = array_values(array_unique($roles));
+    }
+    return $rows;
+}
+// ─── end shared:providers/graph v2 sha256:b64e3db3f3e9f8b2 ───
 // ─── shared:feed v6 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -616,6 +678,12 @@ function tpl_logFailure(string $what, Throwable $e): void
 
 // ─── 5. COLLECT: Entra ID application permissions ───────────────────────────
 
+// Role kinds, worded like the Permissions page of an enterprise application in Entra (Admin consent and
+// User consent tabs, with the permission type), so reviewers find each permission where it can be revoked.
+const ADMIN_APP = 'Application permission (admin consent)';
+const ADMIN_DELEGATED = 'Delegated permission (admin consent)';
+const USER_DELEGATED = 'Delegated permission (user consent)';
+
 const MICROSOFT_TENANTS = ['f8cdef31-a31e-4b4a-93e4-5f571e91255a', '72f988bf-86f1-41af-91ab-2d7cd011db47'];
 
 function validateConfig(array $c): void
@@ -673,7 +741,7 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
             }
             if ($assignment['appRoleId'] === '00000000-0000-0000-0000-000000000000') {
                 // Default access: the application is assigned to the resource without a specific app role.
-                $roles[] = tpl_roleString('Application permission', $resource['displayName'] . ' / Default access', $resource['id'] . ' / ' . $assignment['appRoleId']);
+                $roles[] = [tpl_entraRole(ADMIN_APP, $resource['displayName'] . ' / Default access'), $resource['id']];
                 continue;
             }
             $appRole = null;
@@ -687,7 +755,7 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
                 throw new RuntimeException($unresolved);
             }
             $name = ($appRole['value'] ?? '') !== '' ? $appRole['value'] : $appRole['displayName'];
-            $roles[] = tpl_roleString('Application permission', $resource['displayName'] . ' / ' . $name, $resource['id'] . ' / ' . $assignment['appRoleId']);
+            $roles[] = [tpl_entraRole(ADMIN_APP, $resource['displayName'] . ' / ' . $name), $resource['id']];
         }
 
         $someUsers = [];
@@ -698,35 +766,43 @@ function permissionRows(array $servicePrincipals, array $appRoleAssignments, arr
             }
             $scopes = preg_split('/\s+/', trim((string) ($grant['scope'] ?? '')), -1, PREG_SPLIT_NO_EMPTY);
             if ($grant['consentType'] === 'AllPrincipals') {
-                $kind = 'Delegated permission (all users)';
+                $kind = ADMIN_DELEGATED;
             } elseif ($grant['consentType'] === 'Principal') {
-                $kind = 'Delegated permission (some users)';
+                $kind = USER_DELEGATED;
                 $someUsers[(string) ($grant['principalId'] ?? '')] = true;
             } else {
                 throw new RuntimeException('A delegated permission grant has an unsupported consent type; update the automation.');
             }
             foreach ($scopes as $scope) {
-                $roles[] = tpl_roleString($kind, $resource['displayName'] . ' / ' . $scope, $resource['id'] . ' / ' . $scope);
+                $roles[] = [tpl_entraRole($kind, $resource['displayName'] . ' / ' . $scope), $resource['id']];
             }
         }
 
-        $roles = array_values(array_unique($roles));
         if ($roles === []) {
             continue;
         }
         $publisher = $isMicrosoft ? 'Microsoft' : ($tenant !== '' && $owner === $tenant ? 'Your organization' : 'Third party');
-        $key = tpl_feedKey($sp['displayName'] . ' [' . $sp['appId'] . ']', $seen, true);
         $consents = count($someUsers);
         $description = sprintf(
-            '%s; %s; sign-in: %s; %sappId=%s',
+            '%s; %s; sign-in: %s; %sapplication ID %s',
             $publisher,
             ($sp['accountEnabled'] ?? false) === true ? 'enabled' : 'disabled',
             ($sp['appRoleAssignmentRequired'] ?? false) === true ? 'assigned users only' : 'everyone',
             $consents > 0 ? sprintf('some-user consents: %d %s; ', $consents, $consents === 1 ? 'user' : 'users') : '',
             $sp['appId']
         );
-        $rows[] = ['key' => $key, 'description' => $description, 'roles' => $roles];
+        $rows[] = ['name' => tpl_feedText($sp['displayName'] ?? null, 'Application name'), 'appId' => $sp['appId'], 'description' => $description, 'roles' => $roles];
     }
+    // The row is the application's name; only applications that share a name also show the start of their
+    // application ID, so reviewers can tell them apart.
+    $names = array_count_values(array_map(static fn (array $row): string => mb_strtolower($row['name'], 'UTF-8'), $rows));
+    foreach ($rows as &$row) {
+        $shared = $names[mb_strtolower($row['name'], 'UTF-8')] > 1;
+        $row = ['key' => tpl_feedKey($shared ? $row['name'] . ' [' . substr($row['appId'], 0, 8) . ']' : $row['name'], $seen, true)] + $row;
+        unset($row['name'], $row['appId']);
+    }
+    unset($row);
+    $rows = tpl_entraDisambiguate($rows);
     usort($rows, static fn(array $a, array $b): int => strcmp($a['key'], $b['key']));
     return $rows;
 }
@@ -750,14 +826,23 @@ function checkRows(array $rows, array $config): void
 function collectPermissions(string $token, array $config): array
 {
     // Resources (Microsoft Graph, other APIs) are service principals too, so the limit is wider than MAX_APPS.
-    $servicePrincipals = tpl_graphList(
-        'servicePrincipals?$select=id,appId,displayName,appOwnerOrganizationId,accountEnabled,appRoleAssignmentRequired,appRoles&$top=999',
-        $token,
-        min($config['MAX_APPS'] * 10, 10000)
-    );
+    try {
+        $servicePrincipals = tpl_graphList(
+            'servicePrincipals?$select=id,appId,displayName,appOwnerOrganizationId,accountEnabled,appRoleAssignmentRequired,appRoles&$top=999',
+            $token,
+            min($config['MAX_APPS'] * 10, 10000)
+        );
+    } catch (TplGraphLimitException $e) {
+        throw new RuntimeException(sprintf('The tenant has %s enterprise applications, more than the limit of %d (10 × MAX_APPS, at most 10000).',
+            $e->total ?? 'more', $e->limit), 0, $e);
+    }
     tpl_logInfo(count($servicePrincipals) . ' service principals.');
 
-    $grants = tpl_graphList('oauth2PermissionGrants?$top=999', $token, $config['MAX_OBJECTS'], false);
+    try {
+        $grants = tpl_graphList('oauth2PermissionGrants?$top=999', $token, $config['MAX_OBJECTS'], false);
+    } catch (TplGraphLimitException $e) {
+        throw new RuntimeException(sprintf('More than MAX_OBJECTS (%d) delegated permission grants; raise MAX_OBJECTS (up to 10000).', $e->limit), 0, $e);
+    }
     tpl_logInfo(count($grants) . ' delegated permission grants.');
 
     $paths = [];

@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Entra ID – Accounts
  *  Technology: Microsoft Entra ID
- *  id: entra-account-review        version: 0.1.1 (draft)
+ *  id: entra-account-review        version: 0.3.0 (tested)
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Account%20Reviews
  *
@@ -37,7 +37,8 @@ $secrets = [
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
     'USER_KEY' => 'userPrincipalName', // Account identifier: userPrincipalName, id or mail (no fallback)
-    'USER_IDS' => [], // Empty: whole tenant. Otherwise a list of Entra user object IDs
+    'GROUP_ID' => '', // Empty: whole tenant. Otherwise only the members of this group (nested included)
+    'USER_IDS' => [], // Empty: whole tenant or GROUP_ID. Otherwise a list of Entra user object IDs (testing)
     'ROLES' => ['groups', 'directory_roles', 'applications', 'licenses'], // Access listed as roles; [] = accounts only (README §7)
     'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
     'MAX_USERS' => 2000, // Maximum accounts in the feed; never truncate
@@ -46,7 +47,7 @@ $config = [
 
 // ─── 3. SETTINGS (do not edit) ──────────────────────────────────────────────
 const AUTOMATION_ID = 'entra-account-review';
-const AUTOMATION_VERSION = '0.1.1';
+const AUTOMATION_VERSION = '0.3.0';
 const TPL_LOG_STREAM = 'stderr'; // stdout belongs to the artifact declaration
 const TPL_RUN_SECONDS = 200; // Collection budget inside the 240-second timeout
 const TPL_ALLOWED_REQUESTS = [
@@ -290,7 +291,21 @@ function tpl_readBody(\Psr\Http\Message\StreamInterface $stream, int $maxBytes, 
     return $body;
 }
 // ─── end shared:http v2 sha256:2fa2c253cb37e4d7 ───
-// ─── shared:providers/graph v1 (edit Automation/_shared/providers/graph.php, then run Automation/tools/sync.php) ───
+// ─── shared:providers/graph v2 (edit Automation/_shared/providers/graph.php, then run Automation/tools/sync.php) ───
+/**
+ * Thrown when a list holds more records than the caller's limit. The script never truncates: it stops, and the
+ * caller can turn this into a message that names its own variable. $total is Graph's count when it is known.
+ */
+final class TplGraphLimitException extends RuntimeException
+{
+    public function __construct(public readonly int $limit, public readonly ?int $total)
+    {
+        parent::__construct($total === null
+            ? sprintf('More than %d records in one list; narrow the scope or raise the limit.', $limit)
+            : sprintf('The list has %d records, more than the limit of %d; narrow the scope or raise the limit.', $total, $limit));
+    }
+}
+
 /** Application token through the client-credentials flow. */
 function tpl_graphToken(string $tenantId, string $clientId, string $clientSecret): string
 {
@@ -398,6 +413,9 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
             throw new RuntimeException('Graph collection count is missing.');
         }
         $state['expected'] = $count;
+        if (is_int($count) && $count > $limit) {
+            throw new TplGraphLimitException($limit, $count);
+        }
     } elseif ($count !== null && $count !== $state['expected']) {
         throw new RuntimeException('Graph collection changed during the pull; retry later.');
     }
@@ -414,7 +432,7 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
         }
         $state['items'][$id] = $item;
         if (count($state['items']) > $limit) {
-            throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+            throw new TplGraphLimitException($limit, $state['expected']);
         }
     }
     $next = $page['@odata.nextLink'] ?? null;
@@ -433,7 +451,52 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
     $state['url'] = substr($next, strlen('https://graph.microsoft.com/v1.0'));
     return $state;
 }
-// ─── end shared:providers/graph v1 sha256:0f75dd180874adb4 ───
+
+/**
+ * One Entra role as reviewers read it, without object IDs: "<kind>: <name>", then any details in brackets,
+ * e.g. "Group: Finance (through group Finance EU)". At most 255 bytes: only the name is shortened.
+ */
+function tpl_entraRole(string $kind, mixed $name, array $details = []): string
+{
+    if (!is_string($name) || preg_match('//u', $name) !== 1 || ($name = trim(preg_replace('/[\x00-\x1f\x7f]+/', ' ', $name))) === '') {
+        throw new RuntimeException("$kind name is missing or not valid text.");
+    }
+    $suffix = $details === [] ? '' : ' (' . implode('; ', $details) . ')';
+    $fixed = strlen($kind) + 2 + strlen($suffix);
+    if ($fixed + 3 > 255) {
+        throw new RuntimeException("$kind details are too long for a role value.");
+    }
+    if ($fixed + strlen($name) > 255) {
+        $name = mb_strcut($name, 0, 255 - $fixed - 3, 'UTF-8') . '…';
+    }
+    return "$kind: $name$suffix";
+}
+
+/**
+ * Rows whose roles are lists of [text, identity]. Names in Entra are not unique, so when one role text stands
+ * for two different objects anywhere in the feed (two groups named "Finance"), each of those roles gets
+ * " [<first 8 characters of its object ID>]". Returns the rows with plain, sorted role lists.
+ */
+function tpl_entraDisambiguate(array $rows): array
+{
+    $identities = [];
+    foreach ($rows as $row) {
+        foreach ($row['roles'] as [$text, $identity]) {
+            $identities[$text][$identity] = true;
+        }
+    }
+    foreach ($rows as &$row) {
+        $roles = [];
+        foreach ($row['roles'] as [$text, $identity]) {
+            $roles[] = count($identities[$text]) > 1
+                ? mb_strcut($text, 0, 244, 'UTF-8') . ' [' . substr($identity, 0, 8) . ']'
+                : $text;
+        }
+        $row['roles'] = array_values(array_unique($roles));
+    }
+    return $rows;
+}
+// ─── end shared:providers/graph v2 sha256:b64e3db3f3e9f8b2 ───
 // ─── shared:feed v6 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -630,12 +693,18 @@ function validateConfig(array $c): void
             throw new RuntimeException("$key must be a number from 1 to $max.");
         }
     }
+    if (!is_string($c['GROUP_ID']) || ($c['GROUP_ID'] !== '' && preg_match('/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/iD', $c['GROUP_ID']) !== 1)) {
+        throw new RuntimeException('GROUP_ID must be empty or an Entra group object ID.');
+    }
     if (!is_array($c['USER_IDS']) || !array_is_list($c['USER_IDS'])) {
         throw new RuntimeException('USER_IDS must be a list of user object IDs.');
     }
     $ids = array_map('entraId', $c['USER_IDS']);
     if (count($ids) !== count(array_unique($ids)) || count($ids) > $c['MAX_USERS']) {
         throw new RuntimeException('USER_IDS contains duplicates or exceeds MAX_USERS.');
+    }
+    if ($ids !== [] && $c['GROUP_ID'] !== '') {
+        throw new RuntimeException('Set GROUP_ID or USER_IDS, not both.');
     }
 }
 
@@ -648,13 +717,17 @@ function entraId(mixed $value): string
     return strtolower($value);
 }
 
-/** Active directory role assignments, keyed by principal (user or role-assignable group). */
+/**
+ * Active admin role assignments, keyed by principal (user or role-assignable group). Each holds the role name,
+ * where it applies when that is not the whole organisation, and an identity for telling equal names apart.
+ */
 function directoryRoles(string $token, array $config): array
 {
     $names = [];
     foreach (tpl_graphList('roleManagement/directory/roleDefinitions?$select=id,displayName', $token, $config['MAX_OBJECTS'], false) as $role) {
         $names[entraId($role['id'])] = $role['displayName'] ?? null;
     }
+    $scopes = ['/' => null];
     $byPrincipal = [];
     // The directory provider rejects appScopeId in $select: its assignments are scoped by directoryScopeId only.
     $select = 'roleManagement/directory/roleAssignments?$select=id,principalId,roleDefinitionId,directoryScopeId';
@@ -674,17 +747,44 @@ function directoryRoles(string $token, array $config): array
         if (!is_string($scope) || $scope === '') {
             throw new RuntimeException('A directory role assignment has no scope.');
         }
-        $byPrincipal[entraId($assignment['principalId'] ?? null)][] = tpl_roleString('Directory role', $names[$roleId], "$roleId; scope=$scope");
+        if (!array_key_exists($scope, $scopes)) {
+            $scopes[$scope] = roleScope($scope, $token);
+        }
+        $byPrincipal[entraId($assignment['principalId'] ?? null)][] = [
+            'name' => $names[$roleId], 'scope' => $scopes[$scope], 'id' => "$roleId;$scope",
+        ];
     }
     return $byPrincipal;
 }
 
-/** The whole tenant, or exactly the configured USER_IDS. */
-function listUsers(string $token, array $config): array
+/** Where a role applies, in words: an administrative unit or one object (for example one application). */
+function roleScope(string $scope, string $token): string
 {
-    $select = '$select=id,displayName,userPrincipalName,mail,accountEnabled,userType,assignedLicenses';
+    if (preg_match('~^/administrativeUnits/([^/]+)$~D', $scope, $m) === 1) {
+        $unit = tpl_graphGet('administrativeUnits/' . entraId($m[1]) . '?$select=id,displayName', $token);
+        return mb_strcut('administrative unit ' . tpl_feedText($unit['displayName'] ?? null, 'Administrative unit name'), 0, 100, 'UTF-8');
+    }
+    if (preg_match('~^/([^/]+)$~D', $scope, $m) === 1) {
+        $object = tpl_graphGet('directoryObjects/' . entraId($m[1]), $token);
+        return mb_strcut('only for ' . tpl_feedText($object['displayName'] ?? null, 'Role scope name'), 0, 100, 'UTF-8');
+    }
+    throw new RuntimeException('A directory role assignment has an unsupported scope.');
+}
+
+/** The whole tenant, the members of GROUP_ID (nested included), or exactly the configured USER_IDS. */
+function listUsers(string $token, array $config, bool $licenses): array
+{
+    $select = '$select=id,displayName,userPrincipalName,mail,accountEnabled,userType' . ($licenses ? ',licenseAssignmentStates' : '');
     if ($config['USER_IDS'] === []) {
-        return tpl_graphList('users?' . $select . '&$top=999', $token, $config['MAX_USERS']);
+        $group = $config['GROUP_ID'] !== '';
+        $path = $group ? 'groups/' . strtolower($config['GROUP_ID']) . '/transitiveMembers/microsoft.graph.user?' : 'users?';
+        try {
+            return tpl_graphList($path . $select . '&$top=999', $token, $config['MAX_USERS']);
+        } catch (TplGraphLimitException $e) {
+            throw new RuntimeException(sprintf('The %s has %s accounts, more than MAX_USERS (%d); %s',
+                $group ? 'group' : 'tenant', $e->total ?? 'more', $e->limit,
+                $group ? 'review a smaller group, or raise MAX_USERS (up to 5000).' : 'set GROUP_ID to review one group per feed, or raise MAX_USERS (up to 5000).'), 0, $e);
+        }
     }
     $users = [];
     foreach (array_map('entraId', $config['USER_IDS']) as $id) {
@@ -697,31 +797,78 @@ function listUsers(string $token, array $config): array
     return $users;
 }
 
-/** Microsoft 365 and other licences the tenant subscribes to: SKU ID => SKU part number (e.g. ENTERPRISEPACK). */
+/**
+ * Product names reviewers see in the Microsoft 365 admin center, for the licences most often assigned to people,
+ * from Microsoft's "Product names and service plan identifiers for licensing". Others keep their SKU code.
+ */
+const LICENSE_NAMES = [
+    'AAD_PREMIUM' => 'Microsoft Entra ID P1',
+    'AAD_PREMIUM_P2' => 'Microsoft Entra ID P2',
+    'ATP_ENTERPRISE' => 'Microsoft Defender for Office 365 (Plan 1)',
+    'DESKLESSPACK' => 'Office 365 F3',
+    'DEVELOPERPACK_E5' => 'Microsoft 365 E5 Developer (without Windows and Audio Conferencing)',
+    'EMS' => 'Enterprise Mobility + Security E3',
+    'EMSPREMIUM' => 'Enterprise Mobility + Security E5',
+    'ENTERPRISEPACK' => 'Office 365 E3',
+    'ENTERPRISEPREMIUM' => 'Office 365 E5',
+    'ENTERPRISEPREMIUM_NOPSTNCONF' => 'Office 365 E5 Without Audio Conferencing',
+    'EXCHANGEDESKLESS' => 'Exchange Online Kiosk',
+    'EXCHANGEENTERPRISE' => 'Exchange Online (Plan 2)',
+    'EXCHANGESTANDARD' => 'Exchange Online (Plan 1)',
+    'FLOW_FREE' => 'Microsoft Power Automate Free',
+    'IDENTITY_THREAT_PROTECTION' => 'Microsoft 365 E5 Security',
+    'INTUNE_A' => 'Intune',
+    'M365_F1' => 'Microsoft 365 F1',
+    'MCOEV' => 'Microsoft Teams Phone Standard',
+    'MCOMEETADV' => 'Microsoft 365 Audio Conferencing',
+    'MCOPSTN1' => 'Skype for Business PSTN Domestic Calling',
+    'Microsoft_365_Copilot' => 'Microsoft Copilot for Microsoft 365',
+    'Microsoft_365_E3_(no_Teams)' => 'Microsoft 365 E3 (no Teams)',
+    'Microsoft_365_E5_(no_Teams)' => 'Microsoft 365 E5 (no Teams)',
+    'Microsoft_Teams_Enterprise_New' => 'Microsoft Teams Enterprise',
+    'Microsoft_Teams_Premium' => 'Microsoft Teams Premium Introductory Pricing',
+    'Microsoft_Teams_Rooms_Pro' => 'Microsoft Teams Rooms Pro',
+    'O365_BUSINESS' => 'Microsoft 365 Apps for Business',
+    'O365_BUSINESS_ESSENTIALS' => 'Microsoft 365 Business Basic',
+    'O365_BUSINESS_PREMIUM' => 'Microsoft 365 Business Standard',
+    'O365_w/o_Teams_Bundle_M5' => 'Microsoft 365 E5 EEA (no Teams)',
+    'OFFICESUBSCRIPTION' => 'Microsoft 365 Apps for Enterprise',
+    'Office_365_E3_(no_Teams)' => 'Office 365 E3 (no Teams)',
+    'PHONESYSTEM_VIRTUALUSER' => 'Microsoft Teams Phone Resource Account',
+    'POWERAPPS_DEV' => 'Microsoft Power Apps for Developer',
+    'POWERAPPS_VIRAL' => 'Microsoft Power Apps Plan 2 Trial',
+    'POWER_BI_PRO' => 'Power BI Pro',
+    'POWER_BI_STANDARD' => 'Microsoft Fabric (Free)',
+    'PROJECTPREMIUM' => 'Project Online Premium',
+    'PROJECTPROFESSIONAL' => 'Planner and Project Plan 3',
+    'PROJECT_P1' => 'Planner Plan 1',
+    'RIGHTSMANAGEMENT' => 'Azure Information Protection Plan 1',
+    'SMB_BUSINESS' => 'Microsoft 365 Apps for Business',
+    'SPB' => 'Microsoft 365 Business Premium',
+    'SPE_E3' => 'Microsoft 365 E3',
+    'SPE_E5' => 'Microsoft 365 E5',
+    'SPE_F1' => 'Microsoft 365 F3',
+    'SPE_F5_SECCOMP' => 'Microsoft 365 F5 Security + Compliance Add-on',
+    'STANDARDPACK' => 'Office 365 E1',
+    'STREAM' => 'Microsoft Stream',
+    'TEAMS_EXPLORATORY' => 'Microsoft Teams Exploratory',
+    'TEAMS_FREE' => 'Microsoft Teams (Free)',
+    'THREAT_INTELLIGENCE' => 'Microsoft Defender for Office 365 (Plan 2)',
+    'VISIOCLIENT' => 'Visio Plan 2',
+    'VISIOONLINE_PLAN1' => 'Visio Plan 1',
+    'WINDOWS_STORE' => 'Windows Store for Business',
+    'WIN_DEF_ATP' => 'Microsoft Defender for Endpoint',
+];
+
+/** Licences the tenant subscribes to: SKU ID => product name (or SKU code when the name is not listed above). */
 function licenseNames(string $token): array
 {
     $names = [];
     foreach (tpl_graphGet('subscribedSkus?$select=skuId,skuPartNumber', $token)['value'] ?? null ?: [] as $sku) {
-        $names[entraId($sku['skuId'] ?? null)] = tpl_feedText($sku['skuPartNumber'] ?? null, 'Licence name');
+        $code = tpl_feedText($sku['skuPartNumber'] ?? null, 'Licence name');
+        $names[entraId($sku['skuId'] ?? null)] = LICENSE_NAMES[$code] ?? $code;
     }
     return $names;
-}
-
-/** Licences assigned to one user, directly or through a group. */
-function userLicenses(array $user, array $licenseNames): array
-{
-    if (!is_array($user['assignedLicenses'] ?? null)) {
-        throw new RuntimeException('Assigned licences are missing; cannot establish licence coverage.');
-    }
-    $roles = [];
-    foreach ($user['assignedLicenses'] as $license) {
-        $skuId = entraId(is_array($license) ? ($license['skuId'] ?? null) : null);
-        if (!isset($licenseNames[$skuId])) {
-            throw new RuntimeException('A user has a licence the tenant does not list; retry later.');
-        }
-        $roles[] = tpl_roleString('License', $licenseNames[$skuId], $skuId);
-    }
-    return $roles;
 }
 
 /** Application and role names, fetched once per service principal. */
@@ -732,82 +879,155 @@ function application(string $id, string $token, array &$cache): array
         if (entraId($app['id'] ?? null) !== $id || !is_array($app['appRoles'] ?? null)) {
             throw new RuntimeException('Application metadata is missing or inaccessible.');
         }
-        $roles = ['00000000-0000-0000-0000-000000000000' => 'Default access'];
+        $roles = ['00000000-0000-0000-0000-000000000000' => null]; // Default access: assigned without a role
         foreach ($app['appRoles'] as $role) {
-            $roles[entraId(is_array($role) ? ($role['id'] ?? null) : null)] = $role['displayName'] ?? null;
+            $roles[entraId(is_array($role) ? ($role['id'] ?? null) : null)] = tpl_feedText($role['displayName'] ?? null, 'Application role name');
         }
         $cache[$id] = ['name' => $app['displayName'] ?? null, 'roles' => $roles];
     }
     return $cache[$id];
 }
 
-/**
- * Groups (nested included), directory roles (direct or through a role-assignable group) and
- * application roles (direct or through a group) of one user.
- */
-function userRoles(string $id, array $memberships, array $appAssignments, string $token, array $directoryRoles, array &$apps, array $kinds): array
+/** The groups each of these groups belongs to, nested included, fetched once per group. */
+function parentGroups(array $groupIds, string $token, array $config, array &$cache): void
 {
-    $roles = $directoryRoles[$id] ?? [];
-    $groups = [];
-    foreach ($memberships as $member) {
-        $type = $member['@odata.type'] ?? '';
-        if ($type === '#microsoft.graph.group') {
-            $groupId = entraId($member['id']);
-            $groups[$groupId] = true;
-            if (isset($kinds['groups'])) {
-                $roles[] = tpl_roleString('Group', $member['displayName'] ?? null, $groupId);
+    $missing = array_values(array_diff($groupIds, array_keys($cache)));
+    foreach (array_chunk($missing, 100) as $chunk) {
+        $paths = array_map(fn ($g) => "groups/$g/transitiveMemberOf/microsoft.graph.group?\$select=id,displayName", $chunk);
+        foreach (tpl_graphLists($paths, $token, $config['MAX_OBJECTS']) as $n => $parents) {
+            $cache[$chunk[$n]] = [];
+            foreach ($parents as $parent) {
+                $cache[$chunk[$n]][entraId($parent['id'])] = $parent['displayName'] ?? null;
             }
-            // Role-assignable groups cannot contain other groups, so their members are direct members.
-            array_push($roles, ...($directoryRoles[$groupId] ?? []));
-        } elseif (!in_array($type, ['#microsoft.graph.directoryRole', '#microsoft.graph.administrativeUnit'], true)) {
-            throw new RuntimeException('Unknown membership type; refusing incomplete access coverage.');
         }
     }
-    foreach ($appAssignments as $assignment) {
-        $principal = entraId($assignment['principalId'] ?? null);
-        $type = $assignment['principalType'] ?? '';
-        if (!(($type === 'User' && $principal === $id) || ($type === 'Group' && isset($groups[$principal])))) {
-            throw new RuntimeException('An application assignment has an unresolved principal.');
+}
+
+/**
+ * The access of one user as [text, identity] pairs, named as on the user's page in Entra (Groups, Assigned
+ * roles, Applications, Licenses) and saying how it was obtained: directly, or through which group.
+ * $direct are the user's direct groups (id => name); $parents maps each group to the groups it belongs to.
+ */
+function userRoles(string $id, array $user, array $direct, array $parents, array $appAssignments, string $token, array $directoryRoles, array $licenseNames, array &$apps, array $kinds): array
+{
+    // Every group the user belongs to, with the direct groups it comes through (none when it is direct).
+    $groups = [];
+    foreach ($direct as $groupId => $name) {
+        $groups[$groupId] = ['name' => $name, 'through' => []];
+    }
+    foreach ($direct as $groupId => $name) {
+        foreach ($parents[$groupId] as $parentId => $parentName) {
+            if (!isset($direct[$parentId])) {
+                $groups[$parentId] ??= ['name' => $parentName, 'through' => []];
+                $groups[$parentId]['through'][] = tpl_feedText($name, 'Group name');
+            }
         }
-        $resource = entraId($assignment['resourceId'] ?? null);
-        $roleId = entraId($assignment['appRoleId'] ?? null);
-        $app = application($resource, $token, $apps);
-        if (!array_key_exists($roleId, $app['roles'])) {
-            throw new RuntimeException('An application role assignment cannot be resolved.');
+    }
+    $via = fn (?string $groupId): array => $groupId === null ? [] : ['through group ' . mb_strcut(tpl_feedText($groups[$groupId]['name'], 'Group name'), 0, 100, 'UTF-8')];
+
+    $roles = [];
+    if (isset($kinds['groups'])) {
+        foreach ($groups as $groupId => $group) {
+            $through = array_unique($group['through']);
+            sort($through, SORT_STRING);
+            // Long lists are cut to the first groups, so the role always fits eramba's 255 bytes.
+            $shown = $through;
+            while (count($shown) > 1 && strlen(implode(', ', $shown)) > 120) {
+                array_pop($shown);
+            }
+            $more = count($through) - count($shown);
+            $details = $through === [] ? [] : ['through group ' . mb_strcut(implode(', ', $shown), 0, 120, 'UTF-8') . ($more > 0 ? " and $more more" : '')];
+            $roles[] = [tpl_entraRole('Group', $group['name'], $details), $groupId];
         }
-        $name = tpl_feedText($app['name'], 'Application name') . ' / ' . tpl_feedText($app['roles'][$roleId], 'Application role name');
-        $roles[] = tpl_roleString('Application', $name, "$resource / $roleId");
+    }
+    if (isset($kinds['directory_roles'])) {
+        foreach ([$id => null] + array_fill_keys(array_keys($groups), true) as $principal => $isGroup) {
+            foreach ($directoryRoles[$principal] ?? [] as $role) {
+                $details = [...($role['scope'] === null ? [] : [$role['scope']]), ...$via($isGroup ? $principal : null)];
+                $roles[] = [tpl_entraRole('Admin role', $role['name'], $details), $role['id'] . ($isGroup ? ";$principal" : '')];
+            }
+        }
+    }
+    if (isset($kinds['applications'])) {
+        foreach ($appAssignments as $assignment) {
+            $principal = entraId($assignment['principalId'] ?? null);
+            $type = $assignment['principalType'] ?? '';
+            if (!(($type === 'User' && $principal === $id) || ($type === 'Group' && isset($groups[$principal])))) {
+                throw new RuntimeException('An application assignment has an unresolved principal.');
+            }
+            $resource = entraId($assignment['resourceId'] ?? null);
+            $roleId = entraId($assignment['appRoleId'] ?? null);
+            $app = application($resource, $token, $apps);
+            if (!array_key_exists($roleId, $app['roles'])) {
+                throw new RuntimeException('An application role assignment cannot be resolved.');
+            }
+            $details = [...($app['roles'][$roleId] === null ? [] : ['role ' . $app['roles'][$roleId]]), ...$via($type === 'Group' ? $principal : null)];
+            $roles[] = [tpl_entraRole('Application', $app['name'], $details), "$resource;$roleId" . ($type === 'Group' ? ";$principal" : '')];
+        }
+    }
+    if (isset($kinds['licenses'])) {
+        if (!is_array($user['licenseAssignmentStates'] ?? null)) {
+            throw new RuntimeException('Licence assignments are missing; cannot establish licence coverage.');
+        }
+        foreach ($user['licenseAssignmentStates'] as $state) {
+            $skuId = entraId(is_array($state) ? ($state['skuId'] ?? null) : null);
+            if (!isset($licenseNames[$skuId])) {
+                throw new RuntimeException('A user has a licence the tenant does not list; retry later.');
+            }
+            $group = $state['assignedByGroup'] ?? null;
+            $group = $group === null ? null : entraId($group);
+            if ($group !== null && !isset($groups[$group])) {
+                throw new RuntimeException('A group-based licence comes from a group the user is not in.');
+            }
+            $roles[] = [tpl_entraRole('License', $licenseNames[$skuId], $via($group)), $skuId . ($group === null ? '' : ";$group")];
+        }
     }
     return $roles;
 }
 
 /**
- * Collects every account, 100 users at a time (memberships and app assignments batched), into the staged feed.
+ * Collects every account, 100 users at a time (memberships and app assignments batched), then names the
+ * roles (an object ID only where two objects share a name) and stages the feed.
  * Returns the feed and the account counts shown in the run summary.
  */
 function collectFeed(string $token, array $config, array $directoryRoles, array $kinds): array
 {
-    $feed = tpl_feedOpen();
-    $users = listUsers($token, $config);
+    $users = listUsers($token, $config, isset($kinds['licenses']));
     $licenseNames = isset($kinds['licenses']) ? licenseNames($token) : [];
+    // Direct memberships tell reviewers which group to change; groups, admin roles held by groups and
+    // group-based app and licence assignments all need them.
+    $needGroups = isset($kinds['groups']) || isset($kinds['directory_roles']) || isset($kinds['applications']) || isset($kinds['licenses']);
     $keys = [];
     $apps = [];
-    $bytes = 0;
+    $parents = [];
+    $rows = [];
     $stats = ['enabled' => 0, 'disabled' => 0, 'Member' => 0, 'Guest' => 0];
     foreach (array_chunk($users, 100) as $chunk) {
-        // Memberships are needed for groups, group-held directory roles and to verify group-based app assignments.
         $paths = [];
         foreach ($chunk as $user) {
             $id = entraId($user['id'] ?? null);
-            if ($kinds !== []) {
-                $paths[] = "users/$id/transitiveMemberOf?\$select=id,displayName";
+            if ($needGroups) {
+                $paths[] = "users/$id/memberOf?\$select=id,displayName";
             }
             if (isset($kinds['applications'])) {
                 $paths[] = "users/$id/appRoleAssignments?\$select=id,principalId,principalType,resourceId,appRoleId";
             }
         }
         $lists = $paths === [] ? [] : tpl_graphLists($paths, $token, $config['MAX_OBJECTS']);
-        $perUser = $kinds === [] ? 0 : (isset($kinds['applications']) ? 2 : 1);
+        $perUser = !$needGroups ? 0 : (isset($kinds['applications']) ? 2 : 1);
+        $direct = [];
+        foreach ($chunk as $n => $user) {
+            $direct[$n] = [];
+            foreach ($perUser === 0 ? [] : $lists[$perUser * $n] as $member) {
+                $type = $member['@odata.type'] ?? '';
+                if ($type === '#microsoft.graph.group') {
+                    $direct[$n][entraId($member['id'])] = $member['displayName'] ?? null;
+                } elseif (!in_array($type, ['#microsoft.graph.directoryRole', '#microsoft.graph.administrativeUnit'], true)) {
+                    throw new RuntimeException('Unknown membership type; refusing incomplete access coverage.');
+                }
+            }
+        }
+        parentGroups(array_keys(array_replace([], ...$direct)), $token, $config, $parents);
         foreach ($chunk as $n => $user) {
             $id = entraId($user['id']);
             $key = tpl_feedKey($config['USER_KEY'] === 'id' ? $id : ($user[$config['USER_KEY']] ?? null), $keys);
@@ -816,12 +1036,11 @@ function collectFeed(string $token, array $config, array $directoryRoles, array 
             }
             $name = mb_strcut(tpl_feedText($user['displayName'] ?? null, 'Display name'), 0, 150, 'UTF-8');
             $description = sprintf('%s; %s; %s; object=%s', $name, $user['userType'], $user['accountEnabled'] ? 'enabled' : 'disabled', $id);
-            $roles = isset($kinds['licenses']) ? userLicenses($user, $licenseNames) : [];
-            $roles = [...$roles, ...($perUser === 0 ? [] : userRoles($id, $lists[$perUser * $n], $perUser === 2 ? $lists[2 * $n + 1] : [], $token, $directoryRoles, $apps, $kinds))];
-            if (count(array_unique($roles)) > $config['MAX_OBJECTS']) {
+            $roles = $kinds === [] ? [] : userRoles($id, $user, $direct[$n], $parents, $perUser === 2 ? $lists[2 * $n + 1] : [], $token, $directoryRoles, $licenseNames, $apps, $kinds);
+            if (count($roles) > $config['MAX_OBJECTS']) {
                 throw new RuntimeException('Combined account access limit exceeded.');
             }
-            $bytes = tpl_feedAdd($feed, $key, tpl_feedText($description, 'Description'), $roles);
+            $rows[] = ['key' => $key, 'description' => tpl_feedText($description, 'Description'), 'roles' => $roles];
             $stats[$user['accountEnabled'] ? 'enabled' : 'disabled']++;
             $stats[$user['userType']]++;
         }
@@ -831,9 +1050,14 @@ function collectFeed(string $token, array $config, array $directoryRoles, array 
         }
     }
     if ($users === [] && !$config['ALLOW_EMPTY_FEED']) {
-        throw new TplEmptyFeedException('No accounts found; check USER_IDS, or set ALLOW_EMPTY_FEED if zero accounts is intended.');
+        throw new TplEmptyFeedException('No accounts found; check GROUP_ID and USER_IDS, or set ALLOW_EMPTY_FEED if zero accounts is intended.');
     }
-    tpl_logInfo(sprintf('%d accounts staged (%d bytes), %d applications resolved.', count($users), $bytes, count($apps)));
+    $feed = tpl_feedOpen();
+    $bytes = 0;
+    foreach (tpl_entraDisambiguate($rows) as $row) {
+        $bytes = tpl_feedAdd($feed, $row['key'], $row['description'], $row['roles']);
+    }
+    tpl_logInfo(sprintf('%d accounts staged (%d bytes), %d groups and %d applications resolved.', count($users), $bytes, count($parents), count($apps)));
     return [$feed, $stats];
 }
 
@@ -846,7 +1070,7 @@ try {
     tpl_logStep(1, 'Checking configuration');
     validateConfig($config);
     tpl_checkSecrets($secrets);
-    tpl_logInfo('Secrets present. Scope: ' . ($config['USER_IDS'] === [] ? 'whole tenant.' : count($config['USER_IDS']) . ' explicit users.'));
+    tpl_logInfo('Secrets present. Scope: ' . ($config['USER_IDS'] !== [] ? count($config['USER_IDS']) . ' explicit users.' : ($config['GROUP_ID'] !== '' ? 'members of one group, nested included.' : 'whole tenant.')));
 
     tpl_logStep(2, 'Authenticating to Microsoft Graph');
     $token = tpl_graphToken($secrets['ENTRA_TENANT_ID'], $secrets['ENTRA_CLIENT_ID'], tpl_base64Secret($secrets['ENTRA_CLIENT_SECRET_B64'], 'entra_client_secret_b64'));

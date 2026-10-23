@@ -25,7 +25,7 @@ Every automation belongs to exactly one family. The family decides what a row is
 | **The roles of a row are** | The accesses that account holds | The permissions that thing grants |
 | **Question for the reviewer** | Should this person still have this account and these accesses? | Does this grant more than it should? |
 | **Typical reviewer** | The person's manager, the application owner, IT | IT, security, the owner of the group or policy |
-| **Example (Entra ID)** | `ana@example.com` → Group: Finance, Application: Salesforce / Sales Manager, License: ENTERPRISEPACK | `Contoso Expenses` → Application permission: Microsoft Graph / User.Read.All, Delegated permission (all users): Microsoft Graph / Mail.Read |
+| **Example (Entra ID)** | `ana@example.com` → Group: Finance, Application: Salesforce (role Sales Manager), License: Office 365 E3 | `Contoso Expenses` → Application permission (admin consent): Microsoft Graph / User.Read.All, Delegated permission (admin consent): Microsoft Graph / Mail.Read |
 | **Example (AWS IAM)** | `ana` → Policy: ReadOnlyAccess, Group: Developers | `Policy: DevelopersPolicy` → `s3:GetObject on arn:…`, `ec2:Describe*` |
 | **What a Differential review flags** | A person who gained or lost an access; accounts created or deleted | A group, policy or role that gained or lost a permission; things created or deleted |
 | **Exit reviews** | Yes: accounts that belong to no current employee | No: there is no person to compare |
@@ -105,7 +105,7 @@ Feed type *List of accounts to be reviewed*. Snapshot, Differential and Exit rev
 
 | Automation | Each row is | Roles listed | Status |
 |---|---|---|---|
-| [Entra ID – Accounts](Microsoft/Entra%20ID/) | One user account, employee or guest | Nested groups, scoped directory roles, application role assignments and licences | draft |
+| [Entra ID – Accounts](Microsoft/Entra%20ID/) | One user account, employee or guest, of the tenant or of one group | Nested groups, scoped directory roles, application role assignments and licences | tested |
 | [Okta – Accounts](Okta/Workforce%20Identity/) | One user account, deactivated included | Groups, application assignments and admin roles | draft |
 | [Auth0 – Accounts](Auth0/Auth0/) | One user account (up to 1000) | Roles and organization memberships | draft |
 | [AWS IAM – Accounts](AWS/IAM/) | One IAM user or the root user of one AWS account | Groups, policies, permissions boundaries and active credentials | draft |
@@ -126,7 +126,7 @@ Feed type *List of accounts to be reviewed*. Snapshot and Differential reviews o
 
 | Automation | Each row is | Roles listed | Status |
 |---|---|---|---|
-| [Entra ID – Application permissions](Microsoft/Entra%20ID%20Application%20Permissions/) | One connected application (enterprise application) with at least one permission; Microsoft applications optional | Application permissions and delegated permissions consented for all users or for some users | draft |
+| [Entra ID – Application permissions](Microsoft/Entra%20ID%20Application%20Permissions/) | One connected application (enterprise application) with at least one permission; Microsoft applications optional | Application permissions and delegated permissions consented for all users or for some users | tested |
 
 ### Employee lists (for Exit reviews)
 
@@ -134,7 +134,7 @@ Feed type *List of current employees*. Used as the second feed of an Exit review
 
 | Automation | Each row is | Roles listed | Status |
 |---|---|---|---|
-| [Entra ID – Current employees](Microsoft/Entra%20ID%20Current%20Employees/) | One enabled member user of the tenant or of one group, optionally only those with an Employee ID | None | draft |
+| [Entra ID – Current employees](Microsoft/Entra%20ID%20Current%20Employees/) | One enabled member user of the tenant or of one group, optionally only those with an Employee ID | None | tested |
 | [Workday – Current employees](Workday/Current%20Employees/) | One active worker from a Workday custom report (RaaS); also a former-employees mode | None | draft |
 
 ## Install

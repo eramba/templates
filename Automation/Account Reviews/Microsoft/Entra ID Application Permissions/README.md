@@ -1,8 +1,8 @@
 ---
 id: entra-app-permissions-review
 name: Entra ID – Application permissions
-version: 0.1.0
-status: draft
+version: 0.2.0
+status: tested
 technology: Microsoft Entra ID
 vendor: Microsoft
 eramba_module: Account Review Feeds
@@ -18,8 +18,8 @@ variables:
 dependencies:
   - guzzlehttp/guzzle:^7.9
 timeout_seconds: 240
-eramba_version_tested: null
-last_tested: null
+eramba_version_tested: 3.31.0
+last_tested: 2026-10-23
 ---
 
 # Entra ID – Application permissions
@@ -33,37 +33,37 @@ Sends eramba every connected application in your Microsoft Entra ID that has bee
 | | |
 |---|---|
 | **Family** | Permission review |
-| **Each row is** | One connected application (an *enterprise application* in Entra) that has been granted access to your organisation's data, identified by its name and application ID, for example `Contoso Expenses [1f2e3d4c-…]`. The reviewer answers: *should this application still have these permissions?* This differs from [Entra ID – Accounts](../Entra%20ID/), where each row is a person |
+| **Each row is** | One connected application (an *enterprise application* in Entra) that has been granted access to your organisation's data, identified by its name, for example `Contoso Expenses`. The reviewer answers: *should this application still have these permissions?* This differs from [Entra ID – Accounts](../Entra%20ID/), where each row is a person |
 | **Connects to** | Your Microsoft Entra ID, through Microsoft's official API (Microsoft Graph). Read-only |
 | **Permission needed** | Microsoft Graph application permission `Directory.Read.All`, read-only: the same app registration as *Entra ID – Accounts* can be used. An Entra administrator grants admin consent (§5) |
 | **Included** | Every application with at least one permission: apps your organisation built and apps from other companies. Applications owned by Microsoft are left out unless `INCLUDE_MICROSOFT_APPS` is on (§7) |
 | **Not included** | • What each permission lets the application reach inside SharePoint, Exchange or other services, beyond the permission's name<br>• Which users consented for themselves (only their number is given)<br>• Applications with no permission at all<br>• Who may sign in to each application (that is in *Entra ID – Accounts*)<br>• Azure cloud resource roles<br>• What each group grants (planned automation *Entra ID – Group permissions*)<br>• Other Entra organisations (one per automation) |
 | **Size limit** | Up to 2000 applications by default (`MAX_APPS`, maximum 5000). More stops the run instead of being cut short. A tenant with more than 10,000 enterprise applications in total, Microsoft's included, also stops the run |
-| **Roles listed** | Application permissions (including default access to another application) and delegated permissions consented for all users or for some users |
+| **Roles listed** | Application permissions (admin consent, including default access to another application) and delegated permissions consented by an administrator for all users or by individual users |
 
 How the review families, review types and results work is explained once in the [Account Reviews overview](../../README.md).
 
 ## 2. What one row looks like
 
-One row is one application. Its roles are every permission that application holds. eramba's first column is labelled *Account*: here it holds the application. This automation lists three kinds:
+One row is one application. Its roles are every permission that application holds. eramba's first column is labelled *Account*: here it holds the application. This automation lists three kinds, worded like the application's **Permissions** page in Entra (Enterprise apps › the application › Permissions), whose *Admin consent* and *User consent* tabs list the same permissions with the same *Type*, so each one can be found and revoked there:
 
 | Kind | What it means, in plain words | How reviewers see it |
 |---|---|---|
-| **Application permission** | The application can do this on its own, without anyone signed in. These are usually the most powerful permissions, for example reading every mailbox. *Default access* means the application was given access to another of your applications without a specific role | `Application permission: Microsoft Graph / User.Read.All [<id> / <id>]` |
-| **Delegated permission (all users)** | An administrator allowed the application to act for any user who signs in to it, within what that user may do | `Delegated permission (all users): Microsoft Graph / Mail.Read [<id> / Mail.Read]` |
-| **Delegated permission (some users)** | Individual users allowed the application to act for them. The description says how many users did | `Delegated permission (some users): Microsoft Graph / Files.Read [<id> / Files.Read]` |
+| **Application permission (admin consent)** | The application can do this on its own, without anyone signed in. These are usually the most powerful permissions, for example reading every mailbox. *Default access* means the application was given access to another of your applications without a specific role | `Application permission (admin consent): Microsoft Graph / User.Read.All` |
+| **Delegated permission (admin consent)** | An administrator allowed the application to act for any user who signs in to it, within what that user may do | `Delegated permission (admin consent): Microsoft Graph / Mail.Read` |
+| **Delegated permission (user consent)** | Individual users allowed the application to act for them. The description says how many users did; the *User consent* tab in Entra says who | `Delegated permission (user consent): Microsoft Graph / Files.Read` |
 
 Each permission is shown as *the service it applies to / the permission name*, for example *Microsoft Graph / Mail.Read*: the application can read mail through Microsoft Graph.
 
 ```
-Account:     Contoso Expenses [1f2e3d4c-…]
-Description: Third party; enabled; sign-in: everyone; some-user consents: 3 users; appId=1f2e3d4c-…
-Roles:       Application permission: Microsoft Graph / User.Read.All [5b07… / df02…]
-             Delegated permission (all users): Microsoft Graph / Mail.Read [5b07… / Mail.Read]
-             Delegated permission (some users): Microsoft Graph / Files.Read [5b07… / Files.Read]
+Account:     Contoso Expenses
+Description: Third party; enabled; sign-in: everyone; some-user consents: 3 users; application ID 1f2e3d4c-…
+Roles:       Application permission (admin consent): Microsoft Graph / User.Read.All
+             Delegated permission (admin consent): Microsoft Graph / Mail.Read
+             Delegated permission (user consent): Microsoft Graph / Files.Read
 ```
 
-The codes in square brackets are Microsoft's internal identifiers. They keep two items with the same name apart; reviewers can ignore them. The description gives:
+Rows and roles show names only. When two applications share a name, both rows show the first characters of their application ID, `Contoso Expenses [1f2e3d4c]`; when two APIs share a name, their permissions show the first characters of the API's object ID. The description gives:
 
 - who owns the application: *Your organization* (built in your Entra), *Third party* (another company) or *Microsoft* (only with `INCLUDE_MICROSOFT_APPS`);
 - whether it is *enabled* or *disabled* (a disabled application cannot sign in or use its permissions);
@@ -136,7 +136,7 @@ How results and failures are shown is explained in the [Account Reviews overview
 
 - Below the `RESULT: OK` line, the summary also counts the applications by owner (third-party, your organization, Microsoft).
 - An empty list is not published (`RESULT: NOT PUBLISHED`); the reason suggests turning on `INCLUDE_MICROSOFT_APPS` to include Microsoft applications, or `ALLOW_EMPTY_FEED` if no application with permissions is expected.
-- A Differential review reports an application that gained or lost a permission (*Change in roles*), and a new application with permissions (*Added account*). An application whose last permission was removed, or that was deleted, shows as *Deleted account*. The application's name is part of the row's identifier, so renaming an application shows it as deleted and added again.
+- A Differential review reports an application that gained or lost a permission (*Change in roles*), and a new application with permissions (*Added account*). An application whose last permission was removed, or that was deleted, shows as *Deleted account*. The application's name is the row's identifier, so renaming an application shows it as deleted and added again; so does a second application taking the same name, which adds the short application ID to both.
 - The number of users who consented for themselves is in the description and is never compared: a new user consenting to a permission already listed is not reported.
 
 ## 9. Troubleshooting
@@ -148,7 +148,9 @@ How results and failures are shown is explained in the [Account Reviews overview
 | `Microsoft API HTTP 401/403` or `HTTP 403 for a collection` | Check secret expiry, `Directory.Read.All` and admin consent |
 | `No applications with permissions found` | Turn on `INCLUDE_MICROSOFT_APPS` to include Microsoft applications, or `ALLOW_EMPTY_FEED` if none is expected |
 | `More applications than MAX_APPS` | Raise `MAX_APPS` (up to 5000) |
-| `Collection limit exceeded` | One of these lists was longer than its limit: the enterprise applications in the tenant (ten times `MAX_APPS`, and never more than 10,000), the delegated permission grants in the tenant (`MAX_OBJECTS`), or the application permission assignments of one application (`MAX_OBJECTS`). If the limit hit is below 10,000 (a `MAX_APPS` lowered below 1000, or a `MAX_OBJECTS` lowered below 10000), raise that variable. Otherwise there are more than 10,000 of them, and this version cannot review the tenant in one feed |
+| `The tenant has N enterprise applications, more than the limit of …` | The limit is ten times `MAX_APPS`, never more than 10,000. If it is below 10,000, raise `MAX_APPS`; otherwise this version cannot review the tenant in one feed |
+| `More than MAX_OBJECTS (…) delegated permission grants` | Raise `MAX_OBJECTS` (up to 10000) |
+| `The list has N records, more than the limit of …` | One application holds more application permissions than `MAX_OBJECTS`: raise it (up to 10000) |
 | `An application permission cannot be resolved` or collection changed | Applications changed during the pull; retry later |
 | `unsupported consent type` | Microsoft added a consent type this version does not know; update the automation |
 | Time or size limit | Turn off `INCLUDE_MICROSOFT_APPS`. If it is already off, this version cannot review the tenant in one feed |
@@ -166,5 +168,7 @@ Stop or reconfigure the Account Reviews that use the feed before removing it. Re
 | Version | Change |
 |---|---|
 | 0.1.0 | Initial draft |
+| 0.1.1 | A list above its limit now names the real number and the variable to change. Tested on eramba 3.31.0: Test, Differential review (a removed permission shows as one Change in Roles) and `INCLUDE_MICROSOFT_APPS` |
+| 0.2.0 | Roles are worded like the application's Permissions page in Entra: *Application permission (admin consent)*, *Delegated permission (admin consent)*, *Delegated permission (user consent)*, without object IDs; the row is the application's name, with the start of its application ID only when two applications share a name. A Differential review with an earlier baseline shows every application once as deleted and added: approve that pull or take a new baseline |
 
 References: [client credentials](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow), [service principals](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-list?view=graph-rest-1.0), [app role assignments](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-list-approleassignments?view=graph-rest-1.0), [delegated permission grants](https://learn.microsoft.com/en-us/graph/api/oauth2permissiongrant-list?view=graph-rest-1.0), [JSON batching](https://learn.microsoft.com/en-us/graph/json-batching), [throttling](https://learn.microsoft.com/en-us/graph/throttling).

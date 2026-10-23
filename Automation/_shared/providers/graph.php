@@ -1,6 +1,20 @@
 <?php
 declare(strict_types=1);
-// version: 1 — Microsoft Graph (public cloud): app-only token, complete collections, JSON batching
+// version: 2 — Microsoft Graph (public cloud): app-only token, complete collections, JSON batching
+
+/**
+ * Thrown when a list holds more records than the caller's limit. The script never truncates: it stops, and the
+ * caller can turn this into a message that names its own variable. $total is Graph's count when it is known.
+ */
+final class TplGraphLimitException extends RuntimeException
+{
+    public function __construct(public readonly int $limit, public readonly ?int $total)
+    {
+        parent::__construct($total === null
+            ? sprintf('More than %d records in one list; narrow the scope or raise the limit.', $limit)
+            : sprintf('The list has %d records, more than the limit of %d; narrow the scope or raise the limit.', $total, $limit));
+    }
+}
 
 /** Application token through the client-credentials flow. */
 function tpl_graphToken(string $tenantId, string $clientId, string $clientSecret): string
@@ -109,6 +123,9 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
             throw new RuntimeException('Graph collection count is missing.');
         }
         $state['expected'] = $count;
+        if (is_int($count) && $count > $limit) {
+            throw new TplGraphLimitException($limit, $count);
+        }
     } elseif ($count !== null && $count !== $state['expected']) {
         throw new RuntimeException('Graph collection changed during the pull; retry later.');
     }
@@ -125,7 +142,7 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
         }
         $state['items'][$id] = $item;
         if (count($state['items']) > $limit) {
-            throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+            throw new TplGraphLimitException($limit, $state['expected']);
         }
     }
     $next = $page['@odata.nextLink'] ?? null;
@@ -143,4 +160,49 @@ function tpl_graphPage(array $state, mixed $page, int $limit, bool $counted): ar
     tpl_assertNextUrl($state['first'], $next);
     $state['url'] = substr($next, strlen('https://graph.microsoft.com/v1.0'));
     return $state;
+}
+
+/**
+ * One Entra role as reviewers read it, without object IDs: "<kind>: <name>", then any details in brackets,
+ * e.g. "Group: Finance (through group Finance EU)". At most 255 bytes: only the name is shortened.
+ */
+function tpl_entraRole(string $kind, mixed $name, array $details = []): string
+{
+    if (!is_string($name) || preg_match('//u', $name) !== 1 || ($name = trim(preg_replace('/[\x00-\x1f\x7f]+/', ' ', $name))) === '') {
+        throw new RuntimeException("$kind name is missing or not valid text.");
+    }
+    $suffix = $details === [] ? '' : ' (' . implode('; ', $details) . ')';
+    $fixed = strlen($kind) + 2 + strlen($suffix);
+    if ($fixed + 3 > 255) {
+        throw new RuntimeException("$kind details are too long for a role value.");
+    }
+    if ($fixed + strlen($name) > 255) {
+        $name = mb_strcut($name, 0, 255 - $fixed - 3, 'UTF-8') . '…';
+    }
+    return "$kind: $name$suffix";
+}
+
+/**
+ * Rows whose roles are lists of [text, identity]. Names in Entra are not unique, so when one role text stands
+ * for two different objects anywhere in the feed (two groups named "Finance"), each of those roles gets
+ * " [<first 8 characters of its object ID>]". Returns the rows with plain, sorted role lists.
+ */
+function tpl_entraDisambiguate(array $rows): array
+{
+    $identities = [];
+    foreach ($rows as $row) {
+        foreach ($row['roles'] as [$text, $identity]) {
+            $identities[$text][$identity] = true;
+        }
+    }
+    foreach ($rows as &$row) {
+        $roles = [];
+        foreach ($row['roles'] as [$text, $identity]) {
+            $roles[] = count($identities[$text]) > 1
+                ? mb_strcut($text, 0, 244, 'UTF-8') . ' [' . substr($identity, 0, 8) . ']'
+                : $text;
+        }
+        $row['roles'] = array_values(array_unique($roles));
+    }
+    return $rows;
 }
