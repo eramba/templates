@@ -124,7 +124,9 @@ Feed type *List of accounts to be reviewed*. Snapshot, Differential and Exit rev
 
 Feed type *List of accounts to be reviewed*. Snapshot and Differential reviews only.
 
-Planned: Entra ID – Application permissions.
+| Automation | Each row is | Roles listed | Status |
+|---|---|---|---|
+| [Entra ID – Application permissions](Microsoft/Entra%20ID%20Application%20Permissions/) | One connected application (enterprise application) with at least one permission; Microsoft applications optional | Application permissions and delegated permissions consented for all users or for some users | draft |
 
 ### Employee lists (for Exit reviews)
 

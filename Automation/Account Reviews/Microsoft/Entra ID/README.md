@@ -77,7 +77,7 @@ A row shows *that* Ana is in *Finance* or is a *User Administrator*, not what th
 | I want to... | Use |
 |---|---|
 | See what each group grants | *Entra ID – Group permissions* (planned) |
-| See what data each connected application can reach | *Entra ID – Application permissions* (planned) |
+| See what data each connected application can reach | [Entra ID – Application permissions](../Entra%20ID%20Application%20Permissions/) |
 | See who the administrators are, and only them | This automation, scope option (planned) |
 | Find people who left | Pair this feed with [Entra ID – Current employees](../Entra%20ID%20Current%20Employees/) in an Exit review. Guests match no employee, so they also appear; disabled accounts of leavers stay listed until deleted |
 | See what someone can do inside an application, such as Salesforce | That application's own automation, if there is one in the [catalogue](../../README.md), for example [Salesforce](../../Salesforce/Salesforce/) |
