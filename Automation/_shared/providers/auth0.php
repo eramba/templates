@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-// version: 1 — Auth0 Management API: token and complete page-based or checkpoint pagination
+// version: 2 — Auth0 Management API: token and complete page-based or checkpoint pagination
 
 /** The canonical tenant domain (e.g. example.eu.auth0.com), as "https://host". */
 function tpl_auth0BaseUrl(string $domain): string
@@ -48,7 +48,7 @@ function tpl_auth0Pages(string $base, string $path, string $key, string $token, 
                 throw new RuntimeException("Auth0 reports $total $key; this feed supports up to 1000 (Auth0's page limit).");
             }
             if ($total > $limit) {
-                throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+                throw new RuntimeException("Auth0 reports $total $key, more than the limit of $limit; raise MAX_OBJECTS (up to 10000).");
             }
         } elseif ($data['total'] !== $total) {
             throw new RuntimeException("Auth0 $key changed during the pull; retry later.");
@@ -81,7 +81,7 @@ function tpl_auth0Checkpoint(string $base, string $path, string $key, string $to
         }
         $items = tpl_auth0Add($items, $data[$key], $itemId);
         if (count($items) > $limit) {
-            throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+            throw new RuntimeException("Auth0 has more than $limit $key; raise MAX_OBJECTS (up to 10000).");
         }
         $from = $data['next'] ?? null;
         if ($from !== null && (!is_string($from) || $from === '' || isset($seen[$from]))) {

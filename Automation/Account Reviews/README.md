@@ -107,7 +107,7 @@ Feed type *List of accounts to be reviewed*. Snapshot, Differential and Exit rev
 |---|---|---|---|
 | [Entra ID – Accounts](Microsoft/Entra%20ID/) | One user account, employee or guest, of the tenant or of one group | Nested groups, scoped directory roles, application role assignments and licences | tested |
 | [Okta – Accounts](Okta/Workforce%20Identity/) | One user account, deactivated included | Groups, application assignments and admin roles | draft |
-| [Auth0 – Accounts](Auth0/Auth0/) | One user account (up to 1000) | Roles and organization memberships | draft |
+| [Auth0 – Accounts](Auth0/Auth0/) | One user account (up to 1000) | Roles, organization memberships and organization roles | tested |
 | [AWS IAM – Accounts](AWS/IAM/) | One IAM user or the root user of one AWS account | Groups, policies, permissions boundaries and active credentials | draft |
 | [AWS IAM Identity Center – Accounts](AWS/IAM%20Identity%20Center/) | One Identity Center user | Permission sets per AWS account, direct or through a group, and groups | draft |
 | [Google Workspace – Accounts](Google/Workspace/) | One user account, suspended and archived included | Groups, admin roles and optionally org unit | draft |

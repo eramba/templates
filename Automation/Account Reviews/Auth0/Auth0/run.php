@@ -5,7 +5,7 @@ declare(strict_types=1); // Keep on line 2: eramba inserts its includes right af
  * ============================================================================
  *  Auth0 – Accounts
  *  Technology: Auth0 (Okta Customer Identity)
- *  id: auth0-account-review        version: 0.1.1 (draft)
+ *  id: auth0-account-review        version: 0.2.0 (tested)
  *  Docs: README.md in the same folder (secrets, permissions, variables).
  *  Repository: https://github.com/eramba/templates/tree/master/Automation/Account%20Reviews
  *
@@ -37,14 +37,14 @@ $secrets = [
 // ─── 2. VARIABLES (README §7) ───────────────────────────────────────────────
 $config = [
     'USER_KEY' => 'email', // Account identifier: email or user_id (no fallback)
-    'ROLES' => ['roles', 'organizations'], // Access listed as roles; [] = accounts only (README §7)
+    'ROLES' => ['roles', 'organizations', 'organization_roles'], // Access listed as roles; [] = accounts only (README §7)
     'ALLOW_EMPTY_FEED' => false, // True only if zero accounts is a legitimate result
     'MAX_OBJECTS' => 1000, // Maximum records per API list (roles, organizations, members); never truncate
 ];
 
 // ─── 3. SETTINGS (do not edit) ──────────────────────────────────────────────
 const AUTOMATION_ID = 'auth0-account-review';
-const AUTOMATION_VERSION = '0.1.1';
+const AUTOMATION_VERSION = '0.2.0';
 const TPL_LOG_STREAM = 'stderr'; // stdout belongs to the artifact declaration
 const TPL_RUN_SECONDS = 200; // Collection budget inside the 240-second timeout
 // TPL_ALLOWED_REQUESTS is defined in MAIN from the domain: the token POST and GET https://<domain>/api/v2/.
@@ -284,7 +284,7 @@ function tpl_readBody(\Psr\Http\Message\StreamInterface $stream, int $maxBytes, 
     return $body;
 }
 // ─── end shared:http v2 sha256:2fa2c253cb37e4d7 ───
-// ─── shared:providers/auth0 v1 (edit Automation/_shared/providers/auth0.php, then run Automation/tools/sync.php) ───
+// ─── shared:providers/auth0 v2 (edit Automation/_shared/providers/auth0.php, then run Automation/tools/sync.php) ───
 /** The canonical tenant domain (e.g. example.eu.auth0.com), as "https://host". */
 function tpl_auth0BaseUrl(string $domain): string
 {
@@ -331,7 +331,7 @@ function tpl_auth0Pages(string $base, string $path, string $key, string $token, 
                 throw new RuntimeException("Auth0 reports $total $key; this feed supports up to 1000 (Auth0's page limit).");
             }
             if ($total > $limit) {
-                throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+                throw new RuntimeException("Auth0 reports $total $key, more than the limit of $limit; raise MAX_OBJECTS (up to 10000).");
             }
         } elseif ($data['total'] !== $total) {
             throw new RuntimeException("Auth0 $key changed during the pull; retry later.");
@@ -364,7 +364,7 @@ function tpl_auth0Checkpoint(string $base, string $path, string $key, string $to
         }
         $items = tpl_auth0Add($items, $data[$key], $itemId);
         if (count($items) > $limit) {
-            throw new RuntimeException('Collection limit exceeded; narrow the scope or raise the limit.');
+            throw new RuntimeException("Auth0 has more than $limit $key; raise MAX_OBJECTS (up to 10000).");
         }
         $from = $data['next'] ?? null;
         if ($from !== null && (!is_string($from) || $from === '' || isset($seen[$from]))) {
@@ -390,7 +390,7 @@ function tpl_auth0Add(array $items, array $page, string $itemId): array
     }
     return $items;
 }
-// ─── end shared:providers/auth0 v1 sha256:a599915fd183eec4 ───
+// ─── end shared:providers/auth0 v2 sha256:aa85299838a6a6b4 ───
 // ─── shared:feed v6 (edit Automation/_shared/feed.php, then run Automation/tools/sync.php) ───
 /** A required feed value: trimmed, valid UTF-8, at most 255 bytes (the eramba field size). */
 function tpl_feedText(mixed $value, string $what): string
@@ -571,7 +571,7 @@ function tpl_logFailure(string $what, Throwable $e): void
 
 // ─── 5. COLLECT: Auth0 ──────────────────────────────────────────────────────
 
-const ROLE_KINDS = ['roles', 'organizations'];
+const ROLE_KINDS = ['roles', 'organizations', 'organization_roles'];
 
 function validateConfig(array $c): void
 {
@@ -587,14 +587,117 @@ function validateConfig(array $c): void
     }
 }
 
-/** Adds $role to every listed member, which must belong to the collected users. */
-function grant(array &$roles, array $users, array $members, string $role): void
+/**
+ * One role as reviewers read it, with the names they see in the Auth0 dashboard and no IDs:
+ * "<kind>: <name>", then any detail in brackets. Only the name is shortened to fit 255 bytes.
+ */
+/** A name from Auth0 as one line of valid text, of any length (callers shorten it). */
+function nameText(mixed $value, string $what): string
 {
-    foreach ($members as $member) {
-        if (!isset($users[$member['user_id']])) {
+    if (!is_string($value) || preg_match('//u', $value) !== 1 || ($value = trim(preg_replace('/[\x00-\x1f\x7f]+/', ' ', $value))) === '') {
+        throw new RuntimeException("$what is missing or not valid text.");
+    }
+    return $value;
+}
+
+function roleText(string $kind, mixed $name, string $detail = ''): string
+{
+    $name = nameText($name, "$kind name");
+    $suffix = $detail === '' ? '' : " ($detail)";
+    $fixed = strlen($kind) + 2 + strlen($suffix);
+    if ($fixed + strlen($name) > 255) {
+        $name = mb_strcut($name, 0, 255 - $fixed - 3, 'UTF-8') . '…';
+    }
+    return "$kind: $name$suffix";
+}
+
+/**
+ * The name reviewers see for each item, keyed by ID. Two items with the same name get the value of
+ * $unique after it (an organization's identifier name, which Auth0 keeps unique), so they stay apart.
+ */
+function labels(array $items, string $what, string $nameField, string $unique): array
+{
+    $names = [];
+    foreach ($items as $item) {
+        $names[$item['id']] = nameText($item[$nameField] ?? ($item['name'] ?? null), "$what name");
+    }
+    $counts = array_count_values(array_map(static fn (string $n): string => mb_strtolower($n, 'UTF-8'), $names));
+    $labels = [];
+    foreach ($items as $item) {
+        $name = $names[$item['id']];
+        $label = mb_strlen($name) > 100 ? mb_substr($name, 0, 99) . '…' : $name;
+        if ($counts[mb_strtolower($name, 'UTF-8')] > 1) {
+            $label .= ' (' . mb_strcut(nameText($item[$unique] ?? null, "$what identifier"), 0, 60, 'UTF-8') . ')';
+        }
+        $labels[$item['id']] = $label;
+    }
+    return $labels;
+}
+
+/**
+ * The feed rows from what Auth0 returned: users, roles with their 'members', organizations with their
+ * 'members' (each with its directly assigned 'roles' when organization roles are listed).
+ * Returns [key, description, roles] rows in the users' order.
+ */
+function accountRows(array $users, array $roleList, array $organizations, array $config): array
+{
+    $byId = [];
+    foreach ($users as $user) {
+        $byId[$user['user_id']] = $user;
+    }
+    $access = [];
+    $grant = static function (string $userId, string $role) use ($byId, &$access): void {
+        if (!isset($byId[$userId])) {
             throw new RuntimeException('Access is assigned to a user outside the collected list; users changed during the pull, retry later.');
         }
-        $roles[$member['user_id']][] = $role;
+        $access[$userId][] = $role;
+    };
+
+    $roleNames = labels($roleList, 'Role', 'name', 'id');
+    foreach ($roleList as $role) {
+        foreach ($role['members'] as $member) {
+            $grant($member['user_id'], roleText('Role', $roleNames[$role['id']]));
+        }
+    }
+    $orgNames = labels($organizations, 'Organization', 'display_name', 'name');
+    $kinds = tpl_roleKinds($config['ROLES'], ROLE_KINDS);
+    foreach ($organizations as $organization) {
+        $org = $orgNames[$organization['id']];
+        foreach ($organization['members'] as $member) {
+            if (isset($kinds['organizations'])) {
+                $grant($member['user_id'], roleText('Organization', $org));
+            }
+            if (isset($kinds['organization_roles'])) {
+                foreach ($member['roles'] ?? [] as $role) {
+                    $grant($member['user_id'], roleText('Organization role', $role['name'] ?? null, 'in organization ' . $org));
+                }
+            }
+        }
+    }
+
+    $rows = [];
+    $keys = [];
+    foreach ($byId as $id => $user) {
+        $key = tpl_feedKey($user[$config['USER_KEY']] ?? null, $keys);
+        $name = mb_strcut(nameText($user['name'] ?? ($user['email'] ?? $id), 'User name'), 0, 120, 'UTF-8');
+        $state = ($user['blocked'] ?? false) === true ? 'blocked' : 'active';
+        $roles = array_values(array_unique($access[$id] ?? []));
+        sort($roles);
+        $rows[] = [$key, tpl_feedText("$name; $state; user ID $id", 'Description'), $roles];
+    }
+    return $rows;
+}
+
+/** Runs one Auth0 list; a refusal (HTTP 403) names the scope the machine-to-machine application lacks. */
+function withScope(string $scopes, callable $list): array
+{
+    try {
+        return $list();
+    } catch (RuntimeException $e) {
+        if (str_contains($e->getMessage(), 'returned HTTP 403')) {
+            throw new RuntimeException("Auth0 refused the request (HTTP 403): authorize the eramba machine-to-machine application for $scopes (README §5).", 0, $e);
+        }
+        throw $e;
     }
 }
 
@@ -602,45 +705,45 @@ function collectFeed(string $base, string $token, array $config)
 {
     // At most 1000 users: the page-based list stops there, and a larger total aborts the run.
     $fields = 'fields=' . rawurlencode('user_id,email,name,blocked') . '&include_fields=true&sort=' . rawurlencode('created_at:1');
-    $users = [];
-    foreach (tpl_auth0Pages($base, '/api/v2/users?' . $fields, 'users', $token, 1000, 'user_id') as $user) {
-        $users[$user['user_id']] = $user;
-    }
+    $users = withScope('read:users', fn () => tpl_auth0Pages($base, '/api/v2/users?' . $fields, 'users', $token, 1000, 'user_id'));
     tpl_logInfo(count($users) . ' users found.');
 
-    $roles = [];
     $limit = $config['MAX_OBJECTS'];
     $kinds = tpl_roleKinds($config['ROLES'], ROLE_KINDS);
-    $roleList = isset($kinds['roles']) ? tpl_auth0Pages($base, '/api/v2/roles', 'roles', $token, $limit) : [];
-    foreach ($roleList as $role) {
-        $members = tpl_auth0Checkpoint($base, '/api/v2/roles/' . rawurlencode($role['id']) . '/users', 'users', $token, 1000, 'user_id');
-        grant($roles, $users, $members, tpl_roleString('Role', $role['name'] ?? null, $role['id']));
+    $roleList = isset($kinds['roles']) ? withScope('read:roles', fn () => tpl_auth0Pages($base, '/api/v2/roles', 'roles', $token, $limit)) : [];
+    foreach ($roleList as &$role) {
+        $role['members'] = withScope('read:roles and read:users', fn () => tpl_auth0Checkpoint($base, '/api/v2/roles/' . rawurlencode($role['id']) . '/users', 'users', $token, 1000, 'user_id'));
     }
-    tpl_logInfo(count($roleList) . ' roles collected.');
+    unset($role);
+    if (isset($kinds['roles'])) {
+        tpl_logInfo(count($roleList) . ' roles collected.');
+    }
 
-    if (isset($kinds['organizations'])) {
-        $organizations = tpl_auth0Checkpoint($base, '/api/v2/organizations', 'organizations', $token, $limit);
-        foreach ($organizations as $organization) {
-            $members = tpl_auth0Checkpoint($base, '/api/v2/organizations/' . rawurlencode($organization['id']) . '/members', 'members', $token, 1000, 'user_id');
-            $name = $organization['display_name'] ?? $organization['name'] ?? null;
-            grant($roles, $users, $members, tpl_roleString('Organization', $name, $organization['id']));
+    $organizations = [];
+    if (isset($kinds['organizations']) || isset($kinds['organization_roles'])) {
+        // Member roles need read:organization_member_roles; they are only requested when listed.
+        $memberFields = 'fields=' . rawurlencode(isset($kinds['organization_roles']) ? 'user_id,roles' : 'user_id') . '&include_fields=true';
+        $memberScopes = isset($kinds['organization_roles'])
+            ? 'read:organization_members and read:organization_member_roles (or remove organization_roles from ROLES)'
+            : 'read:organization_members';
+        $organizations = withScope('read:organizations', fn () => tpl_auth0Checkpoint($base, '/api/v2/organizations', 'organizations', $token, $limit));
+        foreach ($organizations as &$organization) {
+            $organization['members'] = withScope($memberScopes, fn () => tpl_auth0Checkpoint($base, '/api/v2/organizations/' . rawurlencode($organization['id']) . '/members?' . $memberFields, 'members', $token, 1000, 'user_id'));
         }
+        unset($organization);
         tpl_logInfo(count($organizations) . ' organizations collected.');
     }
 
-    $feed = tpl_feedOpen();
-    $keys = [];
-    $bytes = 0;
-    foreach ($users as $id => $user) {
-        $key = tpl_feedKey($user[$config['USER_KEY']] ?? null, $keys);
-        $name = mb_strcut(tpl_feedText($user['name'] ?? ($user['email'] ?? $id), 'User name'), 0, 120, 'UTF-8');
-        $state = ($user['blocked'] ?? false) === true ? 'blocked' : 'active';
-        $bytes = tpl_feedAdd($feed, $key, tpl_feedText("$name; $state; id=$id", 'Description'), $roles[$id] ?? []);
-    }
-    if ($users === [] && !$config['ALLOW_EMPTY_FEED']) {
+    $rows = accountRows($users, $roleList, $organizations, $config);
+    if ($rows === [] && !$config['ALLOW_EMPTY_FEED']) {
         throw new TplEmptyFeedException('No accounts found; set ALLOW_EMPTY_FEED if zero accounts is intended.');
     }
-    tpl_logInfo(sprintf('%d accounts staged (%d bytes).', count($users), $bytes));
+    $feed = tpl_feedOpen();
+    $bytes = 0;
+    foreach ($rows as [$key, $description, $roles]) {
+        $bytes = tpl_feedAdd($feed, $key, $description, $roles);
+    }
+    tpl_logInfo(sprintf('%d accounts staged (%d bytes).', count($rows), $bytes));
     return $feed;
 }
 
