@@ -4,15 +4,9 @@ name: Nonconformity and Corrective Action Tracking
 version: 0.1.0
 status: draft
 vendor: Linear
-technology: Linear GraphQL API
+technology:
+  - Linear
 eramba_module: Internal Controls
-vendors:
-  - Linear
-technologies:
-  - Linear
-use_cases:
-  - internal-controls
-  - compliance
 domains:
   - corrective-actions
 frameworks:

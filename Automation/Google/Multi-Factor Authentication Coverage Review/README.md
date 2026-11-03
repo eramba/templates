@@ -4,15 +4,9 @@ name: Multi-Factor Authentication Coverage Review
 version: 0.1.0
 status: draft
 vendor: Google
-technology: Google Workspace Admin SDK Directory
-eramba_module: Internal Controls
-vendors:
-  - Google
-technologies:
+technology:
   - Google Workspace
-use_cases:
-  - internal-controls
-  - compliance
+eramba_module: Internal Controls
 domains:
   - identity-access
 frameworks:

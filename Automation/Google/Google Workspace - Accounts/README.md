@@ -3,15 +3,10 @@ id: google-workspace-account-review
 name: Google Workspace – Accounts
 version: 0.1.1
 status: draft
-technology: Google Workspace
+technology:
+  - Google Workspace
 vendor: Google
 eramba_module: Account Review Feeds
-vendors:
-  - Google
-technologies:
-  - Google Workspace
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

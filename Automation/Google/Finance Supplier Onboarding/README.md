@@ -4,16 +4,10 @@ name: Finance Supplier Onboarding
 version: 0.1.1
 status: tested
 vendor: Google
-technology: Google Sheets API + eramba API v2
-eramba_module: Third Parties
-vendors:
-  - Google
-technologies:
+technology:
   - Google Sheets
   - eramba API
-use_cases:
-  - third-party-risk
-  - online-assessments
+eramba_module: Third Parties
 domains:
   - supplier-management
 trigger: Recurrent (daily)

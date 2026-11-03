@@ -3,17 +3,11 @@ id: intune-windows-encryption
 name: Endpoint Encryption Compliance Review
 version: 0.2.0
 status: draft
-technology: Microsoft Intune and Entra ID
-vendor: Microsoft
-eramba_module: Internal Controls
-vendors:
-  - Microsoft
-technologies:
+technology:
   - Microsoft Intune
   - Microsoft Entra ID
-use_cases:
-  - internal-controls
-  - compliance
+vendor: Microsoft
+eramba_module: Internal Controls
 domains:
   - endpoint-security
   - cryptography

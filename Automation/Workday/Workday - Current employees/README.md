@@ -3,15 +3,10 @@ id: workday-current-employees
 name: Workday – Current employees
 version: 0.1.1
 status: draft
-technology: Workday HCM
+technology:
+  - Workday HCM
 vendor: Workday
 eramba_module: Account Review Feeds
-vendors:
-  - Workday
-technologies:
-  - Workday HCM
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 feed_type: List of current employees

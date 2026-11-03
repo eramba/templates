@@ -5,21 +5,14 @@
       "name": "Anthropic – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "Anthropic"
-      ],
-      "technologies": [
+      "vendor": "Anthropic",
+      "technology": [
         "Anthropic API"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Anthropic",
-      "technology": "Claude Console (Anthropic API)",
       "path": "Automation/Anthropic/Anthropic - Accounts"
     },
     {
@@ -27,21 +20,14 @@
       "name": "Atlassian – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "Atlassian"
-      ],
-      "technologies": [
+      "vendor": "Atlassian",
+      "technology": [
         "Atlassian Cloud"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Atlassian",
-      "technology": "Atlassian Cloud (Jira, Confluence, Jira Service Management…)",
       "path": "Automation/Atlassian/Atlassian - Accounts"
     },
     {
@@ -49,24 +35,17 @@
       "name": "Urgent Incident Jira Issue",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "Atlassian"
-      ],
-      "technologies": [
+      "vendor": "Atlassian",
+      "technology": [
         "Jira Cloud",
         "eramba API"
       ],
-      "use_cases": [
-        "incident-management"
-      ],
+      "eramba_module": "Security Incidents",
       "domains": [
         "incident-response"
       ],
-      "eramba_module": "Security Incidents",
       "trigger": "Notification \"New Item Created\" (Trigger Automation)",
       "guide": "Security Incident Management in eramba",
-      "vendor": "Atlassian",
-      "technology": "Jira Cloud REST API v3 + eramba API v2",
       "path": "Automation/Atlassian/Urgent Incident Jira Issue"
     },
     {
@@ -74,16 +53,11 @@
       "name": "Vulnerability Remediation Tracking",
       "version": "0.1.2",
       "status": "draft",
-      "vendors": [
-        "Atlassian"
-      ],
-      "technologies": [
+      "vendor": "Atlassian",
+      "technology": [
         "Jira Cloud"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "vulnerability-management"
       ],
@@ -96,7 +70,6 @@
         "SCF 2025",
         "EU AI Act 2024/1689"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Vulnerability Remediation Tracking"
       ],
@@ -104,8 +77,6 @@
         "Vulnerability Management > Patch Deployment"
       ],
       "trigger": "Audit planned date",
-      "vendor": "Atlassian",
-      "technology": "Jira Cloud",
       "path": "Automation/Atlassian/Vulnerability Remediation Tracking"
     },
     {
@@ -113,21 +84,14 @@
       "name": "AWS IAM Identity Center – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "AWS"
-      ],
-      "technologies": [
+      "vendor": "AWS",
+      "technology": [
         "AWS IAM Identity Center"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "AWS",
-      "technology": "AWS IAM Identity Center",
       "path": "Automation/AWS/AWS IAM Identity Center - Accounts"
     },
     {
@@ -135,21 +99,14 @@
       "name": "AWS IAM – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "AWS"
-      ],
-      "technologies": [
+      "vendor": "AWS",
+      "technology": [
         "AWS IAM"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "AWS",
-      "technology": "AWS Identity and Access Management",
       "path": "Automation/AWS/AWS IAM - Accounts"
     },
     {
@@ -157,16 +114,11 @@
       "name": "Backup Execution and Restore Test",
       "version": "0.3.2",
       "status": "draft",
-      "vendors": [
-        "AWS"
-      ],
-      "technologies": [
+      "vendor": "AWS",
+      "technology": [
         "AWS Backup"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "business-continuity"
       ],
@@ -180,7 +132,6 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Backup Execution and Restore Test"
       ],
@@ -189,8 +140,6 @@
       ],
       "trigger": "Audit planned date",
       "audit_frequency": "at_least_weekly",
-      "vendor": "AWS",
-      "technology": "AWS Backup",
       "path": "Automation/AWS/Backup Execution and Restore Test"
     },
     {
@@ -198,17 +147,12 @@
       "name": "Capacity Planning Review",
       "version": "0.1.2",
       "status": "draft",
-      "vendors": [
-        "AWS"
-      ],
-      "technologies": [
+      "vendor": "AWS",
+      "technology": [
         "Amazon EC2 Auto Scaling",
         "Amazon CloudWatch"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "capacity-management"
       ],
@@ -217,7 +161,6 @@
         "SOC 2 (TSP 2017)",
         "SCF 2025"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Capacity Planning Review"
       ],
@@ -226,8 +169,6 @@
       ],
       "trigger": "Audit planned date",
       "audit_frequency": "twice monthly (days 1 and 15)",
-      "vendor": "AWS",
-      "technology": "AWS EC2 Auto Scaling and Amazon CloudWatch",
       "path": "Automation/AWS/Capacity Planning Review"
     },
     {
@@ -235,17 +176,12 @@
       "name": "Capacity and Performance Monitoring Review",
       "version": "0.2.1",
       "status": "draft",
-      "vendors": [
-        "AWS"
-      ],
-      "technologies": [
+      "vendor": "AWS",
+      "technology": [
         "Amazon EC2 Auto Scaling",
         "Amazon CloudWatch"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "capacity-management"
       ],
@@ -254,7 +190,6 @@
         "SOC 2 (TSP 2017)",
         "SCF 2025"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Capacity and Performance Monitoring Review"
       ],
@@ -263,8 +198,6 @@
       ],
       "trigger": "Audit planned date",
       "audit_frequency": "twice monthly (days 1 and 15)",
-      "vendor": "AWS",
-      "technology": "AWS EC2 Auto Scaling and Amazon CloudWatch",
       "path": "Automation/AWS/Capacity and Performance Monitoring Review"
     },
     {
@@ -272,18 +205,13 @@
       "name": "Cryptographic Key and Certificate Lifecycle Review",
       "version": "0.2.1",
       "status": "draft",
-      "vendors": [
-        "AWS"
-      ],
-      "technologies": [
+      "vendor": "AWS",
+      "technology": [
         "AWS KMS",
         "AWS Certificate Manager",
         "Elastic Load Balancing"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "cryptography"
       ],
@@ -297,7 +225,6 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Cryptographic Key and Certificate Lifecycle Review"
       ],
@@ -306,8 +233,6 @@
       ],
       "trigger": "Audit planned date",
       "audit_frequency": "quarterly",
-      "vendor": "AWS",
-      "technology": "AWS KMS, ACM and Elastic Load Balancing",
       "path": "Automation/AWS/Cryptographic Key and Certificate Lifecycle Review"
     },
     {
@@ -315,17 +240,12 @@
       "name": "Endpoint Encryption Compliance Review",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "AWS"
-      ],
-      "technologies": [
+      "vendor": "AWS",
+      "technology": [
         "Amazon WorkSpaces",
         "AWS KMS"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "endpoint-security",
         "cryptography"
@@ -339,7 +259,6 @@
         "SCF 2025",
         "NIS2 Article 21"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Endpoint Encryption Compliance Review"
       ],
@@ -347,8 +266,6 @@
         "Endpoint Security > Endpoint Configuration Review"
       ],
       "trigger": "Audit planned date",
-      "vendor": "AWS",
-      "technology": "Amazon WorkSpaces Personal and AWS KMS",
       "path": "Automation/AWS/Endpoint Encryption Compliance Review"
     },
     {
@@ -356,17 +273,12 @@
       "name": "Remote Access Security Review",
       "version": "0.2.1",
       "status": "draft",
-      "vendors": [
-        "AWS"
-      ],
-      "technologies": [
+      "vendor": "AWS",
+      "technology": [
         "AWS Client VPN",
         "AWS Directory Service"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "network-security",
         "identity-access"
@@ -380,7 +292,6 @@
         "SCF 2025",
         "NIS2 Article 21"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Remote Access Security Review"
       ],
@@ -389,97 +300,56 @@
       ],
       "trigger": "Audit planned date",
       "audit_frequency": "monthly",
-      "vendor": "AWS",
-      "technology": "AWS Client VPN and Directory Service",
       "path": "Automation/AWS/Remote Access Security Review"
     },
     {
       "id": "oa-example-add-attachment",
       "name": "Example - Add Attachment",
-      "vendors": [
-        "eramba"
-      ],
-      "technologies": [
+      "vendor": "eramba",
+      "technology": [
         "eramba automation functions"
       ],
-      "use_cases": [
-        "examples",
-        "online-assessments"
-      ],
       "eramba_module": "Online Assessments",
-      "vendor": "eramba",
-      "technology": "eramba automation functions",
       "path": "Automation/eramba/Example - Add Attachment"
     },
     {
       "id": "oa-example-add-comment",
       "name": "Example - Add Comment",
-      "vendors": [
-        "eramba"
-      ],
-      "technologies": [
+      "vendor": "eramba",
+      "technology": [
         "eramba automation functions"
       ],
-      "use_cases": [
-        "examples",
-        "online-assessments"
-      ],
       "eramba_module": "Online Assessments",
-      "vendor": "eramba",
-      "technology": "eramba automation functions",
       "path": "Automation/eramba/Example - Add Comment"
     },
     {
       "id": "oa-example-add-item",
       "name": "Example - Add Item",
-      "vendors": [
-        "eramba"
-      ],
-      "technologies": [
+      "vendor": "eramba",
+      "technology": [
         "eramba automation functions"
       ],
-      "use_cases": [
-        "examples",
-        "online-assessments"
-      ],
       "eramba_module": "Online Assessments",
-      "vendor": "eramba",
-      "technology": "eramba automation functions",
       "path": "Automation/eramba/Example - Add Item"
     },
     {
       "id": "oa-example-edit-item",
       "name": "Example - Edit Item",
-      "vendors": [
-        "eramba"
-      ],
-      "technologies": [
+      "vendor": "eramba",
+      "technology": [
         "eramba automation functions"
       ],
-      "use_cases": [
-        "examples",
-        "online-assessments"
-      ],
       "eramba_module": "Online Assessments",
-      "vendor": "eramba",
-      "technology": "eramba automation functions",
       "path": "Automation/eramba/Example - Edit Item"
     },
     {
       "id": "example-file-write",
       "name": "Example - File Write",
-      "vendors": [
-        "eramba"
-      ],
-      "technologies": [
+      "vendor": "eramba",
+      "technology": [
         "eramba automation functions"
       ],
-      "use_cases": [
-        "examples"
-      ],
       "eramba_module": "Any",
-      "vendor": "eramba",
-      "technology": "PHP file functions in the eramba automation runner",
       "path": "Automation/eramba/Example - File Write"
     },
     {
@@ -487,24 +357,16 @@
       "name": "Missing Online Assessment Launch",
       "version": "0.1.2",
       "status": "tested",
-      "vendors": [
-        "eramba"
-      ],
-      "technologies": [
+      "vendor": "eramba",
+      "technology": [
         "eramba API"
       ],
-      "use_cases": [
-        "third-party-risk",
-        "online-assessments"
-      ],
+      "eramba_module": "Third Parties",
       "domains": [
         "supplier-management"
       ],
-      "eramba_module": "Third Parties",
       "trigger": "Notification \"New Item\" (Trigger Automation)",
       "guide": "Online Assessments - Advanced Configurations (automation 2 of 3)",
-      "vendor": "eramba",
-      "technology": "eramba API v2",
       "path": "Automation/eramba/Missing Online Assessment Launch"
     },
     {
@@ -512,28 +374,18 @@
       "name": "Submitted Assessment Risk Review",
       "version": "0.4.0",
       "status": "tested",
-      "vendors": [
-        "eramba",
-        "OpenAI",
-        "Anthropic"
-      ],
-      "technologies": [
+      "vendor": "eramba",
+      "technology": [
         "OpenAI API",
         "Anthropic API",
         "eramba API"
       ],
-      "use_cases": [
-        "third-party-risk",
-        "online-assessments"
-      ],
+      "eramba_module": "Online Assessments",
       "domains": [
         "supplier-management"
       ],
-      "eramba_module": "Online Assessments",
       "trigger": "Notification \"OA has been submitted\" (Trigger Automation)",
       "guide": "Online Assessments - Advanced Configurations (automation 3 of 3)",
-      "vendor": "eramba",
-      "technology": "OpenAI Chat Completions or Anthropic Messages API (optional) + eramba API v2",
       "path": "Automation/eramba/Submitted Assessment Risk Review"
     },
     {
@@ -541,21 +393,14 @@
       "name": "GitHub – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
+      "vendor": "GitHub",
+      "technology": [
         "GitHub"
       ],
-      "technologies": [
-        "GitHub"
-      ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "GitHub",
-      "technology": "GitHub (GitHub.com, Free to Enterprise Cloud)",
       "path": "Automation/GitHub/GitHub - Accounts"
     },
     {
@@ -563,25 +408,17 @@
       "name": "Finance Supplier Onboarding",
       "version": "0.1.1",
       "status": "tested",
-      "vendors": [
-        "Google"
-      ],
-      "technologies": [
+      "vendor": "Google",
+      "technology": [
         "Google Sheets",
         "eramba API"
       ],
-      "use_cases": [
-        "third-party-risk",
-        "online-assessments"
-      ],
+      "eramba_module": "Third Parties",
       "domains": [
         "supplier-management"
       ],
-      "eramba_module": "Third Parties",
       "trigger": "Recurrent (daily)",
       "guide": "Online Assessments - Advanced Configurations (automation 1 of 3)",
-      "vendor": "Google",
-      "technology": "Google Sheets API + eramba API v2",
       "path": "Automation/Google/Finance Supplier Onboarding"
     },
     {
@@ -589,21 +426,14 @@
       "name": "Google Workspace – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "Google"
-      ],
-      "technologies": [
+      "vendor": "Google",
+      "technology": [
         "Google Workspace"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Google",
-      "technology": "Google Workspace",
       "path": "Automation/Google/Google Workspace - Accounts"
     },
     {
@@ -611,16 +441,11 @@
       "name": "Multi-Factor Authentication Coverage Review",
       "version": "0.1.0",
       "status": "draft",
-      "vendors": [
-        "Google"
-      ],
-      "technologies": [
+      "vendor": "Google",
+      "technology": [
         "Google Workspace"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "identity-access"
       ],
@@ -634,7 +459,6 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -642,8 +466,6 @@
         "Access Management > Authentication"
       ],
       "trigger": "Audit planned date",
-      "vendor": "Google",
-      "technology": "Google Workspace Admin SDK Directory",
       "path": "Automation/Google/Multi-Factor Authentication Coverage Review"
     },
     {
@@ -651,16 +473,11 @@
       "name": "Nonconformity and Corrective Action Tracking",
       "version": "0.1.0",
       "status": "draft",
-      "vendors": [
+      "vendor": "Linear",
+      "technology": [
         "Linear"
       ],
-      "technologies": [
-        "Linear"
-      ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "corrective-actions"
       ],
@@ -675,13 +492,10 @@
         "ISO 37001:2025",
         "ISO 9001:2015"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Nonconformity and Corrective Action Tracking"
       ],
       "trigger": "Audit planned date",
-      "vendor": "Linear",
-      "technology": "Linear GraphQL API",
       "path": "Automation/Linear/Nonconformity and Corrective Action Tracking"
     },
     {
@@ -689,16 +503,11 @@
       "name": "Vulnerability Remediation Tracking",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
+      "vendor": "Linear",
+      "technology": [
         "Linear"
       ],
-      "technologies": [
-        "Linear"
-      ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "vulnerability-management"
       ],
@@ -711,7 +520,6 @@
         "SCF 2025",
         "EU AI Act 2024/1689"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Vulnerability Remediation Tracking"
       ],
@@ -719,8 +527,6 @@
         "Vulnerability Management > Patch Deployment"
       ],
       "trigger": "Audit planned date",
-      "vendor": "Linear",
-      "technology": "Linear GraphQL API",
       "path": "Automation/Linear/Vulnerability Remediation Tracking"
     },
     {
@@ -728,17 +534,12 @@
       "name": "Endpoint Encryption Compliance Review",
       "version": "0.2.0",
       "status": "draft",
-      "vendors": [
-        "Microsoft"
-      ],
-      "technologies": [
+      "vendor": "Microsoft",
+      "technology": [
         "Microsoft Intune",
         "Microsoft Entra ID"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "endpoint-security",
         "cryptography"
@@ -752,7 +553,6 @@
         "SCF 2025",
         "NIS2 Article 21"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Endpoint Encryption Compliance Review"
       ],
@@ -761,8 +561,6 @@
       ],
       "trigger": "Audit planned date",
       "audit_frequency": "quarterly",
-      "vendor": "Microsoft",
-      "technology": "Microsoft Intune and Entra ID",
       "path": "Automation/Microsoft/Endpoint Encryption Compliance Review"
     },
     {
@@ -770,21 +568,14 @@
       "name": "Entra ID – Accounts",
       "version": "0.3.0",
       "status": "tested",
-      "vendors": [
-        "Microsoft"
-      ],
-      "technologies": [
+      "vendor": "Microsoft",
+      "technology": [
         "Microsoft Entra ID"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Microsoft",
-      "technology": "Microsoft Entra ID",
       "path": "Automation/Microsoft/Entra ID - Accounts"
     },
     {
@@ -792,21 +583,14 @@
       "name": "Entra ID – Application permissions",
       "version": "0.2.0",
       "status": "tested",
-      "vendors": [
-        "Microsoft"
-      ],
-      "technologies": [
+      "vendor": "Microsoft",
+      "technology": [
         "Microsoft Entra ID"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Microsoft",
-      "technology": "Microsoft Entra ID",
       "path": "Automation/Microsoft/Entra ID - Application permissions"
     },
     {
@@ -814,21 +598,14 @@
       "name": "Entra ID – Current employees",
       "version": "0.1.2",
       "status": "tested",
-      "vendors": [
-        "Microsoft"
-      ],
-      "technologies": [
+      "vendor": "Microsoft",
+      "technology": [
         "Microsoft Entra ID"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Microsoft",
-      "technology": "Microsoft Entra ID",
       "path": "Automation/Microsoft/Entra ID - Current employees"
     },
     {
@@ -836,17 +613,12 @@
       "name": "Mobile Device Management Review",
       "version": "0.1.0",
       "status": "draft",
-      "vendors": [
-        "Microsoft"
-      ],
-      "technologies": [
+      "vendor": "Microsoft",
+      "technology": [
         "Microsoft Intune",
         "Microsoft Entra ID"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "endpoint-security"
       ],
@@ -855,13 +627,10 @@
         "CIS Controls v8.1",
         "SCF 2025"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Mobile Device Management Review"
       ],
       "trigger": "Audit planned date",
-      "vendor": "Microsoft",
-      "technology": "Intune and Entra ID",
       "path": "Automation/Microsoft/Mobile Device Management Review"
     },
     {
@@ -869,16 +638,11 @@
       "name": "Multi-Factor Authentication Coverage Review",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "Microsoft"
-      ],
-      "technologies": [
+      "vendor": "Microsoft",
+      "technology": [
         "Microsoft Entra ID"
       ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "identity-access"
       ],
@@ -892,7 +656,6 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -901,8 +664,6 @@
       ],
       "trigger": "Audit planned date",
       "audit_frequency": "annually",
-      "vendor": "Microsoft",
-      "technology": "Microsoft Entra ID",
       "path": "Automation/Microsoft/Multi-Factor Authentication Coverage Review"
     },
     {
@@ -910,21 +671,14 @@
       "name": "Auth0 – Accounts",
       "version": "0.2.0",
       "status": "tested",
-      "vendors": [
-        "Okta"
-      ],
-      "technologies": [
+      "vendor": "Okta",
+      "technology": [
         "Auth0"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Okta",
-      "technology": "Auth0",
       "path": "Automation/Okta/Auth0 - Accounts"
     },
     {
@@ -932,21 +686,14 @@
       "name": "Okta – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "Okta"
-      ],
-      "technologies": [
+      "vendor": "Okta",
+      "technology": [
         "Okta Workforce Identity"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Okta",
-      "technology": "Okta Workforce Identity",
       "path": "Automation/Okta/Okta - Accounts"
     },
     {
@@ -954,21 +701,14 @@
       "name": "OpenAI – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "OpenAI"
-      ],
-      "technologies": [
+      "vendor": "OpenAI",
+      "technology": [
         "OpenAI API"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "OpenAI",
-      "technology": "OpenAI API Platform",
       "path": "Automation/OpenAI/OpenAI - Accounts"
     },
     {
@@ -976,21 +716,14 @@
       "name": "Salesforce – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
+      "vendor": "Salesforce",
+      "technology": [
         "Salesforce"
       ],
-      "technologies": [
-        "Salesforce"
-      ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Salesforce",
-      "technology": "Salesforce",
       "path": "Automation/Salesforce/Salesforce - Accounts"
     },
     {
@@ -998,21 +731,14 @@
       "name": "ServiceNow – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
+      "vendor": "ServiceNow",
+      "technology": [
         "ServiceNow"
       ],
-      "technologies": [
-        "ServiceNow"
-      ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "ServiceNow",
-      "technology": "ServiceNow",
       "path": "Automation/ServiceNow/ServiceNow - Accounts"
     },
     {
@@ -1020,21 +746,14 @@
       "name": "Slack – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
+      "vendor": "Slack",
+      "technology": [
         "Slack"
       ],
-      "technologies": [
-        "Slack"
-      ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Slack",
-      "technology": "Slack",
       "path": "Automation/Slack/Slack - Accounts"
     },
     {
@@ -1042,21 +761,14 @@
       "name": "Workday – Current employees",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
-        "Workday"
-      ],
-      "technologies": [
+      "vendor": "Workday",
+      "technology": [
         "Workday HCM"
       ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Workday",
-      "technology": "Workday HCM",
       "path": "Automation/Workday/Workday - Current employees"
     },
     {
@@ -1064,16 +776,11 @@
       "name": "Multi-Factor Authentication Coverage Review",
       "version": "0.1.0",
       "status": "draft",
-      "vendors": [
+      "vendor": "Zoom",
+      "technology": [
         "Zoom"
       ],
-      "technologies": [
-        "Zoom"
-      ],
-      "use_cases": [
-        "internal-controls",
-        "compliance"
-      ],
+      "eramba_module": "Internal Controls",
       "domains": [
         "identity-access"
       ],
@@ -1087,7 +794,6 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "eramba_module": "Internal Controls",
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -1095,8 +801,6 @@
         "Access Management > Authentication"
       ],
       "trigger": "Audit planned date",
-      "vendor": "Zoom",
-      "technology": "Zoom account settings and users REST API",
       "path": "Automation/Zoom/Multi-Factor Authentication Coverage Review"
     },
     {
@@ -1104,21 +808,14 @@
       "name": "Zoom – Accounts",
       "version": "0.1.1",
       "status": "draft",
-      "vendors": [
+      "vendor": "Zoom",
+      "technology": [
         "Zoom"
       ],
-      "technologies": [
-        "Zoom"
-      ],
-      "use_cases": [
-        "account-reviews"
-      ],
+      "eramba_module": "Account Review Feeds",
       "domains": [
         "identity-access"
       ],
-      "eramba_module": "Account Review Feeds",
-      "vendor": "Zoom",
-      "technology": "Zoom Workplace",
       "path": "Automation/Zoom/Zoom - Accounts"
     }
   ]

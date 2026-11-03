@@ -3,15 +3,10 @@ id: aws-identity-center-account-review
 name: AWS IAM Identity Center – Accounts
 version: 0.1.1
 status: draft
-technology: AWS IAM Identity Center
+technology:
+  - AWS IAM Identity Center
 vendor: AWS
 eramba_module: Account Review Feeds
-vendors:
-  - AWS
-technologies:
-  - AWS IAM Identity Center
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

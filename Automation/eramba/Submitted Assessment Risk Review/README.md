@@ -4,19 +4,11 @@ name: Submitted Assessment Risk Review
 version: 0.4.0
 status: tested
 vendor: eramba
-technology: OpenAI Chat Completions or Anthropic Messages API (optional) + eramba API v2
-eramba_module: Online Assessments
-vendors:
-  - eramba
-  - OpenAI
-  - Anthropic
-technologies:
+technology:
   - OpenAI API
   - Anthropic API
   - eramba API
-use_cases:
-  - third-party-risk
-  - online-assessments
+eramba_module: Online Assessments
 domains:
   - supplier-management
 trigger: Notification "OA has been submitted" (Trigger Automation)

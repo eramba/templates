@@ -3,15 +3,10 @@ id: entra-app-permissions-review
 name: Entra ID – Application permissions
 version: 0.2.0
 status: tested
-technology: Microsoft Entra ID
+technology:
+  - Microsoft Entra ID
 vendor: Microsoft
 eramba_module: Account Review Feeds
-vendors:
-  - Microsoft
-technologies:
-  - Microsoft Entra ID
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

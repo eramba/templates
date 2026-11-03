@@ -3,15 +3,10 @@ id: github-account-review
 name: GitHub – Accounts
 version: 0.1.1
 status: draft
-technology: GitHub (GitHub.com, Free to Enterprise Cloud)
+technology:
+  - GitHub
 vendor: GitHub
 eramba_module: Account Review Feeds
-vendors:
-  - GitHub
-technologies:
-  - GitHub
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

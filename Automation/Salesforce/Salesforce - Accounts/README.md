@@ -3,15 +3,10 @@ id: salesforce-account-review
 name: Salesforce – Accounts
 version: 0.1.1
 status: draft
-technology: Salesforce
+technology:
+  - Salesforce
 vendor: Salesforce
 eramba_module: Account Review Feeds
-vendors:
-  - Salesforce
-technologies:
-  - Salesforce
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

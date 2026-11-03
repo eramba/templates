@@ -3,17 +3,11 @@ id: aws-client-vpn-remote-access
 name: Remote Access Security Review
 version: 0.2.1
 status: draft
-technology: AWS Client VPN and Directory Service
-vendor: AWS
-eramba_module: Internal Controls
-vendors:
-  - AWS
-technologies:
+technology:
   - AWS Client VPN
   - AWS Directory Service
-use_cases:
-  - internal-controls
-  - compliance
+vendor: AWS
+eramba_module: Internal Controls
 domains:
   - network-security
   - identity-access

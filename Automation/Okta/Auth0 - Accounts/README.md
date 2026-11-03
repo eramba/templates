@@ -3,15 +3,10 @@ id: auth0-account-review
 name: Auth0 – Accounts
 version: 0.2.0
 status: tested
-technology: Auth0
+technology:
+  - Auth0
 vendor: Okta
 eramba_module: Account Review Feeds
-vendors:
-  - Okta
-technologies:
-  - Auth0
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

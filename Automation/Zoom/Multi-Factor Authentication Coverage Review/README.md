@@ -4,15 +4,9 @@ name: Multi-Factor Authentication Coverage Review
 version: 0.1.0
 status: draft
 vendor: Zoom
-technology: Zoom account settings and users REST API
+technology:
+  - Zoom
 eramba_module: Internal Controls
-vendors:
-  - Zoom
-technologies:
-  - Zoom
-use_cases:
-  - internal-controls
-  - compliance
 domains:
   - identity-access
 frameworks:

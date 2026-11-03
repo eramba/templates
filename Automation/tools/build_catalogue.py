@@ -12,7 +12,7 @@ Usage:
   python3 Automation/tools/build_catalogue.py          # validate and write
   python3 Automation/tools/build_catalogue.py --check  # validate; fail if outputs are stale
 
-Requires PyYAML (pip install pyyaml).
+Requires PyYAML (pip3 install pyyaml).
 """
 from __future__ import annotations
 
@@ -30,13 +30,13 @@ VOCABULARY = AUTOMATION / "metadata-vocabulary.yml"
 MAPPING = REPO / "GRC Templates" / "LLM - GRC Templates" / "Controls" / "mapping_controls_to_requirements.csv"
 OUT_JSON = AUTOMATION / "catalogue.json"
 OUT_MD = AUTOMATION / "CATALOGUE.md"
+NOT_INDEXED = ("_TEMPLATE", "_shared", "docs", "skills", "tools")
 
-REQUIRED = ["id", "name", "vendor", "technology", "eramba_module", "vendors", "technologies", "use_cases"]
-LISTS = ["vendors", "technologies", "use_cases", "domains", "frameworks", "controls", "policies"]
+REQUIRED = ["id", "name", "vendor", "technology", "eramba_module"]
+LISTS = ["technology", "domains", "frameworks", "controls", "policies"]
 EXPORTED = [
-    "id", "name", "version", "status", "vendors", "technologies", "use_cases", "domains",
-    "frameworks", "eramba_module", "controls", "policies", "trigger", "audit_frequency", "guide",
-    "vendor", "technology",
+    "id", "name", "version", "status", "vendor", "technology", "eramba_module", "domains",
+    "frameworks", "controls", "policies", "trigger", "audit_frequency", "guide",
 ]
 
 
@@ -55,29 +55,26 @@ def front_matter(path: Path) -> dict | None:
 
 def control_frameworks() -> dict[str, list[str]]:
     with MAPPING.open(encoding="utf-8", newline="") as fh:
-        rows = csv.DictReader(fh)
         return {
             r["Control Title"]: [k for k, v in r.items() if k != "Control Title" and (v or "").strip() not in ("", "-", "—")]
-            for r in rows
+            for r in csv.DictReader(fh)
         }
 
 
-def collect() -> tuple[list[dict], list[str]]:
-    vocab = yaml.safe_load(VOCABULARY.read_text(encoding="utf-8"))
+def collect(vocab: dict) -> tuple[list[dict], list[str]]:
+    tech_vendor = vocab["technologies"]
     allowed = {
-        "use_cases": set(vocab["use_cases"]),
+        "technology": set(tech_vendor),
         "domains": set(vocab["domains"]),
         "frameworks": set(vocab["frameworks"]),
-        "vendors": set(vocab["vendors"]),
-        "technologies": set(vocab["technologies"]),
     }
-    tech_vendor = vocab["technologies"]
     mapping = control_frameworks()
     entries, errors, seen = [], [], {}
 
     for readme in sorted(AUTOMATION.rglob("README.md")):
         rel = readme.relative_to(REPO)
-        if readme.relative_to(AUTOMATION).parts[0] in ("_TEMPLATE", "_shared", "docs", "skills", "tools"):
+        folder = readme.parent.relative_to(AUTOMATION).parts
+        if folder and folder[0] in NOT_INDEXED:
             continue
         try:
             meta = front_matter(readme)
@@ -85,7 +82,7 @@ def collect() -> tuple[list[dict], list[str]]:
             errors.append(f"{rel}: {exc}")
             continue
         if meta is None:
-            continue  # section README, not an automation
+            continue  # vendor guide, not an automation
 
         def err(msg: str) -> None:
             errors.append(f"{rel}: {msg}")
@@ -100,24 +97,25 @@ def collect() -> tuple[list[dict], list[str]]:
             for value in meta.get(key) or []:
                 if value not in values:
                     err(f"`{key}` value {value!r} is not in metadata-vocabulary.yml")
+        if meta.get("vendor") not in vocab["vendors"]:
+            err(f"`vendor` {meta.get('vendor')!r} is not in metadata-vocabulary.yml")
+        if meta.get("eramba_module") not in vocab["eramba_modules"]:
+            err(f"`eramba_module` {meta.get('eramba_module')!r} is not in metadata-vocabulary.yml")
 
-        tech_vendors = {tech_vendor[t] for t in meta.get("technologies") or [] if t in tech_vendor}
-        listed = set(meta.get("vendors") or [])
-        if not (tech_vendors - {"eramba"} <= listed <= tech_vendors) or not listed:
-            err(f"`vendors` must be the vendors of its technologies ({sorted(tech_vendors)}); eramba is optional")
-
-        folder = readme.parent.relative_to(AUTOMATION).parts
-        expected_folder = (str(meta.get("vendor")), str(meta.get("name", "")).replace("\u2013", "-"))
-        if folder != expected_folder or folder[0] not in listed:
-            err(f"must live in Automation/{expected_folder[0]}/{expected_folder[1]}/ (folders: `vendor`, then `name` with dashes for en dashes), and `vendor` must be listed in `vendors`")
+        tech_vendors = {tech_vendor[t] for t in meta.get("technology") or [] if t in tech_vendor}
+        if tech_vendors and meta.get("vendor") not in tech_vendors:
+            err(f"`vendor` must be the vendor of one of its technologies: {sorted(tech_vendors)}")
+        expected_folder = (str(meta.get("vendor")), str(meta.get("name", "")).replace("–", "-"))
+        if folder != expected_folder:
+            err(f"must live in Automation/{expected_folder[0]}/{expected_folder[1]}/ (`vendor`, then `name` with - for –)")
 
         if meta.get("id") in seen:
             err(f"duplicate id {meta['id']!r} (also in {seen[meta['id']]})")
         seen[meta.get("id")] = rel
 
-        if "internal-controls" in (meta.get("use_cases") or []):
+        if meta.get("eramba_module") == "Internal Controls":
             if not meta.get("controls"):
-                err("internal-controls automations need `controls`")
+                err("internal control automations need `controls`")
             expected: list[str] = []
             for control in meta.get("controls") or []:
                 if control not in mapping:
@@ -126,14 +124,12 @@ def collect() -> tuple[list[dict], list[str]]:
                 expected += [f for f in mapping[control] if f not in expected]
             if set(expected) != set(meta.get("frameworks") or []):
                 err(f"`frameworks` must match {MAPPING.name}: {expected}")
-            if expected and "compliance" not in meta["use_cases"]:
-                err("controls mapped to frameworks are also `compliance`")
 
         entry = {k: meta[k] for k in EXPORTED if meta.get(k) not in (None, [], "")}
         entry["path"] = readme.parent.relative_to(REPO).as_posix()
         entries.append(entry)
 
-    entries.sort(key=lambda e: (e["vendors"][0].lower() if e.get("vendors") else "", e["name"], e["id"]))
+    entries.sort(key=lambda e: (str(e.get("vendor", "")).lower(), e.get("name", ""), e.get("id", "")))
     return entries, errors
 
 
@@ -142,58 +138,59 @@ def link(entry: dict) -> str:
     return f"[{entry['name']}]({quote(rel)}/)"
 
 
-def render_md(entries: list[dict]) -> str:
-    vocab = yaml.safe_load(VOCABULARY.read_text(encoding="utf-8"))
+def status(entry: dict) -> str:
+    return " ".join(str(entry[k]) for k in ("version", "status") if entry.get(k)) or "–"
+
+
+def render_md(entries: list[dict], vocab: dict) -> str:
     tech_vendor = vocab["technologies"]
     out = [
-        "# Automation catalogue by vendor and technology",
+        "# Automation catalogue",
         "",
         "<!-- Generated by Automation/tools/build_catalogue.py from the README front matter. Do not edit by hand. -->",
         "",
-        "Every automation, grouped by the vendor and technology it connects to. An automation that uses several "
-        "vendors appears under each one, next to the technology it uses from that vendor. The same data is in [catalogue.json](catalogue.json); "
-        "the fields are described in [METADATA.md](METADATA.md).",
+        "Every automation, grouped by the vendor and technology it connects to, by eramba section, and by framework. "
+        "An automation that uses technologies of several vendors appears under each one. The same data is in "
+        "[catalogue.json](catalogue.json); the fields are described in [METADATA.md](METADATA.md).",
         "",
         "## By vendor and technology",
         "",
     ]
-    vendors = sorted({v for e in entries for v in e.get("vendors", [])}, key=str.lower)
+    vendors = sorted({tech_vendor[t] for e in entries for t in e["technology"]}, key=str.lower)
     for vendor in vendors:
-        out += [f"### {vendor}", "", "| Technology | Automation | Use cases | eramba module | Status |", "|---|---|---|---|---|"]
-        rows = []
-        for e in entries:
-            if vendor not in e.get("vendors", []):
-                continue
-            for tech in e["technologies"]:
-                if tech_vendor[tech] == vendor:
-                    rows.append((tech, e))
+        out += [f"### {vendor}", "", "| Technology | Automation | eramba section | Status |", "|---|---|---|---|"]
+        rows = [(t, e) for e in entries for t in e["technology"] if tech_vendor[t] == vendor]
         for tech, e in sorted(rows, key=lambda r: (r[0].lower(), r[1]["name"])):
-            status = " ".join(str(e[k]) for k in ("version", "status") if e.get(k)) or "–"
-            out.append(f"| {tech} | {link(e)} | {', '.join(e['use_cases'])} | {e['eramba_module']} | {status} |")
+            out.append(f"| {tech} | {link(e)} | {e['eramba_module']} | {status(e)} |")
         out.append("")
 
-    out += ["## By use case", ""]
-    for use_case, description in vocab["use_cases"].items():
-        matches = [e for e in entries if use_case in e["use_cases"]]
-        out += [f"### {use_case}", "", description, ""]
+    out += ["## By eramba section", ""]
+    for module, description in vocab["eramba_modules"].items():
+        matches = sorted((e for e in entries if e["eramba_module"] == module), key=lambda e: (e["name"], e["id"]))
         if not matches:
-            out += ["No automations yet.", ""]
             continue
-        for e in sorted(matches, key=lambda e: (e["name"], e["id"])):
-            out.append(f"- {link(e)} – {', '.join(e['technologies'])}")
+        out += [f"### {module}", "", description, ""]
+        out += [f"- {link(e)} – {', '.join(e['technology'])}" for e in matches]
         out.append("")
+
+    out += ["## By framework", "", "Internal control automations whose control maps to each framework.", ""]
+    for framework in vocab["frameworks"]:
+        matches = sorted((e for e in entries if framework in e.get("frameworks", [])), key=lambda e: (e["name"], e["id"]))
+        if matches:
+            out += [f"### {framework}", ""] + [f"- {link(e)} – {', '.join(e['technology'])}" for e in matches] + [""]
     return "\n".join(out)
 
 
 def main() -> int:
     check = "--check" in sys.argv[1:]
-    entries, errors = collect()
+    vocab = yaml.safe_load(VOCABULARY.read_text(encoding="utf-8"))
+    entries, errors = collect(vocab)
     if errors:
         print("Metadata errors:", *errors, sep="\n  ", file=sys.stderr)
         return 1
     outputs = {
         OUT_JSON: json.dumps({"automations": entries}, indent=2, ensure_ascii=False) + "\n",
-        OUT_MD: render_md(entries),
+        OUT_MD: render_md(entries, vocab),
     }
     stale = [p for p, text in outputs.items() if not p.exists() or p.read_text(encoding="utf-8") != text]
     if check:

@@ -3,15 +3,10 @@ id: zoom-account-review
 name: Zoom – Accounts
 version: 0.1.1
 status: draft
-technology: Zoom Workplace
+technology:
+  - Zoom
 vendor: Zoom
 eramba_module: Account Review Feeds
-vendors:
-  - Zoom
-technologies:
-  - Zoom
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

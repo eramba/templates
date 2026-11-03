@@ -3,15 +3,10 @@ id: openai-account-review
 name: OpenAI – Accounts
 version: 0.1.1
 status: draft
-technology: OpenAI API Platform
+technology:
+  - OpenAI API
 vendor: OpenAI
 eramba_module: Account Review Feeds
-vendors:
-  - OpenAI
-technologies:
-  - OpenAI API
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

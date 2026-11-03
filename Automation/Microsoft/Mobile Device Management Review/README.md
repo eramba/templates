@@ -4,16 +4,10 @@ name: Mobile Device Management Review
 version: 0.1.0
 status: draft
 vendor: Microsoft
-technology: Intune and Entra ID
-eramba_module: Internal Controls
-vendors:
-  - Microsoft
-technologies:
+technology:
   - Microsoft Intune
   - Microsoft Entra ID
-use_cases:
-  - internal-controls
-  - compliance
+eramba_module: Internal Controls
 domains:
   - endpoint-security
 frameworks:

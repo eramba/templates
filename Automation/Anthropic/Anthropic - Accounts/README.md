@@ -3,15 +3,10 @@ id: anthropic-account-review
 name: Anthropic – Accounts
 version: 0.1.1
 status: draft
-technology: Claude Console (Anthropic API)
+technology:
+  - Anthropic API
 vendor: Anthropic
 eramba_module: Account Review Feeds
-vendors:
-  - Anthropic
-technologies:
-  - Anthropic API
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

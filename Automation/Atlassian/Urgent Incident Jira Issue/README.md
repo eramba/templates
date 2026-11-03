@@ -4,15 +4,10 @@ name: Urgent Incident Jira Issue
 version: 0.1.1
 status: draft
 vendor: Atlassian
-technology: Jira Cloud REST API v3 + eramba API v2
-eramba_module: Security Incidents
-vendors:
-  - Atlassian
-technologies:
+technology:
   - Jira Cloud
   - eramba API
-use_cases:
-  - incident-management
+eramba_module: Security Incidents
 domains:
   - incident-response
 trigger: Notification "New Item Created" (Trigger Automation)

@@ -3,15 +3,10 @@ id: atlassian-cloud-account-review
 name: Atlassian – Accounts
 version: 0.1.1
 status: draft
-technology: Atlassian Cloud (Jira, Confluence, Jira Service Management…)
+technology:
+  - Atlassian Cloud
 vendor: Atlassian
 eramba_module: Account Review Feeds
-vendors:
-  - Atlassian
-technologies:
-  - Atlassian Cloud
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

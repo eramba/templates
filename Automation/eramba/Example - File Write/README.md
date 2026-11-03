@@ -2,14 +2,9 @@
 id: example-file-write
 name: Example - File Write
 vendor: eramba
-technology: PHP file functions in the eramba automation runner
-eramba_module: Any
-vendors:
-  - eramba
-technologies:
+technology:
   - eramba automation functions
-use_cases:
-  - examples
+eramba_module: Any
 ---
 # File Write
 

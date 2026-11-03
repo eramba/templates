@@ -2,14 +2,15 @@
 # Automation/tools/build_catalogue.py rejects values that are not listed here.
 # Add a value here first, then use it in a README. See METADATA.md.
 
-use_cases:
-  account-reviews: Feeds accounts or employees into eramba Account Reviews.
-  internal-controls: Tests an internal control and records the audit result in eramba.
-  compliance: Produces audit evidence for a control mapped to compliance frameworks.
-  third-party-risk: Onboards, assesses or rates suppliers and other third parties.
-  online-assessments: Creates, launches or reviews eramba Online Assessments.
-  incident-management: Handles security incidents registered in eramba.
-  examples: Minimal reference example of an eramba automation function.
+# eramba section where the automation runs. It also says what the
+# automation is for, so there is no separate use-case field.
+eramba_modules:
+  Account Review Feeds: Sends accounts, permissions or employees to eramba Account Reviews.
+  Internal Controls: Tests an internal control and records the audit result.
+  Third Parties: Onboards suppliers and launches their assessments.
+  Online Assessments: Creates, edits or reviews Online Assessments.
+  Security Incidents: Handles security incidents.
+  Any: Works in any section (generic function examples).
 
 domains:
   identity-access: Authentication, MFA and user or privileged account management.
@@ -25,7 +26,8 @@ domains:
 
 # Framework names as they appear in the header of
 # GRC Templates/LLM - GRC Templates/Controls/mapping_controls_to_requirements.csv.
-# For internal-control automations, `frameworks` must match that mapping.
+# For internal-control automations, `frameworks` must match that mapping;
+# an automation with frameworks is the one to look for when indexing compliance.
 frameworks:
   - PCI DSS v4.0.1
   - ISO 27001:2022
@@ -64,9 +66,9 @@ vendors:
   - Workday
   - Zoom
 
-# Technology (product or API) -> vendor. `technologies` in a README must use
-# these names, and `vendors` must be the vendors of its technologies
-# (eramba may be left out when another vendor is present).
+# Technology (product or API) -> vendor. `technology` in a README is a list of
+# these names. The catalogue groups each automation under the vendor of each
+# of its technologies; `vendor` (the folder) must be one of them.
 technologies:
   Amazon CloudWatch: AWS
   Amazon EC2 Auto Scaling: AWS

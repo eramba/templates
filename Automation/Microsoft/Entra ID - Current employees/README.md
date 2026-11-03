@@ -3,15 +3,10 @@ id: entra-current-employees
 name: Entra ID – Current employees
 version: 0.1.2
 status: tested
-technology: Microsoft Entra ID
+technology:
+  - Microsoft Entra ID
 vendor: Microsoft
 eramba_module: Account Review Feeds
-vendors:
-  - Microsoft
-technologies:
-  - Microsoft Entra ID
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 feed_type: List of current employees

@@ -4,16 +4,10 @@ name: Endpoint Encryption Compliance Review
 version: 0.1.1
 status: draft
 vendor: AWS
-technology: Amazon WorkSpaces Personal and AWS KMS
-eramba_module: Internal Controls
-vendors:
-  - AWS
-technologies:
+technology:
   - Amazon WorkSpaces
   - AWS KMS
-use_cases:
-  - internal-controls
-  - compliance
+eramba_module: Internal Controls
 domains:
   - endpoint-security
   - cryptography

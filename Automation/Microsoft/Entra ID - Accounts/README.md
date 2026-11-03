@@ -3,15 +3,10 @@ id: entra-account-review
 name: Entra ID – Accounts
 version: 0.3.0
 status: tested
-technology: Microsoft Entra ID
+technology:
+  - Microsoft Entra ID
 vendor: Microsoft
 eramba_module: Account Review Feeds
-vendors:
-  - Microsoft
-technologies:
-  - Microsoft Entra ID
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

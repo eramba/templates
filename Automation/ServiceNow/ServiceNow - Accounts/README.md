@@ -3,15 +3,10 @@ id: servicenow-account-review
 name: ServiceNow – Accounts
 version: 0.1.1
 status: draft
-technology: ServiceNow
+technology:
+  - ServiceNow
 vendor: ServiceNow
 eramba_module: Account Review Feeds
-vendors:
-  - ServiceNow
-technologies:
-  - ServiceNow
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

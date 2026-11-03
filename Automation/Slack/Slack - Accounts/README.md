@@ -3,15 +3,10 @@ id: slack-account-review
 name: Slack – Accounts
 version: 0.1.1
 status: draft
-technology: Slack
+technology:
+  - Slack
 vendor: Slack
 eramba_module: Account Review Feeds
-vendors:
-  - Slack
-technologies:
-  - Slack
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

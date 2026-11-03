@@ -3,18 +3,12 @@ id: aws-key-certificate-lifecycle
 name: Cryptographic Key and Certificate Lifecycle Review
 version: 0.2.1
 status: draft
-technology: AWS KMS, ACM and Elastic Load Balancing
-vendor: AWS
-eramba_module: Internal Controls
-vendors:
-  - AWS
-technologies:
+technology:
   - AWS KMS
   - AWS Certificate Manager
   - Elastic Load Balancing
-use_cases:
-  - internal-controls
-  - compliance
+vendor: AWS
+eramba_module: Internal Controls
 domains:
   - cryptography
 frameworks:

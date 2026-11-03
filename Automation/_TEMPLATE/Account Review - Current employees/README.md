@@ -3,15 +3,10 @@ id: <source>-current-employees
 name: <Provider> – Current employees
 version: 0.1.0
 status: draft
-technology: <Source>
+technology:
+  - <Product>
 vendor: <Vendor>
 eramba_module: Account Review Feeds
-vendors:
-  - <Vendor>
-technologies:
-  - <Product>
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 feed_type: List of current employees

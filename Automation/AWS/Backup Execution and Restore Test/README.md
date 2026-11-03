@@ -4,16 +4,10 @@ id: aws-backup-jobs-restore-tests
 name: Backup Execution and Restore Test
 version: 0.3.2
 status: draft                            # draft | tested | stable | deprecated
-technology: AWS Backup
+technology:
+  - AWS Backup
 vendor: AWS
 eramba_module: Internal Controls
-vendors:
-  - AWS
-technologies:
-  - AWS Backup
-use_cases:
-  - internal-controls
-  - compliance
 domains:
   - business-continuity
 frameworks:

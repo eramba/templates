@@ -15,15 +15,9 @@ name: Exact Control Title
 version: 0.1.0
 status: draft
 vendor: Vendor
-technology: Specific services
-eramba_module: Internal Controls
-vendors:
-  - Vendor
-technologies:
+technology:
   - Specific service
-use_cases:
-  - internal-controls
-  - compliance
+eramba_module: Internal Controls
 domains: []
 frameworks: []
 trigger: Audit planned date
@@ -38,7 +32,7 @@ last_tested: null
 ---
 ```
 
-Set the timeout to your implementation's requirement within the destination runner's limit. Populate secrets, variables and dependencies to match the code. Add policy mappings only if supplied. Use the exact control title as the document heading and identify technology separately. Fill `vendors`, `technologies`, `use_cases`, `domains` and `frameworks` with values from the [metadata vocabulary](../../metadata-vocabulary.yml), take `frameworks` from the control mapping, and rebuild the catalogue as described in [Automation metadata](../../METADATA.md).
+Set the timeout to your implementation's requirement within the destination runner's limit. Populate secrets, variables and dependencies to match the code. Add policy mappings only if supplied. Use the exact control title as the document heading and identify technology separately. Fill `vendor`, `technology`, `domains` and `frameworks` with values from the [metadata vocabulary](../../metadata-vocabulary.yml), take `frameworks` from the control mapping, and rebuild the catalogue as described in [Automation metadata](../../METADATA.md).
 
 ## 1. Controls and policies
 

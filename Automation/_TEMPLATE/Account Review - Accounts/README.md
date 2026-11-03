@@ -3,15 +3,10 @@ id: <product>-account-review
 name: <Provider> – Accounts
 version: 0.1.0
 status: draft
-technology: <Product>
+technology:
+  - <Product>
 vendor: <Vendor>
 eramba_module: Account Review Feeds
-vendors:
-  - <Vendor>
-technologies:
-  - <Product>
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

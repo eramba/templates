@@ -3,17 +3,11 @@ id: aws-capacity-performance-monitoring
 name: Capacity and Performance Monitoring Review
 version: 0.2.1
 status: draft
-technology: AWS EC2 Auto Scaling and Amazon CloudWatch
-vendor: AWS
-eramba_module: Internal Controls
-vendors:
-  - AWS
-technologies:
+technology:
   - Amazon EC2 Auto Scaling
   - Amazon CloudWatch
-use_cases:
-  - internal-controls
-  - compliance
+vendor: AWS
+eramba_module: Internal Controls
 domains:
   - capacity-management
 frameworks:

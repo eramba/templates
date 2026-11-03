@@ -3,15 +3,10 @@ id: okta-account-review
 name: Okta – Accounts
 version: 0.1.1
 status: draft
-technology: Okta Workforce Identity
+technology:
+  - Okta Workforce Identity
 vendor: Okta
 eramba_module: Account Review Feeds
-vendors:
-  - Okta
-technologies:
-  - Okta Workforce Identity
-use_cases:
-  - account-reviews
 domains:
   - identity-access
 secrets:

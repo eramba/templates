@@ -2,15 +2,9 @@
 id: oa-example-add-item
 name: Example - Add Item
 vendor: eramba
-technology: eramba automation functions
-eramba_module: Online Assessments
-vendors:
-  - eramba
-technologies:
+technology:
   - eramba automation functions
-use_cases:
-  - examples
-  - online-assessments
+eramba_module: Online Assessments
 ---
 # Add Item
 

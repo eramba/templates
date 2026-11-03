@@ -28,7 +28,7 @@ Provide usable reference defaults where the definition permits them. Identify wh
 
 Save a library integration as `<Vendor>/<Exact Control Title>/run.php` with a sibling `README.md`. Use `AWS` or `Microsoft` for the vendor; identify services such as Entra ID or Intune in the README. If several implementations share the same vendor and control, add a service subfolder and update relative links.
 
-Keep a stable machine identifier for logs and evidence filenames; it need not equal the folder name. Keep code and README versions synchronized. New integrations remain `draft` until real installation validation. Add the integration to the catalogue with its actual status. Fill the indexing fields of the README front matter (`vendors`, `technologies`, `use_cases`, `domains`, `frameworks`) as described in [Automation metadata](../METADATA.md), then run `python3 Automation/tools/build_catalogue.py` to validate them and regenerate the [vendor and technology catalogue](../CATALOGUE.md).
+Keep a stable machine identifier for logs and evidence filenames; it need not equal the folder name. Keep code and README versions synchronized. New integrations remain `draft` until real installation validation. Add the integration to the catalogue with its actual status. Fill the indexing fields of the README front matter (`vendor`, `technology`, `eramba_module`, `domains`, `frameworks`) as described in [Automation metadata](../METADATA.md), then run `python3 Automation/tools/build_catalogue.py` to validate them and regenerate the [vendor and technology catalogue](../CATALOGUE.md).
 
 ## Dependencies and security
 

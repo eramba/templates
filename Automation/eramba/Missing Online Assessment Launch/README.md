@@ -4,15 +4,9 @@ name: Missing Online Assessment Launch
 version: 0.1.2
 status: tested
 vendor: eramba
-technology: eramba API v2
-eramba_module: Third Parties
-vendors:
-  - eramba
-technologies:
+technology:
   - eramba API
-use_cases:
-  - third-party-risk
-  - online-assessments
+eramba_module: Third Parties
 domains:
   - supplier-management
 trigger: Notification "New Item" (Trigger Automation)

@@ -3,16 +3,10 @@ id: entra-mfa-coverage
 name: Multi-Factor Authentication Coverage Review
 version: 0.1.1
 status: draft
-technology: Microsoft Entra ID
+technology:
+  - Microsoft Entra ID
 vendor: Microsoft
 eramba_module: Internal Controls
-vendors:
-  - Microsoft
-technologies:
-  - Microsoft Entra ID
-use_cases:
-  - internal-controls
-  - compliance
 domains:
   - identity-access
 frameworks:
