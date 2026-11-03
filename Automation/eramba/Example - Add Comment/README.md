@@ -1,6 +1,6 @@
 ---
 id: oa-example-add-comment
-name: Add Comment
+name: Example - Add Comment
 vendor: eramba
 technology: eramba automation functions
 eramba_module: Online Assessments

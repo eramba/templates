@@ -1,6 +1,6 @@
 ---
 id: oa-example-add-attachment
-name: Add Attachment
+name: Example - Add Attachment
 vendor: eramba
 technology: eramba automation functions
 eramba_module: Online Assessments

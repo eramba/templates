@@ -77,7 +77,7 @@ def collect() -> tuple[list[dict], list[str]]:
 
     for readme in sorted(AUTOMATION.rglob("README.md")):
         rel = readme.relative_to(REPO)
-        if readme.relative_to(AUTOMATION).parts[0] in ("_TEMPLATE", "docs", "skills", "tools"):
+        if readme.relative_to(AUTOMATION).parts[0] in ("_TEMPLATE", "_shared", "docs", "skills", "tools"):
             continue
         try:
             meta = front_matter(readme)
@@ -107,8 +107,9 @@ def collect() -> tuple[list[dict], list[str]]:
             err(f"`vendors` must be the vendors of its technologies ({sorted(tech_vendors)}); eramba is optional")
 
         folder = readme.parent.relative_to(AUTOMATION).parts
-        if len(folder) != 2 or folder[0] != meta.get("vendor") or folder[0] not in listed:
-            err("must live in Automation/<vendor>/<name>/, where <vendor> is its `vendor` and is listed in `vendors`")
+        expected_folder = (str(meta.get("vendor")), str(meta.get("name", "")).replace("\u2013", "-"))
+        if folder != expected_folder or folder[0] not in listed:
+            err(f"must live in Automation/{expected_folder[0]}/{expected_folder[1]}/ (folders: `vendor`, then `name` with dashes for en dashes), and `vendor` must be listed in `vendors`")
 
         if meta.get("id") in seen:
             err(f"duplicate id {meta['id']!r} (also in {seen[meta['id']]})")

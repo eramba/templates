@@ -10,12 +10,14 @@ Every automation, grouped by the vendor and technology it connects to. An automa
 
 | Technology | Automation | Use cases | eramba module | Status |
 |---|---|---|---|---|
+| Anthropic API | [Anthropic – Accounts](Anthropic/Anthropic%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
 | Anthropic API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | third-party-risk, online-assessments | Online Assessments | 0.4.0 tested |
 
 ### Atlassian
 
 | Technology | Automation | Use cases | eramba module | Status |
 |---|---|---|---|---|
+| Atlassian Cloud | [Atlassian – Accounts](Atlassian/Atlassian%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
 | Jira Cloud | [Urgent Incident Jira Issue](Atlassian/Urgent%20Incident%20Jira%20Issue/) | incident-management | Security Incidents | 0.1.1 draft |
 | Jira Cloud | [Vulnerability Remediation Tracking](Atlassian/Vulnerability%20Remediation%20Tracking/) | internal-controls, compliance | Internal Controls | 0.1.2 draft |
 
@@ -32,6 +34,8 @@ Every automation, grouped by the vendor and technology it connects to. An automa
 | AWS Certificate Manager | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | internal-controls, compliance | Internal Controls | 0.2.1 draft |
 | AWS Client VPN | [Remote Access Security Review](AWS/Remote%20Access%20Security%20Review/) | internal-controls, compliance | Internal Controls | 0.2.1 draft |
 | AWS Directory Service | [Remote Access Security Review](AWS/Remote%20Access%20Security%20Review/) | internal-controls, compliance | Internal Controls | 0.2.1 draft |
+| AWS IAM | [AWS IAM – Accounts](AWS/AWS%20IAM%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
+| AWS IAM Identity Center | [AWS IAM Identity Center – Accounts](AWS/AWS%20IAM%20Identity%20Center%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
 | AWS KMS | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | internal-controls, compliance | Internal Controls | 0.2.1 draft |
 | AWS KMS | [Endpoint Encryption Compliance Review](AWS/Endpoint%20Encryption%20Compliance%20Review/) | internal-controls, compliance | Internal Controls | 0.1.1 draft |
 | Elastic Load Balancing | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | internal-controls, compliance | Internal Controls | 0.2.1 draft |
@@ -42,17 +46,24 @@ Every automation, grouped by the vendor and technology it connects to. An automa
 |---|---|---|---|---|
 | eramba API | [Missing Online Assessment Launch](eramba/Missing%20Online%20Assessment%20Launch/) | third-party-risk, online-assessments | Third Parties | 0.1.2 tested |
 | eramba API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | third-party-risk, online-assessments | Online Assessments | 0.4.0 tested |
-| eramba automation functions | [Add Attachment](eramba/Example%20-%20Add%20Attachment/) | examples, online-assessments | Online Assessments | – |
-| eramba automation functions | [Add Comment](eramba/Example%20-%20Add%20Comment/) | examples, online-assessments | Online Assessments | – |
-| eramba automation functions | [Add Item](eramba/Example%20-%20Add%20Item/) | examples, online-assessments | Online Assessments | – |
-| eramba automation functions | [Edit Item](eramba/Example%20-%20Edit%20Item/) | examples, online-assessments | Online Assessments | – |
-| eramba automation functions | [File Write](eramba/Example%20-%20File%20Write/) | examples | Any | – |
+| eramba automation functions | [Example - Add Attachment](eramba/Example%20-%20Add%20Attachment/) | examples, online-assessments | Online Assessments | – |
+| eramba automation functions | [Example - Add Comment](eramba/Example%20-%20Add%20Comment/) | examples, online-assessments | Online Assessments | – |
+| eramba automation functions | [Example - Add Item](eramba/Example%20-%20Add%20Item/) | examples, online-assessments | Online Assessments | – |
+| eramba automation functions | [Example - Edit Item](eramba/Example%20-%20Edit%20Item/) | examples, online-assessments | Online Assessments | – |
+| eramba automation functions | [Example - File Write](eramba/Example%20-%20File%20Write/) | examples | Any | – |
+
+### GitHub
+
+| Technology | Automation | Use cases | eramba module | Status |
+|---|---|---|---|---|
+| GitHub | [GitHub – Accounts](GitHub/GitHub%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
 
 ### Google
 
 | Technology | Automation | Use cases | eramba module | Status |
 |---|---|---|---|---|
 | Google Sheets | [Finance Supplier Onboarding](Google/Finance%20Supplier%20Onboarding/) | third-party-risk, online-assessments | Third Parties | 0.1.1 tested |
+| Google Workspace | [Google Workspace – Accounts](Google/Google%20Workspace%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
 | Google Workspace | [Multi-Factor Authentication Coverage Review](Google/Multi-Factor%20Authentication%20Coverage%20Review/) | internal-controls, compliance | Internal Controls | 0.1.0 draft |
 
 ### Linear
@@ -67,22 +78,58 @@ Every automation, grouped by the vendor and technology it connects to. An automa
 | Technology | Automation | Use cases | eramba module | Status |
 |---|---|---|---|---|
 | Microsoft Entra ID | [Endpoint Encryption Compliance Review](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | internal-controls, compliance | Internal Controls | 0.2.0 draft |
+| Microsoft Entra ID | [Entra ID – Accounts](Microsoft/Entra%20ID%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.3.0 tested |
+| Microsoft Entra ID | [Entra ID – Application permissions](Microsoft/Entra%20ID%20-%20Application%20permissions/) | account-reviews | Account Review Feeds | 0.2.0 tested |
+| Microsoft Entra ID | [Entra ID – Current employees](Microsoft/Entra%20ID%20-%20Current%20employees/) | account-reviews | Account Review Feeds | 0.1.2 tested |
 | Microsoft Entra ID | [Mobile Device Management Review](Microsoft/Mobile%20Device%20Management%20Review/) | internal-controls, compliance | Internal Controls | 0.1.0 draft |
 | Microsoft Entra ID | [Multi-Factor Authentication Coverage Review](Microsoft/Multi-Factor%20Authentication%20Coverage%20Review/) | internal-controls, compliance | Internal Controls | 0.1.1 draft |
 | Microsoft Intune | [Endpoint Encryption Compliance Review](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | internal-controls, compliance | Internal Controls | 0.2.0 draft |
 | Microsoft Intune | [Mobile Device Management Review](Microsoft/Mobile%20Device%20Management%20Review/) | internal-controls, compliance | Internal Controls | 0.1.0 draft |
 
+### Okta
+
+| Technology | Automation | Use cases | eramba module | Status |
+|---|---|---|---|---|
+| Auth0 | [Auth0 – Accounts](Okta/Auth0%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.2.0 tested |
+| Okta Workforce Identity | [Okta – Accounts](Okta/Okta%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
+
 ### OpenAI
 
 | Technology | Automation | Use cases | eramba module | Status |
 |---|---|---|---|---|
+| OpenAI API | [OpenAI – Accounts](OpenAI/OpenAI%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
 | OpenAI API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | third-party-risk, online-assessments | Online Assessments | 0.4.0 tested |
+
+### Salesforce
+
+| Technology | Automation | Use cases | eramba module | Status |
+|---|---|---|---|---|
+| Salesforce | [Salesforce – Accounts](Salesforce/Salesforce%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
+
+### ServiceNow
+
+| Technology | Automation | Use cases | eramba module | Status |
+|---|---|---|---|---|
+| ServiceNow | [ServiceNow – Accounts](ServiceNow/ServiceNow%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
+
+### Slack
+
+| Technology | Automation | Use cases | eramba module | Status |
+|---|---|---|---|---|
+| Slack | [Slack – Accounts](Slack/Slack%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
+
+### Workday
+
+| Technology | Automation | Use cases | eramba module | Status |
+|---|---|---|---|---|
+| Workday HCM | [Workday – Current employees](Workday/Workday%20-%20Current%20employees/) | account-reviews | Account Review Feeds | 0.1.1 draft |
 
 ### Zoom
 
 | Technology | Automation | Use cases | eramba module | Status |
 |---|---|---|---|---|
 | Zoom | [Multi-Factor Authentication Coverage Review](Zoom/Multi-Factor%20Authentication%20Coverage%20Review/) | internal-controls, compliance | Internal Controls | 0.1.0 draft |
+| Zoom | [Zoom – Accounts](Zoom/Zoom%20-%20Accounts/) | account-reviews | Account Review Feeds | 0.1.1 draft |
 
 ## By use case
 
@@ -90,7 +137,23 @@ Every automation, grouped by the vendor and technology it connects to. An automa
 
 Feeds accounts or employees into eramba Account Reviews.
 
-No automations yet.
+- [AWS IAM Identity Center – Accounts](AWS/AWS%20IAM%20Identity%20Center%20-%20Accounts/) – AWS IAM Identity Center
+- [AWS IAM – Accounts](AWS/AWS%20IAM%20-%20Accounts/) – AWS IAM
+- [Anthropic – Accounts](Anthropic/Anthropic%20-%20Accounts/) – Anthropic API
+- [Atlassian – Accounts](Atlassian/Atlassian%20-%20Accounts/) – Atlassian Cloud
+- [Auth0 – Accounts](Okta/Auth0%20-%20Accounts/) – Auth0
+- [Entra ID – Accounts](Microsoft/Entra%20ID%20-%20Accounts/) – Microsoft Entra ID
+- [Entra ID – Application permissions](Microsoft/Entra%20ID%20-%20Application%20permissions/) – Microsoft Entra ID
+- [Entra ID – Current employees](Microsoft/Entra%20ID%20-%20Current%20employees/) – Microsoft Entra ID
+- [GitHub – Accounts](GitHub/GitHub%20-%20Accounts/) – GitHub
+- [Google Workspace – Accounts](Google/Google%20Workspace%20-%20Accounts/) – Google Workspace
+- [Okta – Accounts](Okta/Okta%20-%20Accounts/) – Okta Workforce Identity
+- [OpenAI – Accounts](OpenAI/OpenAI%20-%20Accounts/) – OpenAI API
+- [Salesforce – Accounts](Salesforce/Salesforce%20-%20Accounts/) – Salesforce
+- [ServiceNow – Accounts](ServiceNow/ServiceNow%20-%20Accounts/) – ServiceNow
+- [Slack – Accounts](Slack/Slack%20-%20Accounts/) – Slack
+- [Workday – Current employees](Workday/Workday%20-%20Current%20employees/) – Workday HCM
+- [Zoom – Accounts](Zoom/Zoom%20-%20Accounts/) – Zoom
 
 ### internal-controls
 
@@ -142,10 +205,10 @@ Onboards, assesses or rates suppliers and other third parties.
 
 Creates, launches or reviews eramba Online Assessments.
 
-- [Add Attachment](eramba/Example%20-%20Add%20Attachment/) – eramba automation functions
-- [Add Comment](eramba/Example%20-%20Add%20Comment/) – eramba automation functions
-- [Add Item](eramba/Example%20-%20Add%20Item/) – eramba automation functions
-- [Edit Item](eramba/Example%20-%20Edit%20Item/) – eramba automation functions
+- [Example - Add Attachment](eramba/Example%20-%20Add%20Attachment/) – eramba automation functions
+- [Example - Add Comment](eramba/Example%20-%20Add%20Comment/) – eramba automation functions
+- [Example - Add Item](eramba/Example%20-%20Add%20Item/) – eramba automation functions
+- [Example - Edit Item](eramba/Example%20-%20Edit%20Item/) – eramba automation functions
 - [Finance Supplier Onboarding](Google/Finance%20Supplier%20Onboarding/) – Google Sheets, eramba API
 - [Missing Online Assessment Launch](eramba/Missing%20Online%20Assessment%20Launch/) – eramba API
 - [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) – OpenAI API, Anthropic API, eramba API
@@ -160,8 +223,8 @@ Handles security incidents registered in eramba.
 
 Minimal reference example of an eramba automation function.
 
-- [Add Attachment](eramba/Example%20-%20Add%20Attachment/) – eramba automation functions
-- [Add Comment](eramba/Example%20-%20Add%20Comment/) – eramba automation functions
-- [Add Item](eramba/Example%20-%20Add%20Item/) – eramba automation functions
-- [Edit Item](eramba/Example%20-%20Edit%20Item/) – eramba automation functions
-- [File Write](eramba/Example%20-%20File%20Write/) – eramba automation functions
+- [Example - Add Attachment](eramba/Example%20-%20Add%20Attachment/) – eramba automation functions
+- [Example - Add Comment](eramba/Example%20-%20Add%20Comment/) – eramba automation functions
+- [Example - Add Item](eramba/Example%20-%20Add%20Item/) – eramba automation functions
+- [Example - Edit Item](eramba/Example%20-%20Edit%20Item/) – eramba automation functions
+- [Example - File Write](eramba/Example%20-%20File%20Write/) – eramba automation functions

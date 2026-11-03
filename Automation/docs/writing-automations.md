@@ -1,6 +1,6 @@
 # Writing automations
 
-Use this guide to automate your own internal controls, by hand or with an agent. Start from the [PHP template](../_TEMPLATE/run.php) and [README outline](../_TEMPLATE/README.md). The [internal control catalogue](internal-controls.md) contains complete integration examples with documented coverage and validation status.
+Use this guide to automate your own internal controls, by hand or with an agent. Start from the [PHP template](../_TEMPLATE/Internal%20Control/run.php) and [README outline](../_TEMPLATE/Internal%20Control/README.md). The [internal control catalogue](internal-controls.md) contains complete integration examples with documented coverage and validation status.
 
 ## Use an agent
 

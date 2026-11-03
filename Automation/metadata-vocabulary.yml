@@ -52,10 +52,16 @@ vendors:
   - Atlassian
   - AWS
   - eramba
+  - GitHub
   - Google
   - Linear
   - Microsoft
+  - Okta
   - OpenAI
+  - Salesforce
+  - ServiceNow
+  - Slack
+  - Workday
   - Zoom
 
 # Technology (product or API) -> vendor. `technologies` in a README must use
@@ -70,10 +76,20 @@ technologies:
   AWS Client VPN: AWS
   AWS Directory Service: AWS
   AWS KMS: AWS
+  AWS IAM: AWS
+  AWS IAM Identity Center: AWS
   Elastic Load Balancing: AWS
   Anthropic API: Anthropic
   OpenAI API: OpenAI
+  Atlassian Cloud: Atlassian
   Jira Cloud: Atlassian
+  GitHub: GitHub
+  Auth0: Okta
+  Okta Workforce Identity: Okta
+  Salesforce: Salesforce
+  ServiceNow: ServiceNow
+  Slack: Slack
+  Workday HCM: Workday
   Google Sheets: Google
   Google Workspace: Google
   Linear: Linear

@@ -1,6 +1,6 @@
 # Eramba Automation Examples
 
-PHP automations for eramba: internal control audits, the automations built in eramba's tutorial courses, and small examples of the automation functions.
+PHP automations for eramba: account review feeds, internal control audits, the automations built in eramba's tutorial courses, and small examples of the automation functions.
 
 ## Layout
 
@@ -8,16 +8,18 @@ Every automation lives in `Automation/<Vendor>/<Automation name>/`, with its `ru
 
 | Folder | Contents |
 |---|---|
-| [AWS](AWS/), [Atlassian](Atlassian/), [Google](Google/), [Linear](Linear/), [Microsoft](Microsoft/), [Zoom](Zoom/) | Automations that connect to that vendor's products. |
+| [Anthropic](Anthropic/), [Atlassian](Atlassian/), [AWS](AWS/), [GitHub](GitHub/), [Google](Google/), [Linear](Linear/), [Microsoft](Microsoft/), [Okta](Okta/), [OpenAI](OpenAI/), [Salesforce](Salesforce/), [ServiceNow](ServiceNow/), [Slack](Slack/), [Workday](Workday/), [Zoom](Zoom/) | Automations that connect to that vendor's products. |
 | [eramba](eramba/) | Automations that only use eramba (or eramba plus an optional AI provider), and the function examples. |
-| [_TEMPLATE](_TEMPLATE/) | PHP and README template for a new automation. |
+| [_TEMPLATE](_TEMPLATE/) | PHP and README templates for a new internal control or account review automation. |
+| [_shared](_shared/) | Code blocks reused by several automations and copied into each `run.php` by `tools/sync.php`. Users never install it: every `run.php` stays a single file to paste into eramba. |
 | [docs](docs/) | Installation and writing guides, and the guides that span several automations. |
 | [skills](skills/) | Agent skill to write new internal-control automations. |
-| [tools](tools/) | Catalogue generator and metadata validator. |
+| [tools](tools/) | Maintenance tools: shared-block sync and the catalogue generator. |
 
 ## Find an automation
 
 - [Catalogue by vendor and technology](CATALOGUE.md), also as [catalogue.json](catalogue.json) for indexing. Both are generated from the README front matter.
+- [Account Reviews](docs/account-reviews.md): how account review feeds work, review types and the feed catalogue.
 - [Internal control automations](docs/internal-controls.md): install steps, status and recommended audit frequency.
 - [Online Assessments – Advanced Configurations](docs/online-assessments-tutorial.md): the three automations of that course (supplier onboarding, assessment launch and the review of submitted assessments).
 - [Security Incident Management](docs/security-incidents-tutorial.md): the automation of that course (a Jira issue for each urgent incident).

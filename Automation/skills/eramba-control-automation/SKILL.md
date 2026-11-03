@@ -41,7 +41,7 @@ Implement every outcome the methodology needs. If manual work remains, the code 
 
 Read [PHP execution notes](references/php-execution.md) before generating or fixing PHP. The script runs inside eramba and uses its supplied helpers for updates, comments and attachments, even when the agent read the definition through the API. External provider calls use dedicated read-only credentials stored in eramba Secrets.
 
-If working in this repository, read [Writing automations](../../docs/writing-automations.md), adapt the [PHP template](../../_TEMPLATE/run.php) and its [README outline](../../_TEMPLATE/README.md), and consult the [catalogue](../../docs/internal-controls.md) for examples. If the skill was installed separately, locate these in the provided checkout; they are optional scaffolding, not a dependency on a fixed local path. Produce a complete script and guide even when no scaffold is supplied.
+If working in this repository, read [Writing automations](../../docs/writing-automations.md), adapt the [PHP template](../../_TEMPLATE/Internal%20Control/run.php) and its [README outline](../../_TEMPLATE/Internal%20Control/README.md), and consult the [catalogue](../../docs/internal-controls.md) for examples. If the skill was installed separately, locate these in the provided checkout; they are optional scaffolding, not a dependency on a fixed local path. Produce a complete script and guide even when no scaffold is supplied.
 
 ## Security requirements
 

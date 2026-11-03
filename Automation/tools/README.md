@@ -12,3 +12,14 @@ Keeps the [shared code blocks](../_shared/) inside every `run.php` identical to 
 | `php Automation/tools/sync.php update <run.php> …` | Replaces the shared blocks of the given files with the current originals. Refuses to overwrite a block edited by hand. |
 
 See [Shared code blocks](../_shared/README.md#for-contributors) for the full workflow.
+
+## build_catalogue.py
+
+Validates the front matter of every automation README against [metadata-vocabulary.yml](../metadata-vocabulary.yml) and the vendor/name folder rule, and regenerates [CATALOGUE.md](../CATALOGUE.md) and [catalogue.json](../catalogue.json). Requires Python 3 with PyYAML; run it from the repository root.
+
+| Command | What it does |
+|---|---|
+| `python3 Automation/tools/build_catalogue.py` | Validates and rewrites the catalogue. |
+| `python3 Automation/tools/build_catalogue.py --check` | Validates only. Exits with 1 if the metadata is invalid or the catalogue is out of date. |
+
+See [Automation metadata](../METADATA.md).

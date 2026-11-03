@@ -1,6 +1,50 @@
 {
   "automations": [
     {
+      "id": "anthropic-account-review",
+      "name": "Anthropic – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Anthropic"
+      ],
+      "technologies": [
+        "Anthropic API"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Anthropic",
+      "technology": "Claude Console (Anthropic API)",
+      "path": "Automation/Anthropic/Anthropic - Accounts"
+    },
+    {
+      "id": "atlassian-cloud-account-review",
+      "name": "Atlassian – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Atlassian"
+      ],
+      "technologies": [
+        "Atlassian Cloud"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Atlassian",
+      "technology": "Atlassian Cloud (Jira, Confluence, Jira Service Management…)",
+      "path": "Automation/Atlassian/Atlassian - Accounts"
+    },
+    {
       "id": "incident-urgent-jira-issue",
       "name": "Urgent Incident Jira Issue",
       "version": "0.1.1",
@@ -63,6 +107,50 @@
       "vendor": "Atlassian",
       "technology": "Jira Cloud",
       "path": "Automation/Atlassian/Vulnerability Remediation Tracking"
+    },
+    {
+      "id": "aws-identity-center-account-review",
+      "name": "AWS IAM Identity Center – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "AWS"
+      ],
+      "technologies": [
+        "AWS IAM Identity Center"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "AWS",
+      "technology": "AWS IAM Identity Center",
+      "path": "Automation/AWS/AWS IAM Identity Center - Accounts"
+    },
+    {
+      "id": "aws-iam-account-review",
+      "name": "AWS IAM – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "AWS"
+      ],
+      "technologies": [
+        "AWS IAM"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "AWS",
+      "technology": "AWS Identity and Access Management",
+      "path": "Automation/AWS/AWS IAM - Accounts"
     },
     {
       "id": "aws-backup-jobs-restore-tests",
@@ -307,7 +395,7 @@
     },
     {
       "id": "oa-example-add-attachment",
-      "name": "Add Attachment",
+      "name": "Example - Add Attachment",
       "vendors": [
         "eramba"
       ],
@@ -325,7 +413,7 @@
     },
     {
       "id": "oa-example-add-comment",
-      "name": "Add Comment",
+      "name": "Example - Add Comment",
       "vendors": [
         "eramba"
       ],
@@ -343,7 +431,7 @@
     },
     {
       "id": "oa-example-add-item",
-      "name": "Add Item",
+      "name": "Example - Add Item",
       "vendors": [
         "eramba"
       ],
@@ -361,7 +449,7 @@
     },
     {
       "id": "oa-example-edit-item",
-      "name": "Edit Item",
+      "name": "Example - Edit Item",
       "vendors": [
         "eramba"
       ],
@@ -379,7 +467,7 @@
     },
     {
       "id": "example-file-write",
-      "name": "File Write",
+      "name": "Example - File Write",
       "vendors": [
         "eramba"
       ],
@@ -449,6 +537,28 @@
       "path": "Automation/eramba/Submitted Assessment Risk Review"
     },
     {
+      "id": "github-account-review",
+      "name": "GitHub – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "GitHub"
+      ],
+      "technologies": [
+        "GitHub"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "GitHub",
+      "technology": "GitHub (GitHub.com, Free to Enterprise Cloud)",
+      "path": "Automation/GitHub/GitHub - Accounts"
+    },
+    {
       "id": "oa-finance-supplier-onboarding",
       "name": "Finance Supplier Onboarding",
       "version": "0.1.1",
@@ -473,6 +583,28 @@
       "vendor": "Google",
       "technology": "Google Sheets API + eramba API v2",
       "path": "Automation/Google/Finance Supplier Onboarding"
+    },
+    {
+      "id": "google-workspace-account-review",
+      "name": "Google Workspace – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Google"
+      ],
+      "technologies": [
+        "Google Workspace"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Google",
+      "technology": "Google Workspace",
+      "path": "Automation/Google/Google Workspace - Accounts"
     },
     {
       "id": "google-workspace-mfa",
@@ -634,6 +766,72 @@
       "path": "Automation/Microsoft/Endpoint Encryption Compliance Review"
     },
     {
+      "id": "entra-account-review",
+      "name": "Entra ID – Accounts",
+      "version": "0.3.0",
+      "status": "tested",
+      "vendors": [
+        "Microsoft"
+      ],
+      "technologies": [
+        "Microsoft Entra ID"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Microsoft",
+      "technology": "Microsoft Entra ID",
+      "path": "Automation/Microsoft/Entra ID - Accounts"
+    },
+    {
+      "id": "entra-app-permissions-review",
+      "name": "Entra ID – Application permissions",
+      "version": "0.2.0",
+      "status": "tested",
+      "vendors": [
+        "Microsoft"
+      ],
+      "technologies": [
+        "Microsoft Entra ID"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Microsoft",
+      "technology": "Microsoft Entra ID",
+      "path": "Automation/Microsoft/Entra ID - Application permissions"
+    },
+    {
+      "id": "entra-current-employees",
+      "name": "Entra ID – Current employees",
+      "version": "0.1.2",
+      "status": "tested",
+      "vendors": [
+        "Microsoft"
+      ],
+      "technologies": [
+        "Microsoft Entra ID"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Microsoft",
+      "technology": "Microsoft Entra ID",
+      "path": "Automation/Microsoft/Entra ID - Current employees"
+    },
+    {
       "id": "intune-mobile-management",
       "name": "Mobile Device Management Review",
       "version": "0.1.0",
@@ -708,6 +906,160 @@
       "path": "Automation/Microsoft/Multi-Factor Authentication Coverage Review"
     },
     {
+      "id": "auth0-account-review",
+      "name": "Auth0 – Accounts",
+      "version": "0.2.0",
+      "status": "tested",
+      "vendors": [
+        "Okta"
+      ],
+      "technologies": [
+        "Auth0"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Okta",
+      "technology": "Auth0",
+      "path": "Automation/Okta/Auth0 - Accounts"
+    },
+    {
+      "id": "okta-account-review",
+      "name": "Okta – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Okta"
+      ],
+      "technologies": [
+        "Okta Workforce Identity"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Okta",
+      "technology": "Okta Workforce Identity",
+      "path": "Automation/Okta/Okta - Accounts"
+    },
+    {
+      "id": "openai-account-review",
+      "name": "OpenAI – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "OpenAI"
+      ],
+      "technologies": [
+        "OpenAI API"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "OpenAI",
+      "technology": "OpenAI API Platform",
+      "path": "Automation/OpenAI/OpenAI - Accounts"
+    },
+    {
+      "id": "salesforce-account-review",
+      "name": "Salesforce – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Salesforce"
+      ],
+      "technologies": [
+        "Salesforce"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Salesforce",
+      "technology": "Salesforce",
+      "path": "Automation/Salesforce/Salesforce - Accounts"
+    },
+    {
+      "id": "servicenow-account-review",
+      "name": "ServiceNow – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "ServiceNow"
+      ],
+      "technologies": [
+        "ServiceNow"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "ServiceNow",
+      "technology": "ServiceNow",
+      "path": "Automation/ServiceNow/ServiceNow - Accounts"
+    },
+    {
+      "id": "slack-account-review",
+      "name": "Slack – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Slack"
+      ],
+      "technologies": [
+        "Slack"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Slack",
+      "technology": "Slack",
+      "path": "Automation/Slack/Slack - Accounts"
+    },
+    {
+      "id": "workday-current-employees",
+      "name": "Workday – Current employees",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Workday"
+      ],
+      "technologies": [
+        "Workday HCM"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Workday",
+      "technology": "Workday HCM",
+      "path": "Automation/Workday/Workday - Current employees"
+    },
+    {
       "id": "zoom-mfa-coverage",
       "name": "Multi-Factor Authentication Coverage Review",
       "version": "0.1.0",
@@ -746,6 +1098,28 @@
       "vendor": "Zoom",
       "technology": "Zoom account settings and users REST API",
       "path": "Automation/Zoom/Multi-Factor Authentication Coverage Review"
+    },
+    {
+      "id": "zoom-account-review",
+      "name": "Zoom – Accounts",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Zoom"
+      ],
+      "technologies": [
+        "Zoom"
+      ],
+      "use_cases": [
+        "account-reviews"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "eramba_module": "Account Review Feeds",
+      "vendor": "Zoom",
+      "technology": "Zoom Workplace",
+      "path": "Automation/Zoom/Zoom - Accounts"
     }
   ]
 }
