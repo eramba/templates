@@ -6,8 +6,7 @@ status: draft
 vendor: <Vendor>
 technology:
   - <Product>
-eramba_module: Account Review Feeds
-review_family: Employee list
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -32,6 +31,7 @@ Send the people who should have access today to an eramba feed of type **List of
 
 | | |
 |---|---|
+| **Family** | Employee list (for Exit reviews) |
 | **Each row is** | <One current (or former) employee, and what identifies them> |
 | **Connects to** | <Source> <API or service>, read-only |
 | **Permission needed** | <Exact read-only permission>. Approved by <who grants it in Source>. |

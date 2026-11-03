@@ -6,8 +6,7 @@ status: draft
 vendor: Slack
 technology:
   - Slack
-eramba_module: Account Review Feeds
-review_family: Account review
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -37,6 +36,7 @@ Sends eramba every member of your Slack workspace and the access each one has: i
 
 | | |
 |---|---|
+| **Family** | Account review |
 | **Each row is** | One member of one Slack workspace, identified by its email, for example `ana.garcia@example.com` (or its Slack member ID with `USER_KEY`) |
 | **Connects to** | Your Slack workspace, through Slack's official Web API. Read-only |
 | **Permission needed** | A Slack app installed in the workspace with the bot token scopes `users:read` and `users:read.email`, plus `usergroups:read` only if you list user groups. A workspace admin installs it (§5) |

@@ -8,23 +8,21 @@ Every automation README starts with a YAML front matter block. It describes the 
 |---|---|---|
 | `vendor` | always | Main vendor. It is also the folder the automation lives in: `Automation/<vendor>/<name>/`. |
 | `technology` | always, list | Products or APIs it reads or acts on, with the names in the vocabulary. Each belongs to one vendor, so an automation that uses several vendors (for example eramba API plus OpenAI API) is found under each of them. |
-| `eramba_module` | always | eramba section the automation is attached to: where it is created and what triggers it. Account Review Feeds, Internal Controls, Third Parties, Online Assessments, Security Incidents, or Any. |
-| `review_family` | Account Review Feeds only | What the feed sends: `Account review` (one row per account), `Permission review` (one row per group, policy or application) or `Employee list` (current employees, for Exit reviews). |
+| `eramba_module` | always | eramba section the automation is attached to: where it is created and what triggers it. Account Reviews, Internal Controls, Third Parties, Online Assessments, Security Incidents, or Any. |
 | `controls` | Internal Controls only, list | Exact titles of the controls it tests, as in [the control mapping](../GRC%20Templates/LLM%20-%20GRC%20Templates/Controls/mapping_controls_to_requirements.csv). |
 | `audit_frequency` | Internal Controls only | Recommended audit frequency: `weekly`, `twice-monthly`, `monthly`, `quarterly` or `annually`. |
 | `domains` | optional, list | Security topic, such as `identity-access` or `vulnerability-management`. |
 | `status` | always | `draft`, `tested`, `stable`, `deprecated`, or `example` for the function examples. |
 
-What the automation is for is therefore: `review_family` for an account review feed, `controls` for an internal control, and the name for the rest (one automation each).
+What the automation is for is `controls` for an internal control, and the name for the rest (`<Product> – Accounts`, `<Product> – Current employees`, and so on).
 
-### Derived fields (do not write them)
+### Derived field (do not write it)
 
 | Field | Comes from |
 |---|---|
 | `frameworks` | `controls` and the control mapping. This is what to index for compliance. |
-| `feed_type` | `review_family`: the eramba feed type to choose (*List of accounts to be reviewed* or *List of current employees*). |
 
-The script fails if a README sets either of them.
+The script fails if a README sets it.
 
 The allowed values of every indexing field are in [metadata-vocabulary.yml](metadata-vocabulary.yml). To use a new value, add it there first.
 
@@ -67,8 +65,7 @@ status: draft
 vendor: Workday
 technology:
   - Workday HCM
-eramba_module: Account Review Feeds
-review_family: Employee list
+eramba_module: Account Reviews
 # ...
 ---
 ```

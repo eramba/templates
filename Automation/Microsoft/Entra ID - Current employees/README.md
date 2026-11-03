@@ -6,8 +6,7 @@ status: tested
 vendor: Microsoft
 technology:
   - Microsoft Entra ID
-eramba_module: Account Review Feeds
-review_family: Employee list
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -36,6 +35,7 @@ Sends eramba the people who should have access today, as Entra ID knows them, as
 
 | | |
 |---|---|
+| **Family** | Employee list (for Exit reviews) |
 | **Each row is** | One current employee, identified by their work email, for example `ana.garcia@example.com` (or user principal name or object ID with `USER_KEY`) |
 | **Connects to** | Your Microsoft Entra ID, through Microsoft's official API (Microsoft Graph). Read-only |
 | **Permission needed** | Microsoft Graph application permission `User.Read.All`, plus `GroupMember.Read.All` when `GROUP_ID` is set. An Entra administrator creates the connection and grants admin consent (§5) |

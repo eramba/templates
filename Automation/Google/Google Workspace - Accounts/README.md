@@ -6,8 +6,7 @@ status: draft
 vendor: Google
 technology:
   - Google Workspace
-eramba_module: Account Review Feeds
-review_family: Account review
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -38,6 +37,7 @@ Sends eramba every user account in your Google Workspace and the access each one
 
 | | |
 |---|---|
+| **Family** | Account review |
 | **Each row is** | One user account, identified by its primary email, for example `ana.garcia@example.com` (or its immutable user ID with `USER_KEY`) |
 | **Connects to** | Your Google Workspace, through Google's official Admin SDK Directory API. Read-only |
 | **Permission needed** | A service account with domain-wide delegation for the read-only scopes `admin.directory.user.readonly`, `admin.directory.group.readonly` and `admin.directory.rolemanagement.readonly`, acting as an administrator you name in `DELEGATED_ADMIN_EMAIL`. A Google Cloud administrator creates the service account and a super admin authorizes the delegation once (§5) |

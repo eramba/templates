@@ -6,8 +6,7 @@ status: draft
 vendor: <Vendor>
 technology:
   - <Product>
-eramba_module: Account Review Feeds
-review_family: Account review   # or Permission review
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -33,6 +32,7 @@ Send <Product> accounts and their assigned access to an eramba Account Review fe
 
 | | |
 |---|---|
+| **Family** | <Account review or Permission review> |
 | **Each row is** | <One <Product> account, and what identifies it> |
 | **Connects to** | <Product> <API or service>, read-only |
 | **Permission needed** | <Exact read-only permission>. Approved by <who grants it in Product>. |

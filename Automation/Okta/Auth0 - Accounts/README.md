@@ -6,8 +6,7 @@ status: tested
 vendor: Okta
 technology:
   - Auth0
-eramba_module: Account Review Feeds
-review_family: Account review
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -36,6 +35,7 @@ Sends eramba every user account of one Auth0 tenant and the access each one has:
 
 | | |
 |---|---|
+| **Family** | Account review |
 | **Each row is** | One Auth0 user account, identified by its email, for example `ana.garcia@example.com` (or its user ID with `USER_KEY`) |
 | **Connects to** | Your Auth0 tenant, through Auth0's official Management API. Read-only |
 | **Permission needed** | A machine-to-machine application authorized for the Auth0 Management API with `read:users` and `read:roles`, plus `read:organizations`, `read:organization_members` and `read:organization_member_roles` when organizations are listed (§5). A tenant administrator creates it |

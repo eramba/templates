@@ -6,8 +6,7 @@ status: draft
 vendor: Salesforce
 technology:
   - Salesforce
-eramba_module: Account Review Feeds
-review_family: Account review
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -38,6 +37,7 @@ Sends eramba every user of your Salesforce org and the access each one has: its 
 
 | | |
 |---|---|
+| **Family** | Account review |
 | **Each row is** | One Salesforce user of one org, identified by its email, for example `ana.garcia@example.com` (or its username or 18-character user ID with `USER_KEY`) |
 | **Connects to** | Your Salesforce org (My Domain), through Salesforce's official REST API (v62.0) with read-only SOQL queries |
 | **Permission needed** | A dedicated integration user with the permissions **API Enabled**, **View Setup and Configuration** and **View All Users**, reached through an external client app using the OAuth client credentials flow. A Salesforce administrator creates it (§5) |

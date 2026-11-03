@@ -8,9 +8,8 @@ mapping CSV, and writes:
   Automation/catalogue.json  machine-readable index (one entry per automation)
   Automation/CATALOGUE.md    the same index grouped by vendor, eramba section and framework
 
-Values that can be derived are not written in the READMEs: `frameworks` comes
-from `controls` and the mapping CSV, and `feed_type` from `review_family`.
-Both are added to the catalogue here.
+`frameworks` is not written in the READMEs: it comes from `controls` and the
+mapping CSV, and is added to the catalogue here.
 
 Usage:
   python3 Automation/tools/build_catalogue.py          # validate and write
@@ -38,10 +37,10 @@ NOT_INDEXED = ("_TEMPLATE", "_shared", "docs", "skills", "tools")
 
 REQUIRED = ["id", "name", "status", "vendor", "technology", "eramba_module"]
 LISTS = ["technology", "domains", "controls", "policies"]
-DERIVED = ["frameworks", "feed_type"]  # computed here; not allowed in a README
+DERIVED = ["frameworks"]  # computed here; not allowed in a README
 EXPORTED = [
-    "id", "name", "version", "status", "vendor", "technology", "eramba_module", "review_family",
-    "feed_type", "domains", "controls", "frameworks", "policies", "audit_frequency", "trigger", "guide",
+    "id", "name", "version", "status", "vendor", "technology", "eramba_module",
+    "domains", "controls", "frameworks", "policies", "audit_frequency", "trigger", "guide",
 ]
 
 
@@ -73,7 +72,6 @@ def control_frameworks(known: list[str]) -> tuple[dict[str, list[str]], list[str
 
 def collect(vocab: dict) -> tuple[list[dict], list[str]]:
     tech_vendor = vocab["technologies"]
-    families = vocab["review_families"]
     allowed = {"technology": set(tech_vendor), "domains": set(vocab["domains"])}
     mapping, errors = control_frameworks(vocab["frameworks"])
     entries, seen = [], {}
@@ -137,13 +135,6 @@ def collect(vocab: dict) -> tuple[list[dict], list[str]]:
         seen[meta.get("id")] = rel
 
         module = meta.get("eramba_module")
-        family = meta.get("review_family")
-        if module == "Account Review Feeds":
-            if family not in families:
-                err(f"`review_family` must be one of {list(families)}")
-        elif family is not None:
-            err("`review_family` is only for Account Review Feeds")
-
         frameworks: list[str] = []
         if module == "Internal Controls":
             if not meta.get("controls"):
@@ -160,7 +151,6 @@ def collect(vocab: dict) -> tuple[list[dict], list[str]]:
 
         derived = dict(meta)
         derived["frameworks"] = [f for f in vocab["frameworks"] if f in frameworks]
-        derived["feed_type"] = families.get(family) if family in families else None
         entry = {k: derived[k] for k in EXPORTED if derived.get(k) not in (None, [], "")}
         entry["path"] = readme.parent.relative_to(REPO).as_posix()
         entries.append(entry)
@@ -180,8 +170,6 @@ def status(entry: dict) -> str:
 
 def use(entry: dict) -> str:
     """What the automation is for, in one cell."""
-    if entry.get("review_family"):
-        return entry["review_family"]
     if entry.get("controls"):
         return "Control: " + ", ".join(entry["controls"])
     return entry["eramba_module"]
@@ -215,14 +203,7 @@ def render_md(entries: list[dict], vocab: dict) -> str:
         if not matches:
             continue
         out += [f"### {module}", "", description, ""]
-        if module == "Account Review Feeds":
-            for family, feed_type in vocab["review_families"].items():
-                group = [e for e in matches if e.get("review_family") == family]
-                if group:
-                    out += [f"**{family}** (feed type *{feed_type}*)", ""]
-                    out += [f"- {link(e)} – {', '.join(e['technology'])}" for e in group] + [""]
-        else:
-            out += [f"- {link(e)} – {', '.join(e['technology'])}" for e in matches] + [""]
+        out += [f"- {link(e)} – {', '.join(e['technology'])}" for e in matches] + [""]
 
     out += ["## By framework", "", "Internal control automations whose control maps to each framework.", ""]
     for framework in vocab["frameworks"]:

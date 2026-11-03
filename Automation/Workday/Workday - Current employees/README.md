@@ -6,8 +6,7 @@ status: draft
 vendor: Workday
 technology:
   - Workday HCM
-eramba_module: Account Review Feeds
-review_family: Employee list
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -39,6 +38,7 @@ Sends eramba the people who work for you today, as Workday knows them, as a list
 
 | | |
 |---|---|
+| **Family** | Employee list (for Exit reviews) |
 | **Each row is** | One worker from a Workday report, identified by their primary work email, for example `ana.garcia@example.com` (or their Employee ID with `USER_KEY`) |
 | **Connects to** | One Workday custom report you build and expose as a web service (Report-as-a-Service), read as JSON. Read-only |
 | **Permission needed** | An Integration System User with view-only access to the report and to the data domains its fields come from. A Workday administrator creates it (§5) |

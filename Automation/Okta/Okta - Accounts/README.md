@@ -6,8 +6,7 @@ status: draft
 vendor: Okta
 technology:
   - Okta Workforce Identity
-eramba_module: Account Review Feeds
-review_family: Account review
+eramba_module: Account Reviews
 domains:
   - identity-access
 secrets:
@@ -37,6 +36,7 @@ Sends eramba every user account in your Okta org and the access each one has: it
 
 | | |
 |---|---|
+| **Family** | Account review |
 | **Each row is** | One Okta user account, identified by its login, for example `ana.garcia@example.com` |
 | **Connects to** | Your Okta org, through Okta's official Management API. Read-only |
 | **Permission needed** | An API token created by an Okta administrator account that holds the **Read-only Administrator** role. The token acts with that account's permissions (§5) |

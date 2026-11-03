@@ -9,9 +9,7 @@
       "technology": [
         "Anthropic API"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -26,9 +24,7 @@
       "technology": [
         "Atlassian Cloud"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -93,9 +89,7 @@
       "technology": [
         "AWS IAM Identity Center"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -110,9 +104,7 @@
       "technology": [
         "AWS IAM"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -412,9 +404,7 @@
       "technology": [
         "GitHub"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -447,9 +437,7 @@
       "technology": [
         "Google Workspace"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -594,9 +582,7 @@
       "technology": [
         "Microsoft Entra ID"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -611,9 +597,7 @@
       "technology": [
         "Microsoft Entra ID"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Permission review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -628,9 +612,7 @@
       "technology": [
         "Microsoft Entra ID"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Employee list",
-      "feed_type": "List of current employees",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -704,9 +686,7 @@
       "technology": [
         "Auth0"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -721,9 +701,7 @@
       "technology": [
         "Okta Workforce Identity"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -738,9 +716,7 @@
       "technology": [
         "OpenAI API"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -755,9 +731,7 @@
       "technology": [
         "Salesforce"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -772,9 +746,7 @@
       "technology": [
         "ServiceNow"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -789,9 +761,7 @@
       "technology": [
         "Slack"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -806,9 +776,7 @@
       "technology": [
         "Workday HCM"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Employee list",
-      "feed_type": "List of current employees",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
@@ -856,9 +824,7 @@
       "technology": [
         "Zoom"
       ],
-      "eramba_module": "Account Review Feeds",
-      "review_family": "Account review",
-      "feed_type": "List of accounts to be reviewed",
+      "eramba_module": "Account Reviews",
       "domains": [
         "identity-access"
       ],
