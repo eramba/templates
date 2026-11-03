@@ -7,6 +7,7 @@ vendor: Google
 technology:
   - Google Workspace
 eramba_module: Internal Controls
+summary: Checks that 2-step verification is enrolled and enforced for every active user, administrators included.
 trigger: Audit planned date
 controls:
   - Multi-Factor Authentication Coverage Review

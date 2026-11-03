@@ -7,6 +7,7 @@ vendor: Microsoft
 technology:
   - Microsoft Entra ID
 eramba_module: Account Reviews
+summary: Every Entra ID account, with groups, admin roles, the applications it can sign in to and licences.
 secrets:
   - entra_tenant_id
   - entra_client_id

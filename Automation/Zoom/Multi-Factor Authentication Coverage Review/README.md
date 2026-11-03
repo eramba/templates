@@ -7,6 +7,7 @@ vendor: Zoom
 technology:
   - Zoom
 eramba_module: Internal Controls
+summary: Checks MFA for Zoom users who sign in with Zoom credentials rather than SSO.
 trigger: Audit planned date
 controls:
   - Multi-Factor Authentication Coverage Review

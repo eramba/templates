@@ -8,6 +8,7 @@ technology:
   - Amazon WorkSpaces
   - AWS KMS
 eramba_module: Internal Controls
+summary: Checks that root and user volumes of WorkSpaces desktops are encrypted, and the KMS keys behind them.
 trigger: Audit planned date
 controls:
   - Endpoint Encryption Compliance Review

@@ -7,6 +7,7 @@ vendor: <Vendor>
 technology:
   - <Product>
 eramba_module: Account Reviews
+summary: The people who work for you today, from <Product>, for exit reviews against any application.
 secrets:
   - <secret_name>
 variables:

@@ -7,6 +7,7 @@ vendor: <Vendor>
 technology:
   - <Product>
 eramba_module: Account Reviews
+summary: Every user of your <Product>, with <the access listed as roles>.
 secrets:
   - <secret_name>
 variables:

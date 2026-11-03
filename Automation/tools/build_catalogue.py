@@ -5,7 +5,8 @@ Reads the YAML front matter of each automation README under Automation/,
 validates it against Automation/metadata-vocabulary.yml and the control
 mapping CSV, and writes:
 
-  Automation/catalogue.json  machine-readable index (one entry per automation)
+  Automation/catalogue.json  machine-readable index (one entry per automation, and the
+                             vendor of every technology they use)
   Automation/CATALOGUE.md    the same index grouped by vendor, eramba section and framework
 
 `frameworks` is not written in the READMEs: it comes from `controls` and the
@@ -35,12 +36,14 @@ OUT_JSON = AUTOMATION / "catalogue.json"
 OUT_MD = AUTOMATION / "CATALOGUE.md"
 NOT_INDEXED = ("_TEMPLATE", "_shared", "docs", "skills", "tools")
 
-REQUIRED = ["id", "name", "status", "vendor", "technology", "eramba_module"]
-LISTS = ["technology", "controls", "policies"]
+REQUIRED = ["id", "name", "status", "vendor", "technology", "eramba_module", "summary"]
+LISTS = ["technology", "controls", "policies", "secrets", "dependencies"]
+SUMMARY_MAX = 140  # one sentence for a catalogue card
 DERIVED = ["frameworks"]  # computed here; not allowed in a README
 EXPORTED = [
-    "id", "name", "version", "status", "vendor", "technology", "eramba_module",
+    "id", "name", "version", "status", "vendor", "technology", "eramba_module", "summary",
     "controls", "frameworks", "policies", "audit_frequency", "trigger", "guide",
+    "secrets", "dependencies", "timeout_seconds",
 ]
 
 
@@ -120,6 +123,10 @@ def collect(vocab: dict) -> tuple[list[dict], list[str]]:
         for key, vocab_key in (("vendor", "vendors"), ("eramba_module", "eramba_modules"), ("status", "statuses")):
             if meta.get(key) is not None and meta.get(key) not in vocab[vocab_key]:
                 err(f"`{key}` {meta.get(key)!r} is not in metadata-vocabulary.yml")
+
+        summary = meta.get("summary")
+        if summary is not None and (not isinstance(summary, str) or "\n" in summary.strip() or len(summary) > SUMMARY_MAX):
+            err(f"`summary` must be one sentence of at most {SUMMARY_MAX} characters")
 
         tech_vendors = {tech_vendor[t] for t in meta.get("technology") or [] if t in tech_vendor}
         if tech_vendors and meta.get("vendor") not in tech_vendors:
@@ -213,8 +220,10 @@ def main() -> int:
     if errors:
         print("Metadata errors:", *errors, sep="\n  ", file=sys.stderr)
         return 1
+    used = sorted({t for e in entries for t in e["technology"]}, key=str.lower)
+    technologies = {t: vocab["technologies"][t] for t in used}
     outputs = {
-        OUT_JSON: json.dumps({"automations": entries}, indent=2, ensure_ascii=False) + "\n",
+        OUT_JSON: json.dumps({"automations": entries, "technologies": technologies}, indent=2, ensure_ascii=False) + "\n",
         OUT_MD: render_md(entries, vocab),
     }
     stale = [p for p, text in outputs.items() if not p.exists() or p.read_text(encoding="utf-8") != text]

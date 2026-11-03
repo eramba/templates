@@ -7,6 +7,7 @@ vendor: Atlassian
 technology:
   - Atlassian Cloud
 eramba_module: Account Reviews
+summary: Every user of your Atlassian organization, with product access, groups and admin roles.
 secrets:
   - atlassian_org_id
   - atlassian_admin_api_key

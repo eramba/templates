@@ -9,6 +9,7 @@ technology:
   - AWS Certificate Manager
   - Elastic Load Balancing
 eramba_module: Internal Controls
+summary: Checks KMS key rotation, certificate expiry and TLS settings on load balancers.
 trigger: Audit planned date
 controls:
   - Cryptographic Key and Certificate Lifecycle Review

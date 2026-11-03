@@ -7,6 +7,7 @@ vendor: Salesforce
 technology:
   - Salesforce
 eramba_module: Account Reviews
+summary: Every Salesforce user, with profile, role, permission sets and permission set groups.
 secrets:
   - salesforce_my_domain
   - salesforce_client_id

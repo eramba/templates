@@ -6,6 +6,7 @@ vendor: eramba
 technology:
   - eramba automation functions
 eramba_module: Online Assessments
+summary: Creates a new Online Assessment.
 ---
 # Add Item
 

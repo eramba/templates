@@ -7,6 +7,7 @@ vendor: Microsoft
 technology:
   - Microsoft Entra ID
 eramba_module: Internal Controls
+summary: Checks that Conditional Access requires MFA for all users and applications in your tenant.
 trigger: Audit planned date
 controls:
   - Multi-Factor Authentication Coverage Review

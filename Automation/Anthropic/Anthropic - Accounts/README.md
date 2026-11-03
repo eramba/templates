@@ -7,6 +7,7 @@ vendor: Anthropic
 technology:
   - Anthropic API
 eramba_module: Account Reviews
+summary: Every member of your Claude Console organization, with their organization role and workspaces.
 secrets:
   - anthropic_admin_key
 variables:

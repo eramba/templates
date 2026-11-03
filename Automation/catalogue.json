@@ -10,6 +10,14 @@
         "Anthropic API"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every member of your Claude Console organization, with their organization role and workspaces.",
+      "secrets": [
+        "anthropic_admin_key"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Anthropic/Anthropic - Accounts"
     },
     {
@@ -22,6 +30,15 @@
         "Atlassian Cloud"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every user of your Atlassian organization, with product access, groups and admin roles.",
+      "secrets": [
+        "atlassian_org_id",
+        "atlassian_admin_api_key"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Atlassian/Atlassian - Accounts"
     },
     {
@@ -35,8 +52,17 @@
         "eramba API"
       ],
       "eramba_module": "Security Incidents",
+      "summary": "Opens a Jira issue for every urgent incident and saves the issue key on the incident.",
       "trigger": "Notification \"New Item Created\" (Trigger Automation)",
       "guide": "Security Incident Management in eramba",
+      "secrets": [
+        "jira_site_url",
+        "jira_email",
+        "jira_api_token",
+        "jira_cloud_id (optional, API tokens with scopes only)",
+        "eramba_api_token"
+      ],
+      "timeout_seconds": 60,
       "path": "Automation/Atlassian/Urgent Incident Jira Issue"
     },
     {
@@ -49,6 +75,7 @@
         "Jira Cloud"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Reads the vulnerability register in Jira, calculates SLA compliance and records overdue items.",
       "controls": [
         "Vulnerability Remediation Tracking"
       ],
@@ -66,6 +93,16 @@
       ],
       "audit_frequency": "monthly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "jira_site_url",
+        "jira_email",
+        "jira_api_token",
+        "jira_cloud_id (optional, API tokens with scopes only)"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Atlassian/Vulnerability Remediation Tracking"
     },
     {
@@ -78,6 +115,15 @@
         "AWS IAM Identity Center"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every IAM Identity Center user, with groups and the permission sets that reach your AWS accounts.",
+      "secrets": [
+        "aws_access_key_id",
+        "aws_secret_access_key"
+      ],
+      "dependencies": [
+        "aws/aws-sdk-php:^3.398"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/AWS/AWS IAM Identity Center - Accounts"
     },
     {
@@ -90,6 +136,15 @@
         "AWS IAM"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every IAM user of one AWS account plus root, with groups, policies and active credentials.",
+      "secrets": [
+        "aws_access_key_id",
+        "aws_secret_access_key"
+      ],
+      "dependencies": [
+        "aws/aws-sdk-php:^3.398"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/AWS/AWS IAM - Accounts"
     },
     {
@@ -102,6 +157,7 @@
         "AWS Backup"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Reviews AWS Backup jobs and restore tests against your RPO and RTO.",
       "controls": [
         "Backup Execution and Restore Test"
       ],
@@ -120,6 +176,14 @@
       ],
       "audit_frequency": "weekly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "aws_access_key_id",
+        "aws_secret_access_key"
+      ],
+      "dependencies": [
+        "aws/aws-sdk-php:^3.398"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/AWS/Backup Execution and Restore Test"
     },
     {
@@ -133,6 +197,7 @@
         "Amazon CloudWatch"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Audits the compute capacity of EC2 Auto Scaling groups.",
       "controls": [
         "Capacity Planning Review"
       ],
@@ -146,6 +211,14 @@
       ],
       "audit_frequency": "twice-monthly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "aws_access_key_id",
+        "aws_secret_access_key"
+      ],
+      "dependencies": [
+        "aws/aws-sdk-php:^3.398"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/AWS/Capacity Planning Review"
     },
     {
@@ -159,6 +232,7 @@
         "Amazon CloudWatch"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Collects CPU and capacity evidence for Auto Scaling groups and leaves the audit open for your review.",
       "controls": [
         "Capacity and Performance Monitoring Review"
       ],
@@ -172,6 +246,14 @@
       ],
       "audit_frequency": "twice-monthly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "aws_access_key_id",
+        "aws_secret_access_key"
+      ],
+      "dependencies": [
+        "aws/aws-sdk-php:^3.398"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/AWS/Capacity and Performance Monitoring Review"
     },
     {
@@ -186,6 +268,7 @@
         "Elastic Load Balancing"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Checks KMS key rotation, certificate expiry and TLS settings on load balancers.",
       "controls": [
         "Cryptographic Key and Certificate Lifecycle Review"
       ],
@@ -204,6 +287,14 @@
       ],
       "audit_frequency": "quarterly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "aws_access_key_id",
+        "aws_secret_access_key"
+      ],
+      "dependencies": [
+        "aws/aws-sdk-php:^3.398"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/AWS/Cryptographic Key and Certificate Lifecycle Review"
     },
     {
@@ -217,6 +308,7 @@
         "AWS KMS"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Checks that root and user volumes of WorkSpaces desktops are encrypted, and the KMS keys behind them.",
       "controls": [
         "Endpoint Encryption Compliance Review"
       ],
@@ -234,6 +326,14 @@
       ],
       "audit_frequency": "quarterly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "aws_access_key_id",
+        "aws_secret_access_key"
+      ],
+      "dependencies": [
+        "aws/aws-sdk-php:^3.398"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/AWS/Endpoint Encryption Compliance Review"
     },
     {
@@ -247,6 +347,7 @@
         "AWS Directory Service"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Reviews MFA, session timeout, split tunnelling, encryption and connection logs on Client VPN endpoints.",
       "controls": [
         "Remote Access Security Review"
       ],
@@ -264,6 +365,14 @@
       ],
       "audit_frequency": "monthly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "aws_access_key_id",
+        "aws_secret_access_key"
+      ],
+      "dependencies": [
+        "aws/aws-sdk-php:^3.398"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/AWS/Remote Access Security Review"
     },
     {
@@ -275,6 +384,7 @@
         "eramba automation functions"
       ],
       "eramba_module": "Online Assessments",
+      "summary": "Uploads one attachment to an Online Assessment.",
       "path": "Automation/eramba/Example - Add Attachment"
     },
     {
@@ -286,6 +396,7 @@
         "eramba automation functions"
       ],
       "eramba_module": "Online Assessments",
+      "summary": "Adds a comment to an Online Assessment.",
       "path": "Automation/eramba/Example - Add Comment"
     },
     {
@@ -297,6 +408,7 @@
         "eramba automation functions"
       ],
       "eramba_module": "Online Assessments",
+      "summary": "Creates a new Online Assessment.",
       "path": "Automation/eramba/Example - Add Item"
     },
     {
@@ -308,6 +420,7 @@
         "eramba automation functions"
       ],
       "eramba_module": "Online Assessments",
+      "summary": "Updates an existing Online Assessment.",
       "path": "Automation/eramba/Example - Edit Item"
     },
     {
@@ -319,6 +432,7 @@
         "eramba automation functions"
       ],
       "eramba_module": "Any",
+      "summary": "Writes text to the automation's own file and reads it back.",
       "path": "Automation/eramba/Example - File Write"
     },
     {
@@ -331,8 +445,13 @@
         "eramba API"
       ],
       "eramba_module": "Third Parties",
+      "summary": "When a new supplier needs an assessment, creates it and sends it to the supplier's contact.",
       "trigger": "Notification \"New Item\" (Trigger Automation)",
       "guide": "Online Assessments - Advanced Configurations (automation 2 of 3)",
+      "secrets": [
+        "eramba_api_token"
+      ],
+      "timeout_seconds": 60,
       "path": "Automation/eramba/Missing Online Assessment Launch"
     },
     {
@@ -347,8 +466,14 @@
         "eramba API"
       ],
       "eramba_module": "Online Assessments",
+      "summary": "When a supplier submits an assessment, proposes a risk level and a conclusion, optionally with AI.",
       "trigger": "Notification \"OA has been submitted\" (Trigger Automation)",
       "guide": "Online Assessments - Advanced Configurations (automation 3 of 3)",
+      "secrets": [
+        "eramba_api_token",
+        "openai_api_key or anthropic_api_key (optional, see AI_PROVIDER)"
+      ],
+      "timeout_seconds": 120,
       "path": "Automation/eramba/Submitted Assessment Risk Review"
     },
     {
@@ -361,6 +486,15 @@
         "GitHub"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Members and outside collaborators of your GitHub organizations, with their role and teams.",
+      "secrets": [
+        "github_token",
+        "github_app_private_key_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/GitHub/GitHub - Accounts"
     },
     {
@@ -374,8 +508,14 @@
         "eramba API"
       ],
       "eramba_module": "Third Parties",
+      "summary": "Keeps eramba's suppliers in sync with the supplier list Finance keeps in Google Sheets.",
       "trigger": "Recurrent (daily)",
       "guide": "Online Assessments - Advanced Configurations (automation 1 of 3)",
+      "secrets": [
+        "google_service_account",
+        "eramba_api_token"
+      ],
+      "timeout_seconds": 60,
       "path": "Automation/Google/Finance Supplier Onboarding"
     },
     {
@@ -388,6 +528,15 @@
         "Google Workspace"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every Google Workspace account, with groups, admin roles and optionally its organizational unit.",
+      "secrets": [
+        "google_service_account_json_b64"
+      ],
+      "dependencies": [
+        "google/apiclient:^2.18",
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Google/Google Workspace - Accounts"
     },
     {
@@ -400,6 +549,7 @@
         "Google Workspace"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Checks that 2-step verification is enrolled and enforced for every active user, administrators included.",
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -418,6 +568,14 @@
       ],
       "audit_frequency": "annually",
       "trigger": "Audit planned date",
+      "secrets": [
+        "google_service_account_json_b64"
+      ],
+      "dependencies": [
+        "google/apiclient:^2.18",
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Google/Multi-Factor Authentication Coverage Review"
     },
     {
@@ -430,6 +588,7 @@
         "Linear"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Reviews corrective actions tracked in Linear: owners, target dates, overdue work and verification.",
       "controls": [
         "Nonconformity and Corrective Action Tracking"
       ],
@@ -446,6 +605,13 @@
       ],
       "audit_frequency": "monthly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "linear_api_key_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Linear/Nonconformity and Corrective Action Tracking"
     },
     {
@@ -458,6 +624,7 @@
         "Linear"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Reads the vulnerability register in Linear, calculates SLA compliance and records overdue items.",
       "controls": [
         "Vulnerability Remediation Tracking"
       ],
@@ -475,6 +642,13 @@
       ],
       "audit_frequency": "monthly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "linear_api_key_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Linear/Vulnerability Remediation Tracking"
     },
     {
@@ -488,6 +662,7 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Checks disk encryption and recovery keys on Windows devices managed by Intune.",
       "controls": [
         "Endpoint Encryption Compliance Review"
       ],
@@ -505,6 +680,15 @@
       ],
       "audit_frequency": "quarterly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "entra_tenant_id",
+        "entra_client_id",
+        "entra_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Microsoft/Endpoint Encryption Compliance Review"
     },
     {
@@ -517,6 +701,16 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every Entra ID account, with groups, admin roles, the applications it can sign in to and licences.",
+      "secrets": [
+        "entra_tenant_id",
+        "entra_client_id",
+        "entra_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Microsoft/Entra ID - Accounts"
     },
     {
@@ -529,6 +723,16 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every application allowed to reach your Microsoft 365 data, and the permissions it holds.",
+      "secrets": [
+        "entra_tenant_id",
+        "entra_client_id",
+        "entra_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Microsoft/Entra ID - Application permissions"
     },
     {
@@ -541,6 +745,16 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "The people who should have access today, for exit reviews against any application's accounts.",
+      "secrets": [
+        "entra_tenant_id",
+        "entra_client_id",
+        "entra_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Microsoft/Entra ID - Current employees"
     },
     {
@@ -554,6 +768,7 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Reconciles mobile device enrollment and encryption, and checks remote wipe prerequisites.",
       "controls": [
         "Mobile Device Management Review"
       ],
@@ -564,6 +779,15 @@
       ],
       "audit_frequency": "quarterly",
       "trigger": "Audit planned date",
+      "secrets": [
+        "entra_tenant_id",
+        "entra_client_id",
+        "entra_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Microsoft/Mobile Device Management Review"
     },
     {
@@ -576,6 +800,7 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Checks that Conditional Access requires MFA for all users and applications in your tenant.",
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -594,6 +819,15 @@
       ],
       "audit_frequency": "annually",
       "trigger": "Audit planned date",
+      "secrets": [
+        "entra_tenant_id",
+        "entra_client_id",
+        "entra_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Microsoft/Multi-Factor Authentication Coverage Review"
     },
     {
@@ -606,6 +840,16 @@
         "Auth0"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every user of one Auth0 tenant, with roles, organizations and roles inside each organization.",
+      "secrets": [
+        "auth0_domain",
+        "auth0_client_id",
+        "auth0_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Okta/Auth0 - Accounts"
     },
     {
@@ -618,6 +862,15 @@
         "Okta Workforce Identity"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every user in your Okta org, with groups, assigned applications and admin roles.",
+      "secrets": [
+        "okta_org_url",
+        "okta_api_token"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Okta/Okta - Accounts"
     },
     {
@@ -630,6 +883,14 @@
         "OpenAI API"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every member of your OpenAI API Platform organization, with role and projects.",
+      "secrets": [
+        "openai_admin_key"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/OpenAI/OpenAI - Accounts"
     },
     {
@@ -642,6 +903,16 @@
         "Salesforce"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every Salesforce user, with profile, role, permission sets and permission set groups.",
+      "secrets": [
+        "salesforce_my_domain",
+        "salesforce_client_id",
+        "salesforce_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Salesforce/Salesforce - Accounts"
     },
     {
@@ -654,6 +925,18 @@
         "ServiceNow"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every ServiceNow user, with direct and inherited roles and groups.",
+      "secrets": [
+        "servicenow_instance",
+        "servicenow_client_id",
+        "servicenow_client_secret_b64",
+        "servicenow_username",
+        "servicenow_password_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/ServiceNow/ServiceNow - Accounts"
     },
     {
@@ -666,6 +949,14 @@
         "Slack"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every member of your Slack workspace, with workspace role and optionally user groups.",
+      "secrets": [
+        "slack_token"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Slack/Slack - Accounts"
     },
     {
@@ -678,6 +969,16 @@
         "Workday HCM"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "The people who work for you today, from Workday, for exit reviews against any application.",
+      "secrets": [
+        "workday_report_url",
+        "workday_isu_username",
+        "workday_isu_password_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Workday/Workday - Current employees"
     },
     {
@@ -690,6 +991,7 @@
         "Zoom"
       ],
       "eramba_module": "Internal Controls",
+      "summary": "Checks MFA for Zoom users who sign in with Zoom credentials rather than SSO.",
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -708,6 +1010,15 @@
       ],
       "audit_frequency": "annually",
       "trigger": "Audit planned date",
+      "secrets": [
+        "zoom_account_id",
+        "zoom_client_id",
+        "zoom_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Zoom/Multi-Factor Authentication Coverage Review"
     },
     {
@@ -720,7 +1031,49 @@
         "Zoom"
       ],
       "eramba_module": "Account Reviews",
+      "summary": "Every user of your Zoom account, with role, licence type and optionally groups.",
+      "secrets": [
+        "zoom_account_id",
+        "zoom_client_id",
+        "zoom_client_secret_b64"
+      ],
+      "dependencies": [
+        "guzzlehttp/guzzle:^7.9"
+      ],
+      "timeout_seconds": 240,
       "path": "Automation/Zoom/Zoom - Accounts"
     }
-  ]
+  ],
+  "technologies": {
+    "Amazon CloudWatch": "AWS",
+    "Amazon EC2 Auto Scaling": "AWS",
+    "Amazon WorkSpaces": "AWS",
+    "Anthropic API": "Anthropic",
+    "Atlassian Cloud": "Atlassian",
+    "Auth0": "Okta",
+    "AWS Backup": "AWS",
+    "AWS Certificate Manager": "AWS",
+    "AWS Client VPN": "AWS",
+    "AWS Directory Service": "AWS",
+    "AWS IAM": "AWS",
+    "AWS IAM Identity Center": "AWS",
+    "AWS KMS": "AWS",
+    "Elastic Load Balancing": "AWS",
+    "eramba API": "eramba",
+    "eramba automation functions": "eramba",
+    "GitHub": "GitHub",
+    "Google Sheets": "Google",
+    "Google Workspace": "Google",
+    "Jira Cloud": "Atlassian",
+    "Linear": "Linear",
+    "Microsoft Entra ID": "Microsoft",
+    "Microsoft Intune": "Microsoft",
+    "Okta Workforce Identity": "Okta",
+    "OpenAI API": "OpenAI",
+    "Salesforce": "Salesforce",
+    "ServiceNow": "ServiceNow",
+    "Slack": "Slack",
+    "Workday HCM": "Workday",
+    "Zoom": "Zoom"
+  }
 }

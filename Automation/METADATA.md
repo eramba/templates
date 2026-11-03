@@ -9,6 +9,7 @@ Every automation README starts with a YAML front matter block. It describes the 
 | `vendor` | always | Main vendor. It is also the folder the automation lives in: `Automation/<vendor>/<name>/`. |
 | `technology` | always, list | Products or APIs it reads or acts on, with the names in the vocabulary. Each belongs to one vendor, so an automation that uses several vendors (for example eramba API plus OpenAI API) is found under each of them. |
 | `eramba_module` | always | eramba section the automation is attached to: where it is created and what triggers it. Account Reviews, Internal Controls, Third Parties, Online Assessments, Security Incidents, or Any. |
+| `summary` | always | One sentence, at most 140 characters, that says what the automation does. It is the text of the automation's card on [eramba.org/automation-templates](https://www.eramba.org/automation-templates). Write it for someone choosing a template, for example *Every user in your Okta org, with groups, assigned applications and admin roles.* |
 | `controls` | Internal Controls only, list | Exact titles of the controls it tests, as in [the control mapping](../GRC%20Templates/LLM%20-%20GRC%20Templates/Controls/mapping_controls_to_requirements.csv). |
 | `audit_frequency` | Internal Controls only | Recommended audit frequency: `weekly`, `twice-monthly`, `monthly`, `quarterly` or `annually`. |
 | `status` | always | `draft`, `tested`, `stable`, `deprecated`, or `example` for the function examples. |
@@ -25,13 +26,13 @@ The script fails if a README sets it.
 
 The allowed values of every indexing field are in [metadata-vocabulary.yml](metadata-vocabulary.yml). To use a new value, add it there first.
 
-The other fields (`id`, `name`, `version`, `trigger`, `policies`, `guide`, `secrets`, `variables`, `dependencies`, `timeout_seconds`, `eramba_version_tested`, `last_tested`) are described in the [README template](_TEMPLATE/Internal%20Control/README.md). `id`, `name`, `status`, `vendor`, `technology` and `eramba_module` are required.
+The other fields (`id`, `name`, `version`, `trigger`, `policies`, `guide`, `secrets`, `variables`, `dependencies`, `timeout_seconds`, `eramba_version_tested`, `last_tested`) are described in the [README template](_TEMPLATE/Internal%20Control/README.md). `id`, `name`, `status`, `vendor`, `technology`, `eramba_module` and `summary` are required. `secrets`, `dependencies` and `timeout_seconds` are also copied to the catalogue, because the website shows them on each template.
 
 ## Rules
 
 - The folder is `Automation/<vendor>/<name>/`, with `-` instead of `–` in the name. There are no folders per eramba section.
 - `vendor` is the vendor of one of its technologies.
-- Keys go in this order: `id`, `name`, `version`, `status`, `vendor`, `technology`, `eramba_module`, then the rest.
+- Keys go in this order: `id`, `name`, `version`, `status`, `vendor`, `technology`, `eramba_module`, `summary`, then the rest.
 - Every folder with a `run.php` must have a README with front matter. READMEs without front matter (vendor guides such as `AWS/README.md`), `_TEMPLATE`, `_shared`, `docs`, `skills` and `tools` are not indexed.
 
 ## Examples
@@ -46,6 +47,7 @@ vendor: Microsoft
 technology:
   - Microsoft Entra ID
 eramba_module: Internal Controls
+summary: Checks that Conditional Access requires MFA for all users and applications in your tenant.
 controls:
   - Multi-Factor Authentication Coverage Review
 audit_frequency: annually
@@ -63,6 +65,7 @@ vendor: Workday
 technology:
   - Workday HCM
 eramba_module: Account Reviews
+summary: The people who work for you today, from Workday, for exit reviews against any application.
 # ...
 ---
 ```

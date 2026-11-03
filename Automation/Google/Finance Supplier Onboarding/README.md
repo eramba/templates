@@ -8,6 +8,7 @@ technology:
   - Google Sheets
   - eramba API
 eramba_module: Third Parties
+summary: Keeps eramba's suppliers in sync with the supplier list Finance keeps in Google Sheets.
 trigger: Recurrent (daily)
 guide: Online Assessments - Advanced Configurations (automation 1 of 3)
 secrets:
