@@ -1,6 +1,7 @@
 ---
 id: oa-example-add-attachment
 name: Example - Add Attachment
+status: example
 vendor: eramba
 technology:
   - eramba automation functions

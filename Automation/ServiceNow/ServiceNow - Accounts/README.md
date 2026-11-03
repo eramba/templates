@@ -3,10 +3,11 @@ id: servicenow-account-review
 name: ServiceNow – Accounts
 version: 0.1.1
 status: draft
+vendor: ServiceNow
 technology:
   - ServiceNow
-vendor: ServiceNow
 eramba_module: Account Review Feeds
+review_family: Account review
 domains:
   - identity-access
 secrets:
@@ -39,7 +40,6 @@ Sends eramba every user of your ServiceNow instance and the access each one has:
 
 | | |
 |---|---|
-| **Family** | Account review |
 | **Each row is** | One ServiceNow user of one instance, identified by its email, for example `ana.garcia@example.com` (or its user name or `sys_id` with `USER_KEY`) |
 | **Connects to** | Your ServiceNow instance, through ServiceNow's official Table API. Read-only |
 | **Permission needed** | A dedicated integration user (web service access only) with read access to `sys_user`, `sys_user_has_role` and `sys_user_grmember` and to the role and group names, reached with OAuth client credentials (preferred) or basic authentication. A ServiceNow administrator creates it (§5) |

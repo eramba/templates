@@ -3,23 +3,14 @@ id: aws-key-certificate-lifecycle
 name: Cryptographic Key and Certificate Lifecycle Review
 version: 0.2.1
 status: draft
+vendor: AWS
 technology:
   - AWS KMS
   - AWS Certificate Manager
   - Elastic Load Balancing
-vendor: AWS
 eramba_module: Internal Controls
 domains:
   - cryptography
-frameworks:
-  - "PCI DSS v4.0.1"
-  - "ISO 27002:2022"
-  - "SOC 2 (TSP 2017)"
-  - "NIST 800-53 Rev5"
-  - "CIS Controls v8.1"
-  - "SCF 2025"
-  - "NIS2 Article 21"
-  - "ISO 27701:2025"
 trigger: Audit planned date
 controls:
   - Cryptographic Key and Certificate Lifecycle Review

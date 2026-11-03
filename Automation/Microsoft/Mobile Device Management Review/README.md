@@ -10,13 +10,10 @@ technology:
 eramba_module: Internal Controls
 domains:
   - endpoint-security
-frameworks:
-  - "ISO 27002:2022"
-  - "CIS Controls v8.1"
-  - "SCF 2025"
 trigger: Audit planned date
 controls:
   - Mobile Device Management Review
+audit_frequency: quarterly
 secrets:
   - entra_tenant_id
   - entra_client_id

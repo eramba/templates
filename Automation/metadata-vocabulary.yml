@@ -2,15 +2,38 @@
 # Automation/tools/build_catalogue.py rejects values that are not listed here.
 # Add a value here first, then use it in a README. See METADATA.md.
 
-# eramba section where the automation runs. It also says what the
-# automation is for, so there is no separate use-case field.
+# eramba section where the automation is attached: where it is created and
+# what triggers it. It does not say what the automation is for; that is
+# review_family (account review feeds), controls (internal controls) or the name.
 eramba_modules:
-  Account Review Feeds: Sends accounts, permissions or employees to eramba Account Reviews.
-  Internal Controls: Tests an internal control and records the audit result.
-  Third Parties: Onboards suppliers and launches their assessments.
-  Online Assessments: Creates, edits or reviews Online Assessments.
-  Security Incidents: Handles security incidents.
-  Any: Works in any section (generic function examples).
+  Account Review Feeds: Source of an Account Review feed (Security Operations > Account Reviews > Feeds).
+  Internal Controls: Runs on the audits of an internal control and records the result.
+  Third Parties: Runs from Third Parties, recurrently or from a Third Party notification.
+  Online Assessments: Runs from Online Assessments, recurrently or from an Online Assessment notification.
+  Security Incidents: Runs from Security Incidents, from an incident notification.
+  Any: Not tied to one section (generic function examples).
+
+# Account Review Feeds only: what the feed sends, and the eramba feed type to
+# choose for it. Required for Account Review Feeds, not allowed elsewhere.
+review_families:
+  Account review: List of accounts to be reviewed
+  Permission review: List of accounts to be reviewed
+  Employee list: List of current employees
+
+# Internal Controls only: recommended audit frequency. Required for them.
+audit_frequencies:
+  weekly: At least once a week.
+  twice-monthly: Twice a month (days 1 and 15).
+  monthly: Once a month.
+  quarterly: Once a quarter.
+  annually: Once a year.
+
+statuses:
+  draft: Written and documented, not yet validated on a real eramba and provider.
+  tested: Run successfully on a real eramba against the real provider.
+  stable: Tested, and in use without open issues.
+  deprecated: Kept for reference; do not install.
+  example: Function example to copy from, not a complete automation.
 
 domains:
   identity-access: Authentication, MFA and user or privileged account management.
@@ -26,8 +49,9 @@ domains:
 
 # Framework names as they appear in the header of
 # GRC Templates/LLM - GRC Templates/Controls/mapping_controls_to_requirements.csv.
-# For internal-control automations, `frameworks` must match that mapping;
-# an automation with frameworks is the one to look for when indexing compliance.
+# READMEs do not list frameworks: build_catalogue.py takes them from that
+# mapping through `controls` and writes them to the catalogue. This list fixes
+# their order and fails the build if the mapping gains a column nobody listed.
 frameworks:
   - PCI DSS v4.0.1
   - ISO 27001:2022

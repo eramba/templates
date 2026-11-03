@@ -4,27 +4,18 @@ id: aws-backup-jobs-restore-tests
 name: Backup Execution and Restore Test
 version: 0.3.2
 status: draft                            # draft | tested | stable | deprecated
+vendor: AWS
 technology:
   - AWS Backup
-vendor: AWS
 eramba_module: Internal Controls
 domains:
   - business-continuity
-frameworks:
-  - "PCI DSS v4.0.1"
-  - "ISO 27002:2022"
-  - "SOC 2 (TSP 2017)"
-  - "NIST 800-53 Rev5"
-  - "CIS Controls v8.1"
-  - "SCF 2025"
-  - "NIS2 Article 21"
-  - "ISO 27701:2025"
 trigger: Audit planned date
 controls:
   - Backup Execution and Restore Test
 policies:
   - Business Continuity > Backup Execution and Verification
-audit_frequency: at_least_weekly
+audit_frequency: weekly
 secrets:
   - aws_access_key_id
   - aws_secret_access_key

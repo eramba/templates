@@ -3,10 +3,11 @@ id: entra-account-review
 name: Entra ID – Accounts
 version: 0.3.0
 status: tested
+vendor: Microsoft
 technology:
   - Microsoft Entra ID
-vendor: Microsoft
 eramba_module: Account Review Feeds
+review_family: Account review
 domains:
   - identity-access
 secrets:
@@ -38,7 +39,6 @@ Sends eramba every user account in your Microsoft Entra ID and the access each o
 
 | | |
 |---|---|
-| **Family** | Account review |
 | **Each row is** | One user account (an employee or a guest), identified by its sign-in name, for example `ana.garcia@example.com` |
 | **Connects to** | Your Microsoft Entra ID, through Microsoft's official API (Microsoft Graph). Read-only |
 | **Permission needed** | Microsoft Graph application permissions `Directory.Read.All` and `Member.Read.Hidden`, read-only. An Entra administrator creates the connection and grants admin consent (§5) |

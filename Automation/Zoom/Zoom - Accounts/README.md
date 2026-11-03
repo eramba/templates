@@ -3,10 +3,11 @@ id: zoom-account-review
 name: Zoom – Accounts
 version: 0.1.1
 status: draft
+vendor: Zoom
 technology:
   - Zoom
-vendor: Zoom
 eramba_module: Account Review Feeds
+review_family: Account review
 domains:
   - identity-access
 secrets:
@@ -37,7 +38,6 @@ Sends eramba every user of your Zoom account and the access each one has: its ro
 
 | | |
 |---|---|
-| **Family** | Account review |
 | **Each row is** | One Zoom user of one Zoom account, identified by its email, for example `ana.garcia@example.com` (or its Zoom user ID with `USER_KEY`) |
 | **Connects to** | Your Zoom account, through Zoom's official REST API (`api.zoom.us`). Read-only |
 | **Permission needed** | A Server-to-Server OAuth app with only the read scopes `user:read:list_users:admin`, `role:read:list_roles:admin` (to list roles) and `group:read:list_groups:admin` (to list groups). A Zoom account admin creates and activates it (§5) |

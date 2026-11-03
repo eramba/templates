@@ -4,7 +4,7 @@ PHP automations for eramba: account review feeds, internal control audits, the a
 
 ## Layout
 
-Every automation lives in `Automation/<Vendor>/<Automation name>/`, with its `run.php` and a `README.md`. There are no folders per eramba section: the front matter of each README says which section it runs in (`eramba_module`, which also says what it is for), which technologies it uses and, for internal controls, which frameworks it covers. See [Automation metadata](METADATA.md).
+Every automation lives in `Automation/<Vendor>/<Automation name>/`, with its `run.php` and a `README.md`. There are no folders per eramba section: the front matter of each README says which technologies it uses, which eramba section it is attached to (`eramba_module`) and what it is for (`review_family` for account review feeds, `controls` for internal controls). The catalogue adds the frameworks each control covers. See [Automation metadata](METADATA.md).
 
 | Folder | Contents |
 |---|---|

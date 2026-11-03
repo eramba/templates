@@ -9,19 +9,10 @@ technology:
 eramba_module: Internal Controls
 domains:
   - corrective-actions
-frameworks:
-  - "ISO 27001:2022"
-  - "SOC 2 (TSP 2017)"
-  - "NIST 800-53 Rev5"
-  - "SCF 2025"
-  - "ISO 27701:2025"
-  - "ISO 45001:2018"
-  - "ISO 42001:2023"
-  - "ISO 37001:2025"
-  - "ISO 9001:2015"
 trigger: Audit planned date
 controls:
   - Nonconformity and Corrective Action Tracking
+audit_frequency: monthly
 secrets:
   - linear_api_key_b64
 variables:

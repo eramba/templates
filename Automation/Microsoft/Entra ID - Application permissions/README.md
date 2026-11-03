@@ -3,10 +3,11 @@ id: entra-app-permissions-review
 name: Entra ID – Application permissions
 version: 0.2.0
 status: tested
+vendor: Microsoft
 technology:
   - Microsoft Entra ID
-vendor: Microsoft
 eramba_module: Account Review Feeds
+review_family: Permission review
 domains:
   - identity-access
 secrets:
@@ -35,7 +36,6 @@ Sends eramba every connected application in your Microsoft Entra ID that has bee
 
 | | |
 |---|---|
-| **Family** | Permission review |
 | **Each row is** | One connected application (an *enterprise application* in Entra) that has been granted access to your organisation's data, identified by its name, for example `Contoso Expenses`. The reviewer answers: *should this application still have these permissions?* This differs from [Entra ID – Accounts](../Entra%20ID%20-%20Accounts/), where each row is a person |
 | **Connects to** | Your Microsoft Entra ID, through Microsoft's official API (Microsoft Graph). Read-only |
 | **Permission needed** | Microsoft Graph application permission `Directory.Read.All`, read-only: the same app registration as *Entra ID – Accounts* can be used. An Entra administrator grants admin consent (§5) |

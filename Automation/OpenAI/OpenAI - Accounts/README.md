@@ -3,10 +3,11 @@ id: openai-account-review
 name: OpenAI – Accounts
 version: 0.1.1
 status: draft
+vendor: OpenAI
 technology:
   - OpenAI API
-vendor: OpenAI
 eramba_module: Account Review Feeds
+review_family: Account review
 domains:
   - identity-access
 secrets:
@@ -34,7 +35,6 @@ Sends eramba every member of your OpenAI API Platform organization and the acces
 
 | | |
 |---|---|
-| **Family** | Account review |
 | **Each row is** | One member of one OpenAI organization, identified by its email, for example `ana.garcia@example.com` (or its `user-…` ID with `USER_KEY`) |
 | **Connects to** | Your OpenAI organization (`api.openai.com`), through OpenAI's official Administration API. Read-only requests |
 | **Permission needed** | An Admin API key of the organization, created by an organization owner. Admin keys are separate from project keys. Whether a read-only Admin key is enough is still to be confirmed (§5) |

@@ -3,10 +3,11 @@ id: github-account-review
 name: GitHub – Accounts
 version: 0.1.1
 status: draft
+vendor: GitHub
 technology:
   - GitHub
-vendor: GitHub
 eramba_module: Account Review Feeds
+review_family: Account review
 domains:
   - identity-access
 secrets:
@@ -39,7 +40,6 @@ Sends eramba every member and outside collaborator of the GitHub organizations y
 
 | | |
 |---|---|
-| **Family** | Account review |
 | **Each row is** | One GitHub account that belongs to at least one of your organizations, identified by its login, for example `octo-dev`. An account in several organizations is one row with the roles of all of them |
 | **Connects to** | GitHub.com (`api.github.com`), through GitHub's official REST and GraphQL APIs. Read-only |
 | **Permission needed** | A GitHub App installed on every listed organization with the organization permission **Members: Read-only** (recommended), or a token of a dedicated organization owner with that read access. An organization owner creates it (§5) |

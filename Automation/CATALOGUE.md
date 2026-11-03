@@ -8,136 +8,138 @@ Every automation, grouped by the vendor and technology it connects to, by eramba
 
 ### Anthropic
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Anthropic API | [Anthropic – Accounts](Anthropic/Anthropic%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
-| Anthropic API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | Online Assessments | 0.4.0 tested |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Anthropic API | [Anthropic – Accounts](Anthropic/Anthropic%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
+| Anthropic API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | Online Assessments | Online Assessments | 0.4.0 tested |
 
 ### Atlassian
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Atlassian Cloud | [Atlassian – Accounts](Atlassian/Atlassian%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
-| Jira Cloud | [Urgent Incident Jira Issue](Atlassian/Urgent%20Incident%20Jira%20Issue/) | Security Incidents | 0.1.1 draft |
-| Jira Cloud | [Vulnerability Remediation Tracking](Atlassian/Vulnerability%20Remediation%20Tracking/) | Internal Controls | 0.1.2 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Atlassian Cloud | [Atlassian – Accounts](Atlassian/Atlassian%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
+| Jira Cloud | [Urgent Incident Jira Issue](Atlassian/Urgent%20Incident%20Jira%20Issue/) | Security Incidents | Security Incidents | 0.1.1 draft |
+| Jira Cloud | [Vulnerability Remediation Tracking](Atlassian/Vulnerability%20Remediation%20Tracking/) | Internal Controls | Control: Vulnerability Remediation Tracking | 0.1.2 draft |
 
 ### AWS
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Amazon CloudWatch | [Capacity Planning Review](AWS/Capacity%20Planning%20Review/) | Internal Controls | 0.1.2 draft |
-| Amazon CloudWatch | [Capacity and Performance Monitoring Review](AWS/Capacity%20and%20Performance%20Monitoring%20Review/) | Internal Controls | 0.2.1 draft |
-| Amazon EC2 Auto Scaling | [Capacity Planning Review](AWS/Capacity%20Planning%20Review/) | Internal Controls | 0.1.2 draft |
-| Amazon EC2 Auto Scaling | [Capacity and Performance Monitoring Review](AWS/Capacity%20and%20Performance%20Monitoring%20Review/) | Internal Controls | 0.2.1 draft |
-| Amazon WorkSpaces | [Endpoint Encryption Compliance Review](AWS/Endpoint%20Encryption%20Compliance%20Review/) | Internal Controls | 0.1.1 draft |
-| AWS Backup | [Backup Execution and Restore Test](AWS/Backup%20Execution%20and%20Restore%20Test/) | Internal Controls | 0.3.2 draft |
-| AWS Certificate Manager | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Internal Controls | 0.2.1 draft |
-| AWS Client VPN | [Remote Access Security Review](AWS/Remote%20Access%20Security%20Review/) | Internal Controls | 0.2.1 draft |
-| AWS Directory Service | [Remote Access Security Review](AWS/Remote%20Access%20Security%20Review/) | Internal Controls | 0.2.1 draft |
-| AWS IAM | [AWS IAM – Accounts](AWS/AWS%20IAM%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
-| AWS IAM Identity Center | [AWS IAM Identity Center – Accounts](AWS/AWS%20IAM%20Identity%20Center%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
-| AWS KMS | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Internal Controls | 0.2.1 draft |
-| AWS KMS | [Endpoint Encryption Compliance Review](AWS/Endpoint%20Encryption%20Compliance%20Review/) | Internal Controls | 0.1.1 draft |
-| Elastic Load Balancing | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Internal Controls | 0.2.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Amazon CloudWatch | [Capacity Planning Review](AWS/Capacity%20Planning%20Review/) | Internal Controls | Control: Capacity Planning Review | 0.1.2 draft |
+| Amazon CloudWatch | [Capacity and Performance Monitoring Review](AWS/Capacity%20and%20Performance%20Monitoring%20Review/) | Internal Controls | Control: Capacity and Performance Monitoring Review | 0.2.1 draft |
+| Amazon EC2 Auto Scaling | [Capacity Planning Review](AWS/Capacity%20Planning%20Review/) | Internal Controls | Control: Capacity Planning Review | 0.1.2 draft |
+| Amazon EC2 Auto Scaling | [Capacity and Performance Monitoring Review](AWS/Capacity%20and%20Performance%20Monitoring%20Review/) | Internal Controls | Control: Capacity and Performance Monitoring Review | 0.2.1 draft |
+| Amazon WorkSpaces | [Endpoint Encryption Compliance Review](AWS/Endpoint%20Encryption%20Compliance%20Review/) | Internal Controls | Control: Endpoint Encryption Compliance Review | 0.1.1 draft |
+| AWS Backup | [Backup Execution and Restore Test](AWS/Backup%20Execution%20and%20Restore%20Test/) | Internal Controls | Control: Backup Execution and Restore Test | 0.3.2 draft |
+| AWS Certificate Manager | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Internal Controls | Control: Cryptographic Key and Certificate Lifecycle Review | 0.2.1 draft |
+| AWS Client VPN | [Remote Access Security Review](AWS/Remote%20Access%20Security%20Review/) | Internal Controls | Control: Remote Access Security Review | 0.2.1 draft |
+| AWS Directory Service | [Remote Access Security Review](AWS/Remote%20Access%20Security%20Review/) | Internal Controls | Control: Remote Access Security Review | 0.2.1 draft |
+| AWS IAM | [AWS IAM – Accounts](AWS/AWS%20IAM%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
+| AWS IAM Identity Center | [AWS IAM Identity Center – Accounts](AWS/AWS%20IAM%20Identity%20Center%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
+| AWS KMS | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Internal Controls | Control: Cryptographic Key and Certificate Lifecycle Review | 0.2.1 draft |
+| AWS KMS | [Endpoint Encryption Compliance Review](AWS/Endpoint%20Encryption%20Compliance%20Review/) | Internal Controls | Control: Endpoint Encryption Compliance Review | 0.1.1 draft |
+| Elastic Load Balancing | [Cryptographic Key and Certificate Lifecycle Review](AWS/Cryptographic%20Key%20and%20Certificate%20Lifecycle%20Review/) | Internal Controls | Control: Cryptographic Key and Certificate Lifecycle Review | 0.2.1 draft |
 
 ### eramba
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| eramba API | [Finance Supplier Onboarding](Google/Finance%20Supplier%20Onboarding/) | Third Parties | 0.1.1 tested |
-| eramba API | [Missing Online Assessment Launch](eramba/Missing%20Online%20Assessment%20Launch/) | Third Parties | 0.1.2 tested |
-| eramba API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | Online Assessments | 0.4.0 tested |
-| eramba API | [Urgent Incident Jira Issue](Atlassian/Urgent%20Incident%20Jira%20Issue/) | Security Incidents | 0.1.1 draft |
-| eramba automation functions | [Example - Add Attachment](eramba/Example%20-%20Add%20Attachment/) | Online Assessments | – |
-| eramba automation functions | [Example - Add Comment](eramba/Example%20-%20Add%20Comment/) | Online Assessments | – |
-| eramba automation functions | [Example - Add Item](eramba/Example%20-%20Add%20Item/) | Online Assessments | – |
-| eramba automation functions | [Example - Edit Item](eramba/Example%20-%20Edit%20Item/) | Online Assessments | – |
-| eramba automation functions | [Example - File Write](eramba/Example%20-%20File%20Write/) | Any | – |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| eramba API | [Finance Supplier Onboarding](Google/Finance%20Supplier%20Onboarding/) | Third Parties | Third Parties | 0.1.1 tested |
+| eramba API | [Missing Online Assessment Launch](eramba/Missing%20Online%20Assessment%20Launch/) | Third Parties | Third Parties | 0.1.2 tested |
+| eramba API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | Online Assessments | Online Assessments | 0.4.0 tested |
+| eramba API | [Urgent Incident Jira Issue](Atlassian/Urgent%20Incident%20Jira%20Issue/) | Security Incidents | Security Incidents | 0.1.1 draft |
+| eramba automation functions | [Example - Add Attachment](eramba/Example%20-%20Add%20Attachment/) | Online Assessments | Online Assessments | example |
+| eramba automation functions | [Example - Add Comment](eramba/Example%20-%20Add%20Comment/) | Online Assessments | Online Assessments | example |
+| eramba automation functions | [Example - Add Item](eramba/Example%20-%20Add%20Item/) | Online Assessments | Online Assessments | example |
+| eramba automation functions | [Example - Edit Item](eramba/Example%20-%20Edit%20Item/) | Online Assessments | Online Assessments | example |
+| eramba automation functions | [Example - File Write](eramba/Example%20-%20File%20Write/) | Any | Any | example |
 
 ### GitHub
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| GitHub | [GitHub – Accounts](GitHub/GitHub%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| GitHub | [GitHub – Accounts](GitHub/GitHub%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
 
 ### Google
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Google Sheets | [Finance Supplier Onboarding](Google/Finance%20Supplier%20Onboarding/) | Third Parties | 0.1.1 tested |
-| Google Workspace | [Google Workspace – Accounts](Google/Google%20Workspace%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
-| Google Workspace | [Multi-Factor Authentication Coverage Review](Google/Multi-Factor%20Authentication%20Coverage%20Review/) | Internal Controls | 0.1.0 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Google Sheets | [Finance Supplier Onboarding](Google/Finance%20Supplier%20Onboarding/) | Third Parties | Third Parties | 0.1.1 tested |
+| Google Workspace | [Google Workspace – Accounts](Google/Google%20Workspace%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
+| Google Workspace | [Multi-Factor Authentication Coverage Review](Google/Multi-Factor%20Authentication%20Coverage%20Review/) | Internal Controls | Control: Multi-Factor Authentication Coverage Review | 0.1.0 draft |
 
 ### Linear
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Linear | [Nonconformity and Corrective Action Tracking](Linear/Nonconformity%20and%20Corrective%20Action%20Tracking/) | Internal Controls | 0.1.0 draft |
-| Linear | [Vulnerability Remediation Tracking](Linear/Vulnerability%20Remediation%20Tracking/) | Internal Controls | 0.1.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Linear | [Nonconformity and Corrective Action Tracking](Linear/Nonconformity%20and%20Corrective%20Action%20Tracking/) | Internal Controls | Control: Nonconformity and Corrective Action Tracking | 0.1.0 draft |
+| Linear | [Vulnerability Remediation Tracking](Linear/Vulnerability%20Remediation%20Tracking/) | Internal Controls | Control: Vulnerability Remediation Tracking | 0.1.1 draft |
 
 ### Microsoft
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Microsoft Entra ID | [Endpoint Encryption Compliance Review](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | Internal Controls | 0.2.0 draft |
-| Microsoft Entra ID | [Entra ID – Accounts](Microsoft/Entra%20ID%20-%20Accounts/) | Account Review Feeds | 0.3.0 tested |
-| Microsoft Entra ID | [Entra ID – Application permissions](Microsoft/Entra%20ID%20-%20Application%20permissions/) | Account Review Feeds | 0.2.0 tested |
-| Microsoft Entra ID | [Entra ID – Current employees](Microsoft/Entra%20ID%20-%20Current%20employees/) | Account Review Feeds | 0.1.2 tested |
-| Microsoft Entra ID | [Mobile Device Management Review](Microsoft/Mobile%20Device%20Management%20Review/) | Internal Controls | 0.1.0 draft |
-| Microsoft Entra ID | [Multi-Factor Authentication Coverage Review](Microsoft/Multi-Factor%20Authentication%20Coverage%20Review/) | Internal Controls | 0.1.1 draft |
-| Microsoft Intune | [Endpoint Encryption Compliance Review](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | Internal Controls | 0.2.0 draft |
-| Microsoft Intune | [Mobile Device Management Review](Microsoft/Mobile%20Device%20Management%20Review/) | Internal Controls | 0.1.0 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Microsoft Entra ID | [Endpoint Encryption Compliance Review](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | Internal Controls | Control: Endpoint Encryption Compliance Review | 0.2.0 draft |
+| Microsoft Entra ID | [Entra ID – Accounts](Microsoft/Entra%20ID%20-%20Accounts/) | Account Review Feeds | Account review | 0.3.0 tested |
+| Microsoft Entra ID | [Entra ID – Application permissions](Microsoft/Entra%20ID%20-%20Application%20permissions/) | Account Review Feeds | Permission review | 0.2.0 tested |
+| Microsoft Entra ID | [Entra ID – Current employees](Microsoft/Entra%20ID%20-%20Current%20employees/) | Account Review Feeds | Employee list | 0.1.2 tested |
+| Microsoft Entra ID | [Mobile Device Management Review](Microsoft/Mobile%20Device%20Management%20Review/) | Internal Controls | Control: Mobile Device Management Review | 0.1.0 draft |
+| Microsoft Entra ID | [Multi-Factor Authentication Coverage Review](Microsoft/Multi-Factor%20Authentication%20Coverage%20Review/) | Internal Controls | Control: Multi-Factor Authentication Coverage Review | 0.1.1 draft |
+| Microsoft Intune | [Endpoint Encryption Compliance Review](Microsoft/Endpoint%20Encryption%20Compliance%20Review/) | Internal Controls | Control: Endpoint Encryption Compliance Review | 0.2.0 draft |
+| Microsoft Intune | [Mobile Device Management Review](Microsoft/Mobile%20Device%20Management%20Review/) | Internal Controls | Control: Mobile Device Management Review | 0.1.0 draft |
 
 ### Okta
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Auth0 | [Auth0 – Accounts](Okta/Auth0%20-%20Accounts/) | Account Review Feeds | 0.2.0 tested |
-| Okta Workforce Identity | [Okta – Accounts](Okta/Okta%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Auth0 | [Auth0 – Accounts](Okta/Auth0%20-%20Accounts/) | Account Review Feeds | Account review | 0.2.0 tested |
+| Okta Workforce Identity | [Okta – Accounts](Okta/Okta%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
 
 ### OpenAI
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| OpenAI API | [OpenAI – Accounts](OpenAI/OpenAI%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
-| OpenAI API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | Online Assessments | 0.4.0 tested |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| OpenAI API | [OpenAI – Accounts](OpenAI/OpenAI%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
+| OpenAI API | [Submitted Assessment Risk Review](eramba/Submitted%20Assessment%20Risk%20Review/) | Online Assessments | Online Assessments | 0.4.0 tested |
 
 ### Salesforce
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Salesforce | [Salesforce – Accounts](Salesforce/Salesforce%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Salesforce | [Salesforce – Accounts](Salesforce/Salesforce%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
 
 ### ServiceNow
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| ServiceNow | [ServiceNow – Accounts](ServiceNow/ServiceNow%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| ServiceNow | [ServiceNow – Accounts](ServiceNow/ServiceNow%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
 
 ### Slack
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Slack | [Slack – Accounts](Slack/Slack%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Slack | [Slack – Accounts](Slack/Slack%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
 
 ### Workday
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Workday HCM | [Workday – Current employees](Workday/Workday%20-%20Current%20employees/) | Account Review Feeds | 0.1.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Workday HCM | [Workday – Current employees](Workday/Workday%20-%20Current%20employees/) | Account Review Feeds | Employee list | 0.1.1 draft |
 
 ### Zoom
 
-| Technology | Automation | eramba section | Status |
-|---|---|---|---|
-| Zoom | [Multi-Factor Authentication Coverage Review](Zoom/Multi-Factor%20Authentication%20Coverage%20Review/) | Internal Controls | 0.1.0 draft |
-| Zoom | [Zoom – Accounts](Zoom/Zoom%20-%20Accounts/) | Account Review Feeds | 0.1.1 draft |
+| Technology | Automation | eramba section | Use | Status |
+|---|---|---|---|---|
+| Zoom | [Multi-Factor Authentication Coverage Review](Zoom/Multi-Factor%20Authentication%20Coverage%20Review/) | Internal Controls | Control: Multi-Factor Authentication Coverage Review | 0.1.0 draft |
+| Zoom | [Zoom – Accounts](Zoom/Zoom%20-%20Accounts/) | Account Review Feeds | Account review | 0.1.1 draft |
 
 ## By eramba section
 
 ### Account Review Feeds
 
-Sends accounts, permissions or employees to eramba Account Reviews.
+Source of an Account Review feed (Security Operations > Account Reviews > Feeds).
+
+**Account review** (feed type *List of accounts to be reviewed*)
 
 - [AWS IAM Identity Center – Accounts](AWS/AWS%20IAM%20Identity%20Center%20-%20Accounts/) – AWS IAM Identity Center
 - [AWS IAM – Accounts](AWS/AWS%20IAM%20-%20Accounts/) – AWS IAM
@@ -145,8 +147,6 @@ Sends accounts, permissions or employees to eramba Account Reviews.
 - [Atlassian – Accounts](Atlassian/Atlassian%20-%20Accounts/) – Atlassian Cloud
 - [Auth0 – Accounts](Okta/Auth0%20-%20Accounts/) – Auth0
 - [Entra ID – Accounts](Microsoft/Entra%20ID%20-%20Accounts/) – Microsoft Entra ID
-- [Entra ID – Application permissions](Microsoft/Entra%20ID%20-%20Application%20permissions/) – Microsoft Entra ID
-- [Entra ID – Current employees](Microsoft/Entra%20ID%20-%20Current%20employees/) – Microsoft Entra ID
 - [GitHub – Accounts](GitHub/GitHub%20-%20Accounts/) – GitHub
 - [Google Workspace – Accounts](Google/Google%20Workspace%20-%20Accounts/) – Google Workspace
 - [Okta – Accounts](Okta/Okta%20-%20Accounts/) – Okta Workforce Identity
@@ -154,12 +154,20 @@ Sends accounts, permissions or employees to eramba Account Reviews.
 - [Salesforce – Accounts](Salesforce/Salesforce%20-%20Accounts/) – Salesforce
 - [ServiceNow – Accounts](ServiceNow/ServiceNow%20-%20Accounts/) – ServiceNow
 - [Slack – Accounts](Slack/Slack%20-%20Accounts/) – Slack
-- [Workday – Current employees](Workday/Workday%20-%20Current%20employees/) – Workday HCM
 - [Zoom – Accounts](Zoom/Zoom%20-%20Accounts/) – Zoom
+
+**Permission review** (feed type *List of accounts to be reviewed*)
+
+- [Entra ID – Application permissions](Microsoft/Entra%20ID%20-%20Application%20permissions/) – Microsoft Entra ID
+
+**Employee list** (feed type *List of current employees*)
+
+- [Entra ID – Current employees](Microsoft/Entra%20ID%20-%20Current%20employees/) – Microsoft Entra ID
+- [Workday – Current employees](Workday/Workday%20-%20Current%20employees/) – Workday HCM
 
 ### Internal Controls
 
-Tests an internal control and records the audit result.
+Runs on the audits of an internal control and records the result.
 
 - [Backup Execution and Restore Test](AWS/Backup%20Execution%20and%20Restore%20Test/) – AWS Backup
 - [Capacity Planning Review](AWS/Capacity%20Planning%20Review/) – Amazon EC2 Auto Scaling, Amazon CloudWatch
@@ -178,14 +186,14 @@ Tests an internal control and records the audit result.
 
 ### Third Parties
 
-Onboards suppliers and launches their assessments.
+Runs from Third Parties, recurrently or from a Third Party notification.
 
 - [Finance Supplier Onboarding](Google/Finance%20Supplier%20Onboarding/) – Google Sheets, eramba API
 - [Missing Online Assessment Launch](eramba/Missing%20Online%20Assessment%20Launch/) – eramba API
 
 ### Online Assessments
 
-Creates, edits or reviews Online Assessments.
+Runs from Online Assessments, recurrently or from an Online Assessment notification.
 
 - [Example - Add Attachment](eramba/Example%20-%20Add%20Attachment/) – eramba automation functions
 - [Example - Add Comment](eramba/Example%20-%20Add%20Comment/) – eramba automation functions
@@ -195,13 +203,13 @@ Creates, edits or reviews Online Assessments.
 
 ### Security Incidents
 
-Handles security incidents.
+Runs from Security Incidents, from an incident notification.
 
 - [Urgent Incident Jira Issue](Atlassian/Urgent%20Incident%20Jira%20Issue/) – Jira Cloud, eramba API
 
 ### Any
 
-Works in any section (generic function examples).
+Not tied to one section (generic function examples).
 
 - [Example - File Write](eramba/Example%20-%20File%20Write/) – eramba automation functions
 

@@ -3,23 +3,19 @@ id: aws-capacity-performance-monitoring
 name: Capacity and Performance Monitoring Review
 version: 0.2.1
 status: draft
+vendor: AWS
 technology:
   - Amazon EC2 Auto Scaling
   - Amazon CloudWatch
-vendor: AWS
 eramba_module: Internal Controls
 domains:
   - capacity-management
-frameworks:
-  - "ISO 27002:2022"
-  - "SOC 2 (TSP 2017)"
-  - "SCF 2025"
 trigger: Audit planned date
 controls:
   - Capacity and Performance Monitoring Review
 policies:
   - Business Continuity > Business Impact Analysis and Recovery Objectives
-audit_frequency: twice monthly (days 1 and 15)
+audit_frequency: twice-monthly
 secrets:
   - aws_access_key_id
   - aws_secret_access_key

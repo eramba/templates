@@ -10,6 +10,8 @@
         "Anthropic API"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -25,6 +27,8 @@
         "Atlassian Cloud"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -61,6 +65,9 @@
       "domains": [
         "vulnerability-management"
       ],
+      "controls": [
+        "Vulnerability Remediation Tracking"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -70,12 +77,10 @@
         "SCF 2025",
         "EU AI Act 2024/1689"
       ],
-      "controls": [
-        "Vulnerability Remediation Tracking"
-      ],
       "policies": [
         "Vulnerability Management > Patch Deployment"
       ],
+      "audit_frequency": "monthly",
       "trigger": "Audit planned date",
       "path": "Automation/Atlassian/Vulnerability Remediation Tracking"
     },
@@ -89,6 +94,8 @@
         "AWS IAM Identity Center"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -104,6 +111,8 @@
         "AWS IAM"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -122,6 +131,9 @@
       "domains": [
         "business-continuity"
       ],
+      "controls": [
+        "Backup Execution and Restore Test"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -132,14 +144,11 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "controls": [
-        "Backup Execution and Restore Test"
-      ],
       "policies": [
         "Business Continuity > Backup Execution and Verification"
       ],
+      "audit_frequency": "weekly",
       "trigger": "Audit planned date",
-      "audit_frequency": "at_least_weekly",
       "path": "Automation/AWS/Backup Execution and Restore Test"
     },
     {
@@ -156,19 +165,19 @@
       "domains": [
         "capacity-management"
       ],
+      "controls": [
+        "Capacity Planning Review"
+      ],
       "frameworks": [
         "ISO 27002:2022",
         "SOC 2 (TSP 2017)",
         "SCF 2025"
       ],
-      "controls": [
-        "Capacity Planning Review"
-      ],
       "policies": [
         "Information Classification > Capacity Planning Review Procedure"
       ],
+      "audit_frequency": "twice-monthly",
       "trigger": "Audit planned date",
-      "audit_frequency": "twice monthly (days 1 and 15)",
       "path": "Automation/AWS/Capacity Planning Review"
     },
     {
@@ -185,19 +194,19 @@
       "domains": [
         "capacity-management"
       ],
+      "controls": [
+        "Capacity and Performance Monitoring Review"
+      ],
       "frameworks": [
         "ISO 27002:2022",
         "SOC 2 (TSP 2017)",
         "SCF 2025"
       ],
-      "controls": [
-        "Capacity and Performance Monitoring Review"
-      ],
       "policies": [
         "Business Continuity > Business Impact Analysis and Recovery Objectives"
       ],
+      "audit_frequency": "twice-monthly",
       "trigger": "Audit planned date",
-      "audit_frequency": "twice monthly (days 1 and 15)",
       "path": "Automation/AWS/Capacity and Performance Monitoring Review"
     },
     {
@@ -215,6 +224,9 @@
       "domains": [
         "cryptography"
       ],
+      "controls": [
+        "Cryptographic Key and Certificate Lifecycle Review"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -225,14 +237,11 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "controls": [
-        "Cryptographic Key and Certificate Lifecycle Review"
-      ],
       "policies": [
         "Cryptography > Certificate Management"
       ],
-      "trigger": "Audit planned date",
       "audit_frequency": "quarterly",
+      "trigger": "Audit planned date",
       "path": "Automation/AWS/Cryptographic Key and Certificate Lifecycle Review"
     },
     {
@@ -250,6 +259,9 @@
         "endpoint-security",
         "cryptography"
       ],
+      "controls": [
+        "Endpoint Encryption Compliance Review"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -259,12 +271,10 @@
         "SCF 2025",
         "NIS2 Article 21"
       ],
-      "controls": [
-        "Endpoint Encryption Compliance Review"
-      ],
       "policies": [
         "Endpoint Security > Endpoint Configuration Review"
       ],
+      "audit_frequency": "quarterly",
       "trigger": "Audit planned date",
       "path": "Automation/AWS/Endpoint Encryption Compliance Review"
     },
@@ -283,6 +293,9 @@
         "network-security",
         "identity-access"
       ],
+      "controls": [
+        "Remote Access Security Review"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -292,19 +305,17 @@
         "SCF 2025",
         "NIS2 Article 21"
       ],
-      "controls": [
-        "Remote Access Security Review"
-      ],
       "policies": [
         "Network Security > Remote Access"
       ],
-      "trigger": "Audit planned date",
       "audit_frequency": "monthly",
+      "trigger": "Audit planned date",
       "path": "Automation/AWS/Remote Access Security Review"
     },
     {
       "id": "oa-example-add-attachment",
       "name": "Example - Add Attachment",
+      "status": "example",
       "vendor": "eramba",
       "technology": [
         "eramba automation functions"
@@ -315,6 +326,7 @@
     {
       "id": "oa-example-add-comment",
       "name": "Example - Add Comment",
+      "status": "example",
       "vendor": "eramba",
       "technology": [
         "eramba automation functions"
@@ -325,6 +337,7 @@
     {
       "id": "oa-example-add-item",
       "name": "Example - Add Item",
+      "status": "example",
       "vendor": "eramba",
       "technology": [
         "eramba automation functions"
@@ -335,6 +348,7 @@
     {
       "id": "oa-example-edit-item",
       "name": "Example - Edit Item",
+      "status": "example",
       "vendor": "eramba",
       "technology": [
         "eramba automation functions"
@@ -345,6 +359,7 @@
     {
       "id": "example-file-write",
       "name": "Example - File Write",
+      "status": "example",
       "vendor": "eramba",
       "technology": [
         "eramba automation functions"
@@ -398,6 +413,8 @@
         "GitHub"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -431,6 +448,8 @@
         "Google Workspace"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -449,6 +468,9 @@
       "domains": [
         "identity-access"
       ],
+      "controls": [
+        "Multi-Factor Authentication Coverage Review"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -459,12 +481,10 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "controls": [
-        "Multi-Factor Authentication Coverage Review"
-      ],
       "policies": [
         "Access Management > Authentication"
       ],
+      "audit_frequency": "annually",
       "trigger": "Audit planned date",
       "path": "Automation/Google/Multi-Factor Authentication Coverage Review"
     },
@@ -481,6 +501,9 @@
       "domains": [
         "corrective-actions"
       ],
+      "controls": [
+        "Nonconformity and Corrective Action Tracking"
+      ],
       "frameworks": [
         "ISO 27001:2022",
         "SOC 2 (TSP 2017)",
@@ -492,9 +515,7 @@
         "ISO 37001:2025",
         "ISO 9001:2015"
       ],
-      "controls": [
-        "Nonconformity and Corrective Action Tracking"
-      ],
+      "audit_frequency": "monthly",
       "trigger": "Audit planned date",
       "path": "Automation/Linear/Nonconformity and Corrective Action Tracking"
     },
@@ -511,6 +532,9 @@
       "domains": [
         "vulnerability-management"
       ],
+      "controls": [
+        "Vulnerability Remediation Tracking"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -520,12 +544,10 @@
         "SCF 2025",
         "EU AI Act 2024/1689"
       ],
-      "controls": [
-        "Vulnerability Remediation Tracking"
-      ],
       "policies": [
         "Vulnerability Management > Patch Deployment"
       ],
+      "audit_frequency": "monthly",
       "trigger": "Audit planned date",
       "path": "Automation/Linear/Vulnerability Remediation Tracking"
     },
@@ -544,6 +566,9 @@
         "endpoint-security",
         "cryptography"
       ],
+      "controls": [
+        "Endpoint Encryption Compliance Review"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -553,14 +578,11 @@
         "SCF 2025",
         "NIS2 Article 21"
       ],
-      "controls": [
-        "Endpoint Encryption Compliance Review"
-      ],
       "policies": [
         "Endpoint Security > Endpoint Configuration Review"
       ],
-      "trigger": "Audit planned date",
       "audit_frequency": "quarterly",
+      "trigger": "Audit planned date",
       "path": "Automation/Microsoft/Endpoint Encryption Compliance Review"
     },
     {
@@ -573,6 +595,8 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -588,6 +612,8 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Permission review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -603,6 +629,8 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Employee list",
+      "feed_type": "List of current employees",
       "domains": [
         "identity-access"
       ],
@@ -622,14 +650,15 @@
       "domains": [
         "endpoint-security"
       ],
+      "controls": [
+        "Mobile Device Management Review"
+      ],
       "frameworks": [
         "ISO 27002:2022",
         "CIS Controls v8.1",
         "SCF 2025"
       ],
-      "controls": [
-        "Mobile Device Management Review"
-      ],
+      "audit_frequency": "quarterly",
       "trigger": "Audit planned date",
       "path": "Automation/Microsoft/Mobile Device Management Review"
     },
@@ -646,6 +675,9 @@
       "domains": [
         "identity-access"
       ],
+      "controls": [
+        "Multi-Factor Authentication Coverage Review"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -656,14 +688,11 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "controls": [
-        "Multi-Factor Authentication Coverage Review"
-      ],
       "policies": [
         "Access Management > Authentication"
       ],
-      "trigger": "Audit planned date",
       "audit_frequency": "annually",
+      "trigger": "Audit planned date",
       "path": "Automation/Microsoft/Multi-Factor Authentication Coverage Review"
     },
     {
@@ -676,6 +705,8 @@
         "Auth0"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -691,6 +722,8 @@
         "Okta Workforce Identity"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -706,6 +739,8 @@
         "OpenAI API"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -721,6 +756,8 @@
         "Salesforce"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -736,6 +773,8 @@
         "ServiceNow"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -751,6 +790,8 @@
         "Slack"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],
@@ -766,6 +807,8 @@
         "Workday HCM"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Employee list",
+      "feed_type": "List of current employees",
       "domains": [
         "identity-access"
       ],
@@ -784,6 +827,9 @@
       "domains": [
         "identity-access"
       ],
+      "controls": [
+        "Multi-Factor Authentication Coverage Review"
+      ],
       "frameworks": [
         "PCI DSS v4.0.1",
         "ISO 27002:2022",
@@ -794,12 +840,10 @@
         "NIS2 Article 21",
         "ISO 27701:2025"
       ],
-      "controls": [
-        "Multi-Factor Authentication Coverage Review"
-      ],
       "policies": [
         "Access Management > Authentication"
       ],
+      "audit_frequency": "annually",
       "trigger": "Audit planned date",
       "path": "Automation/Zoom/Multi-Factor Authentication Coverage Review"
     },
@@ -813,6 +857,8 @@
         "Zoom"
       ],
       "eramba_module": "Account Review Feeds",
+      "review_family": "Account review",
+      "feed_type": "List of accounts to be reviewed",
       "domains": [
         "identity-access"
       ],

@@ -19,10 +19,10 @@ technology:
   - Specific service
 eramba_module: Internal Controls
 domains: []
-frameworks: []
 trigger: Audit planned date
 controls:
   - Exact Control Title
+audit_frequency: quarterly   # weekly | twice-monthly | monthly | quarterly | annually
 secrets: []
 variables: []
 dependencies: []
@@ -32,7 +32,7 @@ last_tested: null
 ---
 ```
 
-Set the timeout to your implementation's requirement within the destination runner's limit. Populate secrets, variables and dependencies to match the code. Add policy mappings only if supplied. Use the exact control title as the document heading and identify technology separately. Fill `vendor`, `technology`, `domains` and `frameworks` with values from the [metadata vocabulary](../../metadata-vocabulary.yml), take `frameworks` from the control mapping, and rebuild the catalogue as described in [Automation metadata](../../METADATA.md).
+Set the timeout to your implementation's requirement within the destination runner's limit. Populate secrets, variables and dependencies to match the code. Add policy mappings only if supplied. Use the exact control title as the document heading and identify technology separately. Fill `vendor`, `technology`, `domains` and `audit_frequency` with values from the [metadata vocabulary](../../metadata-vocabulary.yml). Do not add `frameworks`: the catalogue takes them from the control mapping through `controls`. Rebuild the catalogue as described in [Automation metadata](../../METADATA.md).
 
 ## 1. Controls and policies
 

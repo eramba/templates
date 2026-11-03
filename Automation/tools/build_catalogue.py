@@ -6,7 +6,11 @@ validates it against Automation/metadata-vocabulary.yml and the control
 mapping CSV, and writes:
 
   Automation/catalogue.json  machine-readable index (one entry per automation)
-  Automation/CATALOGUE.md    the same index grouped by vendor and technology
+  Automation/CATALOGUE.md    the same index grouped by vendor, eramba section and framework
+
+Values that can be derived are not written in the READMEs: `frameworks` comes
+from `controls` and the mapping CSV, and `feed_type` from `review_family`.
+Both are added to the catalogue here.
 
 Usage:
   python3 Automation/tools/build_catalogue.py          # validate and write
@@ -32,16 +36,17 @@ OUT_JSON = AUTOMATION / "catalogue.json"
 OUT_MD = AUTOMATION / "CATALOGUE.md"
 NOT_INDEXED = ("_TEMPLATE", "_shared", "docs", "skills", "tools")
 
-REQUIRED = ["id", "name", "vendor", "technology", "eramba_module"]
-LISTS = ["technology", "domains", "frameworks", "controls", "policies"]
+REQUIRED = ["id", "name", "status", "vendor", "technology", "eramba_module"]
+LISTS = ["technology", "domains", "controls", "policies"]
+DERIVED = ["frameworks", "feed_type"]  # computed here; not allowed in a README
 EXPORTED = [
-    "id", "name", "version", "status", "vendor", "technology", "eramba_module", "domains",
-    "frameworks", "controls", "policies", "trigger", "audit_frequency", "guide",
+    "id", "name", "version", "status", "vendor", "technology", "eramba_module", "review_family",
+    "feed_type", "domains", "controls", "frameworks", "policies", "audit_frequency", "trigger", "guide",
 ]
 
 
 def front_matter(path: Path) -> dict | None:
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8").replace("\r\n", "\n")
     if not text.startswith("---\n"):
         return None
     end = text.find("\n---\n", 4)
@@ -53,23 +58,37 @@ def front_matter(path: Path) -> dict | None:
     return data
 
 
-def control_frameworks() -> dict[str, list[str]]:
+def control_frameworks(known: list[str]) -> tuple[dict[str, list[str]], list[str]]:
     with MAPPING.open(encoding="utf-8", newline="") as fh:
-        return {
-            r["Control Title"]: [k for k, v in r.items() if k != "Control Title" and (v or "").strip() not in ("", "-", "—")]
-            for r in csv.DictReader(fh)
+        reader = csv.DictReader(fh)
+        columns = [c for c in reader.fieldnames or [] if c != "Control Title"]
+        mapping = {
+            r["Control Title"]: [c for c in columns if (r.get(c) or "").strip() not in ("", "-", "—")]
+            for r in reader
         }
+    unknown = [c for c in columns if c not in known]
+    errors = [f"{MAPPING.name}: framework {c!r} is not in metadata-vocabulary.yml" for c in unknown]
+    return mapping, errors
 
 
 def collect(vocab: dict) -> tuple[list[dict], list[str]]:
     tech_vendor = vocab["technologies"]
-    allowed = {
-        "technology": set(tech_vendor),
-        "domains": set(vocab["domains"]),
-        "frameworks": set(vocab["frameworks"]),
-    }
-    mapping = control_frameworks()
-    entries, errors, seen = [], [], {}
+    families = vocab["review_families"]
+    allowed = {"technology": set(tech_vendor), "domains": set(vocab["domains"])}
+    mapping, errors = control_frameworks(vocab["frameworks"])
+    entries, seen = [], {}
+
+    for tech, vendor in tech_vendor.items():
+        if vendor not in vocab["vendors"]:
+            errors.append(f"metadata-vocabulary.yml: technology {tech!r} has vendor {vendor!r}, which is not in `vendors`")
+
+    for run in sorted(AUTOMATION.rglob("run.php")):
+        folder = run.parent.relative_to(AUTOMATION).parts
+        if folder[0] in NOT_INDEXED:
+            continue
+        readme = run.parent / "README.md"
+        if not readme.exists() or front_matter(readme) is None:
+            errors.append(f"{run.parent.relative_to(REPO)}: has run.php but its README.md has no front matter")
 
     for readme in sorted(AUTOMATION.rglob("README.md")):
         rel = readme.relative_to(REPO)
@@ -90,6 +109,9 @@ def collect(vocab: dict) -> tuple[list[dict], list[str]]:
         for key in REQUIRED:
             if not meta.get(key):
                 err(f"missing `{key}`")
+        for key in DERIVED:
+            if key in meta:
+                err(f"remove `{key}`: build_catalogue.py derives it (see METADATA.md)")
         for key in LISTS:
             if key in meta and not isinstance(meta[key], list):
                 err(f"`{key}` must be a list")
@@ -97,35 +119,49 @@ def collect(vocab: dict) -> tuple[list[dict], list[str]]:
             for value in meta.get(key) or []:
                 if value not in values:
                     err(f"`{key}` value {value!r} is not in metadata-vocabulary.yml")
-        if meta.get("vendor") not in vocab["vendors"]:
-            err(f"`vendor` {meta.get('vendor')!r} is not in metadata-vocabulary.yml")
-        if meta.get("eramba_module") not in vocab["eramba_modules"]:
-            err(f"`eramba_module` {meta.get('eramba_module')!r} is not in metadata-vocabulary.yml")
+        for key, vocab_key in (("vendor", "vendors"), ("eramba_module", "eramba_modules"), ("status", "statuses")):
+            if meta.get(key) is not None and meta.get(key) not in vocab[vocab_key]:
+                err(f"`{key}` {meta.get(key)!r} is not in metadata-vocabulary.yml")
 
         tech_vendors = {tech_vendor[t] for t in meta.get("technology") or [] if t in tech_vendor}
         if tech_vendors and meta.get("vendor") not in tech_vendors:
             err(f"`vendor` must be the vendor of one of its technologies: {sorted(tech_vendors)}")
         expected_folder = (str(meta.get("vendor")), str(meta.get("name", "")).replace("–", "-"))
         if folder != expected_folder:
-            err(f"must live in Automation/{expected_folder[0]}/{expected_folder[1]}/ (`vendor`, then `name` with - for –)")
+            hint = " The difference is only upper/lower case: rename the folder in two steps (A -> tmp -> B)." \
+                if "/".join(folder).lower() == "/".join(expected_folder).lower() else ""
+            err(f"must live in Automation/{expected_folder[0]}/{expected_folder[1]}/ (`vendor`, then `name` with - for –).{hint}")
 
         if meta.get("id") in seen:
             err(f"duplicate id {meta['id']!r} (also in {seen[meta['id']]})")
         seen[meta.get("id")] = rel
 
-        if meta.get("eramba_module") == "Internal Controls":
+        module = meta.get("eramba_module")
+        family = meta.get("review_family")
+        if module == "Account Review Feeds":
+            if family not in families:
+                err(f"`review_family` must be one of {list(families)}")
+        elif family is not None:
+            err("`review_family` is only for Account Review Feeds")
+
+        frameworks: list[str] = []
+        if module == "Internal Controls":
             if not meta.get("controls"):
                 err("internal control automations need `controls`")
-            expected: list[str] = []
+            if meta.get("audit_frequency") not in vocab["audit_frequencies"]:
+                err(f"`audit_frequency` must be one of {list(vocab['audit_frequencies'])}")
             for control in meta.get("controls") or []:
                 if control not in mapping:
                     err(f"control {control!r} is not in {MAPPING.name}")
                     continue
-                expected += [f for f in mapping[control] if f not in expected]
-            if set(expected) != set(meta.get("frameworks") or []):
-                err(f"`frameworks` must match {MAPPING.name}: {expected}")
+                frameworks += [f for f in mapping[control] if f not in frameworks]
+        elif meta.get("audit_frequency") is not None:
+            err("`audit_frequency` is only for Internal Controls")
 
-        entry = {k: meta[k] for k in EXPORTED if meta.get(k) not in (None, [], "")}
+        derived = dict(meta)
+        derived["frameworks"] = [f for f in vocab["frameworks"] if f in frameworks]
+        derived["feed_type"] = families.get(family) if family in families else None
+        entry = {k: derived[k] for k in EXPORTED if derived.get(k) not in (None, [], "")}
         entry["path"] = readme.parent.relative_to(REPO).as_posix()
         entries.append(entry)
 
@@ -140,6 +176,15 @@ def link(entry: dict) -> str:
 
 def status(entry: dict) -> str:
     return " ".join(str(entry[k]) for k in ("version", "status") if entry.get(k)) or "–"
+
+
+def use(entry: dict) -> str:
+    """What the automation is for, in one cell."""
+    if entry.get("review_family"):
+        return entry["review_family"]
+    if entry.get("controls"):
+        return "Control: " + ", ".join(entry["controls"])
+    return entry["eramba_module"]
 
 
 def render_md(entries: list[dict], vocab: dict) -> str:
@@ -158,10 +203,10 @@ def render_md(entries: list[dict], vocab: dict) -> str:
     ]
     vendors = sorted({tech_vendor[t] for e in entries for t in e["technology"]}, key=str.lower)
     for vendor in vendors:
-        out += [f"### {vendor}", "", "| Technology | Automation | eramba section | Status |", "|---|---|---|---|"]
+        out += [f"### {vendor}", "", "| Technology | Automation | eramba section | Use | Status |", "|---|---|---|---|---|"]
         rows = [(t, e) for e in entries for t in e["technology"] if tech_vendor[t] == vendor]
         for tech, e in sorted(rows, key=lambda r: (r[0].lower(), r[1]["name"])):
-            out.append(f"| {tech} | {link(e)} | {e['eramba_module']} | {status(e)} |")
+            out.append(f"| {tech} | {link(e)} | {e['eramba_module']} | {use(e)} | {status(e)} |")
         out.append("")
 
     out += ["## By eramba section", ""]
@@ -170,8 +215,14 @@ def render_md(entries: list[dict], vocab: dict) -> str:
         if not matches:
             continue
         out += [f"### {module}", "", description, ""]
-        out += [f"- {link(e)} – {', '.join(e['technology'])}" for e in matches]
-        out.append("")
+        if module == "Account Review Feeds":
+            for family, feed_type in vocab["review_families"].items():
+                group = [e for e in matches if e.get("review_family") == family]
+                if group:
+                    out += [f"**{family}** (feed type *{feed_type}*)", ""]
+                    out += [f"- {link(e)} – {', '.join(e['technology'])}" for e in group] + [""]
+        else:
+            out += [f"- {link(e)} – {', '.join(e['technology'])}" for e in matches] + [""]
 
     out += ["## By framework", "", "Internal control automations whose control maps to each framework.", ""]
     for framework in vocab["frameworks"]:

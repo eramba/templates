@@ -1,6 +1,7 @@
 ---
 id: oa-example-edit-item
 name: Example - Edit Item
+status: example
 vendor: eramba
 technology:
   - eramba automation functions

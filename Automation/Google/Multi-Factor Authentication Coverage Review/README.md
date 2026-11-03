@@ -9,20 +9,12 @@ technology:
 eramba_module: Internal Controls
 domains:
   - identity-access
-frameworks:
-  - "PCI DSS v4.0.1"
-  - "ISO 27002:2022"
-  - "SOC 2 (TSP 2017)"
-  - "NIST 800-53 Rev5"
-  - "CIS Controls v8.1"
-  - "SCF 2025"
-  - "NIS2 Article 21"
-  - "ISO 27701:2025"
 trigger: Audit planned date
 controls:
   - Multi-Factor Authentication Coverage Review
 policies:
   - Access Management > Authentication
+audit_frequency: annually
 secrets:
   - google_service_account_json_b64
 variables:

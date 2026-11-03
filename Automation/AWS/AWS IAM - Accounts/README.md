@@ -3,10 +3,11 @@ id: aws-iam-account-review
 name: AWS IAM – Accounts
 version: 0.1.1
 status: draft
+vendor: AWS
 technology:
   - AWS IAM
-vendor: AWS
 eramba_module: Account Review Feeds
+review_family: Account review
 domains:
   - identity-access
 secrets:
@@ -35,7 +36,6 @@ Sends eramba every IAM user of one AWS account, plus the account's root user, an
 
 | | |
 |---|---|
-| **Family** | Account review |
 | **Each row is** | One IAM user of one AWS account, identified by its user name, for example `ana.garcia`, or the account's root user, shown as `<root_account>` |
 | **Connects to** | AWS IAM, through the official AWS SDK for PHP. Read-only |
 | **Permission needed** | An IAM user with an access key and a policy allowing `iam:GetAccountAuthorizationDetails`, `iam:GenerateCredentialReport` and `iam:GetCredentialReport`. The AWS managed policy `SecurityAudit` includes them. An AWS administrator creates it (§5) |

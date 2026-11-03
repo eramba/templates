@@ -3,13 +3,13 @@ id: <source>-current-employees
 name: <Provider> – Current employees
 version: 0.1.0
 status: draft
+vendor: <Vendor>
 technology:
   - <Product>
-vendor: <Vendor>
 eramba_module: Account Review Feeds
+review_family: Employee list
 domains:
   - identity-access
-feed_type: List of current employees
 secrets:
   - <secret_name>
 variables:
@@ -32,7 +32,6 @@ Send the people who should have access today to an eramba feed of type **List of
 
 | | |
 |---|---|
-| **Family** | Employee list (for Exit reviews) |
 | **Each row is** | <One current (or former) employee, and what identifies them> |
 | **Connects to** | <Source> <API or service>, read-only |
 | **Permission needed** | <Exact read-only permission>. Approved by <who grants it in Source>. |

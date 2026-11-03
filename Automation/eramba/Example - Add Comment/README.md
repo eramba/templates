@@ -1,6 +1,7 @@
 ---
 id: oa-example-add-comment
 name: Example - Add Comment
+status: example
 vendor: eramba
 technology:
   - eramba automation functions

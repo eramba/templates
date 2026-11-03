@@ -3,22 +3,14 @@ id: aws-client-vpn-remote-access
 name: Remote Access Security Review
 version: 0.2.1
 status: draft
+vendor: AWS
 technology:
   - AWS Client VPN
   - AWS Directory Service
-vendor: AWS
 eramba_module: Internal Controls
 domains:
   - network-security
   - identity-access
-frameworks:
-  - "PCI DSS v4.0.1"
-  - "ISO 27002:2022"
-  - "SOC 2 (TSP 2017)"
-  - "NIST 800-53 Rev5"
-  - "CIS Controls v8.1"
-  - "SCF 2025"
-  - "NIS2 Article 21"
 trigger: Audit planned date
 controls:
   - Remote Access Security Review

@@ -1,6 +1,7 @@
 ---
 id: example-file-write
 name: Example - File Write
+status: example
 vendor: eramba
 technology:
   - eramba automation functions

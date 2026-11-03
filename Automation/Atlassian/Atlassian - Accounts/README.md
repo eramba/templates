@@ -3,10 +3,11 @@ id: atlassian-cloud-account-review
 name: Atlassian – Accounts
 version: 0.1.1
 status: draft
+vendor: Atlassian
 technology:
   - Atlassian Cloud
-vendor: Atlassian
 eramba_module: Account Review Feeds
+review_family: Account review
 domains:
   - identity-access
 secrets:
@@ -36,7 +37,6 @@ Sends eramba every user of your Atlassian organization and the access each one h
 
 | | |
 |---|---|
-| **Family** | Account review |
 | **Each row is** | One Atlassian user of your organization, identified by its email, for example `ana.garcia@example.com` (or its Atlassian account ID with `USER_KEY`) |
 | **Connects to** | Your Atlassian organization, through the Atlassian Admin API of every directory the key can manage. Read-only |
 | **Permission needed** | An organization API key without scopes, created in Atlassian Administration by an organization admin. Atlassian does not offer read-only scopes for these requests yet, so the key can do more than the script uses; the script only sends the three requests listed in §5 |

@@ -1,6 +1,7 @@
 ---
 id: oa-example-add-item
 name: Example - Add Item
+status: example
 vendor: eramba
 technology:
   - eramba automation functions

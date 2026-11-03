@@ -3,10 +3,11 @@ id: aws-identity-center-account-review
 name: AWS IAM Identity Center – Accounts
 version: 0.1.1
 status: draft
+vendor: AWS
 technology:
   - AWS IAM Identity Center
-vendor: AWS
 eramba_module: Account Review Feeds
+review_family: Account review
 domains:
   - identity-access
 secrets:
@@ -38,7 +39,6 @@ Sends eramba every user of your IAM Identity Center and the access each one has:
 
 | | |
 |---|---|
-| **Family** | Account review |
 | **Each row is** | One IAM Identity Center user, identified by its primary email, for example `ana.garcia@example.com` (or its user name or user ID with `USER_KEY`) |
 | **Connects to** | One IAM Identity Center organization instance, in the region you set in `REGION`, through the official AWS SDK for PHP. Read-only |
 | **Permission needed** | An IAM user with an access key, in the AWS Organizations management account or the delegated administrator account for IAM Identity Center, allowed to list instances, permission sets, account assignments, users, groups and group memberships (§5). An AWS administrator creates it |
