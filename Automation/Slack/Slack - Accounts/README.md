@@ -7,6 +7,7 @@ vendor: Slack
 technology:
   - Slack
 eramba_module: Account Reviews
+summary: Every member of your Slack workspace, with workspace role and optionally user groups.
 secrets:
   - slack_token
 variables:

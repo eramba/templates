@@ -9,6 +9,7 @@ technology:
   - Anthropic API
   - eramba API
 eramba_module: Online Assessments
+summary: When a supplier submits an assessment, proposes a risk level and a conclusion, optionally with AI.
 trigger: Notification "OA has been submitted" (Trigger Automation)
 guide: Online Assessments - Advanced Configurations (automation 3 of 3)
 secrets:

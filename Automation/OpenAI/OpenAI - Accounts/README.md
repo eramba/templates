@@ -7,6 +7,7 @@ vendor: OpenAI
 technology:
   - OpenAI API
 eramba_module: Account Reviews
+summary: Every member of your OpenAI API Platform organization, with role and projects.
 secrets:
   - openai_admin_key
 variables:

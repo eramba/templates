@@ -6,6 +6,7 @@ vendor: eramba
 technology:
   - eramba automation functions
 eramba_module: Online Assessments
+summary: Adds a comment to an Online Assessment.
 ---
 # Add Comment
 

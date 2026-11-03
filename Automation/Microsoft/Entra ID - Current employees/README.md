@@ -7,6 +7,7 @@ vendor: Microsoft
 technology:
   - Microsoft Entra ID
 eramba_module: Account Reviews
+summary: The people who should have access today, for exit reviews against any application's accounts.
 secrets:
   - entra_tenant_id
   - entra_client_id

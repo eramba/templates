@@ -8,6 +8,7 @@ technology:
   - Jira Cloud
   - eramba API
 eramba_module: Security Incidents
+summary: Opens a Jira issue for every urgent incident and saves the issue key on the incident.
 trigger: Notification "New Item Created" (Trigger Automation)
 guide: Security Incident Management in eramba
 secrets:

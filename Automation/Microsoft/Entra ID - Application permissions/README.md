@@ -7,6 +7,7 @@ vendor: Microsoft
 technology:
   - Microsoft Entra ID
 eramba_module: Account Reviews
+summary: Every application allowed to reach your Microsoft 365 data, and the permissions it holds.
 secrets:
   - entra_tenant_id
   - entra_client_id

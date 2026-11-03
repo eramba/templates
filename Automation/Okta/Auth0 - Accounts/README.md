@@ -7,6 +7,7 @@ vendor: Okta
 technology:
   - Auth0
 eramba_module: Account Reviews
+summary: Every user of one Auth0 tenant, with roles, organizations and roles inside each organization.
 secrets:
   - auth0_domain
   - auth0_client_id

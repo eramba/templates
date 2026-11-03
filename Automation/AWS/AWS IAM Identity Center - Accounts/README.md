@@ -7,6 +7,7 @@ vendor: AWS
 technology:
   - AWS IAM Identity Center
 eramba_module: Account Reviews
+summary: Every IAM Identity Center user, with groups and the permission sets that reach your AWS accounts.
 secrets:
   - aws_access_key_id
   - aws_secret_access_key

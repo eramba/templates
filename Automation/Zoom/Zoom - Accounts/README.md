@@ -7,6 +7,7 @@ vendor: Zoom
 technology:
   - Zoom
 eramba_module: Account Reviews
+summary: Every user of your Zoom account, with role, licence type and optionally groups.
 secrets:
   - zoom_account_id
   - zoom_client_id

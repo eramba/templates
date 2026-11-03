@@ -7,6 +7,7 @@ vendor: GitHub
 technology:
   - GitHub
 eramba_module: Account Reviews
+summary: Members and outside collaborators of your GitHub organizations, with their role and teams.
 secrets:
   - github_token
   - github_app_private_key_b64

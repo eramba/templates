@@ -6,6 +6,7 @@ vendor: eramba
 technology:
   - eramba automation functions
 eramba_module: Any
+summary: Writes text to the automation's own file and reads it back.
 ---
 # File Write
 

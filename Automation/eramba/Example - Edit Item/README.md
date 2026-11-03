@@ -6,6 +6,7 @@ vendor: eramba
 technology:
   - eramba automation functions
 eramba_module: Online Assessments
+summary: Updates an existing Online Assessment.
 ---
 # Edit Item
 

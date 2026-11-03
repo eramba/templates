@@ -7,6 +7,7 @@ vendor: Linear
 technology:
   - Linear
 eramba_module: Internal Controls
+summary: "Reviews corrective actions tracked in Linear: owners, target dates, overdue work and verification."
 trigger: Audit planned date
 controls:
   - Nonconformity and Corrective Action Tracking

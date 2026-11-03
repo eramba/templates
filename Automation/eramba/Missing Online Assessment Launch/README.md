@@ -7,6 +7,7 @@ vendor: eramba
 technology:
   - eramba API
 eramba_module: Third Parties
+summary: When a new supplier needs an assessment, creates it and sends it to the supplier's contact.
 trigger: Notification "New Item" (Trigger Automation)
 guide: Online Assessments - Advanced Configurations (automation 2 of 3)
 secrets:

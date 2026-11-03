@@ -7,6 +7,7 @@ vendor: Okta
 technology:
   - Okta Workforce Identity
 eramba_module: Account Reviews
+summary: Every user in your Okta org, with groups, assigned applications and admin roles.
 secrets:
   - okta_org_url
   - okta_api_token

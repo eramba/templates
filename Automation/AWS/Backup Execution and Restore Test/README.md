@@ -8,6 +8,7 @@ vendor: AWS
 technology:
   - AWS Backup
 eramba_module: Internal Controls
+summary: Reviews AWS Backup jobs and restore tests against your RPO and RTO.
 trigger: Audit planned date
 controls:
   - Backup Execution and Restore Test

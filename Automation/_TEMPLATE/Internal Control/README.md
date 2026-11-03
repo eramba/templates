@@ -18,6 +18,7 @@ vendor: Vendor
 technology:
   - Specific service
 eramba_module: Internal Controls
+summary: One sentence on what it checks, at most 140 characters.
 trigger: Audit planned date
 controls:
   - Exact Control Title

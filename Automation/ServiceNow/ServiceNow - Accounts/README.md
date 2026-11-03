@@ -7,6 +7,7 @@ vendor: ServiceNow
 technology:
   - ServiceNow
 eramba_module: Account Reviews
+summary: Every ServiceNow user, with direct and inherited roles and groups.
 secrets:
   - servicenow_instance
   - servicenow_client_id

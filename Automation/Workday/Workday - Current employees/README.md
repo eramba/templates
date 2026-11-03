@@ -7,6 +7,7 @@ vendor: Workday
 technology:
   - Workday HCM
 eramba_module: Account Reviews
+summary: The people who work for you today, from Workday, for exit reviews against any application.
 secrets:
   - workday_report_url
   - workday_isu_username

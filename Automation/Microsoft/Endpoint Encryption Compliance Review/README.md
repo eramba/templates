@@ -8,6 +8,7 @@ technology:
   - Microsoft Intune
   - Microsoft Entra ID
 eramba_module: Internal Controls
+summary: Checks disk encryption and recovery keys on Windows devices managed by Intune.
 trigger: Audit planned date
 controls:
   - Endpoint Encryption Compliance Review

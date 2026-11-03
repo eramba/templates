@@ -8,6 +8,7 @@ technology:
   - Microsoft Intune
   - Microsoft Entra ID
 eramba_module: Internal Controls
+summary: Reconciles mobile device enrollment and encryption, and checks remote wipe prerequisites.
 trigger: Audit planned date
 controls:
   - Mobile Device Management Review

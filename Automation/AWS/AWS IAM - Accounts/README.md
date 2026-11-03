@@ -7,6 +7,7 @@ vendor: AWS
 technology:
   - AWS IAM
 eramba_module: Account Reviews
+summary: Every IAM user of one AWS account plus root, with groups, policies and active credentials.
 secrets:
   - aws_access_key_id
   - aws_secret_access_key
