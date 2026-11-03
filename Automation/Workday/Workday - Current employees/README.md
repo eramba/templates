@@ -7,8 +7,6 @@ vendor: Workday
 technology:
   - Workday HCM
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - workday_report_url
   - workday_isu_username

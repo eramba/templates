@@ -7,8 +7,6 @@ vendor: OpenAI
 technology:
   - OpenAI API
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - openai_admin_key
 variables:

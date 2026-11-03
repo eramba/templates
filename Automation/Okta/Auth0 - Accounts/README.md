@@ -7,8 +7,6 @@ vendor: Okta
 technology:
   - Auth0
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - auth0_domain
   - auth0_client_id

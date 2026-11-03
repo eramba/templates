@@ -8,8 +8,6 @@ technology:
   - Amazon EC2 Auto Scaling
   - Amazon CloudWatch
 eramba_module: Internal Controls
-domains:
-  - capacity-management
 trigger: Audit planned date
 controls:
   - Capacity Planning Review

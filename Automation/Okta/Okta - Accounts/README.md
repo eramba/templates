@@ -7,8 +7,6 @@ vendor: Okta
 technology:
   - Okta Workforce Identity
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - okta_org_url
   - okta_api_token

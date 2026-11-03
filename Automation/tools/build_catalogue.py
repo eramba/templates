@@ -36,11 +36,11 @@ OUT_MD = AUTOMATION / "CATALOGUE.md"
 NOT_INDEXED = ("_TEMPLATE", "_shared", "docs", "skills", "tools")
 
 REQUIRED = ["id", "name", "status", "vendor", "technology", "eramba_module"]
-LISTS = ["technology", "domains", "controls", "policies"]
+LISTS = ["technology", "controls", "policies"]
 DERIVED = ["frameworks"]  # computed here; not allowed in a README
 EXPORTED = [
     "id", "name", "version", "status", "vendor", "technology", "eramba_module",
-    "domains", "controls", "frameworks", "policies", "audit_frequency", "trigger", "guide",
+    "controls", "frameworks", "policies", "audit_frequency", "trigger", "guide",
 ]
 
 
@@ -72,7 +72,7 @@ def control_frameworks(known: list[str]) -> tuple[dict[str, list[str]], list[str
 
 def collect(vocab: dict) -> tuple[list[dict], list[str]]:
     tech_vendor = vocab["technologies"]
-    allowed = {"technology": set(tech_vendor), "domains": set(vocab["domains"])}
+    allowed = {"technology": set(tech_vendor)}
     mapping, errors = control_frameworks(vocab["frameworks"])
     entries, seen = [], {}
 
@@ -168,13 +168,6 @@ def status(entry: dict) -> str:
     return " ".join(str(entry[k]) for k in ("version", "status") if entry.get(k)) or "–"
 
 
-def use(entry: dict) -> str:
-    """What the automation is for, in one cell."""
-    if entry.get("controls"):
-        return "Control: " + ", ".join(entry["controls"])
-    return entry["eramba_module"]
-
-
 def render_md(entries: list[dict], vocab: dict) -> str:
     tech_vendor = vocab["technologies"]
     out = [
@@ -191,10 +184,10 @@ def render_md(entries: list[dict], vocab: dict) -> str:
     ]
     vendors = sorted({tech_vendor[t] for e in entries for t in e["technology"]}, key=str.lower)
     for vendor in vendors:
-        out += [f"### {vendor}", "", "| Technology | Automation | eramba section | Use | Status |", "|---|---|---|---|---|"]
+        out += [f"### {vendor}", "", "| Technology | Automation | eramba section | Status |", "|---|---|---|---|"]
         rows = [(t, e) for e in entries for t in e["technology"] if tech_vendor[t] == vendor]
         for tech, e in sorted(rows, key=lambda r: (r[0].lower(), r[1]["name"])):
-            out.append(f"| {tech} | {link(e)} | {e['eramba_module']} | {use(e)} | {status(e)} |")
+            out.append(f"| {tech} | {link(e)} | {e['eramba_module']} | {status(e)} |")
         out.append("")
 
     out += ["## By eramba section", ""]

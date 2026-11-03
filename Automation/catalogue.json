@@ -10,9 +10,6 @@
         "Anthropic API"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Anthropic/Anthropic - Accounts"
     },
     {
@@ -25,9 +22,6 @@
         "Atlassian Cloud"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Atlassian/Atlassian - Accounts"
     },
     {
@@ -41,9 +35,6 @@
         "eramba API"
       ],
       "eramba_module": "Security Incidents",
-      "domains": [
-        "incident-response"
-      ],
       "trigger": "Notification \"New Item Created\" (Trigger Automation)",
       "guide": "Security Incident Management in eramba",
       "path": "Automation/Atlassian/Urgent Incident Jira Issue"
@@ -58,9 +49,6 @@
         "Jira Cloud"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "vulnerability-management"
-      ],
       "controls": [
         "Vulnerability Remediation Tracking"
       ],
@@ -90,9 +78,6 @@
         "AWS IAM Identity Center"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/AWS/AWS IAM Identity Center - Accounts"
     },
     {
@@ -105,9 +90,6 @@
         "AWS IAM"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/AWS/AWS IAM - Accounts"
     },
     {
@@ -120,9 +102,6 @@
         "AWS Backup"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "business-continuity"
-      ],
       "controls": [
         "Backup Execution and Restore Test"
       ],
@@ -154,9 +133,6 @@
         "Amazon CloudWatch"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "capacity-management"
-      ],
       "controls": [
         "Capacity Planning Review"
       ],
@@ -183,9 +159,6 @@
         "Amazon CloudWatch"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "capacity-management"
-      ],
       "controls": [
         "Capacity and Performance Monitoring Review"
       ],
@@ -213,9 +186,6 @@
         "Elastic Load Balancing"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "cryptography"
-      ],
       "controls": [
         "Cryptographic Key and Certificate Lifecycle Review"
       ],
@@ -247,10 +217,6 @@
         "AWS KMS"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "endpoint-security",
-        "cryptography"
-      ],
       "controls": [
         "Endpoint Encryption Compliance Review"
       ],
@@ -281,10 +247,6 @@
         "AWS Directory Service"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "network-security",
-        "identity-access"
-      ],
       "controls": [
         "Remote Access Security Review"
       ],
@@ -369,9 +331,6 @@
         "eramba API"
       ],
       "eramba_module": "Third Parties",
-      "domains": [
-        "supplier-management"
-      ],
       "trigger": "Notification \"New Item\" (Trigger Automation)",
       "guide": "Online Assessments - Advanced Configurations (automation 2 of 3)",
       "path": "Automation/eramba/Missing Online Assessment Launch"
@@ -388,9 +347,6 @@
         "eramba API"
       ],
       "eramba_module": "Online Assessments",
-      "domains": [
-        "supplier-management"
-      ],
       "trigger": "Notification \"OA has been submitted\" (Trigger Automation)",
       "guide": "Online Assessments - Advanced Configurations (automation 3 of 3)",
       "path": "Automation/eramba/Submitted Assessment Risk Review"
@@ -405,9 +361,6 @@
         "GitHub"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/GitHub/GitHub - Accounts"
     },
     {
@@ -421,9 +374,6 @@
         "eramba API"
       ],
       "eramba_module": "Third Parties",
-      "domains": [
-        "supplier-management"
-      ],
       "trigger": "Recurrent (daily)",
       "guide": "Online Assessments - Advanced Configurations (automation 1 of 3)",
       "path": "Automation/Google/Finance Supplier Onboarding"
@@ -438,9 +388,6 @@
         "Google Workspace"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Google/Google Workspace - Accounts"
     },
     {
@@ -453,9 +400,6 @@
         "Google Workspace"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "identity-access"
-      ],
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -486,9 +430,6 @@
         "Linear"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "corrective-actions"
-      ],
       "controls": [
         "Nonconformity and Corrective Action Tracking"
       ],
@@ -517,9 +458,6 @@
         "Linear"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "vulnerability-management"
-      ],
       "controls": [
         "Vulnerability Remediation Tracking"
       ],
@@ -550,10 +488,6 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "endpoint-security",
-        "cryptography"
-      ],
       "controls": [
         "Endpoint Encryption Compliance Review"
       ],
@@ -583,9 +517,6 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Microsoft/Entra ID - Accounts"
     },
     {
@@ -598,9 +529,6 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Microsoft/Entra ID - Application permissions"
     },
     {
@@ -613,9 +541,6 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Microsoft/Entra ID - Current employees"
     },
     {
@@ -629,9 +554,6 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "endpoint-security"
-      ],
       "controls": [
         "Mobile Device Management Review"
       ],
@@ -654,9 +576,6 @@
         "Microsoft Entra ID"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "identity-access"
-      ],
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -687,9 +606,6 @@
         "Auth0"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Okta/Auth0 - Accounts"
     },
     {
@@ -702,9 +618,6 @@
         "Okta Workforce Identity"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Okta/Okta - Accounts"
     },
     {
@@ -717,9 +630,6 @@
         "OpenAI API"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/OpenAI/OpenAI - Accounts"
     },
     {
@@ -732,9 +642,6 @@
         "Salesforce"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Salesforce/Salesforce - Accounts"
     },
     {
@@ -747,9 +654,6 @@
         "ServiceNow"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/ServiceNow/ServiceNow - Accounts"
     },
     {
@@ -762,9 +666,6 @@
         "Slack"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Slack/Slack - Accounts"
     },
     {
@@ -777,9 +678,6 @@
         "Workday HCM"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Workday/Workday - Current employees"
     },
     {
@@ -792,9 +690,6 @@
         "Zoom"
       ],
       "eramba_module": "Internal Controls",
-      "domains": [
-        "identity-access"
-      ],
       "controls": [
         "Multi-Factor Authentication Coverage Review"
       ],
@@ -825,9 +720,6 @@
         "Zoom"
       ],
       "eramba_module": "Account Reviews",
-      "domains": [
-        "identity-access"
-      ],
       "path": "Automation/Zoom/Zoom - Accounts"
     }
   ]

@@ -7,8 +7,6 @@ vendor: AWS
 technology:
   - AWS IAM
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - aws_access_key_id
   - aws_secret_access_key

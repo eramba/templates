@@ -9,8 +9,6 @@ technology:
   - Anthropic API
   - eramba API
 eramba_module: Online Assessments
-domains:
-  - supplier-management
 trigger: Notification "OA has been submitted" (Trigger Automation)
 guide: Online Assessments - Advanced Configurations (automation 3 of 3)
 secrets:

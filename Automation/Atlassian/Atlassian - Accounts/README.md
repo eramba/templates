@@ -7,8 +7,6 @@ vendor: Atlassian
 technology:
   - Atlassian Cloud
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - atlassian_org_id
   - atlassian_admin_api_key

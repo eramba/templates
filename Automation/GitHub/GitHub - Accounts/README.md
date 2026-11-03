@@ -7,8 +7,6 @@ vendor: GitHub
 technology:
   - GitHub
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - github_token
   - github_app_private_key_b64

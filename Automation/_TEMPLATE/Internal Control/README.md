@@ -18,7 +18,6 @@ vendor: Vendor
 technology:
   - Specific service
 eramba_module: Internal Controls
-domains: []
 trigger: Audit planned date
 controls:
   - Exact Control Title
@@ -32,7 +31,7 @@ last_tested: null
 ---
 ```
 
-Set the timeout to your implementation's requirement within the destination runner's limit. Populate secrets, variables and dependencies to match the code. Add policy mappings only if supplied. Use the exact control title as the document heading and identify technology separately. Fill `vendor`, `technology`, `domains` and `audit_frequency` with values from the [metadata vocabulary](../../metadata-vocabulary.yml). Do not add `frameworks`: the catalogue takes them from the control mapping through `controls`. Rebuild the catalogue as described in [Automation metadata](../../METADATA.md).
+Set the timeout to your implementation's requirement within the destination runner's limit. Populate secrets, variables and dependencies to match the code. Add policy mappings only if supplied. Use the exact control title as the document heading and identify technology separately. Fill `vendor`, `technology` and `audit_frequency` with values from the [metadata vocabulary](../../metadata-vocabulary.yml). Do not add `frameworks`: the catalogue takes them from the control mapping through `controls`. Rebuild the catalogue as described in [Automation metadata](../../METADATA.md).
 
 ## 1. Controls and policies
 

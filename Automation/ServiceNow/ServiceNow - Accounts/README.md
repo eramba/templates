@@ -7,8 +7,6 @@ vendor: ServiceNow
 technology:
   - ServiceNow
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - servicenow_instance
   - servicenow_client_id

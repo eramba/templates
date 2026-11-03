@@ -8,9 +8,6 @@ technology:
   - AWS Client VPN
   - AWS Directory Service
 eramba_module: Internal Controls
-domains:
-  - network-security
-  - identity-access
 trigger: Audit planned date
 controls:
   - Remote Access Security Review

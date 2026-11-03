@@ -8,8 +8,6 @@ vendor: AWS
 technology:
   - AWS Backup
 eramba_module: Internal Controls
-domains:
-  - business-continuity
 trigger: Audit planned date
 controls:
   - Backup Execution and Restore Test

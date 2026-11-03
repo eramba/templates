@@ -28,18 +28,6 @@ statuses:
   deprecated: Kept for reference; do not install.
   example: Function example to copy from, not a complete automation.
 
-domains:
-  identity-access: Authentication, MFA and user or privileged account management.
-  endpoint-security: Laptops, mobile devices and virtual desktops.
-  business-continuity: Backups, restores and recovery objectives.
-  capacity-management: Capacity planning and performance monitoring.
-  cryptography: Keys, certificates and encryption in transit.
-  network-security: Remote access, segmentation and firewalls.
-  vulnerability-management: Vulnerability findings and their remediation.
-  corrective-actions: Nonconformities and corrective action tracking.
-  supplier-management: Supplier inventory, onboarding and reviews.
-  incident-response: Escalation and tracking of security incidents.
-
 # Framework names as they appear in the header of
 # GRC Templates/LLM - GRC Templates/Controls/mapping_controls_to_requirements.csv.
 # READMEs do not list frameworks: build_catalogue.py takes them from that

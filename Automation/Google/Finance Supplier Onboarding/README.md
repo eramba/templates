@@ -8,8 +8,6 @@ technology:
   - Google Sheets
   - eramba API
 eramba_module: Third Parties
-domains:
-  - supplier-management
 trigger: Recurrent (daily)
 guide: Online Assessments - Advanced Configurations (automation 1 of 3)
 secrets:

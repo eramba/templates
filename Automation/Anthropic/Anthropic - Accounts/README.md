@@ -7,8 +7,6 @@ vendor: Anthropic
 technology:
   - Anthropic API
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - anthropic_admin_key
 variables:

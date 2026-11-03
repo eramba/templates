@@ -7,8 +7,6 @@ vendor: Slack
 technology:
   - Slack
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - slack_token
 variables:

@@ -7,8 +7,6 @@ vendor: Google
 technology:
   - Google Workspace
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - google_service_account_json_b64
 variables:

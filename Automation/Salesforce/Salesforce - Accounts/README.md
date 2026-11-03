@@ -7,8 +7,6 @@ vendor: Salesforce
 technology:
   - Salesforce
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - salesforce_my_domain
   - salesforce_client_id

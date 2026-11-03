@@ -7,8 +7,6 @@ vendor: eramba
 technology:
   - eramba API
 eramba_module: Third Parties
-domains:
-  - supplier-management
 trigger: Notification "New Item" (Trigger Automation)
 guide: Online Assessments - Advanced Configurations (automation 2 of 3)
 secrets:

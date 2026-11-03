@@ -7,8 +7,6 @@ vendor: Google
 technology:
   - Google Workspace
 eramba_module: Internal Controls
-domains:
-  - identity-access
 trigger: Audit planned date
 controls:
   - Multi-Factor Authentication Coverage Review

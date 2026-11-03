@@ -8,8 +8,6 @@ technology:
   - Jira Cloud
   - eramba API
 eramba_module: Security Incidents
-domains:
-  - incident-response
 trigger: Notification "New Item Created" (Trigger Automation)
 guide: Security Incident Management in eramba
 secrets:

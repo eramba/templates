@@ -9,8 +9,6 @@ technology:
   - AWS Certificate Manager
   - Elastic Load Balancing
 eramba_module: Internal Controls
-domains:
-  - cryptography
 trigger: Audit planned date
 controls:
   - Cryptographic Key and Certificate Lifecycle Review

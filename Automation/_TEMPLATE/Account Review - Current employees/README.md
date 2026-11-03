@@ -7,8 +7,6 @@ vendor: <Vendor>
 technology:
   - <Product>
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - <secret_name>
 variables:

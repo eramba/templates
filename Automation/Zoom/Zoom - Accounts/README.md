@@ -7,8 +7,6 @@ vendor: Zoom
 technology:
   - Zoom
 eramba_module: Account Reviews
-domains:
-  - identity-access
 secrets:
   - zoom_account_id
   - zoom_client_id

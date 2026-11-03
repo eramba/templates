@@ -11,7 +11,6 @@ Every automation README starts with a YAML front matter block. It describes the 
 | `eramba_module` | always | eramba section the automation is attached to: where it is created and what triggers it. Account Reviews, Internal Controls, Third Parties, Online Assessments, Security Incidents, or Any. |
 | `controls` | Internal Controls only, list | Exact titles of the controls it tests, as in [the control mapping](../GRC%20Templates/LLM%20-%20GRC%20Templates/Controls/mapping_controls_to_requirements.csv). |
 | `audit_frequency` | Internal Controls only | Recommended audit frequency: `weekly`, `twice-monthly`, `monthly`, `quarterly` or `annually`. |
-| `domains` | optional, list | Security topic, such as `identity-access` or `vulnerability-management`. |
 | `status` | always | `draft`, `tested`, `stable`, `deprecated`, or `example` for the function examples. |
 
 What the automation is for is `controls` for an internal control, and the name for the rest (`<Product> – Accounts`, `<Product> – Current employees`, and so on).
@@ -47,8 +46,6 @@ vendor: Microsoft
 technology:
   - Microsoft Entra ID
 eramba_module: Internal Controls
-domains:
-  - identity-access
 controls:
   - Multi-Factor Authentication Coverage Review
 audit_frequency: annually

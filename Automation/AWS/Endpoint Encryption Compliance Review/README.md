@@ -8,9 +8,6 @@ technology:
   - Amazon WorkSpaces
   - AWS KMS
 eramba_module: Internal Controls
-domains:
-  - endpoint-security
-  - cryptography
 trigger: Audit planned date
 controls:
   - Endpoint Encryption Compliance Review
