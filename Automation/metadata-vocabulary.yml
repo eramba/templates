@@ -1,0 +1,84 @@
+# Controlled vocabulary for the front matter of every automation README.md.
+# Automation/tools/build_catalogue.py rejects values that are not listed here.
+# Add a value here first, then use it in a README. See METADATA.md.
+
+use_cases:
+  account-reviews: Feeds accounts or employees into eramba Account Reviews.
+  internal-controls: Tests an internal control and records the audit result in eramba.
+  compliance: Produces audit evidence for a control mapped to compliance frameworks.
+  third-party-risk: Onboards, assesses or rates suppliers and other third parties.
+  online-assessments: Creates, launches or reviews eramba Online Assessments.
+  incident-management: Handles security incidents registered in eramba.
+  examples: Minimal reference example of an eramba automation function.
+
+domains:
+  identity-access: Authentication, MFA and user or privileged account management.
+  endpoint-security: Laptops, mobile devices and virtual desktops.
+  business-continuity: Backups, restores and recovery objectives.
+  capacity-management: Capacity planning and performance monitoring.
+  cryptography: Keys, certificates and encryption in transit.
+  network-security: Remote access, segmentation and firewalls.
+  vulnerability-management: Vulnerability findings and their remediation.
+  corrective-actions: Nonconformities and corrective action tracking.
+  supplier-management: Supplier inventory, onboarding and reviews.
+  incident-response: Escalation and tracking of security incidents.
+
+# Framework names as they appear in the header of
+# GRC Templates/LLM - GRC Templates/Controls/mapping_controls_to_requirements.csv.
+# For internal-control automations, `frameworks` must match that mapping.
+frameworks:
+  - PCI DSS v4.0.1
+  - ISO 27001:2022
+  - ISO 27002:2022
+  - SOC 2 (TSP 2017)
+  - NIST 800-53 Rev5
+  - CIS Controls v8.1
+  - SCF 2025
+  - NIS2 Article 21
+  - ISO 27701:2025
+  - ISO 45001:2018
+  - ISO 42001:2023
+  - ISO 37001:2025
+  - ISO 9001:2015
+  - OWASP LLM Top 10 2025
+  - NIST AI 600-1 2024
+  - EU AI Act 2024/1689
+  - AESCSF-SP1
+
+# Vendors, also the top-level folders of Automation/. eramba holds the
+# automations that use only eramba (or eramba plus an optional provider).
+vendors:
+  - Anthropic
+  - Atlassian
+  - AWS
+  - eramba
+  - Google
+  - Linear
+  - Microsoft
+  - OpenAI
+  - Zoom
+
+# Technology (product or API) -> vendor. `technologies` in a README must use
+# these names, and `vendors` must be the vendors of its technologies
+# (eramba may be left out when another vendor is present).
+technologies:
+  Amazon CloudWatch: AWS
+  Amazon EC2 Auto Scaling: AWS
+  Amazon WorkSpaces: AWS
+  AWS Backup: AWS
+  AWS Certificate Manager: AWS
+  AWS Client VPN: AWS
+  AWS Directory Service: AWS
+  AWS KMS: AWS
+  Elastic Load Balancing: AWS
+  Anthropic API: Anthropic
+  OpenAI API: OpenAI
+  Jira Cloud: Atlassian
+  Google Sheets: Google
+  Google Workspace: Google
+  Linear: Linear
+  Microsoft Entra ID: Microsoft
+  Microsoft Intune: Microsoft
+  Zoom: Zoom
+  eramba API: eramba
+  eramba automation functions: eramba

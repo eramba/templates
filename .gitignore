@@ -11,7 +11,7 @@ composer.lock
 # macOS
 .DS_Store
 **/.DS_Store
-Automation/Internal Controls/skill/
+Automation/skill/
 
 # Local authoring material
 /.local/

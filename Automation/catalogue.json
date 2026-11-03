@@ -1,0 +1,751 @@
+{
+  "automations": [
+    {
+      "id": "incident-urgent-jira-issue",
+      "name": "Urgent Incident Jira Issue",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Atlassian"
+      ],
+      "technologies": [
+        "Jira Cloud",
+        "eramba API"
+      ],
+      "use_cases": [
+        "incident-management"
+      ],
+      "domains": [
+        "incident-response"
+      ],
+      "eramba_module": "Security Incidents",
+      "trigger": "Notification \"New Item Created\" (Trigger Automation)",
+      "guide": "Security Incident Management in eramba",
+      "vendor": "Atlassian",
+      "technology": "Jira Cloud REST API v3 + eramba API v2",
+      "path": "Automation/Atlassian/Urgent Incident Jira Issue"
+    },
+    {
+      "id": "jira-vulnerability-remediation",
+      "name": "Vulnerability Remediation Tracking",
+      "version": "0.1.2",
+      "status": "draft",
+      "vendors": [
+        "Atlassian"
+      ],
+      "technologies": [
+        "Jira Cloud"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "vulnerability-management"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "EU AI Act 2024/1689"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Vulnerability Remediation Tracking"
+      ],
+      "policies": [
+        "Vulnerability Management > Patch Deployment"
+      ],
+      "trigger": "Audit planned date",
+      "vendor": "Atlassian",
+      "technology": "Jira Cloud",
+      "path": "Automation/Atlassian/Vulnerability Remediation Tracking"
+    },
+    {
+      "id": "aws-backup-jobs-restore-tests",
+      "name": "Backup Execution and Restore Test",
+      "version": "0.3.2",
+      "status": "draft",
+      "vendors": [
+        "AWS"
+      ],
+      "technologies": [
+        "AWS Backup"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "business-continuity"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "NIS2 Article 21",
+        "ISO 27701:2025"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Backup Execution and Restore Test"
+      ],
+      "policies": [
+        "Business Continuity > Backup Execution and Verification"
+      ],
+      "trigger": "Audit planned date",
+      "audit_frequency": "at_least_weekly",
+      "vendor": "AWS",
+      "technology": "AWS Backup",
+      "path": "Automation/AWS/Backup Execution and Restore Test"
+    },
+    {
+      "id": "aws-capacity-planning",
+      "name": "Capacity Planning Review",
+      "version": "0.1.2",
+      "status": "draft",
+      "vendors": [
+        "AWS"
+      ],
+      "technologies": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon CloudWatch"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "capacity-management"
+      ],
+      "frameworks": [
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "SCF 2025"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Capacity Planning Review"
+      ],
+      "policies": [
+        "Information Classification > Capacity Planning Review Procedure"
+      ],
+      "trigger": "Audit planned date",
+      "audit_frequency": "twice monthly (days 1 and 15)",
+      "vendor": "AWS",
+      "technology": "AWS EC2 Auto Scaling and Amazon CloudWatch",
+      "path": "Automation/AWS/Capacity Planning Review"
+    },
+    {
+      "id": "aws-capacity-performance-monitoring",
+      "name": "Capacity and Performance Monitoring Review",
+      "version": "0.2.1",
+      "status": "draft",
+      "vendors": [
+        "AWS"
+      ],
+      "technologies": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon CloudWatch"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "capacity-management"
+      ],
+      "frameworks": [
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "SCF 2025"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Capacity and Performance Monitoring Review"
+      ],
+      "policies": [
+        "Business Continuity > Business Impact Analysis and Recovery Objectives"
+      ],
+      "trigger": "Audit planned date",
+      "audit_frequency": "twice monthly (days 1 and 15)",
+      "vendor": "AWS",
+      "technology": "AWS EC2 Auto Scaling and Amazon CloudWatch",
+      "path": "Automation/AWS/Capacity and Performance Monitoring Review"
+    },
+    {
+      "id": "aws-key-certificate-lifecycle",
+      "name": "Cryptographic Key and Certificate Lifecycle Review",
+      "version": "0.2.1",
+      "status": "draft",
+      "vendors": [
+        "AWS"
+      ],
+      "technologies": [
+        "AWS KMS",
+        "AWS Certificate Manager",
+        "Elastic Load Balancing"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "cryptography"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "NIS2 Article 21",
+        "ISO 27701:2025"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Cryptographic Key and Certificate Lifecycle Review"
+      ],
+      "policies": [
+        "Cryptography > Certificate Management"
+      ],
+      "trigger": "Audit planned date",
+      "audit_frequency": "quarterly",
+      "vendor": "AWS",
+      "technology": "AWS KMS, ACM and Elastic Load Balancing",
+      "path": "Automation/AWS/Cryptographic Key and Certificate Lifecycle Review"
+    },
+    {
+      "id": "aws-workspaces-encryption",
+      "name": "Endpoint Encryption Compliance Review",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "AWS"
+      ],
+      "technologies": [
+        "Amazon WorkSpaces",
+        "AWS KMS"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "endpoint-security",
+        "cryptography"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "NIS2 Article 21"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Endpoint Encryption Compliance Review"
+      ],
+      "policies": [
+        "Endpoint Security > Endpoint Configuration Review"
+      ],
+      "trigger": "Audit planned date",
+      "vendor": "AWS",
+      "technology": "Amazon WorkSpaces Personal and AWS KMS",
+      "path": "Automation/AWS/Endpoint Encryption Compliance Review"
+    },
+    {
+      "id": "aws-client-vpn-remote-access",
+      "name": "Remote Access Security Review",
+      "version": "0.2.1",
+      "status": "draft",
+      "vendors": [
+        "AWS"
+      ],
+      "technologies": [
+        "AWS Client VPN",
+        "AWS Directory Service"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "network-security",
+        "identity-access"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "NIS2 Article 21"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Remote Access Security Review"
+      ],
+      "policies": [
+        "Network Security > Remote Access"
+      ],
+      "trigger": "Audit planned date",
+      "audit_frequency": "monthly",
+      "vendor": "AWS",
+      "technology": "AWS Client VPN and Directory Service",
+      "path": "Automation/AWS/Remote Access Security Review"
+    },
+    {
+      "id": "oa-example-add-attachment",
+      "name": "Add Attachment",
+      "vendors": [
+        "eramba"
+      ],
+      "technologies": [
+        "eramba automation functions"
+      ],
+      "use_cases": [
+        "examples",
+        "online-assessments"
+      ],
+      "eramba_module": "Online Assessments",
+      "vendor": "eramba",
+      "technology": "eramba automation functions",
+      "path": "Automation/eramba/Example - Add Attachment"
+    },
+    {
+      "id": "oa-example-add-comment",
+      "name": "Add Comment",
+      "vendors": [
+        "eramba"
+      ],
+      "technologies": [
+        "eramba automation functions"
+      ],
+      "use_cases": [
+        "examples",
+        "online-assessments"
+      ],
+      "eramba_module": "Online Assessments",
+      "vendor": "eramba",
+      "technology": "eramba automation functions",
+      "path": "Automation/eramba/Example - Add Comment"
+    },
+    {
+      "id": "oa-example-add-item",
+      "name": "Add Item",
+      "vendors": [
+        "eramba"
+      ],
+      "technologies": [
+        "eramba automation functions"
+      ],
+      "use_cases": [
+        "examples",
+        "online-assessments"
+      ],
+      "eramba_module": "Online Assessments",
+      "vendor": "eramba",
+      "technology": "eramba automation functions",
+      "path": "Automation/eramba/Example - Add Item"
+    },
+    {
+      "id": "oa-example-edit-item",
+      "name": "Edit Item",
+      "vendors": [
+        "eramba"
+      ],
+      "technologies": [
+        "eramba automation functions"
+      ],
+      "use_cases": [
+        "examples",
+        "online-assessments"
+      ],
+      "eramba_module": "Online Assessments",
+      "vendor": "eramba",
+      "technology": "eramba automation functions",
+      "path": "Automation/eramba/Example - Edit Item"
+    },
+    {
+      "id": "example-file-write",
+      "name": "File Write",
+      "vendors": [
+        "eramba"
+      ],
+      "technologies": [
+        "eramba automation functions"
+      ],
+      "use_cases": [
+        "examples"
+      ],
+      "eramba_module": "Any",
+      "vendor": "eramba",
+      "technology": "PHP file functions in the eramba automation runner",
+      "path": "Automation/eramba/Example - File Write"
+    },
+    {
+      "id": "oa-missing-assessment-launch",
+      "name": "Missing Online Assessment Launch",
+      "version": "0.1.2",
+      "status": "tested",
+      "vendors": [
+        "eramba"
+      ],
+      "technologies": [
+        "eramba API"
+      ],
+      "use_cases": [
+        "third-party-risk",
+        "online-assessments"
+      ],
+      "domains": [
+        "supplier-management"
+      ],
+      "eramba_module": "Third Parties",
+      "trigger": "Notification \"New Item\" (Trigger Automation)",
+      "guide": "Online Assessments - Advanced Configurations (automation 2 of 3)",
+      "vendor": "eramba",
+      "technology": "eramba API v2",
+      "path": "Automation/eramba/Missing Online Assessment Launch"
+    },
+    {
+      "id": "oa-submitted-risk-review",
+      "name": "Submitted Assessment Risk Review",
+      "version": "0.4.0",
+      "status": "tested",
+      "vendors": [
+        "eramba",
+        "OpenAI",
+        "Anthropic"
+      ],
+      "technologies": [
+        "OpenAI API",
+        "Anthropic API",
+        "eramba API"
+      ],
+      "use_cases": [
+        "third-party-risk",
+        "online-assessments"
+      ],
+      "domains": [
+        "supplier-management"
+      ],
+      "eramba_module": "Online Assessments",
+      "trigger": "Notification \"OA has been submitted\" (Trigger Automation)",
+      "guide": "Online Assessments - Advanced Configurations (automation 3 of 3)",
+      "vendor": "eramba",
+      "technology": "OpenAI Chat Completions or Anthropic Messages API (optional) + eramba API v2",
+      "path": "Automation/eramba/Submitted Assessment Risk Review"
+    },
+    {
+      "id": "oa-finance-supplier-onboarding",
+      "name": "Finance Supplier Onboarding",
+      "version": "0.1.1",
+      "status": "tested",
+      "vendors": [
+        "Google"
+      ],
+      "technologies": [
+        "Google Sheets",
+        "eramba API"
+      ],
+      "use_cases": [
+        "third-party-risk",
+        "online-assessments"
+      ],
+      "domains": [
+        "supplier-management"
+      ],
+      "eramba_module": "Third Parties",
+      "trigger": "Recurrent (daily)",
+      "guide": "Online Assessments - Advanced Configurations (automation 1 of 3)",
+      "vendor": "Google",
+      "technology": "Google Sheets API + eramba API v2",
+      "path": "Automation/Google/Finance Supplier Onboarding"
+    },
+    {
+      "id": "google-workspace-mfa",
+      "name": "Multi-Factor Authentication Coverage Review",
+      "version": "0.1.0",
+      "status": "draft",
+      "vendors": [
+        "Google"
+      ],
+      "technologies": [
+        "Google Workspace"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "NIS2 Article 21",
+        "ISO 27701:2025"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Multi-Factor Authentication Coverage Review"
+      ],
+      "policies": [
+        "Access Management > Authentication"
+      ],
+      "trigger": "Audit planned date",
+      "vendor": "Google",
+      "technology": "Google Workspace Admin SDK Directory",
+      "path": "Automation/Google/Multi-Factor Authentication Coverage Review"
+    },
+    {
+      "id": "linear-corrective-actions",
+      "name": "Nonconformity and Corrective Action Tracking",
+      "version": "0.1.0",
+      "status": "draft",
+      "vendors": [
+        "Linear"
+      ],
+      "technologies": [
+        "Linear"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "corrective-actions"
+      ],
+      "frameworks": [
+        "ISO 27001:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "SCF 2025",
+        "ISO 27701:2025",
+        "ISO 45001:2018",
+        "ISO 42001:2023",
+        "ISO 37001:2025",
+        "ISO 9001:2015"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Nonconformity and Corrective Action Tracking"
+      ],
+      "trigger": "Audit planned date",
+      "vendor": "Linear",
+      "technology": "Linear GraphQL API",
+      "path": "Automation/Linear/Nonconformity and Corrective Action Tracking"
+    },
+    {
+      "id": "linear-vulnerability-remediation",
+      "name": "Vulnerability Remediation Tracking",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Linear"
+      ],
+      "technologies": [
+        "Linear"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "vulnerability-management"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "EU AI Act 2024/1689"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Vulnerability Remediation Tracking"
+      ],
+      "policies": [
+        "Vulnerability Management > Patch Deployment"
+      ],
+      "trigger": "Audit planned date",
+      "vendor": "Linear",
+      "technology": "Linear GraphQL API",
+      "path": "Automation/Linear/Vulnerability Remediation Tracking"
+    },
+    {
+      "id": "intune-windows-encryption",
+      "name": "Endpoint Encryption Compliance Review",
+      "version": "0.2.0",
+      "status": "draft",
+      "vendors": [
+        "Microsoft"
+      ],
+      "technologies": [
+        "Microsoft Intune",
+        "Microsoft Entra ID"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "endpoint-security",
+        "cryptography"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "NIS2 Article 21"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Endpoint Encryption Compliance Review"
+      ],
+      "policies": [
+        "Endpoint Security > Endpoint Configuration Review"
+      ],
+      "trigger": "Audit planned date",
+      "audit_frequency": "quarterly",
+      "vendor": "Microsoft",
+      "technology": "Microsoft Intune and Entra ID",
+      "path": "Automation/Microsoft/Endpoint Encryption Compliance Review"
+    },
+    {
+      "id": "intune-mobile-management",
+      "name": "Mobile Device Management Review",
+      "version": "0.1.0",
+      "status": "draft",
+      "vendors": [
+        "Microsoft"
+      ],
+      "technologies": [
+        "Microsoft Intune",
+        "Microsoft Entra ID"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "endpoint-security"
+      ],
+      "frameworks": [
+        "ISO 27002:2022",
+        "CIS Controls v8.1",
+        "SCF 2025"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Mobile Device Management Review"
+      ],
+      "trigger": "Audit planned date",
+      "vendor": "Microsoft",
+      "technology": "Intune and Entra ID",
+      "path": "Automation/Microsoft/Mobile Device Management Review"
+    },
+    {
+      "id": "entra-mfa-coverage",
+      "name": "Multi-Factor Authentication Coverage Review",
+      "version": "0.1.1",
+      "status": "draft",
+      "vendors": [
+        "Microsoft"
+      ],
+      "technologies": [
+        "Microsoft Entra ID"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "NIS2 Article 21",
+        "ISO 27701:2025"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Multi-Factor Authentication Coverage Review"
+      ],
+      "policies": [
+        "Access Management > Authentication"
+      ],
+      "trigger": "Audit planned date",
+      "audit_frequency": "annually",
+      "vendor": "Microsoft",
+      "technology": "Microsoft Entra ID",
+      "path": "Automation/Microsoft/Multi-Factor Authentication Coverage Review"
+    },
+    {
+      "id": "zoom-mfa-coverage",
+      "name": "Multi-Factor Authentication Coverage Review",
+      "version": "0.1.0",
+      "status": "draft",
+      "vendors": [
+        "Zoom"
+      ],
+      "technologies": [
+        "Zoom"
+      ],
+      "use_cases": [
+        "internal-controls",
+        "compliance"
+      ],
+      "domains": [
+        "identity-access"
+      ],
+      "frameworks": [
+        "PCI DSS v4.0.1",
+        "ISO 27002:2022",
+        "SOC 2 (TSP 2017)",
+        "NIST 800-53 Rev5",
+        "CIS Controls v8.1",
+        "SCF 2025",
+        "NIS2 Article 21",
+        "ISO 27701:2025"
+      ],
+      "eramba_module": "Internal Controls",
+      "controls": [
+        "Multi-Factor Authentication Coverage Review"
+      ],
+      "policies": [
+        "Access Management > Authentication"
+      ],
+      "trigger": "Audit planned date",
+      "vendor": "Zoom",
+      "technology": "Zoom account settings and users REST API",
+      "path": "Automation/Zoom/Multi-Factor Authentication Coverage Review"
+    }
+  ]
+}
