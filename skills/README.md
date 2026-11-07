@@ -2,7 +2,7 @@
 
 Store each completed skill in this directory as one Markdown file. Use a lowercase, hyphen-separated filename based on the skill title, for example `analyse-compliance-requirements.md`.
 
-Each skill file must begin with YAML metadata, followed by the title, description, and skill text:
+Each skill file must begin with YAML metadata, followed by separate copyable Title, Description, and Instructions values:
 
 ~~~markdown
 ---
@@ -16,11 +16,15 @@ use_cases:
 
 # Title
 
+```text
 Skill title
+```
 
 ## Description
 
+```text
 Brief description of when the skill is used and its purpose.
+```
 
 ## Skill
 
@@ -36,6 +40,6 @@ Complete skill instructions in Markdown.
 - `modules`: Optional. Include one or more relevant Eramba module names when applicable. Omit this field when no module applies.
 - `use_cases`: Required. Include one or more of these values: `compliance`, `risk`, `incident`, `online assessments`, `awareness programs`, `data privacy`.
 
-The `## Skill` section contains the full instructions. Write those instructions in Markdown syntax, which Eramba displays as plain text because its Instructions field does not support rich-text formatting. Wrap the full Instructions value in a fenced `markdown` code block so GitHub displays a copy button; copying the code block copies only the field contents, without the fence. Do not include the YAML metadata in the Eramba Instructions field.
+The `## Skill` section contains the full instructions. Write those instructions in Markdown syntax, which Eramba displays as plain text because its Instructions field does not support rich-text formatting. Wrap the Title and Description values in fenced `text` code blocks and the full Instructions value in a fenced `markdown` code block. GitHub displays a copy button for each field; copying a block copies only its contents, without the fence. Do not include the YAML metadata in the Eramba Instructions field.
 
 Keep each skill self-contained in a single file. Do not add a separate instructions file for the same skill. The README is directory guidance, not a skill.

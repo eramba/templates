@@ -1,20 +1,25 @@
 ---
 author: "Esteban and Codex"
-version: "1.0"
+version: "1.1"
 use_cases:
   - compliance
 ---
 
 # Title
 
+```text
 Analyse Compliance Requirements
+```
 
 ## Description
 
+```text
 Use when the user needs to identify and map the policies and/or internal controls required to address compliance requirements in an Eramba Compliance Package.
+```
 
 ## Skill
 
+```markdown
 # Analyse Compliance Requirements
 
 ## Mandatory sequence
@@ -62,3 +67,4 @@ Then provide a table with one row per identified internal control, its key activ
 |---|---|---|
 
 **Stage output:** A proposed mapping of requirements to policies and controls. The descriptions of policies and internal controls must be bullet lists of the mandatory items they need to address.
+```

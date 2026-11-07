@@ -1,6 +1,6 @@
 ---
 author: "Esteban"
-version: "1.2"
+version: "1.3"
 modules:
   - "Access Management"
 use_cases:
@@ -12,11 +12,17 @@ use_cases:
   - data privacy
 ---
 
-# Set Up Basic Groups and Accounts
+# Title
+
+```text
+Set Up Basic Groups and Accounts
+```
 
 ## Description
 
+```text
 Use when setting up the initial GRC team and department groups and administrator accounts in a new Eramba instance that has no user-created groups or accounts.
+```
 
 ## Skill
 
