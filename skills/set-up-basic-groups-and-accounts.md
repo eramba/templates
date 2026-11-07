@@ -1,6 +1,6 @@
 ---
 author: "Esteban"
-version: "1.1"
+version: "1.2"
 modules:
   - "Access Management"
 use_cases:
@@ -20,6 +20,7 @@ Use when setting up the initial GRC team and department groups and administrator
 
 ## Skill
 
+```markdown
 # Set Up Basic Groups and Accounts
 
 ## Mandatory sequence
@@ -68,3 +69,4 @@ For every administrator with complete, validated details, create an account usin
 Verify that each account was created and that its settings match the table. If creation or verification fails for any account, remain in this phase and resolve it. Do not report completion for accounts that Eramba did not confirm.
 
 After all accounts are verified, give the user each administrator's login and temporary password. State that Eramba requires the administrator to change the password at first login. Do not send credentials to anyone else or through another channel.
+```
