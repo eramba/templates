@@ -1,8 +1,15 @@
 ---
 author: "Esteban"
-version: "1.0"
+version: "1.1"
+modules:
+  - "Access Management"
 use_cases:
   - compliance
+  - risk
+  - incident
+  - online assessments
+  - awareness programs
+  - data privacy
 ---
 
 # Set Up Basic Groups and Accounts
