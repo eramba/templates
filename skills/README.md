@@ -12,9 +12,15 @@ modules:
   - "Relevant Eramba module"
 use_cases:
   - compliance
-title: "Skill title"
-description: "Brief description"
 ---
+
+# Title
+
+Skill title
+
+## Description
+
+Brief description of when the skill is used and its purpose.
 
 ## Skill
 
@@ -27,9 +33,7 @@ Complete skill instructions in Markdown.
 - `version`: Required. Start a new skill at `1.0`. Increase the version when revising that skill, keeping its existing filename.
 - `modules`: Optional. Include one or more relevant Eramba module names when applicable. Omit this field when no module applies.
 - `use_cases`: Required. Include one or more of these values: `compliance`, `risk`, `incident`, `online assessments`, `awareness programs`, `data privacy`.
-- `title`: Required. The skill title.
-- `description`: Required. A brief description of when the skill is used and its purpose.
 
-The `## Skill` section contains the full instructions. Use Markdown because the Eramba Instructions field supports plain text, not rich-text formatting.
+The `## Skill` section contains the full instructions. Write those instructions in Markdown syntax, which Eramba displays as plain text because its Instructions field does not support rich-text formatting. Do not include the YAML metadata in the Eramba Instructions field.
 
 Keep each skill self-contained in a single file. Do not add a separate instructions file for the same skill. The README is directory guidance, not a skill.
