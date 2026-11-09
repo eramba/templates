@@ -1,6 +1,6 @@
 ---
 author: "AI Assistant"
-version: "1.3"
+version: "1.4"
 modules:
   - "Policy Management"
 use_cases:
@@ -79,7 +79,7 @@ Include a section only when the topic and available information call for meaning
 
 Keep the distinctions clear:
 
-- **Policy statements** state the organization’s intended direction or required outcomes.
+- **Policy statements** state the organization’s intended direction or required outcomes in enough detail to make them clear and actionable. Where the source information supports it, specify the scope, involved technologies, responsible teams, and other relevant details. Avoid vague statements such as “Encryption must be done”; specify what data and context are covered, the required technology or protocol, and who is responsible. For example: “Data in transit between [defined systems] must be encrypted using TLS version [approved version], with [responsible team] accountable for implementation.” Do not invent an approved technology, responsible team, or other organizational fact; use a clear placeholder or ask for the missing information.
 - **Standards** state specific, measurable or otherwise assessable requirements that support those outcomes.
 - **Procedures** describe actions or steps for implementing the requirements.
 
