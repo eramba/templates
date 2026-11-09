@@ -1,6 +1,6 @@
 ---
 author: "AI Assistant"
-version: "1.4"
+version: "1.5"
 modules:
   - "Policy Management"
 use_cases:
@@ -68,7 +68,7 @@ If the topic is too broad to draft responsibly, ask a focused question about its
 
 ### 3. Draft the policy content
 
-Use this internal hierarchy and heading levels as needed:
+Build the content as a connected chain of requirements. Each layer must stay within the scope established by the selected topic path. A policy statement may lead to one or more supporting standards; a standard may lead to further policy statements, standards, or procedures when needed. Keep the hierarchy and headings below as internal drafting guidance:
 
 - Introduction — level-one heading, when useful to introduce the policy
 - Policy Statements — level-one heading, with one or more relevant statement topics as level-two headings
@@ -79,9 +79,11 @@ Include a section only when the topic and available information call for meaning
 
 Keep the distinctions clear:
 
-- **Policy statements** state the organization’s intended direction or required outcomes in enough detail to make them clear and actionable. Where the source information supports it, specify the scope, involved technologies, responsible teams, and other relevant details. Avoid vague statements such as “Encryption must be done”; specify what data and context are covered, the required technology or protocol, and who is responsible. For example: “Data in transit between [defined systems] must be encrypted using TLS version [approved version], with [responsible team] accountable for implementation.” Do not invent an approved technology, responsible team, or other organizational fact; use a clear placeholder or ask for the missing information.
-- **Standards** state specific, measurable or otherwise assessable requirements that support those outcomes.
-- **Procedures** describe actions or steps for implementing the requirements.
+- **Policy statements** express broad principles or intended outcomes for the topic. Keep them generic and high-level; for example, “Encryption is used for all data in transit.” Do not put detailed technical settings in a policy statement.
+- **Standards** derive from and make policy statements specific, measurable, and assessable. State the technologies, configurations, scope, ownership, or other details needed to implement the related policy statement, when supported by the topic and source information. For example, an encryption policy statement may lead to a standard requiring TLS 1.1 for data in transit. A standard about TLS may also require a supporting policy statement on secure certificate lifecycle management; its related standard may specify an issuing platform and validity period, such as AWS and two years, when those details are established by the source or confirmed by the user.
+- **Procedures** provide operational steps for carrying out a standard when a process is needed. For example, a certificate lifecycle standard may require a “Certificate Issue” procedure with clear, sequential steps. Include only steps supported by the available information; use placeholders or ask the user about unknown organizational responsibilities, tools, and actions.
+
+Trace each standard and procedure to the policy statement or requirement it supports, and add supporting statements or standards when an implementation detail creates a further relevant requirement. Keep every link in this chain within the topic scope. Do not assume organization-specific technology choices, responsible teams, platforms, validity periods, or operating practices; distinguish technical implications from facts about the organization and use placeholders or ask the user when details are unknown.
 
 Do not invent organizational practices. If a procedure depends on unknown local arrangements, draft a general, adaptable procedure or mark the specific missing detail as a placeholder.
 
