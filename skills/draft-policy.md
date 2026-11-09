@@ -1,6 +1,6 @@
 ---
 author: "AI Assistant"
-version: "1.1"
+version: "1.2"
 modules:
   - "Policy Management"
 use_cases:
@@ -68,17 +68,14 @@ If the topic is too broad to draft responsibly, ask a focused question about its
 
 ### 3. Draft the policy content
 
-Draft the content using this internal hierarchy and heading levels:
+Use this internal hierarchy and heading levels as needed:
 
-- Introduction — level-one heading
-- Policy Statements — level-one heading
-  - One or more relevant statement topics — level-two headings
-- Standards — level-one heading
-  - One or more relevant standard topics — level-two headings
-- Procedures — level-one heading
-  - One or more relevant procedure titles — level-two headings
+- Introduction — level-one heading, when useful to introduce the policy
+- Policy Statements — level-one heading, with one or more relevant statement topics as level-two headings
+- Standards — level-one heading, with one or more relevant standard topics as level-two headings
+- Procedures — level-one heading, with one or more relevant procedure titles as level-two headings
 
-Write meaningful content under each applicable heading. Do not expose this hierarchy as instructions, a checklist, or commentary to the user. In particular, do not tell the user that the structure is hidden or prescribed.
+Include a section only when the topic and available information call for meaningful content in that section. Omit an entire section when it has no relevant content; for example, omit Procedures if no procedure is needed. Do not add empty sections or headings just to complete the hierarchy. Add level-two headings only for relevant topics. Under every level-two heading, present the content as bullet points. Do not expose this hierarchy as instructions, a checklist, or commentary to the user. In particular, do not tell the user that the structure is hidden or prescribed.
 
 Keep the distinctions clear:
 
