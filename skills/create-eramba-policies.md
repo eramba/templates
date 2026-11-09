@@ -1,6 +1,6 @@
 ---
 author: "me"
-version: "1.0"
+version: "1.1"
 modules:
   - "Policy Management"
 use_cases:
@@ -19,7 +19,7 @@ Create Eramba Policies
 ## Description
 
 ```text
-Use when creating a policy in Eramba. Determine the policy fields, get the user’s validation, then create the policy only after all fields are confirmed.
+Use when creating one or more policies in Eramba. Determine the policy fields, ask the user only about unclear fields, then create the policies, in bulk when appropriate.
 ```
 
 ## Skill
@@ -29,7 +29,7 @@ Use when creating a policy in Eramba. Determine the policy fields, get the user�
 
 ## Workflow
 
-Complete each step in order. Do not begin a step until the previous step’s exit condition is met. Keep messages concise.
+Complete each step in order. Do not begin a step until the previous step’s exit condition is met. Keep messages concise and minimize questions to the user.
 
 ### Step 1: Determine and propose policy fields
 
@@ -45,23 +45,25 @@ Review the policy content provided by the user and the relevant Eramba configura
 - **Content:** Use the content provided by the user, formatted clearly. Do not add unsupported requirements or organizational facts.
 - **Policy portal visibility:** Set the policy to private so it is not public on the policy portal.
 
-Present all fields together. Clearly identify any field you could not determine and why. Do not create the policy in this step.
+Prepare the proposed values for all fields. Do not ask the user to review fields you can determine confidently.
 
-**Exit condition:** Every field has a proposed value or is explicitly identified as requiring user input. Present the proposal to the user for validation.
+**Exit condition:** Every field has a proposed value, and any uncertain fields are identified for brief user validation in Step 3.
 
-### Step 2: Get user validation
+### Step 2: Prepare policies for creation
 
-Ask the user whether any proposed fields need changes. Call out unresolved fields, including a missing GRC Contact group or a Reviewer with no obvious connection, and ask the user to provide the needed value.
+If the user provided multiple policy contents or requested multiple policies, prepare each policy using the same field rules. Keep each policy’s fields and content associated with its name.
 
-Apply the user’s feedback to the proposal. If the user requests changes, update the affected fields and present the revised values for validation. Do not proceed while a required field is unresolved or the user has not validated the complete proposal.
+**Exit condition:** All requested policies are prepared, and any uncertain fields are ready to be listed by policy name in Step 3.
 
-**Exit condition:** The user has validated the complete set of fields, and every required field has a confirmed value.
+### Step 3: Resolve unclear fields and create policies
 
-### Step 3: Create the policy
+Briefly show the policy name or names and ask the user to confirm or supply only fields you could not determine confidently. These may include the GRC Contact, Reviewer, or next review date. Keep the question brief and list only the uncertain fields. Do not ask the user to revalidate clear fields.
 
-Create the policy in Eramba using the validated field values. Set portal visibility to private.
+If no fields are uncertain, skip the question and create the policies. After the user resolves any listed fields, create the policies in Eramba using the prepared values. Create multiple policies in bulk when the available Eramba workflow supports it. Do not request another confirmation before creating them. Set each policy’s portal visibility to private.
+
+If a required field remains unresolved, wait for the user’s answer before creating the affected policy. Create other policies whose fields are complete when possible.
 
 If Eramba rejects a value or the policy cannot be created, report the issue and ask only for the information needed to resolve it. Do not claim success unless Eramba confirms creation.
 
-**Exit condition:** Eramba confirms that the policy was created. Tell the user it has been created.
+**Exit condition:** Eramba confirms which policies were created. Tell the user which policies were created and report any that could not be created.
 ```
