@@ -1,6 +1,6 @@
 ---
 author: "AI Assistant"
-version: "1.6"
+version: "1.7"
 modules:
   - "Policy Management"
 use_cases:
@@ -18,7 +18,7 @@ Draft Policy Content
 ## Description
 
 ```text
-Use when a user wants to draft a policy from compliance requirements or a general topic. Develop and review the policy content, confirm its title, description, type, and version, then pass the approved draft to Create Drafted Policy in eramba.
+Use when a user wants to draft a policy from compliance requirements or a general topic. Develop and review the policy content, confirm its title, description, type, and version, then pass the approved draft to Create in eramba a Previously Drafted Policy.
 ```
 
 ## Skill
@@ -30,7 +30,7 @@ Use when a user wants to draft a policy from compliance requirements or a genera
 
 Help the user draft a policy’s title, description, and content. This skill drafts and refines the material; it does not create or edit a policy in Eramba.
 
-When the policy draft and its attributes are confirmed, pass them to the skill **Create Drafted Policy in eramba**. Do not claim the policy has been created.
+When the policy draft and its attributes are confirmed, pass them to the skill **Create in eramba a Previously Drafted Policy**. Do not claim the policy has been created.
 
 Follow the phases below in order. Do not skip a phase or consider it complete until its exit condition is met. Keep the required document structure as internal drafting guidance: do not explain it to the user or display it as a template or checklist.
 
@@ -108,7 +108,7 @@ After Phase 1 is complete, confirm all four attributes below with the user:
 
 Suggest values based on the approved content, but do not treat a suggestion as confirmation. Ask the user to confirm or correct any values not already explicitly confirmed. Do not infer confirmation from silence.
 
-Once all four attributes are confirmed, pass the following to **Create Drafted Policy in eramba**:
+Once all four attributes are confirmed, pass the following to **Create in eramba a Previously Drafted Policy**:
 
 - Confirmed title
 - Confirmed description
@@ -118,5 +118,5 @@ Once all four attributes are confirmed, pass the following to **Create Drafted P
 
 Do not invoke the creation skill before all four attributes are confirmed. Do not create the policy yourself.
 
-**Phase 2 exit condition:** All four attributes and the complete approved content have been passed to **Create Drafted Policy in eramba**. The drafting skill’s work is then complete.
+**Phase 2 exit condition:** All four attributes and the complete approved content have been passed to **Create in eramba a Previously Drafted Policy**. The drafting skill’s work is then complete.
 ```
