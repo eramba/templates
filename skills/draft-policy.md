@@ -1,6 +1,6 @@
 ---
 author: "AI Assistant"
-version: "1.0"
+version: "1.1"
 modules:
   - "Policy Management"
 use_cases:
@@ -12,7 +12,7 @@ use_cases:
 # Title
 
 ```text
-Draft Policy
+Draft Policy Content
 ```
 
 ## Description
@@ -24,7 +24,7 @@ Use when a user wants to draft a policy from compliance requirements or a genera
 ## Skill
 
 ```markdown
-# Draft Policy
+# Draft Policy Content
 
 ## Purpose and boundaries
 
