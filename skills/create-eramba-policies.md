@@ -1,6 +1,6 @@
 ---
 author: "me"
-version: "1.1"
+version: "1.2"
 modules:
   - "Policy Management"
 use_cases:
@@ -13,7 +13,7 @@ use_cases:
 # Title
 
 ```text
-Create Eramba Policies
+Create Drafted Policy in eramba
 ```
 
 ## Description
@@ -25,7 +25,7 @@ Use when creating one or more policies in Eramba. Determine the policy fields, a
 ## Skill
 
 ```markdown
-# Create Eramba Policies
+# Create Drafted Policy in eramba
 
 ## Workflow
 
