@@ -1,6 +1,6 @@
 ---
 author: "AI Assistant"
-version: "1.5"
+version: "1.6"
 modules:
   - "Policy Management"
 use_cases:
@@ -89,13 +89,13 @@ Do not invent organizational practices. If a procedure depends on unknown local 
 
 ### 4. Show the draft and refine it
 
-Once an initial draft is ready, show it using the **display_policy** skill. Then ask the user for feedback, focusing on material gaps, accuracy, scope, and whether the draft reflects their intent.
+Once an initial draft is ready, show it using the **display_policy** skill. Ask targeted questions to check whether the draft reflects the user’s organization and its actual context, including relevant data, systems, technologies, teams, and practices. Where a statement describes a desired future requirement rather than a current practice, make that distinction clear and ask whether it reflects the user’s intent. Ask about material gaps, inaccurate assumptions, and missing details needed to make the draft fit the organization.
 
-Revise the draft in response to feedback and display the updated version using **display_policy**. Continue this review cycle as needed. Do not move to Phase 2 until the user says the content is ready or you determine that the draft is sufficiently clear, complete, coherent, and supported by the available source information.
+After every user response, revise the policy content and show the updated draft using **display_policy**. Recheck the full draft against the defined topic and the selected source path’s rules. Keep feedback that accurately reflects the organization and supports the policy topic. If feedback would take the draft outside the defined topic, explain why it is out of scope and leave it out unless the user explicitly confirms they want to broaden the policy scope to include it. If the scope changes, update the topic definition and ensure the applicable source-path requirements are still met before adding content. Do not add unsupported organizational facts; ask follow-up questions or use clear placeholders where needed. Continue this review cycle until the user says the content is ready or you determine that it is sufficiently clear, complete, coherent, grounded in the organization’s context, and supported by the available source information.
 
 If the required display_policy skill is unavailable, show the draft in the conversation in a clear, readable format and continue the same feedback cycle.
 
-**Phase 1 exit condition:** The user or you has determined that the policy content is ready to proceed.
+**Phase 1 exit condition:** The user or you has determined that the policy content is ready to proceed, after checking that it reflects the organization’s context and remains within the defined topic and source-path rules.
 
 ## Phase 2: Confirm policy attributes and hand off for creation
 
