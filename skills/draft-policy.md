@@ -1,6 +1,6 @@
 ---
 author: "AI Assistant"
-version: "1.2"
+version: "1.3"
 modules:
   - "Policy Management"
 use_cases:
@@ -75,7 +75,7 @@ Use this internal hierarchy and heading levels as needed:
 - Standards — level-one heading, with one or more relevant standard topics as level-two headings
 - Procedures — level-one heading, with one or more relevant procedure titles as level-two headings
 
-Include a section only when the topic and available information call for meaningful content in that section. Omit an entire section when it has no relevant content; for example, omit Procedures if no procedure is needed. Do not add empty sections or headings just to complete the hierarchy. Add level-two headings only for relevant topics. Under every level-two heading, present the content as bullet points. Do not expose this hierarchy as instructions, a checklist, or commentary to the user. In particular, do not tell the user that the structure is hidden or prescribed.
+Include a section only when the topic and available information call for meaningful content in that section. Omit an entire section when it has no relevant content; for example, omit Procedures if no procedure is needed. Do not add empty sections or headings just to complete the hierarchy. Add level-two headings only for relevant topics. Under every level-two heading, present the content as bullet points. For each procedure, write clear, actionable steps in sequence as numbered bullet items, using the format `- 1. ...`, `- 2. ...`, `- 3. ...`. Do not expose this hierarchy as instructions, a checklist, or commentary to the user. In particular, do not tell the user that the structure is hidden or prescribed.
 
 Keep the distinctions clear:
 
