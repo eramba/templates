@@ -1,6 +1,6 @@
 ---
 author: "Esteban and Codex"
-version: "1.1"
+version: "1.2"
 modules:
   - "Policies"
   - "Internal Controls"
@@ -71,9 +71,9 @@ Review the selected requirements together before deciding how many controls to r
 
 ## 3. Recommend policy content
 
-Group requirements into coherent policy topics where appropriate. A topic may be a standalone policy or a section of a broader policy; do not assume the organization's document structure.
+Assess policy needs requirement by requirement. This skill supplies the content-level analysis that **Analyse Compliance Requirements** can use to decide how requirements should be grouped into policies. Do not propose policy groups, policy titles, a policy count, or a policy-to-requirement grouping rationale; those grouping decisions belong to **Analyse Compliance Requirements**.
 
-For each policy topic, retain the source requirement IDs and prepare:
+For each individual requirement ID, summarize the policy content that requirement calls for. Extract its policy-level outcome or decision, supporting standards, and any procedures needed to implement those standards. Preserve details that will help a later policy-grouping decision, including distinct scope, audiences, conditions, responsibilities, timing, triggers, and activities. Keep each statement, standard, and procedure traceable to its requirement ID. Do not merge content from different requirements into a shared policy statement at this stage.
 
 ### Policy Statements
 
@@ -87,11 +87,11 @@ Write specific, assessable requirements that support the policy statements. Incl
 
 Include procedures only where an operational process is useful. Present steps in sequence using numbered bullets, for example `- 1. ...`. Include only steps supported by the source. When a step depends on an unknown local role, system, channel, or decision, use a clear placeholder such as `[organization-defined role]` or identify the missing detail. Do not invent named owners, tools, deadlines, approval paths, or current practices.
 
-Keep the relationship between requirements, policy statements, standards, and procedures clear. Add a supporting statement or standard when needed to make that relationship understandable. Label recommendations as proposed content, not as statements of current organizational practice.
+Keep the relationship between the individual requirement, its policy statements, standards, and procedures clear. Add a supporting statement or standard when needed to make that relationship understandable. Label recommendations as proposed content, not as statements of current organizational practice.
 
 ## 4. Present the recommendations
 
-Present the recommendations in one table with exactly two columns and one row for each selected compliance requirement ID:
+Present the recommendations in one table with exactly two columns and one row for each selected compliance requirement ID. This table is a requirement-level input to later analysis; it does not decide how many policies should be created or which requirements should share a policy:
 
 | Compliance Requirement ID | Condensed Summary |
 |---|---|
@@ -104,21 +104,21 @@ In each summary cell, use these two main structures, in this order:
     - {Internal Control Title}: {concise description}
 
     Policy
-    - Policy Statement: {statement}
+    - Policy Statement: {requirement-level outcome or rule}
       - Standards:
-        - {standard}
+        - {requirement-level assessable requirement}
           - Procedures:
-            - {procedure}
+            - {procedure needed to implement the standard}
               - Steps: 1. {step}; 2. {step}
-    - Policy Statement: {statement}
+    - Policy Statement: {another distinct outcome or rule, if needed}
       - Standards:
-        - {standard}
+        - {supporting requirement-level standard}
 
-Include one or more relevant controls and one or more policy statements when supported by the requirement. Under each policy statement, include its supporting standards; under each standard, include any supporting procedures, with one or more ordered steps for every procedure. Omit a lower level when the source does not support or require it; do not invent content to fill the structure.
+Include one or more relevant controls and one or more policy statements when supported by the requirement. Under each policy statement, include its supporting standards; under each standard, include any supporting procedures, with one or more ordered steps for every procedure. Omit a lower level when the source does not support or require it; do not invent content to fill the structure. Capture the requirement's substantive details accurately enough that a later analysis can compare its objective, scope, audience, responsibilities, and activities with other requirements.
 
-Keep the summary specific to the requirement ID in that row. If a control or policy element addresses multiple requirements, repeat the same title and relevant description under each applicable requirement row so every row is understandable on its own. Do not merge requirement IDs into one row. If a requirement cannot be addressed by a control or policy element, say so briefly in that row and explain the source limitation.
+Keep the summary specific to the requirement ID in that row. If a control addresses multiple requirements, repeat the same control title and relevant description under each applicable requirement row so every row is understandable on its own. Do not merge requirement IDs into one row. Do not repeat or combine policy content across rows; summarize only the policy needs supported by the requirement in that row. If a requirement cannot be addressed by a control or policy element, say so briefly in that row and explain the source limitation.
 
-Use the `display_table` skill to present the table when it is available. Keep the summary cell concise while preserving the relationship between each policy statement, its standards, and any procedures and steps.
+Use the `display_table` skill to present the table when it is available. If it is unavailable, present a Markdown table. Keep each summary concise while preserving the requirement's meaningful details and the relationship between each policy statement, its standards, and any procedures and steps.
 
 Keep the recommendations concise, source-based, and useful for reviewing or adapting. Do not draft a complete policy, ask for policy attributes, or initiate policy creation unless the user separately requests those steps.
 ```
