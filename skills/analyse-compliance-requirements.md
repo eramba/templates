@@ -1,6 +1,6 @@
 ---
 author: "Esteban and Codex"
-version: "1.2"
+version: "1.3"
 modules:
   - "internal controls"
   - "policies"
@@ -35,7 +35,7 @@ Be quiet and provide only the outcomes requested by this skill, unless you or th
 
 ## 1. Find the requirements
 
-Get the Compliance Package name and item names or IDs from the user. In Eramba, locate the package and review each selected item’s title, description, and additional details. Use all available fields; some may be blank. Do not use external sources, particularly internet-based sources.
+Get the Compliance Package name and item names or IDs from the user. In Eramba, locate each selected item and review its **Additional Information** first. Use this field as the primary source for the mandatory policy and internal control definitions. If Additional Information is absent or empty, use the compliance package item’s title and description instead. Do not use external sources, particularly internet-based sources.
 
 If the package or items cannot be found, tell the user. If the available details are insufficient to assess an item, explain what is missing and that you cannot continue. Do not guess or proceed with incomplete requirements.
 
