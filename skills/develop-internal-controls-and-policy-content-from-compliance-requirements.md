@@ -1,6 +1,6 @@
 ---
 author: "Esteban and Codex"
-version: "1.2"
+version: "1.3"
 modules:
   - "Policies"
   - "Internal Controls"
@@ -11,7 +11,7 @@ use_cases:
 # Title
 
 ```text
-Develop Internal Controls and Policy Content from Compliance Requirements
+Develop Compliance Item Additional Information
 ```
 
 ## Description
@@ -23,7 +23,7 @@ Use when a user provides compliance requirement IDs and details and needs recomm
 ## Skill
 
 ```markdown
-# Develop Internal Controls and Policy Content from Compliance Requirements
+# Develop Compliance Item Additional Information
 
 ## Purpose and boundaries
 
