@@ -1,6 +1,6 @@
 ---
 author: "Esteban and Codex"
-version: "1.0"
+version: "1.1"
 modules:
   - "Policies"
   - "Internal Controls"
@@ -91,14 +91,34 @@ Keep the relationship between requirements, policy statements, standards, and pr
 
 ## 4. Present the recommendations
 
-Use this structure:
+Present the recommendations in one table with exactly two columns and one row for each selected compliance requirement ID:
 
-1. **Internal Controls** — for each control, provide its title, related requirement IDs, and bullet-point description.
-2. **Recommended Policy Content** — for each policy topic, provide its title, related requirement IDs, and separate subsections for Policy Statements, Standards, and Procedures. Omit a subsection when the source does not support meaningful content for it.
-3. **Requirement Coverage** — list each requirement ID and the recommended control or controls and policy topic or topics that address it.
-4. **Gaps or assumptions** — include only when needed to explain missing source detail, placeholders, or an unmapped requirement.
+| Compliance Requirement ID | Condensed Summary |
+|---|---|
+| `{ID}` | `Controls` and `Policy` content for this requirement |
 
-Use the `display_table` skill when presenting information in a table and that skill is available. Otherwise, use clearly labelled headings and lists.
+In each summary cell, use these two main structures, in this order:
+
+    Controls
+    - {Internal Control Title}: {concise description}
+    - {Internal Control Title}: {concise description}
+
+    Policy
+    - Policy Statement: {statement}
+      - Standards:
+        - {standard}
+          - Procedures:
+            - {procedure}
+              - Steps: 1. {step}; 2. {step}
+    - Policy Statement: {statement}
+      - Standards:
+        - {standard}
+
+Include one or more relevant controls and one or more policy statements when supported by the requirement. Under each policy statement, include its supporting standards; under each standard, include any supporting procedures, with one or more ordered steps for every procedure. Omit a lower level when the source does not support or require it; do not invent content to fill the structure.
+
+Keep the summary specific to the requirement ID in that row. If a control or policy element addresses multiple requirements, repeat the same title and relevant description under each applicable requirement row so every row is understandable on its own. Do not merge requirement IDs into one row. If a requirement cannot be addressed by a control or policy element, say so briefly in that row and explain the source limitation.
+
+Use the `display_table` skill to present the table when it is available. Keep the summary cell concise while preserving the relationship between each policy statement, its standards, and any procedures and steps.
 
 Keep the recommendations concise, source-based, and useful for reviewing or adapting. Do not draft a complete policy, ask for policy attributes, or initiate policy creation unless the user separately requests those steps.
 ```
