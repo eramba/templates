@@ -1,6 +1,8 @@
 ---
 author: "Esteban"
-version: "1.0"
+version: "1.1"
+modules:
+  - "Awareness Program"
 use_cases:
   - awareness programs
 ---
