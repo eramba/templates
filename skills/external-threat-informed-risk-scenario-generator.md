@@ -1,10 +1,10 @@
 ---
 author: "Esteban"
-version: "1.0"
+version: "1.1"
 modules:
   - "Risk Management"
 use_cases:
-  - risk
+  - "Risk Management"
 ---
 
 # Title
